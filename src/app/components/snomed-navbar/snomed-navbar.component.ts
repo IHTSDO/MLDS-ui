@@ -8,8 +8,8 @@ import {Location} from '@angular/common';
 })
 export class SnomedNavbarComponent implements OnInit {
 
-    environment: string;
-    path: string;
+    environment: string = '';
+    path: string = '';
 
     constructor(private location: Location) {
         this.environment = window.location.host.split(/[.]/)[0].split(/[-]/)[0];
@@ -17,8 +17,5 @@ export class SnomedNavbarComponent implements OnInit {
 
     ngOnInit() {
         this.path = this.location.path();
-    }
-
-    logout() {
     }
 }

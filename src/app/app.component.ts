@@ -12,7 +12,7 @@ import {DOCUMENT} from "@angular/common";
 })
 export class AppComponent implements OnInit {
 
-    environment: string;
+    environment: string = '';
 
     constructor(private envService: EnvService,
                 private toastr: ToastrService,
@@ -29,19 +29,19 @@ export class AppComponent implements OnInit {
     assignFavicon() {
         switch (this.environment) {
             case 'local':
-                this.document.getElementById('favicon').setAttribute('href', 'favicon_grey.ico');
+                this.document.getElementById('favicon')?.setAttribute('href', 'favicon_grey.ico');
                 break;
             case 'dev':
-                this.document.getElementById('favicon').setAttribute('href', 'favicon_red.ico');
+                this.document.getElementById('favicon')?.setAttribute('href', 'favicon_red.ico');
                 break;
             case 'uat':
-                this.document.getElementById('favicon').setAttribute('href', 'favicon_green.ico');
+                this.document.getElementById('favicon')?.setAttribute('href', 'favicon_green.ico');
                 break;
             case 'training':
-                this.document.getElementById('favicon').setAttribute('href', 'favicon_yellow.ico');
+                this.document.getElementById('favicon')?.setAttribute('href', 'favicon_yellow.ico');
                 break;
             default:
-                this.document.getElementById('favicon').setAttribute('href', 'favicon.ico');
+                this.document.getElementById('favicon')?.setAttribute('href', 'favicon.ico');
                 break;
         }
     }
