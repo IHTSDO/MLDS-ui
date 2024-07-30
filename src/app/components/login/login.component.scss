@@ -1,0 +1,47 @@
+.login {
+    background-color: #f5f5f5;
+    border: 1px solid #eeeeee;
+    padding: 25px 20px 40px;
+    margin-top: 40px;
+    border-radius: 12px;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #000000;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    padding: 10px 66px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+.btn-primary {
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: #00a7e1;
+    border-top-left-radius: 10px;
+    border: 1px solid;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.row{
+    padding-bottom: 20px;
+}
+
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+    color: #40ACD6;
+    text-decoration: none;
+}
+.btn-primary:hover, .btn-primary:focus {
+    color: #ffffff;
+    background-color: #00a7e1;
+}

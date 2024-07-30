@@ -1,0 +1,30 @@
+footer[role=admin] {
+    background-color: #eeeeee;
+    color: #222222;
+    height: 60px;
+    padding-top: 20px;
+    position: absolute;
+    bottom: -60px;
+}
+
+footer {
+    background-color: #ffffff;
+    color: #555555;
+    height: 60px;
+    padding-top: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #eeeeee;
+}
+
+/**
+ * FAMFAMFAM flag icons CSS.
+ *
+ * Code from http://tkrotoff.github.io/famfamfam_flags/
+ *
+ * Examples:
+ * <i class="famfamfam-flag-fr"> France</i>
+ * <i class="famfamfam-flag-us"> United States</i>
+ */
+

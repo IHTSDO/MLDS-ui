@@ -1,0 +1,44 @@
+.brand {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #555555;
+    padding: 3px 10px;
+    height: 28px;
+    border-top: 1px solid #999999;
+    padding-top: 10px;
+}
+
+.navbar-collapse.collapse {
+    display: flex;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+    flex-direction: row-reverse;
+}
+
+.navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.navbar-right {
+    float: right !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.navbar > .container, .navbar > .container-fluid, .navbar > .container-lg, .navbar > .container-md, .navbar > .container-sm, .navbar > .container-xl, .navbar > .container-xxl {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: flex-end;
+    flex-direction: row;
+    font-size: 14px;
+}

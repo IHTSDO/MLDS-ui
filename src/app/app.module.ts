@@ -14,6 +14,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {ModalService} from './services/modal/modal.service';
 import {ModalComponent} from './components/modal/modal.component';
 import {TextFilterPipe} from './pipes/text-filter/text-filter.pipe';
+import { MemberManagementComponent } from "./components/member-management/member-management.component";
+import { StaffTopNavComponent } from "./components/staff-top-nav/staff-top-nav.component";
+import { SideNavComponent } from "./components/side-nav/side-nav.component";
+import { AdminFooterComponent } from "./components/admin-footer/admin-footer.component";
+import { CookieService } from 'ngx-cookie-service';
 
 // SERVICE IMPORTS
 
@@ -27,13 +32,17 @@ import {TextFilterPipe} from './pipes/text-filter/text-filter.pipe';
         TextFilterPipe
     ],
     imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        ToastrModule.forRoot(),
-    ],
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    MemberManagementComponent,
+    StaffTopNavComponent,
+    SideNavComponent,
+    AdminFooterComponent
+],
     providers: [
         ModalService,
         EnvServiceProvider,
@@ -41,7 +50,8 @@ import {TextFilterPipe} from './pipes/text-filter/text-filter.pipe';
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,
             multi: true
-        }
+        },
+        CookieService
     ],
     bootstrap: [AppComponent]
 })

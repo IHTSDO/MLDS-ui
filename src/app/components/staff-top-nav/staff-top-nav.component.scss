@@ -1,0 +1,25 @@
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar[role=admin] {
+    background-color: #eeeeee;
+    border-bottom: 3px solid #8dccdc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* position: fixed; */
+    /* width: -webkit-fill-available; */
+}
+
+body {
+    padding-top: 60px; /* Adjust based on the height of your navbar */
+}
+
+.content {
+    padding-top: 60px; /* To avoid content being overlapped by the fixed header */
+}

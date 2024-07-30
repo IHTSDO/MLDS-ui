@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Member Management</h2>
+	<div>
+		<button (click)="fetchMembers()">Reload</button>
+	  </div>
+    <table class="table">
+    	<thead>
+    		<tr>
+    			<th>Member</th>
+    			<th>Name</th>
+    			<th>Public Landing Page</th>
+    			<th>Staff Notifications</th>
+    			<th>License</th>
+    			<th>Version</th>
+    			<th>Last Uploaded</th>
+    			<th></th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr *ngFor="let member of members">
+    			<td>{{member.key}}</td>
+    			<td>{{member.name}}</td>
+    			<td>{{getMemberLandingPage(member)}}</td>
+    			<td>{{member.contactEmail}}</td>
+    			<td>{{member.licenseName}}</td>
+    			<td>{{member.licenseVersion}}</td>
+    			<td>{{member.license.lastUpdated | date: 'yyyy-MM-dd'}}</td>
+    			<td>
+					<div class="btn-group" dropdown>
+						<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-pencil"></i> Edit</button>
+						<ul class="dropdown-menu dropdown-menu-right">
+		    				<li><a ><i class="fa fa-image"></i> View Branding</a></li>
+		    				<li><a ><i class="fa fa-edit"></i> Edit Branding</a></li>
+							<li class="divider"></li>
+							<li><a><i class="fa fa-gavel"></i> View License</a></li>
+    						<li><a ><i class="fa fa-edit"></i> Edit License</a></li>
+							<li class="divider"></li>
+							<li><a><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
+                            <li><a><i class="fa fa-edit"></i> Edit Feed Data</a></li>
+                        </ul>
+					</div>
+    			</td>
+    		</tr>
+    	</tbody>
+    </table>
+
+</div>

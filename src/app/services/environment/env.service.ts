@@ -11,4 +11,9 @@ export class EnvService {
   constructor() {
   }
 
+  environment = {
+    production: false,
+    apiUrl: 'http://localhost:8080/api',
+  };
+
 }
