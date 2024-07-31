@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -19,6 +19,7 @@ import { StaffTopNavComponent } from "./components/staff-top-nav/staff-top-nav.c
 import { SideNavComponent } from "./components/side-nav/side-nav.component";
 import { AdminFooterComponent } from "./components/admin-footer/admin-footer.component";
 import { CookieService } from 'ngx-cookie-service';
+import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 // SERVICE IMPORTS
 
@@ -34,6 +35,9 @@ import { CookieService } from 'ngx-cookie-service';
     imports: [
     BrowserModule,
     FormsModule,
+    NgbTypeaheadModule,
+    ReactiveFormsModule,
+    NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,

@@ -1,11 +1,11 @@
 body {
-    padding-top: 100px; /* Adjust according to your navbar height */
+    padding-top: 70px; /* Adjust according to your navbar height */
 }
 
 .navbar-fixed-top {
     background-color: #f8f8f8;
     border-color: #e7e7e7;
-    z-index: 1050; /* Ensure it stays on top of other content */
+    z-index: 1030; /* Ensure it stays on top of other content */
 }
 
 .container-fluid {
