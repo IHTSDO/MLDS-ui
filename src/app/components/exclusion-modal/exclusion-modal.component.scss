@@ -1,0 +1,27 @@
+.btn-primary {
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: #00a7e1;
+    border-top-left-radius: 10px;
+    border: 2px solid
+}
+
+.btn-danger {
+    color: #f05837;
+    background-color: #fde3dd;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #00a7e1;
+    border-color: #007aa4;
+    border: 2px solid;
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+    color: #ffffff;
+    background-color: #ee3c16;
+    border-color: #ee3c16;
+}

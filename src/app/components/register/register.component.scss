@@ -1,0 +1,50 @@
+/* Highlight invalid form fields with a red border */
+.form-control.ng-invalid.ng-touched {
+    border-color: #dc3545; /* Bootstrap's red for danger */
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Light red shadow */
+  }
+  
+  .help-block {
+    color: #dc3545; /* Red text for error messages */
+  }
+  
+
+  .login {
+    background-color: #f5f5f5;
+    border: 1px solid #eeeeee;
+    padding: 25px 20px 40px;
+    margin-top: 40px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+.btn-lg, .btn-group-lg > .btn {
+    padding: 10px 66px;
+    font-size: 18px;
+    line-height: 1.33;
+}
+.btn-primary {
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: #00a7e1;
+    border-top-left-radius: 10px;
+    border: 1px solid #00a7e1;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #ffffff;
+    background-color: #00a7e1;
+    border-color: #007aa4;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+

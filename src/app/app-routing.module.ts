@@ -7,6 +7,7 @@ import { LandingContentComponent } from './components/landing-content/landing-co
 import { LoginComponent } from './components/login/login.component';
 import { MemberManagementComponent } from './components/member-management/member-management.component';
 import { CountryComponent } from './components/country/country.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
     component: LandingPageComponent,
     children: [
       { path: '', component: LandingContentComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path:'register', component: RegisterComponent },
     ]
   },
   {
@@ -32,7 +34,8 @@ const routes: Routes = [
     component: LandingPageComponent,
     children: [
       { path: '', component: LandingContentComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path:'register', component: RegisterComponent },
     ]
   }
 ];

@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title">Confirmation</h4>
+  </div>
+  <div class="modal-body">
+    <p>{{ countryName }} does not use MLDS to distribute SNOMED CT. To register to download SNOMED CT, you can find more information by going to this link - <a [href]="urlRegistration" target="_blank">{{ urlRegistration }}</a></p>
+    <p>To continue your registration on MLDS, please can you confirm that you would like to deploy SNOMED CT in a different country.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="confirm()">I confirm that I would like to use and deploy SNOMED CT in a country other than {{ countryName }}</button>
+  </div>
+  
