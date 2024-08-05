@@ -4,7 +4,7 @@
             <h2>Countries</h2> 
         </div>
         <div class="col-lg-12">
-            <button class="btn btn-success pull-right" ng-click="openCreate()">
+            <button class="btn btn-success pull-right" (click)="openCreate()">
                 <i class="fa fa-plus"></i> Create a new Country
             </button> 
         </div>
@@ -32,12 +32,12 @@
                             <td>{{country.alternateRegistrationUrl}}</td>
                             <td>
                                 <div>
-                                    <button type="submit"  class="btn btn-primary btn-xs">
+                                    <button type="submit" (click)="update(country.isoCode2)" class="btn btn-primary btn-xs">
                                         <i class="fa fa-pencil"></i> Edit
                                     </button>
                                 </div>
                                 <div class="space">
-                                    <button type="submit"  class="btn btn-danger btn-xs">
+                                    <button type="submit" (click)="delete(country.isoCode2)" class="btn btn-danger btn-xs">
                                         <i class="fa fa-times"></i> Delete
                                     </button>
                                 </div>

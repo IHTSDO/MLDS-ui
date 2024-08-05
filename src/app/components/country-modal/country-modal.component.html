@@ -1,0 +1,57 @@
+<form [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+        <h4 class="modal-title" id="myCountryLabel">Create or edit a Country</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>ISO Code 2</label>
+            <input type="text" class="form-control" formControlName="isoCode2">
+            <div *ngIf="countryForm.get('isoCode2')?.invalid && (countryForm.get('isoCode2')?.dirty || countryForm.get('isoCode2')?.touched)">
+                <div *ngIf="countryForm.get('isoCode2')?.errors?.['required']">ISO Code 2 is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>ISO Code 3</label>
+            <input type="text" class="form-control" formControlName="isoCode3">
+            <div *ngIf="countryForm.get('isoCode3')?.invalid && (countryForm.get('isoCode3')?.dirty || countryForm.get('isoCode3')?.touched)">
+                <div *ngIf="countryForm.get('isoCode3')?.errors?.['required']">ISO Code 3 is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Common Name</label>
+            <input type="text" class="form-control" formControlName="commonName">
+            <div *ngIf="countryForm.get('commonName')?.invalid && (countryForm.get('commonName')?.dirty || countryForm.get('commonName')?.touched)">
+                <div *ngIf="countryForm.get('commonName')?.errors?.['required']">Common Name is required.</div>
+                <div *ngIf="countryForm.get('commonName')?.errors?.['minlength']">Common Name must be at least 1 character long.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="member">Member</label>
+            <input id="member" type="text" class="form-control" formControlName="member" placeholder="Responsible Member"
+                   [ngbTypeahead]="searchMembers" (selectItem)="onMemberSelect($event)" [resultFormatter]="resultFormatter" [inputFormatter]="formatter">
+            <div *ngIf="countryForm.get('member')?.invalid && (countryForm.get('member')?.dirty || countryForm.get('member')?.touched)">
+                <div *ngIf="countryForm.get('member')?.errors?.['required']">Member is required.</div>
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <label>Prevent Usage?</label>
+            <input type="checkbox" formControlName="excludeUsage">
+        </div>
+
+        <div class="form-group">
+            <label>Alternate registration url</label>
+            <input type="text" class="form-control" formControlName="alternateRegistrationUrl">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" (click)="modal.dismiss()">Cancel</button>
+        <button type="submit" class="btn btn-success" [disabled]="countryForm.invalid">Save</button>
+    </div>
+</form>

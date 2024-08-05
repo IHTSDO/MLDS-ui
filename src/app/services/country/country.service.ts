@@ -47,5 +47,24 @@ export class CountryService {
   getCountriesUsingMLDS() {
     return this.countriesUsingMLDS;
   }
+  // New method to get country by ISO code
+getCountryByISOCODE2(isoCode: string): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/countries/${isoCode}`);
+}
+
+// New method to create a country
+createCountry(country: any): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/countries`, country);
+}
+
+// New method to update a country
+updateCountry(isoCode: string, country: any): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/countries`, country);
+}
+
+// New method to delete a country
+deleteCountry(isoCode: string): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/countries/${isoCode}`);
+}
   
 }
