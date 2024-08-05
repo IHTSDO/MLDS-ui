@@ -62,13 +62,14 @@
     </ul>
     <ul class="nav nav-sidebar">
         <li>
-            <a href="#/fileDownloadReport">
+            <a [routerLink]="['/member/fileDownloadReport']">
                 <i class="fa fa-cube"></i>
                 <span>Release File Download Count</span>
             </a>
         </li>
       <li>
-          <a href="#/activityLog">
+          <!-- <a href="#/activityLog"> -->
+            <a [routerLink]="['/member/activityLog']">
               <i class="fa fa-signal"></i>
               <span translate="activityLog.title">Activity Log</span>
           </a>

@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { MemberManagementComponent } from './components/member-management/member-management.component';
 import { CountryComponent } from './components/country/country.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ReleaseFileDownloadCountComponent } from './components/release-file-download-count/release-file-download-count.component';
+
 
 const routes: Routes = [
   {
@@ -16,7 +18,7 @@ const routes: Routes = [
     children: [
       { path: '', component: LandingContentComponent },
       { path: 'login', component: LoginComponent },
-      { path:'register', component: RegisterComponent },
+      { path: 'register', component: RegisterComponent },
     ]
   },
   {
@@ -26,7 +28,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'member', pathMatch: 'full' },
       { path: 'member', component: MemberManagementComponent },
-      { path: 'country', component: CountryComponent }
+      { path: 'country', component: CountryComponent },
+      { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
+      
     ]
   },
   {
@@ -35,7 +39,7 @@ const routes: Routes = [
     children: [
       { path: '', component: LandingContentComponent },
       { path: 'login', component: LoginComponent },
-      { path:'register', component: RegisterComponent },
+      { path: 'register', component: RegisterComponent },
     ]
   }
 ];
