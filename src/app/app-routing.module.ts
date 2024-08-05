@@ -9,6 +9,8 @@ import { MemberManagementComponent } from './components/member-management/member
 import { CountryComponent } from './components/country/country.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReleaseFileDownloadCountComponent } from './components/release-file-download-count/release-file-download-count.component';
+import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,8 @@ const routes: Routes = [
       { path: '', component: LandingContentComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
+      { path: 'resetPassword', component: ResetPasswordComponent }
     ]
   },
   {
@@ -40,6 +44,8 @@ const routes: Routes = [
       { path: '', component: LandingContentComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
+      { path: 'resetPassword', component: ResetPasswordComponent }
     ]
   }
 ];
