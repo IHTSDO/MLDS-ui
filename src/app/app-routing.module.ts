@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReleaseFileDownloadCountComponent } from './components/release-file-download-count/release-file-download-count.component';
 import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { BlocklistDomainComponent } from './components/blocklist-domain/blocklist-domain.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
       { path: 'member', component: MemberManagementComponent },
       { path: 'country', component: CountryComponent },
       { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
+      { path: 'blocklist', component: BlocklistDomainComponent }
       
     ]
   },
