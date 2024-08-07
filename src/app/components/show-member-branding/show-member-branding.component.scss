@@ -1,0 +1,15 @@
+.navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    flex-direction: row-reverse;
+}
+
+h2, .h2 {
+    font-size: 30px;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+}

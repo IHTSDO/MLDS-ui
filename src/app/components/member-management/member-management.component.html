@@ -1,8 +1,6 @@
 <div class="page-header">
     <h2>Member Management</h2>
-	<div>
-		<button (click)="fetchMembers()">Reload</button>
-	  </div>
+
     <table class="table">
     	<thead>
     		<tr>
@@ -27,16 +25,16 @@
     			<td>{{member.license.lastUpdated | date: 'yyyy-MM-dd'}}</td>
     			<td>
 					<div class="btn-group" dropdown>
-						<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-pencil"></i> Edit</button>
+						<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-pencil"></i> Edit</button>
 						<ul class="dropdown-menu dropdown-menu-right">
-		    				<li><a ><i class="fa fa-image"></i> View Branding</a></li>
-		    				<li><a ><i class="fa fa-edit"></i> Edit Branding</a></li>
-							<li class="divider"></li>
-							<li><a><i class="fa fa-gavel"></i> View License</a></li>
-    						<li><a ><i class="fa fa-edit"></i> Edit License</a></li>
-							<li class="divider"></li>
-							<li><a><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
-                            <li><a><i class="fa fa-edit"></i> Edit Feed Data</a></li>
+		    				<li><a class="dropdown-item" (click)="viewBranding(member)"><i class="fa fa-image"></i> View Branding</a></li>
+		    				<li><a class="dropdown-item"><i class="fa fa-edit"></i> Edit Branding</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item"><i class="fa fa-gavel"></i> View License</a></li>
+    						<li><a class="dropdown-item"><i class="fa fa-edit"></i> Edit License</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item"><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
+                            <li><a class="dropdown-item"><i class="fa fa-edit"></i> Edit Feed Data</a></li>
                         </ul>
 					</div>
     			</td>

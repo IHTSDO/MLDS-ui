@@ -12,6 +12,7 @@ import { ReleaseFileDownloadCountComponent } from './components/release-file-dow
 import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { BlocklistDomainComponent } from './components/blocklist-domain/blocklist-domain.component';
+import { ShowMemberBrandingComponent } from './components/show-member-branding/show-member-branding.component';
 
 
 const routes: Routes = [
@@ -33,10 +34,10 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'member', pathMatch: 'full' },
       { path: 'member', component: MemberManagementComponent },
+      { path: 'memberManagement/:memberKey/branding', component: ShowMemberBrandingComponent },
       { path: 'country', component: CountryComponent },
       { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
-      { path: 'blocklist', component: BlocklistDomainComponent }
-      
+      { path: 'blocklist', component: BlocklistDomainComponent }  
     ]
   },
   {

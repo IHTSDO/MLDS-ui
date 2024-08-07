@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MemberService } from 'src/app/services/member/member.service';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-management',
@@ -14,7 +15,10 @@ export class MemberManagementComponent {
   members: any[] = [];
   private apiUrl = environment.apiUrl;
 
-  constructor(private memberService: MemberService) { }
+  constructor(
+    private memberService: MemberService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
       this.fetchMembers();
@@ -39,6 +43,10 @@ export class MemberManagementComponent {
     }
     url += '/landing/' + member.key;
     return url;
+  }
+
+  viewBranding(member: any): void {
+    this.router.navigate(['/member/memberManagement', member.key, 'branding']);
   }
   
 }

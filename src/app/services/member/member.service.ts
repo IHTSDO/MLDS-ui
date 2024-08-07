@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -38,6 +38,9 @@ export class MemberService {
         } else {
           throw new Error('Received non-image blob');
         }
+      }),
+      catchError(error => {
+        return of('assets/logo.png');
       })
     );
   }
