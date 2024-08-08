@@ -1,0 +1,35 @@
+   <div class="modal-header">
+    <h4 class="modal-title">Edit {{ member.key }} Notifications</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
+      {{ alert.msg }}
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
+    </div>
+    <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="staffNotificationEmail">Member Notifications Email</label>
+        <input
+          id="staffNotificationEmail"
+          class="form-control"
+          type="email"
+          placeholder="Enter Notifications Email"
+          formControlName="staffNotificationEmail"
+          [disabled]="submitStatus.submitSuccessful"
+        />
+        <p class="help-block">Mailing list email address that member notifications will be sent to.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="button" (click)="activeModal.dismiss()">Cancel</button>
+        <button class="btn btn-success" type="submit">
+          Update
+          <span *ngIf="submitStatus.submitting"><i class="fa fa-spinner fa-spin"></i></span>
+        </button>
+
+      </div>
+    </form>
+  </div>
+  
+

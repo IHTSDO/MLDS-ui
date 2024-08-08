@@ -1,0 +1,69 @@
+.modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+}
+
+.modal-footer {
+    margin-top: 15px;
+    padding: 19px 20px 20px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+    background-color: #fbfbfb;
+}
+
+h3, .h3 {
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #f26c4f;
+}
+
+.modal-body {
+    position: relative;
+    padding: 20px;
+}
+
+.btn-success {
+    color: #3cb878;
+    background-color: #ffffff;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+    border: 2px solid;
+}
+
+.btn-danger {
+    color: #f26c4f;
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+    border: 2px solid;
+}
+
+.btn-success:hover, .btn-success:focus {
+    color: #ffffff;
+    background-color: #3cb878;
+}
+.btn-danger:hover, .btn-danger:focus {
+    color: #ffffff;
+    background-color: #f26c4f;
+}
+
+.alert-danger {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

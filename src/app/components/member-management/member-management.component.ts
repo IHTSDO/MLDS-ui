@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditMemberModalComponent } from '../edit-member-modal/edit-member-modal.component';
+import { EditMemberNotificationsComponent } from '../edit-member-notifications/edit-member-notifications.component';
 
 @Component({
   selector: 'app-member-management',
@@ -54,6 +55,17 @@ export class MemberManagementComponent {
 
   openEditMemberModal(member: any): void {
     const modalRef = this.modalService.open(EditMemberModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.member = member;
+    modalRef.result.then(() => {
+      this.fetchMembers();
+    });
+  }
+
+  editStaffNotificationsEmail(member: any): void {
+    const modalRef = this.modalService.open(EditMemberNotificationsComponent, {
       size: 'lg',
       backdrop: 'static'
     });

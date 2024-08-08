@@ -51,4 +51,9 @@ export class MemberService {
       observe: 'response'
     });
   }
+
+  updateMemberNotifications(memberKey: string, staffNotificationEmail: string): Observable<any> {
+    const member = { staffNotificationEmail };
+    return this.http.put<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/notifications`, member);
+  }
 }
