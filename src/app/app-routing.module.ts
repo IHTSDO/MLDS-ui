@@ -14,7 +14,6 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { BlocklistDomainComponent } from './components/blocklist-domain/blocklist-domain.component';
 import { ShowMemberBrandingComponent } from './components/show-member-branding/show-member-branding.component';
 import { UsageReportsComponent } from './components/usage-reports/usage-reports.component';
-import { PendingApplicationsComponent } from './components/pending-applications/pending-applications.component';
 
 
 const routes: Routes = [
@@ -40,7 +39,6 @@ const routes: Routes = [
       { path: 'country', component: CountryComponent },
       { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
       { path: 'blocklist', component: BlocklistDomainComponent } ,
-      { path: 'pendingApplications', component: PendingApplicationsComponent } ,
       { path: 'usageReportsReview', component: UsageReportsComponent }  
     ]
   },

@@ -3,6 +3,8 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditMemberModalComponent } from '../edit-member-modal/edit-member-modal.component';
 
 @Component({
   selector: 'app-member-management',
@@ -17,6 +19,7 @@ export class MemberManagementComponent {
 
   constructor(
     private memberService: MemberService,
+    private modalService: NgbModal,
     private router: Router
   ) { }
 
@@ -47,6 +50,17 @@ export class MemberManagementComponent {
 
   viewBranding(member: any): void {
     this.router.navigate(['/member/memberManagement', member.key, 'branding']);
+  }
+
+  openEditMemberModal(member: any): void {
+    const modalRef = this.modalService.open(EditMemberModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.member = member;
+    modalRef.result.then(() => {
+      this.fetchMembers();
+    });
   }
   
 }

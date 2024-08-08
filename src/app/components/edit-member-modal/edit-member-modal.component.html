@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit {{ member.key }} Branding</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+  <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
+      {{ alert.msg }}
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
+  </div>
+  <form [formGroup]="memberBrandForm" (ngSubmit)="submit()">
+      <div class="form-group">
+          <label>Member Name</label>
+          <input class="form-control" placeholder="Enter Member Name" formControlName="memberName" [disabled]="submitStatus.submitSuccessful"/>
+      </div>
+      <div class="form-group">
+          <label>Logo Image File</label><br>
+          <input type="file" (change)="onFileChange($event)" accept="image/*" [disabled]="submitStatus.submitSuccessful"/>
+          <p class="help-block">Logo images should be no larger than 320px wide and 142px tall, and preferably have a transparent background.</p>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-danger" type="button" (click)="activeModal.dismiss()">Cancel</button>
+          <button class="btn btn-success" type="submit" [disabled]="submitStatus.submitting" *ngIf="!submitStatus.submitSuccessful">
+              Update
+              <span *ngIf="submitStatus.submitting"><i class="fa fa-spinner fa-spin"></i></span>
+          </button>
+          <button class="btn btn-success" type="button" (click)="activeModal.close()" *ngIf="submitStatus.submitSuccessful">Close</button>
+      </div>
+  </form>
+</div>

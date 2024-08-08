@@ -44,4 +44,11 @@ export class MemberService {
       })
     );
   }
+
+  updateMemberBrand(memberKey: string, formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/brand`, formData,{
+      headers: {},
+      observe: 'response'
+    });
+  }
 }
