@@ -1,0 +1,43 @@
+h2{
+    padding-top: 30px;
+}
+.btn-btn-default{
+    // color: #78bcf3;
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: transparent;
+    border-top-left-radius: 10px;
+}
+.custom-btn {
+    margin-left: 10px;
+    background-color: #00a7e1; /* Initial background color */
+    color: black; /* Initial text color */
+    border: none; /* Remove border */
+    // padding: 10px 20px; /* Button padding */
+    font-size: 14px; /* Button font size */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+.form-control {
+    font-size: 1.4rem;
+    border: 1px solid;
+    width: 25%;
+}
+label {
+    margin-left: 10px;
+    font-size: 1.5rem;
+}
+.form-group{
+    display: flex;
+}
+.custom-btn:hover {
+    background-color: #00a7e1; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+.custom-btn:focus, 
+.custom-btn:active {
+    outline: none; /* Remove focus outline */
+    box-shadow: none; /* Remove box-shadow */
+}

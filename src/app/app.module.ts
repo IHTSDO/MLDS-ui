@@ -20,6 +20,7 @@ import { SideNavComponent } from "./components/side-nav/side-nav.component";
 import { AdminFooterComponent } from "./components/admin-footer/admin-footer.component";
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // SERVICE IMPORTS
 
@@ -45,6 +46,7 @@ import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
     MemberManagementComponent,
     StaffTopNavComponent,
     SideNavComponent,
+    InfiniteScrollModule,
     AdminFooterComponent
 ],
     providers: [
