@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditMemberModalComponent } from '../edit-member-modal/edit-member-modal.component';
 import { EditMemberNotificationsComponent } from '../edit-member-notifications/edit-member-notifications.component';
 import { EditLicenseComponent } from '../edit-license/edit-license.component';
+import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.component';
 
 @Component({
   selector: 'app-member-management',
@@ -102,4 +103,14 @@ export class MemberManagementComponent {
     });
   }
   
+  editFeedData(member: any): void {
+    const modalRef = this.modalService.open(EditFeedDataComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.member = member;
+    modalRef.result.then(() => {
+      this.fetchMembers();
+    });
+  }
 }

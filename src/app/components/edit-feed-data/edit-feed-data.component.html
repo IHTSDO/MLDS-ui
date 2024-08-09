@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit {{ member.key }} Feed Data</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+  <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
+    {{ alert.msg }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
+  </div>
+  
+  <form [formGroup]="memberFeedForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="memberOrgName">Name of the Member Organization</label>
+      <input id="memberOrgName"
+             class="form-control"
+             type="text"
+             placeholder="Enter Member Organization Name"
+             formControlName="memberOrgName"
+             >
+    </div>
+    <div class="form-group">
+      <label for="memberOrgURL">URL of the Member Organization</label>
+      <input id="memberOrgURL"
+             class="form-control"
+             type="text"
+             placeholder="Enter Member Organization URL"
+             formControlName="memberOrgURL"
+             >
+    </div>
+    <div class="form-group">
+      <label for="contactEmail">Contact email of the Member Organization</label>
+      <input id="contactEmail"
+             class="form-control"
+             type="email"
+             placeholder="Enter Contact email of the Member organization"
+             formControlName="contactEmail"
+             >
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-danger" type="button" (click)="activeModal.dismiss()" [disabled]="submitStatus.submitting">Cancel</button>
+  <button class="btn btn-success" type="submit" (click)="onSubmit()" [disabled]="memberFeedForm.invalid || submitStatus.submitting">
+    Update
+    <span *ngIf="submitStatus.submitting"><i class="fa fa-spinner fa-spin"></i></span>
+  </button>
+</div>

@@ -64,4 +64,13 @@ export class MemberService {
   updateLicense(memberKey: string, formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/license`, formData);
   }
+
+  updateMemberFeedData(memberKey: string, memberOrgName: string, memberOrgURL: string, contactEmail: string): Observable<any> {
+    const member = {
+      memberOrgName,
+      memberOrgURL,
+      contactEmail
+    };
+    return this.http.put<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/memberFeedUrl`, member);
+  }
 }
