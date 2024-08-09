@@ -1,0 +1,63 @@
+.form-group {
+    margin-bottom: 15px;
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    min-height: 16.42857143px;
+}
+
+.modal-footer {
+    margin-top: 15px;
+    padding: 19px 20px 20px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+    background-color: #fbfbfb;
+}
+
+h3, .h3 {
+    font-size: 24px;
+}
+
+.modal-body {
+    position: relative;
+    padding: 20px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.btn-success {
+    color: #3cb878;
+    background-color: #ffffff;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+    border: 2px solid;
+}
+
+.btn-danger {
+    color: #f26c4f;
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+    border: 2px solid;
+}
+
+.alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-success:hover, .btn-success:focus {
+    color: #ffffff;
+    background-color: #3cb878;
+}
+.btn-danger:hover, .btn-danger:focus {
+    color: #ffffff;
+    background-color: #f26c4f;
+}

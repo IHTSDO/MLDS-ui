@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditMemberModalComponent } from '../edit-member-modal/edit-member-modal.component';
 import { EditMemberNotificationsComponent } from '../edit-member-notifications/edit-member-notifications.component';
+import { EditLicenseComponent } from '../edit-license/edit-license.component';
 
 @Component({
   selector: 'app-member-management',
@@ -71,6 +72,32 @@ export class MemberManagementComponent {
     });
     modalRef.componentInstance.member = member;
     modalRef.result.then(() => {
+      this.fetchMembers();
+    });
+  }
+
+  viewLicense(memberKey: string): void {
+    this.memberService.getMemberLicense(memberKey).subscribe({
+      next: (licenseUrl: string) => {
+        window.open(licenseUrl, '_blank');
+      },
+      error: (error) => {
+        console.error('Error fetching member license:', error);
+      }
+    });
+  }
+  
+  editLicense(member: any): void {
+    const modalRef = this.modalService.open(EditLicenseComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.member = member;
+    modalRef.result.then(() => {
+      this.fetchMembers();
+    }).catch(error => {
+      console.error('Modal dismissed or error occurred', error);
+    }).finally(() => {
       this.fetchMembers();
     });
   }

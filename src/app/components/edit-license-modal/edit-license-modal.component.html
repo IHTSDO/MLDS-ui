@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h3 class="modal-title">Replace Terms &amp; Conditions</h3>
+  <button type="button" class="btn-close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+  <p>
+    Are you sure you want to replace the current license 
+    <b>{{member.licenseName}}</b> 
+    <b> {{member.licenseVersion}}</b> for 
+    <b>{{member.key}} </b> 
+    with the uploaded license file?
+  </p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" (click)="activeModal.dismiss()" [disabled]="submitting">Cancel</button>
+  <button class="btn btn-success" (click)="ok()" [disabled]="submitting">
+    <i class="fa fa-upload"></i>
+    Upload and Replace
+    <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+  </button>
+</div>
