@@ -9,7 +9,7 @@ import { User } from 'src/model/user.model';
 })
 export class AuthenticationSharedService {
   private apiUrl = environment.apiUrl;
-  private accountApiBaseUrl = environment.accountApiBaseUrl;
+  private apiBaseUrl = environment.apiBaseUrl;
   loginStatus = false;
   private userRoles: string[] = [];
   private userDetails: User | null = null;
@@ -24,7 +24,7 @@ export class AuthenticationSharedService {
     data.set('j_password', password);
     data.set('remember-me', rememberMe.toString());
 
-    return this.http.post<HttpResponse<any>>(`${this.accountApiBaseUrl}/authentication`, data.toString(), {
+    return this.http.post<HttpResponse<any>>(`${this.apiBaseUrl}/app/authentication`, data.toString(), {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
       }),

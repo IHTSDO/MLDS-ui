@@ -98,7 +98,7 @@
     </ul>
     <ul class="nav nav-sidebar">
       <li *ngIf="isAdmin">
-          <a href="#/metrics">
+          <a [routerLink]="['/member/metrics']">
               <i class="fa fa-exchange"></i>
               <span translate="metrics.title">System Metrics</span>
           </a>

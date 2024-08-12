@@ -15,6 +15,7 @@ import { BlocklistDomainComponent } from './components/blocklist-domain/blocklis
 import { ShowMemberBrandingComponent } from './components/show-member-branding/show-member-branding.component';
 import { UsageReportsComponent } from './components/usage-reports/usage-reports.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { MetricsComponent } from './components/metrics/metrics.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,8 @@ const routes: Routes = [
       { path: 'country', component: CountryComponent },
       { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
       { path: 'blocklist', component: BlocklistDomainComponent } ,
-      { path: 'usageReportsReview', component: UsageReportsComponent }  
+      { path: 'usageReportsReview', component: UsageReportsComponent },
+      { path: 'metrics', component: MetricsComponent },
     ]
   },
   {
