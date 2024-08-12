@@ -16,6 +16,7 @@ import { ShowMemberBrandingComponent } from './components/show-member-branding/s
 import { UsageReportsComponent } from './components/usage-reports/usage-reports.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { MetricsComponent } from './components/metrics/metrics.component';
+import { PendingApplicationsComponent } from './components/pending-application/pending-application.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
       { path: 'blocklist', component: BlocklistDomainComponent } ,
       { path: 'usageReportsReview', component: UsageReportsComponent },
       { path: 'metrics', component: MetricsComponent },
+      { path: 'pendingApplications', component: PendingApplicationsComponent },
     ]
   },
   {
