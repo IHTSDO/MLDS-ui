@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h2 >
+          <span>Reports</span>
+        </h2>
+
+      </div>
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <b>Affiliate Usage Report</b>
+                <br />
+                This report contains the usage report for the affiliates of 
+                <!-- <span *ngIf="session.member">{{ session.member.key | enum: 'global.member.' }}</span> -->
+                <!-- <span *ngIf="!session.member">{{ 'global.member.IHTSDO' | translate }}</span> -->
+              </td>
+              <td style="text-align: right">
+                <button class="btn btn-primary btn-sm" (click)="generateCsv()">
+                  <i class="fa fa-download"></i> Export as CSV
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
