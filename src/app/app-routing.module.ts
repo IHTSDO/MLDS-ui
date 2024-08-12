@@ -14,6 +14,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { BlocklistDomainComponent } from './components/blocklist-domain/blocklist-domain.component';
 import { ShowMemberBrandingComponent } from './components/show-member-branding/show-member-branding.component';
 import { UsageReportsComponent } from './components/usage-reports/usage-reports.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
-      { path: 'resetPassword', component: ResetPasswordComponent }
+      { path: 'resetPassword', component: ResetPasswordComponent },
+      { path: 'userDashboard', component: UserDashboardComponent }
     ]
   },
   {
@@ -50,7 +52,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
-      { path: 'resetPassword', component: ResetPasswordComponent }
+      { path: 'resetPassword', component: ResetPasswordComponent },
+      { path: 'userDashboard', component: UserDashboardComponent }
     ]
   }
 ];

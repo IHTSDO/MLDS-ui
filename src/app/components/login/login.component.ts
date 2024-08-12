@@ -37,7 +37,12 @@ export class LoginComponent {
       )
       .subscribe({
         next: (data) => {
+          if(this.authenticationService.isStaffOrAdmin()){
           this.router.navigate(['/member']);
+          }
+          else{
+            this.router.navigate(['/userDashboard'])
+          }
         },
         error: (error) => {
           this.authenticationError = true;

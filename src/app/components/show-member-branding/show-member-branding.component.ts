@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, Observable, of, switchMap } from 'rxjs';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 
 @Component({
@@ -16,16 +17,22 @@ export class ShowMemberBrandingComponent implements OnInit {
   member: any = null;
   memberLogo$: Observable<string | null> = of(null);
   memberName: string = '';
-  isLoading: boolean = true; // Add a loading state
+  isLoading: boolean = true;
+  userFirstName: string = '';
+  userLastName: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private authenticationService: AuthenticationSharedService
   ) {}
 
   ngOnInit(): void {
     this.memberKey = this.route.snapshot.paramMap.get('memberKey') || '';
     this.loadMemberDetails();
+    const userDetails = this.authenticationService.getUserDetails();
+    this.userFirstName = userDetails?.firstName ?? '';
+    this.userLastName = userDetails?.lastName ?? ''; 
   }
 
   private loadMemberDetails(): void {
