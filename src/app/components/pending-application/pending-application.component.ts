@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { FormsModule } from '@angular/forms';
 import { PendingApplicationsService } from 'src/app/services/pending-applications/pending-application.service';
+import { Router } from '@angular/router';
 
 /**
  * Pending Applications Component
@@ -87,7 +88,7 @@ export class PendingApplicationsComponent implements OnInit {
    * 
    * @param userRegistrationService Pending Applications Service
    */
-  constructor(private userRegistrationService: PendingApplicationsService, private authenticationService: AuthenticationSharedService) { }
+  constructor(private userRegistrationService: PendingApplicationsService, private authenticationService: AuthenticationSharedService, private router: Router) { }
 
   /**
    * Initializes the component
@@ -243,7 +244,7 @@ enumTransform(prefix: string, value: string): string {
  * goToApplication(application);
  */
 goToApplication(application: any): void {
-  // Implement navigation logic
+  this.router.navigate(['member/applicationReview', encodeURIComponent(application.applicationId)]);
 }
 
 /**

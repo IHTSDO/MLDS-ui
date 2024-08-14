@@ -18,6 +18,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { MetricsComponent } from './components/metrics/metrics.component';
 import { PendingApplicationsComponent } from './components/pending-application/pending-application.component';
 import { AffiliateManagementComponent } from './components/affiliate-management/affiliate-management.component';
+import { ApplicationReviewComponent } from './components/application-review/application-review.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'metrics', component: MetricsComponent },
       { path: 'pendingApplications', component: PendingApplicationsComponent },
       { path: 'affiliateManagement', component: AffiliateManagementComponent },
+      { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent}
     ]
   },
   {

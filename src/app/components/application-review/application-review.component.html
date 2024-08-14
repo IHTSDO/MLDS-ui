@@ -1,0 +1,119 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<span><a (click)="goToPendingApplication()"><i class="fa fa-angle-double-left"></i>  Back to Pending Applications</a></span>
+			<h1>{{application?.applicationType}} Application Review</h1>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- Warning Alerts -->
+        <div *ngIf="showNonMemberAlert" class="alert alert-warning">
+          You can view applications submitted to other Member Registration Centres, but you cannot process them.
+        </div>
+        <div *ngIf="showNonPendingAlert && !showNonMemberAlert" class="alert alert-warning">
+          You are viewing an application with the Change Requested Status, and the applicant has not re-submitted.
+        </div>
+
+        <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
+          {{ alert.msg }}
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
+        </div>
+
+      
+        <!-- Applicant Information -->
+        <div class="applicant-info">
+          <p><strong>Application No:</strong> {{ application?.applicationId }}</p>
+          <div *ngIf="application?.organizationName">
+            <h4 class="application-title">
+              {{ application?.organizationName }} - {{ application?.name }}
+              <span class="label label-success">
+                {{ application?.approvalState  }}
+              </span>
+            </h4>
+            <p><strong>Application Date: {{ application?.submittedAt | date: 'yyyy-MM-dd' }}</strong></p>
+          </div>
+          <hr>
+        <app-application-summary-block [application]="application" [commercialUsageInstitutionsByCountry]="commercialUsageInstitutionsByCountry" [usageCountryCountslist]="usageCountryCountslist" [showAuditPanel]="true"></app-application-summary-block>
+        </div>
+      </div>
+      
+      <div class="col-md-4 well-inactive">
+        <div *ngIf="application?.applicationType === 'PRIMARY'">
+            <label>Search Existing Affiliates</label>
+            <div class="input-group application-search">
+                <input type="text"
+                      (input)="onSearch($event)"
+                       placeholder="Search affiliate or contact name"
+                       class="form-control" />
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
+        </div>
+
+        <div class="search-results" *ngIf="showComparisonAffiliate">
+            <div class="search-close">
+                Selected Search Result
+                <button class="close btn-close" (click)="showComparisonAffiliate = false">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div *ngFor="let affiliate of searchResults" class="search-item" (click)="selectAffiliate(affiliate)">
+                <h5>{{affiliate.application.affiliateDetails.organizationName}} - {{affiliate.application.affiliateDetails.firstName}} {{affiliate.application.affiliateDetails.lastName}}</h5>
+                <p>
+                    {{affiliate.application.affiliateDetails.address.street}}<br>
+                    {{affiliate.application.affiliateDetails.address.city}}, {{affiliate.application.affiliateDetails.address.country.commonName}}<br>
+                    <strong>Usage Type:</strong> {{affiliate.application.type}} - {{affiliate.application.subType}}<br>
+                    <strong>Type of Agreement:</strong> {{affiliate.application.affiliateDetails.agreementType}}<br>
+                    <strong>Account Standing:</strong> {{affiliate.standingState}}
+                </p>
+                <hr>
+            </div>
+        </div>
+
+
+        <div class="search-results" *ngIf="comparisonAffiliate">
+          <div class="search-close">
+              Selected Search Result
+              <button class="close btn-close" (click)="closeComparisonAffiliate()">
+                  <i class="fa fa-times"></i>
+              </button>
+          </div>
+          <div class="muted">
+          <app-application-summary-block [application]="comparisonAffiliate" [showAuditPanel]="false"></app-application-summary-block>
+          </div>
+      </div>
+
+
+        <form [formGroup]="notesForm" (ngSubmit)="saveNotes()">
+          <div class="form-group">
+            <div class="pull-right" *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></div>
+          </div>
+          <div class="form-group">
+            <label>Staff Notes</label>
+            <button class="btn btn-success btn-xs pull-right" 
+                    type="submit"
+                    [disabled]="isActionDisabled || notesForm.invalid">
+              Save
+            </button>
+            <textarea class="form-control" 
+                      rows="10" 
+                      formControlName="notesInternal" 
+                      [attr.disabled]="isNoteReadOnly ? true : null">
+            </textarea>
+          </div>
+        </form>
+
+
+        <div class="review-buttons">
+          <a class="btn btn-success btn-block" (click)="approveApplication()">Approve Application</a>
+          <a class="btn btn-danger btn-block" (click)="changeRequested()">Change Requested from Applicant</a>
+          <a class="btn btn-danger btn-block" (click)="reviewRequested()">Review Requested from Staff</a>
+          <br><br>
+          <a class="btn btn-danger btn-block" (click)="rejectApplication()">Decline Application</a>
+        </div>
+
+
+      </div>
+</div>

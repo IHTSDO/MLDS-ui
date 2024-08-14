@@ -1,0 +1,231 @@
+<div [ngSwitch]="application?.applicationType">
+
+    <div class="panel panel-default" *ngSwitchCase="'EXTENSION'">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {{application?.member?.key}} 
+            <span translate="views.applicationSummary.ext.title">Extension Application Info</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <p><strong translate="views.applicationSummary.reason.label">Reason:</strong> {{application?.reason}}</p>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" translate="pendingApplications.table.applicationType">Application Type</h3>
+        </div>
+        <div class="panel-body">
+          <p *ngIf="application?.type !== 'INDIVIDUAL'">
+            <strong translate="views.contactInfo.organization.type.name.label">Organization Type:</strong>
+            <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType === 'OTHER'">
+              {{application?.affiliateDetails?.organizationTypeOther}}
+            </span>
+            <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType !== 'OTHER'">
+              {{application?.affiliateDetails?.organizationType}}
+            </span>
+          </p>
+          <p *ngSwitchCase="'PRIMARY'">
+            <strong translate="views.applicationSummary.useType.label">Use Type:</strong>
+            {{application?.type}}
+          </p>
+          <p *ngSwitchCase="'EXTENSION'">
+            <strong translate="views.applicationSummary.useType.label">Use Type:</strong>
+            {{application?.affiliateDetails?.type}}
+          </p>
+          <p *ngSwitchCase="'PRIMARY'">
+            <strong translate="views.applicationSummary.useSubType.label">Use Subtype:</strong>
+            {{application?.subType}}
+          </p>
+          <p *ngSwitchCase="'PRIMARY'">
+            <strong translate="register.affiliateRegistration.typeOfAgreement.label">Type of Agreement:</strong>
+            {{application?.affiliateDetails?.agreementType}}
+          </p>
+          <p *ngIf="application?.affiliate?.standingState">
+            <strong translate="views.contactInfo.admin.accountStanding.label">Account Standing:</strong>
+            {{application?.affiliate?.standingState}}
+          </p>
+        </div>
+    </div>
+
+    <div class="panel panel-default" *ngIf="application?.type !== 'INDIVIDUAL'">
+        <div class="panel-heading">
+          <h3 class="panel-title">Organization</h3>
+        </div>
+        <div class="panel-body application-review">
+          <p>
+            <strong>Organization Name:</strong>
+            {{ application?.affiliateDetails?.organizationName }}
+          </p>
+          <p>
+            <strong>Address:</strong>
+            {{ application?.affiliateDetails?.address?.street }}
+          </p>
+          <p>
+            <strong>City:</strong>
+            {{ application?.affiliateDetails?.address?.city }}
+          </p>
+          <p>
+            <strong>Post Code:</strong>
+            {{ application?.affiliateDetails?.address?.post }}
+          </p>
+          <p>
+            <strong>Country:</strong>
+            {{ application?.affiliateDetails?.address?.country?.commonName }}
+          </p>
+          <p>
+            <strong>Phone Number</strong>
+            {{ application?.affiliateDetails?.landlineNumber }}
+            <span *ngIf="application?.affiliateDetails?.contactextension">ext: {{ application?.affiliateDetails?.landlineExtension }}</span>
+          </p>
+          <p>
+            <strong>Alternate Email:</strong>
+            {{ application?.affiliateDetails?.alternateEmail }}
+          </p>
+          <p *ngIf="application?.affiliateDetails?.thirdEmail">
+            <strong>{{ 'views.contactInfo.contact.thirdEmail.label' }}</strong>
+            {{ application?.affiliateDetails?.thirdEmail }}
+          </p>
+          <p *ngIf="application?.type === 'OTHER'">
+            <strong>{{ 'views.contactInfo.admin.other.name.label' }}</strong>
+            {{ application?.otherText }}
+          </p>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">User</h3>
+        </div>
+        <div class="panel-body application-review">
+            <p><strong >Name:</strong> {{application?.affiliateDetails?.firstName}} {{application?.affiliateDetails?.lastName}}</p>
+            <p><strong >Email:</strong> {{application?.affiliateDetails?.email}}</p>
+            <p *ngIf="application?.type=='INDIVIDUAL'"><strong>Alternate Email:</strong> {{application?.affiliateDetails?.alternateEmail}}</p>
+            <p *ngIf="application?.type=='INDIVIDUAL' && application.affiliateDetails.thirdEmail"><strong translate="views.contactInfo.contact.thirdEmail.label">Third Email:</strong> {{application?.affiliateDetails?.thirdEmail}}</p>
+            <p>
+                <strong>Landline Phone Number:</strong> {{application?.affiliateDetails?.landlineNumber}}
+                <span *ngIf="application?.affiliateDetails?.landlineExtension"><span translate="views.contactInfo.contact.landlineExtension.short">ext:</span> {{application?.affiliateDetails?.landlineExtension}}</span>
+            </p>
+            <p><strong>Mobile Phone Number:</strong> {{application?.affiliateDetails?.mobileNumber}}</p>
+        </div>
+    </div>
+      
+    
+    <div class="panel panel-default" *ngIf="application?.type === 'INDIVIDUAL'">
+        <div class="panel-heading">
+          <h3 class="panel-title">Address</h3>
+        </div>
+        <div class="panel-body application-review">
+          <p>
+            <strong>Address:</strong>
+            {{ application?.affiliateDetails?.address?.street }}
+          </p>
+          <p>
+            <strong>City:</strong>
+            {{ application?.affiliateDetails?.address?.city }}
+          </p>
+          <p>
+            <strong>Post Code:</strong>
+            {{ application?.affiliateDetails?.address?.post }}
+          </p>
+          <p>
+            <strong>Country: </strong>
+            {{ application?.affiliateDetails?.address?.country?.commonName }}
+          </p>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Billing Information</h3>
+        </div>
+        <div class="panel-body application-review">
+          <p>
+            <strong>Address:</strong>
+            {{ application?.affiliateDetails?.billingAddress?.street }}
+          </p>
+          <p>
+            <strong>City:</strong>
+            {{ application?.affiliateDetails?.billingAddress?.city }}
+          </p>
+          <p>
+            <strong>Post Code: </strong>
+            {{ application?.affiliateDetails?.billingAddress?.post }}
+          </p>
+          <p>
+            <strong>Country:</strong>
+            {{ application?.affiliateDetails?.billingAddress?.country?.commonName }}           
+          </p>
+        </div>
+    </div>
+
+    
+    <div class="panel panel-default" *ngSwitchCase="'PRIMARY'">
+      <div class="panel-heading">
+        <h3 class="panel-title">Usage Context Information</h3>
+      </div>
+      <div class="panel-body application-review">
+            <div>
+              <p>
+                <strong>Current Usage:</strong>
+                {{ application?.commercialUsage?.context?.currentUsage }}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Planned Usage:</strong>
+                {{ application?.commercialUsage?.context?.plannedUsage }}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Purpose:</strong>
+                {{ application?.commercialUsage?.context?.purpose }}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Implementation Status:</strong>
+                {{ application?.commercialUsage?.context?.implementationStatus}}
+              </p>
+            </div>
+            <div *ngFor="let countryRecord of usageCountryCountslist">
+              <strong>Sub-license Usage:</strong>
+              <p>
+                <strong>Country:</strong>
+                {{ 'global.country.' + countryRecord.country.isoCode2  }}
+              </p>
+              <p>
+                <strong>Practices: </strong>
+                {{ countryRecord.snomedPractices | number }}
+              </p>
+              <p *ngIf="(commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]?.length ?? 0) > 0">
+                <strong>Hospitals/Institutions:</strong>
+                <ng-container *ngFor="let entry of commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]; let last = last">
+                    {{ entry.name }}<span *ngIf="!last">,</span>
+                </ng-container>
+              </p>
+            </div>
+            <div *ngIf="application?.commercialUsage?.context?.otherActivities">
+              <strong>{{ 'views.usageLog.otherActivities.label'  }}</strong>
+              <p>{{ application?.commercialUsage?.context?.otherActivities }}</p>
+            </div>
+          </div>
+    </div>
+
+    <div *ngIf="showAuditPanel" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Application Activity</h3>
+      </div>
+      <div class="panel-body application-review">
+        <app-audits-embed [audits]="audits"></app-audits-embed>
+      </div>
+    </div>
+</div>
+      
+      
+      
+
