@@ -1,0 +1,36 @@
+.table-responsive {
+    max-height: 600px; /* Adjust based on your needs */
+    overflow-y: auto;
+  }
+
+h2{
+    padding-top: 30px;
+    font-size: 3.4rem;
+    font-weight: 400;
+}
+.page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eeeeee;
+  // border: 1px solid;
+}
+/* CSS */
+.input-group.search-box {
+  max-width: 738px;
+  margin: 0 auto; /* Center align */
+}
+
+.input-group.search-box .form-control {
+  border-right: 0;
+}
+
+.input-group.search-box .input-group-append .input-group-text {
+  background-color: #fff;
+  border-left: 0;
+  cursor: pointer;
+  height: 34px;
+}
+
+.input-group.search-box .input-group-append .input-group-text .fa-search {
+  font-size: 16px;
+}

@@ -8,7 +8,8 @@
           </a>
       </li>
       <li *ngIf="isStaffOrAdmin">
-          <a href="#/affiliateManagement">
+          <!-- <a href="#/affiliateManagement"> -->
+            <a [routerLink]="['/member/affiliateManagement']">
               <i class="fa fa-users"></i>
               <span translate="affiliateManagement.title">Affiliate Management</span>
           </a>

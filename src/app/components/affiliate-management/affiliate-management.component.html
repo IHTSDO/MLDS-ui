@@ -1,0 +1,219 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h2>
+        <span>Affiliate Management</span>
+        <button class="btn btn-primary pull-right" type="button" (click)="generateCsv()">
+          <i class="fa fa-download"></i> Export as CSV
+          <ng-container *ngIf="generatingCsv">
+            <i class="fa fa-spinner fa-spin"></i>
+          </ng-container>
+        </button>
+      </h2>
+      <div *ngIf="isAdmin">
+        <span>Show: </span>
+        <select (ngModelChange)="changedSelectOption($event)" [(ngModel)]="showAllAffiliates">
+          <option value="0">My Affiliates</option>
+          <option value="1">All Affiliates</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="input-group search-box">
+      <input class="form-control" type="search" (ngModelChange)="loadAffiliates()" [(ngModel)]="query" placeholder="Search Affiliates">
+      <span class="input-group-append">
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
+      </span>
+    </div>
+    
+    <hr>
+  </div>
+  <div class="col-sm-2">
+    <button class="btn btn-info btn-muted" (click)="clearSearch()">Clear</button>
+  </div>
+  <div class="col-sm-2">Number of results: <strong>{{totalResults}}</strong></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-1">
+            <span *ngIf="canSort">
+              <a (click)="toggleField('affiliateId')">
+                No.
+                <ng-container *ngIf="orderByField === 'affiliateId'">
+                  <ng-container *ngIf="!reverseSort">
+                    <i class="fa fa-sort-asc"></i>
+                  </ng-container>
+                  <ng-container *ngIf="reverseSort">
+                    <i class="fa fa-sort-desc"></i>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="orderByField !== 'affiliateId'">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+            </span>
+            <span *ngIf="!canSort">No.</span>
+          </th>
+          <th class="col-md-2">
+            <span *ngIf="canSort">
+              <a (click)="toggleField('name')">
+                Affiliate Name
+                <ng-container *ngIf="orderByField === 'name'">
+                  <ng-container *ngIf="!reverseSort">
+                    <i class="fa fa-sort-asc"></i>
+                  </ng-container>
+                  <ng-container *ngIf="reverseSort">
+                    <i class="fa fa-sort-desc"></i>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="orderByField !== 'name'">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+            </span>
+            <span *ngIf="!canSort">Affiliate Name</span>
+          </th>
+          <th class="col-md-2">
+            <span *ngIf="canSort">
+              <a (click)="toggleField('agreementType')">
+                Agreement Type
+                <ng-container *ngIf="orderByField === 'agreementType'">
+                  <ng-container *ngIf="!reverseSort">
+                    <i class="fa fa-sort-asc"></i>
+                  </ng-container>
+                  <ng-container *ngIf="reverseSort">
+                    <i class="fa fa-sort-desc"></i>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="orderByField !== 'agreementType'">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+            </span>
+            <span *ngIf="!canSort">Agreement Type</span>
+          </th>
+          <th class="col-md-2">
+            <div class="btn-group" ngbDropdown>
+              <a class="btn btn-secondary" id="standingDropdown" ngbDropdownToggle>
+                Standing
+                <ng-container *ngIf="standingStateFilter">
+                  : {{standingStateNotApplying ? 'Not' : ''}} {{standingStateFilter }}
+                </ng-container>
+                <ng-container *ngIf="!standingStateFilter">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+              <div ngbDropdownMenu aria-labelledby="standingDropdown">
+                <button class="dropdown-item" (click)="toggleField('standingState', false)">
+                  <i class="fa fa-sort-alpha-asc"></i> Sort A to Z
+                </button>
+                <button class="dropdown-item" (click)="toggleField('standingState', true)">
+                  <i class="fa fa-sort-alpha-desc"></i> Sort Z to A
+                </button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" (click)="filterStandingState('')">All</button>
+                <button class="dropdown-item" (click)="filterStandingStateNotApplying()" [ngClass]="{'selected': standingStateNotApplying}">
+                  Not Applying
+                </button>
+                <ng-container *ngFor="let standingState of standingStateOptions">
+                  <button class="dropdown-item" (click)="filterStandingState(standingState)" [ngClass]="{'selected': standingStateFilter === standingState && !standingStateNotApplying}">
+                    {{standingState }}
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </th>
+          <th class="col-md-1">
+            <span *ngIf="canSort">
+              <a (click)="toggleField('homeCountry')">
+                Home Country
+                <ng-container *ngIf="orderByField === 'homeCountry'">
+                  <ng-container *ngIf="!reverseSort">
+                    <i class="fa fa-sort-asc"></i>
+                  </ng-container>
+                  <ng-container *ngIf="reverseSort">
+                    <i class="fa fa-sort-desc"></i>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="orderByField !== 'homeCountry'">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+            </span>
+            <span *ngIf="!canSort">Home Country</span>
+          </th>
+          <th class="col-md-1">
+            <span *ngIf="canSort">
+              <a (click)="toggleField('member')">
+                Member
+                <ng-container *ngIf="orderByField === 'member'">
+                  <ng-container *ngIf="!reverseSort">
+                    <i class="fa fa-sort-asc"></i>
+                  </ng-container>
+                  <ng-container *ngIf="reverseSort">
+                    <i class="fa fa-sort-desc"></i>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="orderByField !== 'member'">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+            </span>
+            <span *ngIf="!canSort">Member</span>
+          </th>
+          <th class="col-md-2">
+            <span *ngIf="canSort">
+              <a (click)="toggleField('email')">
+                Email
+                <ng-container *ngIf="orderByField === 'email'">
+                  <ng-container *ngIf="!reverseSort">
+                    <i class="fa fa-sort-asc"></i>
+                  </ng-container>
+                  <ng-container *ngIf="reverseSort">
+                    <i class="fa fa-sort-desc"></i>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="orderByField !== 'email'">
+                  <i class="fa fa-sort"></i>
+                </ng-container>
+              </a>
+            </span>
+            <span *ngIf="!canSort">Email</span>
+          </th>
+          <th class="col-md-1"></th>
+        </tr>
+      </thead>
+      <tbody infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="loadMoreAffiliates()">
+        <tr *ngFor="let affiliate of affiliates" >
+          <td class="col-md-1">{{affiliate.affiliateId}}</td>
+          <td class="col-md-2">{{affiliateActiveDetails(affiliate).firstName + ' ' + affiliateActiveDetails(affiliate).lastName}}</td>
+          <td class="col-md-2">{{affiliateActiveDetails(affiliate).type }} - {{affiliateActiveDetails(affiliate).subType }} {{affiliateActiveDetails(affiliate).otherText}}</td>
+          <td class="col-md-2">{{affiliate.standingState }}</td>
+          <td class="col-md-1">{{affiliateActiveDetails(affiliate).address.country.commonName}}</td>
+          <td class="col-md-1">{{affiliate.homeMember.key}}</td>
+          <td class="col-md-2"><a [href]="'mailto:' + affiliate.affiliateDetails?.email">{{affiliateActiveDetails(affiliate)?.email}}</a></td>
+          <td class="col-md-1"><a class="btn btn-primary btn-sm" (click)="viewAffiliate(affiliate.affiliateId)"><i class="fa fa-eye"></i> View</a></td>
+        </tr>
+        <tr *ngIf="noResults">
+          <td colspan="10" class="text-center">No results.</td>
+        </tr>
+        <tr *ngIf="allRetrieved && !noResults">
+          <td colspan="10" class="text-center">All affiliates retrieved</td>
+        </tr>
+      </tbody>
+      <ng-template #loadingData>
+        <tr>
+          <td colspan="10" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
+</div>

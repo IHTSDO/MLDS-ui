@@ -17,6 +17,7 @@ import { UsageReportsComponent } from './components/usage-reports/usage-reports.
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { MetricsComponent } from './components/metrics/metrics.component';
 import { PendingApplicationsComponent } from './components/pending-application/pending-application.component';
+import { AffiliateManagementComponent } from './components/affiliate-management/affiliate-management.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
       { path: 'usageReportsReview', component: UsageReportsComponent },
       { path: 'metrics', component: MetricsComponent },
       { path: 'pendingApplications', component: PendingApplicationsComponent },
+      { path: 'affiliateManagement', component: AffiliateManagementComponent },
     ]
   },
   {
