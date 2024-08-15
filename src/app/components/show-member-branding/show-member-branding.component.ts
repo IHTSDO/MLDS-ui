@@ -4,7 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, Observable, of, switchMap } from 'rxjs';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
-
+import { ROUTES } from 'src/app/routes-config';
 @Component({
   selector: 'app-show-member-branding',
   standalone: true,
@@ -20,7 +20,7 @@ export class ShowMemberBrandingComponent implements OnInit {
   isLoading: boolean = true;
   userFirstName: string = '';
   userLastName: string = '';
-
+  routes = ROUTES;
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,

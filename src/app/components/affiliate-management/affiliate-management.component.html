@@ -1,15 +1,19 @@
 <div class="row">
   <div class="col-md-12">
     <div class="page-header">
-      <h2>
-        <span>Affiliate Management</span>
-        <button class="btn btn-primary pull-right" type="button" (click)="generateCsv()">
-          <i class="fa fa-download"></i> Export as CSV
-          <ng-container *ngIf="generatingCsv">
-            <i class="fa fa-spinner fa-spin"></i>
-          </ng-container>
+      <h2 class="d-flex justify-content-between align-items-center">
+        <span translate="pendingApplications.title">Affiliate Management</span>
+        <button
+            class="btn btn-primary"
+            type="button"
+            (click)="generateCsv()"
+        >
+        <i class="fa fa-download"></i> Export as CSV
+        <span *ngIf="generatingCsv">
+        <i class="fa fa-spinner fa-spin"></i>
+        </span>
         </button>
-      </h2>
+        </h2>
       <div *ngIf="isAdmin">
         <span>Show: </span>
         <select (ngModelChange)="changedSelectOption($event)" [(ngModel)]="showAllAffiliates">

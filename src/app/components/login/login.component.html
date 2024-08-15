@@ -4,7 +4,7 @@
       <h1>Login</h1>
       <div class="alert alert-danger" *ngIf="authenticationError"> <div [innerHtml]="authenticationErrorMessageKey"></div>
       </div>
-      <form class="form" role="form" (ngSubmit)="login()">
+      <form class="form" role="form" (ngSubmit)="login()">`
         <div class="form-group">
           <label for="username">E-mail or Username</label>
           <input type="text" class="form-control" id="username" placeholder="Enter your email or username" [(ngModel)]="username" name="username">
@@ -27,7 +27,7 @@
       </form>
       <hr>
       <div>
-        <p>You don't have an account yet? <a [routerLink]="['/register']">Register a new account</a></p>
+        <p>You don't have an account yet? <a [routerLink]="[routes.register]">Register a new account</a></p>
         <p><a routerLink="/requestPasswordReset">Forgot your password?</a></p>
       </div>
     </div>

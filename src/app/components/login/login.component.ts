@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
-
+import { ROUTES } from 'src/app/routes-config'
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,7 +21,7 @@ export class LoginComponent {
   submitting: boolean = false;
   authenticationError: boolean = false;
   authenticationErrorMessageKey: string = '';
-
+  routes = ROUTES;
   constructor(
     private authenticationService: AuthenticationSharedService,
     private router: Router
@@ -38,10 +38,10 @@ export class LoginComponent {
       .subscribe({
         next: (data) => {
           if(this.authenticationService.isStaffOrAdmin()){
-          this.router.navigate(['/member']);
+          this.router.navigate([this.routes.pendingApplications]);
           }
           else{
-            this.router.navigate(['/userDashboard'])
+            this.router.navigate([this.routes.userDashboard])
           }
         },
         error: (error) => {

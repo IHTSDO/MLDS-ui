@@ -1,27 +1,25 @@
 <div id="sideNav" class="sidebar">
     <ul class="nav nav-sidebar">
       <li *ngIf="isStaffOrAdmin">
-          <!-- <a href="#/pendingApplications"> -->
-            <a [routerLink]="['/member/pendingApplications']">
+            <a [routerLink]="[routes.pendingApplications]">
               <i class="fa fa-tasks"></i>
               <span translate="pendingApplications.title">Pending Applications</span>
           </a>
       </li>
       <li *ngIf="isStaffOrAdmin">
-          <!-- <a href="#/affiliateManagement"> -->
-            <a [routerLink]="['/member/affiliateManagement']">
+            <a [routerLink]="[routes.affiliateManagement]">
               <i class="fa fa-users"></i>
               <span translate="affiliateManagement.title">Affiliate Management</span>
           </a>
       </li>
       <li *ngIf="isStaffOrAdmin">
-          <a href="#/releaseManagement">
+            <a [routerLink]="[routes.releaseManagement]">
               <i class="fas fa-cube"></i>
               <span translate="releaseManagement.title">Release Management</span>
           </a>
       </li>
       <li *ngIf="isStaffOrAdmin">
-          <a href="#/archiveReleases">
+            <a [routerLink]="[routes.archiveReleases]">
               <i class="fa fa-archive"></i>
               <span>Archive Releases</span>
           </a>
@@ -29,28 +27,26 @@
   
         <!--MLDS-985 Review Usage Reports-->
         <li *ngIf="isAdmin">
-            <!-- <a href="#/usageReportsReview"> -->
-                <a [routerLink]="['/member/usageReportsReview']">
+                <a [routerLink]="[routes.usageReportsReview]">
                 <i class="fa fa-file-text"></i>
                 <span translate="reviewUsageReports.title">Review Usage Reports</span>
             </a>
         </li>
         <li *ngIf="isStaff">
-            <!-- <a href="#/usageReportsReview"> -->
-                <a [routerLink]="['/usageReportsReview']">
+                <a [routerLink]="[routes.reports]">
                 <i class="fa fa-file-text"></i>
                 <span>Reports</span>
             </a>
         </li>
        <!-- MLDS-985 Review Usage Reports-->
       <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="['/member/member']">
+            <a [routerLink]="[routes.memberManagement]">
               <i class="fa fa-institution"></i>
               <span translate="memberManagement.title">Member Management</span>
           </a>
       </li>
       <li *ngIf="isStaffOrAdmin">
-          <a href="#/postAnnouncement">
+            <a [routerLink]="[routes.postAnnouncement]">
               <i class="fa fa-send"></i>
               <span translate="postAnnouncement.title">Post Announcement</span>
           </a>
@@ -58,7 +54,7 @@
     </ul>
     <ul class="nav nav-sidebar">
       <li *ngIf="isMemberOrStaffOrAdmin">
-          <a href="#/ihtsdoReleases">
+            <a [routerLink]="[routes.ihtsdoReleases]">
               <i class="fa fa-download"></i>
               <span translate="ihtsdoReleases.title">IHTSDO Releases</span>
           </a>
@@ -66,32 +62,31 @@
     </ul>
     <ul class="nav nav-sidebar">
         <li *ngIf="isAdmin">
-            <a [routerLink]="['/member/fileDownloadReport']">
+            <a [routerLink]="[routes.fileDownloadReport]">
                 <i class="fa fa-cube"></i>
                 <span>Release File Download Count</span>
             </a>
         </li>
       <li *ngIf="isAdmin">
-          <!-- <a href="#/activityLog"> -->
-            <a [routerLink]="['/member/activityLog']">
+            <a [routerLink]="[routes.activityLog]">
               <i class="fa fa-signal"></i>
               <span translate="activityLog.title">Activity Log</span>
           </a>
          </li>
       <li *ngIf="isAdmin">
-          <a href="#/importAffiliates">
+            <a [routerLink]="[routes.importAffiliates]">
               <i class="fa fa-upload"></i>
               <span translate="importAffiliateRecords.title">Import Affiliate Records</span>
           </a>
       </li>
       <li *ngIf="isAdmin">
-            <a [routerLink]="['/member/blocklist']">
+            <a [routerLink]="[routes.manageBlocklist]">
               <i class="fa fa-bolt"></i>
               <span translate="manageBlocklist.title">Manage Blocklist</span>
           </a>
       </li>
       <li *ngIf="isAdmin">
-            <a [routerLink]="['/member/country']">
+            <a [routerLink]="[routes.nationalRegistrationList]">
               <i class="fa fa-flag-o"></i>
               <span translate="nationalRegistrationList.title">National Registration List</span>
           </a>
@@ -99,13 +94,13 @@
     </ul>
     <ul class="nav nav-sidebar">
       <li *ngIf="isAdmin">
-          <a [routerLink]="['/member/metrics']">
+          <a [routerLink]="[routes.metrics]">
               <i class="fa fa-exchange"></i>
               <span translate="metrics.title">System Metrics</span>
           </a>
       </li>
       <li *ngIf="isAdmin">
-          <a href="#/logs">
+            <a [routerLink]="[routes.systemLoggers]">
               <i class="fa fa-navicon"></i>
               <span translate="systemLoggers.title">System Loggers</span>
           </a>

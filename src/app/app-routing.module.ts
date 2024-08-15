@@ -19,6 +19,7 @@ import { MetricsComponent } from './components/metrics/metrics.component';
 import { PendingApplicationsComponent } from './components/pending-application/pending-application.component';
 import { AffiliateManagementComponent } from './components/affiliate-management/affiliate-management.component';
 import { ApplicationReviewComponent } from './components/application-review/application-review.component';
+import { ActivityLogsComponent } from './components/activity-logs/activity-logs.component';
 
 
 const routes: Routes = [
@@ -35,12 +36,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'member',
+    path: '',
     component: DashboardComponent,
     canActivate: [authguardGuard],
     children: [
-      { path: '', redirectTo: 'member', pathMatch: 'full' },
-      { path: 'member', component: MemberManagementComponent },
+      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: 'memberManagement', component: MemberManagementComponent },
       { path: 'memberManagement/:memberKey/branding', component: ShowMemberBrandingComponent },
       { path: 'country', component: CountryComponent },
       { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
       { path: 'metrics', component: MetricsComponent },
       { path: 'pendingApplications', component: PendingApplicationsComponent },
       { path: 'affiliateManagement', component: AffiliateManagementComponent },
-      { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent}
+      { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent},
+      
     ]
   },
   {
