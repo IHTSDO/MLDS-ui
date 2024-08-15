@@ -13,7 +13,7 @@ import { ReviewRequestedModalComponent } from '../review-requested-modal/review-
 import { RejectApplicationModalComponent } from '../reject-application-modal/reject-application-modal.component';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
-
+import { ROUTES } from 'src/app/routes-config';
 @Component({
   selector: 'app-application-review',
   standalone: true,
@@ -40,7 +40,7 @@ export class ApplicationReviewComponent implements OnInit{
   searchingAffiliates = false;
   searchResults: any[] = [];
   originalAffiliate: any;
-  
+  routes =ROUTES;  
 
 
   constructor(private router: Router,private route: ActivatedRoute, private userRegistrationService: UserRegistrationService, private fb: FormBuilder
@@ -196,7 +196,7 @@ export class ApplicationReviewComponent implements OnInit{
 
  
   goToPendingApplication(): void {
-    this.router.navigate(['member/pendingApplications']);
+    this.router.navigate([this.routes.pendingApplications]);
   }
 
   private processCommercialUsageData(): void {

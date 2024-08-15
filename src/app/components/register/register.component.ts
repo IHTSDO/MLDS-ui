@@ -9,6 +9,8 @@ import { RegisterService } from 'src/app/services/register/register.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { Router } from '@angular/router';
 import { ExclusionModalComponent } from '../exclusion-modal/exclusion-modal.component';
+import { ROUTES } from 'src/app/routes-config'
+import { ErrorCodes } from 'src/app/error-codes'
 
 @Component({
   selector: 'app-register',
@@ -27,7 +29,8 @@ export class RegisterComponent {
   countryName: string | null = null;
   urlRegistration: string | null = null;
   submitted = false;
-
+  routes = ROUTES;
+  errorCodes = ErrorCodes;
   constructor(
     private fb: FormBuilder, 
     private countryService: CountryService, 
@@ -55,7 +58,7 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       tos: [false, Validators.requiredTrue]
-    }, { validator: this.passwordsMatchValidator });
+    }, { validator: this.inputsMatchValidator });
 
     this.createUserForm.get('country')?.valueChanges.subscribe(newValue => {
       this.handleCountryChange(newValue);
@@ -93,22 +96,26 @@ export class RegisterComponent {
       this.registerService.registerAccount(account).subscribe({
         next: () => {
           this.success = 'OK';
-          this.router.navigate(['/emailVerification']);
+          this.router.navigate([this.routes.emailVerification]);
         },
         error: (httpResponse) => {
           this.success = null;
-          if (httpResponse.status === 304) {
-            this.error = { userExists: 'ERROR' };
-          } else if (httpResponse.status === 406) {
-            this.error = { onBlocklist: 'ERROR' };
-          } else {
-            this.error = { general: 'ERROR' };
+          switch (httpResponse.status) {
+            case this.errorCodes.UserExists:
+              this.error = { userExists: 'ERROR' };
+              break;
+            case this.error.OnBlocklist:
+              this.error = { onBlocklist: 'ERROR' };
+              break;
+            default:
+              this.error = { general: 'ERROR' };
+              break;
           }
         }
       });
     }
 
-    private passwordsMatchValidator(formGroup: FormGroup) {
+    private inputsMatchValidator(formGroup: FormGroup) {
       const password = formGroup.get('password')?.value;
       const confirmPassword = formGroup.get('confirmPassword')?.value;
       if (password !== confirmPassword) {
@@ -150,7 +157,7 @@ export class RegisterComponent {
           console.log("accepted")
         }
       }, (reason) => {
-        this.router.navigate(['/']).then(() => {
+        this.router.navigate([this.routes.landingPage]).then(() => {
         });
       });
     }

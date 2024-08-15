@@ -8,7 +8,7 @@ import { EditMemberModalComponent } from '../edit-member-modal/edit-member-modal
 import { EditMemberNotificationsComponent } from '../edit-member-notifications/edit-member-notifications.component';
 import { EditLicenseComponent } from '../edit-license/edit-license.component';
 import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.component';
-
+import { ROUTES } from 'src/app/routes-config';
 @Component({
   selector: 'app-member-management',
   standalone: true,
@@ -19,7 +19,7 @@ import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.componen
 export class MemberManagementComponent {
   members: any[] = [];
   private apiUrl = environment.apiUrl;
-
+  routes = ROUTES;
   constructor(
     private memberService: MemberService,
     private modalService: NgbModal,
@@ -52,7 +52,7 @@ export class MemberManagementComponent {
   }
 
   viewBranding(member: any): void {
-    this.router.navigate(['/member/memberManagement', member.key, 'branding']);
+    this.router.navigate([this.routes.memberManagement, member.key, 'branding']);
   }
 
   openEditMemberModal(member: any): void {

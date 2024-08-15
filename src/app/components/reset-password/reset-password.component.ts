@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { ActivatedRoute, Router } from '@angular/router';
 import { PasswordResetService } from 'src/app/services/passwordReset/password-reset.service';
 import { PasswordStrengthBarComponent } from '../password-strength-bar/password-strength-bar.component';
-
+import { ROUTES } from 'src/app/routes-config'
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -17,7 +17,7 @@ export class ResetPasswordComponent {
   success: string | null = null;
   error: { expired?: boolean, server?: boolean } = {};
   token: string | null = null;
-
+  routes = ROUTES;
   constructor(
     private fb: FormBuilder,
     private passwordResetService: PasswordResetService,
@@ -67,7 +67,7 @@ export class ResetPasswordComponent {
         next: () => {
           this.success = 'Password changed successfully!';
           this.error = {};
-          setTimeout(() => this.router.navigate(['/login']), 2000);
+          setTimeout(() => this.router.navigate([this.routes.login]), 2000);
         },
         error: (response) => {
           this.success = null;

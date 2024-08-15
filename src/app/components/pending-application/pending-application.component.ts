@@ -15,7 +15,7 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { FormsModule } from '@angular/forms';
 import { PendingApplicationsService } from 'src/app/services/pending-applications/pending-application.service';
 import { Router } from '@angular/router';
-
+import { ROUTES } from 'src/app/routes-config'
 /**
  * Pending Applications Component
  */
@@ -81,7 +81,7 @@ export class PendingApplicationsComponent implements OnInit {
    */
   hasMoreData = true;
   loadingApplications = false;
-
+  routes=ROUTES;
 
   /**
    * Constructor
@@ -244,7 +244,7 @@ enumTransform(prefix: string, value: string): string {
  * goToApplication(application);
  */
 goToApplication(application: any): void {
-  this.router.navigate(['member/applicationReview', encodeURIComponent(application.applicationId)]);
+  this.router.navigate([this.routes.applicationReview, encodeURIComponent(application.applicationId)]);
 }
 
 /**
