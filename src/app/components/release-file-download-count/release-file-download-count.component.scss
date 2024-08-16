@@ -48,3 +48,50 @@ button.btn {
     max-height: 200px;
     overflow-y: auto;
   }
+  
+.input-group-addon {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+  
+  .form-control.date-input {
+    width: 150px; /* Adjust the width as needed */
+  }
+  
+  .input-group {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .input-group-addon {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+  
+  .form-control {
+    margin-left: 0;
+  }
+  
+  .input-group {
+    // padding: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  

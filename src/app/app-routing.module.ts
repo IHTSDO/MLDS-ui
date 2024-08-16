@@ -22,6 +22,7 @@ import { ApplicationReviewComponent } from './components/application-review/appl
 import { ActivityLogsComponent } from './components/activity-logs/activity-logs.component';
 
 
+
 const routes: Routes = [
   {
     path: '',
@@ -51,7 +52,7 @@ const routes: Routes = [
       { path: 'pendingApplications', component: PendingApplicationsComponent },
       { path: 'affiliateManagement', component: AffiliateManagementComponent },
       { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent},
-      
+      { path: 'activityLog', component: ActivityLogsComponent},
     ]
   },
   {
