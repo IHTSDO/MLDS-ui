@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api',
-  apiBaseUrl: 'http://localhost:8080'
+  apiUrl: 'https://dev-mlds.ihtsdotools.org/api',
+  apiBaseUrl: 'https://dev-mlds.ihtsdotools.org'
 };
 
 /*
