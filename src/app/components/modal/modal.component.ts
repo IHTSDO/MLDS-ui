@@ -1,7 +1,16 @@
 import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import {ModalService} from '../../services/modal/modal.service';
 
-
+/**
+ * Modal component that can be used to display a modal window.
+ *
+ * Example:
+ * ```
+ * <app-modal id="my-modal" size="large">
+ *   <!-- modal content here -->
+ * </app-modal>
+ * ```
+ */
 @Component({
     selector: 'app-modal',
     templateUrl: 'modal.component.html',
@@ -9,14 +18,25 @@ import {ModalService} from '../../services/modal/modal.service';
     encapsulation: ViewEncapsulation.None
 })
 export class ModalComponent implements OnInit, OnDestroy {
+    /**
+     * The ID of the modal. Required.
+     */
     @Input() id = '';
+
+    /**
+     * The size of the modal. Can be 'small', 'medium', or 'large'. Default is 'medium'.
+     */
     @Input() size = 'medium';
+
     private element: any;
 
     constructor(private modalService: ModalService, private el: ElementRef) {
         this.element = el.nativeElement;
     }
 
+    /**
+     * Initializes the modal component.
+     */
     ngOnInit(): void {
         // ensure id attribute exists
         if (!this.id) {
@@ -41,19 +61,25 @@ export class ModalComponent implements OnInit, OnDestroy {
         this.modalService.add(this);
     }
 
-    // remove self from modal service when component is destroyed
+    /**
+     * Removes the modal component from the DOM and modal service when it's destroyed.
+     */
     ngOnDestroy(): void {
         this.modalService.remove(this.id);
         this.element.remove();
     }
 
-    // open modal
+    /**
+     * Opens the modal window.
+     */
     open(): void {
         this.element.style.display = 'block';
         document.body.classList.add('app-modal-open');
     }
 
-    // close modal
+    /**
+     * Closes the modal window.
+     */
     close(): void {
         this.element.style.display = 'none';
         document.body.classList.remove('app-modal-open');

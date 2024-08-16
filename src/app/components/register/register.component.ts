@@ -12,6 +12,11 @@ import { ExclusionModalComponent } from '../exclusion-modal/exclusion-modal.comp
 import { ROUTES } from 'src/app/routes-config'
 import { ErrorCodes } from 'src/app/error-codes'
 
+/**
+ * Register component
+ *
+ * Handles user registration
+ */
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -21,16 +26,51 @@ import { ErrorCodes } from 'src/app/error-codes'
 })
 export class RegisterComponent {
 
+  /**
+   * Form group for creating a new user
+   */
   createUserForm: FormGroup;
+
+  /**
+   * List of available countries
+   */
   availableCountries: any[] = [];
 
+  /**
+   * Success message
+   */
   success: string | null = null;
+
+  /**
+   * Error object
+   */
   error: any = {};
+
+  /**
+   * Country name
+   */
   countryName: string | null = null;
+
+  /**
+   * URL for registration
+   */
   urlRegistration: string | null = null;
+
+  /**
+   * Flag indicating if the form has been submitted
+   */
   submitted = false;
+
+  /**
+   * Routes configuration
+   */
   routes = ROUTES;
+
+  /**
+   * Error codes
+   */
   errorCodes = ErrorCodes;
+
   constructor(
     private fb: FormBuilder, 
     private countryService: CountryService, 
@@ -43,8 +83,10 @@ export class RegisterComponent {
     this.createUserForm = this.fb.group({});
   }
 
+  /**
+   * Initializes the component
+   */
   ngOnInit(): void {
-
     this.countryService.getCountries().subscribe(countries => {
       this.availableCountries = countries;
     });
@@ -65,6 +107,12 @@ export class RegisterComponent {
     });
   }
 
+  /**
+   * Searches for countries based on the input text
+   *
+   * @param text$ - Observable of the input text
+   * @returns - An observable of the filtered country list
+   */
   search = (text$: Observable<string>) =>
     text$.pipe(
       startWith(''),
@@ -75,31 +123,39 @@ export class RegisterComponent {
       ))
     );
 
-    formatCountry = (country: any) => country.commonName;
+  /**
+   * Formats a country object for display
+   *
+   * @param country - The country object
+   * @returns - The formatted country name
+   */
+  formatCountry = (country: any) => country.commonName;
 
+  /**
+   * Submits the registration form
+   */
+  onSubmit() {
+    this.submitted = true;
+    if (this.createUserForm.invalid) {
+      return;
+    }
 
-    onSubmit() {
-      this.submitted = true;
-      if (this.createUserForm.invalid) {
-        return;
-      }
-
-      const account = this.createUserForm.value;
-      account.langKey = "en";
-      account.login = account.email;
-      const initialPeriod = this.commercialUsageService.generateRanges()[0];
-      account.initialUsagePeriod = {
+    const account = this.createUserForm.value;
+    account.langKey = "en";
+    account.login = account.email;
+    const initialPeriod = this.commercialUsageService.generateRanges()[0];
+    account.initialUsagePeriod = {
       startDate: initialPeriod.startDate,
       endDate: initialPeriod.endDate
-      };
-      console.log(account.initialUsagePeriod);
-      this.registerService.registerAccount(account).subscribe({
-        next: () => {
-          this.success = 'OK';
-          this.router.navigate([this.routes.emailVerification]);
-        },
-        error: (httpResponse) => {
-          this.success = null;
+    };
+    console.log(account.initialUsagePeriod);
+    this.registerService.registerAccount(account).subscribe({
+      next: () => {
+        this.success = 'OK';
+        this.router.navigate([this.routes.emailVerification]);
+      },
+      error: (httpResponse) => {
+        this.success = null;
           switch (httpResponse.status) {
             case this.errorCodes.UserExists:
               this.error = { userExists: 'ERROR' };
@@ -115,53 +171,62 @@ export class RegisterComponent {
       });
     }
 
-    private inputsMatchValidator(formGroup: FormGroup) {
-      const password = formGroup.get('password')?.value;
-      const confirmPassword = formGroup.get('confirmPassword')?.value;
-      if (password !== confirmPassword) {
-        formGroup.get('confirmPassword')?.setErrors({ match: true });
-      } else {
-        formGroup.get('confirmPassword')?.setErrors(null);
-      }
-  
-      const email = formGroup.get('email')?.value;
-      const confirmEmail = formGroup.get('confirmEmail')?.value;
-      if (email !== confirmEmail) {
-        formGroup.get('confirmEmail')?.setErrors({ match: true });
-      } else {
-        formGroup.get('confirmEmail')?.setErrors(null);
-      }
-    }
+   /**
+ * Validator function to check if password and confirm password fields match
+ *
+ * @param formGroup - The form group to validate
+ */
+private inputsMatchValidator(formGroup: FormGroup) {
+  const password = formGroup.get('password')?.value;
+  const confirmPassword = formGroup.get('confirmPassword')?.value;
+  if (password !== confirmPassword) {
+    formGroup.get('confirmPassword')?.setErrors({ match: true });
+  } else {
+    formGroup.get('confirmPassword')?.setErrors(null);
+  }
 
-
-    private handleCountryChange(newValue: any): void {
-      const country = this.availableCountries.find(c => c.commonName === newValue.commonName);
-      if (country && country.excludeUsage) {
-        this.showExclusionModal(country);
-      }
-    }
-
-
-    private showExclusionModal(country: any): void {
-      
-      const modalRef = this.modalService.open(ExclusionModalComponent, {
-        size: 'lg',
-        backdrop: 'static'
-      });
-
-      modalRef.componentInstance.countryName = country.commonName;
-      modalRef.componentInstance.urlRegistration = country.alternateRegistrationUrl;
-  
-      modalRef.result.then((result) => {
-        if (result) {
-          console.log("accepted")
-        }
-      }, (reason) => {
-        this.router.navigate([this.routes.landingPage]).then(() => {
-        });
-      });
-    }
-  
+  const email = formGroup.get('email')?.value;
+  const confirmEmail = formGroup.get('confirmEmail')?.value;
+  if (email !== confirmEmail) {
+    formGroup.get('confirmEmail')?.setErrors({ match: true });
+  } else {
+    formGroup.get('confirmEmail')?.setErrors(null);
+  }
 }
 
+/**
+ * Handles country change event
+ *
+ * @param newValue - The new country value
+ */
+private handleCountryChange(newValue: any): void {
+  const country = this.availableCountries.find(c => c.commonName === newValue.commonName);
+  if (country && country.excludeUsage) {
+    this.showExclusionModal(country);
+  }
+}
 
+/**
+ * Shows exclusion modal for countries with exclude usage
+ *
+ * @param country - The country object
+ */
+private showExclusionModal(country: any): void {
+  const modalRef = this.modalService.open(ExclusionModalComponent, {
+    size: 'lg',
+    backdrop: 'static'
+  });
+
+  modalRef.componentInstance.countryName = country.commonName;
+  modalRef.componentInstance.urlRegistration = country.alternateRegistrationUrl;
+
+  modalRef.result.then((result) => {
+    if (result) {
+      console.log("accepted")
+    }
+  }, (reason) => {
+    this.router.navigate([this.routes.landingPage]).then(() => {
+    });
+  });
+}
+}

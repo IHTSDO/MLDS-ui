@@ -5,6 +5,10 @@ import { catchError, Observable, of, switchMap } from 'rxjs';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
+
+/**
+ * Component to display member branding information
+ */
 @Component({
   selector: 'app-show-member-branding',
   standalone: true,
@@ -13,20 +17,55 @@ import { ROUTES } from 'src/app/routes-config';
   styleUrl: './show-member-branding.component.scss'
 })
 export class ShowMemberBrandingComponent implements OnInit {
+  /**
+   * Member key from route parameter
+   */
   memberKey: string = '';
+
+  /**
+   * Member object from API response
+   */
   member: any = null;
+
+  /**
+   * Observable to fetch member logo
+   */
   memberLogo$: Observable<string | null> = of(null);
+
+  /**
+   * Member name from API response
+   */
   memberName: string = '';
+
+  /**
+   * Flag to indicate loading state
+   */
   isLoading: boolean = true;
+
+  /**
+   * User first name from authentication service
+   */
   userFirstName: string = '';
+
+  /**
+   * User last name from authentication service
+   */
   userLastName: string = '';
+
+  /**
+   * Routes configuration
+   */
   routes = ROUTES;
+
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
     private authenticationService: AuthenticationSharedService
   ) {}
 
+  /**
+   * Initialize component
+   */
   ngOnInit(): void {
     this.memberKey = this.route.snapshot.paramMap.get('memberKey') || '';
     this.loadMemberDetails();
@@ -35,6 +74,12 @@ export class ShowMemberBrandingComponent implements OnInit {
     this.userLastName = userDetails?.lastName ?? ''; 
   }
 
+  /**
+   * Load member details from API
+   * 
+   * @example
+   * this.loadMemberDetails();
+   */
   private loadMemberDetails(): void {
     this.memberService.getMembers().pipe(
       switchMap(members => {
