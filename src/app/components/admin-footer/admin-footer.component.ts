@@ -1,3 +1,15 @@
+/**
+ * Admin Footer Component
+ *
+ * This component displays the footer section of the admin dashboard.
+ *
+ * Example:
+ * ```
+ * <app-admin-footer></app-admin-footer>
+ * ```
+ *
+ * @component
+ */
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,8 +17,12 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './admin-footer.component.html',
-  styleUrl: './admin-footer.component.scss'
+  styleUrls: ['./admin-footer.component.scss']
 })
 export class AdminFooterComponent {
 
+  /**
+   * Constructor
+   */
+  constructor() { }
 }

@@ -5,6 +5,11 @@ import { RouterLink } from '@angular/router';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { PasswordResetService } from 'src/app/services/passwordReset/password-reset.service';
 
+/**
+ * Request Password Reset Component
+ *
+ * This component allows users to request a password reset by entering their email address.
+ */
 @Component({
   selector: 'app-request-password-reset',
   standalone: true,
@@ -12,14 +17,35 @@ import { PasswordResetService } from 'src/app/services/passwordReset/password-re
   templateUrl: './request-password-reset.component.html',
   styleUrl: './request-password-reset.component.scss'
 })
-export class RequestPasswordResetComponent implements OnInit{
+export class RequestPasswordResetComponent implements OnInit {
+  /**
+   * The password reset form
+   */
   passwordResetForm: FormGroup = new FormGroup({});
+
+  /**
+   * Alerts to display to the user
+   */
   alerts: { type: string, msg: string }[] = [];
+
+  /**
+   * Flag indicating whether the password reset process has started
+   */
   resetProcessStarted = false;
+
+  /**
+   * Flag indicating whether the component is currently loading
+   */
   isLoading = false;
 
   constructor(
+    /**
+     * Password Reset Service
+     */
     private passwordResetService: PasswordResetService,
+    /**
+     * Form Builder
+     */
     private formBuilder: FormBuilder
   ) {
     this.passwordResetForm = this.formBuilder.group({
@@ -27,8 +53,17 @@ export class RequestPasswordResetComponent implements OnInit{
     });
   }
 
+  /**
+   * Initialize the component
+   */
   ngOnInit(): void {}
 
+  /**
+   * Request a password reset email
+   *
+   * @example
+   * <button (click)="requestResetEmail()">Request Password Reset</button>
+   */
   requestResetEmail(): void {
     if (this.passwordResetForm.invalid) {
       this.passwordResetForm.markAllAsTouched();

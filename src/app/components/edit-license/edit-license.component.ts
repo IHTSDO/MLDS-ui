@@ -5,6 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EditLicenseModalComponent } from '../edit-license-modal/edit-license-modal.component';
 
+/**
+ * Component for editing a license.
+ *
+ * @example
+ * <app-edit-license [member]="member"></app-edit-license>
+ */
 @Component({
   selector: 'app-edit-license',
   standalone: true,
@@ -14,13 +20,39 @@ import { EditLicenseModalComponent } from '../edit-license-modal/edit-license-mo
 })
 export class EditLicenseComponent implements OnInit {
 
+  /**
+   * The member object to edit the license for.
+   */
   @Input() member: any;
+
+  /**
+   * The form group for the license form.
+   */
   licenseForm!: FormGroup;
+
+  /**
+   * The submit status of the form.
+   */
   submitStatus = { notSubmitted: true, submitting: false, submitSuccessful: false };
+
+  /**
+   * Array of alerts to display.
+   */
   alerts: Array<{ type: string, msg: string }> = [];
+
+  /**
+   * The file to upload.
+   */
   file: File | null = null;
 
-
+  /**
+   * Constructor.
+   *
+   * @param fb The form builder.
+   * @param memberService The member service.
+   * @param modal The active modal.
+   * @param modalService The modal service.
+   */
   constructor(
     private fb: FormBuilder,
     private memberService: MemberService,
@@ -28,6 +60,9 @@ export class EditLicenseComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
     this.licenseForm = this.fb.group({
       licenseName: [this.member?.licenseName || '', []],
@@ -35,6 +70,11 @@ export class EditLicenseComponent implements OnInit {
     });
   }
 
+  /**
+   * Handles file change event.
+   *
+   * @param event The file change event.
+   */
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
@@ -42,6 +82,9 @@ export class EditLicenseComponent implements OnInit {
     }
   }
 
+  /**
+   * Submits the form.
+   */
   onSubmit(): void {
     if (this.licenseForm.invalid) {
       return;
@@ -53,7 +96,7 @@ export class EditLicenseComponent implements OnInit {
     formData.append('licenseName', this.licenseForm.get('licenseName')?.value || '');
     formData.append('licenseVersion', this.licenseForm.get('licenseVersion')?.value || '');
 
-    this.memberService.updateLicense(this.member.key,formData).subscribe(
+    this.memberService.updateLicense(this.member.key, formData).subscribe(
       result => {
         const message = this.file ? 'New license has been uploaded.' : 'License name and version updated.';
         this.alerts.push({ type: 'success', msg: message });
@@ -68,10 +111,18 @@ export class EditLicenseComponent implements OnInit {
     );
   }
 
+  /**
+   * Closes an alert.
+   *
+   * @param index The index of the alert to close.
+   */
   closeAlert(index: number): void {
     this.alerts.splice(index, 1);
   }
 
+  /**
+   * Opens the confirm modal.
+   */
   openConfirmModal(): void {
     const modalRef = this.modalService.open(EditLicenseModalComponent, {
       backdrop: 'static'
@@ -79,14 +130,12 @@ export class EditLicenseComponent implements OnInit {
     modalRef.componentInstance.member = this.member;
     modalRef.result
       .then((result) => {
-        if (result === 'Upload and Replace'){
+        if (result === 'Upload and Replace') {
           this.onSubmit();
         }
-    })
-    .catch((error) => {
-      console.error('Modal dismissed or error occurred', error);
-    });
+      })
+      .catch((error) => {
+        console.error('Modal dismissed or error occurred', error);
+      });
   }
-  
-
 }

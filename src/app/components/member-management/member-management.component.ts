@@ -9,6 +9,15 @@ import { EditMemberNotificationsComponent } from '../edit-member-notifications/e
 import { EditLicenseComponent } from '../edit-license/edit-license.component';
 import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.component';
 import { ROUTES } from 'src/app/routes-config';
+
+/**
+ * Member Management Component
+ * 
+ * This component is responsible for managing members, including fetching, editing, and viewing member data.
+ * 
+ * @example
+ * <app-member-management></app-member-management>
+ */
 @Component({
   selector: 'app-member-management',
   standalone: true,
@@ -17,19 +26,49 @@ import { ROUTES } from 'src/app/routes-config';
   styleUrl: './member-management.component.scss'
 })
 export class MemberManagementComponent {
+  /**
+   * Array of member objects
+   */
   members: any[] = [];
+
+  /**
+   * API URL
+   */
   private apiUrl = environment.apiUrl;
+
+  /**
+   * Routes configuration
+   */
   routes = ROUTES;
+
+  /**
+   * Constructor
+   * 
+   * @param memberService Member service
+   * @param modalService Modal service
+   * @param router Router
+   */
   constructor(
     private memberService: MemberService,
     private modalService: NgbModal,
     private router: Router
   ) { }
 
+  /**
+   * On init lifecycle hook
+   * 
+   * Fetches members data
+   */
   ngOnInit(): void {
-      this.fetchMembers();
+    this.fetchMembers();
   }
 
+  /**
+   * Fetches members data
+   * 
+   * @example
+   * this.fetchMembers();
+   */
   fetchMembers(): void {
     this.memberService.getMembers().subscribe({
       next: (data) => {
@@ -41,6 +80,15 @@ export class MemberManagementComponent {
     });
   }
 
+  /**
+   * Gets member landing page URL
+   * 
+   * @param member Member object
+   * @returns Member landing page URL
+   * 
+   * @example
+   * const url = this.getMemberLandingPage(member);
+   */
   getMemberLandingPage(member: any): string {
     let url = this.apiUrl;
     const hashIndex = url.indexOf('#');
@@ -51,10 +99,26 @@ export class MemberManagementComponent {
     return url;
   }
 
+  /**
+   * Views member branding
+   * 
+   * @param member Member object
+   * 
+   * @example
+   * this.viewBranding(member);
+   */
   viewBranding(member: any): void {
     this.router.navigate([this.routes.memberManagement, member.key, 'branding']);
   }
 
+  /**
+   * Opens edit member modal
+   * 
+   * @param member Member object
+   * 
+   * @example
+   * this.openEditMemberModal(member);
+   */
   openEditMemberModal(member: any): void {
     const modalRef = this.modalService.open(EditMemberModalComponent, {
       size: 'lg',
@@ -66,6 +130,14 @@ export class MemberManagementComponent {
     });
   }
 
+  /**
+   * Edits staff notifications email
+   * 
+   * @param member Member object
+   * 
+   * @example
+   * this.editStaffNotificationsEmail(member);
+   */
   editStaffNotificationsEmail(member: any): void {
     const modalRef = this.modalService.open(EditMemberNotificationsComponent, {
       size: 'lg',
@@ -77,6 +149,14 @@ export class MemberManagementComponent {
     });
   }
 
+  /**
+   * Views member license
+   * 
+   * @param memberKey Member key
+   * 
+   * @example
+   * this.viewLicense(memberKey);
+   */
   viewLicense(memberKey: string): void {
     this.memberService.getMemberLicense(memberKey).subscribe({
       next: (licenseUrl: string) => {
@@ -87,30 +167,50 @@ export class MemberManagementComponent {
       }
     });
   }
-  
-  editLicense(member: any): void {
-    const modalRef = this.modalService.open(EditLicenseComponent, {
-      size: 'lg',
-      backdrop: 'static'
-    });
-    modalRef.componentInstance.member = member;
-    modalRef.result.then(() => {
-      this.fetchMembers();
-    }).catch(error => {
-      console.error('Modal dismissed or error occurred', error);
-    }).finally(() => {
-      this.fetchMembers();
-    });
-  }
-  
-  editFeedData(member: any): void {
-    const modalRef = this.modalService.open(EditFeedDataComponent, {
-      size: 'lg',
-      backdrop: 'static'
-    });
-    modalRef.componentInstance.member = member;
-    modalRef.result.then(() => {
-      this.fetchMembers();
-    });
-  }
+
+  /**
+ * Edits member license
+ * 
+ * Opens a modal to edit the member's license
+ * 
+ * @param member Member object
+ * 
+ * @example
+ * this.editLicense({ key: 'member-key' });
+ */
+editLicense(member: any): void {
+  const modalRef = this.modalService.open(EditLicenseComponent, {
+    size: 'lg',
+    backdrop: 'static'
+  });
+  modalRef.componentInstance.member = member;
+  modalRef.result.then(() => {
+    this.fetchMembers();
+  }).catch(error => {
+    console.error('Modal dismissed or error occurred', error);
+  }).finally(() => {
+    this.fetchMembers();
+  });
+}
+
+/**
+ * Edits member feed data
+ * 
+ * Opens a modal to edit the member's feed data
+ * 
+ * @param member Member object
+ * 
+ * @example
+ * this.editFeedData({ key: 'member-key' });
+ */
+editFeedData(member: any): void {
+  const modalRef = this.modalService.open(EditFeedDataComponent, {
+    size: 'lg',
+    backdrop: 'static'
+  });
+  modalRef.componentInstance.member = member;
+  modalRef.result.then(() => {
+    this.fetchMembers();
+  });
+}
 }
