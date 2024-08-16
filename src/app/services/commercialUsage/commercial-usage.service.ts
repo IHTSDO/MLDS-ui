@@ -16,7 +16,8 @@ export class CommercialUsageService {
    * @example
    * generateRanges(6) // Returns an array of 6 commercial usage ranges in a year
    */
-  generateRanges(periods: number): Array<{ startDate: string, endDate: string }> {
+  generateRanges(): Array<{ startDate: string, endDate: string }> {
+    const periods = 6;
     return this.annualPeriods(periods)
   }
 
