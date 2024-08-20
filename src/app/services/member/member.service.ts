@@ -10,7 +10,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MemberService {
-
+  isMemberEqual(member: any, ihtsdoMember: any) {
+    throw new Error('Method not implemented.');
+  }
+  isMemberEquals(member1: any, member2: any): boolean {
+    // Add your equality logic here
+    return member1.id === member2.id;
+  }
   private apiUrl = environment.apiUrl;
   private memberKeySubject = new BehaviorSubject<string | null>(null);
   /**
@@ -23,6 +29,7 @@ export class MemberService {
    * Observable that emits the current member logo URL.
    */
   memberLogo$ = this.memberLogoSubject.asObservable();
+  ihtsdoMember: any;
 
   constructor(private http: HttpClient) { }
 

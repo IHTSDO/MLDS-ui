@@ -1,7 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { AffiliateService } from '../affiliate/affiliate.service';
+import { UsageReportStateUtilsService } from '../usage-report-state-utils/usage-report-state-utils.service';
 
 /**
  * Service for retrieving usage reports.
@@ -10,36 +13,77 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UsageReportsService {
-  /**
-   * Base URL for API requests.
-   */
-  private apiUrl = environment.apiUrl;
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private modalService: NgbModal,
+    private affiliateService: AffiliateService,
+    private usageReportStateUtils: UsageReportStateUtilsService
+  ) {}
 
-  /**
-   * Creates an instance of UsageReportsService.
-   * @param http HttpClient instance.
-   */
-  constructor(private http: HttpClient) {}
+  usageReportCountries(usageReport: any): number {
+    return usageReport.countries.length;
+  }
 
-  /**
-   * Retrieves submitted usage reports.
-   * 
-   * @param page Page number (1-indexed).
-   * @param pageSize Number of items per page.
-   * @param orderby Field to order by (e.g. 'id', 'name', etc.).
-   * @returns Observable of usage reports.
-   * 
-   * @example
-   * this.usageReportsService.getSubmittedUsageReports(1, 10, 'id')
-   *   .subscribe(reports => console.log(reports));
-   */
-  getSubmittedUsageReports(page: number, pageSize: number, orderby: string): Observable<any> {
-    let params = new HttpParams()
-      .set('page', page.toString())
-      .set('size', pageSize.toString())
-      .set('orderby', orderby)
-      .set('$filter', 'approvalState/not submitted eq false');
+  usageReportHospitals(usageReport: any): number {
+    return usageReport.entries.length;
+  }
 
-    return this.http.get(`${this.apiUrl}/commercialUsages/`, { params });
+  usageReportPractices(usageReport: any): number {
+    return usageReport.countries.reduce((total: number, count: any) => {
+      return total + (count.snomedPractices || 0);
+    }, 0);
+  }
+
+  isInvoiceSent(usageReport: any): boolean {
+    return this.usageReportStateUtils.isInvoiceSent(usageReport.state);
+  }
+
+  isPendingInvoice(usageReport: any): boolean {
+    return this.usageReportStateUtils.isPendingInvoice(usageReport.state);
+  }
+
+  isSubmitted(usageReport: any): boolean {
+    return this.usageReportStateUtils.isSubmitted(usageReport.state);
+  }
+
+  // openAddUsageReportModal(affiliate: any): void {
+  //   const modalRef = this.modalService.open(AddUsageReportModalComponent, {
+  //     size: 'lg',
+  //     backdrop: 'static'
+  //   });
+  //   modalRef.componentInstance.affiliateId = affiliate.affiliateId;
+  // }
+
+  goToUsageReport(usageReport: any): void {
+    this.router.navigate(['/usageReports/usageLog', encodeURIComponent(usageReport.commercialUsageId)]);
+  }
+
+  goToReviewUsageReport(usageReport: any): void {
+    this.router.navigate(['/usageReportsReview', encodeURIComponent(usageReport.commercialUsageId)]);
+  }
+
+  affiliateIsCommercial(affiliate: any): boolean {
+    return this.affiliateService.affiliateIsCommercial(affiliate);
+  }
+
+  anySubmittedUsageReports(affiliate: any): boolean {
+    return affiliate.commercialUsages.some((usageReport: any) => {
+      return !this.usageReportStateUtils.isWaitingForApplicant(usageReport.state) && !usageReport.effectiveTo;
+    });
+  }
+
+  retractUsageReport(commercialUsageReport: any): void {
+    // const modalRef = this.modalService.open(RetractUsageReportModalComponent, {
+    //   size: 'sm',
+    //   backdrop: 'static'
+    // });
+    // modalRef.componentInstance.commercialUsageReport = commercialUsageReport;
+
+    // modalRef.result.then((result: any) => {
+    //   if (result.data && result.data.commercialUsageId) {
+    //     this.router.navigate(['/usageReports/usageLog', result.data.commercialUsageId]);
+    //   }
+    // });
   }
 }

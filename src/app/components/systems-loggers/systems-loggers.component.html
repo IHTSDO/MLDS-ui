@@ -1,0 +1,30 @@
+<div>
+    <h2>Logs</h2>
+  
+    <p>There are {{ loggers.length }} loggers.</p>
+  
+    <label for="filter">Filter:</label>
+    <input id="filter" type="text" [(ngModel)]="filter" class="form-control">
+  
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr title="click to order">
+          <th (click)="predicate = 'name'; reverse = !reverse">Name</th>
+          <th (click)="predicate = 'level'; reverse = !reverse">Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let logger of sortedLoggers">
+          <td><small>{{ logger.name | slice:0:140 }}</small></td>
+          <td>
+            <button (click)="changeLevel(logger.name, 'TRACE')" [ngClass]="{'btn-danger': logger.level === 'TRACE', 'btn-primary': logger.level !== 'TRACE'}" class="btn btn-primary btn-xs">TRACE</button>
+            <button (click)="changeLevel(logger.name, 'DEBUG')" [ngClass]="{'btn-warning': logger.level === 'DEBUG', 'btn-primary': logger.level !== 'DEBUG'}" class="btn btn-primary btn-xs">DEBUG</button>
+            <button (click)="changeLevel(logger.name, 'INFO')" [ngClass]="{'btn-info': logger.level === 'INFO', 'btn-primary': logger.level !== 'INFO'}" class="btn btn-primary btn-xs">INFO</button>
+            <button (click)="changeLevel(logger.name, 'WARN')" [ngClass]="{'btn-success': logger.level === 'WARN', 'btn-warning': logger.level !== 'WARN'}" class="btn btn-warning btn-xs">WARN</button>
+            <button (click)="changeLevel(logger.name, 'ERROR')" [ngClass]="{'btn-primary': logger.level === 'ERROR', 'btn-danger': logger.level !== 'ERROR'}" class="btn btn-danger btn-xs">ERROR</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
