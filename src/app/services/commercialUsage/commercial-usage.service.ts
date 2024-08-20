@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import moment from 'moment'
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * A service that generates commercial usage ranges for a given number of periods in a year.
@@ -14,7 +14,7 @@ export class CommercialUsageService {
    /**
    * Base URL for API requests.
    */
-   private apiUrl = environment.apiUrl;
+   private apiUrl = API_ROUTES.apiUrl;
    constructor(private http: HttpClient) {}
 
    

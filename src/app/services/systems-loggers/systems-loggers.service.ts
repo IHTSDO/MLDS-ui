@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SystemsLoggersService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<any[]> {

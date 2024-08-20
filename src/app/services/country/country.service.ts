@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Country service that provides methods to retrieve, create, update and delete countries.
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CountryService {
   
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
   private countries: any[] = [];
   private countriesByIsoCode2: { [key: string]: any } = {};
   private countriesUsingMLDS: string[] = [];

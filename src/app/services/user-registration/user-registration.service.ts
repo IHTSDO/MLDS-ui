@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Service for user registration-related operations.
@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserRegistrationService {
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
 
   /**
    * Creates an instance of UserRegistrationService.

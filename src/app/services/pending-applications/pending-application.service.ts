@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Service for handling pending applications.
@@ -14,7 +14,7 @@ export class PendingApplicationsService {
   /**
    * Base URL for API requests.
    */
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
 
   /**
    * Creates an instance of PendingApplicationsService.

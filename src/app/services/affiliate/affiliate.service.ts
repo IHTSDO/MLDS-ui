@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { number } from 'echarts';
 import { Observable, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { AuthenticationSharedService } from '../authentication/authentication-shared.service';
 import { ApplicationUtilsService } from '../application-utils/application-utils.service'
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Affiliate service provides methods for interacting with the affiliate API.
@@ -13,7 +12,7 @@ import { ApplicationUtilsService } from '../application-utils/application-utils.
   providedIn: 'root'
 })
 export class AffiliateService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
 
   constructor(
     private http: HttpClient,

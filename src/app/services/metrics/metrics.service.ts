@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 /**
  * Service for interacting with the metrics API.
@@ -10,10 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MetricsService {
-  /**
-   * Base URL for the API.
-   */
-  private apiBaseUrl = environment.apiBaseUrl;
+
 
   /**
    * Constructor.
@@ -30,7 +26,7 @@ export class MetricsService {
    * });
    */
   getHealthCheck(): Observable<any> {
-    return this.http.get(`${this.apiBaseUrl}/health`);
+    return this.http.get('/health');
   }
 
   /**
@@ -42,6 +38,6 @@ export class MetricsService {
    * });
    */
   getMetrics(): Observable<any> {
-    return this.http.get(`${this.apiBaseUrl}/metrics/metrics`);
+    return this.http.get('/metrics/metrics');
   }
 }

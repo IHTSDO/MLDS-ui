@@ -1,7 +1,7 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Service for interacting with member-related API endpoints.
@@ -17,7 +17,7 @@ export class MemberService {
     // Add your equality logic here
     return member1.id === member2.id;
   }
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
   private memberKeySubject = new BehaviorSubject<string | null>(null);
   /**
    * Observable that emits the current member key.

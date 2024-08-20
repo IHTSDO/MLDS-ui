@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Service for retrieving release file download counts and user data.
@@ -14,7 +14,7 @@ export class ReleaseFileDownloadCountService {
   /**
    * Base URL for API requests.
    */
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
 
   /**
    * Constructor.

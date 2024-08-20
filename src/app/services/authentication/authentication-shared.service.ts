@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, switchMap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { API_ROUTES } from 'src/app/routes-config-api';
 import { User } from 'src/model/user.model';
 
 /**
@@ -11,8 +11,7 @@ import { User } from 'src/model/user.model';
   providedIn: 'root'
 })
 export class AuthenticationSharedService {
-  private apiUrl = environment.apiUrl;
-  private apiBaseUrl = environment.apiBaseUrl;
+  private apiUrl = API_ROUTES.apiUrl;
   loginStatus = false;
   private userRoles: string[] = [];
   private userDetails: User | null = null;
@@ -42,7 +41,7 @@ export class AuthenticationSharedService {
     data.set('j_password', password);
     data.set('remember-me', rememberMe.toString());
 
-    return this.http.post<HttpResponse<any>>(`${this.apiBaseUrl}/app/authentication`, data.toString(), {
+    return this.http.post<HttpResponse<any>>('/app/authentication', data.toString(), {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
       }),

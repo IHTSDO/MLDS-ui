@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MemberService } from 'src/app/services/member/member.service';
 import { CommonModule } from '@angular/common';
-import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditMemberModalComponent } from '../edit-member-modal/edit-member-modal.component';
@@ -9,6 +8,7 @@ import { EditMemberNotificationsComponent } from '../edit-member-notifications/e
 import { EditLicenseComponent } from '../edit-license/edit-license.component';
 import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.component';
 import { ROUTES } from 'src/app/routes-config';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Member Management Component
@@ -34,7 +34,7 @@ export class MemberManagementComponent {
   /**
    * API URL
    */
-  private apiUrl = environment.apiUrl;
+  private apiUrl = API_ROUTES.apiUrl;
 
   /**
    * Routes configuration

@@ -32,11 +32,7 @@ export class EnvService {
     /**
      * Whether the environment is production
      */
-    production: false,
-    /**
-     * API URL
-     */
-    apiUrl: 'http://localhost:8080/api',
+    production: false
   };
 
 }
