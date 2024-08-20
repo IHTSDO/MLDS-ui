@@ -20,6 +20,7 @@ import { PendingApplicationsComponent } from './components/pending-application/p
 import { AffiliateManagementComponent } from './components/affiliate-management/affiliate-management.component';
 import { ApplicationReviewComponent } from './components/application-review/application-review.component';
 import { ActivityLogsComponent } from './components/activity-logs/activity-logs.component';
+import { SystemsLoggersComponent } from './components/systems-loggers/systems-loggers.component';
 
 
 
@@ -53,6 +54,7 @@ const routes: Routes = [
       { path: 'affiliateManagement', component: AffiliateManagementComponent },
       { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent},
       { path: 'activityLog', component: ActivityLogsComponent},
+      { path: 'logs', component: SystemsLoggersComponent},
     ]
   },
   {

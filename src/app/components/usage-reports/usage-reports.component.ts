@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service'
-
+import { ROUTES } from 'src/app/routes-config'
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 /**
  * Component for displaying usage reports.
  */
@@ -14,6 +17,7 @@ import { UsageReportsService } from 'src/app/services/usage-reports/usage-report
   styleUrl: './usage-reports.component.scss'
 })
 export class UsageReportsComponent implements OnInit {
+  routes = ROUTES;
   /**
    * Array of usage reports.
    */
@@ -43,18 +47,23 @@ export class UsageReportsComponent implements OnInit {
    * Whether there are more usage reports to load.
    */
   hasMoreData = true;
+  isAdmin: boolean = false; 
 
   /**
    * Whether usage reports are currently being downloaded.
    */
   downloadingReports = false;
 
-  constructor(private usageReportsService: UsageReportsService) {}
+  constructor(private commercialUsageService: CommercialUsageService, private authenticationService: AuthenticationSharedService, private router: Router) {}
 
   /**
    * Initializes the component by loading the first page of usage reports.
    */
   ngOnInit(): void {
+    const userDetails = this.authenticationService.getUserDetails();
+    this.isAdmin = this.authenticationService.isAdmin();
+    console.log(userDetails?.member?.['key'])
+    // this.homeMember = userDetails?.member?.['key'];
     this.loadMoreUsageReports();
   }
 
@@ -74,7 +83,7 @@ export class UsageReportsComponent implements OnInit {
       this.hasMoreData = true;
     }
     const orderByParam = `${this.orderByField},${this.reverseSort ? 'desc' : 'asc'}`;
-    this.usageReportsService.getSubmittedUsageReports(this.page, this.pageSize, orderByParam)
+    this.commercialUsageService.getSubmittedUsageReports(this.page, this.pageSize, orderByParam)
       .subscribe(results => {
         if (results.length < this.pageSize) {
           this.hasMoreData = false;
@@ -116,7 +125,8 @@ export class UsageReportsComponent implements OnInit {
    * @param usageReport The usage report to review.
    */
   goToReviewUsageReport(usageReport: any): void {
-    // Implementation for reviewing a usage report
+    this.router.navigate([this.routes.usageReportsReview, encodeURIComponent(usageReport.commercialUsageId
+    )]);
   }
 
   /**

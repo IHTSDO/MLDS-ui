@@ -68,7 +68,14 @@
             <td>{{usageReport.endDate}}</td>
             <td>{{usageReportHospitals(usageReport)}}</td>
             <td>{{usageReportPractices(usageReport)}}</td>
-            <td><a class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Review</a></td>
+            <button
+                *ngIf="isAdmin"
+                type="button"
+                class="btn btn-primary btn-sm"
+                (click)="goToReviewUsageReport(usageReport)"
+              >
+                Review
+              </button>
           </tr>
         </tbody>
       </table>
