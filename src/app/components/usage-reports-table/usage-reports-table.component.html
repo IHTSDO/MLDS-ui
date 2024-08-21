@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span class="float-end">
+      <button class="btn btn-success btn-xs"><i class="fa fa-plus"></i> <span
+          translate="views.usageReports.newReport">New Report</span></button>
+    </span>
+    <h3 class="panel-title">
+      <span translate="global.menu.usageReports">Usage Reports</span>
+      <button *ngIf="showViewAll" class="btn btn-link btn-xs">
+        <span translate="global.word.viewAll">View All</span> <i class="fa fa-angle-double-right"></i>
+      </button>
+    </h3>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th translate="views.usageReports.reportDate">Report Date</th>
+          <th translate="views.usageReports.usageType" *ngIf="showAllColumns">Usage Type</th>
+          <th translate="global.word.status" *ngIf="showAllColumns">Status</th>
+          <th translate="views.usageReports.countries" *ngIf="showAllColumns">Countries</th>
+          <th translate="views.usageReports.hospitals">Hospitals</th>
+          <th translate="views.usageLog.institutions.practices">Practices</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usageReport of affiliate.commercialUsages">
+          <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
+            <span class="btn-link">
+              <span *ngIf="usageReport.effectiveTo" class="text-muted">
+                <i class="fa fa-minus-square-o"></i>
+              </span>
+              <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+                {{usageReport.startDate | date: 'yyyy-MM'}} - {{usageReport.endDate | date: 'yyyy-MM'}}
+              </span>
+            </span>
+          </td>
+          <td *ngIf="showAllColumns">
+            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+                {{ usageReport.type }}
+              </span></span>
+          </td>
+          <td *ngIf="showAllColumns">
+            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+                {{ usageReport.state }}
+              </span></span>
+          </td>
+          <td *ngIf="showAllColumns">
+            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+                {{usageReportsUtils.usageReportCountries(usageReport) | number}}
+              </span></span>
+          </td>
+          <td>
+            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+                {{usageReportsUtils.usageReportHospitals(usageReport) | number}}
+              </span></span>
+          </td>
+          <td>
+            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+                {{usageReportsUtils.usageReportPractices(usageReport) | number}}
+              </span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

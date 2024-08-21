@@ -1,0 +1,23 @@
+.panel-heading {
+    padding: 15px 0;
+    border-bottom: 4px solid #8dccdc;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 4px solid #eeeeee;
+    padding-right: 5px;
+    text-align: left;
+    background-color: #ffffff;
+    font-weight: 400;
+}
+
+.btn-link {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}

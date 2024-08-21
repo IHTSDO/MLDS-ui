@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">Failed to Create Login</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('cancel')">
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngIf="reason?.noEmail" class="alert alert-danger">
+    There is currently no email assigned to the affiliate.
+  </div>
+  <div *ngIf="reason?.duplicateEmail" class="alert alert-danger">
+    There is already another affiliate with the same email.
+  </div>
+
+  <form #createLoginForm="ngForm" (ngSubmit)="confirm(createLoginForm)">
+    <div class="form-group">
+      <label for="email">Login Email</label>
+      <input class="form-control" id="email" type="email" [(ngModel)]="affiliate.affiliateDetails.email" name="email"
+        #email="ngModel" required />
+      <div *ngIf="submitAttempted">
+        <p class="help-block" *ngIf="email.errors?.['required']">Field is required.</p>
+        <p class="help-block" *ngIf="email.errors?.['email']">Please enter a valid email.</p>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" (click)="activeModal.dismiss('cancel')">Cancel</button>
+  <button class="btn btn-success" (click)="confirm(createLoginForm)" [disabled]="createLoginForm.invalid">Retry</button>
+</div>

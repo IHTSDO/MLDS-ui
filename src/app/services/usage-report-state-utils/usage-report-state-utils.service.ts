@@ -37,4 +37,16 @@ export class UsageReportStateUtilsService {
    return usageState === UsageReportStateUtilsService.SUBMITTED || 
      usageState === UsageReportStateUtilsService.RESUBMITTED;
  }
+
+ usageReportCountries(usageReport: { countries: any[] }): number {
+  return usageReport.countries.length;
+}
+
+usageReportHospitals(usageReport: { entries: any[] }): number {
+  return usageReport.entries.length;
+}
+
+usageReportPractices(usageReport: { countries: { snomedPractices?: number }[] }): number {
+  return usageReport.countries.reduce((total, count) => total + (count.snomedPractices || 0), 0);
+}
 }

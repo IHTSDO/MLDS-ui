@@ -26,8 +26,8 @@ export class ApprovalStateUtilsService {
   isWaitingForApplicant(approvalState: any | null): boolean {
     return (
       !approvalState ||
-      approvalState === approvalState.NotSubmitted ||
-      approvalState === approvalState.ChangeRequested
+      approvalState === 'NOT_SUBMITTED'||
+      approvalState === 'CHANGE_REQUESTED'
     );
   }
 
@@ -44,7 +44,7 @@ export class ApprovalStateUtilsService {
    * ```
    */
   isApproved(approvalState: any): boolean {
-    return approvalState === approvalState.Approved;
+    return approvalState === 'APPROVED';
   }
 
   /**
@@ -60,7 +60,7 @@ export class ApprovalStateUtilsService {
    * ```
    */
   isRejected(approvalState: any): boolean {
-    return approvalState === approvalState.Rejected;
+    return approvalState === 'REJECTED';
   }
 
   /**
@@ -77,8 +77,8 @@ export class ApprovalStateUtilsService {
    */
   isIncomplete(approvalState: any): boolean {
     return (
-      approvalState !== approvalState.Approved &&
-      approvalState !== approvalState.Rejected
+      approvalState !== 'APPROVED' &&
+      approvalState !== 'REJECTED'
     );
   }
 
@@ -96,9 +96,9 @@ export class ApprovalStateUtilsService {
    */
   isPending(approvalState: any): boolean {
     return (
-      approvalState === approvalState.Submitted ||
-      approvalState === approvalState.Resubmitted ||
-      approvalState === approvalState.ReviewRequested
+      approvalState === 'SUBMITTED' ||
+      approvalState === 'RESUBMITTED' ||
+      approvalState === 'REVIEW_REQUESTED'
     );
   }
 }

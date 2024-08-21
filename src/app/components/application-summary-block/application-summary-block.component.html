@@ -216,7 +216,7 @@
           </div>
     </div>
 
-    <div *ngIf="showAuditPanel" class="panel panel-default">
+    <div *ngIf="showAuditPanel && audits.length != 0"  class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Application Activity</h3>
       </div>
