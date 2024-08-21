@@ -19,6 +19,7 @@ import { InvoiceSentModalComponent } from '../invoice-sent-modal/invoice-sent-mo
 import { DeleteAffiliateModalComponent } from '../delete-affiliate-modal/delete-affiliate-modal.component';
 import { UsageReportsTableComponent } from "../usage-reports-table/usage-reports-table.component";
 import { CreateLoginModalComponent } from '../create-login-modal/create-login-modal.component';
+import { ApplicationSummaryModalComponent } from '../application-summary-modal/application-summary-modal.component';
 
 @Component({
   selector: 'app-affiliate-summary',
@@ -163,7 +164,8 @@ export class AffiliateSummaryComponent implements OnInit {
   }
 
   viewApplication(application: any): void {
-      console.log("view application clicked")
+    const modalRef = this.modalService.open(ApplicationSummaryModalComponent, { size: 'lg' });
+    modalRef.componentInstance.application = application;
   }
 
   approveApplication(application: any): void {
