@@ -36,7 +36,7 @@ export const ROUTES = {
    * Alias for usage reports review route.
    * @example '/usageReportsReview'
    */
-  reports: '/usageReportsReview',
+  reports: '/reviewUsageReports',
 
   /**
    * Route for member management.

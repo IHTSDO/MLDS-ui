@@ -139,4 +139,18 @@ export class CommercialUsageService {
       transition: newState
     });
   }
+    /**
+   * Retrieves review usage reports.
+   *
+   * Fetches a list of usage reports that are under review.
+   *
+   * @returns Observable of review usage reports.
+   *
+   * @example
+   * this.usageReportsService.getReviewUsageReport()
+   *   .subscribe(reports => console.log(reports));
+   */
+    getReviewUsageReport(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.apiUrl}/reviewUsageReports`);
+    }
 }

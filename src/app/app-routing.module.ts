@@ -22,6 +22,7 @@ import { ApplicationReviewComponent } from './components/application-review/appl
 import { ActivityLogsComponent } from './components/activity-logs/activity-logs.component';
 import { SystemsLoggersComponent } from './components/systems-loggers/systems-loggers.component';
 import { AffiliateSummaryComponent } from './components/affiliate-summary/affiliate-summary.component';
+import { ReviewUsageReportsComponent } from './components/review-usage-reports/review-usage-reports.component';
 
 
 
@@ -56,7 +57,8 @@ const routes: Routes = [
       { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent},
       { path: 'activityLog', component: ActivityLogsComponent},
       { path: 'logs', component: SystemsLoggersComponent},
-      { path: 'affiliateManagement/:affiliateId', component: AffiliateSummaryComponent}
+      { path: 'affiliateManagement/:affiliateId', component: AffiliateSummaryComponent},
+      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent}
     ]
   },
   {
