@@ -23,6 +23,7 @@ import { ActivityLogsComponent } from './components/activity-logs/activity-logs.
 import { SystemsLoggersComponent } from './components/systems-loggers/systems-loggers.component';
 import { AffiliateSummaryComponent } from './components/affiliate-summary/affiliate-summary.component';
 import { ReviewUsageReportsComponent } from './components/review-usage-reports/review-usage-reports.component';
+import { EditAffiliateComponent } from './components/edit-affiliate/edit-affiliate.component';
 
 
 
@@ -58,7 +59,8 @@ const routes: Routes = [
       { path: 'activityLog', component: ActivityLogsComponent},
       { path: 'logs', component: SystemsLoggersComponent},
       { path: 'affiliateManagement/:affiliateId', component: AffiliateSummaryComponent},
-      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent}
+      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent},
+      { path: 'affiliateManagement/:affiliateId/edit', component: EditAffiliateComponent}
     ]
   },
   {

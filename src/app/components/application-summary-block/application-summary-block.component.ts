@@ -71,12 +71,15 @@ export class ApplicationSummaryBlockComponent implements OnInit {
    */
   private loadApplication(): void {
     this.route.paramMap.subscribe(params => {
-      const applicationId = params.get('applicationId');
+      const routeApplicationId = params.get('applicationId'); 
+      const appId = this.application?.applicationId;
+      const applicationId = routeApplicationId ?? appId;
       if (applicationId) {
         this.loadApplicationAudits(applicationId);
       }
     });
   }
+  
 
   /**
    * Loads the audits for the application.
@@ -84,14 +87,14 @@ export class ApplicationSummaryBlockComponent implements OnInit {
    * @param applicationId The ID of the application.
    */
   private loadApplicationAudits(applicationId: any): void {
-    this.auditsService.findByApplicationId(applicationId).subscribe(
-      result => {
+    this.auditsService.findByApplicationId(applicationId).subscribe({
+      next: (result) => {
         this.audits = result;
       },
-      error => {
+      error: (error) => {
         this.errorMessage = 'Error retrieving application data';
         console.error(error);
       }
-    );
-  }
+    });
+  }  
 }

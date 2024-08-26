@@ -1,0 +1,703 @@
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="page-header">
+            <h1>
+                Account Information
+            </h1>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row" *ngIf="!approved">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="alert alert-warning">
+                <p>
+                    <strong>Registration not approved yet</strong>
+                </p>
+                <p>You can only modify the contact information for an affiliate once the registration request has been
+                    approved.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <span class="col-sm-12 col-md-12 col-lg-12">
+
+            <div class="panel panel-default" *ngIf="isStaffOrAdmin">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Admin Editable
+                    </h4>
+                </div>
+
+                <div class="panel-collapse collapse show">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <!-- for type -->
+                                <div class="form-group">
+                                    <label for="type">Type:</label>
+                                    <select id="type" class="form-select" formControlName="type"
+                                        (change)="onTypeChange()">
+                                        <option value="COMMERCIAL">{{ 'COMMERCIAL' }}</option>
+                                        <option value="ACADEMIC">{{ 'ACADEMIC' }}</option>
+                                        <option value="OTHER">{{ 'OTHER' }}</option>
+                                        <option value="INDIVIDUAL">{{ 'INDIVIDUAL' }}</option>
+                                    </select>
+
+                                    <p class="help-block"
+                                        *ngIf="form.get('type')?.hasError('required') && formSubmitted">
+                                        Usage type field is required.
+                                    </p>
+                                </div>
+
+                                <!-- for other text -->
+                                <div class="form-group" *ngIf="form.get('type')?.value === 'OTHER'">
+                                    <label for="otherText">Other:</label>
+                                    <input type="text" id="otherText" class="form-control" placeholder=""
+                                        formControlName="otherText" />
+
+                                    <div *ngIf="form.get('otherText')?.hasError('required') && formSubmitted">
+                                        <p class="help-block">Other field is required.</p>
+                                    </div>
+                                </div>
+
+                                <!-- for sub type -->
+                                <div class="form-group" *ngIf="type?.value && type?.value !== 'OTHER'">
+                                    <label for="usageSubType">Subtype:</label>
+                                    <select id="usageSubType" class="form-select" formControlName="subType">
+                                        <option value="DEVELOPER" *ngIf="type?.value === 'COMMERCIAL'">Developer
+                                        </option>
+                                        <option value="DEVELOPMENT" *ngIf="type?.value === 'ACADEMIC'">Development
+                                        </option>
+                                        <option value="EDUCATIONAL" *ngIf="type?.value !== 'COMMERCIAL'">Educational
+                                        </option>
+                                        <option value="HEALTHCAREPROVIDER" *ngIf="type?.value === 'ACADEMIC'">Healthcare
+                                            Provider</option>
+                                        <option value="PERSONAL" *ngIf="type?.value === 'INDIVIDUAL'">Personal</option>
+                                        <option value="RESEARCH" *ngIf="type?.value !== 'COMMERCIAL'">Research</option>
+                                        <option value="VENDOR" *ngIf="type?.value === 'COMMERCIAL'">Vendor</option>
+                                    </select>
+                                </div>
+
+                                <!-- for agreement type -->
+                                <div class="form-group">
+                                    <label for="agreementType">Type of Agreement:</label>
+                                    <select id="agreementType" class="form-select" formControlName="agreementType">
+                                        <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ type }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="formSubmitted && form.get('agreementType')?.hasError('required')">
+                                        <p class="help-block">Required field.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- for accept notifications and country notifications -->
+            <div class="form-group">
+                <input type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">
+                <label for="acceptNotifications">
+                    Yes notify me when a SNOMED package is updated.
+                </label>
+                <span *ngIf="acceptNotifications?.value">
+                    &nbsp;(
+                    <input type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">
+                    <label for="countryNotificationsOnly">
+                        Only notify me regarding my member country extension
+                    </label>
+                    )
+                </span>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Contact Information
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse show">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <!-- for first name -->
+                                <div class="form-group">
+                                    <label for="firstName">First Name:</label>
+                                    <input id="firstName" class="form-control" placeholder=""
+                                        formControlName="firstName" [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('firstName')?.invalid && (form.get('firstName')?.touched || formSubmitted)">
+                                        <p class="help-block">Required field.</p>
+                                    </div>
+                                </div>
+
+                                <!-- for last name -->
+                                <div class="form-group">
+                                    <label for="lastName">Last Name:</label>
+                                    <input id="lastName" class="form-control" placeholder="" formControlName="lastName"
+                                        [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('lastName')?.invalid && (form.get('lastName')?.touched || formSubmitted)">
+                                        <p class="help-block">Required field.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- for email -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" *ngIf="!isStaffOrAdmin">
+                                    <label for="email">Email:</label>
+                                    <span>{{ affiliate?.affiliateDetails?.email }}</span>
+                                </div>
+
+                                <div class="form-group" *ngIf="isStaffOrAdmin">
+                                    <label for="email">Email:</label>
+                                    <input id="email" class="form-control" type="email" placeholder=""
+                                        formControlName="email" [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['required']">Required
+                                            field.</p>
+                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['email']">Invalid Email
+                                            Address.</p>
+                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['notUnique']">Email
+                                            Addresses need to be unique.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- for alternate email -->
+                        <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="alternateEmail">Alternate Email:</label>
+                                    <input id="alternateEmail" class="form-control" type="email" placeholder=""
+                                        formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('alternateEmail')?.invalid && (form.get('alternateEmail')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['required']">
+                                            Required field.</p>
+                                        <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['email']">
+                                            Invalid Email Address.</p>
+                                        <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['notUnique']">
+                                            Email Addresses need to be unique.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- for third email -->
+                        <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="thirdEmail">Third Email:</label>
+                                    <input id="thirdEmail" class="form-control" type="email" placeholder=""
+                                        formControlName="thirdEmail" [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('thirdEmail')?.invalid && (form.get('thirdEmail')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['email']">Invalid
+                                            Email Address.</p>
+                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['notUnique']">
+                                            Email Addresses need to be unique.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- labels for landline and extension -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="phoneNumber">Landline Phone Number:</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="extension">Extension:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <ngx-bs-tel-input class="form-control" formControlName="landlineNumber"
+                                        [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                        [attr.disabled]="readOnly ? true : null"></ngx-bs-tel-input>
+                                    <div
+                                        *ngIf="form.get('landlineNumber')?.invalid && (form.get('landlineNumber')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('landlineNumber')?.errors?.['required']">
+                                            Required field.</p>
+                                        <p class="help-block"
+                                            *ngIf="form.get('landlineNumber')?.errors?.['invalidPhoneNumber']">Invalid
+                                            Phone Number.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Extension"
+                                        formControlName="landlineExtension" [attr.disabled]="readOnly ? true : null" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- label for mobile number -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="mobileNumber">Mobile Phone Number:</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <ngx-bs-tel-input class="form-control" formControlName="mobileNumber"
+                                        [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                        [attr.disabled]="readOnly ? true : null"></ngx-bs-tel-input>
+                                    <div
+                                        *ngIf="form.get('mobileNumber')?.invalid && (form.get('mobileNumber')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('mobileNumber')?.errors?.['required']">
+                                            Required field.</p>
+                                        <p class="help-block"
+                                            *ngIf="form.get('mobileNumber')?.errors?.['invalidPhoneNumber']">Invalid
+                                            Phone Number.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="affiliate?.type == 'INDIVIDUAL'">
+                            <!-- for address -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input class="form-control" placeholder=""
+                                            formControlName="addressStreetIndividual"
+                                            [attr.disabled]="readOnly ? true : null" />
+                                        <div
+                                            *ngIf="form.get('addressStreetIndividual')?.invalid && (form.get('addressStreetIndividual')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('addressStreetIndividual')?.errors?.['required']">
+                                                Required field.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- labels for city and post code -->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="city">City:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="postCode">Post Code:</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input class="form-control" formControlName="addressCityIndividual"
+                                            [attr.disabled]="readOnly ? true : null" />
+                                        <div
+                                            *ngIf="form.get('addressCityIndividual')?.invalid && (form.get('addressCityIndividual')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('addressCityIndividual')?.errors?.['required']">Required
+                                                field.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder=""
+                                            formControlName="addressPostIndividual"
+                                            [attr.disabled]="readOnly ? true : null" />
+                                        <div
+                                            *ngIf="form.get('addressPostIndividual')?.invalid && (form.get('addressPostIndividual')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('addressPostIndividual')?.errors?.['required']">Required
+                                                field.</p>
+                                            <p class="help-block"
+                                                *ngIf="form.get('addressPostIndividual')?.errors?.['pattern']">Post Code
+                                                is too long.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- for country -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="country">Country:</label>
+                                        <span> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- for billing fields -->
+                            <div>
+                                <hr>
+
+                                
+                                <div class="row" *ngIf="!isStaffOrAdmin">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="billingAddress">Use Address as Billing Address</label>
+                                            <input type="checkbox" formControlName="use" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- for billing address - individual -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="billingAddress">Billing Address:</label>
+                                            <input class="form-control" placeholder=""
+                                                formControlName="billingAddressStreet"
+                                                [attr.disabled]="readOnly || isSameAddress ? true : null" />
+                                            <div
+                                                *ngIf="form.get('billingAddressStreet')?.invalid && (form.get('billingAddressStreet')?.touched || formSubmitted)">
+                                                <p class="help-block"
+                                                    *ngIf="form.get('billingAddressStreet')?.errors?.['required']">
+                                                    Required field.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="city">City:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="postCode">Post Code:</label>
+                                    </div>
+                                </div>
+
+                                <!-- billing address city and post code - individual -->
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input class="form-control" placeholder=""
+                                                formControlName="billingAddressCity"
+                                                [attr.disabled]="readOnly || isSameAddress ? true : null" />
+                                            <div
+                                                *ngIf="form.get('billingAddressCity')?.invalid && (form.get('billingAddressCity')?.touched || formSubmitted)">
+                                                <p class="help-block"
+                                                    *ngIf="form.get('billingAddressCity')?.errors?.['required']">
+                                                    Required field.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder=""
+                                                formControlName="billingAddressPost"
+                                                [attr.disabled]="readOnly || isSameAddress ? true : null" />
+                                            <div
+                                                *ngIf="form.get('billingAddressPost')?.invalid && (form.get('billingAddressPost')?.touched || formSubmitted)">
+                                                <p class="help-block"
+                                                    *ngIf="form.get('billingAddressPost')?.errors?.['required']">
+                                                    Required field.</p>
+                                                <p class="help-block"
+                                                    *ngIf="form.get('billingAddressPost')?.errors?.['pattern']">Post
+                                                    Code is too long.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="country">Country:</label>
+                                            <input class="form-control" type="text" placeholder=""
+                                                formControlName="billingAddressCountry" [ngbTypeahead]="search"
+                                                [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
+                                                autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
+                                            <div
+                                                *ngIf="form.get('billingAddressCountry')?.invalid && (form.get('billingAddressCountry')?.touched || formSubmitted)">
+                                                <p class="help-block"
+                                                    *ngIf="form.get('billingAddressCountry')?.errors?.['required']">
+                                                    Required field.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default" *ngIf="affiliate?.type && affiliate?.type != 'INDIVIDUAL'">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Organization
+                    </h4>
+                </div>
+
+                <div class="panel-collapse collapse show">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" *ngIf="!isStaffOrAdmin">
+                                    <label for="organizationName">Organization Name:</label>
+                                    <span>{{affiliate?.affiliateDetails?.organizationName}}</span>
+                                </div>
+
+                                <div class="form-group" *ngIf="isStaffOrAdmin">
+                                    <label for="organizationName">Organization Name:</label>
+                                    <input class="form-control" placeholder="" formControlName="organizationName"
+                                        [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('organizationName')?.invalid && (form.get('organizationName')?.touched || formSubmitted)">
+                                        <p class="help-block"
+                                            *ngIf="form.get('organizationName')?.errors?.['required']">Required field.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address">Address:</label>
+                                    <input class="form-control" placeholder="" formControlName="addressStreet"
+                                        [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('addressStreet')?.invalid && (form.get('addressStreet')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('addressStreet')?.errors?.['required']">
+                                            Required field.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="city">City:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="postCode">Post Code:</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="" formControlName="addressCity"
+                                        [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('addressCity')?.invalid && (form.get('addressCity')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('addressCity')?.errors?.['required']">
+                                            Required field.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="" formControlName="addressPost"
+                                        [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('addressPost')?.invalid && (form.get('addressPost')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('addressPost')?.errors?.['required']">
+                                            Required field.</p>
+                                        <p class="help-block" *ngIf="form.get('addressPost')?.errors?.['pattern']">Post
+                                            Code is too long.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="country">Country:</label>
+                                    <span> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <hr>
+
+                            <div class="row" *ngIf="!isStaffOrAdmin">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="billingAddress">Use Organization Address as Billing Address</label>
+                                        <input type="checkbox" formControlName="use" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="billingAddress">Billing Address:</label>
+                                        <input class="form-control" placeholder=""
+                                            formControlName="billingAddressStreet"
+                                            [attr.disabled]="readOnly || isSameAddress ? true : null" />
+                                        <div
+                                            *ngIf="form.get('billingAddressStreet')?.invalid && (form.get('billingAddressStreet')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('billingAddressStreet')?.errors?.['required']">Required
+                                                field.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="city">City:</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="postCode">Post Code:</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="" formControlName="billingAddressCity"
+                                            [attr.disabled]="readOnly || isSameAddress ? true : null" />
+                                        <div
+                                            *ngIf="form.get('billingAddressCity')?.invalid && (form.get('billingAddressCity')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('billingAddressCity')?.errors?.['required']">Required
+                                                field.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="" formControlName="billingAddressPost"
+                                            [attr.disabled]="readOnly || isSameAddress ? true : null" />
+                                        <div
+                                            *ngIf="form.get('billingAddressPost')?.invalid && (form.get('billingAddressPost')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('billingAddressPost')?.errors?.['required']">Required
+                                                field.</p>
+                                            <p class="help-block"
+                                                *ngIf="form.get('billingAddressPost')?.errors?.['pattern']">Post Code is
+                                                too long.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="country">Country:</label>
+                                        <input class="form-control" type="text" placeholder=""
+                                            formControlName="billingAddressCountry" [ngbTypeahead]="search"
+                                            [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
+                                            autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
+                                        <div
+                                            *ngIf="form.get('billingAddressCountry')?.invalid && (form.get('billingAddressCountry')?.touched || formSubmitted)">
+                                            <p class="help-block"
+                                                *ngIf="form.get('billingAddressCountry')?.errors?.['required']">Required
+                                                field.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="alternateEmail">Alternate Email:</label>
+                                    <input class="form-control" type="email" placeholder=""
+                                        formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null"
+                                        required />
+                                    <div
+                                        *ngIf="form.get('alternateEmail')?.invalid && (form.get('alternateEmail')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['required']">
+                                            Required field.</p>
+                                        <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['email']">
+                                            Invalid Email Address.</p>
+                                        <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['notUnique']">
+                                            Email Addresses need to be unique.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="thirdEmail">Third Email:</label>
+                                    <input class="form-control" type="email" placeholder="" formControlName="thirdEmail"
+                                        [attr.disabled]="readOnly ? true : null" />
+                                    <div
+                                        *ngIf="form.get('thirdEmail')?.invalid && (form.get('thirdEmail')?.touched || formSubmitted)">
+                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['email']">Invalid
+                                            Email Address.</p>
+                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['notUnique']">
+                                            Email Addresses need to be unique.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+
+
+    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    <button type="submit" class="btn btn-primary gap" *ngIf="!readOnly">Submit</button>
+
+
+
+    <div *ngIf="formSubmitted">
+        <p class="help-block" *ngIf="form.invalid">
+            Please fix the errors listed above.
+        </p>
+    </div>
+
+
+
+
+
+</form>

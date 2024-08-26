@@ -1,0 +1,62 @@
+h1, .h1 {
+    font-size: 36px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.panel-heading {
+    padding: 15px 0;
+    border-bottom: 4px solid #8dccdc;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.panel-body {
+    border: 1px solid #eeeeee;
+    padding: 15px;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+.custom .ngx-intl-tel-input .ngx-intl-tel-input__country-list {
+    z-index: 1000; 
+    display: block; 
+  }
+
+  .gap {
+    margin-left: 10px;
+  }
+  
+
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #f26c4f;
+}
+  
+
