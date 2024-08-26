@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { AffiliateService } from '../affiliate/affiliate.service';
 import { UsageReportStateUtilsService } from '../usage-report-state-utils/usage-report-state-utils.service';
+import { RetractUsageReportComponent } from 'src/app/components/retract-usage-report/retract-usage-report.component';
 
 /**
  * Service for retrieving usage reports.
@@ -16,9 +16,10 @@ export class UsageReportsService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private modalService: NgbModal,
     private affiliateService: AffiliateService,
-    private usageReportStateUtils: UsageReportStateUtilsService
+    private usageReportStateUtils: UsageReportStateUtilsService,
+    private modalService: NgbModal
+
   ) {}
 
   usageReportCountries(usageReport: any): number {
@@ -74,16 +75,21 @@ export class UsageReportsService {
   }
 
   retractUsageReport(commercialUsageReport: any): void {
-    // const modalRef = this.modalService.open(RetractUsageReportModalComponent, {
-    //   size: 'sm',
-    //   backdrop: 'static'
-    // });
-    // modalRef.componentInstance.commercialUsageReport = commercialUsageReport;
+    const modalRef = this.modalService.open(RetractUsageReportComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
 
-    // modalRef.result.then((result: any) => {
-    //   if (result.data && result.data.commercialUsageId) {
-    //     this.router.navigate(['/usageReports/usageLog', result.data.commercialUsageId]);
-    //   }
-    // });
+    modalRef.componentInstance.commercialUsageReport = commercialUsageReport;
+    modalRef.result
+      .then((result) => {
+        if (result && result.data && result.data.commercialUsageId) {
+          this.router.navigate(['/usageReports/usageLog/', result.data.commercialUsageId]);
+        }
+      })
+      .catch((error) => {
+        // Handle the case where the modal is dismissed or an error occurs
+        console.error('Modal dismissed or error occurred:', error);
+      });
   }
 }

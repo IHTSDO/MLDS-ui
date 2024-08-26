@@ -1,27 +1,38 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { EditAffiliateStandingModalComponent } from '../edit-affiliate-standing-modal/edit-affiliate-standing-modal.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ROUTES } from 'src/app/routes-config';
+
 
 @Component({
   selector: 'app-affiliate-details-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './affiliate-details-summary.component.html',
   styleUrl: './affiliate-details-summary.component.scss'
 })
-export class AffiliateDetailsSummaryComponent implements OnInit {
+export class AffiliateDetailsSummaryComponent implements OnInit,OnChanges {
 
-
+  @Input() showEdit: boolean = true;
   @Input() affiliate: any;
   @Input() isEditable: boolean = false;
-
-  constructor(public standingStateUtils: StandingStateUtilsService, private modalService: NgbModal, private router: Router) { }
+  affiliateId :any;
+  routes = ROUTES;
+  constructor(public standingStateUtils: StandingStateUtilsService, private modalService: NgbModal,private router: Router) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['affiliate']){
+      
+      this.affiliateId=this.affiliate.affiliateId;
+    
+    }
+  }
 
   ngOnInit(): void {
-    console.log("changestanding component")
+  
+    
   }
 
   changeStanding() {
@@ -36,6 +47,13 @@ export class AffiliateDetailsSummaryComponent implements OnInit {
       .then((result) => {
         this.affiliate = result;
       });
+  }
+  goToAffiliateSummary() {
+    if (this.affiliateId) {
+      this.router.navigate([this.routes.affiliateManagement, encodeURIComponent(this.affiliateId)]);
+    } else {
+      console.error('Affiliate ID is not available.');
+    }
   }
 
   editAffiliate(affiliateId: string): void {

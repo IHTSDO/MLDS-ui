@@ -23,11 +23,18 @@ import { ActivityLogsComponent } from './components/activity-logs/activity-logs.
 import { SystemsLoggersComponent } from './components/systems-loggers/systems-loggers.component';
 import { AffiliateSummaryComponent } from './components/affiliate-summary/affiliate-summary.component';
 import { ReviewUsageReportsComponent } from './components/review-usage-reports/review-usage-reports.component';
+import { ReviewUsageReportAdminComponent } from './components/review-usage-report-admin/review-usage-report-admin.component';
 import { EditAffiliateComponent } from './components/edit-affiliate/edit-affiliate.component';
 
 
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/landing',
+    pathMatch: 'full'
+  },
+
   {
     path: '',
     component: LandingPageComponent,
@@ -37,7 +44,16 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
       { path: 'resetPassword', component: ResetPasswordComponent },
-      { path: 'userDashboard', component: UserDashboardComponent }
+      { path: 'userDashboard', component: UserDashboardComponent },
+     
+    ]
+  },
+  {
+    path: 'landing',
+    component: LandingPageComponent,
+    children: [
+      { path: '', component: LandingContentComponent },
+     
     ]
   },
   {
@@ -60,25 +76,23 @@ const routes: Routes = [
       { path: 'logs', component: SystemsLoggersComponent},
       { path: 'affiliateManagement/:affiliateId', component: AffiliateSummaryComponent},
       { path: 'reviewUsageReports', component: ReviewUsageReportsComponent},
+      { path: 'usageReportsReview/:commercialUsageId', component: ReviewUsageReportAdminComponent},
+      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent},
       { path: 'affiliateManagement/:affiliateId/edit', component: EditAffiliateComponent}
     ]
   },
-  {
-    path: 'landing/:memberKey',
-    component: LandingPageComponent,
-    children: [
-      { path: '', component: LandingContentComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
-      { path: 'resetPassword', component: ResetPasswordComponent },
-      { path: 'userDashboard', component: UserDashboardComponent }
-    ]
-  }
+{
+  path: 'landing/:memberKey',
+  component: LandingPageComponent,
+  children: [
+    { path: '', component: LandingContentComponent },
+  ]
+}
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

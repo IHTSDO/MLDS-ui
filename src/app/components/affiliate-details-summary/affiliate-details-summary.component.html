@@ -2,9 +2,10 @@
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <button class="float-end btn btn-success" *ngIf="isEditable" (click)="editAffiliate(affiliate?.affiliateId)">Edit Contact Info</button>
+        <button   class="float-end btn btn-success" *ngIf="isEditable" (click)="editAffiliate(affiliate?.affiliateId)">Edit Contact Info</button>
         <h4 class="panel-title">
-          Affiliate Summary
+          <a (click)="goToAffiliateSummary()"> Affiliate Summary</a>
+          
         </h4>
       </div>
     </div>
@@ -13,33 +14,33 @@
         <h4>Usage Type:</h4>
         <ul class="list-group">
           <li class="list-group-item">
-            <strong>Type:</strong> {{ affiliate.affiliateDetails.type }}
+            <strong>Type:</strong> {{ affiliate.affiliateDetails?.type }}
           </li>
           <li class="list-group-item">
             <strong>Subtype:</strong>
-            {{ affiliate.affiliateDetails.subType }}
-            <span *ngIf="affiliate.affiliateDetails.type === 'OTHER'">
-              {{ affiliate.affiliateDetails.otherText }}
+            {{ affiliate.affiliateDetails?.subType }}
+            <span *ngIf="affiliate.affiliateDetails?.type === 'OTHER'">
+              {{ affiliate.affiliateDetails?.otherText }}
             </span>
           </li>
           <li class="list-group-item">
-            <strong>Agreement Type:</strong> {{ affiliate.affiliateDetails.agreementType }}
+            <strong>Agreement Type:</strong> {{ affiliate.affiliateDetails?.agreementType }}
           </li>
           <li class="list-group-item">
             <strong>Account Standing:</strong>
             {{ affiliate.standingState }}
-            <span class="text-warning" *ngIf="standingStateUtils.isWarningCategory(affiliate.standingState)">
+            <span class="text-warning" *ngIf="standingStateUtils.isWarningCategory(affiliate?.standingState)">
               <i class="fa fa-exclamation-circle"></i>
             </span>
-            <span class="text-danger" *ngIf="standingStateUtils.isDangerCategory(affiliate.standingState)">
+            <span class="text-danger" *ngIf="standingStateUtils.isDangerCategory(affiliate?.standingState)">
               <i class="fa fa-exclamation-circle"></i>
             </span>
             <span class="float-end" *ngIf="isEditable">
-              <button class="btn btn-success" *ngIf="!standingStateUtils.isApplying(affiliate.standingState)"
+              <button class="btn btn-success" *ngIf="!standingStateUtils.isApplying(affiliate?.standingState)"
                 (click)="changeStanding()">
                 Edit Account Standing
               </button>
-              <button class="btn btn-default" *ngIf="standingStateUtils.isApplying(affiliate.standingState)"
+              <button class="btn btn-default" *ngIf="standingStateUtils.isApplying(affiliate?.standingState)"
                 [disabled]="true">
                 Edit Account Standing
               </button>

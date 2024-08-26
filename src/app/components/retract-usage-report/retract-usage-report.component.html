@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" style="margin-left: 75rem;" (click)="cancel()"></button>
+    <h4 class="modal-title">Retract Usage Declaration</h4>
+  </div>
+  <div class="modal-body">
+     <div *ngFor="let alert of alerts; let i = index" 
+     class="alert alert-dismissable position-relative"
+     [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
+  <button type="button" class="btn-close position-absolute top-0 end-0 me-2 mt-2" (click)="closeAlert(i)" aria-label="Close"></button>
+  {{ alert.msg }}
+</div>
+    <p>
+      Are you sure you want to retract this report? You will return to the same usage report to edit and re-submit. For a new time period you must submit a new declaration report.
+    </p>
+    
+    <p><strong style="font-weight: 700;">Declaration for Period {{ commercialUsageReport.startDate | date : 'yyyy-MM' }} &#8211; {{ commercialUsageReport.endDate | date : 'yyyy-MM' }}</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-sm" (click)="cancel()" [disabled]="submitting">Cancel</button>
+    
+    <button class="btn btn-danger" (click)="retract()" [disabled]="submitting">
+      Retract Declaration
+      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+    </button>
+  </div>
+  

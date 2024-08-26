@@ -21,7 +21,6 @@ export class UsageReportsTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("usage reports table component")
   }
 
 }

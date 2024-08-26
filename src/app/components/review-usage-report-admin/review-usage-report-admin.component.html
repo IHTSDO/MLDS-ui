@@ -1,0 +1,170 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+      <span><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
+      <h2>Review Usage Report</h2>
+    </div>
+    <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">
+      {{ alert.msg }}
+    </ngb-alert>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          License Usage
+          <span class="float-end">
+            <span class="state">{{ usageReport?.state  }}</span>
+            {{ usageReport?.startDate | date: 'yyyy-MM' }} - {{ usageReport?.endDate | date: 'yyyy-MM' }}
+          </span>
+        </h4>
+      </div>
+
+      <div class="panel-body" [ngClass]="{'panel-collapse collapse in': !collapsePanel.usage}">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>License Type: </strong><span>{{ usageReport?.type  }}</span>
+          </li>
+          <li class="list-group-item">
+            <strong>Implementation Status: </strong>
+            <span>{{ usageReport?.context?.implementationStatus  }}</span>
+          </li>
+          <li class="list-group-item">
+            <label>Current Usage:</label>
+            <p>{{ usageReport?.context?.currentUsage }}</p>
+          </li>
+          <li class="list-group-item">
+            <label>Planned Usage:</label>
+            <p>{{ usageReport?.context?.plannedUsage }}</p>
+          </li>
+          <li class="list-group-item">
+            <label>Purpose:</label>
+            <p>{{ usageReport?.context?.purpose }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Sublicensed Institutions</h4>
+      </div>
+
+      <div class="panel-body">
+        <div *ngFor="let countryUsage of usageByCountryList" class="country-listing">
+          <div class="row">
+            <div class="country-heading">
+              <div class="col-xs-8 col-sm-6 col-md-4 col-lg-6">
+                <h3 class="country-title">{{ countryUsage.country.commonName }}</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="country-section">
+            <div class="row">
+              <div class="col-xs-12">
+                <hr>
+                <h4>Hospital(s)/Institution(s)</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <table class="table table-striped">
+              <tr>
+                <th class="text-left col-md-3">Name</th>
+                <th class="text-left col-md-2">Started to Use</th>
+                <th class="text-left col-md-2">Ceased Use</th>
+                <th class="text-left col-md-5">Note</th>
+              </tr>
+              <tr *ngFor="let institution of countryUsage.entries">
+                <td class="col-md-3">{{ institution.name }}</td>
+                <td class="col-md-2">{{ institution.startDate | date: 'yyyy-MM-dd' }}</td>
+                <td class="col-md-2">{{ institution.endDate | date: 'yyyy-MM-dd' }}</td>
+                <td class="col-md-5">{{ institution.note }}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="country-section">
+            <div class="row">
+              <div class="col-xs-12">
+                <hr>
+                <h4>Practice(s)</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="country-footer">
+              <div class="col-xs-12">
+                <p><strong>Practices: </strong><span class="label label-default">{{ countryUsage.count.snomedPractices | number }}</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="countryUsage.count.notes">
+            <div class="country-footer">
+              <div class="col-xs-12">
+                <label>Notes: </label>
+                <p>{{ countryUsage.count.notes }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="country-section">
+            <div class="row">
+              <div class="col-xs-12">
+                <hr>
+                <h4>Data Analysis</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="country-footer">
+              <div class="col-xs-12">
+                <p><strong>Hospitals providing staff to practices:</strong> <span class="label label-default">{{ countryUsage.count.hospitalsStaffingPractices | number }}</span></p>
+                <p><strong>Data Creation Systems: Independent practices:</strong> <span class="label label-default">{{ countryUsage.count.dataCreationPracticesNotPartOfHospital | number }}</span> <strong>Hospitals/Institutions:</strong> <span class="label label-default">{{ countryUsage.count.nonPracticeDataCreationSystems | number }}</span></p>
+                <p><strong>Data Analysis Systems: Systems:</strong> <span class="label label-default">{{ countryUsage.count.deployedDataAnalysisSystems | number }}</span> <strong>Data:</strong> <span class="label label-default">{{ countryUsage.count.databasesPerDeployment | number }}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Other Activities</h4>
+      </div>
+      <div class="panel-body">
+        <p>{{ usageReport?.context?.otherActivities || 'N/A' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4" style="width: 25.333333%;">
+    <div>
+      <button *ngIf="usageReportsUtils.isSubmitted(usageReport)" class="btn btn-success btn-block" (click)="updateUsageReport('PENDING_INVOICE')">
+        Mark as Pending Invoice
+      </button>
+      <button *ngIf="usageReportsUtils.isPendingInvoice(usageReport)" class="btn btn-success btn-block" (click)="updateUsageReport('INVOICE_SENT')">
+        Mark as Invoice Sent
+      </button>
+      <button *ngIf="usageReportsUtils.isInvoiceSent(usageReport)" class="btn btn-success btn-block" (click)="updateUsageReport('PAID')">
+        Mark as Paid
+      </button>
+      <button class="btn btn-warning btn-block" (click)="retractUsageReport()">
+        Retract Usage Report 
+      </button>
+    </div>
+
+    <app-affiliate-details-summary  [affiliate]="affiliate" [isEditable]="false"></app-affiliate-details-summary>
+    
+  </div>
+</div>

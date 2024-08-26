@@ -1,0 +1,229 @@
+.row{
+  padding-top: 30px;
+}
+h2{
+  font-size: 2.4rem;
+  font-weight: 300;
+  margin-top: 32px;
+  margin-bottom: -15px;
+}
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+  color: #40ACD6;
+  text-decoration: none;
+}
+
+.page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.well-inactive {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #eeeeee;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+}
+
+.review-buttons{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+.alert-warning {
+  background-color: #ffffff;
+  border-color: #f26c4f;
+  color: #f26c4f;
+  border: 2px solid;
+}
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 2px solid;
+  border-radius: 4px;
+}
+
+.btn{
+  font-size: 14px;
+}
+
+.muted {
+      border: 1px solid #999999;
+      padding: 10px 0;
+      background-color: #ffffff;
+}
+
+.search-close{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: black;
+      color: white;
+      font-size: 14px;
+}
+
+.btn-close{
+  color: white;
+  height: 14px;
+}
+
+.btn-success {
+  color: #3cb878;
+  background-color: #ffffff;
+  border-color: #3cb878;
+  border-top-left-radius: 10px;
+  border: 2px solid;
+}
+
+.btn-danger {
+  color: #f26c4f;
+  background-color: #ffffff;
+  border-color: #f26c4f;
+  border-top-left-radius: 10px;
+  border: 2px solid;
+}
+
+
+.btn-success:hover, .btn-success:focus {
+  color: #ffffff;
+  background-color: #3cb878;
+}
+.btn-danger:hover, .btn-danger:focus {
+  color: #ffffff;
+  background-color: #f26c4f;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px / 1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.input-group.search-box .form-control {
+  border-right: 0;
+}
+
+.input-group.search-box .input-group-append .input-group-text {
+  background-color: #fff;
+  border-left: 0;
+  cursor: pointer;
+  height: 34px;
+}
+
+.input-group.search-box .input-group-append .input-group-text .fa-search {
+  font-size: 16px;
+}
+
+.notes-button{
+  padding-right: 5rem;
+}
+.state{
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+  background-color: #999999;
+}
+.panel-title{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 19px;
+  font-family: "Oxygen", sans-serif;
+  word-wrap: break-word;
+}
+.list-group {
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #eeeeee;
+}
+.panel-default {
+  border-color: none;
+}
+.panel {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+.panel-body {
+  border: 1px solid #eeeeee;
+  padding: 15px;
+}
+.panel-default > .panel-heading {
+
+  background-color: #ffffff;
+  border-color: none;
+}
+.panel-heading {
+  padding: 15px 0;
+  border-bottom: 4px solid #8dccdc;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.btn-warning {
+  color: #f26c4f;
+  background-color: #fde3dd;
+  border-color: #f26c4f;
+  border-top-left-radius: 10px;
+}
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.modal-open {
+  width: 110%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+  outline: none;
+}
