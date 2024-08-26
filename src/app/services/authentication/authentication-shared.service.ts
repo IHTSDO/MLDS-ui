@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Observable, switchMap } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 import { User } from 'src/model/user.model';
-
+import { ROUTES } from 'src/app/routes-config';
 /**
  * Authentication shared service
  */
@@ -15,12 +16,12 @@ export class AuthenticationSharedService {
   loginStatus = false;
   private userRoles: string[] = [];
   private userDetails: User | null = null;
-
+  routes = ROUTES;
   /**
    * Constructor
    * @param http - HttpClient instance
    */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router : Router) {
     this.loadFromLocalStorage();
   }
 
@@ -149,15 +150,31 @@ private removeFromLocalStorage(): void {
   localStorage.removeItem('isLoggedIn');
   localStorage.removeItem('userDetails');
 }
-
+invalidate(): void {
+  this.loginStatus = false;
+  this.userRoles = [];
+  this.userDetails = null;
+  this.removeFromLocalStorage();
+}
 /**
  * Logout from the application
  */
-logout() {
-  this.loginStatus = false;
+logout(): void {
   this.removeFromLocalStorage();
-  location.reload();
+  this.http.get<void>('/app/logout', { withCredentials: true }).subscribe({
+    next: () => {
+      this.router.navigate([this.routes.login]).then(() => {
+        window.location.reload();
+      });
+    },
+    error: () => {
+      this.router.navigate([this.routes.login]).then(() => {
+        window.location.reload();
+      });
+    }
+  });
 }
+
 
 /**
  * Check if user has a specific role
@@ -256,4 +273,8 @@ isStaff(): boolean {
  */
 getUserDetails(): User | null {
   return this.userDetails;
-}}
+}
+isAuthenticated(): boolean {
+  return this.isLoggedIn() && this.getUserDetails() !== null;
+}
+}

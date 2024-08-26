@@ -67,12 +67,6 @@ export class SideNavComponent implements OnInit {
     }
   }
 
-  /**
-   * Logs out the user and navigates to the login page.
-   */
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate([this.routes.login]);
-  }
+ 
 
 }

@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
-
+import { ROUTES } from 'src/app/routes-config';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 /**
  * Landing header component
  *
@@ -11,40 +13,52 @@ import { MemberService } from 'src/app/services/member/member.service';
 @Component({
   selector: 'app-landing-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,NgbModule],
   templateUrl: './landing-header.component.html',
   styleUrls: ['./landing-header.component.scss']
 })
 export class LandingHeaderComponent {
-  /**
-   * Member logo URL
-   *
-   * Initially set to null, updated with the actual logo URL when the component is initialized
-   */
+routes= ROUTES;
+languages: any;
+changeLanguage(arg0: any) {
+throw new Error('Method not implemented.');
+}
   memberLogo: string | null = null;
+  isAuthenticated: boolean = false;
+  userName: string | null = null;
+  firstName: string | null = null;
+  lastName: string | null = null;
+  isUser: boolean = false;
 
-  /**
-   * Constructor
-   *
-   * Injects the MemberService instance
-   * @param memberService - MemberService instance
-   */
-  constructor(private memberService: MemberService) {}
+  constructor(
+    private memberService: MemberService,
+    private router: Router,
+    private sessionService: AuthenticationSharedService // Inject SessionService
+  ) {}
 
-  /**
-   * OnInit lifecycle hook
-   *
-   * Subscribes to the memberLogo$ observable and updates the memberLogo property with the received logo URL
-   */
   ngOnInit(): void {
-    /**
-     * Example: memberLogo$ observable emits a logo URL
-     * memberService.memberLogo$.subscribe(logoUrl => {
-     *   this.memberLogo = 'https://example.com/logo.png';
-     * });
-     */
     this.memberService.memberLogo$.subscribe(logoUrl => {
       this.memberLogo = logoUrl;
     });
+
+    // Check if the user is authenticated and get user details
+    this.isAuthenticated = this.sessionService.isAuthenticated();
+    if (this.isAuthenticated) {
+      const userDetails = this.sessionService.getUserDetails();
+      this.userName = `${userDetails?.firstName} ${userDetails?.lastName}`;
+    }
+     // Check if the user is authenticated and get user details
+     this.isUser = this.sessionService.isUser();
+     if (this.isUser) {
+       const userDetails = this.sessionService.getUserDetails();
+       this.userName = `${userDetails?.firstName} ${userDetails?.lastName}`;
+     }
+    const userDetails = this.sessionService.getUserDetails();
+    if (userDetails) {
+      this.firstName = userDetails.firstName;
+      this.lastName = userDetails.lastName;
+    }
   }
+
+
 }

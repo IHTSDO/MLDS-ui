@@ -1,7 +1,13 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a href="#">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
+            </button>
+            <a [routerLink]="[isAuthenticated ? '/dashboard' : '/']">
                 <span *ngIf="memberLogo; else defaultLogo">
                     <img class="img-responsive" [src]="memberLogo" alt="member-logo">
                 </span>
@@ -9,21 +15,74 @@
                     <img class="img-responsive" src="assets/logo.png" alt="ihtsdo-logo">
                 </ng-template>
             </a>
-            <div class="brand"></div>
+            <!-- <div class="brand">{{ memberName }}</div> -->
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul id="topNav" class="nav navbar-nav navbar-right">
+
+                <!-- Home or Dashboard Link -->
                 <li>
-                    <a href="">Home</a>
+                    <a [routerLink]="isAuthenticated ? '/dashboard' : '/'">
+                        <span>{{ isAuthenticated ? 'Dashboard' : 'Home' }}</span>
+                    </a>
                 </li>
-                <li>
-                    <a href="">Release Packages</a>
+
+                <!-- Usage Reports Link -->
+                <li *ngIf="isAuthenticated">
+                    <a routerLink="/usageReports">
+                        <span>Usage Reports</span>
+                    </a>
                 </li>
+
+                <!-- Release Packages Link -->
                 <li>
-                    <a href="">Language</a>
+                    <a routerLink="/viewReleases">
+                        <span>Release Packages</span>
+                    </a>
                 </li>
-                <li>
-                    <a href="/login">
+
+                <!-- Language Dropdown -->
+                <li class="dropdown pointer">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+                        <span>
+                            <span class="hidden-tablet">Language</span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let language of languages">
+                            <a href="javascript:void(0);" (click)="changeLanguage(language.code)">
+                                <span [class]="'famfamfam-flag-' + language.flag"></span>
+                                &nbsp;<span>{{ language.name }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ngbDropdown class="pointer" *ngIf=isUser>
+                    <a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);">
+                      <span>
+                        <i class="fa fa-user"></i> {{ firstName }} {{ lastName }}
+                        <b class="caret"></b>
+                      </span>
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                      <li>
+                        <a routerLink="/contactInfo">Contact Info</a>
+                      </li>
+                      <li>
+                        <a routerLink="/password">Change Password</a>
+                      </li>
+                      <li>
+                        <a  routerLink="/logout">Log out</a>
+                      </li>
+                    </ul>
+                  </li>
+                  
+
+                <!-- Login Link -->
+                <li *ngIf="!isAuthenticated">
+                    <a routerLink="/login">
                         Login
                         <i class="fa fa-caret-right"></i>
                     </a>

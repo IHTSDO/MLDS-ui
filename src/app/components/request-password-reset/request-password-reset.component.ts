@@ -85,7 +85,6 @@ export class RequestPasswordResetComponent implements OnInit {
           return of(response);
         }),
         catchError(error => {
-          debugger;
           this.alerts.push({ type: 'danger', msg: 'Email not found.' });
           console.error('Error sending reset email:', error);
           return of(null);

@@ -133,4 +133,8 @@ export const ROUTES = {
    * @example '/applicationReview'
    */
   applicationReview: '/applicationReview',
+
+  logout : '/logout',
+
+  activate : '/activate'
 };

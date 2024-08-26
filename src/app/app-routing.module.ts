@@ -25,6 +25,7 @@ import { AffiliateSummaryComponent } from './components/affiliate-summary/affili
 import { ReviewUsageReportsComponent } from './components/review-usage-reports/review-usage-reports.component';
 import { ReviewUsageReportAdminComponent } from './components/review-usage-report-admin/review-usage-report-admin.component';
 import { EditAffiliateComponent } from './components/edit-affiliate/edit-affiliate.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 
@@ -33,8 +34,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/landing',
     pathMatch: 'full'
-  },
-
+  },{
+  path: 'logout',
+  component: LogoutComponent,
+},
   {
     path: '',
     component: LandingPageComponent,
@@ -45,6 +48,7 @@ const routes: Routes = [
       { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
       { path: 'resetPassword', component: ResetPasswordComponent },
       { path: 'userDashboard', component: UserDashboardComponent },
+    
      
     ]
   },

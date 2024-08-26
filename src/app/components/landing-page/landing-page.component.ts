@@ -5,7 +5,7 @@ import { LandingFooterComponent } from "../landing-footer/landing-footer.compone
 import { LoginComponent } from "../login/login.component";
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MemberService } from 'src/app/services/member/member.service';
-
+import { ROUTES } from 'src/app/routes-config';
 /**
  * Landing page component that displays the landing page with header, content, and footer.
  * It also handles member key parameter from the route and sets the member logo accordingly.
@@ -18,6 +18,8 @@ import { MemberService } from 'src/app/services/member/member.service';
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
+
+  routes = ROUTES;
   /**
    * Constructor that injects the member service and activated route.
    * @param memberService - The member service instance.
