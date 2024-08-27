@@ -1,0 +1,22 @@
+<div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<h1>Activation</h1>
+
+			<div class="alert alert-success" *ngIf="success">
+				<strong>User account has been created.</strong>
+				<span>
+					The system will take you to continue your registration process in a few moments.
+					If you are not redirected automatically, please <a href="#/usageReports">click here</a>.
+				</span>
+			</div>
+
+			<div class="alert alert-danger" *ngIf="error">
+				<strong>Your user could not be activated.</strong>
+				<span>Please use the registration form to sign up. If you are still encountering difficulties, please contact support.</span>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

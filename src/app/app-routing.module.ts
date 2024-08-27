@@ -26,6 +26,7 @@ import { ReviewUsageReportsComponent } from './components/review-usage-reports/r
 import { ReviewUsageReportAdminComponent } from './components/review-usage-report-admin/review-usage-report-admin.component';
 import { EditAffiliateComponent } from './components/edit-affiliate/edit-affiliate.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ActivateComponent } from './components/activate/activate.component';
 
 
 
@@ -48,7 +49,7 @@ const routes: Routes = [
       { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
       { path: 'resetPassword', component: ResetPasswordComponent },
       { path: 'userDashboard', component: UserDashboardComponent },
-    
+      { path: 'activate', component: ActivateComponent },
      
     ]
   },
