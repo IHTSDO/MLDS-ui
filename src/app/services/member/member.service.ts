@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
@@ -31,6 +31,9 @@ export class MemberService {
   memberLogo$ = this.memberLogoSubject.asObservable();
   ihtsdoMember: any;
 
+  private members: any[] = [];
+  private membersByKey: { [key: string]: any } = {};
+
   constructor(private http: HttpClient) { }
 
   /**
@@ -38,8 +41,29 @@ export class MemberService {
    *
    * @returns An observable that emits an array of member objects.
    */
+  // getMembers(): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/members`);
+  // }
+
   getMembers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/members`);
+    return this.http.get<any[]>(`${this.apiUrl}/members`).pipe(
+      map(members => {
+        this.members = members;
+        this.membersByKey = members.reduce((acc, member) => {
+          acc[member.key] = member;
+          return acc;
+        }, {});
+        return members;
+      }),
+      catchError(error => {
+        console.error('Error fetching members:', error);
+        return of([]); // Return an empty array on error
+      })
+    );
+  }
+
+  getMemberByKey(key: string): any | undefined {
+    return this.membersByKey[key];
   }
 
   /**
@@ -186,4 +210,19 @@ export class MemberService {
       };
       return this.http.put<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/memberFeedUrl`, member);
     }
+
+
+    updateMember(m: any): Observable<any> {
+      const memberKey = m.key;
+      return this.http.put<any>(`${this.apiUrl}/members/${memberKey}`, m).pipe(
+        catchError(this.handleError)
+      );
+    }
+
+    private handleError(error: HttpErrorResponse) {
+      console.error('An error occurred:', error.message);
+      return throwError(() => new Error('Something went wrong; please try again later.'));
+    }
+
+    
   }

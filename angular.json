@@ -42,7 +42,10 @@
                         "browser": "src/main.ts",
                         "allowedCommonJsDependencies": [
                             "jquery",
-                            "moment"
+                            "moment",
+                            "file-saver",
+                            "lodash",
+                            "google-libphonenumber"
                         ]
                     },
                     "configurations": {
@@ -51,8 +54,8 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "2.5mb"
+                                    "maximumWarning": "3mb",
+                                    "maximumError": "3.5mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",

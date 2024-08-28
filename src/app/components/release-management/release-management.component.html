@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="page-header">
+      <h2>Release Management &nbsp;&nbsp;<button class="btn btn-success"><i class="fa fa-plus"></i> Add Release</button>
+      </h2>
+      <div *ngIf="isAdmin">
+        <span>Show releases for: </span>
+        <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
+          <option value="" selected>SNOMED International</option>
+          <option value="1">All Members</option>
+        </select>&nbsp;&nbsp;
+        <i class="fa fa-question-circle fa-2x" [ngbPopover]="popoverContent" placement="top"
+          triggers="mouseenter:mouseleave"></i>
+        <ng-template #popoverContent>
+          Switch between your releases and releases from all members
+        </ng-template>
+      </div>
+    </div>
+
+    <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
+      {{ alert.msg }}
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div *ngFor="let memberEntry of packagesByMember">
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- online package -->
+      <div class="page-header">
+        <h3>Public Releases: <span>{{memberEntry.member.key}}</span></h3>
+        <p>Releases are made public when one or more versions inside the release is made public. To take a release
+          offline, select a release below and set all versions to offline.</p>
+      </div>
+
+      <div>
+        <label *ngIf="memberEntry.member.key != 'IHTSDO'">
+          <input type="checkbox" name="promotePackages" [(ngModel)]="memberEntry.member.promotePackages"
+            (ngModelChange)="promoteMemberPackagesChanged(memberEntry.member)">
+          Show online packages ahead of IHTSDO packages to affiliates.
+        </label>
+      </div>
+
+
+      
+      <div class="panel panel-default" *ngFor="let package of memberEntry.onlinePackages">
+        <div class="panel-heading">
+          <div class="float-end">
+
+            <button type="button" class="btn btn-primary" (click)="promotePackage(memberEntry, package)"
+              *ngIf="canPromotePackage(memberEntry, package) || canDemotePackage(memberEntry, package)"
+              [disabled]="!canPromotePackage(memberEntry, package)">
+              <i class="fa fa-chevron-up"></i>
+            </button>
+
+            <button type="button" class="btn btn-primary" (click)="demotePackage(memberEntry, package)"
+              *ngIf="canPromotePackage(memberEntry, package) || canDemotePackage(memberEntry, package)"
+              [disabled]="!canDemotePackage(memberEntry, package)">
+              <i class="fa fa-chevron-down"></i>
+            </button>
+
+          </div>
+          <h3 class="panel-title">
+            {{package.name}} - {{package.member.key }}
+          </h3>
+          <p>Please click on the release title above to manage the release packages.</p>
+        </div>
+        <div class="panel-body">
+          <div [innerHTML]="package.description"></div>
+        </div>
+        <div class="panel-footer">
+          <ng-container *ngFor="let version of package.releaseVersions | filterOnline">
+            <ng-container *ngIf="isLatestVersion(version, getOnlineVersions(package.releaseVersions))">
+              <div class="row">
+                <div class="col-lg-1">
+                  <div class="current">Latest:</div>
+                </div>
+                <div class="col-lg-10">
+                  <h4 class="version">{{version.name}}</h4>
+                  <span><strong>Published On:</strong> {{version.publishedAt | date: 'yyyy-MM-dd'}}</span>
+                  <p class="download-files" *ngFor="let file of version.releaseFiles">
+                    <a [href]="file.clientDownloadUrl" target="_blank" [innerHTML]="file.label">
+                      <p class="download-files">{{file.label}}</p>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="memberEntry.onlinePackages.length === 0">
+        <i class="fa fa-exclamation-circle"></i> There are currently no public releases available
+      </div>
+
+    </div>
+  </div>
+
+  <!-- alpha/beta -->
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="page-header">
+        <h3>Alpha/Beta Releases: <span>{{memberEntry.member.key}}</span></h3>
+        <p>Releases that do not have any online versions are taken offline or made available for alpha/beta reviews. To
+          take a release online, select a release below and set one or more versions online.</p>
+      </div>
+
+      <div class="panel panel-default" *ngFor="let package of memberEntry.alphabetaPackages">
+        <div class="panel-heading">
+          <h4 class="panel-title"><a> {{package.name}} - {{package.member.key}}</a></h4>
+        </div>
+        <div class="panel-body">
+          <div [innerHTML]="package.description"></div>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="memberEntry.alphabetaPackages.length === 0">
+        <i class="fa fa-exclamation-circle"></i> There are currently no Alpha/Beta releases available
+      </div>
+    </div>
+  </div>
+
+
+  <!-- offline -->
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="page-header">
+        <h3>Offline Releases: <span>{{memberEntry.member.key}}</span></h3>
+        <p>Releases that do not have any online versions are taken offline or made available for alpha/beta reviews. To
+          take a release online, select a release below and set one or more versions online.</p>
+      </div>
+      <div class="panel panel-default" *ngFor="let package of memberEntry.offlinePackages">
+        <div class="panel-heading">
+          <h4 class="panel-title"><a> {{package.name}} - {{package.member.key}}</a></h4>
+        </div>
+        <div class="panel-body">
+          <div [innerHTML]="package.description"></div>
+        </div>
+      </div>
+      <div class="alert alert-warning" *ngIf="memberEntry.offlinePackages.length == 0"><i
+          class="fa fa-exclamation-circle"></i> There are currently no offline releases available</div>
+    </div>
+  </div>
+
+
+
+</div>
