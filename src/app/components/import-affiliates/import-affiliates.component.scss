@@ -1,0 +1,50 @@
+body {
+    padding-top: 70px; /* Adjust according to your navbar height */
+}
+
+
+.navbar-fixed-top {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    z-index: 1030; /* Ensure it stays on top of other content */
+}
+
+.container-fluid {
+    padding: 0 20px;
+}
+
+.page-header {
+    margin-top: 20px;
+}
+
+.space {
+    margin-top: 10px;
+}
+
+
+.h2{padding-top: 30px;}
+
+.content{
+    padding-top: 30px;
+}
+
+.col-md-6 {
+    width: 50%;
+}
+h2{
+    padding-top: 30px;
+}
+
+button.btn {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    border: none;
+    color: #000000;
+    border: 2px solid;
+}
+
+.dropdown-scrollable {
+    max-height: 200px;
+    overflow-y: auto;
+  }

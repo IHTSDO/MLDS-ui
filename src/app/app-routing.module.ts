@@ -28,6 +28,7 @@ import { EditAffiliateComponent } from './components/edit-affiliate/edit-affilia
 import { LogoutComponent } from './components/logout/logout.component';
 import { ActivateComponent } from './components/activate/activate.component';
 import { ReleaseManagementComponent } from './components/release-management/release-management.component';
+import { ImportAffiliatesComponent } from './components/import-affiliates/import-affiliates.component';
 
 
 
@@ -85,7 +86,9 @@ const routes: Routes = [
       { path: 'usageReportsReview/:commercialUsageId', component: ReviewUsageReportAdminComponent},
       { path: 'reviewUsageReports', component: ReviewUsageReportsComponent},
       { path: 'affiliateManagement/:affiliateId/edit', component: EditAffiliateComponent},
-      { path: 'releaseManagement', component: ReleaseManagementComponent}
+      { path: 'releaseManagement', component: ReleaseManagementComponent},
+      { path: 'importAffiliates', component: ImportAffiliatesComponent},
+      
     ]
   },
 {
