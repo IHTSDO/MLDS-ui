@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title">Replace Terms & Conditions</h3>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to replace the current license file with the uploaded license file?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" (click)="activeModal.dismiss()">Cancel</button>
+    <button class="btn btn-success" (click)="confirm()">
+      <i class="fa fa-upload"></i>
+      Upload and Replace
+    </button>
+  </div>
+  

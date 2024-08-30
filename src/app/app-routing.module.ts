@@ -29,6 +29,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ActivateComponent } from './components/activate/activate.component';
 import { ReleaseManagementComponent } from './components/release-management/release-management.component';
 import { ImportAffiliatesComponent } from './components/import-affiliates/import-affiliates.component';
+import { ReleaseComponent } from './components/release/release.component';
 
 
 
@@ -88,7 +89,8 @@ const routes: Routes = [
       { path: 'affiliateManagement/:affiliateId/edit', component: EditAffiliateComponent},
       { path: 'releaseManagement', component: ReleaseManagementComponent},
       { path: 'importAffiliates', component: ImportAffiliatesComponent},
-      
+      { path: 'releaseManagement', component: ReleaseManagementComponent},
+      { path: 'releaseManagement/release/:packageId', component: ReleaseComponent}     
     ]
   },
 {

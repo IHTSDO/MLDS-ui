@@ -66,7 +66,7 @@
 
           </div>
           <h3 class="panel-title">
-            {{package.name}} - {{package.member.key }}
+            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key }}</a>
           </h3>
           <p>Please click on the release title above to manage the release packages.</p>
         </div>
@@ -113,7 +113,9 @@
 
       <div class="panel panel-default" *ngFor="let package of memberEntry.alphabetaPackages">
         <div class="panel-heading">
-          <h4 class="panel-title"><a> {{package.name}} - {{package.member.key}}</a></h4>
+          <h4 class="panel-title">
+            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key }}</a>
+          </h4>
         </div>
         <div class="panel-body">
           <div [innerHTML]="package.description"></div>
@@ -136,7 +138,9 @@
       </div>
       <div class="panel panel-default" *ngFor="let package of memberEntry.offlinePackages">
         <div class="panel-heading">
-          <h4 class="panel-title"><a> {{package.name}} - {{package.member.key}}</a></h4>
+          <h4 class="panel-title">
+            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key }}</a>
+          </h4>
         </div>
         <div class="panel-body">
           <div [innerHTML]="package.description"></div>

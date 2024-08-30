@@ -37,6 +37,12 @@ export class PackagesService {
     );
   }
 
+  getReleasePackageById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/releasePackages/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Something went wrong; please try again later.'));

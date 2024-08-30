@@ -1,0 +1,257 @@
+<div class="row">
+  <span><a (click)="goToReleaseManagement()"><i class="fa fa-angle-double-left"></i>Back to Release
+      Management</a></span>
+
+  <div class="col-md-12">
+    <h2>{{packageEntity?.name}} - {{packageEntity?.member?.key}}</h2>
+    <div class="float-end" *ngIf="isEditableReleasePackage">
+      <div ngbDropdown>
+        <button class="btn btn-primary" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
+            class="caret"></i></button>
+        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+          <button class="dropdown-item">
+            <i class="fa fa-edit"></i> Edit Package
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" (click)="viewLicense()">
+            <i class="fa fa-gavel"></i> View License
+          </button>
+          <button class="dropdown-item" (click)="updateLicense()">
+            <i class="fa fa-edit"></i> Edit License
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item">
+            <i class="fa fa-plus"></i> Add Version
+          </button>
+          <div class="dropdown-divider" *ngIf="isEditableReleasePackage && isRemovableReleasePackage"></div>
+          <button class="dropdown-item" *ngIf="isEditableReleasePackage && isRemovableReleasePackage">
+            <i class="fa fa-times"></i> Delete
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div [innerHTML]="packageEntity.description"></div>
+  </div>
+
+
+  <div class="col-lg-12">
+  </div>
+
+  <!-- public version -->
+  <div class="col-lg-12">
+    <h3>Public Versions</h3>
+    <p>
+      To take a version offline, click the dropdown of a version below and select "Take Offline". Take all versions
+      offline to remove this release from public view.
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Version</th>
+          <th>Description</th>
+          <th>Download Files</th>
+          <th>Date Published</th>
+          <th>
+            <i class="fa fa-cog"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let releaseVersion of versions['online']">
+          <td class="col-sm-2">{{ releaseVersion?.name }}</td>
+          <td class="col-sm-5" [innerHTML]="releaseVersion?.description"></td>
+          <td class="col-sm-3">
+            <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
+              <i class="fa fa-file" style="margin-bottom:10px;"></i>
+              <div class="file-label">
+                <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
+                  [innerHTML]="releaseFile.label" style="white-space: nowrap;">
+                  {{ releaseFile?.label }}
+                </a>
+              </div>
+              <button class="btn btn-success btn-xs edit-button" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-edit"></i> Edit
+              </button>
+            </div>
+          </td>
+          <td class="col-sm-2">{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
+          <td>
+            <div ngbDropdown *ngIf="isEditableReleasePackage">
+              <button class="dropdown-toggle" ngbDropdownToggle>
+              </button>
+              <div ngbDropdownMenu>
+                <button class="dropdown-item">
+                  <i class="fa fa-pencil"></i> Edit
+                </button>
+                <button class="dropdown-item" (click)="takeOfflineModal(releaseVersion)">
+                  <i class="fa-solid fa-circle-xmark"></i> Take Offline
+                </button>
+                <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
+                  <i class="fa fa-archive"></i> Move to Archive
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <div *ngIf="versions['online'].length === 0" class="alert alert-warning">
+      <i class="fa fa-exclamation-circle"></i> There are currently no online versions of this release.
+    </div>
+  </div>
+
+
+  <!-- alpha/ beta version -->
+  <div class="col-lg-12">
+    <h3>Alpha/Beta Versions</h3>
+    <p>Set one or more versions of a release to public view by selecting "Publish Online" from the drop down menu. Set
+      one or more versions online to move this release to public view. </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-sm-2">Version</th>
+          <th class="col-sm-5">Description</th>
+          <th class="col-sm-3">Download Files</th>
+          <th class="col-sm-2">Date Added</th>
+          <th>
+            <i class="fa fa-cog"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let releaseVersion of versions['alphabeta']">
+          <td>{{ releaseVersion?.name }}</td>
+          <td [innerHTML]="releaseVersion?.description"></td>
+          <td>
+            <p>
+              <button class="btn btn-success btn-xs" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-plus"></i> Add File
+              </button>
+            </p>
+            <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
+              <i class="fa fa-file" style="margin-bottom:10px;"></i>
+              <div class="file-label">
+                <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
+                  [innerHTML]="releaseFile.label" style="white-space: nowrap;">
+                  {{ releaseFile?.label }}
+                </a>
+              </div>
+              <button class="btn btn-success btn-xs edit-button" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-edit"></i> Edit
+              </button> &nbsp;
+              <button class="btn btn-danger btn-xs edit-button" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-xmark"></i> Remove
+              </button>
+            </div>
+          </td>
+          <td>{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
+          <td>
+            <div ngbDropdown *ngIf="isEditableReleasePackage">
+              <button class="dropdown-toggle" ngbDropdownToggle>
+              </button>
+              <div ngbDropdownMenu>
+                <button class="dropdown-item">
+                  <i class="fa fa-pencil"></i> Edit
+                </button>
+                <button class="dropdown-item" (click)="takeOnlineModal(releaseVersion)">
+                  <i class="fa-regular fa-circle-check"></i> Publish Online
+                </button>
+                <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
+                  <i class="fa fa-archive"></i> Move to Archive
+                </button>
+                <button class="dropdown-item">
+                  <i class="fa-solid fa-xmark"></i> Delete
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <div *ngIf="versions['alphabeta'].length === 0" class="alert alert-warning">
+      <i class="fa fa-exclamation-circle"></i> There are currently no Alpha/Beta versions of this release.
+    </div>
+  </div>
+
+  <!-- offline version -->
+
+  <div class="col-lg-12">
+    <h3>Offline Versions</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-sm-2">Version</th>
+          <th class="col-sm-5">Description</th>
+          <th class="col-sm-3">Download Files</th>
+          <th class="col-sm-2">Date Added</th>
+          <th>
+            <i class="fa fa-cog"></i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let releaseVersion of versions['offline']">
+          <td>{{releaseVersion?.name}}</td>
+          <td [innerHTML]="releaseVersion?.description"></td>
+          <td>
+            <p>
+              <button class="btn btn-success btn-xs" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-plus"></i> Add File
+              </button>
+            </p>
+            <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
+              <i class="fa fa-file" style="margin-bottom:10px;"></i>
+              <div class="file-label">
+                <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
+                  [innerHTML]="releaseFile.label" style="white-space: nowrap;">
+                  {{ releaseFile?.label }}
+                </a>
+              </div>
+              <button class="btn btn-success btn-xs edit-button" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-edit"></i> Edit
+              </button> &nbsp;
+              <button class="btn btn-danger btn-xs edit-button" *ngIf="isEditableReleasePackage">
+                <i class="fa fa-xmark"></i> Remove
+              </button>
+            </div>
+          </td>
+          <td>{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
+          <td>
+            <div ngbDropdown *ngIf="isEditableReleasePackage">
+              <button class="dropdown-toggle" ngbDropdownToggle>
+              </button>
+              <div ngbDropdownMenu>
+                <button class="dropdown-item">
+                  <i class="fa fa-pencil"></i> Edit
+                </button>
+                <button class="dropdown-item" (click)="takeAlphaBetaModal(releaseVersion)">
+                  <i class="fa-regular fa-circle-check"></i> Publish Alpha/Beta
+                </button>
+                <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
+                  <i class="fa fa-archive"></i> Move to Archive
+                </button>
+                <button class="dropdown-item">
+                  <i class="fa-solid fa-xmark"></i> Delete
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <div *ngIf="versions['offline'].length === 0" class="alert alert-warning">
+      <i class="fa fa-exclamation-circle"></i> There are currently no offline versions of this release.
+    </div>
+  </div>
+</div>

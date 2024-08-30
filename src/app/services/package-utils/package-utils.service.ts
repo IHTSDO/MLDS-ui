@@ -115,5 +115,101 @@ export class PackageUtilsService {
     return releaseVersion.releaseType === 'online' && !releaseVersion.archive;
   }
 
+  isEditableReleasePackage(releasePackage: any): boolean {
+    const userDetails = this.sessionService.getUserDetails();
+    const userMember = userDetails?.member; 
+    const memberMatches = _.isEqual(userMember, releasePackage.member); 
+    return this.sessionService.isAdmin() || memberMatches;
+  }
+
+  isRemovableReleasePackage(releasePackage: any): boolean {
+    return !this.isPackagePublished(releasePackage);
+  }
+
+  isReleasePackageInactive(packageEntity: any): boolean {
+    if (packageEntity.inactiveAt) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+
+
+  // for release versions
+
+
+  updateVersionsLists(packageEntity: { releaseVersions: any[] }): any {
+    const results = { online: [], alphabeta: [], offline: [], archive: [] };
+    const categorizedVersions = this.categorizeReleaseVersions(packageEntity.releaseVersions);
+    this.sortVersions(categorizedVersions);
+    this.concatenateSortedArrays(categorizedVersions, results);
+    results.archive = categorizedVersions.archive;
+    results.online = categorizedVersions.online;
+    return results;
+  }
+
+  categorizeReleaseVersions(releaseVersions: any[]): any {
+    const categorizedVersions = {
+      archive: [] as any[],
+      publishedOffline: [] as any[],
+      nonPublishedOffline: [] as any[],
+      publishedAlphaBeta: [] as any[],
+      nonPublishedAlphaBeta: [] as any[],
+      online: [] as any[]
+    };
+
+    releaseVersions.forEach(releaseVersion => {
+      if (releaseVersion.archive) {
+        categorizedVersions.archive.push(releaseVersion);
+      } else {
+        this.categorizeByReleaseType(releaseVersion, categorizedVersions);
+      }
+    });
+
+    return categorizedVersions;
+  }
+  
+
+  categorizeByReleaseType(releaseVersion: any, categorizedVersions: any): void {
+    const { publishedAt, releaseType } = releaseVersion;
+
+    const categorizationMap: { [key: string]: () => void } = {
+      "online": () => categorizedVersions.online.push(releaseVersion),
+      "offline": () => {
+        if (publishedAt) {
+          categorizedVersions.publishedOffline.push(releaseVersion);
+        } else {
+          categorizedVersions.nonPublishedOffline.push(releaseVersion);
+        }
+      },
+      "alpha/beta": () => {
+        if (publishedAt) {
+          categorizedVersions.publishedAlphaBeta.push(releaseVersion);
+        } else {
+          categorizedVersions.nonPublishedAlphaBeta.push(releaseVersion);
+        }
+      }
+    };
+
+    if (categorizationMap[releaseType]) {
+      categorizationMap[releaseType]();
+    }
+  }
+
+  sortByPublishedDateDesc(a: any, b: any): number {
+    return new Date(b.publishedAt || b.createdAt || '').getTime() - new Date(a.publishedAt || a.createdAt || '').getTime();
+  }
+
+  sortVersions(categorizedVersions: any): void {
+    Object.keys(categorizedVersions).forEach(key => {
+      categorizedVersions[key] = categorizedVersions[key].toSorted(this.sortByPublishedDateDesc);
+    });
+  }
+
+  concatenateSortedArrays(categorizedVersions: any, results: any): void {
+    results.offline = categorizedVersions.publishedOffline.concat(categorizedVersions.nonPublishedOffline);
+    results.alphabeta = categorizedVersions.publishedAlphaBeta.concat(categorizedVersions.nonPublishedAlphaBeta);
+  }
 
 }

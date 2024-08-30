@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-release-management',
@@ -30,7 +31,8 @@ export class ReleaseManagementComponent {
   constructor(private packagesService: PackagesService,
     private packageUtilsService: PackageUtilsService,
     private memberService: MemberService,
-    private authenticationService: AuthenticationSharedService
+    private authenticationService: AuthenticationSharedService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -187,6 +189,9 @@ export class ReleaseManagementComponent {
     });
   }
 
+  goToPackage(packageEntity: { releasePackageId: string }) {
+    this.router.navigate(['/releaseManagement/release', packageEntity.releasePackageId]);
+  }
 
   closeAlert(alert: any): void {
     this.alerts = this.alerts.filter(a => a !== alert);
