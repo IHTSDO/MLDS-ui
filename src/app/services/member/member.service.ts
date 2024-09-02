@@ -32,7 +32,7 @@ export class MemberService {
   ihtsdoMember: any;
 
   private members: any[] = [];
-  private membersByKey: { [key: string]: any } = {};
+  public membersByKey: { [key: string]: any } = {};
 
   constructor(private http: HttpClient) { }
 

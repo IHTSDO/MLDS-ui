@@ -1,0 +1,58 @@
+.row {
+    padding-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    font-size: 1.5rem;
+}
+
+h2, .h2 {
+  font-size: 30px;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.btn-xs
+{
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+
+
+.edit-button {
+    white-space: nowrap; 
+    text-align: center; 
+    overflow: hidden; 
+  }
+  
+  .file-info {
+    display: flex;
+    flex-grow: 1;
+
+    align-items: center;
+    gap: 10px; 
+
+  }
+  
+  .file-label {
+    flex-grow: 1; 
+    overflow: hidden;
+  }
+
+
+  
+.btn.dropdown-toggle {
+    position: relative; 
+    font-size: 12px;
+  }
+
+  
