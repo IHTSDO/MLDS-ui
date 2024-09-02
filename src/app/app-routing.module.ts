@@ -32,6 +32,7 @@ import { ImportAffiliatesComponent } from './components/import-affiliates/import
 import { ReleaseComponent } from './components/release/release.component';
 import { ArchiveManagementComponent } from './components/archive-management/archive-management.component';
 import { ArchiveVersionsComponent } from './components/archive-versions/archive-versions.component';
+import { ViewReleasesComponent } from './components/view-releases/view-releases.component';
 
 
 
@@ -55,7 +56,7 @@ const routes: Routes = [
       { path: 'resetPassword', component: ResetPasswordComponent },
       { path: 'userDashboard', component: UserDashboardComponent },
       { path: 'activate', component: ActivateComponent },
-     
+      { path: 'viewReleases', component: ViewReleasesComponent },
     ]
   },
   {

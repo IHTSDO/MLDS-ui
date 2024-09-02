@@ -1,103 +1,105 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AffiliateService } from '../affiliate/affiliate.service';
 import { ApplicationUtilsService } from '../application-utils/application-utils.service';
 import { MemberService } from '../member/member.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAffiliateService {
-  private affiliateSubject = new BehaviorSubject<any | null>(null);
-  private approvedMembershipsSubject = new BehaviorSubject<any[]>([]);
-  private incompleteMembershipsSubject = new BehaviorSubject<any[]>([]);
+
+  affiliate: any = null;
+  approvedMemberships: any[] = [];
+  incompleteMemberships: any[] = [];
 
   constructor(
-    private http: HttpClient,
     private affiliateService: AffiliateService,
     private applicationUtilsService: ApplicationUtilsService,
     private memberService: MemberService
   ) {
     this.loadUserAffiliate();
-
-  ;
   }
 
-  get affiliate$(): Observable<any | null> {
-    return this.affiliateSubject.asObservable();
+  loadUserAffiliate() {
+      this.affiliateService.myAffiliate().subscribe(resp => {
+        this.setAffiliate(resp[0]);
+      });
   }
 
-  get approvedMemberships$(): Observable<any[]> {
-    return this.approvedMembershipsSubject.asObservable();
-  }
+  private initializeMemberships() {
+    let primaryApplicationMembers: any[] = [];
 
-  get incompleteMemberships$(): Observable<any[]> {
-    return this.incompleteMembershipsSubject.asObservable();
-  }
+    this.approvedMemberships = this.affiliate.applications
+    .filter((app: any) => {
+      return this.applicationUtilsService.isExtensionApplication(app);
+    })
+    .filter((app: any) => {
+      return this.applicationUtilsService.isApplicationApproved(app);
+    })
+    .map((app: any) => {
+      return app.member;
+    });
 
-  private loadUserAffiliate(): void {
-    this.affiliateService.myAffiliate().pipe(
-      tap(response => this.setAffiliate(response.data))
-    ).subscribe();
-  }
 
-  private initializeMemberships(): void {
-    const affiliate = this.affiliateSubject.getValue();
-    if (!affiliate) return;
 
-    // Including memberships from extension applications only as IHTSDO is always primary application
-    const approvedMemberships = affiliate.applications
-      .filter(this.applicationUtilsService.isExtensionApplication)
-      .filter(this.applicationUtilsService.isApplicationApproved)
-      .map((application: { member: any; }) => application.member);
+  this.incompleteMemberships = this.affiliate.applications
+  .filter((app: any) => {
+    return this.applicationUtilsService.isExtensionApplication(app);
+  })
+  .filter((app: any) => {
+    return this.applicationUtilsService.isApplicationIncomplete(app);
+  })
+  .map((app: any) => {
+    return app.member;
+  });
 
-    const incompleteMemberships = affiliate.applications
-      .filter(this.applicationUtilsService.isExtensionApplication)
-      .filter(this.applicationUtilsService.isApplicationIncomplete)
-      .map((application: { member: any; }) => application.member);
 
-    // Include IHTSDO international membership from primary application
-    if (affiliate.application) {
-      let primaryApplicationMembers = [this.memberService.ihtsdoMember];
-      if (affiliate.application.member && !this.memberService.isMemberEquals(affiliate.application.member, this.memberService.ihtsdoMember)) {
-        primaryApplicationMembers.push(affiliate.application.member);
+
+
+    if (this.affiliate.application) {
+      primaryApplicationMembers = [this.memberService.ihtsdoMember];
+      if (this.affiliate.application.member &&
+          !this.memberService.isMemberEquals(this.affiliate.application.member, this.memberService.ihtsdoMember)) {
+        primaryApplicationMembers.push(this.affiliate.application.member);
       }
-      if (this.applicationUtilsService.isApplicationApproved(affiliate.application)) {
-        approvedMemberships.push(...primaryApplicationMembers);
-      } else if (this.applicationUtilsService.isApplicationIncomplete(affiliate.application)) {
-        incompleteMemberships.push(...primaryApplicationMembers);
+      if (this.applicationUtilsService.isApplicationApproved(this.affiliate.application)) {
+        this.approvedMemberships = [...this.approvedMemberships, ...primaryApplicationMembers];
+      } else if (this.applicationUtilsService.isApplicationIncomplete(this.affiliate.application)) {
+        this.incompleteMemberships = [...this.incompleteMemberships, ...primaryApplicationMembers];
       }
     }
-
-    this.approvedMembershipsSubject.next(approvedMemberships);
-    this.incompleteMembershipsSubject.next(incompleteMemberships);
   }
 
-  private setAffiliate(affiliate: any): void {
-    this.affiliateSubject.next(affiliate);
+  private setAffiliate(affiliate: any) {
+    this.affiliate = affiliate;
     if (affiliate && affiliate.applications) {
       this.initializeMemberships();
     }
   }
 
-  private isMemberOf(member: any, memberships: any[]): boolean {
-    return memberships.some(m => this.memberService.isMemberEqual(m, member));
-  }
+
 
   isMembershipApproved(member: any): boolean {
-    return this.isMemberOf(member, this.approvedMembershipsSubject.getValue());
+    return this.isMemberOf(member, this.approvedMemberships);
   }
 
   isMembershipIncomplete(member: any): boolean {
-    return this.isMemberOf(member, this.incompleteMembershipsSubject.getValue());
+    return this.isMemberOf(member, this.incompleteMemberships);
   }
 
   isMembershipNotStarted(member: any): boolean {
     return !this.isMembershipApproved(member) && !this.isMembershipIncomplete(member);
   }
 
-  refreshAffiliate(): void {
-    this.loadUserAffiliate();
+  private isMemberOf(member: any, memberships: any[]): boolean {
+    return memberships.some(m => this.memberService.isMemberEquals(member, m));
   }
+
+  refreshAffiliate() {
+    this.affiliateService.myAffiliate().subscribe(resp => {
+      this.setAffiliate(resp.data);
+    });
+}
+
 }

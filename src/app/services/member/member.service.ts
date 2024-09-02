@@ -10,13 +10,7 @@ import { API_ROUTES } from 'src/app/routes-config-api';
   providedIn: 'root'
 })
 export class MemberService {
-  isMemberEqual(member: any, ihtsdoMember: any) {
-    throw new Error('Method not implemented.');
-  }
-  isMemberEquals(member1: any, member2: any): boolean {
-    // Add your equality logic here
-    return member1.id === member2.id;
-  }
+
   private apiUrl = API_ROUTES.apiUrl;
   private memberKeySubject = new BehaviorSubject<string | null>(null);
   /**
@@ -29,7 +23,7 @@ export class MemberService {
    * Observable that emits the current member logo URL.
    */
   memberLogo$ = this.memberLogoSubject.asObservable();
-  ihtsdoMember: any;
+  // ihtsdoMember: any;
 
   private members: any[] = [];
   public membersByKey: { [key: string]: any } = {};
@@ -224,5 +218,18 @@ export class MemberService {
       return throwError(() => new Error('Something went wrong; please try again later.'));
     }
 
-    
+    ihtsdoMemberKey = 'IHTSDO';
+    ihtsdoMember = { key: this.ihtsdoMemberKey };
+    isIhtsdoMember(member: { key: string } | null): boolean {
+
+      return member!==null && member.key === this.ihtsdoMemberKey;
+      }
+      isMemberEqual(member: any, ihtsdoMember: any) {
+        throw new Error('Method not implemented.');
+      }
+      isMemberEquals(member1: any, member2: any): boolean {
+        // Add your equality logic here
+        return member1.key === member2.key;
+      }
+      
   }
