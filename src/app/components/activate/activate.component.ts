@@ -28,7 +28,6 @@ export class ActivateComponent implements OnInit {
     if (key) {
       this.activateService.get({ key }).subscribe(
         (response: string) => {
-          console.log('Activation successful:', response);
           this.success = 'OK';
           setTimeout(() => this.router.navigate(['/affiliateRegistration']), 2000);
         },

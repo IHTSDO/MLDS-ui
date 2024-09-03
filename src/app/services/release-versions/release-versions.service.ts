@@ -1,12 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReleaseVersionsService {
+
 
   private apiUrl = API_ROUTES.apiUrl;
 
@@ -20,6 +21,14 @@ export class ReleaseVersionsService {
 
   notify(releasePackageId: string, releaseVersionId: string, data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/releasePackages/${releasePackageId}/releaseVersions/${releaseVersionId}/notifications`, data).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  checkFilePresence(downloadUrl: string): Observable<boolean> {
+    const checkUrl = downloadUrl.replace('/download', '/check');
+    return this.http.get<string>(checkUrl, { responseType: 'text' as 'json' }).pipe(
+      map(response => response === 'true'),
       catchError(this.handleError)
     );
   }

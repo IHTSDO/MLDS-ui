@@ -1,141 +1,195 @@
-// import { CommonModule } from '@angular/common';
-// import { HttpClient } from '@angular/common/http';
-// import { Component, OnDestroy, OnInit } from '@angular/core';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import _ from 'lodash';
-// import { Subscription } from 'rxjs';
-// import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
-// import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
-// import { MemberService } from 'src/app/services/member/member.service';
-// import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
-// import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
-// import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
+import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { MemberService } from 'src/app/services/member/member.service';
+import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
+import { PackagesService } from 'src/app/services/packages-service/packages.service';
+import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
+import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
+import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
+import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
+import { ReviewReleaseLicenseModalComponent } from '../review-release-license-modal/review-release-license-modal.component';
 
-// @Component({
-//   selector: 'app-view-release',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './view-release.component.html',/''
-//   styleUrl: './view-release.component.scss'
-// })
-// export class ViewReleaseComponent implements OnInit, OnDestroy {
-//   releasePackageId: number | null = null;
-//   releasePackage: any = { releaseVersions: [] };
-//   releaseVersions = { online: [], offline: [], alphabeta: [] };
-//   isMembershipInGoodStanding = false;
-//   isMembershipApproved = false;
-//   isMembershipIncomplete = false;
-//   isMembershipUnstarted = false;
-//   isPrimaryApplicationApproved = false;
-//   isIHTSDOPackage = false;
-//   isApplicationWaitingForApplicant = false;
-//   matchingExtensionApplication: any = {};
-//   isAccountDeactivated = false;
-//   isPendingInvoice = false;
+@Component({
+  selector: 'app-view-release',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './view-release.component.html',
+  styleUrl: './view-release.component.scss'
+})
+export class ViewReleaseComponent implements OnInit {
 
-//   private routeSub: Subscription = new Subscription();
+  packageId: string | null = null;
+  releasePackage: any;
+  releaseVersions: any = {
+    online: [],
+    offline: [],
+    alphabeta: []
+  };
+  isAccountDeactivated: boolean = false;
+  standingState!: string;
+  primaryApplication: any[] = [];
+  applications: any;
+  member: any;
+  isPendingInvoice: boolean = false;
+  isPrimaryApplicationWaitingForApplicant: boolean = false;
+  isPrimaryApplicationApproved: boolean = false;
+  matchingExtensionApplication: any;
 
-//   constructor(
-//     private route: ActivatedRoute,
-//     private router: Router,
-//     private http: HttpClient,
-//     private standingStateUtils: StandingStateUtilsService,
-//     private sessionService: AuthenticationSharedService,
-//     private applicationUtilsService: ApplicationUtilsService,
-//     private userAffiliateService: UserAffiliateService,
-//     private memberService: MemberService,
-//     private releasePackageService: ReleasePackageService
-//   ) {}
 
-//   ngOnInit(): void {
-//     this.routeSub = this.route.params.subscribe(params => {
-//       this.releasePackageId = params['releasePackageId'] ? parseInt(params['releasePackageId'], 10) : null;
-//       this.loadReleasePackage();
-//     });
+  constructor(private route: ActivatedRoute, private packagesService: PackagesService,
+    private router: Router,
+    private packageUtilsService: PackageUtilsService,
+    public sessionService: AuthenticationSharedService,
+    private userAffiliateService: UserAffiliateService,
+    private affiliateService: AffiliateService,
+    private standingStateUtils: StandingStateUtilsService,
+    private applicationUtilsService: ApplicationUtilsService,
+    private memberService: MemberService,
+    private releaseVersionsService: ReleaseVersionsService,
+    private modalService: NgbModal,
+    private releasePackageService: ReleasePackageService) { }
 
-//     this.userAffiliateService['promise'].then(() => {
-//       this.initReleasePackageState(this.releasePackage);
-//     });
-//   }
-//   isAuthenticated = this.sessionService.isLoggedIn();
-//   authenticated= this.sessionService.isLoggedIn();
-//   ngOnDestroy(): void {
-//     this.routeSub.unsubscribe();
-//   }
+  ngOnInit(): void {
+    this.loadReleasePackage();
+  }
 
-//   viewLicense(memberKey: string): void {
-//     this.memberService.getMemberLicense(memberKey);
-//   }
+  private loadReleasePackage(): void {
+    this.route.paramMap.subscribe(params => {
+      this.packageId = params.get('releasePackageId');
+    });
 
-//   goToExtensionApplication(): void {
-//     this.router.navigate(['/extensionApplication', this.matchingExtensionApplication.applicationId]);
-//   }
+    if (this.packageId) {
+      this.packagesService.getReleasePackageById(this.packageId).subscribe({
+        next: (data: any) => {
+          this.releasePackage = data;
+          this.member = data.member;
+          this.updateVersionsLists(this.releasePackage);
+          this.loadAffiliateState();
+          this.loadUserState();
+        },
+        error: (error) => {
+          this.goToViewPackages();
+        }
+      });
+    }
 
-//   goToViewPackages(): void {
-//     this.router.navigate(['/viewReleases']);
-//   }
+  }
 
-//   viewReleaseLicense(): void {
-//     this.releasePackageService.getReleaseLicense(this.releasePackageId);
-//   }
+  private updateVersionsLists(releasePackage: any): void {
+    this.releaseVersions = this.packageUtilsService.updateVersionsLists(releasePackage);
+  
+  }
 
-//   downloadReleaseFile(downloadUrl: string): void {
-//     // const checkUrl = downloadUrl.replace('/download', '/check');
-//     // this.http.get(checkUrl, { responseType: 'text' }).subscribe(response => {
-//     //   const isIhtsdoPresent = response === 'true';
-//     //   const modalTemplateUrl = isIhtsdoPresent
-//     //     ? 'views/user/reviewReleaseLicenseModal.html'
-//     //     : 'views/user/reviewReleaseLicenseWithDisclaimerModal.html';
+  private loadUserState(): void {
+    this.userAffiliateService.loadUserAffiliate();
+  }
 
-//     //   this.servicesUtils.$modal.open({
-//     //     templateUrl: modalTemplateUrl,
-//     //     size: 'lg',
-//     //     scope: this
-//     //   }).result.then(() => {
-//     //     this.servicesUtils.$window.open(downloadUrl, '_blank');
-//     //   });
-//     // });
-//   }
+  private loadAffiliateState(): void {
+    this.affiliateService.myAffiliate().subscribe({
+      next: (data) => {
+        this.standingState = data[0].standingState;
+        this.primaryApplication = data[0].application;
+        this.applications = data[0].applications;
+        this.loadStandingState();
+      }
+    });
+  }
 
-//   private getLatestMatchingMemberApplication(releasePackage: any): any {
-//     return _.chain(this.serAffiliateService.affiliate.applications)
-//       .filter(application => application.member.key === releasePackage.member.key)
-//       .max(application => new Date(application.submittedAt))
-//       .value();
-//   }
+  private loadStandingState(): void {
+    this.isPendingInvoice = this.standingStateUtils.isPendingInvoice(this.standingState);
+    this.isAccountDeactivated = this.standingStateUtils.isDeactivated(this.standingState);
+    this.isPrimaryApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.primaryApplication);
+    this.isPrimaryApplicationApproved = this.applicationUtilsService.isApplicationApproved(this.primaryApplication);
+  }
 
-//   private initReleasePackageState(releasePackage: any): void {
-//     this.isAccountDeactivated = this.standingStateUtils.isDeactivated(this.servicesBundle.UserAffiliateService.affiliate.standingState);
-//     this.isPendingInvoice = this.standingStateUtils.isPendingInvoice(this.servicesBundle.UserAffiliateService.affiliate.standingState);
-//     this.isMembershipApproved = this.userAffiliateService.isMembershipApproved(releasePackage.member);
-//     this.isMembershipInGoodStanding = this.isMembershipApproved && !this.isAccountDeactivated && !this.isPendingInvoice;
-//     this.isMembershipIncomplete = this.userAffiliateService.isMembershipIncomplete(releasePackage.member);
-//     this.isMembershipUnstarted = this.userAffiliateService.isMembershipNotStarted(releasePackage.member);
-//     this.isPrimaryApplicationApproved = this.applicationUtilsService.isApplicationApproved(this.servicesBundle.UserAffiliateService.affiliate.application);
-//     this.isPrimaryApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.servicesBundle.UserAffiliateService.affiliate.application);
-//     this.matchingExtensionApplication = this.getLatestMatchingMemberApplication(releasePackage);
-//     this.isApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.matchingExtensionApplication);
-//     this.isIHTSDOPackage = this.memberService.isIhtsdoMember(releasePackage.member);
-//   }
+  isMembershipApproved(): boolean {
+    return this.userAffiliateService.isMembershipApproved(this.member);
+  }
 
-//   private setReleasePackage(releasePackage: any): void {
-//     this.releasePackage = releasePackage;
-//     this.initReleasePackageState(releasePackage);
-//   }
+  isMembershipUnstarted(): boolean {
+    return this.userAffiliateService.isMembershipNotStarted(this.member);
+  }
 
-//   private loadReleasePackage(): void {
-//     if (this.releasePackage?.releasePackageId) {
-//       this.initReleasePackageState(this.releasePackage);
-//     } else if (this.releasePackageId) {
-//       this.releasePackageService.get({ releasePackageId: this.releasePackageId }).subscribe(
-//         result => this.setReleasePackage(result),
-//         () => {
-//           this.servicesUtils.$log.log('ReleasePackage not found');
-//           this.goToViewPackages();
-//         }
-//       );
-//     } else {
-//       this.goToViewPackages();
-//     }
-//   }
-// }
+  isIHTSDOPackage(): boolean {
+    return this.memberService.isIhtsdoMember(this.member);
+  }
+
+  isMembershipIncomplete(): boolean {
+    return this.userAffiliateService.isMembershipIncomplete(this.member);
+  }
+
+  isApplicationWaitingForApplicant(): boolean {
+    return this.applicationUtilsService.isApplicationWaitingForApplicant(this.implementExtension(this.member));
+  }
+
+  implementExtension(member: any) {
+    this.matchingExtensionApplication = this.getLatestMatchingMemberApplication(member);
+    return this.matchingExtensionApplication;
+  }
+
+  getLatestMatchingMemberApplication(member: any) {
+    const filterApplications = this.applications
+      .filter((application: any) => application.member.key === member.key);
+
+    return filterApplications.reduce((latest: any, application: any) =>
+      new Date(application.submittedAt) > new Date(latest.submittedAt) ? application : latest,
+      filterApplications[0]
+    );
+  }
+
+  isMembershipInGoodStanding(): boolean {
+    return this.isMembershipApproved() &&
+      !this.isAccountDeactivated &&
+      !this.isPendingInvoice;
+  }
+
+  downloadReleaseFile(downloadUrl: any) {
+    console.log(this.isMembershipInGoodStanding());
+    console.log(downloadUrl);
+  
+    this.releaseVersionsService.checkFilePresence(downloadUrl).subscribe({
+      next: (isIhtsdoPresent: boolean) => {
+        console.log('Is IHTSDO present:', isIhtsdoPresent);
+        this.openReviewModal(isIhtsdoPresent, downloadUrl);
+      },
+      error: (err) => {
+        console.error('Failed to check file presence:', err);
+      }
+    });
+  }
+  
+  private openReviewModal(isIhtsdoPresent: boolean, downloadUrl: any) {
+    // const modalRef = this.modalService.open(isIhtsdoPresent 
+    //   ? ReviewReleaseLicenseModalComponent 
+    //   : ReviewReleaseLicenseWithDisclaimerModalComponent, 
+    //   { backdrop: 'static' }
+    // );
+    const modalRef = this.modalService.open( 
+         ReviewReleaseLicenseModalComponent  ,
+        { backdrop: 'static' }
+      );
+    modalRef.componentInstance.releasePackage = this.releasePackage;
+    
+    modalRef.result.then(result => {
+      if (result === 'download') {
+        window.open(downloadUrl, '_blank', 'noopener');
+      }
+    }).catch(error => {
+      console.error('Modal dismissed with error:', error);
+    });
+  }
+  
+
+  viewReleaseLicense(): void {
+    this.releasePackageService.getReleaseLicense(this.releasePackage.releasePackageId);
+  }
+
+  goToViewPackages(): void {
+    this.router.navigate(['/viewReleases']);
+  }
+}

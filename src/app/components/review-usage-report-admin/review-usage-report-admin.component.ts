@@ -114,7 +114,6 @@ collapsePanel = {
   
         // Process affiliate data
         this.affiliate = this.usageReport?.affiliate|| {};
-        console.log(this.affiliate);
   
         if (this.affiliate?.affiliateId) {
           this.affiliateService.affiliate(this.affiliate?.affiliateId).subscribe(
@@ -173,7 +172,6 @@ collapsePanel = {
     this.commercialUsageService.updateUsageReport(this.usageReport, newState)
       .subscribe({
         next: (result) => {
-          console.log(result);
           this.router.navigate(['/usageReportsReview']);
           this.submitting = false;
         },

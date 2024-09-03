@@ -143,7 +143,6 @@ export class AffiliateManagementComponent implements OnInit {
   ngOnInit(): void {
     const userDetails = this.sessionService.getUserDetails();
     this.isAdmin = this.sessionService.isAdmin();
-    console.log(userDetails?.member?.['key'])
     this.homeMember = userDetails?.member?.['key'];
     this.showAllAffiliates = '0';
     this.loadVisualState();
@@ -276,7 +275,6 @@ export class AffiliateManagementComponent implements OnInit {
  */
   changedSelectOption(event: any): void{
     this.showAllAffiliates = event;
-    console.log(this.showAllAffiliates);
     this.loadAffiliates();
   }
 /**

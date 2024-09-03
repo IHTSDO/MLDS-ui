@@ -333,7 +333,6 @@ saveNotes() {
       confirmationModalRef.componentInstance.application = this.application;
 
       confirmationModalRef.result.then((result) => {
-        console.log('Modal confirmed with result:', result);
         this.goToPendingApplication();
       })
     });   
@@ -348,10 +347,8 @@ changeRequested() {
   this.saveNotes();
   const modalRef = this.modalService.open(ChangeRequestedModalComponent, { backdrop: 'static' });
   modalRef.componentInstance.application = this.application;
-  console.log('Change requested from applicant');
   modalRef.result.then(
     (result) => {
-      console.log('Modal confirmed with result:', result);
       this.goToPendingApplication();
     }
   );
@@ -366,10 +363,8 @@ reviewRequested() {
   this.saveNotes();
   const modalRef = this.modalService.open(ReviewRequestedModalComponent, { backdrop: 'static' });
   modalRef.componentInstance.application = this.application;
-  console.log('Review requested from staff');
   modalRef.result.then(
     (result) => {
-      console.log('Modal confirmed with result:', result);
       this.goToPendingApplication();
     }
   );
@@ -384,10 +379,8 @@ rejectApplication() {
   this.saveNotes();
   const modalRef = this.modalService.open(RejectApplicationModalComponent, { backdrop: 'static' });
   modalRef.componentInstance.application = this.application;
-  console.log('Application declined');
   modalRef.result.then(
     (result) => {
-      console.log('Modal confirmed with result:', result);
       this.goToPendingApplication();
     }
   );

@@ -104,7 +104,6 @@ export class ReleaseManagementComponent {
       .first()
       .value();
     if (firstMissing) {
-      console.log('Found release package without priority', firstMissing);
       this.updatePackagePriority(firstMissing, 0);
     }
   }

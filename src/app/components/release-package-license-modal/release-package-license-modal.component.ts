@@ -58,8 +58,7 @@ export class ReleasePackageLicenseModalComponent {
       backdrop: 'static'
     });
 
-    modalRef.result.then(() => {
-      console.log("confirmed");
+    modalRef.result.then(() => {]
       this.updateReleasePackageLicense();
     });
   }

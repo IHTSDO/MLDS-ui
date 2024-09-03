@@ -47,8 +47,7 @@ export class EditAffiliateComponent implements OnInit {
         this.loading = false;
         const userDetails = this.authenticationService.getUserDetails();
         this.isEditable = this.isAdmin || (userDetails?.member?.['key'] === this.affiliate.application.member.key);
-        console.log(this.affiliate);
-      },
+        },
       error: error => {
         this.loading = true;
       }

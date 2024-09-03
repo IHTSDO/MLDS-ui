@@ -148,7 +148,6 @@ export class RegisterComponent {
       startDate: initialPeriod.startDate,
       endDate: initialPeriod.endDate
     };
-    console.log(account.initialUsagePeriod);
     this.registerService.registerAccount(account).subscribe({
       next: () => {
         this.success = 'OK';

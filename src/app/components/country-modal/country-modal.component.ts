@@ -154,7 +154,6 @@ export class CountryModalComponent {
    */
   onMemberSelect(event: NgbTypeaheadSelectItemEvent): void {
     const selectedMember: Member = event.item;
-    console.log('Selected member:', selectedMember);
     
     this.selectedMember = selectedMember; 
     

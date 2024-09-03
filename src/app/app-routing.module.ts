@@ -33,6 +33,7 @@ import { ReleaseComponent } from './components/release/release.component';
 import { ArchiveManagementComponent } from './components/archive-management/archive-management.component';
 import { ArchiveVersionsComponent } from './components/archive-versions/archive-versions.component';
 import { ViewReleasesComponent } from './components/view-releases/view-releases.component';
+import { ViewReleaseComponent } from './components/view-release/view-release.component';
 
 
 
@@ -57,6 +58,7 @@ const routes: Routes = [
       { path: 'userDashboard', component: UserDashboardComponent },
       { path: 'activate', component: ActivateComponent },
       { path: 'viewReleases', component: ViewReleasesComponent },
+      { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
     ]
   },
   {

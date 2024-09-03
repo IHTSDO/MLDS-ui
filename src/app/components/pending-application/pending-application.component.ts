@@ -96,7 +96,6 @@ export class PendingApplicationsComponent implements OnInit {
   ngOnInit(): void {
     const userDetails = this.authenticationService.getUserDetails();
     this.isAdmin = this.authenticationService.isAdmin();
-    console.log(userDetails?.member?.['key'])
     this.homeMember = userDetails?.member?.['key'];
     this.loadApplications();
   }
@@ -112,7 +111,6 @@ export class PendingApplicationsComponent implements OnInit {
   loadApplications(reset = false): void {
 
     this.loadingApplications = true;
-    console.log("showApplicationValue" + this.showAllApplications);
     const homeMember = this.showAllApplications == '0' ? this.homeMember : null;
     if (reset) {
       this.page = 0;

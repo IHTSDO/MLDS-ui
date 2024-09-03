@@ -48,7 +48,6 @@ export class CountryComponent {
    * @param isoCode - The ISO code of the country to delete.
    */
   delete(isoCode: string): void {
-    console.log("delete Method Clicked");
     this.countryService.deleteCountry(isoCode).subscribe(
       () => {
         this.fetchCountries(); // Reload countries after deletion
@@ -84,7 +83,6 @@ export class CountryComponent {
    * @param isoCode - The ISO code of the country to update.
    */
   update(isoCode: string): void {
-    console.log(isoCode);
     this.openUpdateModal(isoCode);
   }
 

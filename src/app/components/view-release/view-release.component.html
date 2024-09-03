@@ -1,1 +1,189 @@
-<!--  -->
+<div class="row">
+    <div class="col-md-12">
+        <button (click)="goToViewPackages()" type="button" class="btn btn-link"><span translate="global.word.back">Back
+                to all available releases</span></button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="page-header">
+            <h2>{{releasePackage?.name}} <button class="btn btn-sm btn-link" (click)="viewReleaseLicense()"><span
+                        translate="global.word.viewlicense">View License</span></button></h2>
+            <div [innerHTML]="releasePackage?.description"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default release-package package"
+            *ngFor="let releaseVersion of releaseVersions['online']">
+            <div class="panel-heading status">
+
+                <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
+                    translate="views.releases.warning.deactivated">
+                    Account Deactivated
+                </span>
+
+                <span *ngIf="sessionService.isAuthenticated() && isPendingInvoice && isMembershipApproved"
+                    class="badge bg-danger float-end" translate="views.releases.warning.pending">
+                    Pending Invoice
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant"
+                    class="badge bg-warning float-end" translate="views.releases.warning.pAttention">
+                    Primary application needs attention
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved"
+                    class="badge bg-danger float-end" translate="views.releases.warning.pProcessed">
+                    Primary application is being processed
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipUnstarted()"
+                    class="badge bg-success float-end" translate="views.releases.warning.apply">
+                    Apply for extension
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && !isApplicationWaitingForApplicant()"
+                    class="badge bg-danger float-end" translate="views.releases.warning.apply">
+                    Application being processed
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && isApplicationWaitingForApplicant()"
+                    class="badge bg-warning float-end" translate="views.releases.warning.aAttention">
+                    Application needs attention, click to continue application
+                </span>
+
+                <div class="status">
+                    <h3 class="panel-title">{{releaseVersion?.name}}</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <p [innerHTML]="releaseVersion?.description"></p>
+                <span><strong><span>Published On</span>:</strong> {{releaseVersion?.publishedAt | date:
+                    'yyyy-MM-dd'}}</span>
+            </div>
+
+            <div class="panel-footer" *ngIf="sessionService.isAuthenticated()">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="version-title">File:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                            <i class="fa fa-file"></i>&nbsp;
+                            <a class="disabled no-padding"
+                                [attr.aria-disabled]="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding() ? true : null"
+                                *ngIf="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding()"
+                                [innerHTML]="releaseFile.label">
+                            </a>
+
+                            <a class="" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
+                                (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
+                                [innerHTML]="releaseFile.label">
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+
+<div class="row">
+
+    <div *ngIf="sessionService.isAuthenticated()">
+        <h2 *ngIf="releaseVersions.alphabeta.length > 0">Alpha/Beta Versions</h2>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default release-package package"
+            *ngFor="let releaseVersion of releaseVersions['alphabeta']">
+            <div class="panel-heading status">
+                <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
+                    translate="views.releases.warning.deactivated">
+                    Account Deactivated
+                </span>
+
+                <span *ngIf="sessionService.isAuthenticated() && isPendingInvoice && isMembershipApproved"
+                    class="badge bg-danger float-end" translate="views.releases.warning.pending">
+                    Pending Invoice
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant"
+                    class="badge bg-warning float-end" translate="views.releases.warning.pAttention">
+                    Primary application needs attention
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved"
+                    class="badge bg-danger float-end" translate="views.releases.warning.pProcessed">
+                    Primary application is being processed
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipUnstarted()"
+                    class="badge bg-success float-end" translate="views.releases.warning.apply">
+                    Apply for extension
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && !isApplicationWaitingForApplicant()"
+                    class="badge bg-danger float-end" translate="views.releases.warning.apply">
+                    Application being processed
+                </span>
+
+                <span
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && isApplicationWaitingForApplicant()"
+                    class="badge bg-warning float-end" translate="views.releases.warning.aAttention">
+                    Application needs attention, click to continue application
+                </span>
+                <div class="status">
+                    <h3 class="panel-title">{{releaseVersion?.name}}</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <p [innerHTML]="releaseVersion?.description"></p>
+                <span><strong><span>Published On</span>:</strong> {{releaseVersion?.publishedAt | date:
+                    'yyyy-MM-dd'}}</span>
+            </div>
+
+            <div class="panel-footer" *ngIf="sessionService.isAuthenticated()">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="version-title">File:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                            <i class="fa fa-file"></i>&nbsp;
+                            <a class="disabled no-padding"
+                                [attr.aria-disabled]="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding() ? true : null"
+                                *ngIf="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding()"
+                                [innerHTML]="releaseFile.label">
+                            </a>
+
+                            <a class="" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
+                                (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
+                                [innerHTML]="releaseFile.label">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
