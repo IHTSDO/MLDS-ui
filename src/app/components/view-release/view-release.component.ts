@@ -13,6 +13,7 @@ import { StandingStateUtilsService } from 'src/app/services/standing-state-utils
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import { ReviewReleaseLicenseModalComponent } from '../review-release-license-modal/review-release-license-modal.component';
+import { ReviewReleaseLicenseWithDisclaimerModalComponent } from '../review-release-license-with-disclaimer-modal/review-release-license-with-disclaimer-modal.component';
 
 @Component({
   selector: 'app-view-release',
@@ -164,15 +165,12 @@ export class ViewReleaseComponent implements OnInit {
   }
   
   private openReviewModal(isIhtsdoPresent: boolean, downloadUrl: any) {
-    // const modalRef = this.modalService.open(isIhtsdoPresent 
-    //   ? ReviewReleaseLicenseModalComponent 
-    //   : ReviewReleaseLicenseWithDisclaimerModalComponent, 
-    //   { backdrop: 'static' }
-    // );
-    const modalRef = this.modalService.open( 
-         ReviewReleaseLicenseModalComponent  ,
-        { backdrop: 'static' }
-      );
+    const modalRef = this.modalService.open(isIhtsdoPresent 
+      ? ReviewReleaseLicenseModalComponent 
+      : ReviewReleaseLicenseWithDisclaimerModalComponent, 
+      { backdrop: 'static' }
+    );
+
     modalRef.componentInstance.releasePackage = this.releasePackage;
     
     modalRef.result.then(result => {
