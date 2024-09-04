@@ -33,6 +33,7 @@
                             "@angular/material/prebuilt-themes/indigo-pink.css",
                             "bootstrap/dist/css/bootstrap.min.css",
                             "@fortawesome/fontawesome-free/css/all.css",
+                            "node_modules/quill/dist/quill.snow.css",
                             "src/styles.scss"
                         ],
                         "scripts": [

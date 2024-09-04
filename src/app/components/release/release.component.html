@@ -6,7 +6,7 @@
     <h2>{{packageEntity?.name}} - {{packageEntity?.member?.key}}</h2>
     <div class="float-end" *ngIf="isEditableReleasePackage">
       <div ngbDropdown>
-        <button class="btn btn-primary" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
+        <button class="review-button" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
             class="caret"></i></button>
         <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
           <button class="dropdown-item">
@@ -71,7 +71,7 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
-              <button class="btn btn-success btn-xs edit-button" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button>
             </div>
@@ -129,7 +129,7 @@
           <td [innerHTML]="releaseVersion?.description"></td>
           <td>
             <p>
-              <button class="btn btn-success btn-xs" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage">
                 <i class="fa fa-plus"></i> Add File
               </button>
             </p>
@@ -141,10 +141,10 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
-              <button class="btn btn-success btn-xs edit-button" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button> &nbsp;
-              <button class="btn btn-danger btn-xs edit-button" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage" (click)="deleteReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-xmark"></i> Remove
               </button>
             </div>
@@ -203,7 +203,7 @@
           <td [innerHTML]="releaseVersion?.description"></td>
           <td>
             <p>
-              <button class="btn btn-success btn-xs" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage">
                 <i class="fa fa-plus"></i> Add File
               </button>
             </p>
@@ -215,10 +215,10 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
-              <button class="btn btn-success btn-xs edit-button" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button> &nbsp;
-              <button class="btn btn-danger btn-xs edit-button" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage" (click)="deleteReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-xmark"></i> Remove
               </button>
             </div>

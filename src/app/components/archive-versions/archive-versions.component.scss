@@ -28,11 +28,27 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 
 
-.edit-button {
-    white-space: nowrap; 
-    text-align: center; 
-    overflow: hidden; 
-  }
+.file-edit {
+  white-space: nowrap; 
+  text-align: center; 
+  overflow: hidden;
+  color: #3cb878;
+  background-color: #ffffff;
+  border:1px solid;
+  border-color: #3cb878;
+  border-top-left-radius: 10px;
+}
+
+.file-edit:hover {
+  white-space: nowrap; 
+  text-align: center; 
+  overflow: hidden;
+  background-color: #3cb878;
+  color: #ffffff;
+  border:1px solid;
+  border-color: #3cb878;
+  border-top-left-radius: 10px;
+}
   
   .file-info {
     display: flex;

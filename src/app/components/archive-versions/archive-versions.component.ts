@@ -6,6 +6,7 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import { ReleasePackageLicenseModalComponent } from '../release-package-license-modal/release-package-license-modal.component';
 import { CommonModule } from '@angular/common';
+import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
 
 @Component({
   selector: 'app-archive-versions',
@@ -78,6 +79,23 @@ export class ArchiveVersionsComponent implements OnInit {
   updateLicense(): void {
     const modalRef = this.modalService.open(ReleasePackageLicenseModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.releasePackage = this.packageEntity;
+  }
+
+  editReleaseFile(releaseVersion: any, releaseFile: any): void {
+    const modalRef = this.modalService.open(EditReleaseFileModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+
+    modalRef.componentInstance.releasePackage = { ...this.packageEntity };
+    modalRef.componentInstance.releaseVersion = { ...releaseVersion };
+    modalRef.componentInstance.releaseFile = { ...releaseFile };
+
+    modalRef.result.then(() => {
+      this.loadReleasePackageId();
+    }, (reason) => {
+      console.log('Modal dismissed:', reason);
+    });
   }
 
 

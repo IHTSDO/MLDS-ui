@@ -5,7 +5,7 @@
     <div>
       <div class="float-end" *ngIf="isEditableReleasePackage">
         <div ngbDropdown>
-          <button class="btn btn-primary" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
+          <button class="review-button" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
               class="caret"></i></button>
           <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
             <button class="dropdown-item">
@@ -60,8 +60,8 @@
                 <i class="fa fa-file" style="margin-bottom: 10px;"></i>
                 <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl"
                   [innerHTML]="releaseFile.label">releaseFile.label</a>
-                <button class="btn btn-success btn-xs pull-right" style="margin-bottom: 10px;"
-                  *ngIf="isEditableReleasePackage">
+                <button class="btn btn-success btn-xs file-edit" style="margin-bottom: 10px;"
+                  *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
                   <i class="fa fa-edit"></i> Edit
                 </button>
               </p>

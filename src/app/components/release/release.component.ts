@@ -9,6 +9,8 @@ import { TakeOnlineModalComponent } from '../take-online-modal/take-online-modal
 import { TakeAlphaBetaModalComponent } from '../take-alpha-beta-modal/take-alpha-beta-modal.component';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import { ReleasePackageLicenseModalComponent } from '../release-package-license-modal/release-package-license-modal.component';
+import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
+import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
 
 
 @Component({
@@ -31,7 +33,7 @@ export class ReleaseComponent {
     archive: []
   };
 
-  constructor(private packagesService: PackagesService,  private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router,private modalService: NgbModal,private releasePackageService: ReleasePackageService) { }
+  constructor(private packagesService: PackagesService,  private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router,private modalService: NgbModal,private releasePackageService: ReleasePackageService, private releaseFileService: ReleaseFileService) { }
 
   ngOnInit(): void {
    this.loadReleasePackageId();
@@ -122,6 +124,37 @@ export class ReleaseComponent {
   updateLicense(): void {
     const modalRef = this.modalService.open(ReleasePackageLicenseModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.releasePackage = this.packageEntity;
+  }
+
+  editReleaseFile(releaseVersion: any, releaseFile: any): void {
+    const modalRef = this.modalService.open(EditReleaseFileModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+
+    modalRef.componentInstance.releasePackage = { ...this.packageEntity };
+    modalRef.componentInstance.releaseVersion = { ...releaseVersion };
+    modalRef.componentInstance.releaseFile = { ...releaseFile };
+
+    modalRef.result.then(() => {
+      this.loadReleasePackageId();
+    }, (reason) => {
+      console.log('Modal dismissed:', reason);
+    });
+  }
+
+  deleteReleaseFile(releaseVersion: any, releaseFile: any): void {
+    const releasePackageId = this.packageEntity.releasePackageId;
+  
+    this.releaseFileService.delete(releasePackageId, releaseVersion.releaseVersionId, releaseFile.releaseFileId)
+      .subscribe({
+        next: () => {
+          this.loadReleasePackageId();
+        },
+        error: (error) => {
+          console.error('Error deleting release file:', error);
+        }
+      });
   }
 
 

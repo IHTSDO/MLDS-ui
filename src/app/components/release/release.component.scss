@@ -28,10 +28,48 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 
 
-.edit-button {
+.file-edit {
     white-space: nowrap; 
     text-align: center; 
-    overflow: hidden; 
+    overflow: hidden;
+    color: #3cb878;
+    background-color: #ffffff;
+    border:1px solid;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+  }
+
+  .file-edit:hover {
+    white-space: nowrap; 
+    text-align: center; 
+    overflow: hidden;
+    background-color: #3cb878;
+    color: #ffffff;
+    border:1px solid;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+  }
+
+  .file-remove {
+    white-space: nowrap; 
+    text-align: center; 
+    overflow: hidden;
+    color: #f05837;
+    background-color: #fde3dd;
+    border:1px solid;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+  }
+
+  .file-remove:hover {
+    white-space: nowrap; 
+    text-align: center; 
+    overflow: hidden;
+    background-color: #f26c4f;
+    color: #ffffff;
+    border:1px solid;
+    border-color: #ee3c16;
+    border-top-left-radius: 10px;
   }
   
   .file-info {

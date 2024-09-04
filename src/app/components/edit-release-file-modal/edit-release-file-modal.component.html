@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit Release File</h3>
+</div>
+
+<div class="modal-body">
+
+  <div *ngFor="let alert of alerts" class="alert" [ngClass]="'alert-' + alert.type">
+    {{alert.msg}}
+  </div>
+
+  <form [formGroup]="formReleaseFile">
+    <div class="form-group">
+      <label for="label">Label</label>
+      <quill-editor id="label" formControlName="label" [style]="{'height': '200px'}"></quill-editor>
+      <div *ngIf="submitAttempted && formReleaseFile.get('label')?.invalid" class="help-block">
+        Required Field
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="downloadUrl">Download URL</label>
+      <input id="downloadUrl" type="url" class="form-control" formControlName="downloadUrl"
+        placeholder="Enter File Download URL" />
+      <div *ngIf="submitAttempted && formReleaseFile.get('downloadUrl')?.errors?.['required']" class="help-block">
+        Required Field
+      </div>
+      <div *ngIf="submitAttempted && formReleaseFile.get('downloadUrl')?.errors?.['pattern']" class="help-block">
+        Invalid URL
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="md5Hash">MD5 Hash</label>
+      <input id="md5Hash" class="form-control" formControlName="md5Hash" placeholder="Enter File MD5 Hash" />
+    </div>
+
+    <div class="form-group">
+      <label for="fileSize">File Size in Octets</label>
+      <input id="fileSize" class="form-control" formControlName="fileSize" placeholder="File Size" />
+      <div *ngIf="submitAttempted && formReleaseFile.get('fileSize')?.errors?.['pattern']" class="help-block">
+        Only numbers are allowed. Remove commas or special characters if entered.
+      </div>
+    </div>
+
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="primaryFile" formControlName="primaryFile">
+      <label class="form-check-label" for="primaryFile">Is Primary File</label>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link" (click)="onCancel()">Cancel</button>
+  <button type="button" class="btn btn-success" [disabled]="submitting" (click)="onSave()">
+    Save
+    <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+  </button>
+</div>
