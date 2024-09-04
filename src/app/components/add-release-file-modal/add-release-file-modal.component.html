@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h3 class="modal-title">Add Release File</h3>
+</div>
+<div class="modal-body">
+  <form [formGroup]="formReleaseFile" (ngSubmit)="ok()">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div *ngFor="let alert of alerts; let i = index" class="alert"
+          [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}" role="alert">
+          {{ alert.msg }}
+          <button type="button" class="btn-close" (click)="closeAlert(i)" aria-label="Close"></button>
+        </div>
+
+        <div class="form-group">
+          <label for="label">Label</label>
+          <quill-editor id="label" formControlName="label" [style]="{'height': '200px'}"></quill-editor>
+          <div *ngIf="formReleaseFile.get('label')?.invalid && submitAttempted" class="help-block">Required Field</div>
+        </div>
+
+        <div class="form-group">
+          <label for="downloadUrl">Download URL</label>
+          <input class="form-control" id="downloadUrl" placeholder="Enter File Download URL"
+            formControlName="downloadUrl" type="url" />
+          <div *ngIf="formReleaseFile.get('downloadUrl')?.invalid && submitAttempted" class="help-block">
+            <div *ngIf="formReleaseFile.get('downloadUrl')?.errors?.['required']">Required Field</div>
+            <div *ngIf="formReleaseFile.get('downloadUrl')?.errors?.['pattern']">Invalid URL</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="md5Hash">MD5 Hash</label>
+          <input class="form-control" id="md5Hash" placeholder="Enter File MD5 Hash" formControlName="md5Hash" />
+        </div>
+
+        <div class="form-group">
+          <div class="form-row">
+            <div class="form-group file-size-group">
+              <label for="fileSize">File Size in Octets</label>
+              <input class="form-control" id="fileSize" placeholder="File Size" formControlName="fileSize" />
+              <div *ngIf="formReleaseFile.get('fileSize')?.invalid && submitAttempted" class="help-block">
+                <div *ngIf="formReleaseFile.get('fileSize')?.errors?.['pattern']">Only numbers are allowed. Remove
+                  Commas/Special Characters if Entered.</div>
+              </div>
+            </div>
+            <div class="form-group checkbox-group">
+              <label for="isPrimaryCheckbox">
+                <input id="isPrimaryCheckbox" type="checkbox" formControlName="primaryFile" />
+                Is Primary file
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link" (click)="onCancel()">Cancel</button>
+  <button class="btn btn-success" (click)="ok()" [disabled]="submitting"><i class="fa fa-plus"></i>&nbsp;Add
+    <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+  </button>
+</div>

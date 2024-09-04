@@ -26,6 +26,22 @@ label {
     font-weight: bold;
 }
 
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline {
+    color: #f26c4f;
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #f26c4f;
+}
+
 .btn-success {
     color: #3cb878;
     background-color: #ffffff;
@@ -54,22 +70,6 @@ label {
     cursor: pointer;
     border-radius: 0;
     text-decoration: underline;
-}
-
-.has-error .help-block,
-.has-error .control-label,
-.has-error .radio,
-.has-error .checkbox,
-.has-error .radio-inline,
-.has-error .checkbox-inline {
-    color: #f26c4f;
-}
-
-.help-block {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    color: #f26c4f;
 }
 
 .alert {

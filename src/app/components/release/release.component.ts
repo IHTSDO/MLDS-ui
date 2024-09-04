@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
@@ -11,6 +11,7 @@ import { ReleasePackageService } from 'src/app/services/release-package/release-
 import { ReleasePackageLicenseModalComponent } from '../release-package-license-modal/release-package-license-modal.component';
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
 import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
+import { AddReleaseFileModalComponent } from '../add-release-file-modal/add-release-file-modal.component';
 
 
 @Component({
@@ -33,13 +34,13 @@ export class ReleaseComponent {
     archive: []
   };
 
-  constructor(private packagesService: PackagesService,  private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router,private modalService: NgbModal,private releasePackageService: ReleasePackageService, private releaseFileService: ReleaseFileService) { }
+  constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService, private releaseFileService: ReleaseFileService) { }
 
   ngOnInit(): void {
-   this.loadReleasePackageId();
+    this.loadReleasePackageId();
   }
 
-  loadReleasePackageId():void{
+  loadReleasePackageId(): void {
     this.route.paramMap.subscribe(params => {
       this.packageId = params.get('packageId');
       if (this.packageId) {
@@ -71,7 +72,7 @@ export class ReleaseComponent {
     this.router.navigate(['/releaseManagement']);
   }
 
-  takeOnlineModal(selectedReleaseVersion: any){
+  takeOnlineModal(selectedReleaseVersion: any) {
     const modalRef = this.modalService.open(TakeOnlineModalComponent, { backdrop: 'static' });
 
     modalRef.componentInstance.releasePackage = this.packageEntity;
@@ -79,12 +80,12 @@ export class ReleaseComponent {
 
     modalRef.result.then((result) => {
       if (result) {
-          this.loadReleasePackageId();
+        this.loadReleasePackageId();
       }
     });
   }
 
-  takeOfflineModal(selectedReleaseVersion: any){
+  takeOfflineModal(selectedReleaseVersion: any) {
     const modalRef = this.modalService.open(TakeOfflineModalComponent, { backdrop: 'static' });
 
     modalRef.componentInstance.releasePackage = this.packageEntity;
@@ -92,12 +93,12 @@ export class ReleaseComponent {
 
     modalRef.result.then((result) => {
       if (result) {
-          this.loadReleasePackageId();
+        this.loadReleasePackageId();
       }
     });
   }
 
-  takeAlphaBetaModal(selectedReleaseVersion: any){
+  takeAlphaBetaModal(selectedReleaseVersion: any) {
     const modalRef = this.modalService.open(TakeAlphaBetaModalComponent, { backdrop: 'static' });
 
     modalRef.componentInstance.releasePackage = this.packageEntity;
@@ -105,7 +106,7 @@ export class ReleaseComponent {
 
     modalRef.result.then((result) => {
       if (result) {
-          this.loadReleasePackageId();
+        this.loadReleasePackageId();
       }
     });
   }
@@ -124,6 +125,19 @@ export class ReleaseComponent {
   updateLicense(): void {
     const modalRef = this.modalService.open(ReleasePackageLicenseModalComponent, { backdrop: 'static' });
     modalRef.componentInstance.releasePackage = this.packageEntity;
+  }
+
+  addReleaseFile(selectedReleaseVersion: any): void {
+    const modalRef = this.modalService.open(AddReleaseFileModalComponent, { size: 'lg', backdrop: 'static' });
+
+    modalRef.componentInstance.releasePackage = { ...this.packageEntity };
+    modalRef.componentInstance.releaseVersion = { ...selectedReleaseVersion };
+
+    modalRef.result.then(() => {
+      this.loadReleasePackageId();
+    }, (reason) => {
+      console.log('Modal dismissed:', reason);
+    });
   }
 
   editReleaseFile(releaseVersion: any, releaseFile: any): void {
@@ -145,7 +159,7 @@ export class ReleaseComponent {
 
   deleteReleaseFile(releaseVersion: any, releaseFile: any): void {
     const releasePackageId = this.packageEntity.releasePackageId;
-  
+
     this.releaseFileService.delete(releasePackageId, releaseVersion.releaseVersionId, releaseFile.releaseFileId)
       .subscribe({
         next: () => {

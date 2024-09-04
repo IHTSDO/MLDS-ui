@@ -1,96 +1,99 @@
 .row {
-    padding-top: 30px;
-    margin-left: 15px;
-    margin-right: 15px;
+  padding-top: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .dropdown-menu.show {
-    display: block;
-    font-size: 1.5rem;
+  display: block;
+  font-size: 1.5rem;
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: 30px;
 }
 
-h1, .h1, h2, .h2, h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.btn-xs
-{
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 3px;
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
 
 
 
 .file-edit {
-    white-space: nowrap; 
-    text-align: center; 
-    overflow: hidden;
-    color: #3cb878;
-    background-color: #ffffff;
-    border:1px solid;
-    border-color: #3cb878;
-    border-top-left-radius: 10px;
-  }
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  color: #3cb878;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #3cb878;
+  border-top-left-radius: 10px;
+}
 
-  .file-edit:hover {
-    white-space: nowrap; 
-    text-align: center; 
-    overflow: hidden;
-    background-color: #3cb878;
-    color: #ffffff;
-    border:1px solid;
-    border-color: #3cb878;
-    border-top-left-radius: 10px;
-  }
+.file-edit:hover {
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  background-color: #3cb878;
+  color: #ffffff;
+  border: 1px solid;
+  border-color: #3cb878;
+  border-top-left-radius: 10px;
+}
 
-  .file-remove {
-    white-space: nowrap; 
-    text-align: center; 
-    overflow: hidden;
-    color: #f05837;
-    background-color: #fde3dd;
-    border:1px solid;
-    border-color: #f26c4f;
-    border-top-left-radius: 10px;
-  }
+.file-remove {
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  color: #f05837;
+  background-color: #fde3dd;
+  border: 1px solid;
+  border-color: #f26c4f;
+  border-top-left-radius: 10px;
+}
 
-  .file-remove:hover {
-    white-space: nowrap; 
-    text-align: center; 
-    overflow: hidden;
-    background-color: #f26c4f;
-    color: #ffffff;
-    border:1px solid;
-    border-color: #ee3c16;
-    border-top-left-radius: 10px;
-  }
-  
-  .file-info {
-    display: flex;
-    flex-grow: 1;
+.file-remove:hover {
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  background-color: #f26c4f;
+  color: #ffffff;
+  border: 1px solid;
+  border-color: #ee3c16;
+  border-top-left-radius: 10px;
+}
 
-    align-items: center;
-    gap: 10px; 
+.file-info {
+  display: flex;
+  flex-grow: 1;
 
-  }
-  
-  .file-label {
-    flex-grow: 1; 
-    overflow: hidden;
-  }
+  align-items: center;
+  gap: 10px;
+
+}
+
+.file-label {
+  flex-grow: 1;
+  overflow: hidden;
+}
 
 
-  
+
 .btn.dropdown-toggle {
-    position: relative; 
-    font-size: 12px;
-  }
-
-  
+  position: relative;
+  font-size: 12px;
+}

@@ -75,4 +75,8 @@ export class EditReleaseFileModalComponent implements OnInit {
   onCancel(): void {
     this.activeModal.dismiss('cancel');
   }
+
+  closeAlert(index: number): void {
+    this.alerts.splice(index, 1);
+  }
 }

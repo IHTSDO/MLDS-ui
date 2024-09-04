@@ -13,6 +13,14 @@ export class ReleaseFileService {
 
   constructor(private http: HttpClient) { }
 
+  save(releasePackageId: string, releaseVersionId: string, releaseFile: any): Observable<any> {
+    const url = `${this.baseUrl}/releasePackages/${releasePackageId}/releaseVersions/${releaseVersionId}/releaseFiles`;
+
+    return this.http.post<any>(url, releaseFile).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   update(releasePackageId: string, releaseVersionId: string, releaseFileId: string, releaseFile: any): Observable<any> {
     const url = `${this.baseUrl}/releasePackages/${releasePackageId}/releaseVersions/${releaseVersionId}/releaseFiles`;
     const params = { releaseFileId: releaseFileId };

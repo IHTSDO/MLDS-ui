@@ -71,7 +71,8 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
-              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
+                (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button>
             </div>
@@ -129,7 +130,8 @@
           <td [innerHTML]="releaseVersion?.description"></td>
           <td>
             <p>
-              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
+                (click)="addReleaseFile(releaseVersion)">
                 <i class="fa fa-plus"></i> Add File
               </button>
             </p>
@@ -141,10 +143,12 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
-              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
+                (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button> &nbsp;
-              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage" (click)="deleteReleaseFile(releaseVersion,releaseFile)">
+              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
+                (click)="deleteReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-xmark"></i> Remove
               </button>
             </div>
@@ -203,7 +207,8 @@
           <td [innerHTML]="releaseVersion?.description"></td>
           <td>
             <p>
-              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
+                (click)="addReleaseFile(releaseVersion)">
                 <i class="fa fa-plus"></i> Add File
               </button>
             </p>
@@ -215,10 +220,12 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
-              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
+              <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
+                (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button> &nbsp;
-              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage" (click)="deleteReleaseFile(releaseVersion,releaseFile)">
+              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
+                (click)="deleteReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-xmark"></i> Remove
               </button>
             </div>

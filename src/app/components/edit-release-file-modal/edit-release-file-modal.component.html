@@ -4,8 +4,9 @@
 
 <div class="modal-body">
 
-  <div *ngFor="let alert of alerts" class="alert" [ngClass]="'alert-' + alert.type">
-    {{alert.msg}}
+  <div *ngFor="let alert of alerts; let i = index" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}" role="alert">
+    {{ alert.msg }}
+    <button type="button" class="btn-close" (click)="closeAlert(i)" aria-label="Close"></button>
   </div>
 
   <form [formGroup]="formReleaseFile">
