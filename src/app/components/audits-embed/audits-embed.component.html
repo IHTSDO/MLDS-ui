@@ -49,8 +49,8 @@
                   {{ audit.data?.['application.approvalState']}}
                 </span>
   
-                <span *ngIf="audit.data?.['import.success'] === 'true'" class="text-success"><span class="glyphicon glyphicon-ok"></span> Successful Import</span>
-                <span *ngIf="audit.data?.['import.success'] === 'false'" class="text-danger"><span class="glyphicon glyphicon-remove"></span> Failed Import</span>
+                <span *ngIf="audit.data?.['import.success'] === 'true'" class="text-success"><i class="fa-solid fa-check"></i> Successful Import </span>
+                <span *ngIf="audit.data?.['import.success'] === 'false'" class="text-danger"><i class="fa-solid fa-xmark"></i> Failed Import </span>
                 <span *ngIf="audit.data?.['import.source']"><strong>Source Member:</strong> {{ audit.data?.['import.source'] }}</span>
                 <span *ngIf="audit.data?.['import.affiliates'] && audit.data?.['import.affiliates'] !== '-1'"><strong>Affiliates:</strong> {{ audit.data?.['import.affiliates'] }}</span>
                 <span *ngIf="audit.data?.['import.errors'] && audit.data['import.errors'] !== '0'"><strong>Errors:</strong> {{ audit.data?.['import.errors'] }}</span>

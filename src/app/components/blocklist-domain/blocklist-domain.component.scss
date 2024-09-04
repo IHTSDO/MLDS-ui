@@ -41,3 +41,104 @@ label {
     outline: none; /* Remove focus outline */
     box-shadow: none; /* Remove box-shadow */
 }
+
+[ng-click]:not([modal-window]) {
+    cursor: pointer;
+}
+.btn-danger {
+    color: #f05837;
+    background-color: #fde3dd;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: inherit;
+    line-height: inherit;
+}
+
+.btn:hover {
+    background-color: #f05837; /* Keep the background color the same on hover */
+    color: white; /* Change the text color to red on hover */
+    border-color: #f26c4f; /* Optionally, adjust the border color on hover */
+}
+
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button {
+    overflow: visible;
+}
+/* Form and table styling */
+.form-inline {
+    margin-bottom: 20px; /* Space below the form */
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    margin-right: 10px; /* Space between label and input */
+}
+
+.form-control {
+    font-size: 1.4rem;
+    border: 1px solid;
+    width: 25%;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group .form-control {
+    flex: 1;
+}
+
+.input-group-append {
+    margin-left: 10px; /* Space between input and button */
+}
+
+.table-responsive {
+    margin-top: 20px; /* Space above the table */
+}
+
+.table th, .table td {
+    padding: 12px; /* Padding inside table cells */
+}
+
+label {
+    margin-left: 10px;
+    font-size: 1.5rem;
+}

@@ -17,12 +17,35 @@
         <tr *ngFor="let logger of sortedLoggers">
           <td><small>{{ logger.name | slice:0:140 }}</small></td>
           <td>
-            <button (click)="changeLevel(logger.name, 'TRACE')" [ngClass]="{'btn-danger': logger.level === 'TRACE', 'btn-primary': logger.level !== 'TRACE'}" class="btn btn-primary btn-xs">TRACE</button>
-            <button (click)="changeLevel(logger.name, 'DEBUG')" [ngClass]="{'btn-warning': logger.level === 'DEBUG', 'btn-primary': logger.level !== 'DEBUG'}" class="btn btn-primary btn-xs">DEBUG</button>
-            <button (click)="changeLevel(logger.name, 'INFO')" [ngClass]="{'btn-info': logger.level === 'INFO', 'btn-primary': logger.level !== 'INFO'}" class="btn btn-primary btn-xs">INFO</button>
-            <button (click)="changeLevel(logger.name, 'WARN')" [ngClass]="{'btn-success': logger.level === 'WARN', 'btn-warning': logger.level !== 'WARN'}" class="btn btn-warning btn-xs">WARN</button>
-            <button (click)="changeLevel(logger.name, 'ERROR')" [ngClass]="{'btn-primary': logger.level === 'ERROR', 'btn-danger': logger.level !== 'ERROR'}" class="btn btn-danger btn-xs">ERROR</button>
+            <button 
+              class="btn-edit" 
+              (click)="changeLevel('TRACE')" 
+              [ngClass]="{'btn-danger': isActive('TRACE')}">TRACE
+            </button>
+            <button 
+              class="btn-delete" 
+              (click)="changeLevel('DEBUG')" 
+              [ngClass]="{'btn-primary': isActive('DEBUG')}">DEBUG
+            </button>
+            <button 
+              class="btn-edit" 
+              (click)="changeLevel('INFO')" 
+              [ngClass]="{'btn-info': isActive('INFO')}">INFO
+            </button>
+            <button 
+              class="btn-delete" 
+              (click)="changeLevel('WARN')" 
+              [ngClass]="{'btn-warning': isActive('WARN')}">WARN
+            </button>
+            <button 
+              class="btn-delete" 
+              (click)="changeLevel('ERROR')" 
+              [ngClass]="{'btn-danger': isActive('ERROR')}">ERROR
+            </button>
           </td>
+          
+          
+        
         </tr>
       </tbody>
     </table>

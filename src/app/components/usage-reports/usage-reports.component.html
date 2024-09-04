@@ -1,12 +1,9 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="page-header">
-      <!-- <span *ngIf="!isAdmin" -->
-      <!-- <span>Reports</span> -->
-      <!-- <span *ngIf="isAdmin" -->
+
       <h2>Review Usage Reports</h2>
     </div>
-    <!-- <div class="table-responsive" *ngIf="isAdmin"> -->
       <table class="table table-striped">
         <thead>
           <tr>
@@ -72,10 +69,10 @@
             <button
                 *ngIf="isAdmin"
                 type="button"
-                class="btn btn-primary btn-sm"
+                class="review-button"
                 (click)="goToReviewUsageReport(usageReport)"
               >
-                Review
+              <i class="fa fa-pencil"></i>  Review
               </button>
             </td>
           </tr>

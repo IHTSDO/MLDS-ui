@@ -1,0 +1,178 @@
+<!-- back to releases button -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <span ><a (click)="goToViewPackages()" style="color: #53baf2;"><i class="fa fa-angle-double-left"></i>Back to IHTSDO Releases</a></span>
+          
+          </div>
+        
+            
+    </div>
+</div>
+
+<!-- release package details -->
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="page-header">
+            <h2>{{releasePackage.name}} 
+                <button class="btn btn-sm btn-link" (click)="viewLicense(releasePackage.member.key)">
+                    <span translate="global.word.viewlicense">View License</span>
+                </button>
+            </h2>
+            <div [innerHTML]="releasePackage.description"></div>
+        </div>
+    </div>
+</div>
+
+<!-- public versions -->
+<div class="row">
+    <div class="col-md-12">
+        <h3 translate="views.ihtsdoReleases.publicVersions">Public Versions</h3>
+
+        <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.online">
+            <div class="panel-heading status">
+              <div class="status">
+                <h3 class="panel-title">{{ releaseVersion?.name }}</h3>
+              </div>
+            </div>
+            <div class="panel-body">
+                <p [innerHTML]="releaseVersion.description"></p>
+                <span>
+                    <strong><span translate="global.word.publishedOn">Published On</span>:</strong> 
+                    {{releaseVersion?.publishedAt | date: 'yyyy-MM-dd'}}
+                </span>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="version-title" translate="global.word.file">File:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                            <i class="fa fa-file"></i>
+                            <button class="btn btn-link disabled no-padding" 
+                                    [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
+                                    *ngIf="!releaseFile.clientDownloadUrl" 
+                                    [innerHTML]="releaseFile.label">
+                            </button>
+                            <a *ngIf="releaseFile.clientDownloadUrl" 
+                               [href]="releaseFile.clientDownloadUrl" 
+                               (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
+                               target="_blank" 
+                               [innerHTML]="releaseFile.label">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="alert alert-warning" *ngIf="releaseVersions.online.length == 0">
+            <i class="fa fa-exclamation-circle"></i> 
+            <span translate="views.ihtsdoReleases.noOnlineVersions">There are currently no online versions of this release.</span>
+        </div>
+    </div>
+</div>
+
+<!-- alpha/beta versions -->
+<div class="row">
+    <div class="col-md-12">
+        <h3>Alpha/Beta Versions</h3>
+
+        <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.alphabeta">
+            <div class="panel-heading status">
+                <span class="alert-danger-flag pull-right">Alpha/Beta</span>
+                <div class="status">
+                    <h3 class="panel-title">{{releaseVersion.name}}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <p [innerHTML]="releaseVersion.description"></p>
+                <span>
+                    <strong><span translate="global.word.publishedOn">Published On</span>:</strong> 
+                    {{releaseVersion.publishedAt | date: 'yyyy-MM-dd'}}
+                </span>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="version-title" translate="global.word.file">File:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                            <i class="fa fa-file"></i>
+                            <button class="btn btn-link disabled no-padding" 
+                                    [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
+                                    *ngIf="!releaseFile.clientDownloadUrl" 
+                                    [innerHTML]="releaseFile.label">
+                            </button>
+                            <a *ngIf="releaseFile.clientDownloadUrl" 
+                               [href]="releaseFile.clientDownloadUrl" 
+                               target="_blank" 
+                               [innerHTML]="releaseFile.label">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="alert alert-warning" *ngIf="releaseVersions.alphabeta.length == 0">
+            <i class="fa fa-exclamation-circle"></i> 
+            <span>There are currently no alpha/beta versions of this release.</span>
+        </div>
+    </div>
+</div>
+
+<!-- offline versions -->
+<div class="row">
+    <div class="col-md-12">
+        <h3>Offline Versions</h3>
+
+        <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.offline">
+            <div class="panel-heading status">
+                <span class="alert-danger-flag pull-right">Offline</span>
+                <div class="status">
+                    <h3 class="panel-title">{{releaseVersion.name}}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <p [innerHTML]="releaseVersion.description"></p>
+                <span>
+                    <strong><span translate="global.word.publishedOn">Published On</span>:</strong> 
+                    {{releaseVersion.publishedAt | date: 'yyyy-MM-dd'}}
+                </span>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="version-title" translate="global.word.file">File:</span>
+                    </div>
+                    <div class="col-md-10">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                            <i class="fa fa-file"></i>
+                            <button class="btn btn-link disabled no-padding" 
+                                    [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
+                                    *ngIf="!releaseFile.clientDownloadUrl" 
+                                    [innerHTML]="releaseFile.label">
+                            </button>
+                            <a *ngIf="releaseFile.clientDownloadUrl" 
+                               [href]="releaseFile.clientDownloadUrl" 
+                               target="_blank" 
+                               [innerHTML]="releaseFile.label">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="alert alert-warning" *ngIf="releaseVersions.offline.length == 0">
+            <i class="fa fa-exclamation-circle"></i> 
+            <span>There are currently no offline versions of this release.</span>
+        </div>
+    </div>
+</div>

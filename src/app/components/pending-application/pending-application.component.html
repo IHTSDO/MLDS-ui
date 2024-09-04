@@ -5,7 +5,7 @@
       <h2 class="d-flex justify-content-between align-items-center">
         <span translate="pendingApplications.title">Pending Applications</span>
         <button
-            class="btn btn-primary"
+            class="csv-button"
             type="button"
             (click)="generateCsv()"
         >
@@ -28,10 +28,10 @@
     </div>
 
     <div>
-      <table class="table table-hover">
+      <table class="table table-hover title-colors">
         <thead>
           <tr>
-            <th class="col-md-1">
+            <th class="col-md-1" style=" color: #40ACD6;">
               <a (click)="toggleField('applicationId')">
                 No.
                 <span *ngIf="orderByField !== 'applicationId'"
@@ -47,7 +47,7 @@
                 </span>
               </a>
             </th>
-            <th class="col-md-2">
+            <th class="col-md-2" style=" color: #40ACD6;">
               <a (click)="toggleField('affiliateName')">
                 <span translate="pendingApplications.table.affiliateName">
                   Affiliate Name
@@ -248,13 +248,14 @@
             <td class="col-md-1">{{ application.affiliateDetails.email }}</td>
             <td class="col-md-1">
               <button
-                *ngIf="isAdmin"
-                type="button"
-                class="btn btn-primary btn-sm"
-                (click)="goToApplication(application)"
-              >
-                Review
-              </button>
+              *ngIf="isAdmin"
+              type="button"
+              class="review-button"
+              (click)="goToApplication(application)"
+            >
+              <i class="fa fa-pencil"></i> Review
+            </button>
+            
             </td>
           </tr>
           <tr *ngIf="applications.length === 0">

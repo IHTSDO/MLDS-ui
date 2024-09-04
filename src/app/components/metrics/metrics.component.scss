@@ -1,3 +1,108 @@
-h2{
-    padding-top: 30px;
-}
+/* Styles for the metrics page */
+
+h2, h3 {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  .refresh-button {
+    float: left; 
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid #00a7e1;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: #00a7e1;
+    border-top-left-radius: 10px;
+    float: right !important;
+    font-family: inherit;
+    line-height: inherit;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
+  }
+  
+  .refresh-button:hover {
+    background-color: #00a7e1;
+    color: #ffffff;
+  }
+  
+  .alert {
+    margin-bottom: 10px;
+  }
+  
+  .popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    width: 100%;
+    max-width: 360px;
+    padding: 1px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .popover-title {
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .popover-content {
+    padding: 10px;
+  }
+  
+  .close {
+    font-size: 16px;
+    color: #000;
+  }
+  
+  .close:hover {
+    color: #0056b3;
+  }
+  
+  .progress {
+    height: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .progress-bar {
+    line-height: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  .progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(0,0,0,0.15) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15) 75%, transparent 75%, transparent);
+  }
+  
+  .modal-content {
+    border-radius: 0;
+  }
+  
+  .modal-header {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #ddd;
+  }
+  

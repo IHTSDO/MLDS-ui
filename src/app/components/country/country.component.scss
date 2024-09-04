@@ -19,3 +19,32 @@ body {
 .space {
     margin-top: 10px;
 }
+.btn-edit {
+    padding: 4px 8px;             /* Reduce padding for a smaller button size */
+    font-size: 12px;              /* Decrease font size */
+    border: 2px solid #40ACD6;    /* Blue border */
+    color: #40ACD6;               /* Blue font color */
+    background-color: white;      /* White background */
+    border-top-left-radius: 10px; /* Top left border radius */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #40ACD6;    /* Blue background on hover */
+    color: white;                 /* White font color on hover */
+}
+
+.btn-delete {
+    padding: 4px 8px;             /* Reduce padding for a smaller button size */
+    font-size: 12px; 
+    border: 2px solid  #f05837;    /* Red border */
+    color:  #f05837;               /* Red font color */
+    background-color: white;  /* White background */
+    border-top-left-radius: 10px; /* Top left border radius */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color:  #f05837;    /* Red background on hover */
+    color: white;             /* White font color on hover */
+}

@@ -35,6 +35,7 @@ import { ArchiveVersionsComponent } from './components/archive-versions/archive-
 import { ViewReleasesComponent } from './components/view-releases/view-releases.component';
 import { ViewReleaseComponent } from './components/view-release/view-release.component';
 import { IhtsdoReleasesComponent } from './components/ihtsdo-releases/ihtsdo-releases.component';
+import { IhtsdoReleaseComponent } from './components/ihtsdo-release/ihtsdo-release.component';
 
 
 
@@ -100,6 +101,8 @@ const routes: Routes = [
       { path: 'archiveReleases', component: ArchiveManagementComponent},
       { path: 'archiveReleases/archivePackage/:packageId', component: ArchiveVersionsComponent},
       { path: 'ihtsdoReleases', component: IhtsdoReleasesComponent},
+      { path: 'ihtsdoReleases/ihtsdoRelease/:releasePackageId', component: IhtsdoReleaseComponent},
+
     ]
   },
 {

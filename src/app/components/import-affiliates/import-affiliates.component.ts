@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivityLogsService } from 'src/app/services/activity-logs/activity-logs.service';
 import { ImportAffiliatesService } from 'src/app/services/import-affiliates/import-affiliates.service';
+import { AuditsEmbedComponent } from "../audits-embed/audits-embed.component";
 
 @Component({
   selector: 'app-import-affiliates',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, AuditsEmbedComponent],
   templateUrl: './import-affiliates.component.html',
   styleUrl: './import-affiliates.component.scss'
 })

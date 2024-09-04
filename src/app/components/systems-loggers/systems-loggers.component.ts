@@ -15,6 +15,7 @@ export class SystemsLoggersComponent implements OnInit {
   filter: string = '';
   predicate: string = 'name';
   reverse: boolean = false;
+  currentLevel: string = '';
 
   constructor(private logsService: SystemsLoggersService) {}
 
@@ -28,11 +29,11 @@ export class SystemsLoggersComponent implements OnInit {
     });
   }
 
-  changeLevel(name: string, level: string): void {
-    this.logsService.changeLevel(name, level).subscribe(() => {
-      this.loadLoggers();  // Refresh the list after changing level
-    });
-  }
+  // changeLevel(name: string, level: string): void {
+  //   this.logsService.changeLevel(name, level).subscribe(() => {
+  //     this.loadLoggers();  // Refresh the list after changing level
+  //   });
+  // }
 
   get filteredLoggers(): any[] {
     // Filter the loggers based on the filter string
@@ -55,5 +56,13 @@ export class SystemsLoggersComponent implements OnInit {
       }
       return 0;
     });
+  }
+  changeLevel(level: string) {
+    this.currentLevel = level;
+  }
+
+  isActive(level: string): boolean {
+    // Return true if the button's level matches the currentLevel
+    return this.currentLevel === level;
   }
 }

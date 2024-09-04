@@ -34,3 +34,27 @@ height: 34px;
 .input-group.search-box .input-group-append .input-group-text .fa-search {
 font-size: 16px;
 }
+
+.title-colors th a,
+.title-colors th a:visited {
+    color: #40ACD6; /* Blue color for sortable fields */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.title-colors th span {
+    color: black; /* Black color for non-sortable fields */
+}
+
+.title-colors th a:hover {
+    color: #007bb8; /* Darker blue on hover for sortable fields */
+}
+
+.title-colors th i {
+    margin-left: 4px; /* Spacing for icons */
+}
+
+/* Ensures the active sorting state remains blue */
+.title-colors th a[ng-reflect-router-link-active="active"] {
+    color: #40ACD6;
+}

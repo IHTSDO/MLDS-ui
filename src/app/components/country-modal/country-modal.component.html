@@ -1,7 +1,7 @@
 <form [formGroup]="countryForm" (ngSubmit)="onSubmit()">
     <div class="modal-header">
         <button type="button" class="close" aria-hidden="true" (click)="modal.dismiss()">&times;</button>
-        <h4 class="modal-title" id="myCountryLabel">Create or edit a Country</h4>
+        <h4 class="modal-title" id="myCountryLabel">Create or Edit a Country</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">
@@ -52,6 +52,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-link" (click)="modal.dismiss()">Cancel</button>
-        <button type="submit" class="btn btn-success" [disabled]="countryForm.invalid">Save</button>
+        <a class="cancel-link" (click)="modal.dismiss()">Cancel</a>
+        <button type="submit" class="edit-button save" [disabled]="countryForm.invalid">Save</button>
     </div>
 </form>

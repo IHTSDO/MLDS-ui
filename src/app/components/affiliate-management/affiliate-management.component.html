@@ -4,7 +4,7 @@
       <h2 class="d-flex justify-content-between align-items-center">
         <span translate="pendingApplications.title">Affiliate Management</span>
         <button
-            class="btn btn-primary"
+            class="csv-button"
             type="button"
             (click)="generateCsv()"
         >
@@ -37,16 +37,16 @@
     <hr>
   </div>
   <div class="col-sm-2">
-    <button class="btn btn-info btn-muted" (click)="clearSearch()">Clear</button>
+    <button class="review-button" (click)="clearSearch()">Clear</button>
   </div>
   <div class="col-sm-2">Number of results: <strong>{{totalResults}}</strong></div>
 </div>
 
 <div class="row">
   <div class="col-sm-12">
-    <table class="table table-hover">
+    <table  class="table table-hover title-colors">
       <thead>
-        <tr>
+        <tr >
           <th class="col-md-1">
             <span *ngIf="canSort">
               <a (click)="toggleField('affiliateId')">
@@ -106,7 +106,7 @@
           </th>
           <th class="col-md-2">
             <div class="btn-group" ngbDropdown>
-              <a class="btn btn-secondary" id="standingDropdown" ngbDropdownToggle>
+              <a id="standingDropdown" ngbDropdownToggle>
                 Standing
                 <ng-container *ngIf="standingStateFilter">
                   : {{standingStateNotApplying ? 'Not' : ''}} {{standingStateFilter }}
@@ -204,7 +204,7 @@
           <td class="col-md-1">{{affiliateActiveDetails(affiliate).address.country.commonName}}</td>
           <td class="col-md-1">{{affiliate.homeMember.key}}</td>
           <td class="col-md-2"><a [href]="'mailto:' + affiliate.affiliateDetails?.email">{{affiliateActiveDetails(affiliate)?.email}}</a></td>
-          <td class="col-md-1"><a class="btn btn-primary btn-sm" (click)="viewAffiliate(affiliate.affiliateId)"><i class="fa fa-eye"></i> View</a></td>
+          <td class="col-md-1"><a class="review-button" (click)="viewAffiliate(affiliate.affiliateId)"><i class="fa fa-eye"></i> View</a></td>
         </tr>
         <tr *ngIf="noResults">
           <td colspan="10" class="text-center">No results.</td>

@@ -2,7 +2,7 @@
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <button   class="float-end btn btn-success" *ngIf="isEditable" (click)="editAffiliate(affiliate?.affiliateId)">Edit Contact Info</button>
+        <button   class="edit-button" *ngIf="isEditable" (click)="editAffiliate(affiliate?.affiliateId)">Edit Contact Info</button>
         <h4 class="panel-title">
           <a (click)="goToAffiliateSummary()"> Affiliate Summary</a>
           
@@ -36,11 +36,11 @@
               <i class="fa fa-exclamation-circle"></i>
             </span>
             <span class="float-end" *ngIf="isEditable">
-              <button class="btn btn-success" *ngIf="!standingStateUtils.isApplying(affiliate?.standingState)"
+              <button class="edit-button" *ngIf="!standingStateUtils.isApplying(affiliate?.standingState)"
                 (click)="changeStanding()">
                 Edit Account Standing
               </button>
-              <button class="btn btn-default" *ngIf="standingStateUtils.isApplying(affiliate?.standingState)"
+              <button class="edit-button" *ngIf="standingStateUtils.isApplying(affiliate?.standingState)"
                 [disabled]="true">
                 Edit Account Standing
               </button>

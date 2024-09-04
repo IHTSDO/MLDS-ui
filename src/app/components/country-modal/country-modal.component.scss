@@ -1,0 +1,63 @@
+.form-group {
+    margin-bottom: 20px; /* Add spacing between form fields */
+}
+
+.modal-footer {
+    margin-top: 20px; /* Add spacing above the modal footer */
+}
+
+.edit-button {
+    padding: 8px 16px;  /* Adjust button padding if needed */
+}
+.save{
+    padding: 4px 8px;             /* Reduce padding for a smaller button size */
+    font-size: 15px; 
+}
+.form-group label {
+    margin-bottom: 10px; /* Add spacing below the label */
+    display: inline-block; /* Ensure the label respects the margin */
+}
+
+.form-group input[type="checkbox"] {
+    margin-left: 10px; /* Add spacing between the label and the checkbox */
+}
+.form-group label {
+    font-weight: bold;
+}
+.modal-title {
+    font-weight: bold;
+}
+
+
+
+.modal-header .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;  /* White background */
+    color: black;             /* Black font color */
+    border: none;             /* No border */
+    font-size: 24px;          /* Adjust font size as needed */
+    padding: 5px 10px;
+    cursor: pointer;
+    line-height: 1;           /* Ensures the button is vertically aligned without extra space */
+    transition: color 0.3s ease;
+}
+
+.modal-header .close:hover {
+    color: black;             /* Black font color on hover */
+    background-color: white;  /* Keep white background on hover */
+}
+
+.cancel-link {
+    color: #3c8db8;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+    margin-right: 10px;
+    transition: text-decoration 0.3s ease;
+}
+.cancel-link:hover {
+    text-decoration: underline;
+}
