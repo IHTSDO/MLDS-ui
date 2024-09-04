@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="page-header">
+            <h1>IHTSDO Releases</h1>
+            <p>This page contains IHTSDO releases, both production and alpha/beta (technology previews), available for
+                Members to download</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default" *ngFor="let package of onlinePackages">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a (click)="goToPackage(package)">{{ package.name }}</a>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div [innerHTML]="package.description"></div>
+            </div>
+
+            <!-- Latest Versions -->
+            <div class="panel-footer">
+                <ng-container *ngFor="let version of package.releaseVersions | filterOnline">
+                    <ng-container *ngIf="isLatestVersion(version, getOnlineVersions(package.releaseVersions))">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="current">Latest:</div>
+                            </div>
+                            <div class="col-lg-10" style="padding-left:0px">
+                                <h4 class="version">{{ version.name }}</h4>
+                                <span><strong>Published On:</strong> {{ version.publishedAt | date: 'yyyy-MM-dd'
+                                    }}</span>
+                                <p class="download-files" *ngFor="let file of version.releaseFiles">
+                                    <i class="fa fa-file"></i>&nbsp;
+                                    <a [href]="file.clientDownloadUrl" target="_blank" [innerHTML]="file.label">{{file.label}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+
+            <!-- Alpha/Beta Versions -->
+            <div class="panel-footer" *ngFor="let version of package.releaseVersions | filterAlphabeta">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="current">Alpha/Beta:</div>
+                    </div>
+                    <div class="col-lg-10" style="padding-left:0px">
+                        <h4 class="version">{{ version.name }}</h4>
+                        <span><strong>Published On:</strong> {{ version.publishedAt | date: 'yyyy-MM-dd' }}</span>
+                        <p class="download-files" *ngFor="let file of version.releaseFiles">
+                            <i class="fa fa-file"></i>&nbsp;
+                            <a [href]="file.clientDownloadUrl" target="_blank" [innerHTML]="file.label">{{file.label}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offline Versions -->
+            <div class="panel-footer" *ngFor="let version of package.releaseVersions | filterOffline">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="current">Offline:</div>
+                    </div>
+                    <div class="col-lg-10" style="padding-left:0px">
+                        <h4 class="version">{{ version.name }}</h4>
+                        <span><strong>Published On:</strong> {{ version.publishedAt | date: 'yyyy-MM-dd' }}</span>
+                        <p class="download-files" *ngFor="let file of version.releaseFiles">
+                            <i class="fa fa-file"></i>&nbsp;
+                            <a [href]="file.clientDownloadUrl" target="_blank" [innerHTML]="file.label">{{file.label}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="onlinePackages.length === 0">
+            <i class="fa fa-exclamation-circle"></i> There are currently no public releases available.
+        </div>
+    </div>
+</div>
+
+<!-- Alpha/Beta Releases -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="page-header">
+            <h3>Alpha/Beta Releases</h3>
+        </div>
+        <div class="panel panel-default" *ngFor="let package of alphabetaPackages">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a (click)="goToPackage(package)">
+                        {{ package.name }} - {{ package.member.key }}
+                    </a>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div [innerHTML]="package.description"></div>
+            </div>
+            <div class="panel-footer" *ngFor="let version of package.releaseVersions | filterAlphabeta">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="current">Alpha/Beta:</div>
+                    </div>
+                    <div class="col-lg-10" style="padding-left:0px">
+                        <h4 class="version">{{ version.name }}</h4>
+                        <span><strong>Published On:</strong> {{ version.publishedAt | date: 'yyyy-MM-dd' }}</span>
+                        <p class="download-files" *ngFor="let file of version.releaseFiles">
+                            <i class="fa fa-file"></i>&nbsp;
+                            <a [href]="file.clientDownloadUrl" target="_blank"
+                                [innerHTML]="file.label">{{file.label}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="alphabetaPackages.length === 0">
+            <i class="fa fa-exclamation-circle"></i> There are currently no alpha/beta releases available.
+        </div>
+    </div>
+</div>
+
+<!-- Offline Releases -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="page-header">
+            <h3>Offline Releases</h3>
+        </div>
+        <div class="panel panel-default" *ngFor="let package of offlinePackages">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a (click)="goToPackage(package)">
+                        {{ package.name }} - {{ package.member.key }}
+                    </a>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <div [innerHTML]="package.description"></div>
+            </div>
+            <div class="panel-footer" *ngFor="let version of package.releaseVersions | filterOffline">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="current">Offline:</div>
+                    </div>
+                    <div class="col-lg-10" style="padding-left:0px">
+                        <h4 class="version">{{ version.name }}</h4>
+                        <span><strong>Published On:</strong> {{ version.publishedAt | date: 'yyyy-MM-dd' }}</span>
+                        <p class="download-files" *ngFor="let file of version.releaseFiles">
+                            <i class="fa fa-file"></i>&nbsp;
+                            <a [href]="file.clientDownloadUrl" target="_blank"
+                                [innerHTML]="file.label">{{file.label}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="offlinePackages.length === 0">
+            <i class="fa fa-exclamation-circle"></i> There are currently no offline releases available.
+        </div>
+    </div>
+</div>

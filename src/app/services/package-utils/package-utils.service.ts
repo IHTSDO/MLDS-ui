@@ -115,6 +115,14 @@ export class PackageUtilsService {
     return releaseVersion.releaseType === 'online' && !releaseVersion.archive;
   }
 
+  isVersionOffline(releaseVersion: any): boolean {
+    return releaseVersion.releaseType === 'offline' && !releaseVersion.archive;
+  }
+  
+  isVersionAlphaBeta(releaseVersion: any): boolean {
+    return releaseVersion.releaseType === 'alpha/beta' && !releaseVersion.archive;
+  }
+
   isEditableReleasePackage(releasePackage: any): boolean {
     const userDetails = this.sessionService.getUserDetails();
     const userMember = userDetails?.member; 
