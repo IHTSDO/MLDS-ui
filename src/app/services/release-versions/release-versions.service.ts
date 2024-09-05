@@ -32,6 +32,13 @@ export class ReleaseVersionsService {
     );
   }
 
+  delete(releasePackageId: number, releaseVersionId: number): Observable<any> {
+    const url = `${this.apiUrl}/releasePackages/${releasePackageId}/releaseVersions/${releaseVersionId}`;
+    return this.http.delete<any>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
   checkFilePresence(downloadUrl: string): Observable<boolean> {
     const checkUrl = downloadUrl.replace('/download', '/check');
     return this.http.get<string>(checkUrl, { responseType: 'text' as 'json' }).pipe(

@@ -13,6 +13,8 @@ import { ReleaseFileService } from 'src/app/services/release-file/release-file.s
 import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
 import { AddReleaseFileModalComponent } from '../add-release-file-modal/add-release-file-modal.component';
 import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version-modal/add-edit-release-version-modal.component';
+import { DeleteVersionDependentModalComponent } from '../delete-version-dependent-modal/delete-version-dependent-modal.component';
+import { DeleteVersionModalComponent } from '../delete-version-modal/delete-version-modal.component';
 
 
 @Component({
@@ -173,21 +175,57 @@ export class ReleaseComponent {
   }
 
   addReleaseVersion(): void {
+    this.openReleaseVersionModal();
+  }
+
+  private openReleaseVersionModal(releaseVersion: any = {}): void {
     const modalRef = this.modalService.open(AddEditReleaseVersionModalComponent, {
       size: 'lg',
       backdrop: 'static'
     });
 
     modalRef.componentInstance.releasePackage = { ...this.packageEntity };
-    modalRef.componentInstance.releaseVersion = {};
+    modalRef.componentInstance.releaseVersion = { ...releaseVersion };
 
     modalRef.result.then(() => {
       this.loadReleasePackageId();
     }).catch((error) => {
-      console.log('Modal dismissed with error:', error);
+      console.log('Modal dismissed');
     });
   }
 
+
+  editReleaseVersion(selectedReleaseVersion: any): void {
+    this.openReleaseVersionModal(selectedReleaseVersion);
+  }
+
+  deleteVersionModal(selectedReleaseVersion: any): void {
+    this.releasePackageService.determineDependencyPresence(selectedReleaseVersion.releaseVersionId)
+      .subscribe({
+        next: (isDependencyPresent: boolean) => {
+          const modalComponent = isDependencyPresent ? 
+                                 DeleteVersionDependentModalComponent : 
+                                 DeleteVersionModalComponent;
+  
+          const modalRef = this.modalService.open(modalComponent, {
+            size: 'lg',
+            backdrop: 'static',
+          });
+  
+          modalRef.componentInstance.releasePackage = { ...this.packageEntity };
+          modalRef.componentInstance.releaseVersion = { ...selectedReleaseVersion };
+  
+          modalRef.result.then(() => {
+            this.loadReleasePackageId();
+          }).catch((error) => {
+            console.log('Modal dismissed');
+          });
+        },
+        error: (error: any) => {
+          console.error('Error checking dependency:', error);
+        }
+      });
+  }
 
 
 }

@@ -83,7 +83,7 @@
               <button class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>
-                <button class="dropdown-item">
+                <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
                   <i class="fa fa-pencil"></i> Edit
                 </button>
                 <button class="dropdown-item" (click)="takeOfflineModal(releaseVersion)">
@@ -159,7 +159,7 @@
               <button class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>
-                <button class="dropdown-item">
+                <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
                   <i class="fa fa-pencil"></i> Edit
                 </button>
                 <button class="dropdown-item" (click)="takeOnlineModal(releaseVersion)">
@@ -168,7 +168,7 @@
                 <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
-                <button class="dropdown-item">
+                <button class="dropdown-item" (click)="deleteVersionModal(releaseVersion)">
                   <i class="fa-solid fa-xmark"></i> Delete
                 </button>
               </div>
@@ -236,7 +236,7 @@
               <button class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>
-                <button class="dropdown-item">
+                <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
                   <i class="fa fa-pencil"></i> Edit
                 </button>
                 <button class="dropdown-item" (click)="takeAlphaBetaModal(releaseVersion)">
@@ -245,7 +245,7 @@
                 <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
-                <button class="dropdown-item">
+                <button class="dropdown-item" (click)="deleteVersionModal(releaseVersion)">
                   <i class="fa-solid fa-xmark"></i> Delete
                 </button>
               </div>

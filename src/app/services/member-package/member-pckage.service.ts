@@ -21,7 +21,7 @@ export class MemberPckageService {
 
 // Method to order by approved memberships
 private orderApprovedMemberships(memberReleases: any): boolean {
-  debugger;
+
   return !(
     memberReleases.member &&
     _.some(this.userAffiliateService.approvedMemberships, 
@@ -31,7 +31,7 @@ private orderApprovedMemberships(memberReleases: any): boolean {
 
 // Method to order by incomplete memberships
 private orderIncompleteMemberships(memberReleases: any): boolean {
-  debugger;
+
   return !(
     memberReleases.member &&
     _.some(this.userAffiliateService.incompleteMemberships, 
@@ -46,7 +46,7 @@ private orderMemberName(memberReleases: any): string {
 
 // Public methods to get the ordering functions
 public getOrderBy(): Array<(memberReleases: any) => boolean | string> {
-  debugger;
+
   return [
     this.orderIhtsdo.bind(this),
     this.orderApprovedMemberships.bind(this),

@@ -100,19 +100,28 @@ export class ArchiveVersionsComponent implements OnInit {
   }
 
   addReleaseVersion(): void {
+    this.openReleaseVersionModal();
+  }
+
+  private openReleaseVersionModal(releaseVersion: any = {}): void {
     const modalRef = this.modalService.open(AddEditReleaseVersionModalComponent, {
       size: 'lg',
       backdrop: 'static'
     });
 
     modalRef.componentInstance.releasePackage = { ...this.packageEntity };
-    modalRef.componentInstance.releaseVersion = {};
+    modalRef.componentInstance.releaseVersion = { ...releaseVersion };
 
     modalRef.result.then(() => {
       this.loadReleasePackageId();
     }).catch((error) => {
-      console.log('Modal dismissed with error:', error);
+      console.log('Modal dismissed');
     });
+  }
+
+
+  editReleaseVersion(selectedReleaseVersion: any): void {
+    this.openReleaseVersionModal(selectedReleaseVersion);
   }
 
 

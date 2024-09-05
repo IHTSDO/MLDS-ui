@@ -35,6 +35,13 @@ export class ReleasePackageService {
     );
   }
 
+  determineDependencyPresence(releaseVersionId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/checkVersionDependency/${releaseVersionId}`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Something went wrong; please try again later.'));
