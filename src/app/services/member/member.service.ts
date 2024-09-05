@@ -25,7 +25,7 @@ export class MemberService {
   memberLogo$ = this.memberLogoSubject.asObservable();
   // ihtsdoMember: any;
 
-  private members: any[] = [];
+  public members: any[] = [];
   public membersByKey: { [key: string]: any } = {};
 
   constructor(private http: HttpClient) { }

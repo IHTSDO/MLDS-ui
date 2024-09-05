@@ -2,7 +2,8 @@
   <div class="col-md-12">
 
     <div class="page-header">
-      <h2>Release Management &nbsp;&nbsp;<button class="btn btn-success"><i class="fa fa-plus"></i> Add Release</button>
+      <h2>Release Management &nbsp;&nbsp;
+      <button class="btn btn-success" (click)="addReleasePackage()"><i class="fa fa-plus"></i> Add Release</button>
       </h2>
       <div *ngIf="isAdmin">
         <span>Show releases for: </span>
@@ -52,13 +53,13 @@
         <div class="panel-heading">
           <div class="float-end">
 
-            <button type="button" class="btn btn-primary" (click)="promotePackage(memberEntry, package)"
+            <button type="button" class="btn btn-primary promote" (click)="promotePackage(memberEntry, package)"
               *ngIf="canPromotePackage(memberEntry, package) || canDemotePackage(memberEntry, package)"
               [disabled]="!canPromotePackage(memberEntry, package)">
               <i class="fa fa-chevron-up"></i>
             </button>
 
-            <button type="button" class="btn btn-primary" (click)="demotePackage(memberEntry, package)"
+            <button type="button" class="btn btn-primary promote" (click)="demotePackage(memberEntry, package)"
               *ngIf="canPromotePackage(memberEntry, package) || canDemotePackage(memberEntry, package)"
               [disabled]="!canDemotePackage(memberEntry, package)">
               <i class="fa fa-chevron-down"></i>

@@ -7,8 +7,9 @@ import { FilterOnlinePipe } from "../../pipes/filter-online/filter-online.pipe";
 import { FormsModule } from '@angular/forms';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { AddReleaseModalComponent } from '../add-release-modal/add-release-modal.component';
 
 @Component({
   selector: 'app-release-management',
@@ -32,7 +33,8 @@ export class ReleaseManagementComponent {
     private packageUtilsService: PackageUtilsService,
     private memberService: MemberService,
     private authenticationService: AuthenticationSharedService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal 
   ) { }
 
   ngOnInit() {
@@ -194,6 +196,19 @@ export class ReleaseManagementComponent {
 
   closeAlert(alert: any): void {
     this.alerts = this.alerts.filter(a => a !== alert);
+  }
+
+
+// add relase package 
+  addReleasePackage() {
+    const modalRef = this.modalService.open(AddReleaseModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.result.then(result => {
+      if (result === 'save') {
+        this.loadReleasePackages();
+      }
+    }).catch(error => {
+      console.error('Modal dismissed');
+    });
   }
 
 }
