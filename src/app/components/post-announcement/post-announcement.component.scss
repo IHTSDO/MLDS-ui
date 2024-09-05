@@ -1,0 +1,137 @@
+body {
+    padding-top: 70px; /* Adjust according to your navbar height */
+}
+
+.navbar-fixed-top {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    z-index: 1030; /* Ensure it stays on top of other content */
+}
+
+.container-fluid {
+    padding: 0 20px;
+}
+
+.page-header {
+    margin-top: 20px;
+}
+
+.space {
+    margin-top: 10px;
+}
+
+.upload-button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid #3cb878;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    user-select: none;
+    color: #3cb878;
+    background-color: #ffffff;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+    font-family: inherit;
+    overflow: visible;
+    text-transform: none;
+}
+
+.upload-button:hover {
+    background-color: #3cb878;
+    color: #ffffff;
+}
+
+/* Styles for the disabled Post Announcement button */
+.upload-button[disabled] {
+    background-color: #e0e0e0; /* Lighter background to indicate disabled state */
+    color: #a0a0a0; /* Lighter text color */
+    border-color: #3cb878; /* Green border color */
+    cursor: not-allowed; /* Show not-allowed cursor */
+    pointer-events: none; /* Prevent any interaction */
+}
+
+/* Remove hover effects for disabled buttons */
+.upload-button[disabled]:hover {
+    background-color: #e0e0e0; /* Ensure hover state does not change background */
+    color: #a0a0a0; /* Ensure hover state does not change text color */
+    border-color: #3cb878; /* Ensure hover state does not change border color */
+}
+
+/* Flexbox layout for grouping buttons */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust space between buttons */
+}
+
+/* General layout and padding */
+.h2, h2 {
+    padding-top: 30px;
+}
+
+.content {
+    padding-top: 30px;
+}
+
+.col-md-6 {
+    width: 50%;
+}
+
+/* Button styles */
+button.btn {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    border: none;
+    color: #000000;
+    border: 2px solid;
+}
+
+/* Scrollable dropdown menu */
+.dropdown-scrollable {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Quill editor height */
+.quill-editor {
+    height: 200px;
+}
+
+/* Help block styling */
+.help-block {
+    color: #d9534f;
+}
+
+/* Alert box styling */
+.alert {
+    position: relative;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.alert .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 21px;
+    line-height: 1;
+    color: inherit;
+    cursor: pointer;
+}
+
+.alert.space {
+    margin-top: 20px;
+}

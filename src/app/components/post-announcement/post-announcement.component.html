@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h2>Post Announcement</h2>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <form [formGroup]="announcementForm" (ngSubmit)="postAnnouncement()">
+  
+      <div class="col-md-12">
+        <h3>Message Content</h3>
+  
+        <div class="form-group">
+          <label>Email Subject</label>
+          <input class="form-control"
+            formControlName="subject"
+            required 
+            [disabled]="completed">
+          <span *ngIf="announcementForm.get('subject')?.invalid && announcementForm.get('subject')?.touched" class="help-block">Required Field</span>
+        </div>
+  
+        <div class="form-group">  
+          <label for="body">Email Body</label><br>
+          <quill-editor id="body" formControlName="body"  [style]="{'height': '200px'}"></quill-editor><br>
+         
+          <span class="help-block">Remember to add a salutation and valediction to the email.</span>
+          <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block">Required Field</span>
+        </div>
+      </div>
+  
+      <div class="col-md-12">
+        <h3>Audience</h3>
+        
+        <div class="form-group">
+          <label>Affiliates</label>
+          <div *ngIf="isAdmin">
+            <select formControlName="includeAllAffiliates">
+              <option value="0" selected>My Affiliates {{memberKey}}</option>
+              <option value="1">All Affiliates</option>
+            </select>
+          </div>
+          <div *ngIf="!isAdmin">
+            <div>My Affiliates {{memberKey}}</div>
+          </div>
+          <div>
+            <span class="help-block">
+              Approved affiliates with an account standing of:
+              <span>In Good Standing</span>,
+              <span>Pending Invoice</span>,
+              <span>Invoice Sent</span>,
+              <span>Deactivation Pending</span>.
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Additional Email Addresses</label>
+          
+          <!-- Binding input to FormControl using formControlName -->
+          <input
+            class="form-control"
+            formControlName="emailListString"
+            [disabled]="completed"
+          />
+          <span class="help-block">
+            Send the announcement to additional email addresses.
+          </span>
+        </div>
+        
+      </div>
+  
+      <div class="col-md-12">
+        <div class="button-group">
+          <button class="upload-button" 
+          
+          (click)="announcementForm.markAllAsTouched()"
+          *ngIf="!completed">
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      Post Announcement
+      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+  </button>
+      
+          <!-- Disabled Post Announcement Button -->
+          <button class="upload-button" 
+                  [disabled]="true" 
+                  *ngIf="completed">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            Post Announcement
+            <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+          </button>
+      
+          <!-- New Announcement Button -->
+          <button class="upload-button" 
+                  *ngIf="completed" 
+                  (click)="newAnnouncement()">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            New Announcement
+          </button>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      <div class="col-md-12">
+        <div class="alert space" 
+          *ngFor="let alert of alerts" 
+          [ngClass]="'alert-' + alert.type">
+          {{alert.msg}}
+          <button type="button" class="close" (click)="closeAlert(alert)">
+            &times;
+          </button>
+        </div>
+      </div>
+  
+    </form>
+  </div>
+  
