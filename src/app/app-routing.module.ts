@@ -36,6 +36,7 @@ import { ViewReleasesComponent } from './components/view-releases/view-releases.
 import { ViewReleaseComponent } from './components/view-release/view-release.component';
 import { IhtsdoReleasesComponent } from './components/ihtsdo-releases/ihtsdo-releases.component';
 import { IhtsdoReleaseComponent } from './components/ihtsdo-release/ihtsdo-release.component';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 
 
 
@@ -61,6 +62,8 @@ const routes: Routes = [
       { path: 'activate', component: ActivateComponent },
       { path: 'viewReleases', component: ViewReleasesComponent },
       { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
+      { path: 'emailVerification', component: EmailVerificationComponent },
+      
     ]
   },
   {
@@ -102,7 +105,8 @@ const routes: Routes = [
       { path: 'archiveReleases/archivePackage/:packageId', component: ArchiveVersionsComponent},
       { path: 'ihtsdoReleases', component: IhtsdoReleasesComponent},
       { path: 'ihtsdoReleases/ihtsdoRelease/:releasePackageId', component: IhtsdoReleaseComponent},
-
+     
+      
     ]
   },
 {

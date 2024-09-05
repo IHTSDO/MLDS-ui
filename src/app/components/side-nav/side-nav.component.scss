@@ -1,24 +1,58 @@
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
+/* Sidebar container */
 .sidebar {
-    color: #a19f9f;
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    overflow: hidden; 
+    padding: 0;/* Hide overflow if the text exceeds the container width */
+    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+    width: 230px; /* Set a width that allows most text to fit; adjust as needed */
 }
 
+/* Sidebar list styles */
+.sidebar ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+/* Sidebar list item padding */
 .sidebar li {
-    padding: 10px;
+    padding: 15px 17px; /* Adjust padding for better spacing */
 }
 
+/* Sidebar link styles */
 .sidebar a {
-    text-decoration: none;
-    /* color: #333; */
-    color: #a19f9f;
-    display: block;
+    text-decoration: none; /* Remove underline */
+    color: #a19f9f; /* Default link color */
+    display: block; /* Make the link fill the list item */
+    white-space: nowrap; /* Ensure text stays on one line */
+    overflow: hidden; /* Hide overflow if text is too long */
+    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
+/* Hover effect on links */
 .sidebar a:hover {
-    background-color: #ddd;
+    background-color: #ddd; /* Light gray background on hover */
+    color: #333; /* Change text color on hover */
+}
+
+/* Active state - the selected link */
+.sidebar .active a {
+    background-color: #40ACD6; /* Blue background when active */
+    color: #ffffff; /* White text when active */
+}
+
+/* Ensure full visibility of text by slightly increasing the width */
+.sidebar {
+    width: 270px; /* Adjust this width as needed to fit longer tab names */
+}
+
+/* Optional: Adjust font size to ensure text fits within the available space */
+.sidebar a {
+    font-size: 14px; /* Adjust font size as needed */
+}
+
+/* Optional: Add padding to increase clickable area */
+.sidebar li {
+    padding: 12px 20px; /* Add horizontal padding for better spacing */
 }
