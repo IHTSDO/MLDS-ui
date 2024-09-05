@@ -12,6 +12,7 @@ import { ReleasePackageLicenseModalComponent } from '../release-package-license-
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
 import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
 import { AddReleaseFileModalComponent } from '../add-release-file-modal/add-release-file-modal.component';
+import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version-modal/add-edit-release-version-modal.component';
 
 
 @Component({
@@ -169,6 +170,22 @@ export class ReleaseComponent {
           console.error('Error deleting release file:', error);
         }
       });
+  }
+
+  addReleaseVersion(): void {
+    const modalRef = this.modalService.open(AddEditReleaseVersionModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+
+    modalRef.componentInstance.releasePackage = { ...this.packageEntity };
+    modalRef.componentInstance.releaseVersion = {};
+
+    modalRef.result.then(() => {
+      this.loadReleasePackageId();
+    }).catch((error) => {
+      console.log('Modal dismissed with error:', error);
+    });
   }
 
 

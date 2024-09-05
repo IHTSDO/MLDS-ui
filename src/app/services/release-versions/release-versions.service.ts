@@ -12,6 +12,13 @@ export class ReleaseVersionsService {
   private apiUrl = API_ROUTES.apiUrl;
 
   constructor(private http: HttpClient) { }
+
+  save(releasePackageId: string, releaseVersion: any): Observable<any> {
+    const url = `${this.apiUrl}/releasePackages/${releasePackageId}/releaseVersions`;
+    return this.http.post<any>(url, releaseVersion).pipe(
+      catchError(this.handleError)
+    );
+  }
   
   update(releasePackageId: string, releaseVersionId: string, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/releasePackages/${releasePackageId}/releaseVersions/${releaseVersionId}`, data).pipe(
