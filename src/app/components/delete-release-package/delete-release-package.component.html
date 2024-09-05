@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirm Delete Release Package</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+
+  <div *ngFor="let alert of alerts; let i = index" class="alert"
+    [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}" role="alert">
+    {{ alert.msg }}
+    <button type="button" class="btn-close" (click)="closeAlert(i)" aria-label="Close"></button>
+  </div>
+
+  <p>Are you sure you want to remove the <strong>{{ releasePackage.name }}</strong> ?</p>
+</div>
+
+<div class="modal-footer"><a class="cancel-link" (click)="!submitting && cancel()"
+    [ngClass]="{ 'disabled-link': submitting }">
+    No
+  </a>
+
+  <button class="btn btn-muted btn-success" (click)="confirmDelete()">
+    Yes
+    <ng-container *ngIf="submitting">
+      <i class="fa fa-spinner fa-spin"></i>
+    </ng-container>
+  </button>
+</div>

@@ -8,6 +8,7 @@ import { ReleasePackageLicenseModalComponent } from '../release-package-license-
 import { CommonModule } from '@angular/common';
 import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
 import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version-modal/add-edit-release-version-modal.component';
+import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
 
 @Component({
   selector: 'app-archive-versions',
@@ -119,9 +120,20 @@ export class ArchiveVersionsComponent implements OnInit {
     });
   }
 
-
   editReleaseVersion(selectedReleaseVersion: any): void {
     this.openReleaseVersionModal(selectedReleaseVersion);
+  }
+
+  editPackage(releasePackage: any) {
+    const modalRef = this.modalService.open(EditReleasePackageModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.releasePackage = { ...releasePackage };
+    modalRef.result.then(result => {
+      if (result) {
+        this.loadReleasePackageId();
+      }
+    }).catch(error => {
+      console.log('Modal dismissed', error);
+    });
   }
 
 

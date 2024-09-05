@@ -9,7 +9,7 @@
         <button class="review-button" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
             class="caret"></i></button>
         <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
-          <button class="dropdown-item">
+          <button class="dropdown-item" (click)="editPackage(packageEntity)">
             <i class="fa fa-edit"></i> Edit Package
           </button>
           <div class="dropdown-divider"></div>
@@ -24,7 +24,7 @@
             <i class="fa fa-plus"></i> Add Version
           </button>
           <div class="dropdown-divider" *ngIf="isEditableReleasePackage && isRemovableReleasePackage"></div>
-          <button class="dropdown-item" *ngIf="isEditableReleasePackage && isRemovableReleasePackage">
+          <button class="dropdown-item" *ngIf="isEditableReleasePackage && isRemovableReleasePackage" (click)="deleteReleasePackage(packageEntity)">
             <i class="fa fa-times"></i> Delete
           </button>
         </div>

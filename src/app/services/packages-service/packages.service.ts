@@ -49,6 +49,12 @@ export class PackagesService {
     );
   }
 
+  delete(releasePackage : any) {
+    return this.http.delete<any>(`${this.apiUrl}/releasePackages/${releasePackage.releasePackageId}`,releasePackage).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Something went wrong; please try again later.'));

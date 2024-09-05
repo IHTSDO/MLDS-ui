@@ -15,6 +15,8 @@ import { AddReleaseFileModalComponent } from '../add-release-file-modal/add-rele
 import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version-modal/add-edit-release-version-modal.component';
 import { DeleteVersionDependentModalComponent } from '../delete-version-dependent-modal/delete-version-dependent-modal.component';
 import { DeleteVersionModalComponent } from '../delete-version-modal/delete-version-modal.component';
+import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
+import { DeleteReleasePackageComponent } from '../delete-release-package/delete-release-package.component';
 
 
 @Component({
@@ -130,6 +132,18 @@ export class ReleaseComponent {
     modalRef.componentInstance.releasePackage = this.packageEntity;
   }
 
+  editPackage(releasePackage: any) {
+    const modalRef = this.modalService.open(EditReleasePackageModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.releasePackage = { ...releasePackage };
+    modalRef.result.then(result => {
+      if (result) {
+        this.loadReleasePackageId();
+      }
+    }).catch(error => {
+      console.log('Modal dismissed', error);
+    });
+  }
+
   addReleaseFile(selectedReleaseVersion: any): void {
     const modalRef = this.modalService.open(AddReleaseFileModalComponent, { size: 'lg', backdrop: 'static' });
 
@@ -225,6 +239,24 @@ export class ReleaseComponent {
           console.error('Error checking dependency:', error);
         }
       });
+  }
+
+  deleteReleasePackage(releasePackage: any): void {
+
+    const modalRef = this.modalService.open(DeleteReleasePackageComponent, {
+      backdrop: 'static'
+    });
+
+    modalRef.componentInstance.releasePackage = releasePackage;
+
+    modalRef.result.then(
+      (result) => {
+        this.goToReleaseManagement();
+      },
+      (reason) => {
+        console.log('Dismissed');
+      }
+    );
   }
 
 
