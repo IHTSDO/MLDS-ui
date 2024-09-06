@@ -39,6 +39,7 @@ import { IhtsdoReleaseComponent } from './components/ihtsdo-release/ihtsdo-relea
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { PostAnnouncementComponent } from './components/post-announcement/post-announcement.component';
 import { UserUsageReportsTableComponent } from './components/user-usage-reports-table/user-usage-reports-table.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 
@@ -66,7 +67,7 @@ const routes: Routes = [
       { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
       { path: 'emailVerification', component: EmailVerificationComponent },
       { path: 'usageReports', component: UserUsageReportsTableComponent },
-      
+      { path: 'passowrd', component: ChangePasswordComponent },
     ]
   },
   {
