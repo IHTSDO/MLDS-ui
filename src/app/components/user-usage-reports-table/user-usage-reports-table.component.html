@@ -1,0 +1,12 @@
+<div class="row" *ngFor="let affiliate of affiliates">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <h1 i18n="global.menu.usageReports">Usage Reports</h1>
+      </div>
+    </div>
+    <!-- Include the UsageReportsTableComponent -->
+    <div class="col-lg-12">
+        <app-usage-reports-table [affiliate]="affiliate"></app-usage-reports-table>
+    </div>
+  </div>
+  

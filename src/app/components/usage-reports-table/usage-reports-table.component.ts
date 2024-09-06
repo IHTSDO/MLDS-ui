@@ -3,11 +3,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { OrderByPipe } from "../../pipes/order-by/order-by.pipe";
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service';
+import { DateSortPipe } from 'src/app/pipes/date-sort/date-sort.pipe';
 
 @Component({
   selector: 'app-usage-reports-table',
   standalone: true,
-  imports: [CommonModule, OrderByPipe],
+  imports: [CommonModule,DateSortPipe],
   templateUrl: './usage-reports-table.component.html',
   styleUrl: './usage-reports-table.component.scss'
 })

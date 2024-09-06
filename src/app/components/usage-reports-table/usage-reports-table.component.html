@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usageReport of affiliate.commercialUsages">
+        <tr *ngFor="let usageReport of affiliate.commercialUsages | dateSort: 'startDate': 'desc'">
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">
@@ -62,6 +62,7 @@
           </td>
         </tr>
       </tbody>
+      
     </table>
   </div>
 </div>
