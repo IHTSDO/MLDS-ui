@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuditsService } from 'src/app/services/audits/audits.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuditsEmbedComponent } from '../audits-embed/audits-embed.component';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 /**
  * Application Summary Block Component
@@ -51,18 +52,24 @@ export class ApplicationSummaryBlockComponent implements OnInit {
    */
   errorMessage: string | null = null;
 
+
+  isStaffOrAdmin: boolean = false;
+
   /**
    * Constructor.
    * 
    * @param auditsService The audits service.
    * @param route The activated route.
    */
-  constructor(private auditsService: AuditsService, private route: ActivatedRoute) { }
+  constructor(private auditsService: AuditsService, private route: ActivatedRoute, private authenticationService: AuthenticationSharedService) { }
 
   /**
    * Initializes the component.
    */
   ngOnInit(): void {
+    if (this.authenticationService.isLoggedIn()) {
+      this.isStaffOrAdmin = this.authenticationService.isStaffOrAdmin();
+    }
     this.loadApplication();
   }
 
@@ -74,7 +81,7 @@ export class ApplicationSummaryBlockComponent implements OnInit {
       const routeApplicationId = params.get('applicationId'); 
       const appId = this.application?.applicationId;
       const applicationId = routeApplicationId ?? appId;
-      if (applicationId) {
+      if (applicationId && this.isStaffOrAdmin) {
         this.loadApplicationAudits(applicationId);
       }
     });

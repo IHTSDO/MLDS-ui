@@ -136,4 +136,12 @@ export class UserDashboardComponent implements OnInit {
     return this.standingStateUtils.isDangerCategory(standingState);
   }
 
+  viewApplication(application: any): void {
+    const modalRef = this.modalService.open(ApplicationSummaryModalComponent, {
+      size: 'lg'
+    });
+    modalRef.componentInstance.application = application;
+    modalRef.componentInstance.audits = [];
+  }
+
 }

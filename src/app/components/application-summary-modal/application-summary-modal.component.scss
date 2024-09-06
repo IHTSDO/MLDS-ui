@@ -1,0 +1,28 @@
+.btn-success {
+    color: #3cb878;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+}
+
+.btn-success:hover {
+    color: #ffffff;
+    background-color: #3cb878;
+}
+
+.btn-link {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}

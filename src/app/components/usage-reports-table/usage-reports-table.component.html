@@ -6,7 +6,7 @@
     </span>
     <h3 class="panel-title">
       <span translate="global.menu.usageReports">Usage Reports</span>
-      <button *ngIf="showViewAll" class="btn btn-link btn-xs">
+      <button (click)="viewUsageReports()" *ngIf="showViewAll" class="btn btn-link btn-xs">
         <span translate="global.word.viewAll">View All</span> <i class="fa fa-angle-double-right"></i>
       </button>
     </h3>
