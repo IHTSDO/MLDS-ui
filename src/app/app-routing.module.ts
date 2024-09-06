@@ -67,7 +67,7 @@ const routes: Routes = [
       { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
       { path: 'emailVerification', component: EmailVerificationComponent },
       { path: 'usageReports', component: UserUsageReportsTableComponent },
-      { path: 'passowrd', component: ChangePasswordComponent },
+      { path: 'password', component: ChangePasswordComponent },
     ]
   },
   {
