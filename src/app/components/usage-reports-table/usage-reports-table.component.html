@@ -28,7 +28,7 @@
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">
-                <i class="fa fa-minus-square-o"></i>
+                <i class="fas fa-minus-square"></i>
               </span>
               <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{usageReport.startDate | date: 'yyyy-MM'}} - {{usageReport.endDate | date: 'yyyy-MM'}}

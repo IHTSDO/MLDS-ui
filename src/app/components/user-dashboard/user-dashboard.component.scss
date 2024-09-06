@@ -1,0 +1,140 @@
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 19px;
+    word-wrap: break-word;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.panel-heading {
+    padding: 15px 0;
+    border-bottom: 4px solid #8dccdc;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.panel-body {
+    border: 1px solid #eeeeee;
+    padding: 15px;
+}
+
+.dashboard {
+    height: 380px;
+    margin-bottom: 20px;
+}
+
+.user-dashboard-item {
+    height: 250px;
+    overflow-y: auto;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.panel-default {
+    border-color: none;
+}
+
+td,
+.table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #eeeeee;
+}
+
+.break-text,
+.break-text a {
+    word-break: break-all;
+}
+
+.list-group {
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #eeeeee;
+}
+
+a {
+    color: #40ACD6;
+    text-decoration: none;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    padding-right: 0;
+}
+
+.alert-success {
+    background-color: #ffffff;
+    border-color: #3cb878;
+    color: #3cb878;
+}
+
+.alert-warning,
+.alert-danger {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+.btn-sm,
+.btn-group-sm>.btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: #00a7e1;
+    border-top-left-radius: 10px;
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+    background-color: #00a7e1;
+}
+
+.btn-warning:hover {
+    color: #ffffff;
+    background-color: #ee3c16;
+    border-color: #ee3c16;
+}
+
+.btn-warning {
+    color: #f26c4f;
+    background-color: #fde3dd;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+}

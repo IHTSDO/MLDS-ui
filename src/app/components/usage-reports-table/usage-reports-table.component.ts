@@ -14,8 +14,8 @@ import { UsageReportsService } from 'src/app/services/usage-reports/usage-report
 export class UsageReportsTableComponent implements OnInit {
   
   @Input() affiliate: any;
-  showAllColumns: boolean = true;
-  showViewAll: boolean = false;
+  @Input() showAllColumns: boolean = true;
+  @Input() showViewAll: boolean = false;
 
   constructor(public usageReportsUtils: UsageReportStateUtilsService, private usageReportsService: UsageReportsService) {
   }
