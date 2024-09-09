@@ -59,4 +59,76 @@ h1, .h1, h2, .h2, h3, .h3 {
     color: #f26c4f;
 }
   
+.edit-button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid  #3cb878;
+    white-space: nowrap;
+    padding: 2px 10px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color:  #3cb878;
+    background-color: #ffffff;
+    border-color:  #3cb878;
+    border-top-left-radius: 10px;
+    float: left !important;
+    font-family: inherit;
+    line-height: inherit;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
+  }
+  
+  .edit-button:hover {
+    background-color:  #3cb878;
+    color: #ffffff;
+  }
 
+  .btn-link {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}
+
+/* Alert box styling */
+.nbgalert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Success alert: Green border, green text, white background */
+.nbgalert-success {
+  color: #3cb878; /* Font color green */
+  background-color: white; /* Background white */
+  border: 2px solid #3cb878; /* Border green */
+}
+
+/* Danger alert: Red border, red text, white background */
+.nbgalert-danger {
+  color: #a94442; /* Font color red */
+  background-color: white; /* Background white */
+  border: 2px solid #ebccd1; /* Border red */
+}

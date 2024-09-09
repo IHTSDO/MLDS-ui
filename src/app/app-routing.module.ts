@@ -40,6 +40,7 @@ import { EmailVerificationComponent } from './components/email-verification/emai
 import { PostAnnouncementComponent } from './components/post-announcement/post-announcement.component';
 import { UserUsageReportsTableComponent } from './components/user-usage-reports-table/user-usage-reports-table.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 
 
 
@@ -68,6 +69,7 @@ const routes: Routes = [
       { path: 'emailVerification', component: EmailVerificationComponent },
       { path: 'usageReports', component: UserUsageReportsTableComponent },
       { path: 'password', component: ChangePasswordComponent },
+      { path: 'contactInfo', component: ContactInfoComponent },
     ]
   },
   {

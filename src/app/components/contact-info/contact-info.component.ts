@@ -38,6 +38,7 @@ export class ContactInfoComponent implements OnInit {
   availableCountries: any[] = [];
   includeDialCode = true;
   agreementTypeOptions: string[] = ['AFFILIATE_NORMAL', 'AFFILIATE_RESEARCH', 'AFFILIATE_PUBLIC_GOOD'];
+  public alerts: any[] = [];
 
 
   constructor(private applicationUtilsService: ApplicationUtilsService, private authenticationService: AuthenticationSharedService, private route: ActivatedRoute, private fb: FormBuilder, private affiliateService: AffiliateService
@@ -136,23 +137,42 @@ export class ContactInfoComponent implements OnInit {
     
   }
 
-
-  
-
   ngOnInit(): void {
-
-    this.route.paramMap.subscribe(params => {
-      this.affiliateId = params.get('affiliateId');
-    });
     if (this.authenticationService.isLoggedIn()) {
       this.isStaffOrAdmin = this.authenticationService.isStaffOrAdmin();
+  
       this.countryService.getCountries().subscribe(countries => {
         this.availableCountries = countries;
       });
-      this.loadAffiliate();
+  
+      // Attempt to get the affiliate ID from route parameters
+      const routeAffiliateId = this.route.snapshot.paramMap.get('affiliateId');
+      if (routeAffiliateId) {
+        this.affiliateId = +routeAffiliateId; // Convert to number if needed
+        this.loadAffiliate();
+      } else {
+        this.affiliateService.myAffiliate().subscribe({
+          next: (response) => {
+            
+            // Assuming `response` is an array of objects
+            if (response) {
+              this.affiliateId = response[0].affiliateId;
+              
+              console.log('Affiliate ID from myAccount:', this.affiliateId);
+              this.loadAffiliate();
+            } else {
+              console.log('No affiliate data found');
+            }
+          },
+          error: (err) => {
+            console.error('Error fetching affiliate data:', err);
+          }
+        });
+        
+      }
     }
   }
-
+  
   private loadAffiliate(): void {
     if (this.affiliateId) {
       this.fetchAffiliateById(this.affiliateId);
@@ -160,13 +180,13 @@ export class ContactInfoComponent implements OnInit {
   }
 
   private fetchAffiliateById(affiliateId: string): void {
-    this.affiliateService.affiliate(affiliateId).subscribe({
+    this.affiliateService?.affiliate(affiliateId).subscribe({
       next: data => {
         this.affiliate = data;
-        this.approved = this.applicationUtilsService.isApplicationApproved(this.affiliate.application);
-        const userDetails = this.authenticationService.getUserDetails();
-        this.isEditable = this.isAdmin || (userDetails?.member?.['key'] === this.affiliate.application.member.key);
-        this.readOnly = !this.applicationUtilsService.isApplicationApproved(this.affiliate.application);
+        this.approved = this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
+        const userDetails = this.authenticationService?.getUserDetails();
+        this.isEditable = this.isAdmin || (userDetails?.member?.['key'] === this.affiliate?.application?.member?.key);
+        this.readOnly = !this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
         this.updateForm();
         this.updateAddressStatus();
       }
@@ -333,8 +353,14 @@ export class ContactInfoComponent implements OnInit {
   private updateAffiliateDetails(formValues: any): void {
     if (this.form.valid) {
       this.affiliateService.updateAffiliateDetails(this.affiliateId, this.affiliate.affiliateDetails).subscribe(
-        () => this.router.navigate([`/affiliateManagement/${this.affiliateId}`]),
-        (error) => console.error('Update failed', error)
+        () =>{
+          if(this.isStaffOrAdmin){
+           this.router.navigate([`/affiliateManagement/${this.affiliateId}`])
+        }
+        this.alerts = [];
+        this.alerts.push({ type: 'success', msg: 'Contact information has been successfully saved.' });
+       },
+        (error) => this.alerts.push({ type: 'danger', msg: 'Network request failure [29]: please try again later.' })
       );
     }
   }
@@ -364,7 +390,10 @@ export class ContactInfoComponent implements OnInit {
     formatCountry = (country: any) => country.commonName;
 
     cancel(){
+      if(this.isStaffOrAdmin){
       this.router.navigate([`/affiliateManagement/${this.affiliateId}`]);
+      }
+      this.router.navigate([`/userDashboard`]);
     }
 
  

@@ -17,6 +17,8 @@ export class AuthenticationSharedService {
   private userRoles: string[] = [];
   private userDetails: User | null = null;
   routes = ROUTES;
+  firstName: string | undefined ;
+  lastName:string | undefined;
   /**
    * Constructor
    * @param http - HttpClient instance
@@ -277,4 +279,12 @@ getUserDetails(): User | null {
 isAuthenticated(): boolean {
   return this.isLoggedIn() && this.getUserDetails() !== null;
 }
+updateUserName(firstName: any, lastName: any) {
+  if (this.userDetails) {
+    this.userDetails.firstName = firstName;
+    this.userDetails.lastName = lastName;
+  }
+}
+
+
 }

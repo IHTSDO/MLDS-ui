@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form style="padding-bottom: 10rem;" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="row" *ngIf="!approved">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="alert alert-warning">
@@ -20,7 +20,17 @@
             </div>
         </div>
     </div>
+  <div class="row space" style="padding-bottom: 12rem;">
+  <div class="col-sm-12">
+    <div *ngFor="let alert of alerts; let i = index" class="alert"
+         [ngClass]="{'nbgalert-success': alert.type === 'success', 'nbgalert-danger': alert.type === 'danger'}" 
+         role="alert">
+      {{ alert.msg }}
+    </div>
+  </div>
+</div>
 
+      
     <div class="row">
         <span class="col-sm-12 col-md-12 col-lg-12">
 
@@ -685,8 +695,8 @@
     </div>
 
 
-    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
-    <button type="submit" class="btn btn-primary gap" *ngIf="!readOnly">Submit</button>
+    <button class="btn btn-link" (click)="cancel()">Cancel</button>
+    <button type="submit" class="edit-button" *ngIf="!readOnly">Submit</button>
 
 
 

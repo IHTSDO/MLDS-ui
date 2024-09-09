@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 import { AuthenticationSharedService } from '../authentication/authentication-shared.service';
 import { ApplicationUtilsService } from '../application-utils/application-utils.service'
 import { API_ROUTES } from 'src/app/routes-config-api';
@@ -132,16 +132,19 @@ export class AffiliateService {
  * affiliateService.updateAffiliateDetails('affiliateId', { firstName: 'New First Name', lastName: 'New Last Name' }).subscribe(details => console.log(details));
  */
 updateAffiliateDetails(affiliateId: string, affiliateDetails: any): Observable<any> {
-  const promise = this.http.put(`${this.apiUrl}/affiliates/${encodeURIComponent(affiliateId)}/detail`, affiliateDetails);
-  // Subscribe to the promise to update the session service with the new user name
-  promise.subscribe(result => {
-    const updatedDetails = result as any;
-    // if (updatedDetails.email === this.sessionService.login) {
-    //   this.sessionService.updateUserName(updatedDetails.firstName, updatedDetails.lastName);
-    // }
-  });
-  return promise;
+  const url = `${this.apiUrl}/affiliates/${encodeURIComponent(affiliateId)}/detail`;
+
+  return this.http.put<any>(url, affiliateDetails).pipe(
+    tap(result => {
+      if (result.email === this.sessionService.login) {
+        this.sessionService.updateUserName(result.firstName, result.lastName);
+      }
+    }),
+    // catch(this.handleError<any>('updateAffiliateDetails', {}))
+  );
 }
+
+
 
 /**
  * Retrieves the current user's affiliates.
