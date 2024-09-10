@@ -1,0 +1,43 @@
+<div class="modal-header" id="welcome">
+        <button type="button" class="btn-close" aria-label="Close" style="margin-left: 75rem;" (click)="cancel()">
+     
+    </button>
+    <h3 class="modal-title">Create Usage Declaration</h3>
+  </div>
+  
+  <div class="modal-body">
+    <div *ngFor="let alert of alerts; let i = index" class="alert alert-{{ alert.type }}" role="alert">
+      {{ alert.msg }}
+      <button type="button" class="close" aria-label="Close" (click)="closeAlert(i)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+    <p>Please complete your usage declaration for all time periods. Please include reports for past and current use.</p>
+  
+    <form [formGroup]="addRangeForm" (ngSubmit)="add()">
+      <div class="row">
+        <div class="form-group col-md-6">
+            <label for="selectedRange">Declaration Period</label>
+            <select id="selectedRange" formControlName="selectedRange" class="form-control">
+              <option *ngFor="let range of ranges" [ngValue]="range">
+                {{ range?.startDate | date: 'yyyy-MM' }} - {{ range?.endDate | date: 'yyyy-MM' }}
+              </option>
+            </select>
+            <div *ngIf="addRangeForm.get('selectedRange')?.invalid && addRangeForm.get('selectedRange')?.touched" class="text-danger">
+              Please select a declaration period.
+            </div>
+          </div>
+          
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn-link" (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button class="edit-button" (click)="add()" [disabled]="submitting || addRangeForm.invalid">
+      <i class="fa fa-plus"></i> Add
+      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+    </button>
+  </div>
+  

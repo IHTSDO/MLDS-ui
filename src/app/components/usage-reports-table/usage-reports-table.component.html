@@ -1,8 +1,8 @@
-<div class="panel panel-default">
+<div class="panel panel-default " id="email-verification">
   <div class="panel-heading">
     <span class="float-end">
-      <button class="btn btn-success btn-xs"><i class="fa fa-plus"></i> <span
-          translate="views.usageReports.newReport">New Report</span></button>
+      <button class="edit-button" (click)="openAddUsageReportModal(affiliate)"> <span
+          translate="views.usageReports.newReport"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;New Report</span></button>
     </span>
     <h3 class="panel-title">
       <span translate="global.menu.usageReports">Usage Reports</span>
@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usageReport of affiliate.commercialUsages | dateSort: 'startDate': 'desc'">
+        <tr *ngFor="let usageReport of affiliate?.commercialUsages | dateSort: 'startDate': 'desc'">
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">

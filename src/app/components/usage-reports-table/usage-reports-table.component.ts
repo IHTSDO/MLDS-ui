@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class UsageReportsTableComponent implements OnInit {
   
+  
   @Input() affiliate: any;
   @Input() showAllColumns: boolean = true;
   @Input() showViewAll: boolean = false;
@@ -23,6 +24,9 @@ export class UsageReportsTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  openAddUsageReportModal(affiliate: any): void {
+    this.usageReportsService.openAddUsageReportModal(affiliate);
   }
 
   viewUsageReports() {

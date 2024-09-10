@@ -22,10 +22,52 @@
     text-decoration: none;
 }
 
-.btn-link:hover{
-    color: #40ACD6;
+.edit-button {
+    display: inline-block;
+    margin-bottom: 0;
     font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
     cursor: pointer;
-    border-radius: 0;
-    text-decoration: underline;
+    background-image: none;
+    border: 2px solid  #3cb878;
+    white-space: nowrap;
+    padding: 1px 8px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color:  #3cb878;
+    background-color: #ffffff;
+    border-color:  #3cb878;
+    border-top-left-radius: 10px;
+    float: right !important;
+    font-family: inherit;
+    line-height: inherit;
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
+  }
+  
+  .edit-button:hover {
+    background-color:  #3cb878;
+    color: #ffffff;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    padding-top: 6rem;
+   
+}
+#email-verification{
+    padding-bottom: 15rem;
+}
+#welcome{
+    border-bottom: 4px solid #8dccdc;
+}
+.pad{
+    padding-top: 10rem;
 }

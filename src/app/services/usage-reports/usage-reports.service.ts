@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AffiliateService } from '../affiliate/affiliate.service';
 import { UsageReportStateUtilsService } from '../usage-report-state-utils/usage-report-state-utils.service';
 import { RetractUsageReportComponent } from 'src/app/components/retract-usage-report/retract-usage-report.component';
+import { AddUsageReportModalComponent } from 'src/app/components/add-usage-report-modal/add-usage-report-modal.component';
 
 /**
  * Service for retrieving usage reports.
@@ -48,14 +49,14 @@ export class UsageReportsService {
     return this.usageReportStateUtils.isSubmitted(usageReport.state);
   }
 
-  // openAddUsageReportModal(affiliate: any): void {
-  //   const modalRef = this.modalService.open(AddUsageReportModalComponent, {
-  //     size: 'lg',
-  //     backdrop: 'static'
-  //   });
-  //   modalRef.componentInstance.affiliateId = affiliate.affiliateId;
-  // }
-
+  openAddUsageReportModal(affiliate: any): void {
+    const modalRef = this.modalService.open(AddUsageReportModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.affiliateId = affiliate.affiliateId;
+  }
+  
   goToUsageReport(usageReport: any): void {
     this.router.navigate(['/usageReports/usageLog', encodeURIComponent(usageReport.commercialUsageId)]);
   }
