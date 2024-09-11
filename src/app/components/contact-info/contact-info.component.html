@@ -112,13 +112,13 @@
 
             <!-- for accept notifications and country notifications -->
             <div class="form-group">
-                <input type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">
+                <input type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">&nbsp;
                 <label for="acceptNotifications">
                     Yes notify me when a SNOMED package is updated.
                 </label>
                 <span *ngIf="acceptNotifications?.value">
                     &nbsp;(
-                    <input type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">
+                    <input type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">&nbsp;
                     <label for="countryNotificationsOnly">
                         Only notify me regarding my member country extension
                     </label>
