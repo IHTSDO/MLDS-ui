@@ -157,9 +157,13 @@ export class ContactInfoComponent implements OnInit {
             // Assuming `response` is an array of objects
             if (response) {
               this.affiliateId = response[0].affiliateId;
+              this.affiliate = response[0];
               
               console.log('Affiliate ID from myAccount:', this.affiliateId);
-              this.loadAffiliate();
+              this.approved = this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
+              this.readOnly = !this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
+              this.updateForm();
+              this.updateAddressStatus();
             } else {
               console.log('No affiliate data found');
             }

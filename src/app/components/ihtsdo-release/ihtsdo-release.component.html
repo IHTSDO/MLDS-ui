@@ -82,7 +82,7 @@
 
         <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.alphabeta">
             <div class="panel-heading status">
-                <span class="alert-danger-flag pull-right">Alpha/Beta</span>
+                <span class="alert-danger-flag pull-right "  >Alpha/Beta</span>
                 <div class="status">
                     <h3 class="panel-title">{{releaseVersion.name}}</h3>
                 </div>
@@ -129,11 +129,11 @@
 <!-- offline versions -->
 <div class="row">
     <div class="col-md-12">
-        <h3>Offline Versions</h3>
+        <h3 >Offline Versions</h3>
 
         <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.offline">
             <div class="panel-heading status">
-                <span class="alert-danger-flag pull-right">Offline</span>
+                <span class="alert-danger-flag pull-right" >Offline</span>
                 <div class="status">
                     <h3 class="panel-title">{{releaseVersion.name}}</h3>
                 </div>

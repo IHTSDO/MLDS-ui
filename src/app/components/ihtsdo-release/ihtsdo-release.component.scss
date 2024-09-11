@@ -134,4 +134,16 @@ p {
     font-family: var(--fa-style-family, "Font Awesome 6 Free");
     font-weight: var(--fa-style, 900);
 }
+.pull-right {
+    float: right;
+}
+.pull-right {
+    float: right !important;
+}
+.alert-danger-flag {
+    background-color: #fde3dd;
+    color: #f26c4f;
+    height: 30px;
+    padding: 5px 10px;
+}
  

@@ -87,7 +87,7 @@
 }
 .modal-footer {
     margin-top: 15px;
-    padding: 19px 20px 20px;
+    padding: 12px 12px 10px;
     text-align: right;
     border-top: 1px solid #e5e5e5;
     background-color: #fbfbfb;
@@ -215,4 +215,33 @@ h1 {
 #welcome{
     border-bottom: 4px solid #8dccdc;
 }
-
+/* Flexbox for label and select to align horizontally */
+.form-group.col-md-6 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .form-group.col-md-6 label {
+    margin-right: 10px;
+    white-space: nowrap; /* Ensure label text doesn't wrap */
+  }
+  
+  /* Modal header custom alignment */
+  .modal-header #welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header h3.modal-title {
+    margin: 0;
+  }
+  
+  /* Modal footer buttons alignment */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+  }
