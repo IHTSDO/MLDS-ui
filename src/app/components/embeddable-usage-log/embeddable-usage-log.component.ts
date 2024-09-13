@@ -14,6 +14,7 @@ import { RemoveCountryModalComponent } from '../remove-country-modal/remove-coun
 import { AddInstitutionModalComponent } from '../add-institution-modal/add-institution-modal.component';
 import { DeleteInstitutionModalComponent } from '../delete-institution-modal/delete-institution-modal.component';
 import { EditInstitutionModalComponent } from '../edit-institution-modal/edit-institution-modal.component';
+import { EditCountModalComponent } from '../edit-count-modal/edit-count-modal.component';
 
 @Component({
   selector: 'app-embeddable-usage-log',
@@ -427,15 +428,15 @@ saveUsage() {
   }
 
   editCountModal(count: any, country: any): void {
-    // const modalRef = this.modalService.open(EditCountModalComponent, { backdrop: 'static' });
-    // modalRef.componentInstance.count = { ...count };
-    // modalRef.componentInstance.country = country;
-    // modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    // modalRef.result.then(
-    //   () => {
-    //     this.loadParentsUsageReport();
-    //   }
-    // );
+    const modalRef = this.modalService.open(EditCountModalComponent, { backdrop: 'static' });
+    modalRef.componentInstance.count = { ...count };
+    modalRef.componentInstance.country = country;
+    modalRef.componentInstance.usageReport = this.commercialUsageReport;
+    modalRef.result.then(
+      () => {
+        this.loadParentsUsageReport();
+      }
+    );
   }
 
   editCountDataAnalysisModal(count: any, country: any): void {

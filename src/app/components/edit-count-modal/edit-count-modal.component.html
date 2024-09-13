@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" (click)="cancel()">&times;</button>
+    <h3 class="modal-title">
+      Edit Practices
+    </h3>
+  </div>
+  
+  <div class="modal-body">
+    <div *ngFor="let alert of alerts; let i = index" class="alert alert-{{alert.type}}">
+      {{alert.msg}}
+      <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
+    </div>
+  
+    <h3>{{ 'global.country.' + country?.isoCode2 }}</h3>
+  
+    <form [formGroup]="formCount" (ngSubmit)="updateCount()">
+      <div class="form-group">
+        <label>Please add the number of practices using SNOMED</label>
+        <input type="number" class="form-control" formControlName="snomedPractices" min="0" />
+        <div *ngIf="formCount.get('snomedPractices')?.invalid && submitAttempted" class="text-danger">
+          <span *ngIf="formCount.get('snomedPractices')?.errors?.['required']">Required Field</span>
+          <span *ngIf="formCount.get('snomedPractices')?.errors?.['min']">Not a valid number</span>
+        </div>
+      </div>
+  
+      <hr />
+  
+      <div class="form-group">
+        <label>Note</label>
+        <textarea class="form-control" formControlName="notes" rows="3"></textarea>
+      </div>
+  
+      <div class="modal-footer">
+        <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">Cancel</button>
+        <button class="btn btn-success" type="submit" [disabled]="formCount.invalid || submitting">
+          Update
+          <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+        </button>
+      </div>
+    </form>
+  </div>
+  
