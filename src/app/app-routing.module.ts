@@ -55,28 +55,7 @@ const routes: Routes = [
   path: 'logout',
   component: LogoutComponent,
 },
-  {
-    path: '',
-    component: LandingPageComponent,
-    children: [
-      { path: '', component: LandingContentComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
-      { path: 'resetPassword', component: ResetPasswordComponent },
-      { path: 'userDashboard', component: UserDashboardComponent },
-      { path: 'activate', component: ActivateComponent },
-      { path: 'viewReleases', component: ViewReleasesComponent },
-      { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
-      { path: 'emailVerification', component: EmailVerificationComponent },
-      { path: 'usageReports', component: UserUsageReportsTableComponent },
-      { path: 'password', component: ChangePasswordComponent },
-      { path: 'contactInfo', component: ContactInfoComponent },
-      { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent },
-      { path: 'usageReports/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
-      
-    ]
-  },
+ 
   {
     path: 'landing',
     component: LandingPageComponent,
@@ -117,6 +96,28 @@ const routes: Routes = [
       { path: 'ihtsdoReleases', component: IhtsdoReleasesComponent},
       { path: 'ihtsdoReleases/ihtsdoRelease/:releasePackageId', component: IhtsdoReleaseComponent},
       { path: 'postAnnouncement', component: PostAnnouncementComponent},
+      { path: 'usageReports/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
+    ]
+  },
+  {
+    path: '',
+    component: LandingPageComponent,
+    children: [
+      { path: '', component: LandingContentComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
+      { path: 'resetPassword', component: ResetPasswordComponent },
+      { path: 'userDashboard', component: UserDashboardComponent },
+      { path: 'activate', component: ActivateComponent },
+      { path: 'viewReleases', component: ViewReleasesComponent },
+      { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
+      { path: 'emailVerification', component: EmailVerificationComponent },
+      { path: 'usageReports', component: UserUsageReportsTableComponent },
+      { path: 'password', component: ChangePasswordComponent },
+      { path: 'contactInfo', component: ContactInfoComponent },
+      { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent },
+      { path: 'usageReport/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
       
     ]
   },

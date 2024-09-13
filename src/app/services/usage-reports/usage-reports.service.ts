@@ -84,8 +84,8 @@ export class UsageReportsService {
     modalRef.componentInstance.commercialUsageReport = commercialUsageReport;
     modalRef.result
       .then((result) => {
-        if (result && result.data && result.data.commercialUsageId) {
-          this.router.navigate(['/usageReports/usageLog/', result.data.commercialUsageId]);
+        if (result && result && result.commercialUsageId) {
+          this.router.navigate(['/usageReports/usageLog/', result.commercialUsageId]);
         }
       })
       .catch((error) => {
