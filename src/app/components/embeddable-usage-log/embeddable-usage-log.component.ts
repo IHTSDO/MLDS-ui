@@ -11,6 +11,9 @@ import { UsageReportStateUtilsService } from 'src/app/services/usage-report-stat
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service';
 import { Router } from '@angular/router';
 import { RemoveCountryModalComponent } from '../remove-country-modal/remove-country-modal.component';
+import { AddInstitutionModalComponent } from '../add-institution-modal/add-institution-modal.component';
+import { DeleteInstitutionModalComponent } from '../delete-institution-modal/delete-institution-modal.component';
+import { EditInstitutionModalComponent } from '../edit-institution-modal/edit-institution-modal.component';
 
 @Component({
   selector: 'app-embeddable-usage-log',
@@ -392,35 +395,35 @@ saveUsage() {
   
 
   addInstitutionModal(country: any): void {
-    // const modalRef = this.modalService.open(AddInstitutionModalComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.country = country;
-    // modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    // modalRef.result.then(
-    //   () => {
-    //     this.loadParentsUsageReport();
-    //   }
-    // );
+    const modalRef = this.modalService.open(AddInstitutionModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.country = country;
+    modalRef.componentInstance.usageReport = this.commercialUsageReport;
+    modalRef.result.then(
+      () => {
+        this.loadParentsUsageReport();
+      }
+    );
   }
 
   editInstitutionModal(institution: any, country: any): void {
    
-    // const modalRef = this.modalService.open(EditInstitutionModalComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.institution = { ...institution };
-    // modalRef.componentInstance.country = country;
-    // modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    // modalRef.result.then(
-    //   () => {
-    //     this.loadParentsUsageReport();
-    //   }
-    // );
+    const modalRef = this.modalService.open(EditInstitutionModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.institution = { ...institution };
+    modalRef.componentInstance.country = country;
+    modalRef.componentInstance.usageReport = this.commercialUsageReport;
+    modalRef.result.then(
+      () => {
+        this.loadParentsUsageReport();
+      }
+    );
   }
 
   deleteInstitutionModal(institution: any, country: any): void {
-    // const modalRef = this.modalService.open(DeleteInstitutionModalComponent, { backdrop: 'static' });
-    // modalRef.componentInstance.institution = institution;
-    // modalRef.componentInstance.country = country;
-    // modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    // this.loadParentsUsageReport();
+    const modalRef = this.modalService.open(DeleteInstitutionModalComponent, { backdrop: 'static' });
+    modalRef.componentInstance.institution = institution;
+    modalRef.componentInstance.country = country;
+    modalRef.componentInstance.usageReport = this.commercialUsageReport;
+    this.loadParentsUsageReport();
   }
 
   editCountModal(count: any, country: any): void {
