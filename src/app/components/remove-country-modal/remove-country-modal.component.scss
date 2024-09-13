@@ -1,0 +1,49 @@
+.remove-button {
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid  #f26c4f;
+    white-space: nowrap;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color:  #f26c4f;
+    background-color: #fde3dd;;
+    border-color:  #f26c4f;
+    border-top-left-radius: 10px;
+
+    font-family: inherit;
+
+    overflow: visible;
+    text-transform: none;
+
+  }
+  
+  .remove-button:hover {
+    background-color:  #f26c4f;
+    color: #ffffff;
+  } 
+  .btn-link {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}

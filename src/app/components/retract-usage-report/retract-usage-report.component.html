@@ -16,9 +16,9 @@
     <p><strong style="font-weight: 700;">Declaration for Period {{ commercialUsageReport.startDate | date : 'yyyy-MM' }} &#8211; {{ commercialUsageReport.endDate | date : 'yyyy-MM' }}</strong></p>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary btn-sm" (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button class="btn-link" (click)="cancel()" [disabled]="submitting">Cancel</button>
     
-    <button class="btn btn-danger" (click)="retract()" [disabled]="submitting">
+    <button class="btn btn-warning btn-sm" (click)="retract()" [disabled]="submitting">
       Retract Declaration
       <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
     </button>

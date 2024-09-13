@@ -120,3 +120,41 @@ body {
     margin-bottom: 60px;
 }
 
+
+.btn-warning:hover {
+    color: #ffffff;
+    background-color: #ee3c16;
+    border-color: #ee3c16;
+}
+
+.btn-warning {
+    color: #f26c4f;
+    background-color: #fde3dd;
+    border-color: #f26c4f;
+    border-top-left-radius: 10px;
+}
+.alert-warning,
+.alert-danger {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}
+
+.btn-link {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}
+

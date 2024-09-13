@@ -10,6 +10,7 @@ import { StandingStateUtilsService } from 'src/app/services/standing-state-utils
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service';
 import { Router } from '@angular/router';
+import { RemoveCountryModalComponent } from '../remove-country-modal/remove-country-modal.component';
 
 @Component({
   selector: 'app-embeddable-usage-log',
@@ -449,13 +450,13 @@ saveUsage() {
   }
 
   removeCountryModal(count: any): void {
-    // const modalRef = this.modalService.open(RemoveCountryModalComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.count = count;
-    // modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    // modalRef.componentInstance.hospitalsCount = this.lookupUsageByCountryOrCreate(count.country).entries.length;
-    // modalRef.componentInstance.practicesCount = count.snomedPractices;
-    // modalRef.result.then(() =>{this.loadParentsUsageReport()});
-    // this.loadParentsUsageReport();
+    const modalRef = this.modalService.open(RemoveCountryModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.count = count;
+    modalRef.componentInstance.usageReport = this.commercialUsageReport;
+    modalRef.componentInstance.hospitalsCount = this.lookupUsageByCountryOrCreate(count.country).entries.length;
+    modalRef.componentInstance.practicesCount = count.snomedPractices;
+    modalRef.result.then(() =>{this.loadParentsUsageReport()});
+    this.loadParentsUsageReport();
   }
 
   submitUsageReport(form: any): void {
