@@ -1,0 +1,12 @@
+<div>
+	<!-- <button (click)="goToUsageReport()" ><i class="fa fa-angle-double-left"></i> <span translate="global.word.back">Back</span></button> -->
+  <span><a style="padding-top: 30px;padding-bottom: 30px;" class="btn btn-link" (click)="goToUsageReport()"><i class="fa fa-angle-double-left"></i>  <span translate="global.word.back">Back</span></a></span>
+	<h1 translate="views.usage.title">Usage Log</h1>
+	<p translate="views.usage.instructions">Please complete your usage declaration for the time period selected.</p>
+	<app-embeddable-usage-log 
+    *ngIf="hasCommercialUsageReport()"
+    [commercialUsageReport]="commercialUsageReport"
+    [usageLogCanSubmit]="true">
+  </app-embeddable-usage-log>
+  
+  </div>

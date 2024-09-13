@@ -42,6 +42,7 @@ import { UserUsageReportsTableComponent } from './components/user-usage-reports-
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 import { ExtensionApplicationComponent } from './components/extension-application/extension-application.component';
+import { FullPageUsageLogComponent } from './components/full-page-usage-log/full-page-usage-log.component';
 
 
 
@@ -72,6 +73,7 @@ const routes: Routes = [
       { path: 'password', component: ChangePasswordComponent },
       { path: 'contactInfo', component: ContactInfoComponent },
       { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent },
+      { path: 'usageReports/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
       
     ]
   },

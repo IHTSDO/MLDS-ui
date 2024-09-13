@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import moment from 'moment'
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
@@ -11,13 +11,33 @@ import { API_ROUTES } from 'src/app/routes-config-api';
   providedIn: 'root'
 })
 export class CommercialUsageService {
+  sendUsageReportForApproval(commercialUsageReport: any) {
+    throw new Error('Method not implemented.');
+  }
    /**
    * Base URL for API requests.
    */
+   private commercialUsageUpdated = new Subject<void>();
    private apiUrl = API_ROUTES.apiUrl;
    constructor(private http: HttpClient) {}
 
-   
+   broadcastCommercialUsageUpdate(): void {
+    this.commercialUsageUpdated.next();
+  }
+
+  notifyUsageUpdatedIfRequired(httpPromise: Promise<any>, options?: { skipBroadcast?: boolean }): void {
+    httpPromise.then(() => {
+      if (!options || !options.skipBroadcast) {
+        this.broadcastCommercialUsageUpdate();
+      }
+    }).catch((error) => {
+      console.error('HTTP request failed:', error);
+    });
+  }
+
+  getCommercialUsageUpdatedObservable() {
+    return this.commercialUsageUpdated.asObservable();
+  }
    generateRanges(): Array<{ startDate: string, endDate: string }> {
     const periods = 6;
     return this.annualPeriods(periods);
@@ -70,8 +90,9 @@ export class CommercialUsageService {
     return date ? moment(date).format('YYYY-MM-DD') : '';
   }
 
-  getUsageReport(reportId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/commercialUsages/${reportId}`);
+  getUsageReport(commercialUsageId: string): Observable<any> {
+    console.log("commercial Usage Id" + commercialUsageId)
+    return this.http.get(`${this.apiUrl}/commercialUsages/${commercialUsageId}`);
   }
 
   updateUsageReportContext(usageReport: any, options?: any): Observable<any> {
@@ -115,6 +136,7 @@ export class CommercialUsageService {
   }
 
   updateUsageCount(usageReport: any, count: any, options?: any): Observable<any> {
+    console.log('API call - usageReport:', usageReport); // Check what is sent
     return this.http.put(`${this.apiUrl}/commercialUsages/${usageReport.commercialUsageId}/countries/${count.commercialUsageCountId}`, this.serializeCommercialCount(count));
   }
 

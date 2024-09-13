@@ -26,7 +26,7 @@
       <tbody>
         <tr *ngFor="let usageReport of affiliate?.commercialUsages | dateSort: 'startDate': 'desc'">
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
-            <span class="btn-link">
+            <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">
                 <i class="fas fa-minus-square"></i>
               </span>
@@ -36,33 +36,43 @@
             </span>
           </td>
           <td *ngIf="showAllColumns">
-            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+            <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
+              <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{ usageReport.type }}
-              </span></span>
+              </span>
+            </span>
           </td>
           <td *ngIf="showAllColumns">
-            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+            <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
+              <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{ usageReport.state }}
-              </span></span>
+              </span>
+            </span>
           </td>
           <td *ngIf="showAllColumns">
-            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+            <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
+              <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{usageReportsUtils.usageReportCountries(usageReport) | number}}
-              </span></span>
+              </span>
+            </span>
           </td>
           <td>
-            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+            <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
+              <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{usageReportsUtils.usageReportHospitals(usageReport) | number}}
-              </span></span>
+              </span>
+            </span>
           </td>
           <td>
-            <span class="btn-link"><span [ngClass]="{'text-muted': usageReport.effectiveTo}">
+            <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
+              <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{usageReportsUtils.usageReportPractices(usageReport) | number}}
-              </span></span>
+              </span>
+            </span>
           </td>
         </tr>
       </tbody>
-      
     </table>
+    
   </div>
 </div>

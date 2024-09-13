@@ -32,5 +32,11 @@ export class UsageReportsTableComponent implements OnInit {
   viewUsageReports() {
     this.router.navigate(['/usageReports']);
   }
+   // Method to navigate to the report's detail page
+   navigateToUsageReport(usageReport: any) {
+    const usageReportId = encodeURIComponent(usageReport.commercialUsageId);
+    this.router.navigate(['/usageReports/usageLog', usageReportId]);
+  }
+
 
 }
