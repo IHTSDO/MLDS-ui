@@ -15,6 +15,8 @@ import { AddInstitutionModalComponent } from '../add-institution-modal/add-insti
 import { DeleteInstitutionModalComponent } from '../delete-institution-modal/delete-institution-modal.component';
 import { EditInstitutionModalComponent } from '../edit-institution-modal/edit-institution-modal.component';
 import { EditCountModalComponent } from '../edit-count-modal/edit-count-modal.component';
+import { SubmitUsageReportModalComponent } from '../submit-usage-report-modal/submit-usage-report-modal.component';
+import { EditCountDataAnalysisComponent } from '../edit-count-data-analysis/edit-count-data-analysis.component';
 
 @Component({
   selector: 'app-embeddable-usage-log',
@@ -440,17 +442,17 @@ saveUsage() {
   }
 
   editCountDataAnalysisModal(count: any, country: any): void {
-    // const modalRef = this.modalService.open(EditCountDataAnalysisComponent, { backdrop: 'static' });
-    // modalRef.componentInstance.count = { ...count };
-    // modalRef.componentInstance.country = country;
-    // modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    // modalRef.componentInstance.hospitalsCount = this.lookupUsageByCountryOrCreate(count.country).entries.length;
-    // modalRef.componentInstance.practicesCount = count.snomedPractices;
-    // modalRef.result.then(
-    //   () => {
-    //     this.loadParentsUsageReport();
-    //   }
-    // );
+    const modalRef = this.modalService.open(EditCountDataAnalysisComponent, { backdrop: 'static' });
+    modalRef.componentInstance.count = { ...count };
+    modalRef.componentInstance.country = country;
+    modalRef.componentInstance.usageReport = this.commercialUsageReport;
+    modalRef.componentInstance.hospitalsCount = this.lookupUsageByCountryOrCreate(count.country).entries.length;
+    modalRef.componentInstance.practicesCount = count.snomedPractices;
+    modalRef.result.then(
+      () => {
+        this.loadParentsUsageReport();
+      }
+    );
   }
 
   removeCountryModal(count: any): void {
@@ -469,9 +471,9 @@ saveUsage() {
       return;
     }
 
-    // const modalRef = this.modalService.open(SubmitUsageReportModalComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.commercialUsageReport = this.commercialUsageReport;
-    // modalRef.componentInstance.usageByCountryList = this.usageByCountryList;
+    const modalRef = this.modalService.open(SubmitUsageReportModalComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.commercialUsageReport = this.commercialUsageReport;
+    modalRef.componentInstance.usageByCountryList = this.usageByCountryList;
   }
 
   retractUsageReport(): void {

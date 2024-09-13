@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <button type="button" class="close" (click)="modalService.dismissAll()">&times;</button>
+    <h3 class="modal-title">Submit Usage Declaration</h3>
+  </div>
+  
+  
+  <div class="modal-body">
+    <div *ngFor="let alert of alerts; let i = index" class="alert alert-{{alert.type}}" role="alert">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlert(i)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ alert.msg }}
+      </div>
+      
+  
+    <p>Please check and ensure your usage declaration shown below is correct before submitting.</p>
+  
+    <h4>
+      Declaration for Period {{ commercialUsageReport?.startDate | date: 'yyyy-MM' }} &#8211;
+      {{ commercialUsageReport?.endDate | date: 'yyyy-MM' }}:
+    </h4>
+  
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-default">
+        <strong>Usage:</strong>
+      </li>
+      <li class="list-group-item">
+        <strong>License Type:</strong> {{ commercialUsageReport?.type  }}
+      </li>
+      <li class="list-group-item">
+        <strong>Current Usage:</strong> {{ commercialUsageReport?.context?.currentUsage }}
+      </li>
+      <li class="list-group-item">
+        <strong>Planned Usage:</strong> {{ commercialUsageReport?.context?.plannedUsage }}
+      </li>
+      <li class="list-group-item">
+        <strong>Purpose:</strong> {{ commercialUsageReport?.context?.purpose }}
+      </li>
+      <li class="list-group-item">
+        <strong>Implementation Status:</strong>
+        {{ commercialUsageReport?.context?.implementationStatus }}
+      </li>
+  
+      <li *ngFor="let countryRecord of usageByCountryList" class="list-group-item">
+        <strong>Country:</strong> {{ countryRecord?.country?.commonName }}<br />
+        <strong>Practices:</strong> {{ countryRecord?.count?.snomedPractices | number }}
+        <span *ngIf="countryRecord.entries">
+          <br />
+          <strong>Hospitals/Institutions:</strong>
+          <span *ngFor="let entry of countryRecord?.entries; let isLast = last">
+            {{ entry.name }}<span *ngIf="!isLast">,</span>
+          </span>
+        </span>
+      </li>
+  
+      <li class="list-group-item" *ngIf="commercialUsageReport?.context?.otherActivities">
+        <strong>Other Activities:</strong> {{ commercialUsageReport?.context?.otherActivities }}
+      </li>
+    </ul>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">Edit</button>
+    <button class="btn btn-success" (click)="submit()" [disabled]="submitting">
+      Submit Declaration
+      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+    </button>
+  </div>
+  
