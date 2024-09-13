@@ -17,7 +17,7 @@ import { SortLimitPipe } from "../../pipes/sort-limit/sort-limit.pipe";
 @Component({
   selector: 'app-view-releases',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe],
+  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe,],
   templateUrl: './view-releases.component.html',
   styleUrl: './view-releases.component.scss'
 })
@@ -49,6 +49,7 @@ export class ViewReleasesComponent implements OnInit {
     private standingStateUtils: StandingStateUtilsService,
     private applicationUtilsService: ApplicationUtilsService,
     public memberPackageService: MemberPckageService,
+    public packageUtilService: PackageUtilsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}

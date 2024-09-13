@@ -1,0 +1,71 @@
+.modal-header .close {
+    margin-top: -2px;
+}
+
+button.close {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+.close {
+    // float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.2;
+    filter: alpha(opacity = 20);
+    // float: inline-end;
+}
+.add-button {
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 2px solid  #3cb878;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color:  #3cb878;
+    background-color: #ffffff;
+    border-color:  #3cb878;
+    border-top-left-radius: 10px;
+
+    font-family: inherit;
+
+    overflow: visible;
+    text-transform: none;
+
+  }
+  
+  .add-button:hover {
+    background-color:  #3cb878;
+    color: #ffffff;
+  } 
+  .btn-link {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}

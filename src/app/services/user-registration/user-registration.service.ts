@@ -62,4 +62,20 @@ export class UserRegistrationService {
   approveApplication(application: any, approvalStatus: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/applications/${encodeURIComponent(application.applicationId)}/approve`, approvalStatus);
   }
+  createExtensionApplication(member: { key: string }): Observable<any> {
+    console.log('createExtensionApplication');
+    const payload = {
+      memberKey: member.key,
+      applicationType: 'EXTENSION',
+    };
+
+    return this.http.post(`${this.apiUrl}/applications`, payload);
+  }
+  updateApplication(application: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/applications/`+ encodeURIComponent(application.applicationId), application);
+  }
+
+  deleteApplication(applicationId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/applications/`+ encodeURIComponent(applicationId));
+  }
 }

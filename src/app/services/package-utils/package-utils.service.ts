@@ -3,13 +3,19 @@ import { isEqual } from 'lodash';
 import { AuthenticationSharedService } from '../authentication/authentication-shared.service';
 import { MemberService } from '../member/member.service';
 import _ from 'lodash';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserAffiliateService } from '../user-affiliate/user-affiliate.service';
+import { StartExtensionApplicationModalComponent } from 'src/app/components/start-extension-application-modal/start-extension-application-modal.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PackageUtilsService {
 
-  constructor(private sessionService: AuthenticationSharedService, private memberService: MemberService) { }
+  constructor(private sessionService: AuthenticationSharedService, private memberService: MemberService, private modalService: NgbModal,
+    private router: Router,
+    private userAffiliateService: UserAffiliateService) { }
 
   isReleasePackageMatchingMember(releasePackage: any): boolean {
     const userDetails = this.sessionService.getUserDetails();
@@ -219,5 +225,25 @@ export class PackageUtilsService {
     results.offline = categorizedVersions.publishedOffline.concat(categorizedVersions.nonPublishedOffline);
     results.alphabeta = categorizedVersions.publishedAlphaBeta.concat(categorizedVersions.nonPublishedAlphaBeta);
   }
+  openExtensionApplication(releasePackage: any): void {
+    const modalRef = this.modalService.open(StartExtensionApplicationModalComponent, {
+      size: 'sm',
+      backdrop: 'static'
+    });
 
+    // Passing the releasePackage data to the modal component
+    modalRef.componentInstance.releasePackage = releasePackage;
+
+    // Handling the result of the modal
+    modalRef.result.then((result: any) => {
+      this.userAffiliateService.refreshAffiliate(); // Refresh affiliate
+      if (result?.applicationId) {
+        this.router.navigate(['/extensionApplication', result.applicationId]);
+      }
+    }).catch((error) => {
+      // Handle modal dismissal or errors here if needed
+      console.log('Modal dismissed', error);
+    });
+  }
+  
 }

@@ -83,7 +83,6 @@ export class IhtsdoReleaseComponent implements OnInit {
   }
 
   downloadReleaseFile(downloadUrl: string): void {
-    // this.windowRefService.nativeWindow.open(downloadUrl, '_blank');
     window.open(downloadUrl, '_blank', 'noopener');
   }
 }
