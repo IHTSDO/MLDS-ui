@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbDropdown, NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, forkJoin, map, Observable, of } from 'rxjs';
@@ -25,7 +25,7 @@ import { EditCountDataAnalysisComponent } from '../edit-count-data-analysis/edit
   templateUrl: './embeddable-usage-log.component.html',
   styleUrl: './embeddable-usage-log.component.scss'
 })
-export class EmbeddableUsageLogComponent implements OnInit {
+export class EmbeddableUsageLogComponent implements OnInit,OnChanges {
 
   usageForm!: FormGroup;
   collapsePanel: any = {};
@@ -49,7 +49,8 @@ export class EmbeddableUsageLogComponent implements OnInit {
   homeCountry: any = null;
   canSubmit = false;
   private events: EventEmitter<any> = new EventEmitter<any>();
-isAffiliateApplying: any;
+// isAffiliateApplying: any;
+isAffiliateApplying = false;
 country: any;
 countryUsage: any;
 institution: any;
@@ -132,7 +133,7 @@ q: string = '';
   }
 
   loadParentsUsageReport() {
-    if (this.usageLogCanSubmit) {
+    if (this.commercialUsageReport) {
       this.commercialUsageService.getUsageReport(this.commercialUsageReport?.commercialUsageId)
         .subscribe(
           (usageReport: any) => {
@@ -157,7 +158,8 @@ q: string = '';
     this.commercialUsageReport = usageReport;
     this.isActiveUsage = !usageReport.effectiveTo;
     console.log(usageReport.effectiveTo);
-    this.isEditable = this.session.isUser() || this.session.isAdmin();
+    this.isAffiliateApplying = this.standingStateUtils.isApplying(usageReport.affiliate.standingState);
+    this.isEditable = this.session.isUser() || this.session.isAdmin() || this.isAffiliateApplying;
     this.readOnly = this.isEditable ? !this.usageReportStateUtils.isWaitingForApplicant(usageReport.state) : true;
     this.commercialType = usageReport.type === 'COMMERCIAL';
     this.homeCountry = usageReport.affiliate?.affiliateDetails?.address?.country || this.homeCountry;
@@ -332,6 +334,16 @@ q: string = '';
 
  
 saveUsage() {
+
+  if (!this.commercialUsageReport.context) {
+    this.commercialUsageReport.context = {};
+  }
+  
+  this.commercialUsageReport.context.plannedUsage = this.usageForm.get('plannedUsage')?.value || '';
+  this.commercialUsageReport.context.currentUsage = this.usageForm.get('currentUsage')?.value || '';
+  this.commercialUsageReport.context.purpose = this.usageForm.get('purpose')?.value || '';
+  this.commercialUsageReport.context.implementationStatus = this.usageForm.get('implementationStatus')?.value || '';
+  this.commercialUsageReport.context.otherActivities = this.usageForm.get('otherActivities')?.value || '';
   this.commercialUsageService.updateUsageReportContext(this.commercialUsageReport, { skipBroadcast: true })
     .pipe(
       catchError((error: any) => {
@@ -345,6 +357,10 @@ saveUsage() {
         console.log('Usage context updated successfully', response);
       }
     });
+}
+
+autoSubmit(){
+  this.saveUsage();
 }
 
   canRemoveSelectedCountries(countryCodes: string[]): boolean {

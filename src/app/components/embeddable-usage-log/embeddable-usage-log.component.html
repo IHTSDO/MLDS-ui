@@ -28,7 +28,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" translate="views.usageLog.currentUsage">Current Usage:</label>
-                      <textarea class="form-control" rows="3" formControlName="currentUsage" [attr.disabled]="readOnly ? true : null"></textarea>
+                      <textarea class="form-control" rows="3" formControlName="currentUsage" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('currentUsage')?.invalid && usageForm?.get('currentUsage')?.touched">
                         <p class="help-block">Required field.</p>
                       </div>
@@ -36,7 +36,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name " translate="views.usageLog.plannedUsage.label">Planned Usage:</label>
-                      <textarea class="form-control" rows="3" formControlName="plannedUsage" [attr.disabled]="readOnly ? true : null"></textarea>
+                      <textarea class="form-control" rows="3" formControlName="plannedUsage" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('plannedUsage')?.invalid && usageForm?.get('plannedUsage')?.touched">
                         <p class="help-block" translate="form.requiredField">Required field.</p>
                       </div>
@@ -44,7 +44,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" translate="views.usageLog.purpose.label">Purpose:</label>
-                      <textarea class="form-control" rows="3" formControlName="purpose" [attr.disabled]="readOnly ? true : null"></textarea>
+                      <textarea class="form-control" rows="3" formControlName="purpose" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('purpose')?.invalid && usageForm?.get('purpose')?.touched">
                         <p class="help-block" translate="form.requiredField">Required field.</p>
                       </div>
@@ -52,7 +52,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" translate="views.usageLog.impStatus.label">Implementation Status:</label>
-                      <select formControlName="implementationStatus" class="form-select" [attr.disabled]="readOnly ? true : null">
+                      <select formControlName="implementationStatus" class="form-select" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()">
                         <option *ngFor="let status of implementationStatusOptions" [value]="status">{{ status }}</option>
                       </select>
                       <div *ngIf="usageForm?.get('implementationStatus')?.invalid && usageForm?.get('implementationStatus')?.touched">
@@ -126,7 +126,7 @@
 
                     </div>
                     <div class="col-sx-4 col-md-4 col-lg-6">
-                        <h4><span translate="views.usageLog.countries.homeCountry.label">Home Country:</span> {{homeCountry.commonName}}</h4>
+                        <h4><span translate="views.usageLog.countries.homeCountry.label">Home Country:</span> {{homeCountry?.commonName}}</h4>
                     </div>
              
                 </form>
@@ -281,7 +281,7 @@
             <p translate="views.usageLog.notificationRequired">Affiliates are required to notify IHTSDO prior to engaging in any activities that do not fall within the existing categories at which time the IHTSDO will determine the appropriate Fee Structure for the activity in question.</p>
             <p translate="views.usageLog.pleaseDescribe">Please describe activity below.</p>
             <div class="form-group">
-                <textarea rows="4" class="form-control" formControlName="otherActivities" [attr.disabled]="readOnly ? true : null"></textarea>
+                <textarea rows="4" class="form-control" formControlName="otherActivities" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
             </div>
         </form>
     </div>

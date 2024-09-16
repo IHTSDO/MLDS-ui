@@ -33,6 +33,11 @@ export class UserRegistrationService {
     return this.http.get(`${this.apiUrl}/applications/${encodeURIComponent(applicationId)}`);
   }
 
+  getApplication(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/applications/me`);
+  }
+
+
   /**
    * Updates the internal notes for an application.
    * @param {any} application - The application object with updated notesInternal property.
@@ -62,6 +67,16 @@ export class UserRegistrationService {
   approveApplication(application: any, approvalStatus: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/applications/${encodeURIComponent(application.applicationId)}/approve`, approvalStatus);
   }
+
+  saveApplication(applicationForm: any, applicationId: any): Observable<any> {
+    const url = `${this.apiUrl}/applications/${encodeURIComponent(applicationId)}/registration`;
+    return this.http.put(url, applicationForm);
+  }
+
+  submitApplication(applicationForm: any, applicationId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/applications/${encodeURIComponent(applicationId)}/registration`, applicationForm);
+  }
+
   createExtensionApplication(member: { key: string }): Observable<any> {
     console.log('createExtensionApplication');
     const payload = {

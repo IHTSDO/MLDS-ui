@@ -29,7 +29,8 @@ export class ActivateComponent implements OnInit {
       this.activateService.get({ key }).subscribe(
         (response: string) => {
           this.success = 'OK';
-          setTimeout(() => this.router.navigate(['/affiliateRegistration']), 2000);
+          localStorage.setItem('isLoggedIn', 'true'); 
+          this.handleAccountDetails();
         },
         (error: any) => {
           console.error('Activation error', error);
@@ -40,5 +41,16 @@ export class ActivateComponent implements OnInit {
     }
   }
   
+
+  handleAccountDetails(): void {
+    this.sessionService.getAccountDetails().subscribe({
+      next: () => {
+        setTimeout(() => this.router.navigate(['/affiliateRegistration']), 2000);
+      },
+      error: (err) => {
+        console.error('Error fetching account details:', err);
+      }
+    });
+  }
 }
   

@@ -1,0 +1,72 @@
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-select {
+    font-size: 1.4rem;
+}
+
+.panel-heading {
+    padding: 15px 0;
+    border-bottom: 4px solid #8dccdc;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.panel-body {
+    border: 1px solid #eeeeee;
+    padding: 15px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-default {
+    font-size: 14px;
+    color: #00a7e1;
+    background-color: #ffffff;
+    border-color: transparent;
+    border-top-left-radius: 10px;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    color: #ffffff;
+    background-color: #00a7e1;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-right: 1px solid #8dccdc;
+    border-left: 1px solid #eeeeee;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #eeeeee;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.btn-success {
+    color: #3cb878;
+    border: 1px solid;
+    background-color: #ffffff;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+}
+
+.btn-success:hover, .btn-success:focus {
+    color: #ffffff;
+    border: 1px solid;
+    background-color: #3cb878;
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #f26c4f;
+}

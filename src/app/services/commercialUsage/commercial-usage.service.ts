@@ -18,6 +18,7 @@ export class CommercialUsageService {
    * Base URL for API requests.
    */
    private commercialUsageUpdated = new Subject<void>();
+   currentCommercialUsageReport: any = {};
    private apiUrl = API_ROUTES.apiUrl;
    constructor(private http: HttpClient) {}
 

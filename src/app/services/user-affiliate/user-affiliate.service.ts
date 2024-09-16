@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AffiliateService } from '../affiliate/affiliate.service';
 import { ApplicationUtilsService } from '../application-utils/application-utils.service';
 import { MemberService } from '../member/member.service';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 
 @Injectable({
@@ -21,10 +22,14 @@ export class UserAffiliateService {
     this.loadUserAffiliate();
   }
 
-  loadUserAffiliate() {
-      this.affiliateService.myAffiliate().subscribe(resp => {
-        this.setAffiliate(resp[0]);
-      });
+  loadUserAffiliate(): Observable<void> {
+    return this.affiliateService.myAffiliate().pipe(
+      tap(resp => this.setAffiliate(resp[0])),
+      catchError(err => {
+        console.error('Error loading affiliate data:', err);
+        return of(void 0); 
+      })
+    );
   }
 
   private initializeMemberships() {

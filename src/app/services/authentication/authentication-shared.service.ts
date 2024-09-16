@@ -106,7 +106,7 @@ export class AuthenticationSharedService {
   /**
    * Load user data from account data
    */
-  private loadFromAccountData(): void {
+  loadFromAccountData(): void {
     if (this.isLoggedIn()) {
       this.getAccountDetails().subscribe({
         next: (user) => this.handleUserDetails(user),

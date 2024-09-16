@@ -43,6 +43,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 import { ExtensionApplicationComponent } from './components/extension-application/extension-application.component';
 import { FullPageUsageLogComponent } from './components/full-page-usage-log/full-page-usage-log.component';
+import { AffiliateRegistrationComponent } from './components/affiliate-registration/affiliate-registration.component';
 
 
 
@@ -116,6 +117,7 @@ const routes: Routes = [
       { path: 'usageReports', component: UserUsageReportsTableComponent },
       { path: 'password', component: ChangePasswordComponent },
       { path: 'contactInfo', component: ContactInfoComponent },
+      { path: 'affiliateRegistration',component: AffiliateRegistrationComponent},
       { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent },
       { path: 'usageReport/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
       

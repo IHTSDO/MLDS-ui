@@ -12,7 +12,7 @@ import { API_ROUTES } from 'src/app/routes-config-api';
 export class CountryService {
   
   private apiUrl = API_ROUTES.apiUrl;
-  private countries: any[] = [];
+  public countries: any[] = [];
   private countriesByIsoCode2: { [key: string]: any } = {};
   private countriesUsingMLDS: string[] = [];
 

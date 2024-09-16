@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { ROUTES } from 'src/app/routes-config'
+import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
+import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 
 /**
  * LoginComponent - Handles user login functionality
@@ -66,7 +67,9 @@ export class LoginComponent {
    */
   constructor(
     private authenticationService: AuthenticationSharedService,
-    private router: Router
+    private router: Router,
+    private applicationUtilsService: ApplicationUtilsService,
+    private userAffiliateService: UserAffiliateService
   ) {}
 
   /**
@@ -93,7 +96,21 @@ export class LoginComponent {
           if(this.authenticationService.isStaffOrAdmin()){
             this.router.navigate([this.routes.pendingApplications]);
           } else {
-            this.router.navigate([this.routes.userDashboard])
+            this.userAffiliateService.loadUserAffiliate().subscribe({
+              next: () => {
+                console.log(this.userAffiliateService.affiliate);
+                if(this.applicationUtilsService.isApplicationWaitingForApplicant(this.userAffiliateService.affiliate.application))
+                {
+                  this.router.navigate(['/affiliateRegistration']);       
+                }
+                else{
+                  this.router.navigate([this.routes.userDashboard]);
+                }
+              },
+              error: () => {
+                console.error('Failed to load affiliate data');
+              }
+            });
           }
         },
         error: (error) => {
@@ -102,5 +119,4 @@ export class LoginComponent {
         }
       });
   }
-
 }
