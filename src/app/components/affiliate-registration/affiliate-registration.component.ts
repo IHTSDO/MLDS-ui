@@ -12,6 +12,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { EmbeddableUsageLogComponent } from "../embeddable-usage-log/embeddable-usage-log.component";
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
+import { AffiliateRegistrationReviewComponent } from '../affiliate-registration-review/affiliate-registration-review.component';
 
 @Component({
   selector: 'app-affiliate-registration',
@@ -319,6 +320,27 @@ export class AffiliateRegistrationComponent implements OnInit {
       console.log('Form is invalid');
       return;
     }
+
+    const modalRef = this.modalService.open(AffiliateRegistrationReviewComponent, {
+      size: 'lg'
+    });
+    modalRef.componentInstance.affiliateform = this.affiliateApplicationForm.value;
+    modalRef.componentInstance.affiliate = this.applicationData;
+    modalRef.componentInstance.billingHide = this.billingHide;
+
+    modalRef.result.then(
+      (result) => {
+        if (result !== 'submit') {
+          this.updateUsageContext(result);
+          this.finalSubmission();
+        }
+      },
+      (reason) => {
+        if (reason === 'cancel') {
+          console.log('Modal dismissed with reason');
+        }
+      }
+    );
   }
 
   search = (text$: Observable<string>) =>

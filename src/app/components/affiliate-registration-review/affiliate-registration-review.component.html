@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <h3 class="modal-title" translate="register.affiliateRegistrationReview.title">Review Application
+    </h3>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4><span translate="register.affiliateRegistration.usageType.label">Usage Type:</span></h4>
+            <ul class="list-group">
+                <li class="list-group-item-light"><strong translate="views.contactInfo.admin.usageType.name.label">Type:</strong> {{affiliateform?.type }}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.admin.subtype.name.label">Subtype:</strong> {{affiliateform?.subType}} {{affiliateform?.otherText }}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.admin.agreementType.label">Agreement Type:</strong> {{affiliateform?.agreementType }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h4 translate="views.contactInfo.contact.title.label">Contact Information:</h4>
+            <ul class="list-group">
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.fullName.label">Name:</strong> {{affiliate?.affiliateDetails?.firstName}} {{affiliate?.affiliateDetails?.lastName}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.email.name.label">Email:</strong> {{affiliate?.affiliateDetails?.email}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.landline.name.label">Landline Phone Number:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension" translate="views.contactInfo.contact.landlineExtension.short">ext: {{affiliateform?.contactExtension}}</span></li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.mobile.name.label">Mobile Phone Number:</strong> {{affiliate?.affiliateDetails?.mobileNumber}}</li>
+            </ul>
+
+            <ul class="list-group" *ngIf="affiliateform.type=='INDIVIDUAL'">
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.address.name.label">Address:</strong> {{affiliateform?.address}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.city.name.label">City:</strong> {{affiliateform?.city}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.postcode.name.label">Post Code:</strong> {{affiliateform?.postalCode}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.country.name.label">Country:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
+            </ul>
+            <ul class="list-group" *ngIf="affiliateform.type!='INDIVIDUAL' && !billingHide">
+                <h4>Billing Address:</h4>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.address.name.label">Address:</strong> {{affiliateform?.billingAddress}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.city.name.label">City:</strong> {{affiliateform?.billingCity}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.postcode.name.label">Post Code:</strong> {{affiliateform?.billingPostCode}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.country.name.label">Country:</strong> {{affiliateform?.billingCountry?.commonName}}</li>
+            </ul>
+
+        </div>
+        <div class="col-xs-6">
+            <ul class="list-group" *ngIf="affiliateform.type!='INDIVIDUAL'">
+                <h4 translate="views.contactInfo.organization.title">Organization:</h4>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.organization.name.label">Organization Name:</strong> {{affiliateform?.organizationName}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.organization.type.name.label">Organization Type:</strong>
+                    <span *ngIf="affiliateform?.organizationType=='OTHER'">{{affiliateform?.organizationTypeOther}}</span>
+                    <span *ngIf="affiliateform?.organizationType!='OTHER'">{{affiliateform?.organizationType}}</span>
+                </li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.address.name.label">Address:</strong> {{affiliateform?.address}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.city.name.label">City:</strong> {{affiliateform?.city}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.postcode.name.label">Post Code:</strong> {{affiliateform?.postalCode}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.country.name.label">Country:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.landline.short">Phone Number:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension"><span  translate="views.contactInfo.contact.landlineExtension.short">ext:</span>                    {{affiliateform?.contactExtension}}</span>
+                </li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.alternateEmail.name.label">Alternate Email:</strong> {{affiliateform?.alternateEmail}}</li>
+                <li class="list-group-item-light" *ngIf="affiliateform.type=='COMMERCIAL'"><strong translate="views.contactInfo.contact.thirdEmail.label">Third Email:</strong> {{affiliateform?.thirdEmail}}</li>
+                
+            </ul>
+            <ul class="list-group" *ngIf="affiliateform.type === 'INDIVIDUAL' && !billingHide">
+                <h4 translate="views.contactInfo.contact.billingAddress.name.label">Billing Address:</h4>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.address.name.label">Address:</strong> {{affiliate?.affiliateDetails?.billingAddress?.street}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.city.name.label">City:</strong> {{affiliate?.affiliateDetails?.billingAddress?.city}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.postcode.name.label">Post Code:</strong> {{affiliate?.affiliateDetails?.billingAddress?.post}}</li>
+                <li class="list-group-item-light"><strong translate="views.contactInfo.contact.country.name.label">Country:</strong> {{affiliate?.affiliateDetails?.billingAddress?.country?.commonName}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <h4 translate="views.usageLog.usage.label">Usage</h4>
+                <li class="list-group-item-light"><strong translate="views.usageLog.currentUsage.label">Current Usage:</strong>{{context?.currentUsage}}</li>
+                <li class="list-group-item-light"><strong translate="views.usageLog.plannedUsage.label">Planned Usage:</strong>{{context?.plannedUsage}}</li>
+                <li class="list-group-item-light"><strong translate="views.usageLog.purpose.label">Purpose:</strong>{{context?.purpose}} </li>
+                <li class="list-group-item-light"><strong translate="views.usageLog.impStatus.label">Implementation Status:</strong>{{context?.implementationStatus}}</li>
+                <li class="list-group-item-light"><strong translate="views.usageLog.otherActivities.label">Other Activities:</strong>{{context?.otherActivities}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" *ngFor="let pair of usageCountryCountsPairs">
+        <div class="col-xs-6" *ngFor="let countryRecord of pair">
+          <ul class="list-group">
+            <li class="list-group-item-light">
+              <strong translate="views.contactInfo.contact.country.name.label">Country:</strong>
+              {{ 'global.country.' + countryRecord.country.isoCode2 }} <br>
+              <strong translate="views.usageLog.institutions.practices.label">Practices:</strong>
+              {{ countryRecord.snomedPractices | number }}
+              <ng-container *ngIf="(commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]?.length ?? 0) > 0">
+                <br>
+                <strong translate="views.usageLog.institutions.hospAndInst.plural.label">Hospitals/Institutions:</strong>
+                <span *ngFor="let entry of commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]; let isLast = last">
+                  {{ entry.name }}<span *ngIf="!isLast">,</span>
+                </span>
+                <br>
+              </ng-container>
+            </li>
+          </ul>
+        </div>
+      </div>    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-link" (click)="cancel()" translate="register.affiliateRegistrationReview.editApp">Edit Application</button>
+    <button class="btn btn-success" (click)="submit()">
+		<span translate="global.word.submit">Submit</span>
+	</button>
+</div>
+
+
