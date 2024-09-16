@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { MemberService } from 'src/app/services/member/member.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 /**
  * Landing Footer Component
@@ -14,7 +16,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 @Component({
   selector: 'app-landing-footer',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule, CompareTextPipe],
   templateUrl: './landing-footer.component.html',
   styleUrl: './landing-footer.component.scss'
 })

@@ -24,3 +24,31 @@ body {
 .content {
     padding-top: 60px; /* To avoid content being overlapped by the fixed header */
 }
+
+/* Ensure the dropdown menu is positioned correctly */
+.nav-item {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    right: 0; /* Align to the right */
+    left: auto; /* Disable left alignment */
+    border: none; /* Remove border */
+  }
+  
+  /* Style dropdown items */
+  .dropdown-item {
+    color: #fff; /* White text */
+  }
+  
+  .dropdown-item:hover {
+    background-color: #333; /* Lighter black on hover */
+  }
+  
+  /* Ensure caret is visible */
+  .caret {
+    border-color: #fff transparent transparent transparent; /* White caret */
+  }
+  

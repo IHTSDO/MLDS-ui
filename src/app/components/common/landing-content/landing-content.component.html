@@ -2,14 +2,25 @@
 	<div class="row">
 		<div class="col-md-10">
 			<div class="main-login">
-				<h2 class="title-mlds">Member Licensing and Distribution Service</h2>
+				<h2 class="title-mlds">{{'views.landingPage.appName' | translate | compareText :'Member Licensing and Distribution Service'}}</h2>
 				<p>
-					<b>Welcome</b>
+					<b>{{'global.word.welcome' | translate | compareText :'Welcome'}}</b>
 				</p>
-				<p><i class="fa fa-angle-right"></i>This service is provided by SNOMED International for organizations and individuals to request use and access to the International Release of SNOMED CT for use in non-Member as well as some Member countries.</p>
-				<p><i class="fa fa-angle-right"></i> <span translate="views.landingPage.furtherDetails">For further details, please refer to the <a href="http://www.ihtsdo.org" target="_blank">SNOMED International website</a> or the <a href="https://ihtsdo.freshdesk.com/support/solutions/4000002199" target="_blank">Frequently Asked Questions</a>.</span></p>
-				<a class="btn btn-success btn-lg" [routerLink]="['/register']" translate="global.menu.account.register">Register</a>
-				<p><span translate="global.word.or">or</span> <a [routerLink]="['/login']"> login here</a>
+				<p>
+					<i class="fa fa-angle-right"></i>
+					<span [innerHTML]="landingText"></span>
+				  </p>
+				<p>
+					<i class="fa fa-angle-right"></i>
+					<span [innerHTML]="translatedDetails"></span>
+				  </p>
+				<a class="btn btn-success btn-lg" [routerLink]="['/register']" >{{'global.menu.account.register' | translate | compareText : 'Register'}}</a>
+				<!-- <p><span translate="global.word.or">or</span> <a [routerLink]="['/login']"> login here</a> -->
+					<p>
+						<span>{{ 'global.word.or' | translate }}</span>&nbsp;
+						<a [routerLink]="['/login']">{{ 'views.landingPage.loginHere' | translate | compareText: 'login here' }}</a>
+					  </p>
+					  
 			</div>
 		</div>
 	</div>

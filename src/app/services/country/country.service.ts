@@ -13,7 +13,7 @@ export class CountryService {
   
   private apiUrl = API_ROUTES.apiUrl;
   public countries: any[] = [];
-  private countriesByIsoCode2: { [key: string]: any } = {};
+  public countriesByIsoCode2: { [key: string]: any } = {};
   private countriesUsingMLDS: string[] = [];
 
   constructor(private http: HttpClient) { }

@@ -7,14 +7,7 @@
                 <span class="icon-bar"></span> 
                 <span class="icon-bar"></span>
             </button> -->
-            <!-- <a [routerLink]="[isAuthenticated ? '/dashboard' : '/']">
-                <span *ngIf="memberLogo; else defaultLogo">
-                    <img class="img-responsive" [src]="memberLogo" alt="member-logo">
-                </span>
-                <ng-template #defaultLogo>
-                    <img class="img-responsive" src="assets/logo.png" alt="ihtsdo-logo">
-                </ng-template>
-            </a> -->
+        
             <a [href]="isAuthenticated ? '/dashboard' : '#'">
                 <span *ngIf="memberLogo">
                   <img class="img-responsive" [src]="memberLogo" alt="member-logo">
@@ -29,44 +22,46 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul id="topNav" class="nav navbar-nav navbar-right">
 
-                <!-- Home or Dashboard Link -->
-                <li>
-                    <a [routerLink]="isAuthenticated ? '/userDashboard' : '/'">
-                        <span>{{ isAuthenticated ? 'Dashboard' : 'Home' }}</span>
-                    </a>
+                <!-- Home link when user is not authenticated -->
+                <li *ngIf="!isAuthenticated">
+                    <a routerLink="/"> <span >{{'global.menu.home' | translate | compareText:'Home'}}</span></a>
                 </li>
+                
+                <!-- Dashboard link when user is authenticated -->
+                <li *ngIf="isAuthenticated">
+                    <a routerLink="/dashboard"> <span>{{'global.menu.dashboard' | translate | compareText: 'Dashboard'}}</span></a>
+                </li>
+  
 
                 <!-- Usage Reports Link -->
                 <li *ngIf="isAuthenticated">
                     <a routerLink="/usageReports">
-                        <span>Usage Reports</span>
+                        <span>{{'global.menu.usageReports' |translate | compareText: 'Usage Reports'}}</span>
                     </a>
                 </li>
 
                 <!-- Release Packages Link -->
                 <li>
                     <a routerLink="/viewReleases">
-                        <span>Release Packages</span>
+                        <span>{{'global.menu.releasePackages' |translate | compareText: 'Release Packages'}}</span>
                     </a>
                 </li>
 
-                <!-- Language Dropdown -->
-                <li class="dropdown pointer">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-                        <span>
-                            <span class="hidden-tablet">Language</span>
-                            <b class="caret"></b>
-                        </span>
+                <li ngbDropdown class="dropdown pointer">
+                    <a ngbDropdownToggle class="dropdown-toggle" href="javascript:void(0);">
+                      <span>
+                        <span class="hidden-tablet" >{{'global.menu.language'|translate | compareText:'Language'}}</span>
+                        <b class="caret"></b>
+                      </span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li *ngFor="let language of languages">
-                            <a href="javascript:void(0);" (click)="changeLanguage(language.code)">
-                                <span [class]="'famfamfam-flag-' + language.flag"></span>
-                                &nbsp;<span>{{ language.name }}</span>
-                            </a>
-                        </li>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                      <li *ngFor="let lang of languages" class="dropdown-item" (click)="changeLanguage(lang.key)">
+                        <span class="famfamfam-flag-{{ lang.flag }}"></span> &nbsp;
+                        <span [translate]="'global.language.' + lang.key">{{ lang.name }}</span>
+                      </li>
                     </ul>
-                </li>
+                  </li>
+                  
                 <li ngbDropdown class="nav-item dropdown pointer " *ngIf="isUser">
                     <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="userDropdown">
                       <span>
@@ -76,13 +71,13 @@
                     </a>
                     <ul ngbDropdownMenu aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu width">
                       <li class="dropdown-item">
-                        <a routerLink="/contactInfo" class="nav-link">Account Information</a>
+                        <a routerLink="/contactInfo" class="nav-link">{{'global.menu.affiliate.accountInformation' | translate | compareText: 'Account Information'}}</a>
                       </li>
                       <li class="dropdown-item">
-                        <a routerLink="/password" class="nav-link">Change Password</a>
+                        <a routerLink="/password" class="nav-link">{{'global.menu.affiliate.changePassword' | translate | compareText : 'Change Password'}}</a>
                       </li>
                       <li class="dropdown-item">
-                        <a routerLink="/logout" class="nav-link">Log out</a>
+                        <a routerLink="/logout" class="nav-link">{{'global.menu.affiliate.logout' | translate | compareText: 'Log out'}}</a>
                       </li>
                     </ul>
                   </li>
@@ -90,7 +85,7 @@
                 <!-- Login Link -->
                 <li *ngIf="!isAuthenticated">
                     <a routerLink="/login">
-                        Login
+                        {{'global.menu.account.login' | translate | compareText : 'Login'}}
                         <i class="fa fa-caret-right"></i>
                     </a>
                 </li>
