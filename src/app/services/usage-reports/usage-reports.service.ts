@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AffiliateService } from '../affiliate/affiliate.service';
 import { UsageReportStateUtilsService } from '../usage-report-state-utils/usage-report-state-utils.service';
-import { RetractUsageReportComponent } from 'src/app/components/retract-usage-report/retract-usage-report.component';
-import { AddUsageReportModalComponent } from 'src/app/components/add-usage-report-modal/add-usage-report-modal.component';
+import { RetractUsageReportComponent } from 'src/app/components/common/retract-usage-report/retract-usage-report.component';
+import { AddUsageReportModalComponent } from 'src/app/components/user/add-usage-report-modal/add-usage-report-modal.component';
 
 /**
  * Service for retrieving usage reports.

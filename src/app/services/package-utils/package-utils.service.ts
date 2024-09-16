@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserAffiliateService } from '../user-affiliate/user-affiliate.service';
-import { StartExtensionApplicationModalComponent } from 'src/app/components/start-extension-application-modal/start-extension-application-modal.component';
+import { StartExtensionApplicationModalComponent } from 'src/app/components/user/start-extension-application-modal/start-extension-application-modal.component';
 
 @Injectable({
   providedIn: 'root'
