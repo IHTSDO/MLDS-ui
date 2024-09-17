@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { ROUTES } from 'src/app/routes-config';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 /**
  * Side navigation component that displays links based on user roles.
@@ -13,7 +16,7 @@ import { ROUTES } from 'src/app/routes-config';
 @Component({
   selector: 'app-side-nav',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule, CompareTextPipe, EnumPipe],
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss']
 })

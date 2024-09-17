@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { MemberService } from 'src/app/services/member/member.service';
 
 /**
@@ -15,7 +16,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 @Component({
   selector: 'app-edit-member-notifications',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslateModule],
   templateUrl: './edit-member-notifications.component.html',
   styleUrls: ['./edit-member-notifications.component.scss']
 })

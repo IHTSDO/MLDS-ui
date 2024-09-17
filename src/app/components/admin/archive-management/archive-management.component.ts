@@ -10,11 +10,13 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { SessionStateService } from 'src/app/services/session-state/session-state.service';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-archive-management',
   standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule],
+  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, EnumPipe,TranslateModule],
   templateUrl: './archive-management.component.html',
   styleUrl: './archive-management.component.scss'
 })
@@ -26,7 +28,7 @@ export class ArchiveManagementComponent implements OnInit {
   packages: any[] = [];
   packagesByMember: any[] = [];
   archivePackages: any[] = [];
-
+  member:any;
   constructor(
     private router: Router,
     private packageUtilsService: PackageUtilsService,
@@ -41,6 +43,7 @@ export class ArchiveManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.extractPackages();
+    this.member=this.sessionService.getUserDetails()?.member?.['key'];
   }
   onShowAllMembersChange(): void {
     this.extractPackages();

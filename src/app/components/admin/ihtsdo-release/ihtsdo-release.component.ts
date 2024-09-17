@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
@@ -8,11 +9,12 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
   selector: 'app-ihtsdo-release',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule, CompareTextPipe],
   templateUrl: './ihtsdo-release.component.html',
   styleUrl: './ihtsdo-release.component.scss',
 })
@@ -42,10 +44,12 @@ export class IhtsdoReleaseComponent implements OnInit {
     this.releasePackageId = this.route.snapshot.paramMap.get('releasePackageId');
     this.loadReleasePackage();
   }
-
-  viewLicense(memberKey: string): void {
-    this.memberService.getMemberLicense(memberKey);
+  viewLicense(memberKey: string) {
+    this.memberService.getMemberLicense(memberKey).subscribe((licenseData: string) => {
+      window.open(licenseData, '_blank', 'noopener');
+    });
   }
+  
 
   private loadReleasePackage(): void {
     if (this.releasePackage && this.releasePackage.id) {

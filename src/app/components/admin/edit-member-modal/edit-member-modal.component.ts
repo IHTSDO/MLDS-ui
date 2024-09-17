@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { MemberService } from 'src/app/services/member/member.service';
 
 /**
@@ -12,7 +13,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 @Component({
   selector: 'app-edit-member-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule],
+  imports: [CommonModule, ReactiveFormsModule, NgbModule,TranslateModule],
   templateUrl: './edit-member-modal.component.html',
   styleUrls: ['./edit-member-modal.component.scss']
 })

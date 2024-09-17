@@ -27,7 +27,7 @@
 
       </div>
 
-      <h2>{{ packageEntity.name }} - {{ packageEntity?.member?.key }}</h2>
+      <h2>{{ packageEntity.name }} - {{packageEntity?.member?.key | enum:'global.member.'|async}}</h2>
     </div>
 
     <div [innerHTML]="packageEntity.description"></div>

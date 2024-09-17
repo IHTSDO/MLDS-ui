@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
   selector: 'app-delete-affiliate-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EnumPipe, TranslateModule, CompareTextPipe],
   templateUrl: './delete-affiliate-modal.component.html',
   styleUrl: './delete-affiliate-modal.component.scss'
 })

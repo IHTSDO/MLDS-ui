@@ -4,8 +4,14 @@
             <h2>Archive Release Management</h2>
             <div *ngIf="isAdmin">
                 <span>Show releases for: </span>
-                <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
-                    <option value="" selected>SNOMED International</option>
+                <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">                   
+                      <option 
+                        value=""
+                        [selected]="true"
+                      >
+                        {{ (member | enum:'global.member.') | async }}
+                      </option>
+                         
                     <option [value]="1">All Members</option>
                 </select>&nbsp;&nbsp;
                 <i class="fa fa-question-circle fa-2x" [ngbPopover]="popoverContent" placement="top"
@@ -27,13 +33,13 @@
         <div class="col-lg-8">
           <h3>
             Archive Releases: 
-            <span>{{ memberEntry.member.key }}</span>
+            <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span>
           </h3>
           <div class="panel panel-default" *ngFor="let package of memberEntry.archivePackages">
             <div class="panel-heading">
               <h3 class="panel-title">
                 <a (click)="goToArchivePackage(package)">
-                  {{ package.name }} - {{ package.member.key }}
+                  {{ package.name }} - {{package.member.key | enum:'global.member.'| async}}
                 </a>
               </h3>
               <p>Please click on the release title above to manage the release packages.</p>

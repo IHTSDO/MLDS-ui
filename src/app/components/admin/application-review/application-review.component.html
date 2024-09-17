@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="page-header">
 			<span><a (click)="goToPendingApplication()"><i class="fa fa-angle-double-left"></i>  Back to Pending Applications</a></span>
-			<h1>{{application?.applicationType}} Application Review</h1>
+      <h1>{{application.applicationType | enum:'application.applicationType.' | async}} Application Review</h1>
 		</div>
 	</div>
 </div>
@@ -30,7 +30,7 @@
             <h4 class="application-title">
               {{ application?.organizationName }} - {{ application?.name }}
               <span class="label label-success">
-                {{ application?.approvalState  }}
+                {{'approval.state.'+application.approvalState|translate}}
               </span>
             </h4>
             <p><strong>Application Date: {{ application?.submittedAt | date: 'yyyy-MM-dd' }}</strong></p>
@@ -68,9 +68,9 @@
                 <p>
                     {{affiliate.application.affiliateDetails.address.street}}<br>
                     {{affiliate.application.affiliateDetails.address.city}}, {{affiliate.application.affiliateDetails.address.country.commonName}}<br>
-                    <strong>Usage Type:</strong> {{affiliate.application.type}} - {{affiliate.application.subType}}<br>
-                    <strong>Type of Agreement:</strong> {{affiliate.application.affiliateDetails.agreementType}}<br>
-                    <strong>Account Standing:</strong> {{affiliate.standingState}}
+                    <strong>Usage Type:</strong> {{'affiliate.type.'+affiliate.application.type|translate}} - {{'affiliate.subType.'+affiliate.application.subType|translate}}<br>
+                    <strong>Type of Agreement:</strong> {{'affiliate.agreementType.'+affiliate.application.affiliateDetails.agreementType|translate}}<br>
+                    <strong>Account Standing:</strong> {{'affiliate.standingState.'+affiliate.standingState|translate}}
                 </p>
                 <hr>
             </div>

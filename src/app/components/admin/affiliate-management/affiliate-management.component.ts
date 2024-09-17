@@ -9,6 +9,8 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { SessionStateService } from 'src/app/services/session-state/session-state.service';
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { saveAs } from 'file-saver';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * Affiliate Management Component
@@ -16,7 +18,7 @@ import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-affiliate-management',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, FormsModule, NgbModule],
+  imports: [CommonModule, InfiniteScrollModule, FormsModule, NgbModule, EnumPipe,TranslateModule],
   templateUrl: './affiliate-management.component.html',
   styleUrl: './affiliate-management.component.scss'
 })

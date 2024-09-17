@@ -8,12 +8,15 @@ import { FilterOnlinePipe } from "../../../pipes/filter-online/filter-online.pip
 import { FilterAlphabetaPipe } from 'src/app/pipes/filter-alphabeta/filter-alphabeta.pipe';
 import { FilterOfflinePipe } from "../../../pipes/filter-offline/filter-offline.pipe";
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-ihtsdo-releases',
   standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FilterAlphabetaPipe, FilterOfflinePipe],
+  imports: [CommonModule, FilterOnlinePipe, FilterAlphabetaPipe, FilterOfflinePipe, EnumPipe, CompareTextPipe,TranslateModule],
   templateUrl: './ihtsdo-releases.component.html',
   styleUrl: './ihtsdo-releases.component.scss'
 })

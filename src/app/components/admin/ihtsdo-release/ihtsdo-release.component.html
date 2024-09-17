@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="page-header">
-            <span ><a (click)="goToViewPackages()" style="color: #53baf2;"><i class="fa fa-angle-double-left"></i>Back to IHTSDO Releases</a></span>
+            <span ><a (click)="goToViewPackages()" style="color: #53baf2;"><i class="fa fa-angle-double-left">&nbsp;</i>{{'views.ihtsdoReleases.backToReleases' | translate}}</a></span>
           
           </div>
         
@@ -16,7 +16,7 @@
         <div class="page-header">
             <h2>{{releasePackage.name}} 
                 <button class="btn btn-sm btn-link" (click)="viewLicense(releasePackage.member.key)">
-                    <span translate="global.word.viewlicense">View License</span>
+                    <span>{{'global.word.viewlicense' | translate | compareText : 'View License'}}</span>
                 </button>
             </h2>
             <div [innerHTML]="releasePackage.description"></div>
@@ -27,7 +27,7 @@
 <!-- public versions -->
 <div class="row">
     <div class="col-md-12">
-        <h3 translate="views.ihtsdoReleases.publicVersions">Public Versions</h3>
+        <h3>{{'views.ihtsdoReleases.publicVersions' | translate | compareText : 'Public Versions'}}</h3>
 
         <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.online">
             <div class="panel-heading status">
@@ -38,14 +38,14 @@
             <div class="panel-body">
                 <p [innerHTML]="releaseVersion.description"></p>
                 <span>
-                    <strong><span translate="global.word.publishedOn">Published On</span>:</strong> 
+                    <strong><span>{{'global.word.publishedOn' | translate | compareText : 'Published On'}}</span>:</strong> 
                     {{releaseVersion?.publishedAt | date: 'yyyy-MM-dd'}}
                 </span>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="version-title" translate="global.word.file">File:</span>
+                        <span class="version-title"><span>{{'global.word.file' | translate | compareText: 'File'}}</span>:</span>
                     </div>
                     <div class="col-md-10">
                         <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
@@ -70,7 +70,7 @@
     <div class="col-md-12">
         <div class="alert alert-warning" *ngIf="releaseVersions.online.length == 0">
             <i class="fa fa-exclamation-circle"></i> 
-            <span translate="views.ihtsdoReleases.noOnlineVersions">There are currently no online versions of this release.</span>
+            <span>{{'views.ihtsdoReleases.noOnlineVersions' |translate | compareText : 'There are currently no online versions of this release.'}}</span>
         </div>
     </div>
 </div>
@@ -90,14 +90,14 @@
             <div class="panel-body">
                 <p [innerHTML]="releaseVersion.description"></p>
                 <span>
-                    <strong><span translate="global.word.publishedOn">Published On</span>:</strong> 
+                    <strong><span>{{'global.word.publishedOn' | translate | compareText :'Published On'}}</span>:</strong> 
                     {{releaseVersion.publishedAt | date: 'yyyy-MM-dd'}}
                 </span>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="version-title" translate="global.word.file">File:</span>
+                        <span class="version-title"><span>{{'global.word.file' | translate | compareText : 'File'}}</span> :</span>
                     </div>
                     <div class="col-md-10">
                         <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
@@ -141,14 +141,14 @@
             <div class="panel-body">
                 <p [innerHTML]="releaseVersion.description"></p>
                 <span>
-                    <strong><span translate="global.word.publishedOn">Published On</span>:</strong> 
+                    <strong><span>{{'global.word.publishedOn' | translate | compareText :'Published On'}}</span>:</strong> 
                     {{releaseVersion.publishedAt | date: 'yyyy-MM-dd'}}
                 </span>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="version-title" translate="global.word.file">File:</span>
+                        <span class="version-title"> <span>{{'global.word.file' | translate | compareText : 'File'}}</span>  :</span>
                     </div>
                     <div class="col-md-10">
                         <div *ngFor="let releaseFile of releaseVersion.releaseFiles">

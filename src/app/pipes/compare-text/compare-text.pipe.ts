@@ -12,8 +12,17 @@ export class CompareTextPipe implements PipeTransform {
     // Get the current language
     const currentLang = this.translateService.currentLang;
 
-    // If the language is English and both texts are the same, return only one.
-    if (currentLang === 'en' && translatedText === staticText) {
+    // Convert both texts to lowercase for case-insensitive comparison
+    const lowerTranslatedText = (translatedText || '').toLowerCase();
+    const lowerStaticText = (staticText || '').toLowerCase();
+
+    // Handle special case where IHTSDO and SNOMED are considered the same
+    if (lowerTranslatedText === 'snomed releases' && lowerStaticText === 'ihtsdo releases') {
+      return translatedText;
+    }
+
+    // If the language is English and both texts are the same, return only one
+    if (currentLang === 'en' && lowerTranslatedText === lowerStaticText) {
       return translatedText;
     }
 

@@ -3,12 +3,14 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
   selector: 'app-edit-affiliate-standing-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe],
   templateUrl: './edit-affiliate-standing-modal.component.html',
   styleUrl: './edit-affiliate-standing-modal.component.scss'
 })

@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Delete Affiliate</h3>
+  <h3 class="modal-title">{{'views.affiliateSummary.deleteAffiliate' | translate | compareText :'Delete Affiliate'}}</h3>
   <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
 </div>
 <div class="modal-body">
@@ -7,28 +7,27 @@
     <button type="button" class="close" (click)="alerts.splice(alerts.indexOf(alert), 1)">&times;</button>
     {{ alert.msg }}
   </div>
-  <p>Are you sure you want to delete the Affiliate?</p>
+  <p>{{'views.affiliateSummary.deleteAffiliateModal.sure'| translate | compareText : 'Are you sure you want to delete the Affiliate?'}}</p>
   <div>
-    <label for="affiliate">Affiliate No: </label>
+    <label for="affiliate">Affiliate No: </label>&nbsp;
     <span>{{affiliate.affiliateId}}</span>
   </div>
   <div>
-    <label for="creator">User: </label>
+    <label for="creator">User: </label>&nbsp;
     <span>{{affiliate.creator}}</span>
   </div>
   <div>
-    <label for="home-member">Member: </label>
-    <span>{{affiliate.homeMember.key}}</span>
+    <label for="home-member">Member: </label>&nbsp;
+    <span>{{ 'global.member.'+affiliate.homeMember.key|translate}}</span>
   </div>
   <p class="help-block">
-    Deleting an Affiliate will also delete their Applications and Usage Information.
-    The user will no longer be able to login to the account.
+    {{'views.affiliateSummary.deleteAffiliateModal.explanation'| translate| compareText : 'Deleting an Affiliate will also delete their Applications and Usage Information. The user will no longer be able to login to the account.'}}
   </p>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-secondary" (click)="cancel()" [disabled]="submitting">Cancel</button>
+  <button class="btn btn-secondary" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel' | translate | compareText: 'Cancel'}}</button>
   <button class="btn btn-danger" (click)="deleteAffiliate()">
-    Delete Affiliate
+    {{'views.affiliateSummary.deleteAffiliate' |translate | compareText: 'Delete Affiliate'}}
     <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
   </button>
 </div>

@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
 import { catchError, finalize } from 'rxjs';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 
 @Component({
   selector: 'app-edit-release-package-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule, TranslateModule, EnumPipe],
   templateUrl: './edit-release-package-modal.component.html',
   styleUrl: './edit-release-package-modal.component.scss'
 })

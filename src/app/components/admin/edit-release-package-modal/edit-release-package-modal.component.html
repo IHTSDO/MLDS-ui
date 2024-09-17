@@ -28,7 +28,7 @@
         <div class="form-group" *ngIf="isAdmin">
             <label for="member">Member</label>
             <select class="form-control" formControlName="member">
-                <option *ngFor="let m of members" [ngValue]="m">{{ m.key }}</option>
+                <option *ngFor="let m of members" [ngValue]="m">{{m.key | enum:'global.member.'| async}}</option>
             </select>
         </div>
 

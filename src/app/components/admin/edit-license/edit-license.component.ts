@@ -4,6 +4,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EditLicenseModalComponent } from '../edit-license-modal/edit-license-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * Component for editing a license.
@@ -14,7 +15,7 @@ import { EditLicenseModalComponent } from '../edit-license-modal/edit-license-mo
 @Component({
   selector: 'app-edit-license',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslateModule],
   templateUrl: './edit-license.component.html',
   styleUrl: './edit-license.component.scss'
 })

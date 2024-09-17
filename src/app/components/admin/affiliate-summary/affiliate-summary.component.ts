@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, finalize, of } from 'rxjs';
@@ -20,11 +20,14 @@ import { DeleteAffiliateModalComponent } from '../delete-affiliate-modal/delete-
 import { UsageReportsTableComponent } from "../../common/usage-reports-table/usage-reports-table.component";
 import { CreateLoginModalComponent } from '../../common/create-login-modal/create-login-modal.component';
 import { ApplicationSummaryModalComponent } from '../../common/application-summary-modal/application-summary-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 @Component({
   selector: 'app-affiliate-summary',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AffiliateDetailsSummaryComponent, ActivityLogsComponent, AuditsEmbedComponent, OrderByPipe, UsageReportsTableComponent],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, AffiliateDetailsSummaryComponent, ActivityLogsComponent, AuditsEmbedComponent, OrderByPipe, UsageReportsTableComponent, CompareTextPipe, EnumPipe],
   templateUrl: './affiliate-summary.component.html',
   styleUrl: './affiliate-summary.component.scss'
 })
@@ -44,7 +47,7 @@ export class AffiliateSummaryComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private affiliateService: AffiliateService, private authenticationService: AuthenticationSharedService,
     private fb: FormBuilder, private auditsService: AuditsService, public standingStateUtilsService: StandingStateUtilsService, public applicationUtilsService: ApplicationUtilsService,
-    private modalService: NgbModal
+    private modalService: NgbModal,private cd: ChangeDetectorRef
   ) {
     this.notesForm = this.fb.group({
       notesInternal: [{ value: '', disabled: this.isEditable }, Validators.required]
@@ -52,6 +55,7 @@ export class AffiliateSummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cd.detectChanges();
     if (this.authenticationService.isLoggedIn()) {
       this.isAdmin = this.authenticationService.isAdmin();
     }

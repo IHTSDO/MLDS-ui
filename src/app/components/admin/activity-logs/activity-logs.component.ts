@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import moment from 'moment';
 import { AuditsService } from 'src/app/services/audits/audits.service';
 import { AuditsEmbedComponent } from '../../common/audits-embed/audits-embed.component';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * ActivityLogsComponent - displays activity logs for a given date range
@@ -11,7 +13,7 @@ import { AuditsEmbedComponent } from '../../common/audits-embed/audits-embed.com
 @Component({
   selector: 'app-activity-logs',
   standalone: true,
-  imports: [CommonModule, FormsModule, AuditsEmbedComponent],
+  imports: [CommonModule, FormsModule, AuditsEmbedComponent, CompareTextPipe,TranslateModule],
   templateUrl: './activity-logs.component.html',
   styleUrl: './activity-logs.component.scss'
 })

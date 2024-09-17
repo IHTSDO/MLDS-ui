@@ -69,8 +69,7 @@
           [disabled]="standingStateUtilsService.isInvoiceSent(affiliate.standingState)"
           (click)="invoiceSent()">Invoice</button>
         <button class="btn btn-danger btn-block"
-          [disabled]="!standingStateUtilsService.isApplying(affiliate.standingState)" (click)="deleteAffiliate()">Delete
-          Affiliate</button>
+          [disabled]="!standingStateUtilsService.isApplying(affiliate.standingState)" (click)="deleteAffiliate()">{{'views.affiliateSummary.deleteAffiliate' | translate | compareText :'Delete Affiliate'}}</button>
       </div>
 
 
@@ -90,14 +89,17 @@
                   class="list-group-item">
                   <div class="row">
                     <div class="col-4">
-                      <strong>{{ application.applicationType }}</strong><br>
+                      <strong>{{'application.applicationType.' + application?.applicationType | translate }}</strong><br>
+
                       <small>{{ application.submittedAt | date: 'yyyy-MM-dd' }}</small>
                     </div>
                     <div class="col-2" [ngClass]="{
                                    'text-warning': isApplicationPending(application),
                                    'text-danger': isApplicationWaitingForApplicant(application)
                                  }" style="margin-top: 0.5em;">
-                      <strong>{{ application.approvalState }}</strong>
+                     <strong>{{'approval.state.'+ application.approvalState | translate}}</strong>
+                     
+                           
                     </div>
                     <div class="col-6 d-flex justify-content-end">
                       <button class="btn btn-primary btn-sm" style="font-size: 1rem;" *ngIf="isApplicationApproved(application)"

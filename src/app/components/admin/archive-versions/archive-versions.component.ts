@@ -9,11 +9,12 @@ import { CommonModule } from '@angular/common';
 import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-release-file-modal.component';
 import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version-modal/add-edit-release-version-modal.component';
 import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 @Component({
   selector: 'app-archive-versions',
   standalone: true,
-  imports: [CommonModule, NgbModule],
+  imports: [CommonModule, NgbModule, EnumPipe],
   templateUrl: './archive-versions.component.html',
   styleUrl: './archive-versions.component.scss'
 })
