@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
       <div class="page-header">
-        <h2>Post Announcement</h2>
+        <h2>{{'views.postAnnouncement.title' | translate| compareText: 'Post Announcement'}}</h2>
       </div>
     </div>
   </div>
@@ -10,53 +10,54 @@
     <form [formGroup]="announcementForm" (ngSubmit)="postAnnouncement()">
   
       <div class="col-md-12">
-        <h3>Message Content</h3>
+        <h3>{{'views.postAnnouncement.messageContent' | translate | compareText: 'Message Content'}}</h3>
   
         <div class="form-group">
-          <label>Email Subject</label>
+          <label>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}</label>
           <input class="form-control"
             formControlName="subject"
             required 
             [disabled]="completed">
-          <span *ngIf="announcementForm.get('subject')?.invalid && announcementForm.get('subject')?.touched" class="help-block">Required Field</span>
+          <span *ngIf="announcementForm.get('subject')?.invalid && announcementForm.get('subject')?.touched" class="help-block">{{'form.requiredField' | translate | compareText: 'Required Field'}}</span>
         </div>
   
         <div class="form-group">  
-          <label for="body">Email Body</label><br>
+          <label for="body">{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}</label><br>
           <quill-editor id="body" formControlName="body"  [style]="{'height': '200px'}"></quill-editor><br>
          
-          <span class="help-block">Remember to add a salutation and valediction to the email.</span>
-          <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block">Required Field</span>
+          <span class="help-block">{{'views.postAnnouncement.salutationMessage' | translate |compareText: 'Remember to add a salutation and valediction to the email body.'}}</span>
+          <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block">{{'form.requiredField' | translate | compareText: 'Required Field'}}</span>
         </div>
       </div>
   
       <div class="col-md-12">
-        <h3>Audience</h3>
+        <h3>{{'views.postAnnouncement.audience' |translate| compareText: 'Audience'}}</h3>
         
         <div class="form-group">
-          <label>Affiliates</label>
+          <label>{{'views.postAnnouncement.affiliates' | translate |compareText: 'Affiliates'}}</label>
           <div *ngIf="isAdmin">
             <select formControlName="includeAllAffiliates">
-              <option value="0" selected>My Affiliates {{memberKey}}</option>
-              <option value="1">All Affiliates</option>
+              <option value="0" selected><span>My Affiliates</span> ({{memberKey | enum:'global.member.'|async}})</option>
+              <option value="1"> {{'views.postAnnouncement.allAffiliates' |translate | compareText:  'All Affiliates'}} </option>
             </select>
           </div>
           <div *ngIf="!isAdmin">
-            <div>My Affiliates {{memberKey}}</div>
+            <div><span>{{'views.postAnnouncement.myAffiliates' |translate |compareText: 'My Affiliates'}}</span> ({{memberKey | enum:'global.member.'|async}})</div>
           </div>
           <div>
             <span class="help-block">
-              Approved affiliates with an account standing of:
-              <span>In Good Standing</span>,
-              <span>Pending Invoice</span>,
-              <span>Invoice Sent</span>,
-              <span>Deactivation Pending</span>.
+              {{ 'views.postAnnouncement.affiliatesClarification' | translate | compareText: 'Approved affiliates with an account standing of:' }}
+              {{ 'affiliate.standingState.IN_GOOD_STANDING' | translate | compareText: 'In Good Standing' }},
+              {{ 'affiliate.standingState.PENDING_INVOICE' | translate | compareText: 'Pending Invoice' }},
+              {{ 'affiliate.standingState.INVOICE_SENT' | translate | compareText: 'Invoice Sent' }},
+              {{ 'affiliate.standingState.DEACTIVATION_PENDING' | translate | compareText: 'Deactivation Pending' }}.
             </span>
           </div>
+          
         </div>
 
         <div class="form-group">
-          <label>Additional Email Addresses</label>
+          <label>{{'views.postAnnouncement.additionalEmails' | translate | compareText: 'Additional Email Addresses'}}</label>
           
           <!-- Binding input to FormControl using formControlName -->
           <input
@@ -65,7 +66,7 @@
             [disabled]="completed"
           />
           <span class="help-block">
-            Send the announcement to additional email addresses.
+           {{'views.postAnnouncement.additionalEmailsHelp' |translate |compareText: 'Send the announcement to additional email addressses.'}}
           </span>
         </div>
         
@@ -78,7 +79,7 @@
           (click)="announcementForm.markAllAsTouched()"
           *ngIf="!completed">
       <i class="fa fa-paper-plane" aria-hidden="true"></i>
-      Post Announcement
+      {{'views.postAnnouncement.post' | translate |compareText: 'Post Announcement'}}
       <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
   </button>
       
@@ -87,7 +88,7 @@
                   [disabled]="true" 
                   *ngIf="completed">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            Post Announcement
+            {{'views.postAnnouncement.post' | translate |compareText: 'Post Announcement'}}
             <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
           </button>
       
@@ -96,7 +97,7 @@
                   *ngIf="completed" 
                   (click)="newAnnouncement()">
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            New Announcement
+            {{'views.postAnnouncement.newAnnouncement' | translate |compareText: 'New Announcement'}}
           </button>
         </div>
       </div>

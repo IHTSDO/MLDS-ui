@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SystemsLoggersService } from 'src/app/services/systems-loggers/systems-loggers.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-systems-loggers',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, CompareTextPipe,TranslateModule],
   templateUrl: './systems-loggers.component.html',
   styleUrl: './systems-loggers.component.scss'
 })

@@ -792,7 +792,7 @@
             "useType": "ประเภทการใช้",
             "agreementType": "ประเภทข้อตกลง",
             "applicationType": "ประเภทการสมัคร",
-
+            "affiliateName": "ชื่อผู้ใช้งานที่เป็นเครือข่าย",
             "review": "ทบทวน",
             "email": "อีเมล",
             "member": "ประเทศสมาชิก",

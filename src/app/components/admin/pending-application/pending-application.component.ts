@@ -16,13 +16,16 @@ import { FormsModule } from '@angular/forms';
 import { PendingApplicationsService } from 'src/app/services/pending-applications/pending-application.service';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config'
+import { TranslateModule } from '@ngx-translate/core';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 /**
  * Pending Applications Component
  */
 @Component({
   selector: 'app-pending-applications',
   standalone: true,
-  imports: [InfiniteScrollModule, CommonModule, FormsModule],
+  imports: [InfiniteScrollModule, CommonModule, FormsModule, TranslateModule, EnumPipe, CompareTextPipe],
   templateUrl: './pending-application.component.html',
   styleUrls: ['./pending-application.component.scss']
 })

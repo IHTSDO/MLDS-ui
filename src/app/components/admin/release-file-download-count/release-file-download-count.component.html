@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-md-5">
-      <h4 translate="audits.filter.title">Filter by date and exclude users</h4>
+      <h4>{{'audits.filter.title' | translate |compareText: 'Filter per date'}}</h4>
     </div>
   </div>
 
@@ -12,9 +12,9 @@
 
     <div class="col-md-4">
       <div class="input-group">
-        <span class="input-group-addon">from</span>
+        <span class="input-group-addon">{{'audits.filter.from' | translate | compareText: 'from'}}</span>
         <input type="date" class="input-sm form-control" name="fromDate" [(ngModel)]="fromDate" required />
-        <span class="input-group-addon">to</span>
+        <span class="input-group-addon">{{'audits.filter.to' | translate | compareText: 'to'}}</span>
         <input type="date" class="input-sm form-control" name="toDate" [(ngModel)]="toDate" (change)="loadUsers(fromDate, toDate)" required />
       </div>
     </div>

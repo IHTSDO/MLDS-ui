@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms'
 import { MetricsService } from 'src/app/services/metrics/metrics.service'
 import { ToFixedPipe } from "../../../pipes/to-fixed/to-fixed.pipe"
 import { NumberRoundPipe } from 'src/app/pipes/number-round/number-round.pipe'
+import { TranslateModule } from '@ngx-translate/core'
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 /**
  * This component displays various metrics related to the application's health,
@@ -12,7 +14,7 @@ import { NumberRoundPipe } from 'src/app/pipes/number-round/number-round.pipe'
 @Component({
   selector: 'app-metrics',
   standalone: true,
-  imports: [CommonModule, FormsModule, ToFixedPipe, NumberRoundPipe],
+  imports: [CommonModule, FormsModule, ToFixedPipe, NumberRoundPipe, TranslateModule, CompareTextPipe],
   templateUrl: './metrics.component.html',
   styleUrls: ['./metrics.component.scss']
 })

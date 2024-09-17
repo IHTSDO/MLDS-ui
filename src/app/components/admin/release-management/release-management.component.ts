@@ -10,11 +10,14 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { AddReleaseModalComponent } from '../add-release-modal/add-release-modal.component';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { TranslateModule } from '@ngx-translate/core';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 @Component({
   selector: 'app-release-management',
   standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule],
+  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, CompareTextPipe, TranslateModule, EnumPipe],
   templateUrl: './release-management.component.html',
   styleUrl: './release-management.component.scss'
 })
@@ -26,13 +29,14 @@ export class ReleaseManagementComponent {
   public releaseManagementFilter = {
     showAllMembers: ''
   };
+session: any;
 
 
 
   constructor(private packagesService: PackagesService,
     private packageUtilsService: PackageUtilsService,
     private memberService: MemberService,
-    private authenticationService: AuthenticationSharedService,
+    public authenticationService: AuthenticationSharedService,
     private router: Router,
     private modalService: NgbModal 
   ) { }
@@ -42,6 +46,7 @@ export class ReleaseManagementComponent {
     if (this.authenticationService.isLoggedIn()) {
       this.isAdmin = this.authenticationService.isAdmin();
     }
+    this.session= this.authenticationService.getUserDetails();
   }
 
   onShowAllMembersChange(): void {

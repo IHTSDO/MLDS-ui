@@ -58,9 +58,9 @@
           <tr *ngFor="let usageReport of usageReports" (click)="goToReviewUsageReport(usageReport)">
             <td>{{usageReport.affiliate.affiliateDetails.firstName + ' ' + usageReport.affiliate.affiliateDetails.lastName}}</td>
             <td>{{usageReport.submitted | date: 'yyyy-MM-dd'}}</td>
-            <td>{{usageReport.state}}</td>
-            <td>{{usageReport.type}}</td>
-            <td>{{usageReport.context?.implementationStatus}}</td>
+            <td>{{'usageReport.state.'+usageReport.state|translate}}</td>
+            <td>{{'affiliate.type.'+usageReport.type  |translate}}</td>
+            <td>{{'affiliate.implementationStatus.'+usageReport.context?.implementationStatus |translate}}</td>
             <td>{{usageReport.startDate}}</td>
             <td>{{usageReport.endDate}}</td>
             <td>{{usageReportHospitals(usageReport)}}</td>

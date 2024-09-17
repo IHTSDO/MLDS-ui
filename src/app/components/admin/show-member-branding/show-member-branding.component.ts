@@ -5,6 +5,9 @@ import { catchError, Observable, of, switchMap } from 'rxjs';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 /**
  * Component to display member branding information
@@ -12,7 +15,7 @@ import { ROUTES } from 'src/app/routes-config';
 @Component({
   selector: 'app-show-member-branding',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, EnumPipe, TranslateModule, CompareTextPipe],
   templateUrl: './show-member-branding.component.html',
   styleUrl: './show-member-branding.component.scss'
 })

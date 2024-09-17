@@ -1,16 +1,23 @@
 <div>
-    <h2>Logs</h2>
+    <h2>{{'logs.title' | translate | compareText: 'Logs'}}</h2>
   
-    <p>There are {{ loggers.length }} loggers.</p>
+    <p>
+      <span>
+        {{ 'logs.nbloggers' | translate: { total: loggers.length } | compareText: 'There are ' + loggers.length + ' loggers.' }}
+      </span>
+    </p>
+    
   
-    <label for="filter">Filter:</label>
+    <label>{{ 'logs.filter' | translate }}</label>
+<input type="text" [(ngModel)]="filter" class="form-control">
+
     <input id="filter" type="text" [(ngModel)]="filter" class="form-control">
   
     <table class="table table-condensed table-striped">
       <thead>
         <tr title="click to order">
-          <th (click)="predicate = 'name'; reverse = !reverse">Name</th>
-          <th (click)="predicate = 'level'; reverse = !reverse">Level</th>
+          <th (click)="predicate = 'name'; reverse = !reverse">{{'logs.table.name' | translate | compareText:'Name'}}</th>
+          <th (click)="predicate = 'level'; reverse = !reverse">{{'logs.table.level' | translate | compareText: 'Level'}}</th>
         </tr>
       </thead>
       <tbody>

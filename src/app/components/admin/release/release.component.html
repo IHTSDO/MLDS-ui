@@ -3,7 +3,7 @@
       Management</a></span>
 
   <div class="col-md-12">
-    <h2>{{packageEntity?.name}} - {{packageEntity?.member?.key}}</h2>
+    <h2>{{packageEntity?.name}} - {{packageEntity?.member?.key | enum:'global.member.'|async}}</h2>
     <div class="float-end" *ngIf="isEditableReleasePackage">
       <div ngbDropdown>
         <button class="review-button" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i

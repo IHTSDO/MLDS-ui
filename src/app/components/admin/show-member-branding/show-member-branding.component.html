@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 	  <div class="page-header">
 		<span><a [routerLink]="[routes.memberManagement]"><i class="fa fa-angle-double-left"></i> Back to Member Management</a></span>
-		<h2>Affiliate Branding: {{ memberName }}</h2>
+		<h2>Affiliate Branding: {{'global.member.' +member.key |translate}}</h2>
 	  </div>
 	</div>
   </div>
@@ -37,13 +37,13 @@
 		  <div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul id="topNav" class="nav navbar-nav navbar-right">
 			  <li class="nav-item">
-				<a class="nav-link" href="#"><span translate="global.menu.dashboard">Dashboard</span></a>
+				<a class="nav-link" href="#"><span>{{'global.menu.dashboard' |translate | compareText:'Dashboard'}}</span></a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#"><span translate="global.menu.usageReports">Usage Reports</span></a>
+				<a class="nav-link" href="#"><span>{{'global.menu.usageReports' |translate|compareText:'Usage Reports'}}</span></a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#"><span translate="global.menu.releasePackages">Release Packages</span></a>
+				<a class="nav-link" href="#"><span>{{'global.menu.releasePackages' | translate |compareText :'Release Packages'}}</span></a>
 			  </li>
 			  <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

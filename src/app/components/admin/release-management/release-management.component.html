@@ -8,7 +8,11 @@
       <div *ngIf="isAdmin">
         <span>Show releases for: </span>
         <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
-          <option value="" selected>SNOMED International</option>
+          <option value="" selected>
+            {{ session.member.key | enum:'global.member.' | async }}
+            
+          </option>
+          
           <option value="1">All Members</option>
         </select>&nbsp;&nbsp;
         <i class="fa fa-question-circle fa-2x" [ngbPopover]="popoverContent" placement="top"
@@ -34,7 +38,7 @@
     <div class="col-lg-8">
       <!-- online package -->
       <div class="page-header">
-        <h3>Public Releases: <span>{{memberEntry.member.key}}</span></h3>
+        <h3>Public Releases: <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span></h3>
         <p>Releases are made public when one or more versions inside the release is made public. To take a release
           offline, select a release below and set all versions to offline.</p>
       </div>
@@ -67,7 +71,7 @@
 
           </div>
           <h3 class="panel-title">
-            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key }}</a>
+            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key | enum:'global.member.'|async}}</a>
           </h3>
           <p>Please click on the release title above to manage the release packages.</p>
         </div>
@@ -107,7 +111,7 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="page-header">
-        <h3>Alpha/Beta Releases: <span>{{memberEntry.member.key}}</span></h3>
+        <h3>Alpha/Beta Releases: <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span></h3>
         <p>Releases that do not have any online versions are taken offline or made available for alpha/beta reviews. To
           take a release online, select a release below and set one or more versions online.</p>
       </div>
@@ -115,7 +119,7 @@
       <div class="panel panel-default" *ngFor="let package of memberEntry.alphabetaPackages">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key }}</a>
+            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key | enum:'global.member.'|async}}</a>
           </h4>
         </div>
         <div class="panel-body">
@@ -133,14 +137,14 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="page-header">
-        <h3>Offline Releases: <span>{{memberEntry.member.key}}</span></h3>
+        <h3>Offline Releases: <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span></h3>
         <p>Releases that do not have any online versions are taken offline or made available for alpha/beta reviews. To
           take a release online, select a release below and set one or more versions online.</p>
       </div>
       <div class="panel panel-default" *ngFor="let package of memberEntry.offlinePackages">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key }}</a>
+            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key | enum:'global.member.'|async}}</a>
           </h4>
         </div>
         <div class="panel-body">

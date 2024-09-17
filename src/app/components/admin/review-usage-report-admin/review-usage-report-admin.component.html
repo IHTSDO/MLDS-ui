@@ -18,7 +18,7 @@
         <h4 class="panel-title">
           License Usage
           <span class="float-end">
-            <span class="state">{{ usageReport?.state  }}</span>
+            <span class="state">{{ 'usageReport.state.'+usageReport?.state | translate }}</span>
             {{ usageReport?.startDate | date: 'yyyy-MM' }} - {{ usageReport?.endDate | date: 'yyyy-MM' }}
           </span>
         </h4>
@@ -27,11 +27,11 @@
       <div class="panel-body" [ngClass]="{'panel-collapse collapse in': !collapsePanel.usage}">
         <ul class="list-group">
           <li class="list-group-item">
-            <strong>License Type: </strong><span>{{ usageReport?.type  }}</span>
+            <strong>License Type: </strong><span>{{ 'affiliate.type.'+usageReport?.type |translate  }}</span>
           </li>
           <li class="list-group-item">
             <strong>Implementation Status: </strong>
-            <span>{{ usageReport?.context?.implementationStatus  }}</span>
+            <span>{{ 'affiliate.implementationStatus.'+usageReport?.context?.implementationStatus |translate  }}</span>
           </li>
           <li class="list-group-item">
             <label>Current Usage:</label>

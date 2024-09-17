@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
 
 
@@ -9,12 +10,14 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PostAnnouncementService } from 'src/app/services/post-announcement/post-announcement.service';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 
 @Component({
   selector: 'app-post-announcement',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,QuillModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, QuillModule, TranslateModule, EnumPipe, CompareTextPipe],
   templateUrl: './post-announcement.component.html',
   styleUrl: './post-announcement.component.scss'
 })

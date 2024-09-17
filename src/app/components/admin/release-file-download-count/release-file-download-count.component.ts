@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import moment from 'moment';
 import { ReleaseFileDownloadCountService } from 'src/app/services/release-file-download-count/release-file-download-count.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 /**
  * Release File Download Count component
@@ -13,7 +15,7 @@ import { ReleaseFileDownloadCountService } from 'src/app/services/release-file-d
 @Component({
   selector: 'app-release-file-download-count',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe],
   templateUrl: './release-file-download-count.component.html',
   styleUrl: './release-file-download-count.component.scss'
 })

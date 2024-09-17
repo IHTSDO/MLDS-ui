@@ -6,13 +6,15 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service'
 import { ROUTES } from 'src/app/routes-config'
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 /**
  * Component for displaying usage reports.
  */
 @Component({
   selector: 'app-usage-reports',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule],
+  imports: [CommonModule, InfiniteScrollModule, EnumPipe,TranslateModule],
   templateUrl: './usage-reports.component.html',
   styleUrl: './usage-reports.component.scss'
 })

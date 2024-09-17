@@ -17,12 +17,13 @@ import { DeleteVersionDependentModalComponent } from '../delete-version-dependen
 import { DeleteVersionModalComponent } from '../delete-version-modal/delete-version-modal.component';
 import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
 import { DeleteReleasePackageComponent } from '../delete-release-package/delete-release-package.component';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 
 @Component({
   selector: 'app-release',
   standalone: true,
-  imports: [CommonModule, NgbModule],
+  imports: [CommonModule, NgbModule, EnumPipe],
   templateUrl: './release.component.html',
   styleUrl: './release.component.scss'
 })

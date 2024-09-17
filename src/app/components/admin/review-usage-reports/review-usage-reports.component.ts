@@ -3,6 +3,8 @@ import { saveAs } from 'file-saver';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CommonModule } from '@angular/common';
+import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * Review Usage Reports Component
@@ -15,7 +17,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-review-usage-reports',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EnumPipe,TranslateModule],
   templateUrl: './review-usage-reports.component.html',
   styleUrls: ['./review-usage-reports.component.scss']
 })

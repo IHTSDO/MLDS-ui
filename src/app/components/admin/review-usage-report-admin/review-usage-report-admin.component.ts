@@ -8,11 +8,12 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service';
 import { ROUTES } from 'src/app/routes-config';
 import { AffiliateDetailsSummaryComponent } from "../../common/affiliate-details-summary/affiliate-details-summary.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-review-usage-report-admin',
   standalone: true,
-  imports: [CommonModule, NgbAlertModule, NgbModule, FormsModule, AffiliateDetailsSummaryComponent],
+  imports: [CommonModule, NgbAlertModule, NgbModule, FormsModule, AffiliateDetailsSummaryComponent,TranslateModule],
   templateUrl: './review-usage-report-admin.component.html',
   styleUrl: './review-usage-report-admin.component.scss'
 })

@@ -13,8 +13,8 @@
               <b>Affiliate Usage Report</b>
               <br />
               This report contains the usage report for the affiliates of 
-              <span *ngIf="homeMember">{{ homeMember }}</span>
-              <span *ngIf="!homeMember">{{ 'global.member.IHTSDO' }}</span>
+              <span *ngIf="homeMember">{{'global.member.'+ homeMember |translate}}</span>
+              <span *ngIf="!homeMember">{{ 'global.member.IHTSDO'| translate }}</span>
             </td>
             <td class="text-end report-button">
               <button class="btn btn-primary btn-sm btn-margin" (click)="generateCsv()">
