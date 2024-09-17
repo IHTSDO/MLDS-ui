@@ -5,12 +5,13 @@ import { StandingStateUtilsService } from 'src/app/services/standing-state-utils
 import { EditAffiliateStandingModalComponent } from '../../admin/edit-affiliate-standing-modal/edit-affiliate-standing-modal.component';
 import { Router, RouterLink } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-affiliate-details-summary',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   templateUrl: './affiliate-details-summary.component.html',
   styleUrl: './affiliate-details-summary.component.scss'
 })

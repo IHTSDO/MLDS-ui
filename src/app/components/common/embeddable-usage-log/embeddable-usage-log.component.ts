@@ -10,18 +10,20 @@ import { StandingStateUtilsService } from 'src/app/services/standing-state-utils
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service';
 import { Router } from '@angular/router';
-import { RemoveCountryModalComponent } from '../../admin/remove-country-modal/remove-country-modal.component';
+import { RemoveCountryModalComponent } from '../../user/remove-country-modal/remove-country-modal.component';
 import { AddInstitutionModalComponent } from '../../user/add-institution-modal/add-institution-modal.component';
 import { DeleteInstitutionModalComponent } from '../../user/delete-institution-modal/delete-institution-modal.component';
 import { EditInstitutionModalComponent } from '../../user/edit-institution-modal/edit-institution-modal.component';
 import { EditCountModalComponent } from '../../user/edit-count-modal/edit-count-modal.component';
 import { SubmitUsageReportModalComponent } from '../../user/submit-usage-report-modal/submit-usage-report-modal.component';
 import { EditCountDataAnalysisComponent } from '../../user/edit-count-data-analysis/edit-count-data-analysis.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
   selector: 'app-embeddable-usage-log',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbDropdownModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbDropdownModule,TranslateModule, CompareTextPipe],
   templateUrl: './embeddable-usage-log.component.html',
   styleUrl: './embeddable-usage-log.component.scss'
 })

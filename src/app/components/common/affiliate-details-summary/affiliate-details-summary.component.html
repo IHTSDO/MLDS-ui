@@ -14,21 +14,21 @@
         <h4>Usage Type:</h4>
         <ul class="list-group">
           <li class="list-group-item">
-            <strong>Type:</strong> {{ affiliate.affiliateDetails?.type }}
+            <strong>Type:</strong> {{ 'affiliate.type.' + affiliate.affiliateDetails?.type | translate}}
           </li>
           <li class="list-group-item">
             <strong>Subtype:</strong>
-            {{ affiliate.affiliateDetails?.subType }}
+            {{'affiliate.subType.' +  affiliate.affiliateDetails?.subType | translate}}
             <span *ngIf="affiliate.affiliateDetails?.type === 'OTHER'">
               {{ affiliate.affiliateDetails?.otherText }}
             </span>
           </li>
           <li class="list-group-item">
-            <strong>Agreement Type:</strong> {{ affiliate.affiliateDetails?.agreementType }}
+            <strong>Agreement Type:</strong> {{ 'affiliate.agreementType.' + affiliate.affiliateDetails?.agreementType | translate }}
           </li>
           <li class="list-group-item">
             <strong>Account Standing:</strong>
-            {{ affiliate.standingState }}
+            {{ 'affiliate.standingState.' + affiliate.standingState | translate }}
             <span class="text-warning" *ngIf="standingStateUtils.isWarningCategory(affiliate?.standingState)">
               <i class="fa fa-exclamation-circle"></i>
             </span>
@@ -112,7 +112,7 @@
               {{affiliate?.affiliateDetails?.organizationTypeOther}}
             </span>
             <span *ngIf="affiliate?.affiliateDetails?.organizationType !== 'OTHER'">
-              {{affiliate?.affiliateDetails?.organizationType }}
+              {{ 'affiliate.organizationType.' + affiliate?.affiliateDetails?.organizationType | translate }}
             </span>
           </li>
           <li class="list-group-item">

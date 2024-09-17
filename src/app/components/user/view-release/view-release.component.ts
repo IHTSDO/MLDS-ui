@@ -12,8 +12,8 @@ import { ReleaseVersionsService } from 'src/app/services/release-versions/releas
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
-import { ReviewReleaseLicenseModalComponent } from '../../admin/review-release-license-modal/review-release-license-modal.component';
-import { ReviewReleaseLicenseWithDisclaimerModalComponent } from '../../admin/review-release-license-with-disclaimer-modal/review-release-license-with-disclaimer-modal.component';
+import { ReviewReleaseLicenseModalComponent } from '../review-release-license-modal/review-release-license-modal.component';
+import { ReviewReleaseLicenseWithDisclaimerModalComponent } from '../review-release-license-with-disclaimer-modal/review-release-license-with-disclaimer-modal.component';
 
 @Component({
   selector: 'app-view-release',

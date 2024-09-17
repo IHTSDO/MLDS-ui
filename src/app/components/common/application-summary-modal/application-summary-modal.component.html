@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Application Summary</h3>
+  <h3 class="modal-title">{{ 'views.applicationSummary.title' | translate | compareText: 'Application Summary' }}</h3>
 </div>
 <div class="modal-body">
   <div *ngFor="let alert of alerts" class="alert"
@@ -12,9 +12,9 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-link" (click)="activeModal.dismiss()">
-    Cancel
+    <span>{{ 'global.word.cancel' | translate | compareText: 'Cancel' }}</span>
   </button>
   <button class="btn btn-success" (click)="activeModal.close()" [disabled]="submitting">
-    OK
+    <span>{{ 'global.word.ok' | translate | compareText: 'OK' }}</span>
   </button>
 </div>

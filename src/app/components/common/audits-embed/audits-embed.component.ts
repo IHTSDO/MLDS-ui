@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * Audits embed component
@@ -14,7 +15,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-audits-embed',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './audits-embed.component.html',
   styleUrls: ['./audits-embed.component.scss']
 })

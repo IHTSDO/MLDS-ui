@@ -4,6 +4,8 @@ import { AuditsService } from 'src/app/services/audits/audits.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuditsEmbedComponent } from '../audits-embed/audits-embed.component';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * Application Summary Block Component
@@ -16,7 +18,7 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 @Component({
   selector: 'app-application-summary-block',
   standalone: true,
-  imports: [CommonModule, AuditsEmbedComponent],
+  imports: [CommonModule, AuditsEmbedComponent, CompareTextPipe, TranslateModule],
   templateUrl: './application-summary-block.component.html',
   styleUrl: './application-summary-block.component.scss'
 })

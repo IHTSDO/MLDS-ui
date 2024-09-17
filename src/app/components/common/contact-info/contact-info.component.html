@@ -1,9 +1,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="page-header">
-            <h1>
-                Account Information
-            </h1>
+            <h1>{{ 'views.contactInfo.title' | translate | compareText: 'Account Information' }}</h1>
         </div>
     </div>
 </div>
@@ -13,10 +11,9 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="alert alert-warning">
                 <p>
-                    <strong>Registration not approved yet</strong>
+                    <strong>{{ 'views.contactInfo.messages.notApproved.title' | translate | compareText: 'Registration not approved yet' }}</strong>
                 </p>
-                <p>You can only modify the contact information for an affiliate once the registration request has been
-                    approved.</p>
+                <p>{{ 'views.contactInfo.messages.notApproved.body' | translate | compareText: 'You can only modify the contact information for an affiliate once the registration request has been approved.' }}</p>
             </div>
         </div>
     </div>
@@ -36,9 +33,7 @@
 
             <div class="panel panel-default" *ngIf="isStaffOrAdmin">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Admin Editable
-                    </h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -48,59 +43,63 @@
 
                                 <!-- for type -->
                                 <div class="form-group">
-                                    <label for="type">Type:</label>
+                                    <label for="type">{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</label>
                                     <select id="type" class="form-select" formControlName="type"
                                         (change)="onTypeChange()">
-                                        <option value="COMMERCIAL">{{ 'COMMERCIAL' }}</option>
-                                        <option value="ACADEMIC">{{ 'ACADEMIC' }}</option>
-                                        <option value="OTHER">{{ 'OTHER' }}</option>
-                                        <option value="INDIVIDUAL">{{ 'INDIVIDUAL' }}</option>
+                                        <option value="COMMERCIAL">{{ 'affiliate.type.' + 'COMMERCIAL' | translate}}</option>
+                                        <option value="ACADEMIC">{{ 'affiliate.type.' + 'ACADEMIC' | translate}}</option>
+                                        <option value="OTHER">{{ 'affiliate.type.' + 'OTHER' | translate}}</option>
+                                        <option value="INDIVIDUAL">{{ 'affiliate.type.' + 'INDIVIDUAL' | translate}}</option>
                                     </select>
 
                                     <p class="help-block"
                                         *ngIf="form.get('type')?.hasError('required') && formSubmitted">
-                                        Usage type field is required.
+                                        {{ 'views.contactInfo.admin.usageType.required' | translate | compareText: 'Usage type field is required.' }}
                                     </p>
                                 </div>
 
                                 <!-- for other text -->
                                 <div class="form-group" *ngIf="form.get('type')?.value === 'OTHER'">
-                                    <label for="otherText">Other:</label>
-                                    <input type="text" id="otherText" class="form-control" placeholder=""
+                                    <label for="otherText">{{ 'views.contactInfo.admin.other.name' | translate | compareText: 'Other' }}:</label>
+                                    <input type="text" id="otherText" class="form-control" placeholder="{{'views.contactInfo.admin.other.placeholder' | translate}}"
                                         formControlName="otherText" />
 
                                     <div *ngIf="form.get('otherText')?.hasError('required') && formSubmitted">
-                                        <p class="help-block">Other field is required.</p>
+                                        <p class="help-block">{{ 'views.contactInfo.admin.other.required' | translate | compareText: 'Other field is required.' }}</p>
                                     </div>
                                 </div>
 
                                 <!-- for sub type -->
                                 <div class="form-group" *ngIf="type?.value && type?.value !== 'OTHER'">
-                                    <label for="usageSubType">Subtype:</label>
+                                    <label for="usageSubType">{{ 'views.contactInfo.admin.subtype.name' | translate | compareText: 'Subtype' }}:</label>
                                     <select id="usageSubType" class="form-select" formControlName="subType">
-                                        <option value="DEVELOPER" *ngIf="type?.value === 'COMMERCIAL'">Developer
+                                        <option value="DEVELOPER" *ngIf="type?.value === 'COMMERCIAL'">{{ 'affiliate.subType.DEVELOPER' | translate}}
                                         </option>
-                                        <option value="DEVELOPMENT" *ngIf="type?.value === 'ACADEMIC'">Development
+                                        <option value="DEVELOPMENT" *ngIf="type?.value === 'ACADEMIC'">{{ 'affiliate.subType.DEVELOPMENT' | translate}}
                                         </option>
-                                        <option value="EDUCATIONAL" *ngIf="type?.value !== 'COMMERCIAL'">Educational
+                                        <option value="EDUCATIONAL" *ngIf="type?.value !== 'COMMERCIAL'">{{ 'affiliate.subType.EDUCATIONAL' | translate}}
                                         </option>
-                                        <option value="HEALTHCAREPROVIDER" *ngIf="type?.value === 'ACADEMIC'">Healthcare
-                                            Provider</option>
-                                        <option value="PERSONAL" *ngIf="type?.value === 'INDIVIDUAL'">Personal</option>
-                                        <option value="RESEARCH" *ngIf="type?.value !== 'COMMERCIAL'">Research</option>
-                                        <option value="VENDOR" *ngIf="type?.value === 'COMMERCIAL'">Vendor</option>
+                                        <option value="HEALTHCAREPROVIDER" *ngIf="type?.value === 'ACADEMIC'">{{ 'affiliate.subType.HEALTHCAREPROVIDER' | translate}}
+                                        </option>
+                                        <option value="PERSONAL" *ngIf="type?.value === 'INDIVIDUAL'">{{ 'affiliate.subType.PERSONAL' | translate}}</option>
+                                        <option value="RESEARCH" *ngIf="type?.value !== 'COMMERCIAL'">{{ 'affiliate.subType.RESEARCH' | translate}}</option>
+                                        <option value="VENDOR" *ngIf="type?.value === 'COMMERCIAL'">{{ 'affiliate.subType.VENDOR' | translate}}</option>
                                     </select>
+                                    <p class="help-block"
+                                        *ngIf="form.get('subType')?.hasError('required') && formSubmitted">
+                                        {{ 'views.contactInfo.admin.subtype.required' | translate | compareText: 'Subtype field is required.' }}
+                                    </p>
                                 </div>
 
                                 <!-- for agreement type -->
                                 <div class="form-group">
-                                    <label for="agreementType">Type of Agreement:</label>
+                                    <label for="agreementType">{{ 'views.contactInfo.admin.agreementType' | translate | compareText: 'Agreement Type' }}:</label>
                                     <select id="agreementType" class="form-select" formControlName="agreementType">
-                                        <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ type }}
+                                        <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ ('affiliate.agreementType.' + type) | translate }}
                                         </option>
                                     </select>
                                     <div *ngIf="formSubmitted && form.get('agreementType')?.hasError('required')">
-                                        <p class="help-block">Required field.</p>
+                                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                     </div>
                                 </div>
 
@@ -114,13 +113,13 @@
             <div class="form-group">
                 <input type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">&nbsp;
                 <label for="acceptNotifications">
-                    Yes notify me when a SNOMED package is updated.
+                    {{ 'views.contactInfo.acceptNotifications' | translate | compareText: 'Yes notify me when a SNOMED package is updated.' }}
                 </label>
                 <span *ngIf="acceptNotifications?.value">
                     &nbsp;(
                     <input type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">&nbsp;
                     <label for="countryNotificationsOnly">
-                        Only notify me regarding my member country extension
+                        {{ 'views.contactInfo.countryNotificationsOnly' | translate | compareText: 'Only for my country extensions' }}
                     </label>
                     )
                 </span>
@@ -128,9 +127,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Contact Information
-                    </h4>
+                    <h4 class="panel-title"> {{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</h4>
                 </div>
                 <div class="panel-collapse collapse show">
                     <div class="panel-body">
@@ -139,23 +136,23 @@
 
                                 <!-- for first name -->
                                 <div class="form-group">
-                                    <label for="firstName">First Name:</label>
-                                    <input id="firstName" class="form-control" placeholder=""
+                                    <label for="firstName">{{ 'views.contactInfo.contact.firstName.name' | translate | compareText: 'First Name' }}: </label>
+                                    <input id="firstName" class="form-control" placeholder="{{'views.contactInfo.contact.firstName.placeholder'|translate}}"
                                         formControlName="firstName" [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('firstName')?.invalid && (form.get('firstName')?.touched || formSubmitted)">
-                                        <p class="help-block">Required field.</p>
+                                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                     </div>
                                 </div>
 
                                 <!-- for last name -->
                                 <div class="form-group">
-                                    <label for="lastName">Last Name:</label>
-                                    <input id="lastName" class="form-control" placeholder="" formControlName="lastName"
+                                    <label for="lastName">{{ 'views.contactInfo.contact.lastName.name' | translate | compareText: 'Last Name' }}:</label>
+                                    <input id="lastName" class="form-control" placeholder="{{'views.contactInfo.contact.lastName.placeholder'| translate}}" formControlName="lastName"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('lastName')?.invalid && (form.get('lastName')?.touched || formSubmitted)">
-                                        <p class="help-block">Required field.</p>
+                                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                     </div>
                                 </div>
 
@@ -166,22 +163,22 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" *ngIf="!isStaffOrAdmin">
-                                    <label for="email">Email:</label>
+                                    <label for="email">{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</label>
                                     <span>{{ affiliate?.affiliateDetails?.email }}</span>
                                 </div>
 
                                 <div class="form-group" *ngIf="isStaffOrAdmin">
-                                    <label for="email">Email:</label>
-                                    <input id="email" class="form-control" type="email" placeholder=""
+                                    <label for="email">{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</label>
+                                    <input id="email" class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder' | translate }}" 
                                         formControlName="email" [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || formSubmitted)">
-                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['required']">Required
-                                            field.</p>
-                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['email']">Invalid Email
-                                            Address.</p>
-                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['notUnique']">Email
-                                            Addresses need to be unique.</p>
+                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}
+                                        </p>
+                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['email']">{{ 'views.contactInfo.contact.email.invalid' | translate | compareText: 'Invalid Email Address.' }}
+                                        </p>
+                                        <p class="help-block" *ngIf="form.get('email')?.errors?.['notUnique']">{{ 'views.contactInfo.contact.email.unique' | translate | compareText: 'Email Addresses need to be unique.' }}
+                                        </p>
                                     </div>
                                 </div>
 
@@ -192,17 +189,17 @@
                         <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="alternateEmail">Alternate Email:</label>
-                                    <input id="alternateEmail" class="form-control" type="email" placeholder=""
+                                    <label for="alternateEmail">{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</label>
+                                    <input id="alternateEmail" class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
                                         formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('alternateEmail')?.invalid && (form.get('alternateEmail')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['email']">
-                                            Invalid Email Address.</p>
+                                            {{ 'views.contactInfo.contact.email.invalid' | translate | compareText: 'Invalid Email Address.' }}</p>
                                         <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['notUnique']">
-                                            Email Addresses need to be unique.</p>
+                                            {{ 'views.contactInfo.contact.email.unique' | translate | compareText: 'Email Addresses need to be unique.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -212,15 +209,15 @@
                         <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thirdEmail">Third Email:</label>
-                                    <input id="thirdEmail" class="form-control" type="email" placeholder=""
+                                    <label for="thirdEmail">{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</label>
+                                    <input id="thirdEmail" class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'| translate}}"
                                         formControlName="thirdEmail" [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('thirdEmail')?.invalid && (form.get('thirdEmail')?.touched || formSubmitted)">
-                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['email']">Invalid
-                                            Email Address.</p>
+                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['email']">
+                                            {{ 'views.contactInfo.contact.email.invalid' | translate | compareText: 'Invalid Email Address.' }}</p>
                                         <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['notUnique']">
-                                            Email Addresses need to be unique.</p>
+                                            {{ 'views.contactInfo.contact.email.unique' | translate | compareText: 'Email Addresses need to be unique.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -229,10 +226,10 @@
                         <!-- labels for landline and extension -->
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="phoneNumber">Landline Phone Number:</label>
+                                <label for="phoneNumber">{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:</label>
                             </div>
                             <div class="col-md-2">
-                                <label for="extension">Extension:</label>
+                                <label for="extension">{{ 'views.contactInfo.contact.landlineExtension.name' | translate | compareText: 'Extension' }}:</label>
                             </div>
                         </div>
 
@@ -247,10 +244,9 @@
                                     <div
                                         *ngIf="form.get('landlineNumber')?.invalid && (form.get('landlineNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('landlineNumber')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block"
-                                            *ngIf="form.get('landlineNumber')?.errors?.['invalidPhoneNumber']">Invalid
-                                            Phone Number.</p>
+                                            *ngIf="form.get('landlineNumber')?.errors?.['invalidPhoneNumber']">{{ 'views.contactInfo.contact.landline.invalid' | translate | compareText: 'Invalid Phone Number.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +264,7 @@
                         <!-- label for mobile number -->
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="mobileNumber">Mobile Phone Number:</label>
+                                <label for="mobileNumber">{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}:</label>
                             </div>
                         </div>
 
@@ -283,10 +279,9 @@
                                     <div
                                         *ngIf="form.get('mobileNumber')?.invalid && (form.get('mobileNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('mobileNumber')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block"
-                                            *ngIf="form.get('mobileNumber')?.errors?.['invalidPhoneNumber']">Invalid
-                                            Phone Number.</p>
+                                            *ngIf="form.get('mobileNumber')?.errors?.['invalidPhoneNumber']">{{ 'views.contactInfo.contact.landline.invalid' | translate | compareText: 'Invalid Phone Number.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -297,15 +292,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="address">Address</label>
-                                        <input class="form-control" placeholder=""
+                                        <label for="address">{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</label>
+                                        <input class="form-control" placeholder="{{'views.contactInfo.contact.address.placeholder'|translate}}"
                                             formControlName="addressStreetIndividual"
                                             [attr.disabled]="readOnly ? true : null" />
                                         <div
                                             *ngIf="form.get('addressStreetIndividual')?.invalid && (form.get('addressStreetIndividual')?.touched || formSubmitted)">
                                             <p class="help-block"
                                                 *ngIf="form.get('addressStreetIndividual')?.errors?.['required']">
-                                                Required field.</p>
+                                                {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -314,40 +309,37 @@
                             <!-- labels for city and post code -->
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="city">City:</label>
+                                    <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="postCode">Post Code:</label>
+                                    <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input class="form-control" formControlName="addressCityIndividual"
+                                        <input class="form-control" formControlName="addressCityIndividual" placeholder="{{'views.contactInfo.contact.city.placeholder'|translate}}"
                                             [attr.disabled]="readOnly ? true : null" />
                                         <div
                                             *ngIf="form.get('addressCityIndividual')?.invalid && (form.get('addressCityIndividual')?.touched || formSubmitted)">
                                             <p class="help-block"
-                                                *ngIf="form.get('addressCityIndividual')?.errors?.['required']">Required
-                                                field.</p>
+                                                *ngIf="form.get('addressCityIndividual')?.errors?.['required']"> {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder=""
+                                        <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postcode.placeholder'|translate}}"
                                             formControlName="addressPostIndividual"
                                             [attr.disabled]="readOnly ? true : null" />
                                         <div
                                             *ngIf="form.get('addressPostIndividual')?.invalid && (form.get('addressPostIndividual')?.touched || formSubmitted)">
                                             <p class="help-block"
-                                                *ngIf="form.get('addressPostIndividual')?.errors?.['required']">Required
-                                                field.</p>
+                                                *ngIf="form.get('addressPostIndividual')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                             <p class="help-block"
-                                                *ngIf="form.get('addressPostIndividual')?.errors?.['pattern']">Post Code
-                                                is too long.</p>
+                                                *ngIf="form.get('addressPostIndividual')?.errors?.['pattern']">{{ 'views.contactInfo.contact.postcode.tooLong' | translate | compareText: 'Post Code is too long.'}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +349,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="country">Country:</label>
+                                        <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
                                         <span> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</span>
                                     </div>
                                 </div>
@@ -372,7 +364,7 @@
                                 <div class="row" *ngIf="!isStaffOrAdmin">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="billingAddress">Use Address as Billing Address</label>
+                                            <label for="checkbox">{{ 'views.contactInfo.contact.billingAddress.sameAsAddress' | translate | compareText: 'Use Address as Billing Address' }}</label>
                                             <input type="checkbox" formControlName="use" />
                                         </div>
                                     </div>
@@ -382,15 +374,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="billingAddress">Billing Address:</label>
-                                            <input class="form-control" placeholder=""
+                                            <label for="billingAddress">{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</label>
+                                            <input class="form-control" placeholder="{{'views.contactInfo.contact.billingAddress.placeholder'|translate}}"
                                                 formControlName="billingAddressStreet"
                                                 [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                             <div
                                                 *ngIf="form.get('billingAddressStreet')?.invalid && (form.get('billingAddressStreet')?.touched || formSubmitted)">
                                                 <p class="help-block"
                                                     *ngIf="form.get('billingAddressStreet')?.errors?.['required']">
-                                                    Required field.</p>
+                                                    {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -398,10 +390,10 @@
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="city">City:</label>
+                                        <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="postCode">Post Code:</label>
+                                        <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
                                     </div>
                                 </div>
 
@@ -410,31 +402,30 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder=""
+                                            <input class="form-control" placeholder="{{'views.contactInfo.contact.city.placeholder'|translate}}"
                                                 formControlName="billingAddressCity"
                                                 [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                             <div
                                                 *ngIf="form.get('billingAddressCity')?.invalid && (form.get('billingAddressCity')?.touched || formSubmitted)">
                                                 <p class="help-block"
                                                     *ngIf="form.get('billingAddressCity')?.errors?.['required']">
-                                                    Required field.</p>
+                                                    {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder=""
+                                            <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postCode.placeholder'|translate}}"
                                                 formControlName="billingAddressPost"
                                                 [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                             <div
                                                 *ngIf="form.get('billingAddressPost')?.invalid && (form.get('billingAddressPost')?.touched || formSubmitted)">
                                                 <p class="help-block"
                                                     *ngIf="form.get('billingAddressPost')?.errors?.['required']">
-                                                    Required field.</p>
+                                                    {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                                 <p class="help-block"
-                                                    *ngIf="form.get('billingAddressPost')?.errors?.['pattern']">Post
-                                                    Code is too long.</p>
+                                                    *ngIf="form.get('billingAddressPost')?.errors?.['pattern']">{{ 'views.contactInfo.contact.postcode.tooLong' | translate | compareText: 'Post Code is too long.'}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -444,8 +435,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="country">Country:</label>
-                                            <input class="form-control" type="text" placeholder=""
+                                            <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
+                                            <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postCode.placeholder'|translate}}"
                                                 formControlName="billingAddressCountry" [ngbTypeahead]="search"
                                                 [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
                                                 autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
@@ -453,7 +444,7 @@
                                                 *ngIf="form.get('billingAddressCountry')?.invalid && (form.get('billingAddressCountry')?.touched || formSubmitted)">
                                                 <p class="help-block"
                                                     *ngIf="form.get('billingAddressCountry')?.errors?.['required']">
-                                                    Required field.</p>
+                                                    {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -471,9 +462,7 @@
 
             <div class="panel panel-default" *ngIf="affiliate?.type && affiliate?.type != 'INDIVIDUAL'">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Organization
-                    </h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -482,18 +471,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" *ngIf="!isStaffOrAdmin">
-                                    <label for="organizationName">Organization Name:</label>
+                                    <label for="organizationName">{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</label>
                                     <span>{{affiliate?.affiliateDetails?.organizationName}}</span>
                                 </div>
 
                                 <div class="form-group" *ngIf="isStaffOrAdmin">
-                                    <label for="organizationName">Organization Name:</label>
-                                    <input class="form-control" placeholder="" formControlName="organizationName"
+                                    <label for="organizationName">{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</label>
+                                    <input class="form-control" placeholder="{{'views.contactInfo.organization.name.placeholder'|translate}}" formControlName="organizationName"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('organizationName')?.invalid && (form.get('organizationName')?.touched || formSubmitted)">
                                         <p class="help-block"
-                                            *ngIf="form.get('organizationName')?.errors?.['required']">Required field.
+                                            *ngIf="form.get('organizationName')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}
                                         </p>
                                     </div>
                                 </div>
@@ -504,13 +493,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address">Address:</label>
-                                    <input class="form-control" placeholder="" formControlName="addressStreet"
+                                    <label for="address">{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</label>
+                                    <input class="form-control" placeholder="{{'views.contactInfo.contact.address.placeholder'|translate}}" formControlName="addressStreet"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('addressStreet')?.invalid && (form.get('addressStreet')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('addressStreet')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -518,36 +507,36 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="city">City:</label>
+                                <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
                             </div>
                             <div class="col-md-3">
-                                <label for="postCode">Post Code:</label>
+                                <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="" formControlName="addressCity"
+                                    <input class="form-control" placeholder="{{'views.contactInfo.contact.city.placeholder'|translate}}" formControlName="addressCity"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('addressCity')?.invalid && (form.get('addressCity')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('addressCity')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="" formControlName="addressPost"
+                                    <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postcode.placeholder'|translate}}" formControlName="addressPost"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('addressPost')?.invalid && (form.get('addressPost')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('addressPost')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block" *ngIf="form.get('addressPost')?.errors?.['pattern']">Post
-                                            Code is too long.</p>
+                                            {{ 'views.contactInfo.contact.postcode.tooLong' | translate | compareText: 'Post Code is too long.'}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +545,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="country">Country:</label>
+                                    <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
                                     <span> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</span>
                                 </div>
                             </div>
@@ -568,7 +557,7 @@
                             <div class="row" *ngIf="!isStaffOrAdmin">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="billingAddress">Use Organization Address as Billing Address</label>
+                                        <label for="checkbox">{{ 'views.contactInfo.contact.billingAddress.useOrganizationAddress' | translate | compareText: 'Use Organization Address as Billing Address' }}</label>
                                         <input type="checkbox" formControlName="use" />
                                     </div>
                                 </div>
@@ -577,15 +566,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="billingAddress">Billing Address:</label>
-                                        <input class="form-control" placeholder=""
+                                        <label for="billingAddress">{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</label>
+                                        <input class="form-control" placeholder="{{'views.contactInfo.contact.billingAddress.placeholder'|translate}}"
                                             formControlName="billingAddressStreet"
                                             [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                         <div
                                             *ngIf="form.get('billingAddressStreet')?.invalid && (form.get('billingAddressStreet')?.touched || formSubmitted)">
                                             <p class="help-block"
-                                                *ngIf="form.get('billingAddressStreet')?.errors?.['required']">Required
-                                                field.</p>
+                                                *ngIf="form.get('billingAddressStreet')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -593,39 +581,36 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="city">City:</label>
+                                    <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="postCode">Post Code:</label>
+                                    <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="" formControlName="billingAddressCity"
+                                        <input class="form-control" placeholder="{{'views.contactInfo.contact.city.placeholder'|translate}}" formControlName="billingAddressCity"
                                             [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                         <div
                                             *ngIf="form.get('billingAddressCity')?.invalid && (form.get('billingAddressCity')?.touched || formSubmitted)">
                                             <p class="help-block"
-                                                *ngIf="form.get('billingAddressCity')?.errors?.['required']">Required
-                                                field.</p>
+                                                *ngIf="form.get('billingAddressCity')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="" formControlName="billingAddressPost"
+                                        <input class="form-control" placeholder="{{'views.contactInfo.contact.postcode.placeholder'|translate}}" formControlName="billingAddressPost"
                                             [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                         <div
                                             *ngIf="form.get('billingAddressPost')?.invalid && (form.get('billingAddressPost')?.touched || formSubmitted)">
                                             <p class="help-block"
-                                                *ngIf="form.get('billingAddressPost')?.errors?.['required']">Required
-                                                field.</p>
+                                                *ngIf="form.get('billingAddressPost')?.errors?.['required']"> {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                             <p class="help-block"
-                                                *ngIf="form.get('billingAddressPost')?.errors?.['pattern']">Post Code is
-                                                too long.</p>
+                                                *ngIf="form.get('billingAddressPost')?.errors?.['pattern']">{{ 'views.contactInfo.contact.postcode.tooLong' | translate | compareText: 'Post Code is too long.'}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -634,16 +619,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="country">Country:</label>
-                                        <input class="form-control" type="text" placeholder=""
+                                        <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
+                                        <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.country.placeholder'|translate}}"
                                             formControlName="billingAddressCountry" [ngbTypeahead]="search"
                                             [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
                                             autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
                                         <div
                                             *ngIf="form.get('billingAddressCountry')?.invalid && (form.get('billingAddressCountry')?.touched || formSubmitted)">
                                             <p class="help-block"
-                                                *ngIf="form.get('billingAddressCountry')?.errors?.['required']">Required
-                                                field.</p>
+                                                *ngIf="form.get('billingAddressCountry')?.errors?.['required']"> {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -654,18 +638,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="alternateEmail">Alternate Email:</label>
-                                    <input class="form-control" type="email" placeholder=""
+                                    <label for="alternateEmail">{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</label>
+                                    <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
                                         formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null"
                                         required />
                                     <div
                                         *ngIf="form.get('alternateEmail')?.invalid && (form.get('alternateEmail')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['required']">
-                                            Required field.</p>
+                                            {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['email']">
-                                            Invalid Email Address.</p>
+                                            {{ 'views.contactInfo.contact.email.invalid' | translate | compareText: 'Invalid Email Address.' }}</p>
                                         <p class="help-block" *ngIf="form.get('alternateEmail')?.errors?.['notUnique']">
-                                            Email Addresses need to be unique.</p>
+                                            {{ 'views.contactInfo.contact.email.unique' | translate | compareText: 'Email Addresses need to be unique.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -674,15 +658,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thirdEmail">Third Email:</label>
-                                    <input class="form-control" type="email" placeholder="" formControlName="thirdEmail"
+                                    <label for="thirdEmail">{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</label>
+                                    <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'| translate}}" formControlName="thirdEmail"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
                                         *ngIf="form.get('thirdEmail')?.invalid && (form.get('thirdEmail')?.touched || formSubmitted)">
-                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['email']">Invalid
-                                            Email Address.</p>
+                                        <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['email']">{{ 'views.contactInfo.contact.email.invalid' | translate | compareText: 'Invalid Email Address.' }}</p>
                                         <p class="help-block" *ngIf="form.get('thirdEmail')?.errors?.['notUnique']">
-                                            Email Addresses need to be unique.</p>
+                                            {{ 'views.contactInfo.contact.email.unique' | translate | compareText: 'Email Addresses need to be unique.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -695,19 +678,16 @@
     </div>
 
 
-    <button class="btn btn-link" (click)="cancel()">Cancel</button>
-    <button type="submit" class="edit-button" *ngIf="!readOnly">Submit</button>
+    <button class="btn btn-link" (click)="cancel()"> {{ 'global.word.cancel' | translate | compareText: 'Cancel' }}</button>
+    <button type="submit" class="edit-button" *ngIf="!readOnly"><span>{{ 'global.word.save' | translate | compareText: 'Save' }}</span>
+    </button>
 
 
 
     <div *ngIf="formSubmitted">
         <p class="help-block" *ngIf="form.invalid">
-            Please fix the errors listed above.
+            {{ 'form.pleaseFix' | translate | compareText: 'Please fix the errors listed above.' }}
         </p>
     </div>
-
-
-
-
 
 </form>

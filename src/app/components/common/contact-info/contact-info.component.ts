@@ -10,12 +10,14 @@ import { CountryISO, NgxBsTelInputComponent, PhoneNumberFormat, SearchCountryFie
 import { CountryService } from 'src/app/services/country/country.service';
 import { map, Observable, of, startWith } from 'rxjs';
 import { phoneNumberValidator } from 'src/app/validators/phone-number.validator';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-contact-info',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent],
+  imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent, CompareTextPipe, TranslateModule],
   templateUrl: './contact-info.component.html',
   styleUrl: './contact-info.component.scss'
 })
