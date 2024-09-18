@@ -1,119 +1,111 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 login">
-      <h1>Register</h1>
+      <h1>{{ 'register.title' | translate | compareText:'Register' }}</h1>
   
       <!-- Success and error messages -->
-      <div *ngIf="success === 'OK'" class="alert alert-success">
-        <strong>Registration saved!</strong> Please check your email for confirmation.
-      </div>
+      <div *ngIf="success === 'OK'" class="alert alert-success" [innerHTML]="'register.messages.success' | translate"></div>
+
   
-      <div *ngIf="error.general" class="alert alert-danger">
-        <strong>Registration failed!</strong> Please check your input and try again.
-      </div>
+      <div *ngIf="error.general" class="alert alert-danger" [innerHTML]="'register.messages.error.fail' | translate"></div>
   
-      <div *ngIf="error.onBlocklist" class="alert alert-danger">
-        Due to our IT policies we are unable to process the entered email address. Please contact <a href="mailto:Support@IHTSDO.org">Support IHTSDO.org</a> for further assistance.
-      </div>
+      <div *ngIf="error.onBlocklist" class="alert alert-danger" [innerHTML]="'register.messages.error.blocklist' | translate"></div>
   
-      <div *ngIf="error.userExists" class="alert alert-danger">
+      <div *ngIf="error.userExists" class="alert alert-danger" [innerHTML]="'register.messages.error.userexists' | translate">
         <strong>Login name already registered!</strong> Please choose another one.
       </div>
   
       <!-- Registration form -->
       <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()" *ngIf="!success">
         <div class="form-group">
-          <label>Country of Residence</label>
-          <input class="form-control" type="text" placeholder="Your country of residence" formControlName="country" [ngbTypeahead]="search" [resultFormatter]="formatCountry" [inputFormatter]="formatCountry" [ngClass]="{ 'border-red': submitted && createUserForm.get('country')?.invalid }" autocomplete="off" aria-autocomplete="list" aria-expanded="false"/>
+          <label for="country">{{ 'settings.form.countryOfResidence' | translate | compareText:'Country of Residence' }}</label>
+          <input class="form-control" type="text" placeholder="{{'settings.form.countryOfResidence.placeholder' | translate}}" formControlName="country" [ngbTypeahead]="search" [resultFormatter]="formatCountry" [inputFormatter]="formatCountry" [ngClass]="{ 'border-red': submitted && createUserForm.get('country')?.invalid }" autocomplete="off" aria-autocomplete="list" aria-expanded="false"/>
           <div *ngIf="submitted && createUserForm.get('country')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('country')?.errors?.['required']">Required field.</div>
-            <div class="help-block" *ngIf="createUserForm.get('country')?.errors?.['editable']">Unrecognized country</div>
+            <div class="help-block" *ngIf="createUserForm.get('country')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('country')?.errors?.['editable']">{{ 'views.contactInfo.contact.country.unrecognized' | translate | compareText: 'Unrecognized country.' }}</div>
             <div class="help-block" *ngIf="createUserForm.get('country')?.errors?.['excluded']">This IHTSDO member country manages an independent registry for SNOMED users.</div>
           </div>
         </div>
   
         <div class="form-group">
-          <label>First Name</label>
-          <input type="text" class="form-control" placeholder="Your first name" formControlName="firstName" [ngClass]="{ 'border-red': submitted && createUserForm.get('firstName')?.invalid }" />
+          <label for="firstName">{{ 'settings.form.firstname' | translate | compareText:'First Name' }}</label>
+          <input type="text" class="form-control" placeholder="{{'settings.form.firstname.placeholder' | translate}}" formControlName="firstName" [ngClass]="{ 'border-red': submitted && createUserForm.get('firstName')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('firstName')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['required']">Your first name is required.</div>
-            <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['minlength']">Your first name is required to be at least 1 character.</div>
-            <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['maxlength']">Your first name cannot be longer than 50 characters.</div>
+            <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['required']">{{ 'settings.messages.validate.firstname.required' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['minlength']">{{ 'settings.messages.validate.firstname.minlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['maxlength']">{{ 'settings.messages.validate.firstname.maxlength' | translate }}</div>
           </div>
         </div>
   
         <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" class="form-control" placeholder="Your last name" formControlName="lastName" [ngClass]="{ 'border-red': submitted && createUserForm.get('lastName')?.invalid }" />
+          <label for="lastName">{{ 'settings.form.lastname' | translate | compareText:'Last Name' }}</label>
+          <input type="text" class="form-control" placeholder="{{'settings.form.lastname.placeholder' | translate}}" formControlName="lastName" [ngClass]="{ 'border-red': submitted && createUserForm.get('lastName')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('lastName')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['required']">Your last name is required.</div>
-            <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['minlength']">Your last name is required to be at least 1 character.</div>
-            <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['maxlength']">Your last name cannot be longer than 50 characters.</div>
+            <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['required']">{{ 'settings.messages.validate.lastname.required' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['minlength']">{{ 'settings.messages.validate.lastname.minlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['maxlength']">{{ 'settings.messages.validate.lastname.maxlength' | translate }}</div>
           </div>
         </div>
   
         <div class="form-group">
-          <label>E-mail</label>
-          <input type="email" class="form-control" placeholder="Your e-mail address" formControlName="email" [ngClass]="{ 'border-red': submitted && createUserForm.get('email')?.invalid }" />
+          <label for="email" [innerHTML]="('global.form.email' | translate )"></label>
+          <input type="email" class="form-control" placeholder="{{'global.form.email.placeholder' | translate}}" formControlName="email" [ngClass]="{ 'border-red': submitted && createUserForm.get('email')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('email')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['required']">Your e-mail is required.</div>
-            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['email']">Your e-mail is invalid.</div>
-            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['minlength']">Your e-mail is required to be at least 5 characters.</div>
-            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['maxlength']">Your e-mail cannot be longer than 100 characters.</div>
+            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['required']"><div>{{ 'global.messages.validate.email.required' | translate }}</div>          </div>
+            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['email']"><div>{{ 'global.messages.validate.email.invalid' | translate }}</div>          </div>
+            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['minlength']"><div>{{ 'global.messages.validate.email.minlength' | translate }}</div>          </div>
+            <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['maxlength']"><div>{{ 'global.messages.validate.email.maxlength' | translate }}</div>          </div>
           </div>
         </div>
   
         <div class="form-group">
-          <label>E-mail (confirm)</label>
-          <input type="email" class="form-control" placeholder="Your e-mail address" formControlName="confirmEmail" [ngClass]="{ 'border-red': submitted && createUserForm.get('confirmEmail')?.invalid }" />
+          <label for="confirmEmail">{{ 'register.form.confirmemail' | translate }}</label>
+          <input type="email" class="form-control" placeholder="{{'global.form.email.placeholder' | translate}}" formControlName="confirmEmail" [ngClass]="{ 'border-red': submitted && createUserForm.get('confirmEmail')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('confirmEmail')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['required']">Your e-mail is required.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['email']">Your e-mail is invalid.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['minlength']">Your e-mail is required to be at least 5 characters.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['maxlength']">Your e-mail cannot be longer than 100 characters.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['match']">Your email confirmation does not match your email.</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['required']">{{ 'global.messages.validate.email.required' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['email']">{{ 'global.messages.validate.email.invalid' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['minlength']">{{ 'global.messages.validate.email.minlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['maxlength']">{{ 'global.messages.validate.email.minlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['match']">{{ 'global.messages.validate.confirmemail.match' | translate }}</div>
           </div>
         </div>
   
         <div class="form-group">
-          <label>New password</label>
-          <input type="password" class="form-control" placeholder="New password" formControlName="password" [ngClass]="{ 'border-red': submitted && createUserForm.get('password')?.invalid }" />
+          <label for="newPassword">{{ 'global.form.newpassword' | translate | compareText:'New password' }}</label>
+          <input type="password" class="form-control" placeholder="{{'global.form.newpassword.placeholder' | translate}}" formControlName="password" [ngClass]="{ 'border-red': submitted && createUserForm.get('password')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('password')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['required']">Your password is required.</div>
-            <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['minlength']">Your password is required to be at least 5 characters.</div>
-            <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['maxlength']">Your password cannot be longer than 50 characters.</div>
+            <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['required']">{{ 'global.messages.validate.newpassword.required' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['minlength']">{{ 'global.messages.validate.newpassword.minlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['maxlength']">{{ 'global.messages.validate.newpassword.maxlength' | translate }}</div>
           </div>
           <div id="strength">
-          <small>Password strength:</small>
+          <small>{{'global.messages.validate.newpassword.strength' | translate}}</small>
           <app-password-strength-bar [passwordToCheck]="createUserForm.get('password')?.value"></app-password-strength-bar>
           </div>
         </div>
   
         <div class="form-group">
-          <label>New password confirmation</label>
-          <input type="password" class="form-control" placeholder="Confirm the new password" formControlName="confirmPassword" [ngClass]="{ 'border-red': submitted && createUserForm.get('confirmPassword')?.invalid }" />
+          <label for="newPasswordConfirmation">{{ 'global.form.confirmpassword' | translate | compareText:'New password confirmation' }}</label>
+          <input type="password" class="form-control" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}" formControlName="confirmPassword" [ngClass]="{ 'border-red': submitted && createUserForm.get('confirmPassword')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('confirmPassword')?.invalid">
-            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['required']">Your password confirmation is required.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['minlength']">Your password confirmation is required to be at least 5 characters.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['maxlength']">Your password confirmation cannot be longer than 50 characters.</div>
-            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['match']">Your password confirmation does not match your password.</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['required']">{{ 'global.messages.validate.confirmpassword.required' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['minlength']">{{ 'global.messages.validate.confirmpassword.minlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['maxlength']">{{ 'global.messages.validate.confirmpassword.maxlength' | translate }}</div>
+            <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['match']">{{ 'global.messages.validate.confirmpassword.match' | translate }}</div>
           </div>
         </div>
   
         <div class="form-group">
-          <label>
-            <input type="checkbox" formControlName="tos" [ngClass]="{ 'border-red': submitted && createUserForm.get('tos')?.invalid }" />
-            <small class="muted">
-              Agree to our
-              <a href="https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service" target="_blank">Terms and Conditions</a>.
-            </small>
+          <label for="tos">
+            <input type="checkbox" formControlName="tos" [ngClass]="{ 'border-red': submitted && createUserForm.get('tos')?.invalid }" />&nbsp;
+            <small class="muted" [innerHTML]="('register.form.tos' | translate)"></small>
           </label>
           <div *ngIf="submitted && createUserForm.get('tos')?.invalid">
             <div class="help-block">You must agree to the IHTSDO Terms and Conditions to continue.</div>
           </div>
         </div>
   
-        <button type="submit" class="btn btn-primary btn-lg">Start Registration</button>
+        <button type="submit" class="btn btn-primary btn-lg">{{ 'register.form.button' | translate }}</button>
       </form>
     </div>
     <div class="col-md-3"></div>

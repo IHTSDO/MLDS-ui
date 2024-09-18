@@ -6,11 +6,13 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CountryService } from 'src/app/services/country/country.service';
 import { EmbeddableUsageLogComponent } from "../embeddable-usage-log/embeddable-usage-log.component";
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
   selector: 'app-full-page-usage-log',
   standalone: true,
-  imports: [CommonModule, FormsModule, EmbeddableUsageLogComponent],
+  imports: [CommonModule, FormsModule, EmbeddableUsageLogComponent, TranslateModule, CompareTextPipe],
   templateUrl: './full-page-usage-log.component.html',
   styleUrl: './full-page-usage-log.component.scss'
 })
@@ -65,7 +67,7 @@ export class FullPageUsageLogComponent implements OnInit {
   }
 
   goToUsageReport(): void {
-    this.router.navigate(['/usageReports']);
+    window.history.back();
   }
  
   closeAlert(index: number) {

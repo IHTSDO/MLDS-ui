@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { ExclusionModalComponent } from '../../user/exclusion-modal/exclusion-modal.component';
 import { ROUTES } from 'src/app/routes-config'
 import { ErrorCodes } from 'src/app/error-codes'
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 /**
  * Register component
@@ -20,7 +22,7 @@ import { ErrorCodes } from 'src/app/error-codes'
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule, PasswordStrengthBarComponent],
+  imports: [CommonModule, ReactiveFormsModule, NgbModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -77,7 +79,8 @@ export class RegisterComponent {
     private registerService: RegisterService, 
     private commercialUsageService: CommercialUsageService, 
     private router: Router, 
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private translate: TranslateService
   ) 
   {  
     this.createUserForm = this.fb.group({});
@@ -116,12 +119,23 @@ export class RegisterComponent {
   search = (text$: Observable<string>) =>
     text$.pipe(
       startWith(''),
-      map(term => (term === '' ? []
-        : this.availableCountries
-            .filter(country => country.commonName.toLowerCase().includes(term.toLowerCase()))
-            .slice(0, 8)
-      ))
+      map(term => {
+        if (term === '') {
+          return [];
+        }
+  
+        const translatedCountries = this.availableCountries.map(country => ({
+          ...country,
+          translatedName: this.translate.instant('global.country.' + country.isoCode2) || country.commonName
+        }));
+  
+        return translatedCountries
+          .filter(country => country.translatedName.toLowerCase().includes(term.toLowerCase()))
+          .slice(0, 8);
+      })
     );
+  
+  
 
   /**
    * Formats a country object for display
@@ -129,7 +143,15 @@ export class RegisterComponent {
    * @param country - The country object
    * @returns - The formatted country name
    */
-  formatCountry = (country: any) => country.commonName;
+  formatCountry = (country: any) => {
+    const isoCode2 = country?.isoCode2;
+    if (!isoCode2) {
+      return ''; 
+    }
+    const translatedName = this.translate.instant('global.country.' + country.isoCode2);
+    return translatedName || country.commonName; 
+  };
+  
 
   /**
    * Submits the registration form
@@ -198,12 +220,21 @@ private inputsMatchValidator(formGroup: FormGroup) {
  *
  * @param newValue - The new country value
  */
-private handleCountryChange(newValue: any): void {
-  const country = this.availableCountries.find(c => c.commonName === newValue.commonName);
-  if (country && country.excludeUsage) {
-    this.showExclusionModal(country);
+  private handleCountryChange(newValue: any): void {
+    const countryControl = this.createUserForm.get('country');
+    if (countryControl) {
+      const country = this.availableCountries.find(c => c.commonName === newValue.commonName);
+      if (country) {
+
+        if (country.excludeUsage) {
+          this.showExclusionModal(country);
+        }
+        countryControl.setErrors(null);
+      } else {
+        countryControl.setErrors({ editable: true });
+      }
+    }
   }
-}
 
 /**
  * Shows exclusion modal for countries with exclude usage

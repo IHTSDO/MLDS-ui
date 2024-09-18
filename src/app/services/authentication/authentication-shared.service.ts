@@ -86,11 +86,11 @@ export class AuthenticationSharedService {
   extractErrorCode(message: string): string {
     const errorCodeMapping: { [key: string]: string } = {
       'MLDS_ERR_AUTH_NO_PERMISSIONS': 'login.messages.error.noPermissions',
-      'MLDS_ERR_AUTH_BAD_PASSWORD': '<strong>Authentication failed!</strong> Please check your credentials and try again. Passwords are case sensitive.',
+      'MLDS_ERR_AUTH_BAD_PASSWORD': 'login.messages.error.authentication',
       'MLDS_ERR_AUTH_DEREGISTERED': 'login.messages.error.deregistered',
       'MLDS_ERR_AUTH_SYSTEM': 'global.messages.error.server'
     };
-    return errorCodeMapping[message] || '<strong>Authentication failed!</strong> Please check your credentials and try again. Passwords are case sensitive.';
+    return errorCodeMapping[message] || 'login.messages.error.authentication';
   }
 
   /**

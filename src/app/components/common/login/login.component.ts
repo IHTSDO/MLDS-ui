@@ -7,6 +7,8 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { ROUTES } from 'src/app/routes-config'
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * LoginComponent - Handles user login functionality
@@ -18,7 +20,7 @@ import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affil
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, CompareTextPipe, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

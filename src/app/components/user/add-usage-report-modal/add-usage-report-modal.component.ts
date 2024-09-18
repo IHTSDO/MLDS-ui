@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule,FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -21,10 +22,12 @@ export class AddUsageReportModalComponent implements OnInit {
   submitting = false;
   affiliateId!: number; // This should be passed in from the parent component
   addRangeForm!: FormGroup; // Use FormGroup to ensure proper typing
+  isAdminOrStaff = false;
 
   constructor(
     public activeModal: NgbActiveModal,
     private commercialUsageService: CommercialUsageService,
+    private session: AuthenticationSharedService,
     private router: Router,
     private fb: FormBuilder // Add FormBuilder to your constructor
   ) {}
@@ -32,7 +35,7 @@ export class AddUsageReportModalComponent implements OnInit {
   ngOnInit(): void {
     this.ranges = this.commercialUsageService.generateRanges();
     this.selectedRange = this.ranges[0];
-
+    this.isAdminOrStaff = this.session.isStaffOrAdmin();
     // Initialize the form with FormBuilder
     this.addRangeForm = this.fb.group({
       selectedRange: [this.selectedRange, Validators.required]
@@ -57,7 +60,11 @@ export class AddUsageReportModalComponent implements OnInit {
        
         console.log(result);
         const commercialUsageId = result.commercialUsageId;
-        this.router.navigate(['/usageReports/usageLog', commercialUsageId]);
+        if (this.isAdminOrStaff) {
+          this.router.navigate(['/usageReports/usageLog', commercialUsageId]);
+        } else {
+          this.router.navigate(['/usageReport/usageLog', commercialUsageId]);
+        }
         this.activeModal.close(result);
       },
       error: () => {

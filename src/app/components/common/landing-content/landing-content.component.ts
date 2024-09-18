@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -24,7 +24,7 @@ import { MemberService } from 'src/app/services/member/member.service';
   templateUrl: './landing-content.component.html',
   styleUrl: './landing-content.component.scss'
 })
-export class LandingContentComponent {
+export class LandingContentComponent implements OnInit{
  /**
    * Member key retrieved from route parameters or default value
    */
@@ -71,6 +71,7 @@ export class LandingContentComponent {
    /**
     * Subscribes to route parameters changes
     */
+   this.setLandingText();
    this.route.params.subscribe(params => {
      /**
       * Retrieves the member key from route parameters or uses the default value

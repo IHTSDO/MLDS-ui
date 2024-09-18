@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PasswordResetService } from 'src/app/services/passwordReset/password-reset.service';
 import { PasswordStrengthBarComponent } from '../password-strength-bar/password-strength-bar.component';
 import { ROUTES } from 'src/app/routes-config'
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 /**
  * Component for resetting a user's password.
@@ -15,7 +17,7 @@ import { ROUTES } from 'src/app/routes-config'
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, PasswordStrengthBarComponent],
+  imports: [ReactiveFormsModule, CommonModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })

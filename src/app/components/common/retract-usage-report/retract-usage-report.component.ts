@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 
 @Component({
   selector: 'app-retract-usage-report',
   standalone: true,
-  imports: [CommonModule,NgbAlert],
+  imports: [CommonModule,NgbAlert, TranslateModule, CompareTextPipe],
   templateUrl: './retract-usage-report.component.html',
   styleUrl: './retract-usage-report.component.scss'
 })

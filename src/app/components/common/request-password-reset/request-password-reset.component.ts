@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { catchError, finalize, of, switchMap } from 'rxjs';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { PasswordResetService } from 'src/app/services/passwordReset/password-reset.service';
 
 /**
@@ -13,7 +15,7 @@ import { PasswordResetService } from 'src/app/services/passwordReset/password-re
 @Component({
   selector: 'app-request-password-reset',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, CompareTextPipe],
   templateUrl: './request-password-reset.component.html',
   styleUrl: './request-password-reset.component.scss'
 })
@@ -43,6 +45,7 @@ export class RequestPasswordResetComponent implements OnInit {
      * Password Reset Service
      */
     private passwordResetService: PasswordResetService,
+    private translateService: TranslateService,
     /**
      * Form Builder
      */
@@ -79,13 +82,15 @@ export class RequestPasswordResetComponent implements OnInit {
       .pipe(
         switchMap(response => {
           if (response) {
-            this.alerts.push({ type: 'success', msg: 'Password reset process started, please check your email.' });
+            const successMsg = this.translateService.instant('views.requestPasswordReset.resetEmailSent');
+            this.alerts.push({ type: 'success', msg: successMsg });
             this.resetProcessStarted = true;
           }
           return of(response);
         }),
         catchError(error => {
-          this.alerts.push({ type: 'danger', msg: 'Email not found.' });
+          const errorMsg = this.translateService.instant('views.requestPasswordReset.emailNotFound');
+          this.alerts.push({ type: 'danger', msg: errorMsg });
           console.error('Error sending reset email:', error);
           return of(null);
         }),

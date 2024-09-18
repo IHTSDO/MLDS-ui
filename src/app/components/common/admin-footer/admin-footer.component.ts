@@ -10,19 +10,38 @@
  *
  * @component
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-footer',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './admin-footer.component.html',
   styleUrls: ['./admin-footer.component.scss']
 })
-export class AdminFooterComponent {
+export class AdminFooterComponent implements OnInit{
+
+  copyright!: string; 
 
   /**
    * Constructor
    */
   constructor() { }
+
+
+  ngOnInit(): void {
+     this.updateCopyright();
+    this.loadIubendaScript();
+  }
+
+  updateCopyright(): void {
+    this.copyright = 'Copyright © ' + new Date().getFullYear() + ' SNOMED International';
+  }
+
+  loadIubendaScript(): void {
+    const script = document.createElement('script');
+    script.src = '//cdn.iubenda.com/iubenda.js';
+    document.body.appendChild(script);
+  }
 }

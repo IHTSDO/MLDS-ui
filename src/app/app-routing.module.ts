@@ -114,7 +114,7 @@ const routes: Routes = [
       { path: 'viewReleases', component: ViewReleasesComponent },
       { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
       { path: 'emailVerification', component: EmailVerificationComponent },
-      { path: 'usageReports', component: UserUsageReportsTableComponent },
+      { path: 'usageReport', component: UserUsageReportsTableComponent },
       { path: 'password', component: ChangePasswordComponent },
       { path: 'contactInfo', component: ContactInfoComponent },
       { path: 'affiliateRegistration',component: AffiliateRegistrationComponent},

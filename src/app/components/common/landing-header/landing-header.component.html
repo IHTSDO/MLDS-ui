@@ -29,13 +29,13 @@
                 
                 <!-- Dashboard link when user is authenticated -->
                 <li *ngIf="isAuthenticated">
-                    <a routerLink="/userDashboard"> <span>{{'global.menu.dashboard' | translate }}</span></a>
+                    <a routerLink="/userDashboard"> <span>{{'global.menu.dashboard' | translate | compareText: 'Dashboard'}}</span></a>
                 </li>
   
 
                 <!-- Usage Reports Link -->
                 <li *ngIf="isAuthenticated">
-                    <a routerLink="/usageReports">
+                    <a routerLink="/usageReport">
                         <span>{{'global.menu.usageReports' |translate | compareText: 'Usage Reports'}}</span>
                     </a>
                 </li>

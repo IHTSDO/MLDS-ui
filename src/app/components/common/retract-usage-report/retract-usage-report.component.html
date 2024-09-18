@@ -1,6 +1,6 @@
 <div class="modal-header">
     <button type="button" class="btn-close" aria-label="Close" style="margin-left: 75rem;" (click)="cancel()"></button>
-    <h4 class="modal-title">Retract Usage Declaration</h4>
+    <h3 class="modal-title">{{ 'views.usage.retract.title' | translate | compareText:'Retract Usage Declaration' }}</h3>
   </div>
   <div class="modal-body">
      <div *ngFor="let alert of alerts; let i = index" 
@@ -9,17 +9,16 @@
   <button type="button" class="btn-close position-absolute top-0 end-0 me-2 mt-2" (click)="closeAlert(i)" aria-label="Close"></button>
   {{ alert.msg }}
 </div>
-    <p>
-      Are you sure you want to retract this report? You will return to the same usage report to edit and re-submit. For a new time period you must submit a new declaration report.
-    </p>
+    <p>{{ 'views.usage.retract.instructions' | translate }}</p>
+
     
-    <p><strong style="font-weight: 700;">Declaration for Period {{ commercialUsageReport.startDate | date : 'yyyy-MM' }} &#8211; {{ commercialUsageReport.endDate | date : 'yyyy-MM' }}</strong></p>
+    <p><strong style="font-weight: 700;"><span>{{ 'views.usage.submit.declarationForPeriod' | translate }}</span>      {{ commercialUsageReport.startDate | date : 'yyyy-MM' }} &#8211; {{ commercialUsageReport.endDate | date : 'yyyy-MM' }}</strong></p>
   </div>
   <div class="modal-footer">
-    <button class="btn-link" (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button class="btn-link" (click)="cancel()" [disabled]="submitting">{{ 'global.word.cancel' | translate }}</button>
     
     <button class="btn btn-warning btn-sm" (click)="retract()" [disabled]="submitting">
-      Retract Declaration
+      {{ 'views.usage.retract.button' | translate }}
       <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
     </button>
   </div>
