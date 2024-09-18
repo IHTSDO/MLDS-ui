@@ -1,9 +1,10 @@
 <div class="modal-header">
-  <button type="button" class="close" (click)="cancel()">&times;</button>
+  
   <h3 class="modal-title">
-    <span>{{'global.word.add' | translate | compareText:'Add'}}</span>
-    <span>{{'views.usageLog.institutions.hospAndInst' | translate | compareText :'Hospital/Institution'}}</span>
+   <b> <span>{{'global.word.add' | translate | compareText:'Add'}}</span>
+    <span>{{'views.usageLog.institutions.hospAndInst' | translate | compareText :'Hospital/Institution'}}</span></b>
   </h3>
+  <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()"></button>
 </div>
 
 <div class="modal-body">
@@ -12,12 +13,12 @@
     <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
   </div>
 
-  <h3>{{ 'global.country.' + country?.isoCode2 | translate}}</h3>
+  <h3><strong>{{ 'global.country.' + country?.isoCode2 | translate}}</strong></h3>
 
   <form [formGroup]="form" (ngSubmit)="add()">
     <div class="row">
       <div class="form-group col-md-6">
-        <label>{{'views.usageLog.institutions.modal.subtitle' |translate | compareText: 'Hospital/Institution Name'}}</label>
+        <label><b>{{'views.usageLog.institutions.modal.subtitle' |translate | compareText: 'Hospital/Institution Name'}}</b></label>
         <input
           class="form-control"
           placeholder="{{ 'views.usageLog.institutions.modal.placeholder' | translate }}"

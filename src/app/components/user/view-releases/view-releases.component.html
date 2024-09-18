@@ -45,12 +45,12 @@
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" class="badge bg-warning float-end"
           >
-         {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
+         {{ 'views.releases.warning.pAttention'| translate |compareText:'Primary application needs attention'}}
           </span>
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
           >
-         {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
+         {{'views.releases.warning.pProcessed'  | translate |compareText:'Primary application is being processed'}}
           </span>
 
           <button class="edit-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 

@@ -1,0 +1,28 @@
+.btn-link {
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+.btn-link:hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}
+.btn-success {
+    color: #3cb878;
+    border: 1px solid;
+    background-color: #ffffff;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+}
+
+.btn-success:hover, .btn-success:focus {
+    color: #ffffff;
+    border: 1px solid;
+    background-color: #3cb878;
+}

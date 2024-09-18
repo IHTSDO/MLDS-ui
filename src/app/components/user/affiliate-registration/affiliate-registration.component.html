@@ -124,7 +124,7 @@
                             <h4 class="panel-title">
                                 <span>{{'views.contactInfo.contact.title'|translate|compareText:'Contact Information'}}</span>&nbsp;
                                 <small *ngIf="affiliateApplicationForm?.get('type')?.value === 'INDIVIDUAL'">Member:
-                                    {{applicationData?.affiliateDetails?.address?.country?.member?.key}}</small>
+                                    {{'global.member.'+applicationData?.affiliateDetails?.address?.country?.member?.key|translate}}</small>
                             </h4>
                         </div>
 
@@ -502,7 +502,7 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <span >{{'views.contactInfo.organization.title'|translate|compareText:'Organization'}}</span>&nbsp;
-                                <small>Member: {{applicationData.affiliateDetails.address.country.member.key}}</small>
+                                <small>Member: {{'global.member.'+applicationData.affiliateDetails.address.country.member.key|translate}}</small>
                             </h4>
                         </div>
 
@@ -539,7 +539,7 @@
                                                 >{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:</label>
                                             <select formControlName="organizationType" class="form-select">
                                                 <option *ngFor="let type of organizationTypes" [value]="type"
-                                                    (blur)="autoSubmit()">{{ type }}
+                                                    (blur)="autoSubmit()">{{ 'affiliate.organizationType.'+type|translate }}
                                                 </option>
                                             </select>
                                         </div>

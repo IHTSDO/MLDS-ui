@@ -1,9 +1,10 @@
 <div class="modal-header">
-    <button type="button" class="close" aria-hidden="true" (click)="cancel()">&times;</button>
+    
     <h3 class="modal-title">
-      <span >{{'global.word.edit'|translate|compareText:'Edit'}}</span>
+      <span >{{'global.word.edit'|translate|compareText:'Edit'}}</span>&nbsp;
       <span>{{'views.usageLog.institutions.dataAnalysis.title'|translate|compareText:'Data Analysis'}}</span>
     </h3>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
   <div class="modal-body">
     <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alerts.indexOf(alert))">
@@ -12,10 +13,10 @@
     <h3>{{ 'global.country.' + count?.country?.isoCode2 | translate  }}</h3>
     <div class="row">
       <div class="col-md-6">
-        <p><span>{{'views.usageLog.institutions.hospAndInst.plural.label'|translate|compareText:'Hospitals/Institutions'}}:</span> <strong>{{ hospitalsCount | number }}</strong></p>
+        <p><span>{{'views.usageLog.institutions.hospAndInst.plural'|translate|compareText:'Hospitals/Institutions'}}:</span> <strong>{{ hospitalsCount | number }}</strong></p>
       </div>
       <div class="col-md-6">
-        <p><span>{{'views.usageLog.institutions.practices.label'|translate|compareText:'Practices'}}:</span> <strong>{{ practicesCount | number }}</strong></p>
+        <p><span>{{'views.usageLog.institutions.practices'|translate|compareText:'Practices'}}:</span> <strong>{{ practicesCount | number }}</strong></p>
       </div>
     </div>
     
@@ -62,7 +63,7 @@
         </div>
         <div class="row">
           <div class="col-md-2">
-            <label><span>{{'views.usageLog.institutions.dataAnalysis.systems.label'|translate|compareText:'Systems'}}:</span></label>
+            <label><span>{{'views.usageLog.institutions.dataAnalysis.systems'|translate|compareText:'Systems'}}:</span></label>
           </div>
           <div class="col-md-4">
             <input type="number" min="0" class="form-control" formControlName="deployedDataAnalysisSystems">
@@ -70,7 +71,7 @@
             <span *ngIf="formCount.get('deployedDataAnalysisSystems')?.errors?.['number'] && submitAttempted" class="help-block" >{{'form.invalidNumber'|translate|compareText:'Not a valid number'}}</span>
           </div>
           <div class="col-md-2">
-            <label><span>{{'views.usageLog.institutions.dataAnalysis.data.label'|translate|compareText:'Data'}}:</span></label>
+            <label><span>{{'views.usageLog.institutions.dataAnalysis.data'|translate|compareText:'Data'}}:</span></label>
           </div>
           <div class="col-md-4">
             <input type="number" min="0" class="form-control" formControlName="databasesPerDeployment">
