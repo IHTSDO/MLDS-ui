@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 
 @Component({
   selector: 'app-edit-count-modal',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,TranslateModule,CompareTextPipe],
   templateUrl: './edit-count-modal.component.html',
   styleUrl: './edit-count-modal.component.scss'
 })

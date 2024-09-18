@@ -4,11 +4,13 @@ import { FormsModule, ReactiveFormsModule,FormBuilder, Validators, FormGroup } f
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-usage-report-modal',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, CompareTextPipe,TranslateModule],
   templateUrl: './add-usage-report-modal.component.html',
   styleUrl: './add-usage-report-modal.component.scss'
 })

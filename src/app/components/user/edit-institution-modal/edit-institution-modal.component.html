@@ -1,6 +1,9 @@
 <div class="modal-header">
     
-    <h3 class="titles">Edit Hospital/Institution</h3>
+  <h3 class="title">
+    <span>{{ 'global.word.edit' | translate | compareText: 'Edit' }}</span>
+    <span>{{ 'views.usageLog.institutions.hospAndInst' | translate | compareText: 'Hospital/Institution' }}</span>
+  </h3>
     <button type="button" class="btn-close" (click)="cancel()"></button>
 
   </div>
@@ -13,20 +16,20 @@
       </div>
     </div>
   
-    <h3>{{ 'global.country.' + institution.country?.isoCode2 }}</h3>
+    <h3>{{ 'global.country.' + institution.country?.isoCode2 |translate }}</h3>
   
     <form [formGroup]="formInstitution" (ngSubmit)="updateInstitution()">
       <div class="row">
         <div class="col-md-6 form-group">
-          <label class="title" for="name">Hospital/Institution Name</label>
+          <label class="title" for="name">{{'views.usageLog.institutions.modal.subtitle'|translate|compareText:'Hospital/Institution Name'}}</label>
           <input
             id="name"
             formControlName="name"
             class="form-control"
-            placeholder="Enter hospital or institution name"
+            placeholder="{{ 'views.usageLog.institutions.modal.placeholder' | translate}}"
           />
           <div *ngIf="formInstitution.get('name')?.invalid && attemptedSubmit" class="text-danger">
-            Required Field
+            {{'form.requiredField'|translate|compareText:'Required Field'}}
           </div>
         </div>
       </div>
@@ -35,7 +38,7 @@
   
       <div class="row">
         <div class="col-md-4 form-group">
-          <h4 class="title">Started to Use</h4>
+          <h4 class="title">{{'views.usageLog.institutions.started'|translate|compareText:'Started to Use'}}</h4>
           <div class="input-group datepicker">
             <input
               formControlName="startDate"
@@ -48,13 +51,13 @@
               <i class="fa fa-calendar"></i>
             </span>
             <div *ngIf="formInstitution.get('startDate')?.invalid && attemptedSubmit" class="text-danger">
-              Required Field
+              {{'form.requiredField'|translate|compareText:'Required Field'}}
             </div>
           </div>
         </div>
       
         <div class="col-md-4 form-group">
-          <h4 class="title">Ceased Use</h4>
+          <h4 class="title">{{'views.usageLog.institutions.finished'|translate|compareText:'Ceased Use'}}</h4>
           <div class="input-group datepicker">
             <input
               formControlName="endDate"
@@ -68,7 +71,7 @@
               <i class="fa fa-calendar"></i>
             </span>
             <div *ngIf="formInstitution.get('endDate')?.hasError('dateAfter') && attemptedSubmit" class="text-danger">
-              Date before Started to Use date
+              {{'views.usageLog.institutions.modal.dateBefore'|translate|compareText:'Date before Started to Use date'}}
             </div>
           </div>
         </div>
@@ -76,7 +79,7 @@
       
       <div class="row">
         <div class="col-md-8 form-group">
-          <label class="title" for="note">Note</label>
+          <label class="title" for="note">{{'global.word.note'|translate|compareText:'Note'}}</label>
           <textarea id="note" formControlName="note" class="form-control" rows="4"></textarea>
         </div>
       </div>
@@ -84,12 +87,12 @@
   </div>
   
   <div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel'|translate|compareText:'Cancel'}}</button>
     <button
       class="add-button"
       (click)="updateInstitution()"
     >
-      Update <span *ngIf="submitting" class="spinner-border spinner-border-sm"></span>
+      {{'global.word.update'|translate|compareText:'Update'}} <span *ngIf="submitting" class="spinner-border spinner-border-sm"></span>
     </button>
   </div>
   

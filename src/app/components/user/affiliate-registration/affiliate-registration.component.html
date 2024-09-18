@@ -4,16 +4,13 @@
         <div class="row space" *ngIf="approvalState === 'CHANGE_REQUESTED'">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="alert alert-warning" role="alert">
-                    <div translate="register.affiliateRegistration.changeRequestedWarning.title"><strong>Affiliate
-                            Registration Needs Amendments</strong></div>
-                    <p translate="register.affiliateRegistration.changeRequestedWarning.text">Your affiliate
-                        registration needs to be updated before it can processed. Please see email regarding the
-                        necessary changes to complete your registration.</p>
+                    <div><strong>{{'register.affiliateRegistration.changeRequestedWarning.title'|translate|compareText:'Affiliate Registration Needs Amendments'}}</strong></div>
+                    <p>{{'register.affiliateRegistration.changeRequestedWarning.text'|translate|compareText:'Your affiliate  registration needs to be updated before it can processed. Please see email regarding the necessary changes to complete your registration.'}}</p>
                 </div>
             </div>
         </div>
 
-        <h1 translate="register.affiliateRegistration.title">Affiliate Registration</h1>
+        <h1>{{'register.affiliateRegistration.title'|translate  |compareText:'Affiliate Registration'}}</h1>
 
         <div class="row">
             <div class="col-sx-12 col-md-12">
@@ -23,35 +20,28 @@
 
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <span translate="register.affiliateRegistration.usageType"> Usage Type</span>
+                                <span> {{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}</span>
                             </h4>
                         </div>
 
                         <div class="panel-collapse collapse show">
                             <div class="panel-body">
-                                <h4 translate="register.affiliateRegistration.conditions">Please select the conditions
-                                    that the product will be used under:</h4>
+                                <h4>{{'register.affiliateRegistration.conditions'|translate|compareText:'Please select the conditions that the product will be used under'}}:</h4>
 
                                 <!-- for usage type -->
                                 <div class="form-group">
 
-                                    <label for="usageType"
-                                        translate="register.affiliateRegistration.usageType.label">Usage Type: </label>
+                                    <label for="usageType">{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}: </label>
                                     <select formControlName="type" class="form-select input-md">
-                                        <option value="COMMERCIAL" translate="affiliate.type.extended.COMMERCIAL">
-                                            Commercial - Developer, Vendor or Terminology provider</option>
-                                        <option value="ACADEMIC" translate="affiliate.type.extended.ACADEMIC">Academic -
-                                            for internal use within an Organization. (Educational, Research, Development
-                                            or Healthcare Provider)</option>
-                                        <option value="OTHER" translate="affiliate.type.extended.OTHER">Other - Use not
-                                            stated in other options</option>
-                                        <option value="INDIVIDUAL" translate="affiliate.type.extended.INDIVIDUAL">
-                                            Individual - Personal, Educational or Research</option>
+                                        <option value="COMMERCIAL">{{ 'affiliate.types.extended.COMMERCIAL' | translate }}</option>
+                                        <option value="ACADEMIC">{{ 'affiliate.types.extended.ACADEMIC' | translate }}</option>
+                                        <option value="OTHER">{{ 'affiliate.types.extended.OTHER' | translate }}</option>
+                                        <option value="INDIVIDUAL">{{ 'affiliate.types.extended.INDIVIDUAL' | translate }}</option>
                                     </select>
 
                                     <p *ngIf="(affiliateApplicationForm?.get('type')?.hasError('required') && (affiliateApplicationForm?.get('type')?.touched || submitAttempted))"
                                         class="help-block">
-                                        Usage type field is required.
+                                        {{'register.messages.validate.registration.usagetyperequired'|translate|compareText:'Usage type field is required.'}}
                                     </p>
                                 </div>
 
@@ -59,36 +49,36 @@
                                 <div class="form-group"
                                     *ngIf="affiliateApplicationForm?.get('type')?.value && affiliateApplicationForm?.get('type')?.value !== 'OTHER'">
                                     <label for="subType"
-                                        translate="views.contactInfo.admin.subtype.name.label">Subtype:</label>
+                                        >{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:</label>
                                     <select formControlName="subType" class="form-select input-md"
                                         (blur)="autoSubmit()">
                                         <option value="" disabled selected>Select a subtype</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value === 'COMMERCIAL'"
-                                            value="DEVELOPER">Developer</option>
+                                            value="DEVELOPER">{{'affiliate.subType.DEVELOPER'|translate|compareText:'Developer'}}</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value === 'ACADEMIC'"
-                                            value="DEVELOPMENT">Development</option>
+                                            value="DEVELOPMENT">{{'affiliate.subType.DEVELOPMENT'|translate|compareText:'Development'}}</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value !== 'COMMERCIAL'"
-                                            value="EDUCATIONAL">Educational</option>
+                                            value="EDUCATIONAL">{{'affiliate.subType.EDUCATIONAL'|translate|compareText:'Educational'}}</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value === 'ACADEMIC'"
-                                            value="HEALTHCAREPROVIDER">Healthcare Provider</option>
+                                            value="HEALTHCAREPROVIDER">{{'affiliate.subType.HEALTHCAREPROVIDER'|translate|compareText:'Healthcare Provider'}}</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value === 'INDIVIDUAL'"
-                                            value="PERSONAL">Personal</option>
+                                            value="PERSONAL">{{'affiliate.subType.PERSONAL'|translate|compareText:'Personal'}}</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value !== 'COMMERCIAL'"
-                                            value="RESEARCH">Research</option>
+                                            value="RESEARCH">{{'affiliate.subType.RESEARCH'|translate|compareText:'Research'}}</option>
                                         <option *ngIf="affiliateApplicationForm?.get('type')?.value === 'COMMERCIAL'"
-                                            value="VENDOR">Vendor</option>
+                                            value="VENDOR">{{'affiliate.subType.VENDOR'|translate|compareText:'Vendor'}}</option>
                                     </select>
 
                                     <p *ngIf="affiliateApplicationForm?.get('subType')?.hasError('required') && (affiliateApplicationForm?.get('subType')?.touched || submitAttempted)"
                                         class="help-block">
-                                        Subtype field is required.
+                                        {{'register.messages.validate.registration.subtyperequired'|translate|compareText:'Subtype field is required.'}}
                                     </p>
                                 </div>
 
                                 <!-- other type text -->
                                 <div class="form-group"
                                     *ngIf="affiliateApplicationForm?.get('type')?.value === 'OTHER'">
-                                    <label for="other">Other:</label>
+                                    <label for="other">{{'views.contactInfo.admin.other.name'|translate|compareText:'Other'}}:</label>
                                     <input type="text" formControlName="otherText" class="form-control"
                                         (blur)="autoSubmit()">
 
@@ -97,11 +87,11 @@
                                         *ngIf="(affiliateApplicationForm?.get('otherText')?.touched || submitAttempted)">
                                         <p *ngIf="affiliateApplicationForm?.get('otherText')?.hasError('required')"
                                             class="help-block">
-                                            Other field is required.
+                                            {{'register.messages.validate.registration.other.required'|translate|compareText:'Other field is required.'}}
                                         </p>
                                         <p *ngIf="affiliateApplicationForm?.get('otherText')?.hasError('maxlength')"
                                             class="help-block">
-                                            Input value is too long.
+                                            {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                         </p>
                                     </div>
 
@@ -109,9 +99,9 @@
 
                                 <!-- agreement type -->
                                 <div *ngIf="!billingHide" class="form-group">
-                                    <label for="agreementType">Type of Agreement:</label>
+                                    <label for="agreementType">{{'register.affiliateRegistration.typeOfAgreement'|translate|compareText:'Type of Agreement'}}:</label>
                                     <select formControlName="agreementType" class="form-select" (blur)="autoSubmit()">
-                                        <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ type }}
+                                        <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ 'affiliate.agreementType.'+type|translate }}
                                         </option>
                                     </select>
 
@@ -119,7 +109,7 @@
                                         *ngIf="(affiliateApplicationForm?.get('agreementType')?.touched || submitAttempted)">
                                         <p *ngIf="affiliateApplicationForm?.get('agreementType')?.hasError('required')"
                                             class="help-block">
-                                            Required field.
+                                            {{'form.requiredField'|translate|compareText:'Required field.'}}
                                         </p>
                                     </div>
 
@@ -132,7 +122,7 @@
 
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <span translate="views.contactInfo.contact.title">Contact Information</span>&nbsp;
+                                <span>{{'views.contactInfo.contact.title'|translate|compareText:'Contact Information'}}</span>&nbsp;
                                 <small *ngIf="affiliateApplicationForm?.get('type')?.value === 'INDIVIDUAL'">Member:
                                     {{applicationData?.affiliateDetails?.address?.country?.member?.key}}</small>
                             </h4>
@@ -143,11 +133,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p><label for="name"
-                                                translate="views.contactInfo.contact.fullName.label">Name:</label>
+                                               >{{'views.contactInfo.contact.fullName'|translate|compareText:'Name'}}:</label>
                                             {{applicationData.affiliateDetails.firstName + ' ' +
                                             applicationData.affiliateDetails.lastName}}</p>
                                         <p><label for="email"
-                                                translate="views.contactInfo.contact.email.name.label">Email:</label>
+                                                >{{'views.contactInfo.contact.email.name'|translate|compareText:'Email'}}:</label>
                                             {{applicationData.affiliateDetails.email}}</p>
                                     </div>
                                 </div>
@@ -157,26 +147,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="alternateEmail"
-                                                translate="views.contactInfo.contact.alternateEmail.name.label">Alternate
-                                                Email:</label>
+                                                >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</label>
                                             <input class="form-control" type="email" formControlName="alternateEmail"
                                                 (blur)="autoSubmit()" />
 
                                             <div
                                                 *ngIf="affiliateApplicationForm?.get('alternateEmail')?.touched || submitAttempted">
                                                 <p *ngIf="affiliateApplicationForm?.get('alternateEmail')?.hasError('required')"
-                                                    class="help-block" translate="form.requiredField">
-                                                    Required field.
+                                                    class="help-block">
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('alternateEmail')?.hasError('required') && affiliateApplicationForm?.get('alternateEmail')?.hasError('email')"
                                                     class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Invalid Email Address.
+                                                    >
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Invalid Email Address.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('alternateEmail')?.hasError('required') && affiliateApplicationForm?.get('alternateEmail')?.hasError('notUnique')"
                                                     class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Email Addresses needs to be unique.
+                                                    >
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses needs to be unique.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -188,26 +177,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="thirdEmail"
-                                                translate="views.contactInfo.contact.thirdEmail.label">Third
-                                                Email:</label>
+                                                >{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</label>
 
                                             <input class="form-control" type="email" formControlName="thirdEmail"
                                                 (blur)="autoSubmit()" />
                                             <div
                                                 *ngIf="affiliateApplicationForm?.get('thirdEmail')?.touched || submitAttempted">
                                                 <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('required')"
-                                                    class="help-block" translate="form.requiredField">
-                                                    Required field.
+                                                    class="help-block">
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('email')"
                                                     class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Invalid Email Address.
+                                                    >
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Invalid Email Address.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('notUnique')"
                                                     class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Email Addresses needs to be unique.
+                                                    >
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses needs to be unique.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -217,12 +205,11 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="landline"
-                                            translate="views.contactInfo.contact.landline.name.label">Landline Phone
-                                            Number:</label>
+                                            >{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:</label>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="extension"
-                                            translate="views.contactInfo.contact.landlineExtension.name.label">Extension:</label>
+                                            >{{'views.contactInfo.contact.landlineExtension.name'|translate|compareText:'Extension'}}:</label>
                                     </div>
                                 </div>
 
@@ -238,15 +225,15 @@
                                             *ngIf="affiliateApplicationForm?.get('contactPhone')?.touched || submitAttempted">
                                             <p *ngIf="affiliateApplicationForm.get('contactPhone')?.hasError('required')"
                                                 class="help-block">
-                                                Required field.
+                                                {{'form.requiredField'|translate|compareText:'Required field.'}}
                                             </p>
                                             <p *ngIf="!affiliateApplicationForm.get('contactPhone')?.hasError('required') && affiliateApplicationForm.get('contactPhone')?.hasError('maxLength')"
                                                 class="help-block">
-                                                Input value is too long.
+                                                {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                             </p>
                                             <p *ngIf="!affiliateApplicationForm.get('contactPhone')?.hasError('required') && affiliateApplicationForm.get('contactPhone')?.hasError('phoneNumberInvalid')"
                                                 class="help-block">
-                                                Invalid Phone Number.
+                                                {{'views.contactInfo.contact.landline.invalid'|translate|compareText:'Invalid Phone Number.'}}
                                             </p>
                                         </div>
                                     </div>
@@ -258,7 +245,7 @@
                                                 (blur)="autoSubmit()" />
                                             <p *ngIf="affiliateApplicationForm.get('contactExtension')?.hasError('maxLength')"
                                                 class="help-block">
-                                                Input value is too long.
+                                                {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                             </p>
                                         </div>
                                     </div>
@@ -267,8 +254,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="mobile"
-                                            translate="views.contactInfo.contact.mobile.name.label">Mobile Phone
-                                            Number:</label>
+                                            >{{'views.contactInfo.contact.mobile.name'|translate|compareText:'Mobile Phone Number'}}:</label>
                                     </div>
                                 </div>
 
@@ -284,15 +270,15 @@
                                             *ngIf="affiliateApplicationForm?.get('mobilePhone')?.touched || submitAttempted">
                                             <p *ngIf="affiliateApplicationForm.get('mobilePhone')?.hasError('required')"
                                                 class="help-block">
-                                                Required field.
+                                                {{'form.requiredField'|translate|compareText:'Required field.'}}
                                             </p>
                                             <p *ngIf="!affiliateApplicationForm.get('mobilePhone')?.hasError('required') && affiliateApplicationForm.get('mobilePhone')?.hasError('maxLength')"
                                                 class="help-block">
-                                                Input value is too long.
+                                                {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                             </p>
                                             <p *ngIf="!affiliateApplicationForm.get('mobilePhone')?.hasError('required') && affiliateApplicationForm.get('mobilePhone')?.hasError('phoneNumberInvalid')"
                                                 class="help-block">
-                                                Invalid Phone Number.
+                                                {{'views.contactInfo.contact.landline.invalid'|translate|compareText:'Invalid Phone Number.'}}
                                             </p>
                                         </div>
                                     </div>
@@ -305,20 +291,20 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address"
-                                                    translate="views.contactInfo.contact.address.name.label">Address:</label>
+                                                    >{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</label>
                                                 <input class="form-control" formControlName="address"
-                                                    placeholder="{{ 'views.contactInfo.contact.address.placeholder' }}"
+                                                    placeholder="{{ 'views.contactInfo.contact.address.placeholder' | translate}}"
                                                     (change)="copyAddress()" (blur)="autoSubmit()" />
 
                                                 <div
                                                     *ngIf="affiliateApplicationForm.get('address')?.touched || submitAttempted">
                                                     <p *ngIf="affiliateApplicationForm.get('address')?.hasError('required')"
                                                         class="help-block">
-                                                        Required field.
+                                                        {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                     </p>
                                                     <p *ngIf="!affiliateApplicationForm.get('address')?.hasError('required') && affiliateApplicationForm.get('address')?.hasError('maxLength')"
                                                         class="help-block">
-                                                        Input value is too long.
+                                                        {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -327,12 +313,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="city"
-                                                translate="views.contactInfo.contact.city.name.label">City:</label>
+                                                >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
                                         </div>
                                         <div class="col-md-3">
                                             <label for="postCode"
-                                                translate="views.contactInfo.contact.postcode.name.label">Post
-                                                Code:</label>
+                                                >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
                                         </div>
                                     </div>
 
@@ -342,18 +327,18 @@
                                             <!-- city -->
                                             <div class="form-group">
                                                 <input class="form-control" formControlName="city"
-                                                    placeholder="{{ 'views.contactInfo.contact.city.placeholder'}}"
+                                                    placeholder="{{ 'views.contactInfo.contact.city.placeholder'|translate}}"
                                                     (change)="copyAddress()" (blur)="autoSubmit()" />
 
                                                 <div
                                                     *ngIf="affiliateApplicationForm.get('city')?.touched || submitAttempted">
                                                     <p *ngIf="affiliateApplicationForm.get('city')?.hasError('required')"
                                                         class="help-block">
-                                                        Required field.
+                                                        {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                     </p>
                                                     <p *ngIf="!affiliateApplicationForm.get('city')?.hasError('required') && affiliateApplicationForm.get('city')?.hasError('maxlength')"
                                                         class="help-block">
-                                                        Input value is too long.
+                                                        {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                     </p>
                                                 </div>
 
@@ -364,18 +349,18 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input class="form-control" type="text" formControlName="postalCode"
-                                                    placeholder="{{ 'views.contactInfo.contact.postcode.placeholder'}}"
+                                                    placeholder="{{ 'views.contactInfo.contact.postcode.placeholder'|translate}}"
                                                     (change)="copyAddress()" (blur)="autoSubmit()" />
 
                                                 <div
                                                     *ngIf="affiliateApplicationForm.get('postalCode')?.touched || submitAttempted">
                                                     <p *ngIf="affiliateApplicationForm.get('postalCode')?.hasError('required')"
                                                         class="help-block">
-                                                        Required field.
+                                                        {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                     </p>
                                                     <p *ngIf="!affiliateApplicationForm.get('postalCode')?.hasError('required') && affiliateApplicationForm.get('postalCode')?.hasError('maxlength')"
                                                         class="help-block">
-                                                        Input value is too long.
+                                                        {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                     </p>
                                                 </div>
 
@@ -386,7 +371,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country"
-                                                    translate="views.contactInfo.contact.country.name.label">Country:</label><span>
+                                                    >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</label><span>
                                                     {{applicationData.affiliateDetails.address.country.commonName}}</span>
                                             </div>
                                         </div>
@@ -400,8 +385,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="isSameAddress"
-                                                        translate="views.contactInfo.contact.billingAddress.sameAsAddress">Use
-                                                        Address as Billing Address</label>&nbsp;
+                                                        >{{'views.contactInfo.contact.billingAddress.sameAsAddress'|translate|compareText:'Use Address as Billing Address'}}</label>&nbsp;&nbsp;
                                                     <input name="use" type="checkbox" formControlName="isSameAddress"
                                                         (change)="copyAddress()" />
                                                 </div>
@@ -413,20 +397,19 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="billingAddress"
-                                                        translate="views.contactInfo.contact.billingAddress.name.label">Billing
-                                                        Address:</label>
+                                                        >{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:</label>
                                                     <input class="form-control" formControlName="billingAddress"
-                                                        placeholder="{{ 'views.contactInfo.contact.address.placeholder' }}"
+                                                        placeholder="{{ 'views.contactInfo.contact.address.placeholder' |translate}}"
                                                         (blur)="autoSubmit()" />
                                                     <div
                                                         *ngIf="(affiliateApplicationForm.get('billingAddress')?.touched || submitAttempted) && affiliateApplicationForm.get('billingAddress')?.errors">
                                                         <p *ngIf="affiliateApplicationForm.get('billingAddress')?.hasError('required')"
                                                             class="help-block">
-                                                            Required field.
+                                                            {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                         </p>
                                                         <p *ngIf="affiliateApplicationForm.get('billingAddress')?.hasError('maxlength')"
                                                             class="help-block">
-                                                            Input value is too long.
+                                                            {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -436,12 +419,11 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label for="city"
-                                                    translate="views.contactInfo.contact.city.name.label">City:</label>
+                                                   >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="postCode"
-                                                    translate="views.contactInfo.contact.postcode.name.label">Post
-                                                    Code:</label>
+                                                    >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
                                             </div>
                                         </div>
 
@@ -449,17 +431,17 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <input class="form-control" formControlName="billingCity"
-                                                        placeholder="{{ 'views.contactInfo.contact.city.placeholder' }}"
+                                                        placeholder="{{ 'views.contactInfo.contact.city.placeholder' |translate}}"
                                                         (blur)="autoSubmit()" />
                                                     <div
                                                         *ngIf="(affiliateApplicationForm.get('billingCity')?.touched || submitAttempted) && affiliateApplicationForm.get('billingCity')?.errors">
                                                         <p *ngIf="affiliateApplicationForm.get('billingCity')?.hasError('required')"
                                                             class="help-block">
-                                                            Required field.
+                                                            {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                         </p>
                                                         <p *ngIf="affiliateApplicationForm.get('billingCity')?.hasError('maxlength')"
                                                             class="help-block">
-                                                            Input value is too long.
+                                                            {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -468,18 +450,18 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <input class="form-control" formControlName="billingPostCode"
-                                                        placeholder="{{ 'affiliateform.affiliateDetails.billingAddress.post' }}"
+                                                        placeholder="{{ 'affiliateform.affiliateDetails.billingAddress.post' |translate}}"
                                                         (blur)="autoSubmit()" />
 
                                                     <div
                                                         *ngIf="(affiliateApplicationForm.get('billingPostCode')?.touched || submitAttempted) && affiliateApplicationForm.get('billingPostCode')?.errors">
                                                         <p *ngIf="affiliateApplicationForm.get('billingPostCode')?.hasError('required')"
                                                             class="help-block">
-                                                            Required field.
+                                                            {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                         </p>
                                                         <p *ngIf="affiliateApplicationForm.get('billingPostCode')?.hasError('maxlength')"
                                                             class="help-block">
-                                                            Input value is too long.
+                                                            {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                         </p>
                                                     </div>
 
@@ -491,8 +473,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label
-                                                        translate="views.contactInfo.contact.country.name.label">Country:</label>
-                                                    <input class="form-control" type="text" placeholder=""
+                                                        >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</label>
+                                                    <input class="form-control" type="text" placeholder="{{ 'views.contactInfo.contact.country.placeholder' | translate }}"
                                                         formControlName="billingCountry" [ngbTypeahead]="search"
                                                         [resultFormatter]="formatCountry"
                                                         [inputFormatter]="formatCountry" autocomplete="off"
@@ -502,7 +484,7 @@
                                                     *ngIf="(affiliateApplicationForm.get('billingCountry')?.touched || submitAttempted) && affiliateApplicationForm.get('billingCountry')?.errors">
                                                     <p *ngIf="affiliateApplicationForm.get('billingCountry')?.hasError('required')"
                                                         class="help-block">
-                                                        Required field.
+                                                        {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                     </p>
                                                 </div>
 
@@ -519,7 +501,7 @@
                         *ngIf="affiliateApplicationForm?.get('type')?.value && affiliateApplicationForm?.get('type')?.value != 'INDIVIDUAL'">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <span translate="views.contactInfo.organization.title">Organization</span>&nbsp;
+                                <span >{{'views.contactInfo.organization.title'|translate|compareText:'Organization'}}</span>&nbsp;
                                 <small>Member: {{applicationData.affiliateDetails.address.country.member.key}}</small>
                             </h4>
                         </div>
@@ -531,20 +513,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="organizationName"
-                                                translate="views.contactInfo.organization.name.name.label">Organization
-                                                Name:</label>
+                                                >{{'views.contactInfo.organization.name.name'|translate|compareText:'Organization Name'}}:</label>
                                             <input class="form-control" formControlName="organizationName"
-                                                placeholder="views.contactInfo.organization.name.placeholder"
+                                                placeholder="{{'views.contactInfo.organization.name.placeholder'|translate}}"
                                                 (blur)="autoSubmit()" />
                                             <div
                                                 *ngIf="(affiliateApplicationForm.get('organizationName')?.touched || submitAttempted) && affiliateApplicationForm.get('organizationName')?.errors">
                                                 <p *ngIf="affiliateApplicationForm.get('organizationName')?.hasError('required')"
                                                     class="help-block">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="affiliateApplicationForm.get('organizationName')?.hasError('maxlength')"
                                                     class="help-block">
-                                                    Input value is too long.
+                                                    {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -555,8 +536,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="organizationType"
-                                                translate="views.contactInfo.organization.type.name.label">Organization
-                                                Type:</label>
+                                                >{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:</label>
                                             <select formControlName="organizationType" class="form-select">
                                                 <option *ngFor="let type of organizationTypes" [value]="type"
                                                     (blur)="autoSubmit()">{{ type }}
@@ -567,7 +547,7 @@
                                             *ngIf="(affiliateApplicationForm.get('organizationType')?.touched || submitAttempted) && affiliateApplicationForm.get('organizationType')?.errors">
                                             <p *ngIf="affiliateApplicationForm.get('organizationType')?.hasError('required')"
                                                 class="help-block">
-                                                Required field.
+                                                {{'form.requiredField'|translate|compareText:'Required field.'}}
                                             </p>
                                         </div>
                                     </div>
@@ -578,18 +558,18 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <input class="form-control" formControlName="organizationTypeOther"
-                                                placeholder="{{ 'views.contactInfo.organization.type.placeholder' }}"
+                                                placeholder="{{ 'views.contactInfo.organization.type.placeholder' |translate}}"
                                                 (blur)="autoSubmit()" />
                                         </div>
                                         <div
                                             *ngIf="(affiliateApplicationForm.get('organizationTypeOther')?.touched || submitAttempted) && affiliateApplicationForm.get('organizationTypeOther')?.errors">
                                             <p *ngIf="affiliateApplicationForm.get('organizationTypeOther')?.hasError('required')"
                                                 class="help-block">
-                                                Required field.
+                                                {{'form.requiredField'|translate|compareText:'Required field.'}}
                                             </p>
                                             <p *ngIf="affiliateApplicationForm.get('organizationTypeOther')?.hasError('maxlength')"
                                                 class="help-block">
-                                                Input value is too long.
+                                                {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                             </p>
                                         </div>
 
@@ -600,20 +580,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="address"
-                                                translate="views.contactInfo.contact.address.name.label">Address:</label>
+                                                >{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</label>
                                             <input class="form-control" formControlName="address"
-                                                placeholder="{{ 'views.contactInfo.contact.address.placeholder'}}"
+                                                placeholder="{{ 'views.contactInfo.contact.address.placeholder'|translate}}"
                                                 (change)="copyAddress()" (blur)="autoSubmit()">
 
                                             <div
                                                 *ngIf="(affiliateApplicationForm.get('address')?.touched || submitAttempted) && affiliateApplicationForm.get('address')?.errors">
                                                 <p *ngIf="affiliateApplicationForm.get('address')?.hasError('required')"
                                                     class="help-block">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="affiliateApplicationForm.get('address')?.hasError('maxlength')"
                                                     class="help-block">
-                                                    Input value is too long.
+                                                    {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -623,11 +603,11 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="city"
-                                            translate="views.contactInfo.contact.city.name.label">City:</label>
+                                            >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="postCode"
-                                            translate="views.contactInfo.contact.postcode.name.label">Post Code:</label>
+                                            >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
                                     </div>
                                 </div>
 
@@ -635,7 +615,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <input class="form-control" formControlName="city"
-                                                placeholder="{{ 'views.contactInfo.contact.city.placeholder' }}"
+                                                placeholder="{{ 'views.contactInfo.contact.city.placeholder'|translate }}"
                                                 (change)="copyAddress()" (blur)="autoSubmit()">
                                         </div>
 
@@ -643,18 +623,18 @@
                                             *ngIf="(affiliateApplicationForm.get('city')?.touched || submitAttempted) && affiliateApplicationForm.get('city')?.errors">
                                             <p *ngIf="affiliateApplicationForm.get('city')?.hasError('required')"
                                                 class="help-block">
-                                                Required field.
+                                                {{'form.requiredField'|translate|compareText:'Required field.'}}
                                             </p>
                                             <p *ngIf="affiliateApplicationForm.get('city')?.hasError('maxlength')"
                                                 class="help-block">
-                                                Input value is too long.
+                                                {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <input class="form-control" type="text" formControlName="postalCode"
-                                                placeholder="{{ 'views.contactInfo.contact.postcode.placeholder' }}"
+                                                placeholder="{{ 'views.contactInfo.contact.postcode.placeholder' |translate}}"
                                                 (change)="copyAddress()" (blur)="autoSubmit()">
                                         </div>
 
@@ -662,11 +642,11 @@
                                             *ngIf="(affiliateApplicationForm.get('postalCode')?.touched || submitAttempted) && affiliateApplicationForm.get('postalCode')?.errors">
                                             <p *ngIf="affiliateApplicationForm.get('postalCode')?.hasError('required')"
                                                 class="help-block">
-                                                Required field.
+                                                {{'form.requiredField'|translate|compareText:'Required field.'}}
                                             </p>
                                             <p *ngIf="affiliateApplicationForm.get('postalCode')?.hasError('maxlength')"
                                                 class="help-block">
-                                                Input value is too long.
+                                                {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                             </p>
                                         </div>
                                     </div>
@@ -675,7 +655,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country"
-                                                translate="views.contactInfo.contact.country.name.label">Country:</label><span>
+                                                >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</label><span>
                                                 {{applicationData.affiliateDetails.address.country.commonName}}</span>
                                         </div>
                                     </div>
@@ -688,8 +668,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="useOrganizationAddress"
-                                                    translate="views.contactInfo.contact.billingAddress.useOrganizationAddress">Use
-                                                    Organization Address as Billing Address</label>&nbsp;<input
+                                                    >{{'views.contactInfo.contact.billingAddress.useOrganizationAddress'|translate|compareText:'Use Organization Address as Billing Address'}}</label>&nbsp;<input
                                                     name="use" type="checkbox" formControlName="isSameAddress"
                                                     (change)="copyAddress()">
                                             </div>
@@ -700,10 +679,9 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="billingAddress"
-                                                    translate="views.contactInfo.contact.billingAddress.name.label">Billing
-                                                    Address:</label>
+                                                    >{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:</label>
                                                 <input class="form-control" formControlName="billingAddress"
-                                                    placeholder="{{ 'views.contactInfo.contact.address.placeholder'}}"
+                                                    placeholder="{{ 'views.contactInfo.contact.address.placeholder'|translate}}"
                                                     (blur)="autoSubmit()" />
 
                                             </div>
@@ -711,11 +689,11 @@
                                                 *ngIf="(affiliateApplicationForm.get('billingAddress')?.touched || submitAttempted) && affiliateApplicationForm.get('billingAddress')?.errors">
                                                 <p *ngIf="affiliateApplicationForm.get('billingAddress')?.hasError('required')"
                                                     class="help-block">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="affiliateApplicationForm.get('billingAddress')?.hasError('maxlength')"
                                                     class="help-block">
-                                                    Input value is too long.
+                                                    {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -724,12 +702,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="city"
-                                                translate="views.contactInfo.contact.city.name.label">City:</label>
+                                                >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
                                         </div>
                                         <div class="col-md-3">
                                             <label for="postCode"
-                                                translate="views.contactInfo.contact.postcode.name.label">Post
-                                                Code:</label>
+                                                >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
                                         </div>
                                     </div>
 
@@ -737,25 +714,25 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input class="form-control" formControlName="billingCity"
-                                                    placeholder="{{ 'views.contactInfo.contact.city.placeholder' }}"
+                                                    placeholder="{{ 'views.contactInfo.contact.city.placeholder' |translate}}"
                                                     (blur)="autoSubmit()" />
                                             </div>
                                             <div
                                                 *ngIf="(affiliateApplicationForm.get('billingCity')?.touched || submitAttempted) && affiliateApplicationForm.get('billingCity')?.errors">
                                                 <p *ngIf="affiliateApplicationForm.get('billingCity')?.hasError('required')"
                                                     class="help-block">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="affiliateApplicationForm.get('billingCity')?.hasError('maxlength')"
                                                     class="help-block">
-                                                    Input value is too long.
+                                                    {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input class="form-control" formControlName="billingPostCode"
-                                                    placeholder="{{ 'affiliateform.affiliateDetails.billingAddress.post' }}"
+                                                    placeholder="{{ 'affiliateform.affiliateDetails.billingAddress.post' |translate}}"
                                                     (blur)="autoSubmit()" />
                                             </div>
 
@@ -763,11 +740,11 @@
                                                 *ngIf="(affiliateApplicationForm.get('billingPostCode')?.touched || submitAttempted) && affiliateApplicationForm.get('billingPostCode')?.errors">
                                                 <p *ngIf="affiliateApplicationForm.get('billingPostCode')?.hasError('required')"
                                                     class="help-block">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="affiliateApplicationForm.get('billingPostCode')?.hasError('maxlength')"
                                                     class="help-block">
-                                                    Input value is too long.
+                                                    {{'form.tooLong'|translate|compareText:'Input value is too long.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -777,8 +754,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country"
-                                                    translate="views.contactInfo.contact.country.name.label">Country:</label>
-                                                <input class="form-control" type="text" placeholder=""
+                                                    >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</label>
+                                                <input class="form-control" type="text" placeholder="{{ 'views.contactInfo.contact.country.placeholder' | translate }}"
                                                     formControlName="billingCountry" [ngbTypeahead]="search"
                                                     [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
                                                     autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
@@ -787,7 +764,7 @@
                                                 *ngIf="(affiliateApplicationForm.get('billingCountry')?.touched || submitAttempted) && affiliateApplicationForm.get('billingCountry')?.errors">
                                                 <p *ngIf="affiliateApplicationForm.get('billingCountry')?.hasError('required')"
                                                     class="help-block">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -799,8 +776,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="alternateEmail"
-                                                translate="views.contactInfo.contact.alternateEmail.name.label">Alternate
-                                                Email:</label>
+                                                >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</label>
                                             <input class="form-control" type="email"
                                                 placeholder="{{ 'views.contactInfo.contact.email.placeholder' }}"
                                                 formControlName="alternateEmail" (blur)="autoSubmit()" />
@@ -809,17 +785,17 @@
                                                 *ngIf="(affiliateApplicationForm?.get('alternateEmail')?.touched || submitAttempted) && affiliateApplicationForm?.get('alternateEmail')?.errors">
                                                 <p *ngIf="affiliateApplicationForm?.get('alternateEmail')?.hasError('required')"
                                                     class="help-block" translate="form.requiredField">
-                                                    Required field.
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('alternateEmail')?.hasError('required') && affiliateApplicationForm?.get('alternateEmail')?.hasError('email')"
                                                     class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Invalid Email Address.
+                                                    >
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Invalid Email Address.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('alternateEmail')?.hasError('required') && affiliateApplicationForm?.get('alternateEmail')?.hasError('notUnique')"
                                                     class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Email Addresses need to be unique.
+                                                    >
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses need to be unique.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -831,27 +807,24 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="thirdEmail"
-                                                translate="views.contactInfo.contact.thirdEmail.label">Third
-                                                Email:</label>
+                                                >{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</label>
                                             <input class="form-control" type="email"
-                                                placeholder="{{ 'views.contactInfo.contact.email.placeholder' }}"
+                                                placeholder="{{ 'views.contactInfo.contact.email.placeholder' |translate}}"
                                                 formControlName="thirdEmail" (blur)="autoSubmit()" />
 
                                             <div
                                                 *ngIf="(affiliateApplicationForm?.get('thirdEmail')?.touched || submitAttempted) && affiliateApplicationForm?.get('thirdEmail')?.errors">
                                                 <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('required')"
-                                                    class="help-block" translate="form.requiredField">
-                                                    Required field.
+                                                    class="help-block">
+                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('email')"
-                                                    class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Invalid Email Address.
+                                                    class="help-block">
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Invalid Email Address.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('notUnique')"
-                                                    class="help-block"
-                                                    translate="views.contactInfo.contact.email.invalid">
-                                                    Email Addresses need to be unique.
+                                                    class="help-block">
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses need to be unique.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -861,7 +834,7 @@
                                 <div class="row" *ngIf="affiliateApplicationForm?.get('type')?.value == 'OTHER'">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="other" translate="affiliate.type.OTHER">Other</label>
+                                            <label for="other" >{{'affiliate.type.OTHER'|translate|compareText:'Other'}}</label>
                                             <textarea class="form-control" rows="4" formControlName="otherTextArea"
                                                 (blur)="autoSubmit()"></textarea>
                                         </div>
@@ -880,36 +853,32 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" translate="register.affiliateRegistration.license.title">
-                            SNOMED CT Agreement
+                        <h3 class="panel-title" >
+                            {{'register.affiliateRegistration.license.title'|translate|compareText:'SNOMED CT Agreement'}}
                         </h3>
                     </div>
                     <div class="panel-body">
                         <p>
                             <a target="_blank" class="btn btn-default btn-block"
-                                translate="register.affiliateRegistration.license" (click)="viewLicense()">SNOMED
-                                License</a>
+                                 (click)="viewLicense()">{{'register.affiliateRegistration.license'|translate|compareText:'SNOMED License'}}</a>
                         </p>
                         <div class="form-group">
                             <label>
                                 <input type="checkbox" formControlName="snoMedTC" />&nbsp;
                                 <span>
-                                    <b>I agree to the license</b>
+                                    <b>{{'register.affiliateRegistration.license.confirm'|translate|compareText:'I agree to the license'}}</b>
                                 </span>
                             </label>
 
                             <div class="help-block"
                                 *ngIf="submitAttempted && affiliateApplicationForm.get('snoMedTC')?.invalid">
-                                You must agree to the terms and conditions of the SNOMED CT License to register, which
-                                may include potential
-                                fees.
+                                {{'register.affiliateRegistration.license.error'|translate|compareText:'You must agree to the terms and conditions of the SNOMED CT License to register, which may include potential fees.'}}
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <button type="button" class="btn btn-success" (click)="submit()">Start
-                                Registration</button>
+                            <button type="button" class="btn btn-success" (click)="submit()">{{'register.form.button'|translate|compareText:'Start Registration'}}</button>
                             <div class="has-error" *ngIf="submitAttempted && !affiliateApplicationForm.valid">
-                                <p class="help-block">Please fix the errors listed above.</p>
+                                <p class="help-block">{{'form.pleaseFix'|translate|compareText:'Please fix the errors listed above.'}}</p>
                             </div>
                         </div>
                     </div>

@@ -9,29 +9,29 @@
     </div>
   
     <p>
-      <span translate="views.usageLog.institutions.modal.sure">Are you sure you want to remove</span>
-      <strong>{{ 'global.country.' + count?.country?.isoCode2 }}</strong>
-      <span translate="views.usageLog.institutions.modal.andEntries"></span>
-      and its associated entries?
+      <span>{{'views.usageLog.institutions.modal.sure'|translate|compareText:'Are you sure you want to remove'}}</span>
+      <strong>{{ 'global.country.' + count?.country?.isoCode2 |translate }}</strong>
+      <span ></span>
+      {{'views.usageLog.institutions.modal.andEntries'|translate|compareText:'and its associated entries?'}}
     </p>
   
     <dl class="dl-horizontal">
-      <dt translate="views.usageLog.institutions.country">Country</dt>
+      <dt>{{'views.usageLog.institutions.country'|translate|compareText:'Country'}}</dt>
       <dd>{{ count?.country?.commonName }}</dd>
-      <dt translate="views.usageLog.institutions.hospAndInst.plural">Hospitals/Institutions</dt>
+      <dt>{{'views.usageLog.institutions.hospAndInst.plural'|translate|compareText:'Hospitals/Institutions'}}</dt>
       <dd>{{ hospitalsCount | number }}</dd>
-      <dt translate="views.usageLog.institutions.practices">Practices</dt>
+      <dt>{{'views.usageLog.institutions.practices'|translate|compareText:'Practices'}}</dt>
       <dd>{{ practicesCount | number }}</dd>
     </dl>
   </div>
   
   <div class="modal-footer">
     <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">
-      Cancel
+      {{'global.word.cancel'|translate|compareText:'Cancel'}}
     </button>
     
     <button class="remove-button" (click)="submit()" [disabled]="submitting">
-      <span>Remove</span>
+      <span>{{'global.word.delete'|translate|compareText:'Remove'}}</span>
       <span *ngIf="submitting">
         <i class="fa fa-spinner fa-spin"></i>
       </span>

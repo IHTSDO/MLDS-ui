@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button> -->
         
-            <a [href]="isAuthenticated ? '/dashboard' : '#'">
+            <a [href]="isAuthenticated ? '/userDashboard' : '#'">
                 <span *ngIf="memberLogo">
                   <img class="img-responsive" [src]="memberLogo" alt="member-logo">
                 </span>
@@ -29,7 +29,7 @@
                 
                 <!-- Dashboard link when user is authenticated -->
                 <li *ngIf="isAuthenticated">
-                    <a routerLink="/dashboard"> <span>{{'global.menu.dashboard' | translate | compareText: 'Dashboard'}}</span></a>
+                    <a routerLink="/userDashboard"> <span>{{'global.menu.dashboard' | translate }}</span></a>
                 </li>
   
 
@@ -77,7 +77,7 @@
                         <a routerLink="/password" class="nav-link">{{'global.menu.affiliate.changePassword' | translate | compareText : 'Change Password'}}</a>
                       </li>
                       <li class="dropdown-item">
-                        <a routerLink="/logout" class="nav-link">{{'global.menu.affiliate.logout' | translate | compareText: 'Log out'}}</a>
+                        <a routerLink="/logout" class="nav-link">{{'global.menu.affiliate.logout' | translate | compareText: 'Logout'}}</a>
                       </li>
                     </ul>
                   </li>

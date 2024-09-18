@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ChangePasswordService } from 'src/app/services/change-password/change-password.service';
 import { PasswordStrengthBarComponent } from "../../common/password-strength-bar/password-strength-bar.component";
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, PasswordStrengthBarComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss'
 })

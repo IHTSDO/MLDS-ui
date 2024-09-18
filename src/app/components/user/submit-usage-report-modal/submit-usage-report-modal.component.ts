@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
@@ -10,7 +12,7 @@ import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affil
 @Component({
   selector: 'app-submit-usage-report-modal',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert,TranslateModule,CompareTextPipe],
   templateUrl: './submit-usage-report-modal.component.html',
   styleUrl: './submit-usage-report-modal.component.scss'
 })

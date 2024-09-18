@@ -2,19 +2,18 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h1>Activation</h1>
+			<h1>{{'views.activate.title' | translate | compareText: 'Activation'}}</h1>
 
 			<div class="alert alert-success" *ngIf="success">
-				<strong>User account has been created.</strong>
-				<span>
-					The system will take you to continue your registration process in a few moments.
-					If you are not redirected automatically, please <a href="#/usageReports">click here</a>.
-				</span>
+				<strong>{{'views.activate.messages.success.title' | translate | compareText: 'User account has been created.'}}</strong>
+				
+				<div *ngIf="successMessage" [innerHTML]="successMessage"></div>
+
 			</div>
 
 			<div class="alert alert-danger" *ngIf="error">
-				<strong>Your user could not be activated.</strong>
-				<span>Please use the registration form to sign up. If you are still encountering difficulties, please contact support.</span>
+				<strong>{{'views.activate.messages.error.title' | translate | compareText :'Your user could not be activated.'}}</strong>
+				<span>{{'views.activate.messages.error.body' |translate | compareText : 'Please use the registration form to sign up. If you are still encountering difficulties, please contact support.'}}</span>
 			</div>
 		</div>
 		<div class="col-md-2"></div>

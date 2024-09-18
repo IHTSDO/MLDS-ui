@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 /**
  * Exclusion modal component.
@@ -12,7 +14,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-exclusion-modal',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule,CompareTextPipe],
   templateUrl: './exclusion-modal.component.html',
   styleUrls: ['./exclusion-modal.component.scss']
 })

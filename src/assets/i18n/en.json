@@ -761,11 +761,13 @@
             "OTHER": "Other",
             "INDIVIDUAL": "Individual"
         },
-        "type.extended": {
-            "COMMERCIAL": "Commercial - Developer, Vendor or Terminology provider",
-            "ACADEMIC": "Academic - for internal use within an Organization. (Educational, Research, Development or Healthcare Provider)",
-            "OTHER": "Other - Use not stated in other options",
-            "INDIVIDUAL": "Individual - Personal, Educational or Research"
+        "types": {
+            "extended": {
+                "COMMERCIAL": "Commercial - Developer, Vendor or Terminology provider",
+                "ACADEMIC": "Academic - for internal use within an Organization. (Educational, Research, Development or Healthcare Provider)",
+                "OTHER": "Other - Use not stated in other options",
+                "INDIVIDUAL": "Individual - Personal, Educational or Research"
+            }
         },
         "subType": {
             "DEVELOPER": "Developer",

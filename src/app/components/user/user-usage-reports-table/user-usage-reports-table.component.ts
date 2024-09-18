@@ -3,11 +3,13 @@ import { UsageReportsService } from 'src/app/services/usage-reports/usage-report
 import { UsageReportsTableComponent } from "../../common/usage-reports-table/usage-reports-table.component";
 import { CommonModule } from '@angular/common';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
   selector: 'app-user-usage-reports-table',
   standalone: true,
-  imports: [UsageReportsTableComponent,CommonModule],
+  imports: [UsageReportsTableComponent,CommonModule,TranslateModule,CompareTextPipe],
   templateUrl: './user-usage-reports-table.component.html',
   styleUrl: './user-usage-reports-table.component.scss'
 })

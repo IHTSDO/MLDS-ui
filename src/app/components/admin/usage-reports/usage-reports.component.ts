@@ -8,6 +8,7 @@ import { ROUTES } from 'src/app/routes-config'
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
+import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 /**
  * Component for displaying usage reports.
  */
@@ -56,7 +57,7 @@ export class UsageReportsComponent implements OnInit {
    */
   downloadingReports = false;
 
-  constructor(private commercialUsageService: CommercialUsageService, private authenticationService: AuthenticationSharedService, private router: Router) {}
+  constructor(private commercialUsageService: CommercialUsageService, private authenticationService: AuthenticationSharedService, private router: Router,private usageReportStateUtilsService: UsageReportStateUtilsService) {}
 
   /**
    * Initializes the component by loading the first page of usage reports.
@@ -142,12 +143,11 @@ export class UsageReportsComponent implements OnInit {
    * console.log(this.usageReportHospitals(usageReport)); // Output: "Hospital A, Hospital B"
    * ```
    */
-  usageReportHospitals(usageReport: any): string {
-    // Implementation to get hospital details from the usage report
-    return '';
+  usageReportHospitals(usageReport: any): number {
+    return this.usageReportStateUtilsService.usageReportHospitals(usageReport);
   }
 
-  /**
+    /**
    * Returns a string representation of the practices associated with the specified usage report.
    *
    * @param usageReport The usage report to get practice details for.
@@ -158,8 +158,9 @@ export class UsageReportsComponent implements OnInit {
    * console.log(this.usageReportPractices(usageReport)); // Output: "Practice A, Practice B"
    * ```
    */
-  usageReportPractices(usageReport: any): string {
-    // Implementation to get practice details from the usage report
-    return '';
+    usageReportPractices(usageReport: any): number {
+    return this.usageReportStateUtilsService.usageReportPractices(usageReport);
   }
 }
+
+

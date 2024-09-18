@@ -762,11 +762,13 @@
             "OTHER": "Autre",
             "INDIVIDUAL": "Individuel"
         },
-        "type.extended": {
+       "types": {
+            "extended": {
             "COMMERCIAL": "Commercial - Développeur, vendeur ou fournisseur de terminologie",
             "ACADEMIC": "Académique - Pour utilisation interne au sein d’une organisation (éducation, recherche, développement ou prestataire de soins).",
             "OTHER": "Autre - Utilisation non mentionnée sous les autres points",
             "INDIVIDUAL": "Individuel - Personnel, éducation ou recherche"
+            }
         },
         "subType": {
             "DEVELOPER": "Développeur",

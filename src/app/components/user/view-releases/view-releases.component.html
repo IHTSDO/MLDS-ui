@@ -1,12 +1,15 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="page-header">
-          <h1 translate="views.releases.title">Releases available for Registered Users</h1>
-          <p *ngIf="!sessionService.isAuthenticated()" translate="views.releases.noAuth">
-              <a [routerLink]="['/login']">Log in</a> to download
-              or click <a [routerLink]="['/register']">register</a>
-              to start application process.
+          <h1 translate="">{{'views.releases.title'|translate}}</h1>
+          <p *ngIf="!sessionService.isAuthenticated()">
+            <span>
+              <p [innerHTML]="'views.releases.noAuth' | translate: { loginLink: '<a href=\'#/login\'>', registerLink: '<a href=\'#/register\'>' }"></p>
+
+            </span>
+           
           </p>
+          
       </div>
   </div>
 </div>
@@ -17,8 +20,8 @@
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="release-header">
       <h2 >
-        {{memberReleases.member.key}}
-        <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">View License</a>
+        {{'global.member.'+memberReleases.member.key | translate}}
+        <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">{{'global.word.viewlicense'|translate|compareText:'View License'}}</a>
       </h2>
     </div>
   </div>
@@ -31,38 +34,38 @@
             <h3 class="panel-title"><span class="panel-title-link" (click)="goToViewPackagePage(releasePackage.releasePackageId)">{{releasePackage.name}}</span></h3>
           </div>
           <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
-          translate="views.releases.warning.deactivated">
-          Account Deactivated
+          >
+          {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
           </span>
 
           <span  *ngIf="sessionService.isAuthenticated() && isPendingInvoice && userAffiliateService.isMembershipApproved(memberReleases.member)" class="badge bg-danger float-end"
-          translate="views.releases.warning.pending">
-          Pending Invoice
+          >
+          {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
           </span>
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" class="badge bg-warning float-end"
-          translate="views.releases.warning.pAttention">
-          Primary application needs attention
+          >
+         {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
           </span>
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
-          translate="views.releases.warning.pProcessed">
-          Primary application is being processed
+          >
+         {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
           </span>
 
           <button class="edit-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
-          translate="views.releases.warning.apply"  (click)="packageUtilService.openExtensionApplication(releasePackage)">
-          Apply for extension
+          (click)="packageUtilService.openExtensionApplication(releasePackage)">
+          {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
           </button>
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="badge bg-danger float-end"
-          translate="views.releases.warning.apply">
-          Application being processed
+          >
+          {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
           </span>
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
-          translate="views.releases.warning.aAttention">
-          Application needs attention, click to continue application
+          >
+          {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
           </span>          
         </div>
       </div>
@@ -79,8 +82,8 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="release-header">
         <h2 >
-          {{memberReleases.member.key}} - Alpha/Beta Releases
-          <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">View License</a>
+          {{'global.member.'+memberReleases.member.key| translate}} - Alpha/Beta Releases
+          <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">{{'global.word.viewlicense' | translate |compareText:'View License'}}</a>
         </h2>
       </div>
     </div>
@@ -93,38 +96,38 @@
               <h3 class="panel-title"><span class="panel-title-link" (click)="goToViewPackagePage(releasePackage.releasePackageId)">{{releasePackage.name}}</span></h3>
             </div>
             <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
-            translate="views.releases.warning.deactivated">
-            Account Deactivated
+            >
+            {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
             </span>
   
             <span  *ngIf="sessionService.isAuthenticated() && isPendingInvoice && userAffiliateService.isMembershipApproved(memberReleases.member)" class="badge bg-danger float-end"
-            translate="views.releases.warning.pending">
-            Pending Invoice
+            >
+            {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
             </span>
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" class="badge bg-warning float-end"
-            translate="views.releases.warning.pAttention">
-            Primary application needs attention
+            >
+            {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
             </span>
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
-            translate="views.releases.warning.pProcessed">
-            Primary application is being processed
+            >
+            {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
             </span>
   
             <button class="edit-button"  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)"
-            translate="views.releases.warning.apply" (click)="packageUtilService.openExtensionApplication(releasePackage)">
-            Apply for extension
+            (click)="packageUtilService.openExtensionApplication(releasePackage)">
+            {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
             </button>
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="badge bg-danger float-end"
-            translate="views.releases.warning.apply">
-            Application being processed
+            >
+            {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
             </span>
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
-            translate="views.releases.warning.aAttention">
-            Application needs attention, click to continue application
+            >
+            {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
             </span>          
           </div>
         </div>
@@ -144,9 +147,14 @@
 <div class="row">
   <div class="col-12">
       <div class="release-divider">
-          <h2>Member Countries</h2>
-          <p>If the country you're looking for is not in this list, please refer to the <a href="http://www.ihtsdo.org/" target="_blank" rel="noopener noreferrer">IHTSDO website</a> for release download information.</p>
-      </div>
+          <h2>{{'views.releases.memberCountries'|translate|compareText:'Member Countries'}}</h2>
+          <p>
+            {{ 'views.releases.countryIsMissing' | translate | compareText: "If the country you're looking for is not in this list, please refer to the IHTSDO website for release download information." }}
+            <a href="http://www.ihtsdo.org/">
+              {{ 'global.word.ihtsdoWebsite' | translate | compareText: 'IHTSDO website' }}
+            </a>
+          </p>
+           </div>
   </div>
 </div>
 
@@ -157,9 +165,9 @@
           <div class="accordion-item">
               <h2 class="accordion-header" [id]="'heading-' + memberReleases.member.key">
                   <button class="accordion-button" type="button" (click)="toggleAccordion(i)">
-                      <span>{{ memberReleases.member.key }}</span>
+                      <span>{{'global.member.'+ memberReleases.member.key |translate}}</span>
                       <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">
-                          View License
+                          {{'global.word.viewlicense'| translate |compareText:'View License'}}
                       </a>
                   </button>
               </h2>
@@ -174,38 +182,38 @@
                                   </a>
 
                                   <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.deactivated">
-                                  Account Deactivated
+                                  >
+                                  {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && isPendingInvoice && userAffiliateService.isMembershipApproved(memberReleases.member)" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.pending">
-                                  Pending Invoice
+                                  >
+                                  {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" class="badge bg-warning float-end"
-                                  translate="views.releases.warning.pAttention">
-                                  Primary application needs attention
+                                  >
+                                  {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.pProcessed">
-                                  Primary application is being processed
+                                  >
+                                  {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
                                   </span>
                         
                                   <button class="greenbutton" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
-                                  translate="views.releases.warning.apply" (click)="packageUtilService.openExtensionApplication(releasePackage)">
-                                  Apply for extension
+                                  (click)="packageUtilService.openExtensionApplication(releasePackage)">
+                                  {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
                                   </button>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="alert-danger-flag pull-right ng-scope"
-                                  translate="views.releases.warning.apply">
-                                  Application being processed
+                                  >
+                                  {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
-                                  translate="views.releases.warning.aAttention">
-                                  Application needs attention, click to continue application
+                                  >
+                                  {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
                                   </span>        
                               </h3>
                             </div>
@@ -229,9 +237,15 @@
 <div class="row">
   <div class="col-12">
       <div class="release-divider">
-          <h2>Member Countries -Alpha/Beta Releases</h2>
-          <p>If the country you're looking for is not in this list, please refer to the <a href="http://www.ihtsdo.org/" target="_blank" rel="noopener noreferrer">IHTSDO website</a> for release download information.</p>
-      </div>
+          <h2>{{'views.releases.memberCountries'|translate|compareText:'Member Countries'}} -Alpha/Beta Releases</h2>
+          <p>
+            {{ 'views.releases.countryIsMissing' | translate | compareText: "If the country you're looking for is not in this list, please refer to the" }}
+            <a href="http://www.ihtsdo.org/">
+              {{ 'global.word.ihtsdoWebsite' | translate | compareText: 'IHTSDO website' }}
+            </a>
+            {{ 'views.releases.countryIsMissing2' | translate | compareText: "for release download information." }}
+          </p>
+          </div>
   </div>
 </div>
 
@@ -242,9 +256,9 @@
           <div class="accordion-item">
               <h2 class="accordion-header" [id]="'heading-' + memberReleases.member.key">
                   <button class="accordion-button" type="button" (click)="toggleAccordion(i)">
-                      <span>{{ memberReleases.member.key }}</span>
+                      <span>{{'global.member.'+ memberReleases.member.key |translate}}</span>
                       <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">
-                          View License
+                          {{'global.word.viewlicense'|translate|compareText:'View License'}}
                       </a>
                   </button>
               </h2>
@@ -259,38 +273,38 @@
                                   </a>
 
                                   <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.deactivated">
-                                  Account Deactivated
+                                  >
+                                  {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && isPendingInvoice && userAffiliateService.isMembershipApproved(memberReleases.member)" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.pending">
-                                  Pending Invoice
+                                  >
+                                  {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" class="badge bg-warning float-end"
-                                  translate="views.releases.warning.pAttention">
-                                  Primary application needs attention
+                                  >
+                                  {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.pProcessed">
-                                  Primary application is being processed
+                                  >
+                                  {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
                                   </span>
                         
                                   <button class="edit-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
-                                  translate="views.releases.warning.apply" (click)="packageUtilService.openExtensionApplication(releasePackage)">
-                                  Apply for extension
+                                  (click)="packageUtilService.openExtensionApplication(releasePackage)">
+                                  {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
                                   </button>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="badge bg-danger float-end"
-                                  translate="views.releases.warning.apply">
-                                  Application being processed
+                                  >
+                                  {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
-                                  translate="views.releases.warning.aAttention">
-                                  Application needs attention, click to continue application
+                                 >
+                                  {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
                                   </span>        
                               </h3>
                             </div>

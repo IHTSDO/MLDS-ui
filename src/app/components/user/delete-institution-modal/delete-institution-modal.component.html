@@ -3,8 +3,8 @@
       <span aria-hidden="true">&times;</span>
     </button>
     <h3 class="modal-title">
-      <span translate="global.word.delete">Remove</span> 
-      <span translate="views.usageLog.institutions.hospAndInst">Hospital/Institution</span>
+      <span>{{'global.word.delete'| translate|compareText:'Remove'}}</span> 
+      <span>{{'views.usageLog.institutions.hospAndInst'| translate|compareText:'Hospital/Institution'}}</span>
     </h3>
   </div>
   
@@ -13,17 +13,17 @@
       {{ alert.msg }}
     </ngb-alert>
     <p>
-      <span translate="views.usageLog.institutions.modal.sure">Are you sure you want to remove</span>
+      <span>{{'views.usageLog.institutions.modal.sure'| translate|compareText:'Are you sure you want to remove'}}</span>
       <strong>{{ institution.name }}</strong>
-      <span translate="global.word.from">from</span>
-      {{ 'global.country.' + country?.isoCode2 }}?
+      <span>{{'global.word.from' | translate|compareText:'from'}}</span>
+      {{'global.country.' + country?.isoCode2 }}?
     </p>
   </div>
   
   <div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting" translate="global.word.cancel">Cancel</button>
+    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel'| translate|compareText:'Cancel'}}</button>
     <button class="btn btn-danger" (click)="removeInstitution()" [disabled]="submitting">
-      <span translate="global.word.delete">Remove</span>
+      <span>{{'global.word.delete'| translate|compareText:'Remove'}}</span>
       <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
     </button>
   </div>

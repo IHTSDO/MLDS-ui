@@ -13,11 +13,13 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { SortLimitPipe } from "../../../pipes/sort-limit/sort-limit.pipe";
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
   selector: 'app-view-releases',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe,],
+  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe],
   templateUrl: './view-releases.component.html',
   styleUrl: './view-releases.component.scss'
 })

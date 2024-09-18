@@ -1,25 +1,25 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    <span>Release Package License</span>
+    <span>{{'views.releases.releasePackageLicense'|translate|compareText:'Release Package License'}}</span>
   </h4>
 </div>
 <div class="modal-body">
   <p>
-    <span>Please review the following license and accept it before downloading the release package:</span>
+    <span>{{'views.releases.reviewLicense'|translate}}:</span>
   </p>
   <button class="btn btn-muted btn-default btn-block" (click)="viewReleaseLicense()">
-    {{ releasePackage.name }} <span></span>
+    {{ releasePackage.name }}  <span>{{'global.word.license'|translate|compareText:'License'}}</span>
   </button>
   <br>
   <br>
   <label class="license-label">
     <input type="checkbox" [(ngModel)]="isLicenseAccepted" value="1">
-    <span>I agree to the license.</span>
+    <span>{{'views.releases.agreeToLicense'|translate|compareText:'I agree to the license.'}}</span>
   </label>
 </div>
 <div class="modal-footer">
-  <a class="cancel-link" (click)="onCancel()">Cancel</a>
+  <a class="cancel-link" (click)="onCancel()">{{'global.word.cancel'|translate|compareText:'Cancel'}}</a>
   <button class="btn btn-muted btn-success" (click)="onDownload()" [disabled]="!isLicenseAccepted">
-    <span>Download</span>
+    <span>{{'global.word.download'|translate|compareText:'Download'}}</span>
   </button>
 </div>

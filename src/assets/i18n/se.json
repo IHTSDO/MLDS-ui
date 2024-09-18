@@ -754,11 +754,13 @@
             "OTHER": "Annan",
             "INDIVIDUAL": "Individuell"
         },
-        "type.extended": {
+       "types": {
+            "extended": {
             "COMMERCIAL": "Kommersiell utvecklare, säljare eller leverantör",
             "ACADEMIC": "Akademisk för intern användning inom en organisation. (Utbildning, forskning, utveckling eller vårdgivare)",
             "OTHER": "Annan användning som inte anges i övriga alternativ",
             "INDIVIDUAL": "Individuell för personligt, utbildnings- eller forskningssyfte"
+            }
         },
         "subType": {
             "DEVELOPER": "Utvecklare",

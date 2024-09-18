@@ -761,11 +761,13 @@
             "OTHER": "Andere Nutzung",
             "INDIVIDUAL": "Nutzung als Einzelperson"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "COMMERCIAL": "Kommerzielle Nutzung = Nutzung durch kommerzielle Entwickler, Software- oder Terminologie-Dienst-Anbieter",
             "ACADEMIC": "Nicht-Kommerzielle Nutzung = Interne Nutzung innerhalb einer Organisation (im Bereich Bildung, Forschung, Entwicklung oder Leistungserbringer im Gesundheitswesen)",
             "OTHER": "Andere Nutzung = Nutzung für andere Zwecke",
             "INDIVIDUAL": "Nutzung als Einzelperson = Persönliche Nutzung im Bereich Bildung oder Forschung "
+            }
         },
         "subType": {
             "DEVELOPER": "Kommerzielle Software-Entwicklung",

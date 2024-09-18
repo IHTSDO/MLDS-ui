@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
 
 @Component({
   selector: 'app-start-extension-application-modal',
   standalone: true,
-  imports: [CommonModule,NgbAlert],
+  imports: [CommonModule,NgbAlert,TranslateModule,CompareTextPipe],
   templateUrl: './start-extension-application-modal.component.html',
   styleUrl: './start-extension-application-modal.component.scss'
 })

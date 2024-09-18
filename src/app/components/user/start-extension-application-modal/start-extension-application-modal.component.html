@@ -1,6 +1,6 @@
 <div class="modal-header">
   
-  <h4 class="modal-title"><b>Start Extension Application Process</b></h4>
+  <h4 class="modal-title"><b>{{'views.extensionApplication.title'|translate|compareText:'Start Extension Application Process'}}</b></h4>
   <button type="button" class="close" aria-label="Close" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -10,13 +10,13 @@
   <div *ngFor="let alert of alerts" class="alert" [ngClass]="'alert-' + alert.type">
     {{ alert.msg }}
   </div>
-  <p>Are you sure you want to apply for this Extension?</p>
+  <p>{{'views.extensionApplication.sure'|translate|compareText:'Are you sure you want to apply for this Extension?'}}</p>
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-link" (click)="dismiss()">No</button>
+  <button class="btn btn-link" (click)="dismiss()">{{'global.word.no'|translate|compareText:'No'}}</button>
   <button class="add-button" (click)="ok()" [disabled]="submitting">
-    Yes
+    {{'global.word.yes'|translate|compareText:'Yes'}}
     <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
   </button>
 </div>

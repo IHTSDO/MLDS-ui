@@ -990,11 +990,13 @@
             "DEVELOPMENT": "Pengembangan",
             "DEVELOPER": "Fasilitas Pelayanan Kesehatan"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "ACADEMIC": "Akademik - Untuk Penggunaan Internal Dalam Suatu Organisasi. (Pendidikan, Riset, Pengembangan atau Penyedia Layanan Kesehatan)",
             "INDIVIDUAL": "Individu - Pribadi, Pendidikan atau Penelitian",
             "OTHER": "Lainnya - Gunakan Pilihan Ini Apabila Penggunaan Tidak Dinyatakan Dalam Opsi Lainnya",
             "COMMERCIAL": "Komersial - Penyedia Sistem Informasi atau Terminologi"
+            }
         },
         "type": {
             "INDIVIDUAL": "Individu",

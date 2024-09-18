@@ -1,12 +1,12 @@
 <div class="modal-header">
     <h4 class="modal-title">
-      <span>Release Package License</span>
+      <span>{{'views.releases.releasePackageLicense'|translate|compareText:'Release Package License'}}</span>
     </h4>
   </div>
 <div class="modal-body">
-    <p><span translate="views.releases.reviewLicense">Please review the following license and accept them before downloading the release package:</span></p>
+    <p><span>{{'views.releases.reviewLicense'|translate}}:</span></p>
     <button (click)="viewReleaseLicense()" class="btn btn-muted btn-default btn-block">
-        {{releasePackage.name}} <span translate="global.word.license">License</span>
+        {{releasePackage.name}} <span>{{'global.word.license'|translate|compareText:'License'}}</span>
     </button>
     <br>
     <strong>Disclaimer:</strong>
@@ -22,13 +22,13 @@
     <br>
     <label class="license-label">
       <input type="checkbox" [(ngModel)]="isLicenseAccepted" value="1">
-      <span><strong>I agree to the license.</strong></span>
+      <span><strong>{{'views.releases.agreeToLicense'|translate|compareText:'I agree to the license.'}}</strong></span>
     </label>
   </div>
   <div class="modal-footer">
-    <a class="cancel-link" (click)="onCancel()">Cancel</a>
+    <a class="cancel-link" (click)="onCancel()">{{'global.word.cancel'|translate|compareText:'Cancel'}}</a>
     <button class="btn btn-muted btn-success" (click)="onDownload()" [disabled]="!isLicenseAccepted">
-      <span>Download</span>
+      <span>{{'global.word.download'|translate|compareText:'Download'}}</span>
     </button>
   </div>
   

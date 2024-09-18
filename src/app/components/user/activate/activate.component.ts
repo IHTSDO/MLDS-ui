@@ -1,36 +1,40 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ActivateService } from 'src/app/services/activate/activate.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
   selector: 'app-activate',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule, CompareTextPipe],
   templateUrl: './activate.component.html',
   styleUrl: './activate.component.scss'
 })
 export class ActivateComponent implements OnInit {
   success: string | null = null;
   error: string | null = null;
+  successMessage: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private activateService: ActivateService,
-    private sessionService: AuthenticationSharedService
+    private sessionService: AuthenticationSharedService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
-    
     const key = this.route.snapshot.queryParamMap.get('key');
     if (key) {
       this.activateService.get({ key }).subscribe(
         (response: string) => {
           this.success = 'OK';
-          localStorage.setItem('isLoggedIn', 'true'); 
+          localStorage.setItem('isLoggedIn', 'true');
           this.handleAccountDetails();
+          this.setSuccessMessage(); // Set the success message after activation
         },
         (error: any) => {
           console.error('Activation error', error);
@@ -40,7 +44,6 @@ export class ActivateComponent implements OnInit {
       );
     }
   }
-  
 
   handleAccountDetails(): void {
     this.sessionService.getAccountDetails().subscribe({
@@ -52,5 +55,11 @@ export class ActivateComponent implements OnInit {
       }
     });
   }
+
+  setSuccessMessage(): void {
+    this.translateService.get('views.activate.messages.success.body', { linkbegin: '<a href="#/usageReports">', linkend: '</a>' })
+      .subscribe((translated: string) => {
+        this.successMessage = translated;
+      });
+  }
 }
-  

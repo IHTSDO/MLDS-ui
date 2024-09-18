@@ -3,11 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert, NgbDatepicker, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
+import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-institution-modal',
   standalone: true,
-  imports: [CommonModule,FormsModule,NgbAlert,ReactiveFormsModule,NgbDatepicker,NgbDatepickerModule],
+  imports: [CommonModule, FormsModule, NgbAlert, ReactiveFormsModule, NgbDatepicker, NgbDatepickerModule, CompareTextPipe,TranslateModule],
   templateUrl: './add-institution-modal.component.html',
   styleUrl: './add-institution-modal.component.scss'
 })

@@ -725,11 +725,13 @@
             "INDIVIDUAL": "Indywidualny",
             "COMMERCIAL": "Komercyjny"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "ACADEMIC": "Akademicki - do użytku wewnętrznego w organizacji (edukacyjnej, badawczej, rozwojowej lub świadczącej opiekę zdrowotną)",
             "OTHER": "Inne - użycie nieokreślone w innych opcjach",
             "INDIVIDUAL": "Indywidualny - osobisty, edukacyjny lub badawczy",
             "COMMERCIAL": "Komercyjny — programista, sprzedawca lub dostawca terminologii"
+        }
         },
         "subType": {
             "DEVELOPER": "Deweloper",

@@ -746,11 +746,13 @@
             "OTHER": "Annet",
             "INDIVIDUAL": "Individuell"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "COMMERCIAL": "Kommersiell utvikler, selger eller leverandør",
             "ACADEMIC": "Akademisk for internt bruk innen en organisasjon. (utdanning, forskning, utvikling eller helseyter)",
             "OTHER": "Annet bruk som so ikke angis i øvrige alternativ",
             "INDIVIDUAL": "Individuell for personlig, utdannings- eller forskningsformål"
+            }
         },
         "subType": {
             "DEVELOPER": "Utvikler",

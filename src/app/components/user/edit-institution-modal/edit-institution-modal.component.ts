@@ -2,12 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert, NgbDatepicker, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { compact } from 'lodash';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 
 @Component({
   selector: 'app-edit-institution-modal',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbAlert,NgbDatepicker,NgbDatepickerModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbAlert,NgbDatepicker,NgbDatepickerModule,TranslateModule,CompareTextPipe],
   templateUrl: './edit-institution-modal.component.html',
   styleUrl: './edit-institution-modal.component.scss'
 })

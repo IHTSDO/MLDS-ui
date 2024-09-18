@@ -1,35 +1,35 @@
 <div class="container">
     <!-- Approval States -->
     <div *ngIf="extensionForm.approvalState === 'CHANGE_REQUESTED'" class="alert alert-warning" role="alert">
-      <strong>Extension Registration Needs Change</strong>
-      <p>Your extension registration needs to be updated before it can be processed. Please check your email for the necessary changes.</p>
+      <strong>{{'views.extensionApplication.change'|translate|compareText:'Extension Registration Needs Change'}}</strong>
+      <p>{{'views.extensionApplication.change.detail'|translate|compareText:'Your extension registration needs to be updated before it can be processed. Please check your email for the necessary changes.'}}</p>
     </div>
   
     <div *ngIf="isApplicationRejected" class="alert alert-danger" role="alert">
-      <strong>Extension Registration Rejected</strong>
-      <p>Your extension registration needs to be updated before it can be processed. Please check your email for the necessary changes.</p>
+      <strong>{{'views.extensionApplication.rejected'|translate|compareText:'Extension Registration Rejected'}}</strong>
+      <p>{{'views.extensionApplication.rejected.detail'|translate|compareText:'Your extension registration needs to be updated before it can be processed. Please check your email for the necessary changes.'}}</p>
     </div>
   
     <div *ngIf="isApplicationApproved" class="alert alert-success" role="alert">
-      <strong>Extension Registration Approved</strong>
-      <p>Your application has been approved.</p>
+      <strong>{{'views.extensionApplication.approved'|translate|compareText:'Extension Registration Approved'}}</strong>
+      <p>{{'views.extensionApplication.approved.detail'|translate|compareText:'Your application has been approved.'}}</p>
     </div>
   
     <!-- Extension Application Form -->
     <form [formGroup]="extensionApplicationForm" (ngSubmit)="submit()" novalidate>
       <div class="panel panel-default applicant">
         <div class="panel-heading">
-          <h4>{{ extensionForm.member?.key }} Extension Application Form</h4>
+          <h4>{{ 'global.member.'+extensionForm.member?.key|translate }} {{'views.extensionApplication.form.title'|translate|compareText:'Extension Application Form'}}</h4>
         </div>
         <div class="panel-body">
-          <h4 class="content">Please describe why you would like access to this extension.</h4>
+          <h4 class="content">{{'views.extensionApplication.form.why'|translate|compareText:'Please describe why you would like access to this extension.'}}</h4>
           <div class="form-group">
             <label class="font" for="reason">
-            <b >Purpose of Use</b></label>
+            <b >{{'views.extensionApplication.form.purpose'|translate|compareText:'Purpose of Use'}}</b></label>
             <textarea id="reason" class="form-control" formControlName="reason" rows="10" cols="135"></textarea>
             <div *ngIf="extensionApplicationForm.get('reason')?.touched && extensionApplicationForm.get('reason')?.invalid" class="text-danger">
-              <small *ngIf="extensionApplicationForm.get('reason')?.hasError('required')">Required field.</small>
-              <small *ngIf="extensionApplicationForm.get('reason')?.hasError('minlength')">Reason needs to be longer.</small>
+              <small *ngIf="extensionApplicationForm.get('reason')?.hasError('required')">{{'form.requiredField'|translate|compareText:'Required field.'}}</small>
+              <small *ngIf="extensionApplicationForm.get('reason')?.hasError('minlength')">{{'views.extensionApplication.form.error'|translate|compareText:'Reason needs to be longer.'}}</small>
             </div>
           </div>
         </div>
@@ -38,19 +38,20 @@
       <!-- License Agreement -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4 class="content">{{ extensionForm.member?.key }} Extension Agreement</h4>
+          <h4 class="content">{{ 'global.member.'+extensionForm.member?.key|translate }} {{'views.extensionApplication.agreement'|translate|compareText:'Extension Agreement'}}</h4>
         </div>
         <div class="panel-body">
           <p>
-            <button class="blue-button" (click)="viewLicense(extensionForm.member?.key)">{{ extensionForm.member?.key }} Extension License</button>
+            <button class="blue-button" (click)="viewLicense(extensionForm.member?.key)">{{'global.member.'+ extensionForm.member?.key|translate }} {{'views.extensionApplication.license'|translate|compareText:'Extension License'}}</button>
           </p>
           <div class="form-group">
             <label >
               <input type="checkbox" formControlName="snoMedTC" style="vertical-align: middle;    margin: -1px 0px 0px"/>&nbsp;
-              <b style="vertical-align: middle;">I agree to the license</b> 
+              <b style="vertical-align: middle;">{{'register.affiliateRegistration.license.confirm'|translate|compareText:'I agree to the license'}}</b> 
             </label>
             <div *ngIf="extensionApplicationForm.get('snoMedTC')?.touched && extensionApplicationForm.get('snoMedTC')?.invalid" class="text-danger">
-              <small>You must agree to the terms and conditions of the SNOMED CT License in order to register.</small>
+              <small>{{'register.affiliateRegistration.license.error'|translate|compareText:'
+                You must agree to the terms and conditions of the SNOMED CT License in order to register, which also indicates potential fees that be required.'}}</small>
             </div>
           </div>
         </div>
@@ -58,8 +59,8 @@
   
       <!-- Form Buttons -->
       <div class="panel-footer" *ngIf="!readOnly">
-        <button type="button" class="remove-button" (click)="cancelApplication()">Cancel</button>
-        <button type="submit" class="add-button" [disabled]="extensionApplicationForm.invalid">Apply</button>
+        <button type="button" class="remove-button" (click)="cancelApplication()">{{'global.word.cancel'|translate|compareText:'Cancel'}}</button>
+        <button type="submit" class="add-button" [disabled]="extensionApplicationForm.invalid">{{'global.word.apply'|translate|compareText:'Apply'}}</button>        
       </div>
     </form>
   </div>

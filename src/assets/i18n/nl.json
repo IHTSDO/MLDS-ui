@@ -761,11 +761,13 @@
             "OTHER": "Anders",
             "INDIVIDUAL": "Persoonlijk"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "COMMERCIAL": "Commercieel - Ontwikkelaar, Verkoper of Leverancier van Terminologie",
             "ACADEMIC": "Academisch – Voor intern gebruik binnen een Organisatie. (onderwijs, onderzoek,ontwikkeling of gezondheidswerker)",
             "OTHER": "Andere – Gebruik staat niet vermeld in andere opties",
             "INDIVIDUAL": "Individueel - Persoonlijk, onderzoek"
+            }
         },
         "subType": {
             "DEVELOPER": "Ontwikkelaar",

@@ -8,11 +8,13 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
 import { DeleteExtensionApplicationComponent } from '../delete-extension-application/delete-extension-application.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
   selector: 'app-extension-application',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbAlert],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbAlert,TranslateModule,CompareTextPipe],
   templateUrl: './extension-application.component.html',
   styleUrl: './extension-application.component.scss'
 })

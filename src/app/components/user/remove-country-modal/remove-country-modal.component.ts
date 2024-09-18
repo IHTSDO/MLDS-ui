@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 
 @Component({
   selector: 'app-remove-country-modal',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,NgbAlert],
+  imports: [CommonModule,ReactiveFormsModule,NgbAlert,TranslateModule,CompareTextPipe],
   templateUrl: './remove-country-modal.component.html',
   styleUrl: './remove-country-modal.component.scss'
 })

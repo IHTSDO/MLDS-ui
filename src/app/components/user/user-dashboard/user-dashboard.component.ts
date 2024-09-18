@@ -13,12 +13,14 @@ import _ from 'lodash';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { ApplicationSummaryModalComponent } from '../../common/application-summary-modal/application-summary-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, UsageReportsTableComponent],
+  imports: [CommonModule, UsageReportsTableComponent,TranslateModule,CompareTextPipe],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss'
 })

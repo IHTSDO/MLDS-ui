@@ -761,11 +761,13 @@
             "OTHER": "Andere",
             "INDIVIDUAL": "Einzelperson"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "COMMERCIAL": "Kommerziell – Entwickler, Verkäufer oder Terminologie-Anbieter",
             "ACADEMIC": "Akademisch – für interne Nutzung innerhalb einer Organisation. (Bildung, Forschung, Entwicklung oder Leistungserbringer im Gesundheitswesen)",
             "OTHER": "Andere – Nutzung nicht in anderen Optionen erwähnt",
             "INDIVIDUAL": "Einzelperson – privat, Bildung oder Forschung "
+            }
         },
         "subType": {
             "DEVELOPER": "Entwickler",

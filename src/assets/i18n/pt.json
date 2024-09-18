@@ -762,11 +762,13 @@
             "OTHER": "Outros",
             "INDIVIDUAL": "Individual"
         },
-        "type.extended": {
+        "types": {
+            "extended": {
             "COMMERCIAL": "Comercial - Programador, Fornecedor de Software ou Fornecedor de Terminologia",
             "ACADEMIC": "Académico - Para uso interno dentro de uma Organização. (Educação, Investigação, Prestador de cuidados de saúde)",
             "OTHER": "Outros - Não especificado nas outras opções",
             "INDIVIDUAL": "Individual - Pessoal, Educação ou Investigação"
+        }
         },
         "subType": {
             "DEVELOPER": "Programador",

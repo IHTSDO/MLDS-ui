@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 import { groupBy, sortBy } from 'lodash';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 
 @Component({
   selector: 'app-affiliate-registration-review',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule,CompareTextPipe],
   templateUrl: './affiliate-registration-review.component.html',
   styleUrl: './affiliate-registration-review.component.scss'
 })

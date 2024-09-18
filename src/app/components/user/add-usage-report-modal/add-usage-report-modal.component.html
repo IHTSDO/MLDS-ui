@@ -2,7 +2,7 @@
         <button type="button" class="btn-close" aria-label="Close" style="margin-left: 75rem;" (click)="cancel()">
      
     </button>
-    <h3 class="modal-title" >Create Usage Declaration</h3>
+    <h3 class="modal-title">{{'views.usage.modal.title' |translate | compareText:'Create Usage Declaration'}}</h3>
   </div>
   
   <div class="modal-body">
@@ -13,12 +13,12 @@
       </button>
     </div>
   
-    <p>Please complete your usage declaration for all time periods. Please include reports for past and current use.</p>
+    <p>{{'views.usage.modal.instructions' |translate|compareText:'Please complete your usage declaration for all time periods. Please include reports for past and current use.'}}</p>
   
     <form [formGroup]="addRangeForm" (ngSubmit)="add()">
       <div class="row">
         <div class="form-group col-md-6">
-          <label for="selectedRange" style="font-weight: bold;">Declaration Period</label>
+          <label for="selectedRange" style="font-weight: bold;">{{'views.usage.modal.period' |translate|compareText:'Declaration Period'}}</label>
             <select id="selectedRange" formControlName="selectedRange" class="form-select">
               <option *ngFor="let range of ranges" [ngValue]="range">
                 {{ range?.startDate | date: 'yyyy-MM' }} - {{ range?.endDate | date: 'yyyy-MM' }}
@@ -34,9 +34,9 @@
   </div>
   
   <div class="modal-footer">
-    <button class="btn-link" (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button class="btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel'|translate|compareText:'Cancel'}}</button>
     <button class="edit-button" (click)="add()" [disabled]="submitting || addRangeForm.invalid">
-      <i class="fa fa-plus"></i> Add
+      <i class="fa fa-plus"></i> {{'global.word.add' | translate|compareText:'Add'}}
       <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
     </button>
   </div>

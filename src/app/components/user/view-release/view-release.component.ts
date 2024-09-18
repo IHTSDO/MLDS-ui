@@ -14,11 +14,13 @@ import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affil
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import { ReviewReleaseLicenseModalComponent } from '../review-release-license-modal/review-release-license-modal.component';
 import { ReviewReleaseLicenseWithDisclaimerModalComponent } from '../review-release-license-with-disclaimer-modal/review-release-license-with-disclaimer-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
   selector: 'app-view-release',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule,CompareTextPipe],
   templateUrl: './view-release.component.html',
   styleUrl: './view-release.component.scss'
 })

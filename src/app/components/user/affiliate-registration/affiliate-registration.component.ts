@@ -13,11 +13,13 @@ import { EmbeddableUsageLogComponent } from "../../common/embeddable-usage-log/e
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { AffiliateRegistrationReviewComponent } from '../affiliate-registration-review/affiliate-registration-review.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
   selector: 'app-affiliate-registration',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxBsTelInputComponent, NgbModule, EmbeddableUsageLogComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxBsTelInputComponent, NgbModule, EmbeddableUsageLogComponent,TranslateModule,CompareTextPipe],
   templateUrl: './affiliate-registration.component.html',
   styleUrl: './affiliate-registration.component.scss'
 })
