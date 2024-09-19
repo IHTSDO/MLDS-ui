@@ -5,11 +5,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-edit-count-modal',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,TranslateModule,CompareTextPipe],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, CompareTextPipe,ModalComponent],
   templateUrl: './edit-count-modal.component.html',
   styleUrl: './edit-count-modal.component.scss'
 })

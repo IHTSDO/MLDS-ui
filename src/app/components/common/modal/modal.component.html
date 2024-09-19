@@ -1,18 +1,26 @@
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-header">
-            <ng-content select="[header]"></ng-content>
-            <button type="button" class="border-0 close" (click)="close()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <div class="modal-body">
-            <ng-content select="[body]"></ng-content>
-        </div>
-        <div class="modal-footer">
-            <ng-content select="[footer]"></ng-content>
-        </div>
+<div class="modal-header">
+    <h3 class="modal-title">{{ title }}</h3>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()"></button>
+  </div>
+  
+  <div class="modal-body">
+    <!-- Alerts Section -->
+    <div *ngFor="let alert of alerts; let i = index" class="alert alert-dismissible" [ngClass]="'alert-' + alert.type">
+      {{ alert.msg }}
+      <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
     </div>
+   <!-- Form Section -->
+   <ng-container *ngIf="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+      <ng-content></ng-content> <!-- Allows injecting custom content (form fields) from the parent component -->
+    </form>
+  </ng-container>
 </div>
-<div class="app-modal-background" (click)="close()"></div>
+  <div class="modal-footer">
+    <button class="btn btn-link" (click)="cancel()" [disabled]="isSubmitting">{{ cancelText }}</button>
+    <button class="btn btn-success" (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)">
+      {{ submitText }}
+      <span *ngIf="isSubmitting"><i class="fa fa-spinner fa-spin"></i></span>
+    </button>
+  </div>
+  

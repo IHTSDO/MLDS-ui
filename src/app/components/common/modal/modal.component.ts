@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-import {ModalService} from '../../../services/modal/modal.service';
+import { Component, ViewEncapsulation, Input, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 /**
  * Modal component that can be used to display a modal window.
@@ -13,75 +14,40 @@ import {ModalService} from '../../../services/modal/modal.service';
  */
 @Component({
     selector: 'app-modal',
+    standalone: true,
+    imports: [FormsModule,ReactiveFormsModule,CommonModule],
     templateUrl: 'modal.component.html',
     styleUrls: ['modal.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ModalComponent implements OnInit, OnDestroy {
-    /**
-     * The ID of the modal. Required.
-     */
-    @Input() id = '';
+export class ModalComponent {
+      // Inputs to customize the modal
+  @Input() title: string = ''; // The title of the modal
+  @Input() formGroup: FormGroup | null = null; // FormGroup for forms inside the modal
+  @Input() submitText: string = 'Submit'; // Submit button text
+  @Input() cancelText: string = 'Cancel'; // Cancel button text
+  @Input() alerts: any[] = []; // Any alerts to be shown
+  @Input() isSubmitting: boolean = false; // Whether form submission is in progress
+  @Input() showForm: boolean = true; // Flag to show/hide form
 
-    /**
-     * The size of the modal. Can be 'small', 'medium', or 'large'. Default is 'medium'.
-     */
-    @Input() size = 'medium';
+  // Outputs to communicate actions back to parent components
+  @Output() onSubmit: EventEmitter<void> = new EventEmitter();
+  @Output() onCancel: EventEmitter<void> = new EventEmitter();
 
-    private element: any;
-
-    constructor(private modalService: ModalService, private el: ElementRef) {
-        this.element = el.nativeElement;
+  // Method to handle submit
+  submit() {
+    if (this.formGroup && this.formGroup.valid) {
+      this.onSubmit.emit();
     }
+  }
 
-    /**
-     * Initializes the modal component.
-     */
-    ngOnInit(): void {
-        // ensure id attribute exists
-        if (!this.id) {
-            console.error('modal must have an id');
-            return;
-        }
+  // Method to handle cancel
+  cancel() {
+    this.onCancel.emit();
+  }
 
-        // move element to bottom of page (just before </body>) so it can be displayed above everything else
-        document.body.appendChild(this.element);
-
-        // add size to dialog
-        this.element.firstChild.classList.add('modal-' + this.size);
-
-        // close modal on background click
-        this.element.addEventListener('click', (el: any) => {
-            if (el.target.className === 'app-modal') {
-                this.close();
-            }
-        });
-
-        // add self (this modal instance) to the modal service so it's accessible from controllers
-        this.modalService.add(this);
-    }
-
-    /**
-     * Removes the modal component from the DOM and modal service when it's destroyed.
-     */
-    ngOnDestroy(): void {
-        this.modalService.remove(this.id);
-        this.element.remove();
-    }
-
-    /**
-     * Opens the modal window.
-     */
-    open(): void {
-        this.element.style.display = 'block';
-        document.body.classList.add('app-modal-open');
-    }
-
-    /**
-     * Closes the modal window.
-     */
-    close(): void {
-        this.element.style.display = 'none';
-        document.body.classList.remove('app-modal-open');
-    }
+  // Method to close alerts
+  closeAlert(index: number) {
+    this.alerts.splice(index, 1);
+  }
 }

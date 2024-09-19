@@ -12,7 +12,6 @@ import { EnvServiceProvider } from './providers/env.service.provider';
 import {ToastrModule} from 'ngx-toastr';
 import {AppRoutingModule} from './app-routing.module';
 import {ModalService} from './services/modal/modal.service';
-import {ModalComponent} from './components/common/modal/modal.component';
 import {TextFilterPipe} from './pipes/text-filter/text-filter.pipe';
 import { MemberManagementComponent } from "./components/admin/member-management/member-management.component";
 import { StaffTopNavComponent } from "./components/common/staff-top-nav/staff-top-nav.component";
@@ -37,7 +36,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         AppComponent,
         SnomedNavbarComponent,
         SnomedFooterComponent,
-        ModalComponent,
         TextFilterPipe
     ],
     imports: [
