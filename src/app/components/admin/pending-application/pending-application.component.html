@@ -22,7 +22,7 @@
           <option value="0">
             {{'pendingApplications.show.myApplications' | translate |compareText: 'My Pending Applications'}}
           </option>
-          <option value="1">{{'pendingApplications.show.allApplications' |translate|compareText:'All Applications'}}</option>
+          <option value="1">{{'pendingApplications.show.allApplications' |translate|compareText:'All Pending Applications'}}</option>
         </select>
       </div>
     </div>
@@ -245,8 +245,9 @@
               {{ application.affiliateDetails.address.country.commonName }}
             </td>
             <td class="col-md-1">{{ 'global.member.'+application.member.key| translate}}</td>
-            <a href="mailto:{{application.affiliateDetails.email}}">{{application.affiliateDetails.email}}</a>
-            <!-- <td class="col-md-1">{{ application.affiliateDetails.email }}</td> -->
+            <td class="col-md-1">
+              <a href="mailto:{{ application.affiliateDetails.email }}">{{ application.affiliateDetails.email }}</a>
+            </td>            
             <td class="col-md-1">
               <button
               *ngIf="isAdmin"

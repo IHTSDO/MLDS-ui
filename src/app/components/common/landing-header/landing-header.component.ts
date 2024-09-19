@@ -52,7 +52,8 @@ export class LandingHeaderComponent {
 
   ngOnInit(): void {
 
-    this.translateService.use("en"); 
+    const storedLang = localStorage.getItem('selectedLang');
+    this.translateService.use(storedLang ?? 'en');
 
     this.memberService.memberLogo$.subscribe(logoUrl => {
       this.memberLogo = logoUrl;
@@ -85,6 +86,7 @@ export class LandingHeaderComponent {
   }
   changeLanguage(lang: any) {
     this.translateService.use(lang);
+    localStorage.setItem('selectedLang', lang);
   }
 
 }

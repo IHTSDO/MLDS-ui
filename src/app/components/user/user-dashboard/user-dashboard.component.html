@@ -1,9 +1,9 @@
 <div class="row" *ngIf="!(anySubmittedUsageReports || affiliate?.application?.approvalState === 'REJECTED')">
 	<div class="col-sm-12">
 		<div class="alert alert-danger space" role="alert">
-			<div><strong >{{'views.userDashboard.warning.required.msg'|translate|compareText:'Usage Declaration Required'}}</strong>
+			<div><strong >{{'views.userDashboard.warning.required.title'|translate|compareText:'Usage Declaration Required'}}</strong>
 			</div>
-			<p >{{'views.userDashboard.warning.required.msg' | translate|compareText:'Your preliminary usage declaration has been saved.However, please be advised that you will need to submit your final usage declaration for the current year by January 15th. Please note all previous years usage reports must be submitted in order to download SNOMED CT.'}}</p>
+			<p >{{'views.userDashboard.warning.required.msg' | translate}}</p>
 		</div>
 	</div>
 </div>
@@ -12,8 +12,8 @@
 <div class="row space" *ngIf="affiliate?.application?.approvalState === 'CHANGE_REQUESTED'">
 	<div class="col-sm-12">
 		<div class="alert alert-warning" role="alert">
-			<div><strong>{{'views.userDashboard.warning.required.change'|translate|compareText:'Affiliate Registration Requires	Change'}}</strong></div>
-			<p>{{'views.userDashboard.warning.required.msg'|translate|compareText:'Your affiliate registration needs to be updated	before it can processed. Please see email regarding the necessary changes to complete your registration.'}}
+			<div><strong>{{'views.userDashboard.warning.change.title'|translate}}</strong></div>
+			<p>{{'views.userDashboard.warning.required.msg'|translate}}
 			</p>
 		</div>
 	</div>
@@ -32,10 +32,8 @@
 <div class="row" *ngIf="isDeactivated">
 	<div class="col-sm-12">
 		<div class="alert alert-danger space" role="alert">
-			<div><strong translate="views.userDashboard.warning.deactivated.title">Account Deactivated</strong></div>
-			<p>
-				{{ 'views.userDashboard.warning.deactivated.msg' | translate}}
-			  </p>
+			<div><strong>{{ 'views.userDashboard.warning.deactivated.title' | translate}}</strong></div>
+			<p [innerHTML]=" 'views.userDashboard.warning.deactivated.msg' | translate "></p>
 			  
 		</div>
 	</div>
@@ -45,7 +43,7 @@
 	<div class="col-sm-12">
 		<div class="alert alert-danger space" role="alert">
 			<div><strong>{{'views.userDashboard.warning.iPending.title'|translate|compareText:'Account Pending Invoice'}}</strong></div>
-			<p>{{'views.userDashboard.warning.iPending.msg'|translate}}</p>
+			<p [innerHTML]="'views.userDashboard.warning.iPending.msg'|translate"></p>
 		</div>
 	</div>
 </div>
@@ -55,7 +53,7 @@
 		<div class="alert alert-danger space" role="alert">
 			<div><strong>{{'views.userDashboard.warning.dPending.title'|translate|compareText:'Account Deactivation Pending'}}</strong>
 			</div>
-			<p>{{'views.userDashboard.warning.dPending.msg'|translate}}</p>
+			<p [innerHTML]="'views.userDashboard.warning.dPending.msg'|translate"></p>
 		</div>
 	</div>
 </div>

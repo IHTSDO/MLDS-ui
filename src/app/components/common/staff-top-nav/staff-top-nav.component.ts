@@ -39,9 +39,8 @@ langkey: string | undefined;
  
 
   constructor(private sessionService: AuthenticationSharedService, private translate: TranslateService) {
-     // Set the default language based on user details or fallback to a default language
-  this.langkey = this.sessionService.getUserDetails()?.langKey || 'defaultLanguageKey';  // Default to 'en' if no language key is found
-  this.translate.use(this.langkey);  // Set the language using TranslateService
+    const storedLang = localStorage.getItem('selectedLang') ?? this.sessionService.getUserDetails()?.langKey ?? 'en';
+    this.translate.use(storedLang);
    }
 
   ngOnInit(): void {
@@ -65,5 +64,6 @@ langkey: string | undefined;
 
   changeLanguage(lang: string): void {
     this.translate.use(lang);
+    localStorage.setItem('selectedLang', lang);
   }
 }

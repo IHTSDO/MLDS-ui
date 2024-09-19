@@ -148,12 +148,7 @@
   <div class="col-12">
       <div class="release-divider">
           <h2>{{'views.releases.memberCountries'|translate|compareText:'Member Countries'}}</h2>
-          <p>
-            {{ 'views.releases.countryIsMissing' | translate | compareText: "If the country you're looking for is not in this list, please refer to the IHTSDO website for release download information." }}
-            <a href="http://www.ihtsdo.org/">
-              {{ 'global.word.ihtsdoWebsite' | translate | compareText: 'IHTSDO website' }}
-            </a>
-          </p>
+          <p [innerHTML]="('views.releases.countryIsMissing' | translate)"></p>      
            </div>
   </div>
 </div>
