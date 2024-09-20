@@ -396,10 +396,15 @@ export class ContactInfoComponent implements OnInit {
     formatCountry = (country: any) => country.commonName;
 
     cancel(){
+      debugger;
+      console.log(this.isStaffOrAdmin)
       if(this.isStaffOrAdmin){
+        debugger;
       this.router.navigate([`/affiliateManagement/${this.affiliateId}`]);
+      }else{
+        this.router.navigate([`/userDashboard`]);
       }
-      this.router.navigate([`/userDashboard`]);
+     
     }
 
  
