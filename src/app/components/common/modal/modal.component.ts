@@ -30,6 +30,8 @@ export class ModalComponent {
   @Input() isSubmitting: boolean = false; // Whether form submission is in progress
   @Input() showForm: boolean = true; // Flag to show/hide form
   @Input() buttonDisabled:boolean=false;
+  @Input() buttonType: 'default' | 'delete' = 'default'; 
+  @Input() iconClass: string = '';
   // Outputs to communicate actions back to parent components
   @Output() onSubmit: EventEmitter<void> = new EventEmitter();
   @Output() onCancel: EventEmitter<void> = new EventEmitter();

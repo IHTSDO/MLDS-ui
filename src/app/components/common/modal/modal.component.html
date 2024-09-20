@@ -25,7 +25,10 @@
 
 <div class="modal-footer">
   <button class="btn btn-link" (click)="cancel()" [disabled]="isSubmitting">{{ cancelText }}</button>
-  <button class="btn btn-success" (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)|| buttonDisabled">
+  <button 
+  [ngClass]="buttonType === 'delete' ? 'btn-danger' : 'btn-success'" 
+  (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)|| buttonDisabled">
+  <i *ngIf="iconClass" [class]="iconClass"></i>&nbsp; <!-- Add the icon here -->
     {{ submitText }}
     <span *ngIf="isSubmitting"><i class="fa fa-spinner fa-spin"></i></span>
   </button>

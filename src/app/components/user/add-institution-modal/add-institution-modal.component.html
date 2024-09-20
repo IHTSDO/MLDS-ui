@@ -4,6 +4,7 @@
 [cancelText]="'global.word.cancel' | translate | compareText:'Cancel'"
 [isSubmitting]="submitting"
 (onSubmit)="add()"
+[iconClass]="'fa fa-plus'"
 (onCancel)="cancel()"
 >
 <div *ngIf="country">

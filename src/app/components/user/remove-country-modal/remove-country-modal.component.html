@@ -6,6 +6,7 @@
   (onCancel)="cancel()"
   [formGroup]="formGroup"
   [isSubmitting]="submitting"
+  [buttonType]="'delete'" 
   (onSubmit)="submit()">
 
   <div *ngFor="let alert of alerts" class="alert" [ngClass]="'alert-' + alert.type">
