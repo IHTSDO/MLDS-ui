@@ -5,11 +5,12 @@ import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-delete-affiliate-modal',
   standalone: true,
-  imports: [CommonModule, EnumPipe, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, EnumPipe, TranslateModule, CompareTextPipe, ModalComponent],
   templateUrl: './delete-affiliate-modal.component.html',
   styleUrl: './delete-affiliate-modal.component.scss'
 })

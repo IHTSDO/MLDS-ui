@@ -46,9 +46,6 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   border-radius: 4px;
 }
 
-.btn{
-  font-size: 14px;
-}
 
 .muted {
       border: 1px solid #999999;
@@ -73,9 +70,9 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-success {
   color: #3cb878;
   background-color: #ffffff;
+  border: 2px solid;
   border-color: #3cb878;
   border-top-left-radius: 10px;
-  border: 2px solid;
 }
 
 .btn-danger {
@@ -90,15 +87,16 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-success:hover, .btn-success:focus {
   color: #ffffff;
   background-color: #3cb878;
+  border: 2px solid;
+  border-color: #3cb878;
 }
-.btn-danger:hover, .btn-danger:focus {
+.btn-warning:hover, .btn-warning:focus {
   color: #ffffff;
   background-color: #f26c4f;
 }
 
 .fa {
   display: inline-block;
-  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -194,6 +192,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-warning {
   color: #f26c4f;
   background-color: #fde3dd;
+  border: 1px solid;
   border-color: #f26c4f;
   border-top-left-radius: 10px;
 }
@@ -205,7 +204,6 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   vertical-align: middle;
   cursor: pointer;
   background-image: none;
-  border: 2px solid transparent;
   white-space: nowrap;
   padding: 6px 12px;
   font-size: 14px;

@@ -6,6 +6,7 @@ import { AffiliateService } from '../affiliate/affiliate.service';
 import { UsageReportStateUtilsService } from '../usage-report-state-utils/usage-report-state-utils.service';
 import { RetractUsageReportComponent } from 'src/app/components/common/retract-usage-report/retract-usage-report.component';
 import { AddUsageReportModalComponent } from 'src/app/components/user/add-usage-report-modal/add-usage-report-modal.component';
+import { AuthenticationSharedService } from '../authentication/authentication-shared.service';
 
 /**
  * Service for retrieving usage reports.
@@ -19,7 +20,8 @@ export class UsageReportsService {
     private router: Router,
     private affiliateService: AffiliateService,
     private usageReportStateUtils: UsageReportStateUtilsService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private sessionService: AuthenticationSharedService
 
   ) {}
 
@@ -85,7 +87,12 @@ export class UsageReportsService {
     modalRef.result
       .then((result) => {
         if (result && result && result.commercialUsageId) {
+          if(this.sessionService.isStaffOrAdmin()){
           this.router.navigate(['/usageReports/usageLog/', result.commercialUsageId]);
+          }
+          else{
+            this.router.navigate(['/usageReport/usageLog/', result.commercialUsageId]);
+          }
         }
       })
       .catch((error) => {

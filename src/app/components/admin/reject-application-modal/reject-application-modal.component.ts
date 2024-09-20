@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Reject Application Modal Component
@@ -14,7 +15,7 @@ import { UserRegistrationService } from 'src/app/services/user-registration/user
 @Component({
   selector: 'app-reject-application-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './reject-application-modal.component.html',
   styleUrl: './reject-application-modal.component.scss'
 })

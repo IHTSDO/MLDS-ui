@@ -1,54 +1,41 @@
-<div class="modal-header">
-  <h3 class="modal-title">Add Release</h3>
-</div>
-<div class="modal-body">
+<app-modal
+  [title]="'Add Release'"
+  [formGroup]="formPackage"
+  [submitText]="'Add'"
+  [cancelText]="'Cancel'"
+  [isSubmitting]="submitting"
+  [alerts]="alerts"
+  [iconClass]="'fa fa-plus'"
+  (onSubmit)="ok()"
+  (onCancel)="close()">
 
-  <div *ngFor="let alert of alerts; let i = index" class="alert"
-    [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}" role="alert">
-    {{ alert.msg }}
-    <button type="button" class="btn-close" (click)="closeAlert(i)" aria-label="Close"></button>
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" id="name" class="form-control" placeholder="Enter Release Name" formControlName="name" required />
+    <div *ngIf="formPackage.get('name')?.invalid && submitAttempted" class="help-block">Required Field</div>
   </div>
 
-  <form [formGroup]="formPackage" (ngSubmit)="ok()">
+  <div class="form-group">
+    <label for="description">Description</label>
+    <quill-editor id="Description" formControlName="description" [style]="{'height': '200px','width':'780px'}"></quill-editor>
+  </div>
 
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" class="form-control" placeholder="Enter Release Name" formControlName="name"
-        required />
-      <div *ngIf="formPackage.get('name')?.invalid && submitAttempted" class="help-block">
-        Required Field
-      </div>
-    </div>
+  <div class="form-group" *ngIf="isAdmin">
+    <label for="member">Member</label>
+    <select id="member" class="form-select" formControlName="member">
+      <option *ngFor="let m of members" [ngValue]="m">{{ m.key }}</option>
+    </select>
+  </div>
 
-    <div class="form-group">
-      <label for="description">Description</label>
-      <quill-editor id="Description" formControlName="description" [style]="{'height': '200px'}"></quill-editor>
-    </div>
+  <div class="form-group">
+    <label for="releasePackageURI">Release Package URI</label>
+    <input type="text" id="releasePackageURI" class="form-control" placeholder="Enter Release Package URI" formControlName="releasePackageURI" />
+  </div>
 
-    <div class="form-group" *ngIf="isAdmin">
-      <label for="member">Member</label>
-      <select id="member" class="form-select" formControlName="member">
-        <option *ngFor="let m of members" [ngValue]="m">{{ m.key }}</option>
-      </select>
-    </div>
+  <div class="form-group">
+    <label for="copyrights">Copyrights</label>
+    <textarea id="copyrights" class="form-control" rows="3" formControlName="copyrights"></textarea>
+  </div>
 
-    <div class="form-group">
-      <label for="releasePackageURI">Release Package URI</label>
-      <input type="text" id="releasePackageURI" class="form-control" placeholder="Enter Release Package URI"
-        formControlName="releasePackageURI" />
-    </div>
-
-    <div class="form-group">
-      <label for="copyrights">Copyrights</label>
-      <textarea id="copyrights" class="form-control" rows="3" formControlName="copyrights"></textarea>
-    </div>
-  </form>
-</div>
-
-<div class="modal-footer">
-  <button class="btn btn-link" (click)="close()">Cancel</button>
-  <button class="btn btn-success" [disabled]="submitting" (click)="ok()">
-    <i class="fa fa-plus"></i> Add
-    <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-  </button>
-</div>
+</app-modal>

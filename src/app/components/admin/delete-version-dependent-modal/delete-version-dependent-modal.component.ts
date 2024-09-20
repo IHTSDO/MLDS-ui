@@ -4,11 +4,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, EMPTY, lastValueFrom, tap } from 'rxjs';
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-delete-version-dependent-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './delete-version-dependent-modal.component.html',
   styleUrl: './delete-version-dependent-modal.component.scss'
 })

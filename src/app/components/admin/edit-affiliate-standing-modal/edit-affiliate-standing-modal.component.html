@@ -1,52 +1,48 @@
-<div class="modal-header">
-  <h3 class="modal-title">Edit Affiliate Account Standing</h3>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-</div>
-<div class="modal-body">
-  <div *ngFor="let alert of alerts" class="alert alert-{{alert.type}}" role="alert">
-    {{alert.msg}}
-  </div>
-  <form #formStanding="ngForm">
-    <div class="mb-3">
-      <label for="affiliate-detail" class="form-label">Affiliate: {{affiliateActiveDetails()?.organizationName ||
-        (affiliateActiveDetails()?.firstName + ' ' + affiliateActiveDetails()?.lastName)}}</label>
-    </div>
-    <div class="mb-3">
-      <label for="standingState" class="form-label">Account Standing:</label>
-      <select class="form-select" name="standingState" [(ngModel)]="affiliate.standingState" required>
-          <option value="IN_GOOD_STANDING">
-            {{ 'affiliate.standingStateWithExplanation.IN_GOOD_STANDING' | translate | compareText: 'In Good Standing - Approved full access, Account Paid, No Payment Required or Account Issue Resolved' }}
-          </option>
-          <option value="PENDING_INVOICE">
-            {{ 'affiliate.standingStateWithExplanation.PENDING_INVOICE' | translate | compareText: 'Pending Invoice - Access to Account only, Payment Outstanding' }}
-          </option>
-          <option value="INVOICE_SENT">
-            {{ 'affiliate.standingStateWithExplanation.INVOICE_SENT' | translate | compareText: 'Invoice Sent - Access to Account only, Payment Outstanding' }}
-          </option>
-          <option value="DEACTIVATION_PENDING">
-            {{ 'affiliate.standingStateWithExplanation.DEACTIVATION_PENDING' | translate | compareText: 'Deactivation Pending - Access to Account Only, No Download Capability' }}
-          </option>
-          <option value="DEACTIVATED">
-            {{ 'affiliate.standingStateWithExplanation.DEACTIVATED' | translate | compareText: 'Deactivated - Access to Account Only, No Download Capability' }}
-          </option>
-          <option value="DEREGISTERED">
-            {{ 'affiliate.standingStateWithExplanation.DEREGISTERED' | translate | compareText: 'Deregistered – No Access to MLDS Account' }}
-          </option>
-        </select>
+<app-modal
+  [title]="'Edit Affiliate Account Standing'"
+  [submitText]="'Update'"
+  [cancelText]="'Cancel'"
+  [alerts]="alerts"
+  [isSubmitting]="submitting"
+  (onSubmit)="ok(formStanding)"
+  (onCancel)="activeModal.dismiss('cancel click')">
+
+  <ng-container modal-body>
+    <form #formStanding="ngForm">
+      <div class="mb-3">
+        <label for="affiliate-detail" class="form-label">Affiliate: {{affiliateActiveDetails()?.organizationName ||
+          (affiliateActiveDetails()?.firstName + ' ' + affiliateActiveDetails()?.lastName)}}</label>
+      </div>
+      <div class="mb-3">
+        <label for="standingState" class="form-label">Account Standing:</label>
+        <select class="form-select" name="standingState" [(ngModel)]="affiliate.standingState" required>
+            <option value="IN_GOOD_STANDING">
+              {{ 'affiliate.standingStateWithExplanation.IN_GOOD_STANDING' | translate | compareText: 'In Good Standing - Approved full access, Account Paid, No Payment Required or Account Issue Resolved' }}
+            </option>
+            <option value="PENDING_INVOICE">
+              {{ 'affiliate.standingStateWithExplanation.PENDING_INVOICE' | translate | compareText: 'Pending Invoice - Access to Account only, Payment Outstanding' }}
+            </option>
+            <option value="INVOICE_SENT">
+              {{ 'affiliate.standingStateWithExplanation.INVOICE_SENT' | translate | compareText: 'Invoice Sent - Access to Account only, Payment Outstanding' }}
+            </option>
+            <option value="DEACTIVATION_PENDING">
+              {{ 'affiliate.standingStateWithExplanation.DEACTIVATION_PENDING' | translate | compareText: 'Deactivation Pending - Access to Account Only, No Download Capability' }}
+            </option>
+            <option value="DEACTIVATED">
+              {{ 'affiliate.standingStateWithExplanation.DEACTIVATED' | translate | compareText: 'Deactivated - Access to Account Only, No Download Capability' }}
+            </option>
+            <option value="DEREGISTERED">
+              {{ 'affiliate.standingStateWithExplanation.DEREGISTERED' | translate | compareText: 'Deregistered – No Access to MLDS Account' }}
+            </option>
+          </select>
         
-      <div *ngIf="formStanding.submitted && formStanding.controls['standingState'].invalid" class="text-danger">Required
-        Field</div>
-    </div>
-    <div class="mb-3">
-      <p>Send reason for change, if necessary, to <a
-          [href]="'mailto:' + affiliateActiveDetails()?.email">{{affiliateActiveDetails()?.email}}</a></p>
-    </div>
-  </form>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('cancel click')">Cancel</button>
-  <button type="button" class="btn btn-success" [disabled]="formStanding.invalid" (click)="ok(formStanding)">
-    Update
-    <div *ngIf="submitting" class="spinner-border spinner-border-sm" aria-live="polite" aria-label="Loading..."></div>
-  </button>
-</div>
+        <div *ngIf="formStanding.submitted && formStanding.controls['standingState'].invalid" class="text-danger">Required Field</div>
+      </div>
+      <div class="mb-3">
+        <p>Send reason for change, if necessary, to <a
+            [href]="'mailto:' + affiliateActiveDetails()?.email">{{affiliateActiveDetails()?.email}}</a></p>
+      </div>
+    </form>
+  </ng-container>
+
+</app-modal>

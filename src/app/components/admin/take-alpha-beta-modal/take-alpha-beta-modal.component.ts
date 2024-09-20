@@ -3,11 +3,12 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, of } from 'rxjs';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-take-alpha-beta-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './take-alpha-beta-modal.component.html',
   styleUrl: './take-alpha-beta-modal.component.scss'
 })

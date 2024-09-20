@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditReleaseLicenseConfirmModalComponent } from '../edit-release-license-confirm-modal/edit-release-license-confirm-modal.component';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-release-package-license-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalComponent],
   templateUrl: './release-package-license-modal.component.html',
   styleUrl: './release-package-license-modal.component.scss'
 })
@@ -74,6 +75,7 @@ export class ReleasePackageLicenseModalComponent {
           next: () => {
             this.alerts.push({ type: 'success', msg: 'New license has been uploaded.' });
             this.submitStatus.submitSuccessful = true;
+            this.submitStatus.submitting = false;
           },
           error: (error) => {
             console.error(error);

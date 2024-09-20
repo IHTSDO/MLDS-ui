@@ -1,20 +1,14 @@
-<div class="modal-header">
-  <h3 class="modal-title">{{ 'views.applicationSummary.title' | translate | compareText: 'Application Summary' }}</h3>
-</div>
-<div class="modal-body">
-  <div *ngFor="let alert of alerts" class="alert"
-    [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
-    {{ alert.msg }}
-    <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)">
-    </button>
-  </div>
-  <app-application-summary-block [application]="application"></app-application-summary-block>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-link" (click)="activeModal.dismiss()">
-    <span>{{ 'global.word.cancel' | translate | compareText: 'Cancel' }}</span>
-  </button>
-  <button class="btn btn-success" (click)="activeModal.close()" [disabled]="submitting">
-    <span>{{ 'global.word.ok' | translate | compareText: 'OK' }}</span>
-  </button>
-</div>
+<app-modal
+  [title]="'views.applicationSummary.title' | translate | compareText: 'Application Summary'"
+  [alerts]="alerts"
+  [cancelText]="'global.word.cancel' | translate | compareText: 'Cancel'"
+  [submitText]="'global.word.ok' | translate | compareText: 'OK'"
+  [isSubmitting]="submitting"
+  (onCancel)="activeModal.dismiss()"
+  (onSubmit)="activeModal.close()">
+
+  <ng-container modal-body>
+    <app-application-summary-block [application]="application"></app-application-summary-block>
+  </ng-container>
+
+</app-modal>

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import _ from 'lodash';
+import lodash from 'lodash';
 import { FilterOnlinePipe } from 'src/app/pipes/filter-online/filter-online.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
@@ -63,7 +63,7 @@ export class ArchiveManagementComponent implements OnInit {
           ? this.packages
           : this.packages.filter(p => this.packageUtilsService.isReleasePackageMatchingMember(p));
 
-        this.packagesByMember = _.chain(memberFiltered)
+        this.packagesByMember = lodash.chain(memberFiltered)
           .groupBy('member.key')
           .map((memberPackages, memberKey) => {
             const archivePackages = memberPackages.filter(releasePackage =>

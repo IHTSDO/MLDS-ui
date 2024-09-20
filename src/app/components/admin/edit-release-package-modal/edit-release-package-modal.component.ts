@@ -9,12 +9,13 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { ModalComponent } from '../../common/modal/modal.component';
 
 
 @Component({
   selector: 'app-edit-release-package-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule, TranslateModule, EnumPipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule, TranslateModule, EnumPipe, ModalComponent],
   templateUrl: './edit-release-package-modal.component.html',
   styleUrl: './edit-release-package-modal.component.scss'
 })

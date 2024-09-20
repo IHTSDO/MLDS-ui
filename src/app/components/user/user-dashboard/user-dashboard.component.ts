@@ -9,7 +9,7 @@ import { ApplicationUtilsService } from 'src/app/services/application-utils/appl
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
 import { MemberService } from 'src/app/services/member/member.service';
-import _ from 'lodash';
+import lodash from 'lodash';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { ApplicationSummaryModalComponent } from '../../common/application-summary-modal/application-summary-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -91,7 +91,7 @@ export class UserDashboardComponent implements OnInit {
       next: (data) => {
         this.releasePackage = data;
         console.log(this.releasePackage);
-        const releasePackagesByMember = _.chain(this.releasePackage)
+        const releasePackagesByMember = lodash.chain(this.releasePackage)
           .filter(this.packageUtilsService.isPackagePublished)
           .groupBy(this.getEffectivePackageMemberKey.bind(this))
           .map((packages, memberKey) => {

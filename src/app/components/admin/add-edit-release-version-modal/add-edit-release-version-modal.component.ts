@@ -5,12 +5,12 @@ import { NgbActiveModal, NgbAlert, NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import moment from 'moment';
 import { QuillModule } from 'ngx-quill';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
-import { ModalComponent } from "../../common/modal/modal.component";
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-add-edit-release-version-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, NgbModule, QuillModule, ModalComponent],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert,NgbModule,QuillModule,ModalComponent],
   templateUrl: './add-edit-release-version-modal.component.html',
   styleUrl: './add-edit-release-version-modal.component.scss'
 })

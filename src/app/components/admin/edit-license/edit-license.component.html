@@ -1,31 +1,36 @@
-<div class="modal-header">
-  <h3 class="modal-title">Edit {{'global.member.'+ member.key | translate }} License</h3>
-  <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
-</div>
-<div class="modal-body">
-  <div *ngFor="let alert of alerts; let i = index" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}" role="alert">
-    {{ alert.msg }}
-    <button type="button" class="btn-close" (click)="closeAlert(i)" aria-label="Close"></button>
-  </div>
-  <form [formGroup]="licenseForm" (ngSubmit)="onSubmit()">
+<app-modal
+  [title]="'Edit ' + ('global.member.' + member.key | translate) + ' License'"
+  [submitText]="submitStatus.submitSuccessful ? '' : (file ? 'Upload' : 'Update')"
+  [cancelText]="submitStatus.submitSuccessful ? 'Close' : 'Cancel'"
+  [alerts]="alerts"
+  [isSubmitting]="submitStatus.submitting"
+  [formGroup]="licenseForm"
+  (onSubmit)="file ? openConfirmModal() : onSubmit()"
+  (onCancel)="modal.dismiss()">
+
+  <ng-container>
     <div class="mb-3">
       <label for="licenseName" class="form-label">License Name</label>
-      <input id="licenseName" class="form-control" placeholder="Enter Name" formControlName="licenseName" [attr.disabled]="submitStatus.submitSuccessful ? true : null"/>
+      <input id="licenseName"
+             class="form-control"
+             placeholder="Enter Name"
+             formControlName="licenseName"
+             [attr.disabled]="submitStatus.submitSuccessful ? true : null"/>
     </div>
     <div class="mb-3">
       <label for="licenseVersion" class="form-label">License Version</label>
-      <input id="licenseVersion" class="form-control" placeholder="Enter Version" formControlName="licenseVersion" [attr.disabled]="submitStatus.submitSuccessful ? true : null"/>
+      <input id="licenseVersion"
+             class="form-control"
+             placeholder="Enter Version"
+             formControlName="licenseVersion"
+             [attr.disabled]="submitStatus.submitSuccessful ? true : null"/>
     </div>
     <div class="mb-3">
       <label for="licenseFile" class="form-label">License File</label><br>
-      <input id="licenseFile" type="file" (change)="onFileChange($event)" [attr.disabled]="submitStatus.submitSuccessful ? true : null"/>
+      <input id="licenseFile"
+             type="file"
+             (change)="onFileChange($event)"
+             [attr.disabled]="submitStatus.submitSuccessful ? true : null"/>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="modal.dismiss()" *ngIf="!submitStatus.submitSuccessful">Cancel</button>
-      <button type="submit" class="btn btn-success" *ngIf="!file && !submitStatus.submitSuccessful" [disabled]="submitStatus.submitting || licenseForm.invalid">Update</button>
-      <button type="button" class="btn btn-success"  *ngIf="file && !submitStatus.submitSuccessful"  (click)=openConfirmModal() [disabled]="submitStatus.submitting || licenseForm.invalid"><i class="fa fa-upload"></i> Upload</button>
-      <button type="button" class="btn btn-danger" (click)="modal.dismiss()" *ngIf="submitStatus.submitSuccessful">Close</button>
-    </div>
-  </form>
-</div>
-
+  </ng-container>
+</app-modal>

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-invoice-sent-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './invoice-sent-modal.component.html',
   styleUrl: './invoice-sent-modal.component.scss'
 })

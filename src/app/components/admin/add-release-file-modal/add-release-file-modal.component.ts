@@ -5,11 +5,12 @@ import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-add-release-file-modal',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbAlert, QuillModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbAlert, QuillModule, ModalComponent],
   templateUrl: './add-release-file-modal.component.html',
   styleUrl: './add-release-file-modal.component.scss'
 })

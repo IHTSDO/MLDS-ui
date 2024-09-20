@@ -7,11 +7,12 @@ import { QuillModule } from 'ngx-quill';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-add-release-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgbAlert, QuillModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, NgbAlert, QuillModule, ReactiveFormsModule, ModalComponent],
   templateUrl: './add-release-modal.component.html',
   styleUrl: './add-release-modal.component.scss'
 })

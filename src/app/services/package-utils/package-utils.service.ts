@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { isEqual } from 'lodash';
 import { AuthenticationSharedService } from '../authentication/authentication-shared.service';
 import { MemberService } from '../member/member.service';
-import _ from 'lodash';
+import lodash from 'lodash';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserAffiliateService } from '../user-affiliate/user-affiliate.service';
@@ -20,7 +19,7 @@ export class PackageUtilsService {
   isReleasePackageMatchingMember(releasePackage: any): boolean {
     const userDetails = this.sessionService.getUserDetails();
     const userMember = userDetails?.member;
-    return isEqual(userMember, releasePackage.member);
+    return lodash.isEqual(userMember, releasePackage.member);
   }
 
   isPackagePublished(packageEntity: any): boolean {
@@ -110,7 +109,7 @@ export class PackageUtilsService {
   }
 
   releasePackageSort(releasePackages: any[]): any[] {
-    return _.orderBy(releasePackages, [
+    return lodash.orderBy(releasePackages, [
       this.getMemberOrder.bind(this),
       'priority',
       this.getLatestPublishedDate.bind(this)
@@ -132,7 +131,7 @@ export class PackageUtilsService {
   isEditableReleasePackage(releasePackage: any): boolean {
     const userDetails = this.sessionService.getUserDetails();
     const userMember = userDetails?.member; 
-    const memberMatches = _.isEqual(userMember, releasePackage.member); 
+    const memberMatches = lodash.isEqual(userMember, releasePackage.member); 
     return this.sessionService.isAdmin() || memberMatches;
   }
 

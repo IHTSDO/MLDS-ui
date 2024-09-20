@@ -1,19 +1,14 @@
-<div class="modal-header">
-    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <h3 class="modal-title">Application Accepted</h3>
-  </div>
-  <div class="modal-body">
-    <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
-      {{ alert.msg }}
-      <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
-    </div>
-    <p>A confirmation email was sent to the applicant.</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-success" [disabled]="submitting" (click)="close()">
-      Close
-    </button>
-  </div>
+<app-modal
+  [title]="'Application Accepted'"
+  [submitText]="'Close'"
+  [formGroup]="null"
+  [cancelText]="''"
+  [isSubmitting]="submitting"
+  [alerts]="alerts"
+  (onCancel)="dismiss()"
+  (onSubmit)="close()">
   
+<div modal-body>
+  <p>A confirmation email was sent to the applicant.</p> 
+</div>
+</app-modal>

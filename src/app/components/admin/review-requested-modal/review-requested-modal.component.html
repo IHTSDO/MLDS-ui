@@ -1,19 +1,15 @@
-<div class="modal-header">
-    <h3 class="modal-title">Review Requested from Staff</h3>
-    <button type="button" class="btn-close" (click)="dismiss()"></button>
-  </div>
-  <div class="modal-body">
-    <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
-      {{ alert.msg }}
-      <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
-    </div>
+<app-modal
+  [title]="'Review Requested from Staff'"
+  [alerts]="alerts"
+  [cancelText]="'Cancel'"
+  [submitText]="'Mark as review requested'"
+  [isSubmitting]="submitting"
+  [buttonType]="'delete'"
+  (onCancel)="dismiss()"
+  (onSubmit)="ok()">
+
+  <ng-container modal-body>
     <p>Are you sure you want to mark this application as waiting for a review to be completed?</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-danger" [disabled]="submitting" (click)="dismiss()">Cancel</button>
-    <button class="btn btn-warning" [disabled]="submitting" (click)="ok()">
-      Mark as review requested
-      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-  </div>
-  
+  </ng-container>
+
+</app-modal>

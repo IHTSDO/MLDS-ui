@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, finalize, of } from 'rxjs';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Approve Application Modal Component
@@ -16,7 +17,7 @@ import { UserRegistrationService } from 'src/app/services/user-registration/user
 @Component({
   selector: 'app-approve-application-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './approve-application-modal.component.html',
   styleUrls: ['./approve-application-modal.component.scss']
 })

@@ -1,19 +1,17 @@
-<div class="modal-header">
-  <h4 class="modal-title">Send Invoice</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+<app-modal
+  [title]="'Send Invoice'"
+  [alerts]="alerts"
+  [cancelText]="'Cancel'"
+  [submitText]="'Mark as Invoice Sent'"
+  [isSubmitting]="submitting"
+  [buttonType]="'delete'" 
+  (onCancel)="closeModal()"
+  (onSubmit)="markAsSent()">
 
-</div>
-<div class="modal-body">
-  <div *ngFor="let alert of alerts; let i = index" class="alert" [ngClass]="'alert-' + alert.type">
-    <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
-    {{alert.msg}}
-  </div>
-  <p>Send invoice to affiliate using the following email: <a
-      [href]="'mailto:' + affiliate.affiliateDetails.email">{{affiliate.affiliateDetails.email}}</a></p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="closeModal()" [disabled]="submitting">Cancel</button>
-  <button type="button" class="btn btn-warning" (click)="markAsSent()" [disabled]="submitting">
-    Mark as Invoice Sent
-  </button>
-</div>
+  <ng-container modal-body>
+    <p>Send invoice to affiliate using the following email: 
+      <a [href]="'mailto:' + affiliate.affiliateDetails.email">{{ affiliate.affiliateDetails.email }}</a>
+    </p>
+  </ng-container>
+
+</app-modal>

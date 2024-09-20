@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgbActiveModal, NgbModule, NgbTypeaheadModule, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { debounceTime, distinctUntilChanged, map, Observable, Subject } from 'rxjs';
 import { MemberService } from 'src/app/services/member/member.service'
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Interface representing a Member object
@@ -21,7 +22,7 @@ interface Member {
 @Component({
   selector: 'app-country-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgbModule, NgbTypeaheadModule],
+  imports: [ReactiveFormsModule, CommonModule, NgbModule, NgbTypeaheadModule, ModalComponent],
   templateUrl: './country-modal.component.html',
   styleUrl: './country-modal.component.scss'
 })

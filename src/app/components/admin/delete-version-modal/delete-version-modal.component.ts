@@ -5,11 +5,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { lastValueFrom, tap, catchError, EMPTY } from 'rxjs';
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-delete-version-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalComponent],
   templateUrl: './delete-version-modal.component.html',
   styleUrl: './delete-version-modal.component.scss'
 })

@@ -4,11 +4,12 @@ import { ApplicationSummaryBlockComponent } from "../application-summary-block/a
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-application-summary-modal',
   standalone: true,
-  imports: [CommonModule, ApplicationSummaryBlockComponent, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, ApplicationSummaryBlockComponent, TranslateModule, CompareTextPipe, ModalComponent],
   templateUrl: './application-summary-modal.component.html',
   styleUrl: './application-summary-modal.component.scss'
 })

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { MemberService } from 'src/app/services/member/member.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * EditMemberNotificationsComponent - A component to edit member notifications
@@ -16,7 +17,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 @Component({
   selector: 'app-edit-member-notifications',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslateModule,ModalComponent],
   templateUrl: './edit-member-notifications.component.html',
   styleUrls: ['./edit-member-notifications.component.scss']
 })

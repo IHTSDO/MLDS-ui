@@ -6,11 +6,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-edit-affiliate-standing-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, ModalComponent],
   templateUrl: './edit-affiliate-standing-modal.component.html',
   styleUrl: './edit-affiliate-standing-modal.component.scss'
 })

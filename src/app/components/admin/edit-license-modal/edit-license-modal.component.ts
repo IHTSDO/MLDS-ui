@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Edit License Modal Component
@@ -14,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-license-modal',
   standalone: true,
-  imports: [CommonModule,TranslateModule],
+  imports: [CommonModule,TranslateModule, ModalComponent],
   templateUrl: './edit-license-modal.component.html',
   styleUrls: ['./edit-license-modal.component.scss']
 })

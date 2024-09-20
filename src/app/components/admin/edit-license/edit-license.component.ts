@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { EditLicenseModalComponent } from '../edit-license-modal/edit-license-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Component for editing a license.
@@ -15,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-license',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslateModule, ModalComponent],
   templateUrl: './edit-license.component.html',
   styleUrl: './edit-license.component.scss'
 })
@@ -26,6 +27,7 @@ export class EditLicenseComponent implements OnInit {
    */
   @Input() member: any;
 
+  isFileUploaded = false;
   /**
    * The form group for the license form.
    */
@@ -80,6 +82,7 @@ export class EditLicenseComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.file = input.files[0];
+      this.isFileUploaded = true;
     }
   }
 

@@ -1,29 +1,24 @@
-<div class="modal-header">
-    <h3 class="modal-title">Confirm Version</h3>
-    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
-  </div>
-  <div class="modal-body">
-    <div *ngFor="let alert of alerts" class="alert" [ngClass]="{'alert-success': alert.type === 'success', 'alert-danger': alert.type === 'danger'}">
-        {{ alert.msg }}
-    <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert(alert)"></button>
-    </div>
+<app-modal
+  [title]="'Confirm Version'"
+  [alerts]="alerts"
+  [cancelText]="'No'"
+  [submitText]="'Yes'"
+  [isSubmitting]="submitting"
+  (onCancel)="close()"
+  (onSubmit)="confirm()">
+
+  <ng-container modal-body>
     <p>Please verify that you have selected the correct version before taking Alpha/Beta:</p>
     
     <div>
-      <label>Package Name: </label>
-      <span>{{ releasePackage.name }}</span>
+      <label for="packageName">Package Name: </label>
+      <span> {{ releasePackage.name }}</span>
     </div>
     
     <div>
-      <label>Package Version: </label>
-      <span>{{ releaseVersion.name }}</span>
+      <label for="packageVersion">Package Version: </label>
+      <span> {{ releaseVersion.name }}</span>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-warning" (click)="close()">No</button>
-    <button class="btn btn-success" (click)="confirm()" [disabled]="submitting">
-      Yes 
-      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-  </div>
-  
+  </ng-container>
+
+</app-modal>

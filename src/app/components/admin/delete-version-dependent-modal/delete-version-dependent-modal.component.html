@@ -1,33 +1,24 @@
-<div class="modal-header">
-    <h3 class="modal-title">Confirm Deletion</h3>
+<app-modal
+  [title]="'Confirm Deletion'"
+  [submitText]="'Yes'"
+  [cancelText]="'No'"
+  [alerts]="alerts"
+  [isSubmitting]="submitting"
+  (onSubmit)="ok()"
+  (onCancel)="cancel()">
 
-</div>
-
-<div class="modal-body">
-    <div *ngFor="let alert of alerts; let i = index" class="alert" [ngClass]="'alert-' + alert.type" role="alert">
-        {{ alert.msg }}
-        <button type="button" class="btn-close" (click)="closeAlert(i)">
-        </button>
-    </div>
-
+  <ng-container modal-body>
     <p>You are about to delete the Package that is a dependency for another Live Package. Do you want to proceed?</p>
 
     <div class="info-row">
-        <label for="packageName"><strong>Package Name:</strong></label>
-        <span>{{ releasePackage.name }}</span>
+      <label for="packageName"><strong>Package Name:</strong></label>
+      <span>{{ releasePackage.name }}</span>
     </div>
 
     <div class="info-row">
-        <label for="packageVersion"><strong>Package Version:</strong></label>
-        <span>{{ releaseVersion.name }}</span>
+      <label for="packageVersion"><strong>Package Version:</strong></label>
+      <span>{{ releaseVersion.name }}</span>
     </div>
+  </ng-container>
 
-</div>
-
-<div class="modal-footer">
-    <a class="cancel-link" (click)="cancel()">No</a>
-    <button class="btn btn-muted btn-success" (click)="ok()" [disabled]="submitting">
-        Yes
-        <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-</div>
+</app-modal>

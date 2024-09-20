@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, of } from 'rxjs';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-take-online-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalComponent],
   templateUrl: './take-online-modal.component.html',
   styleUrl: './take-online-modal.component.scss'
 })

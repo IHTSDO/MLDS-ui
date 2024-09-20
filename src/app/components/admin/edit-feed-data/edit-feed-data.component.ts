@@ -18,6 +18,7 @@ import { catchError, of } from 'rxjs';
 import { MemberService } from 'src/app/services/member/member.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Edit Feed Data Component
@@ -27,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-feed-data',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, EnumPipe,TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, EnumPipe,TranslateModule, ModalComponent],
   templateUrl: './edit-feed-data.component.html',
   styleUrl: './edit-feed-data.component.scss'
 })

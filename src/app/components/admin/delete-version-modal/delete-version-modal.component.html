@@ -1,34 +1,24 @@
-<div class="modal-header">
-  <h3 class="modal-title">Confirm Deletion</h3>
+<app-modal
+  [title]="'Confirm Deletion'"
+  [submitText]="'Yes'"
+  [cancelText]="'No'"
+  [alerts]="alerts"
+  [isSubmitting]="submitting"
+  (onSubmit)="ok()"
+  (onCancel)="cancel()">
 
-</div>
+  <ng-container modal-body>
+    <p>Please verify that you have selected the correct version to delete:</p>
 
-<div class="modal-body">
-  <div *ngIf="alerts.length > 0">
-    <div *ngFor="let alert of alerts; let i = index" class="alert" [ngClass]="'alert-' + alert.type" role="alert">
-      {{ alert.msg }}
-      <button type="button" class="btn-close" (click)="closeAlert(i)"></button>
+    <div class="info-row">
+      <label for="packageName"><strong>Package Name:</strong></label>
+      <span>{{ releasePackage.name }}</span>
     </div>
-  </div>
 
-  <p>Please verify that you have selected the correct version to delete:</p>
+    <div class="info-row">
+      <label for="packageVersion"><strong>Package Version:</strong></label>
+      <span>{{ releaseVersion.name }}</span>
+    </div>
+  </ng-container>
 
-  <div class="info-row">
-    <label for="packageName"><strong>Package Name:</strong></label>
-    <span>{{ releasePackage.name }}</span>
-  </div>
-
-  <div class="info-row">
-    <label for="packageVersion"><strong>Package Version:</strong></label>
-    <span>{{ releaseVersion.name }}</span>
-  </div>
-
-</div>
-
-<div class="modal-footer">
-  <a class="cancel-link" (click)="cancel()">No</a>
-  <button class="btn btn-success" (click)="ok()" [disabled]="submitting">
-    Yes
-    <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-  </button>
-</div>
+</app-modal>

@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Review Requested Modal Component
@@ -18,7 +19,7 @@ import { UserRegistrationService } from 'src/app/services/user-registration/user
 @Component({
   selector: 'app-review-requested-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './review-requested-modal.component.html',
   styleUrl: './review-requested-modal.component.scss'
 })

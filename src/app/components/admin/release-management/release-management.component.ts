@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import _ from 'lodash';
+import lodash from 'lodash';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
 import { FilterOnlinePipe } from "../../../pipes/filter-online/filter-online.pipe";
@@ -59,22 +59,22 @@ session: any;
 
         const memberFiltered = data.filter(p => this.releaseManagementFilter.showAllMembers || this.packageUtilsService.isReleasePackageMatchingMember(p));
 
-        const groupedByMember = _.groupBy(memberFiltered, 'member.key');
+        const groupedByMember = lodash.groupBy(memberFiltered, 'member.key');
 
-        this.packagesByMember = _.map(groupedByMember, (memberPackages, memberKey) => {
+        this.packagesByMember = lodash.map(groupedByMember, (memberPackages, memberKey) => {
 
           const onlinePackages = this.packageUtilsService.releasePackageSort(
-            _.filter(memberPackages, this.packageUtilsService.isPackagePublished)
+            lodash.filter(memberPackages, this.packageUtilsService.isPackagePublished)
           );
 
-          const alphabetaPackages = _.chain(memberPackages)
+          const alphabetaPackages = lodash.chain(memberPackages)
             .reject(this.packageUtilsService.isPackageOffline.bind(this))
             .reject(this.packageUtilsService.isPackagePublished.bind(this))
             .reject(this.packageUtilsService.isPackageEmpty.bind(this))
             .sortBy('createdAt')
             .value();
 
-          const offlinePackages = _.chain(memberPackages)
+          const offlinePackages = lodash.chain(memberPackages)
             .reject(this.packageUtilsService.isPackagePublished.bind(this))
             .reject(this.packageUtilsService.isPackageNotPublished.bind(this))
             .reject(this.packageUtilsService.isPackageFullyArchived.bind(this))
@@ -89,7 +89,7 @@ session: any;
           };
         });
 
-        this.packagesByMember = _.sortBy(this.packagesByMember, (memberEntry) =>
+        this.packagesByMember = lodash.sortBy(this.packagesByMember, (memberEntry) =>
           memberEntry.member.key === 'IHTSDO' ? '!IHTSDO' : memberEntry.member.key
         );
 
@@ -104,7 +104,7 @@ session: any;
   }
 
   private fixReleasePackagesWithoutPriority(memberFiltered: any[]): void {
-    const firstMissing = _.chain(memberFiltered)
+    const firstMissing = lodash.chain(memberFiltered)
       .filter(this.packageUtilsService.isPackagePublished.bind(this))
       .sortBy(this.packageUtilsService.getLatestPublishedDate.bind(this))
       .filter(p => p.priority === -1 || p.priority === null)

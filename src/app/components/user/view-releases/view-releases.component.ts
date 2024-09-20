@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import _ from 'lodash';
+import lodash from 'lodash';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
@@ -90,25 +90,25 @@ export class ViewReleasesComponent implements OnInit {
 
 
   updateReleasePackagesByMember(releasePackages: any[]): void {
-    const publishedPackages = _.filter(releasePackages, this.packageUtilsService.isPackagePublished);
-    const groupedByMember = _.groupBy(publishedPackages, (p) => p.member.key);
+    const publishedPackages = lodash.filter(releasePackages, this.packageUtilsService.isPackagePublished);
+    const groupedByMember = lodash.groupBy(publishedPackages, (p) => p.member.key);
 
-    this.releasePackagesByMember = _.map(groupedByMember, (packages, memberKey) => ({
+    this.releasePackagesByMember = lodash.map(groupedByMember, (packages, memberKey) => ({
       member: this.memberService.membersByKey[memberKey],
       packages: this.packageUtilsService.releasePackageSort(packages)
     }));
 
     const sessionMember = this.sessionMember;
     if (sessionMember != null) {
-      const memberRelease = _.find(this.releasePackagesByMember, (item) => {
+      const memberRelease = lodash.find(this.releasePackagesByMember, (item) => {
         return sessionMember['key'] != null && sessionMember['key'] !== 'undefined' && sessionMember['key'] !== "IHTSDO" &&
                item.member.key === sessionMember['key'];
       });
 
       if (memberRelease) {
-        _.each(this.releasePackagesByMember, (item) => {
+        lodash.each(this.releasePackagesByMember, (item) => {
           if (item.member.key === "IHTSDO" && memberRelease) {
-            _.each(memberRelease.packages, (releasePackage) => {
+            lodash.each(memberRelease.packages, (releasePackage) => {
               item.packages.push(releasePackage);
             });
             item.packages = this.packageUtilsService.releasePackageSort(item.packages);
@@ -120,27 +120,27 @@ export class ViewReleasesComponent implements OnInit {
 
   updateAlphaReleasePackagesByMember(releasePackages: any[]): void {
    
-    const filteredPackages = _.reject(releasePackages, this.packageUtilsService.isPackageOffline);
-    const nonPublishedPackages = _.reject(filteredPackages, this.packageUtilsService.isPackagePublished);
+    const filteredPackages = lodash.reject(releasePackages, this.packageUtilsService.isPackageOffline);
+    const nonPublishedPackages = lodash.reject(filteredPackages, this.packageUtilsService.isPackagePublished);
 
-    const groupedByMember = _.groupBy(nonPublishedPackages, (p) => p.member.key);
+    const groupedByMember = lodash.groupBy(nonPublishedPackages, (p) => p.member.key);
 
-    this.alphaReleasePackagesByMember = _.map(groupedByMember, (packages, memberKey) => ({
+    this.alphaReleasePackagesByMember = lodash.map(groupedByMember, (packages, memberKey) => ({
       member: this.memberService.membersByKey[memberKey],
       packages: this.packageUtilsService.releasePackageSort(packages)
     }));
 
     const sessionMember = this.sessionMember;
     if (sessionMember != null) {
-      const alphaMemberRelease = _.find(this.alphaReleasePackagesByMember, (item) => {
+      const alphaMemberRelease = lodash.find(this.alphaReleasePackagesByMember, (item) => {
         return sessionMember['key'] != null && sessionMember['key'] !== 'undefined' && sessionMember['key'] !== "IHTSDO" &&
                item.member.key === sessionMember['key'];
       });
 
       if (alphaMemberRelease) {
-        _.each(this.alphaReleasePackagesByMember, (item) => {
+        lodash.each(this.alphaReleasePackagesByMember, (item) => {
           if (item.member.key === "IHTSDO" && alphaMemberRelease) {
-            _.each(alphaMemberRelease.packages, (releasePackage) => {
+            lodash.each(alphaMemberRelease.packages, (releasePackage) => {
               item.packages.push(releasePackage);
             });
             item.packages = this.packageUtilsService.releasePackageSort(item.packages);

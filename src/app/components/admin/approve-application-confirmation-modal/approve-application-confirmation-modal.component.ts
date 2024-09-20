@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Approve Application Confirmation Modal Component
@@ -13,7 +14,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-approve-application-confirmation-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './approve-application-confirmation-modal.component.html',
   styleUrls: ['./approve-application-confirmation-modal.component.scss']
 })

@@ -5,11 +5,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-retract-usage-report',
   standalone: true,
-  imports: [CommonModule,NgbAlert, TranslateModule, CompareTextPipe],
+  imports: [CommonModule,NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
   templateUrl: './retract-usage-report.component.html',
   styleUrl: './retract-usage-report.component.scss'
 })

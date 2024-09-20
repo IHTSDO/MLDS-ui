@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import _ from 'lodash';
+import lodash from 'lodash';
 import { MemberService } from '../member/member.service';
 import { UserAffiliateService } from '../user-affiliate/user-affiliate.service';
 
@@ -24,8 +24,8 @@ private orderApprovedMemberships(memberReleases: any): boolean {
 
   return !(
     memberReleases.member &&
-    _.some(this.userAffiliateService.approvedMemberships, 
-           _.partial(this.memberService.isMemberEqual, memberReleases.member))
+    lodash.some(this.userAffiliateService.approvedMemberships, 
+           lodash.partial(this.memberService.isMemberEqual, memberReleases.member))
   );
 }
 
@@ -34,8 +34,8 @@ private orderIncompleteMemberships(memberReleases: any): boolean {
 
   return !(
     memberReleases.member &&
-    _.some(this.userAffiliateService.incompleteMemberships, 
-           _.partial(this.memberService.isMemberEqual, memberReleases.member))
+    lodash.some(this.userAffiliateService.incompleteMemberships, 
+           lodash.partial(this.memberService.isMemberEqual, memberReleases.member))
   );
 }
 

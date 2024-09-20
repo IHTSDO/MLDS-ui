@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-edit-release-license-confirm-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './edit-release-license-confirm-modal.component.html',
   styleUrl: './edit-release-license-confirm-modal.component.scss'
 })

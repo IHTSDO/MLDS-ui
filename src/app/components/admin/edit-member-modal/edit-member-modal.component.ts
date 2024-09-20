@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { MemberService } from 'src/app/services/member/member.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 /**
  * Edit Member Modal Component
@@ -13,7 +14,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 @Component({
   selector: 'app-edit-member-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule,TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, NgbModule,TranslateModule, ModalComponent],
   templateUrl: './edit-member-modal.component.html',
   styleUrls: ['./edit-member-modal.component.scss']
 })
