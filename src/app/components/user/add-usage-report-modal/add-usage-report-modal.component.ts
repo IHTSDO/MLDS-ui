@@ -7,11 +7,12 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-add-usage-report-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, CompareTextPipe,TranslateModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, CompareTextPipe,TranslateModule,ModalComponent],
   templateUrl: './add-usage-report-modal.component.html',
   styleUrl: './add-usage-report-modal.component.scss'
 })

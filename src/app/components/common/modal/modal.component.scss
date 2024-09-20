@@ -1,0 +1,29 @@
+.btn-success {
+    color: #3cb878 !important;
+    background-color: #ffffff !important;
+    border: 1px solid !important;
+    border-color: #3cb878 !important;
+    border-top-left-radius: 10px !important;
+}
+ 
+.btn-success:hover,
+.btn-success:focus {
+    color: #ffffff !important;
+    background-color: #3cb878 !important;
+}
+ 
+.btn-link {
+    color: #40ACD6 !important;
+    font-weight: normal !important;
+    cursor: pointer !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
+}
+ 
+.btn-link:hover {
+    color: #40ACD6 !important;
+    font-weight: normal !important;
+    cursor: pointer !important;
+    border-radius: 0 !important;
+    text-decoration: underline !important;
+}

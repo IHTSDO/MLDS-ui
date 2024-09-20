@@ -29,7 +29,7 @@ export class ModalComponent {
   @Input() alerts: any[] = []; // Any alerts to be shown
   @Input() isSubmitting: boolean = false; // Whether form submission is in progress
   @Input() showForm: boolean = true; // Flag to show/hide form
-
+  @Input() buttonDisabled:boolean=false;
   // Outputs to communicate actions back to parent components
   @Output() onSubmit: EventEmitter<void> = new EventEmitter();
   @Output() onCancel: EventEmitter<void> = new EventEmitter();
@@ -38,8 +38,11 @@ export class ModalComponent {
   submit() {
     if (this.formGroup && this.formGroup.valid) {
       this.onSubmit.emit();
+    } else {
+      this.onSubmit.emit();
     }
   }
+  
 
   // Method to handle cancel
   cancel() {

@@ -6,11 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { compact } from 'lodash';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
+import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
   selector: 'app-edit-institution-modal',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbAlert,NgbDatepicker,NgbDatepickerModule,TranslateModule,CompareTextPipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAlert, NgbDatepicker, NgbDatepickerModule, TranslateModule, CompareTextPipe, ModalComponent],
   templateUrl: './edit-institution-modal.component.html',
   styleUrl: './edit-institution-modal.component.scss'
 })

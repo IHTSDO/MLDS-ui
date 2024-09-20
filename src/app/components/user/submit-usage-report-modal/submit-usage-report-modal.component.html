@@ -1,69 +1,61 @@
-<div class="modal-header">
-    <button type="button" class="close" (click)="modalService.dismissAll()">&times;</button>
-    <h3 class="modal-title">{{'views.usage.submit.title'|translate|compareText:'Submit Usage Declaration'}}</h3>
-  </div>
-  
-  
-  <div class="modal-body">
-    <div *ngFor="let alert of alerts; let i = index" class="alert alert-{{alert.type}}" role="alert">
-        <button type="button" class="close" aria-label="Close" (click)="closeAlert(i)">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        {{ alert.msg }}
-      </div>
-      
-  
-    <p>{{'views.usage.submit.instructions'|translate}}</p>
-  
-    <h4>
-      {{'views.usage.submit.title'|translate}} {{ commercialUsageReport?.startDate | date: 'yyyy-MM' }} &#8211;
-      {{ commercialUsageReport?.endDate | date: 'yyyy-MM' }}:
-    </h4>
-  
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-default">
-        <strong>{{'views.usageLog.usage'|translate|compareText:'Usage'}}:</strong>
-      </li>
-      <li class="list-group-item">
-        <strong>{{'views.usageLog.licenseType'|translate|compareText:'License Type'}}:</strong> {{ 'affiliate.type.'+commercialUsageReport?.type|translate  }}
-      </li>
-      <li class="list-group-item">
-        <strong>{{'views.usageLog.currentUsage'|translate|compareText:'Current Usage'}}:</strong> {{ commercialUsageReport?.context?.currentUsage }}
-      </li>
-      <li class="list-group-item">
-        <strong>{{'views.usageLog.plannedUsage'|translate|compareText:'Planned Usage'}}:</strong> {{ commercialUsageReport?.context?.plannedUsage }}
-      </li>
-      <li class="list-group-item">
-        <strong>{{'views.usageLog.purpose'|translate|compareText:'Purpose'}}:</strong> {{ commercialUsageReport?.context?.purpose }}
-      </li>
-      <li class="list-group-item">
-        <strong>{{'views.usageLog.impStatus'|translate|compareText:'Implementation Status'}}:</strong>
-        {{'affiliate.implementationStatus.'+ commercialUsageReport?.context?.implementationStatus|translate }}
-      </li>
-  
-      <li *ngFor="let countryRecord of usageByCountryList" class="list-group-item">
-        <strong>{{'views.usageLog.institutions.country'|translate|compareText:'Country'}}:</strong> {{ countryRecord?.country?.commonName }}<br />
-        <strong>{{'views.usageLog.institutions.practices'|translate|compareText:'Practices'}}:</strong> {{ countryRecord?.count?.snomedPractices | number }}
-        <span *ngIf="countryRecord.entries">
-          <br />
-          <strong>{{'views.usageLog.institutions.hospAndInst.plural'|translate|compareText:'Hospitals/Institutions'}}:</strong>
-          <span *ngFor="let entry of countryRecord?.entries; let isLast = last">
-            {{ entry.name }}<span *ngIf="!isLast">,</span>
-          </span>
+<app-modal 
+[title]="'views.usage.submit.title'|translate|compareText:'Submit Usage Declaration'" 
+[cancelText]="'global.word.edit'|translate|compareText:'Edit'"
+[submitText]="'views.usage.submit.button'|translate|compareText:'Submit Declaration'"
+(onCancel)="cancel()"
+[alerts]="alerts"
+[isSubmitting]="submitting"
+
+(onSubmit)="submit()">
+<div modal-body>
+ 
+    
+
+  <p>{{'views.usage.submit.instructions'|translate}}</p>
+
+  <h4>
+    {{'views.usage.submit.title'|translate}} {{ commercialUsageReport?.startDate | date: 'yyyy-MM' }} &#8211;
+    {{ commercialUsageReport?.endDate | date: 'yyyy-MM' }}:
+  </h4>
+
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-default">
+      <strong>{{'views.usageLog.usage'|translate|compareText:'Usage'}}:</strong>
+    </li>
+    <li class="list-group-item">
+      <strong>{{'views.usageLog.licenseType'|translate|compareText:'License Type'}}:</strong> {{ 'affiliate.type.'+commercialUsageReport?.type|translate  }}
+    </li>
+    <li class="list-group-item">
+      <strong>{{'views.usageLog.currentUsage'|translate|compareText:'Current Usage'}}:</strong> {{ commercialUsageReport?.context?.currentUsage }}
+    </li>
+    <li class="list-group-item">
+      <strong>{{'views.usageLog.plannedUsage'|translate|compareText:'Planned Usage'}}:</strong> {{ commercialUsageReport?.context?.plannedUsage }}
+    </li>
+    <li class="list-group-item">
+      <strong>{{'views.usageLog.purpose'|translate|compareText:'Purpose'}}:</strong> {{ commercialUsageReport?.context?.purpose }}
+    </li>
+    <li class="list-group-item">
+      <strong>{{'views.usageLog.impStatus'|translate|compareText:'Implementation Status'}}:</strong>
+      {{'affiliate.implementationStatus.'+ commercialUsageReport?.context?.implementationStatus|translate }}
+    </li>
+
+    <li *ngFor="let countryRecord of usageByCountryList" class="list-group-item">
+      <strong>{{'views.usageLog.institutions.country'|translate|compareText:'Country'}}:</strong> {{ countryRecord?.country?.commonName }}<br />
+      <strong>{{'views.usageLog.institutions.practices'|translate|compareText:'Practices'}}:</strong> {{ countryRecord?.count?.snomedPractices | number }}
+      <span *ngIf="countryRecord.entries">
+        <br />
+        <strong>{{'views.usageLog.institutions.hospAndInst.plural'|translate|compareText:'Hospitals/Institutions'}}:</strong>
+        <span *ngFor="let entry of countryRecord?.entries; let isLast = last">
+          {{ entry.name }}<span *ngIf="!isLast">,</span>
         </span>
-      </li>
-  
-      <li class="list-group-item" *ngIf="commercialUsageReport?.context?.otherActivities">
-        <strong>{{'views.usageLog.otherActivities'|translate|compareText:'Other Activities'}}:</strong> {{ commercialUsageReport?.context?.otherActivities }}
-      </li>
-    </ul>
-  </div>
-  
-  <div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.edit'|translate|compareText:'Edit'}}</button>
-    <button class="btn btn-success" (click)="submit()" [disabled]="submitting">
-      {{'views.usage.submit.button'|translate|compareText:'Submit Declaration'}}
-      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-  </div>
-  
+      </span>
+    </li>
+
+    <li class="list-group-item" *ngIf="commercialUsageReport?.context?.otherActivities">
+      <strong>{{'views.usageLog.otherActivities'|translate|compareText:'Other Activities'}}:</strong> {{ commercialUsageReport?.context?.otherActivities }}
+    </li>
+  </ul>
+</div>
+
+
+  </app-modal>

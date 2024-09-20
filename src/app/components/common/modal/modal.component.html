@@ -1,26 +1,32 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{ title }}</h3>
-    <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()"></button>
+  <h3 class="modal-title">{{ title }}</h3>
+  <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <!-- Alerts Section -->
+  <div *ngFor="let alert of alerts; let i = index" class="alert alert-dismissible" [ngClass]="'alert-' + alert.type">
+    {{ alert.msg }}
+    <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
   </div>
   
-  <div class="modal-body">
-    <!-- Alerts Section -->
-    <div *ngFor="let alert of alerts; let i = index" class="alert alert-dismissible" [ngClass]="'alert-' + alert.type">
-      {{ alert.msg }}
-      <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
-    </div>
-   <!-- Form Section -->
-   <ng-container *ngIf="formGroup">
+  <!-- Form Section -->
+  <ng-container *ngIf="formGroup">
     <form [formGroup]="formGroup" (ngSubmit)="submit()">
       <ng-content></ng-content> <!-- Allows injecting custom content (form fields) from the parent component -->
     </form>
   </ng-container>
-</div>
-  <div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()" [disabled]="isSubmitting">{{ cancelText }}</button>
-    <button class="btn btn-success" (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)">
-      {{ submitText }}
-      <span *ngIf="isSubmitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-  </div>
   
+  <!-- Default Content Section (if any) -->
+  <ng-container *ngIf="!formGroup">
+    <ng-content select="[modal-body]"></ng-content>
+  </ng-container>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-link" (click)="cancel()" [disabled]="isSubmitting">{{ cancelText }}</button>
+  <button class="btn btn-success" (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)|| buttonDisabled">
+    {{ submitText }}
+    <span *ngIf="isSubmitting"><i class="fa fa-spinner fa-spin"></i></span>
+  </button>
+</div>

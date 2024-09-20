@@ -1,80 +1,82 @@
-<div class="modal-header">
-    <h3 class="modal-title">{{'register.affiliateRegistrationReview.title'|translate|compareText:'Review Application'}}
-    </h3>
-</div>
-
-<div class="modal-body">
+ <app-modal
+  [title]="'register.affiliateRegistrationReview.title' | translate | compareText:'Review Application'"
+  [formGroup]="affiliateform" 
+  [submitText]="'global.word.submit' | translate | compareText:'Submit'"
+  [cancelText]="'register.affiliateRegistrationReview.editApp' | translate | compareText:'Edit Application'"
+  [isSubmitting]="submitting"
+  (onSubmit)="submit()"
+  (onCancel)="cancel()"
+>
+  <!-- Modal Content -->
+  <div class="modal-body">
     <div class="row">
-        <div class="col-xs-12">
-            <h4><span>{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}:</span></h4>
-            <ul class="list-group">
-                <li class="list-group-item-light"><strong >{{'views.contactInfo.admin.usageType.name'|translate|compareText:'Type'}}:</strong> {{'affiliate.type.'+affiliateform?.type|translate }}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:</strong> {{'affiliate.subType.'+affiliateform?.subType|translate}} {{affiliateform?.otherText }}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.agreementType'|translate|compareText:'Agreement Type'}}:</strong> {{'affiliate.agreementType.'+affiliateform?.agreementType |translate}}</li>
-            </ul>
-        </div>
+      <div class="col-xs-12">
+        <h4><span>{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}:</span></h4>
+        <ul class="list-group">
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.usageType.name'|translate|compareText:'Type'}}:</strong> {{'affiliate.type.'+affiliateform?.type|translate }}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:</strong> {{'affiliate.subType.'+affiliateform?.subType|translate}} {{affiliateform?.otherText }}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.agreementType'|translate|compareText:'Agreement Type'}}:</strong> {{'affiliate.agreementType.'+affiliateform?.agreementType |translate}}</li>
+        </ul>
+      </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
-            <h4>{{'views.contactInfo.contact.title'|translate|compareText:'Contact Information'}}:</h4>
-            <ul class="list-group">
-                <li class="list-group-item-light"><strong >{{'views.contactInfo.contact.fullName'|translate|compareText:'Name'}}:</strong> {{affiliate?.affiliateDetails?.firstName}} {{affiliate?.affiliateDetails?.lastName}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.email.name'|translate|compareText:'Email'}}:</strong> {{affiliate?.affiliateDetails?.email}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension" translate="views.contactInfo.contact.landlineExtension.short">ext: {{affiliateform?.contactExtension}}</span></li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.mobile.name'|translate|compareText:'Mobile Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.mobileNumber}}</li>
-            </ul>
+      <div class="col-xs-6">
+        <h4>{{'views.contactInfo.contact.title'|translate|compareText:'Contact Information'}}:</h4>
+        <ul class="list-group">
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.fullName'|translate|compareText:'Name'}}:</strong> {{affiliate?.affiliateDetails?.firstName}} {{affiliate?.affiliateDetails?.lastName}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.email.name'|translate|compareText:'Email'}}:</strong> {{affiliate?.affiliateDetails?.email}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension" translate="views.contactInfo.contact.landlineExtension.short">ext: {{affiliateform?.contactExtension}}</span></li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.mobile.name'|translate|compareText:'Mobile Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.mobileNumber}}</li>
+        </ul>
 
-            <ul class="list-group" *ngIf="affiliateform.type=='INDIVIDUAL'">
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliateform?.address}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.city}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.postalCode}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
-            </ul>
-            <ul class="list-group" *ngIf="affiliateform.type!='INDIVIDUAL' && !billingHide">
-                <h4>Billing Address:</h4>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliateform?.billingAddress}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.billingCity}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.billingPostCode}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliateform?.billingCountry?.commonName}}</li>
-            </ul>
-
-        </div>
-        <div class="col-xs-6">
-            <ul class="list-group" *ngIf="affiliateform.type!='INDIVIDUAL'">
-                <h4>{{'views.contactInfo.organization.title'|translate|compareText:'Organization'}}:</h4>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.organization.name.name'|translate|compareText:'Organization Name'}}:</strong> {{affiliateform?.organizationName}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:</strong>
-                    <span *ngIf="affiliateform?.organizationType=='OTHER'">{{affiliateform?.organizationTypeOther}}</span>
-                    <span *ngIf="affiliateform?.organizationType!='OTHER'">{{'affiliate.organizationType.'+affiliateform?.organizationType|translate}}</span>
-                </li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliateform?.address}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.city}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.postalCode}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.short'|translate|compareText:'Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension"><span  translate="views.contactInfo.contact.landlineExtension.short">ext:</span>                    {{affiliateform?.contactExtension}}</span>
-                </li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</strong> {{affiliateform?.alternateEmail}}</li>
-                <li class="list-group-item-light" *ngIf="affiliateform.type=='COMMERCIAL'"><strong>{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</strong> {{affiliateform?.thirdEmail}}</li>
-                
-            </ul>
-            <ul class="list-group" *ngIf="affiliateform.type === 'INDIVIDUAL' && !billingHide">
-                <h4>{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:</h4>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.street}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.city}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.post}}</li>
-                <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.country?.commonName}}</li>
-            </ul>
-        </div>
+        <ul class="list-group" *ngIf="affiliateform.type=='INDIVIDUAL'">
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliateform?.address}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.city}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.postalCode}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
+        </ul>
+        <ul class="list-group" *ngIf="affiliateform.type!='INDIVIDUAL' && !billingHide">
+          <h4>Billing Address:</h4>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliateform?.billingAddress}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.billingCity}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.billingPostCode}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliateform?.billingCountry?.commonName}}</li>
+        </ul>
+      </div>
+      <div class="col-xs-6">
+        <ul class="list-group" *ngIf="affiliateform.type!='INDIVIDUAL'">
+          <h4>{{'views.contactInfo.organization.title'|translate|compareText:'Organization'}}:</h4>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.organization.name.name'|translate|compareText:'Organization Name'}}:</strong> {{affiliateform?.organizationName}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:</strong>&nbsp;
+            <span *ngIf="affiliateform?.organizationType=='OTHER'"> {{affiliateform?.organizationTypeOther}}</span>
+            <span *ngIf="affiliateform?.organizationType!='OTHER'"> {{'affiliate.organizationType.'+affiliateform?.organizationType|translate}}</span>
+          </li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliateform?.address}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.city}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.postalCode}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.short'|translate|compareText:'Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension"><span translate="views.contactInfo.contact.landlineExtension.short">ext:</span> {{affiliateform?.contactExtension}}</span></li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</strong> {{affiliateform?.alternateEmail}}</li>
+          <li class="list-group-item-light" *ngIf="affiliateform.type=='COMMERCIAL'"><strong>{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</strong> {{affiliateform?.thirdEmail}}</li>
+        </ul>
+        <ul class="list-group" *ngIf="affiliateform.type === 'INDIVIDUAL' && !billingHide">
+          <h4>{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:</h4>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.street}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.city}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.post}}</li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.billingAddress?.country?.commonName}}</li>
+        </ul>
+      </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
             <ul class="list-group">
                 <h4>{{'views.usageLog.usage'|translate|compareText:'Usage'}}</h4>
-                <li class="list-group-item-light"><strong>{{'views.usageLog.currentUsage'|translate|compareText:'Current Usage'}}:</strong>{{context?.currentUsage}}</li>
-                <li class="list-group-item-light"><strong>{{'views.usageLog.plannedUsage'|translate|compareText:'Planned Usage'}}:</strong>{{context?.plannedUsage}}</li>
-                <li class="list-group-item-light"><strong>{{'views.usageLog.purpose'|translate|compareText:'Purpose'}}:</strong>{{context?.purpose}} </li>
-                <li class="list-group-item-light"><strong>{{'views.usageLog.impStatus'|translate|compareText:'Implementation Status'}}:</strong>{{'affiliate.implementationStatus.'+context?.implementationStatus|translate}}</li>
-                <li class="list-group-item-light"><strong>{{'views.usageLog.otherActivities'|translate|compareText:'Other Activities'}}:</strong>{{context?.otherActivities}}</li>
+                <li class="list-group-item-light"><strong>{{'views.usageLog.currentUsage'|translate|compareText:'Current Usage'}}:</strong> {{context?.currentUsage}}</li>
+                <li class="list-group-item-light"><strong>{{'views.usageLog.plannedUsage'|translate|compareText:'Planned Usage'}}:</strong> {{context?.plannedUsage}}</li>
+                <li class="list-group-item-light"><strong>{{'views.usageLog.purpose'|translate|compareText:'Purpose'}}:</strong> {{context?.purpose}} </li>
+                <li class="list-group-item-light"><strong>{{'views.usageLog.impStatus'|translate|compareText:'Implementation Status'}}:</strong> {{'affiliate.implementationStatus.'+context?.implementationStatus|translate}}</li>
+                <li class="list-group-item-light"><strong>{{'views.usageLog.otherActivities'|translate|compareText:'Other Activities'}}:</strong> {{context?.otherActivities}}</li>
             </ul>
         </div>
     </div>
@@ -99,11 +101,5 @@
         </div>
       </div>    
 </div>
-<div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()">{{'register.affiliateRegistrationReview.editApp'|translate|compareText:'Edit Application'}}</button>
-    <button class="btn btn-success" (click)="submit()">
-		<span>{{'global.word.submit'|translate|compareText:'Submit'}}</span>
-	</button>
-</div>
-
+</app-modal>
 

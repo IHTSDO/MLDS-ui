@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { Country } from 'ngx-bs-tel-input/lib/core/models/country.model';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
   selector: 'app-delete-institution-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, CompareTextPipe,TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, CompareTextPipe, TranslateModule, ModalComponent],
   templateUrl: './delete-institution-modal.component.html',
   styleUrl: './delete-institution-modal.component.scss'
 })
@@ -18,15 +18,19 @@ export class DeleteInstitutionModalComponent {
   @Input() country!: any;
   @Input() institution!: any;
   @Input() usageReport!: any;
-
+  title = '';
+  formGroup!: FormGroup;
   attemptedSubmit = false;
   submitting = false;
   alerts: Array<{ type: string; msg: string }> = [];
 
   constructor(
     public activeModal: NgbActiveModal,
-    private commercialUsageService: CommercialUsageService
-  ) {}
+    private commercialUsageService: CommercialUsageService,
+    private translate: TranslateService
+  ) {
+    this.title = `${this.translate.instant('global.word.delete')} ${this.translate.instant('views.usageLog.institutions.hospAndInst')}`;
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

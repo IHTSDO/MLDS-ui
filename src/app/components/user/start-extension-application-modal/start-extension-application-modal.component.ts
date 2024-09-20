@@ -4,11 +4,12 @@ import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
+import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
   selector: 'app-start-extension-application-modal',
   standalone: true,
-  imports: [CommonModule,NgbAlert,TranslateModule,CompareTextPipe],
+  imports: [CommonModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
   templateUrl: './start-extension-application-modal.component.html',
   styleUrl: './start-extension-application-modal.component.scss'
 })

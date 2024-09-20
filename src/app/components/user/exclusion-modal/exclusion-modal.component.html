@@ -1,14 +1,20 @@
-<div class="modal-header">
-    <h4 class="modal-title">{{'register.messages.excludemessage.confirm'|translate|compareText:'Confirmation'}}</h4>
-  </div>
-  <div class="modal-body">
+<app-modal 
+  [title]="'register.messages.excludemessage.confirm' | translate | compareText:'Confirmation'" 
+  [cancelText]="'register.messages.excludemessage.cancel' | translate | compareText:'Cancel'"
+  [submitText]="submitText"
+  (onCancel)="cancel()"
+  [formGroup]="null"
+  [isSubmitting]="false"
+  (onSubmit)="confirm()">
+
+  <div modal-body>
     <p>{{ countryName }} 
-      <span>{{'register.messages.excludemessage.link'|translate|compareText:'does not use MLDS to distribute SNOMED CT. To register to download SNOMED CT, you can find more information by going to this link -'}} </span>
-        <a [href]="urlRegistration" target="_blank">{{ urlRegistration }}</a>.<br><br>
-    <p>{{'register.messages.excludemessage.userConfirm' | translate|compareText:'To continue your registration on MLDS, please can you confirm that you would like to deploy SNOMED CT in a different country.'}}</p>
+      <span>{{ 'register.messages.excludemessage.link' | translate | compareText:'does not use MLDS to distribute SNOMED CT. To register to download SNOMED CT, you can find more information by going to this link -' }}</span>&nbsp;
+      <a [href]="urlRegistration" target="_blank">{{ urlRegistration }}</a>.
+    </p>
+
+
+
+    <p>{{ 'register.messages.excludemessage.userConfirm' | translate | compareText:'To continue your registration on MLDS, please can you confirm that you would like to deploy SNOMED CT in a different country.' }}</p>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="cancel()">{{'register.messages.excludemessage.cancel' | translate|compareText:'Cancel'}}</button>
-    <button type="button" class="btn btn-primary" (click)="confirm()">{{'register.messages.excludemessage.accept' | translate|compareText:'I confirm that I would like to use and deploy SNOMED CT in a country other than'}}{{ countryName }}</button>
-  </div>
-  
+</app-modal>

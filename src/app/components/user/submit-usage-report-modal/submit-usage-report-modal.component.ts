@@ -8,11 +8,12 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-submit-usage-report-modal',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert,TranslateModule,CompareTextPipe],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert,TranslateModule,CompareTextPipe,ModalComponent],
   templateUrl: './submit-usage-report-modal.component.html',
   styleUrl: './submit-usage-report-modal.component.scss'
 })
@@ -52,7 +53,7 @@ export class SubmitUsageReportModalComponent implements OnInit {
           this.router.navigate(['/affiliateManagement', this.commercialUsageReport.affiliate.affiliateId]);
         } else {
           this.userAffiliateService.refreshAffiliate();
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/userDashboard']);
         }
         this.modalService.dismissAll(result);
       },

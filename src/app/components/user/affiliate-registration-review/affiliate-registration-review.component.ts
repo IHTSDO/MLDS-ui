@@ -5,11 +5,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { groupBy, sortBy } from 'lodash';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-affiliate-registration-review',
   standalone: true,
-  imports: [CommonModule,TranslateModule,CompareTextPipe],
+  imports: [CommonModule,TranslateModule,CompareTextPipe,ModalComponent],
   templateUrl: './affiliate-registration-review.component.html',
   styleUrl: './affiliate-registration-review.component.scss'
 })
@@ -21,6 +22,7 @@ export class AffiliateRegistrationReviewComponent implements OnInit {
   commercialUsageInstitutionsByCountry: { [key: string]: any[] } = {};
   usageCountryCountsPairs: any[] = [];
   context: any;
+  submitting: boolean=false;
 
   constructor(private commercialUsageService: CommercialUsageService, public activeModal: NgbActiveModal) {
   }
@@ -67,6 +69,7 @@ export class AffiliateRegistrationReviewComponent implements OnInit {
   }
 
   submit(): void {
+    this.submitting = true;
     this.activeModal.close(this.context);
   }
 

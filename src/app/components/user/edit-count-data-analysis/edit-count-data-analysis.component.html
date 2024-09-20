@@ -1,93 +1,113 @@
-<div class="modal-header">
-    
-    <h3 class="modal-title">
-      <span >{{'global.word.edit'|translate|compareText:'Edit'}}</span>&nbsp;
-      <span>{{'views.usageLog.institutions.dataAnalysis.title'|translate|compareText:'Data Analysis'}}</span>
-    </h3>
-    <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()">&times;</button>
-  </div>
-  <div class="modal-body">
-    <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alerts.indexOf(alert))">
-      {{alert.msg}}
-    </ngb-alert>
-    <h3>{{ 'global.country.' + count?.country?.isoCode2 | translate  }}</h3>
-    <div class="row">
-      <div class="col-md-6">
-        <p><span>{{'views.usageLog.institutions.hospAndInst.plural'|translate|compareText:'Hospitals/Institutions'}}:</span> <strong>{{ hospitalsCount | number }}</strong></p>
-      </div>
-      <div class="col-md-6">
-        <p><span>{{'views.usageLog.institutions.practices'|translate|compareText:'Practices'}}:</span> <strong>{{ practicesCount | number }}</strong></p>
-      </div>
-    </div>
-    
-    <form [formGroup]="formCount" novalidate>
-      <hr>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>{{'views.usageLog.institutions.dataAnalysis.provideStaff'|translate|compareText:'How many Hospitals provide staff to stated Practices?'}}</label> 
-            <input type="number" min="0" class="form-control" formControlName="hospitalsStaffingPractices">
-            <span *ngIf="formCount.get('hospitalsStaffingPractices')?.invalid && submitAttempted" class="help-block">{{'form.requiredField'|translate|compareText:'Required Field'}}</span>
-            <span *ngIf="formCount.get('hospitalsStaffingPractices')?.errors?.['number'] && submitAttempted" class="help-block" >{{'form.invalidNumber'|translate|compareText:'Not a valid number'}}</span>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>{{'views.usageLog.institutions.dataAnalysis.usingDCSNotHosp'|translate|compareText:'How many Practices are using Data Creation Systems and are NOT part of a Hospital organization?'}}</label> 
-            <input type="number" min="0" class="form-control" formControlName="dataCreationPracticesNotPartOfHospital">
-            <span *ngIf="formCount.get('dataCreationPracticesNotPartOfHospital')?.invalid && submitAttempted" class="help-block" translate="form.requiredField">{{'form.requiredField'|translate|compareText:'Required Field'}}</span>
-            <span *ngIf="formCount.get('dataCreationPracticesNotPartOfHospital')?.errors?.['number'] && submitAttempted" class="help-block">{{'form.invalidNumber'|translate|compareText:'Not a valid number'}}</span>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>{{'views.usageLog.institutions.dataAnalysis.usingDCSNotPract'|translate|compareText:'How many Hospitals or other Institutions are using data creation systems and cannot be defined as Practices under the definition of the license?'}}</label> 
-            <input type="number" min="0" class="form-control" formControlName="nonPracticeDataCreationSystems">
-            <span *ngIf="formCount.get('nonPracticeDataCreationSystems')?.invalid && submitAttempted" class="help-block" >{{'form.requiredField'|translate|compareText:'Required Field'}}</span>
-            <span *ngIf="formCount.get('nonPracticeDataCreationSystems')?.errors?.['number'] && submitAttempted" class="help-block">{{'form.invalidNumber'|translate|compareText:'Not a valid number'}}</span>
-          </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>{{'views.usageLog.institutions.dataAnalysis.howManyDAS'|translate|compareText:'How many Data Analysis Systems have you deployed in this region and how many databases are there per deployment?'}}</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-2">
-            <label><span>{{'views.usageLog.institutions.dataAnalysis.systems'|translate|compareText:'Systems'}}:</span></label>
-          </div>
-          <div class="col-md-4">
-            <input type="number" min="0" class="form-control" formControlName="deployedDataAnalysisSystems">
-            <span *ngIf="formCount.get('deployedDataAnalysisSystems')?.invalid && submitAttempted" class="help-block" >{{'form.requiredField'|translate|compareText:'Required Field'}}</span>
-            <span *ngIf="formCount.get('deployedDataAnalysisSystems')?.errors?.['number'] && submitAttempted" class="help-block" >{{'form.invalidNumber'|translate|compareText:'Not a valid number'}}</span>
-          </div>
-          <div class="col-md-2">
-            <label><span>{{'views.usageLog.institutions.dataAnalysis.data'|translate|compareText:'Data'}}:</span></label>
-          </div>
-          <div class="col-md-4">
-            <input type="number" min="0" class="form-control" formControlName="databasesPerDeployment">
-            <span *ngIf="formCount.get('databasesPerDeployment')?.invalid && submitAttempted" class="help-block" >{{'form.requiredField'|translate|compareText:'Required Field'}}</span>
-            <span *ngIf="formCount.get('databasesPerDeployment')?.errors?.['number'] && submitAttempted" class="help-block" >{{'form.invalidNumber'|translate|compareText:'Not a valid number'}}</span>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel'|translate|compareText:'Cancel'}}</button>
-    <button class="btn btn-success" *ngIf="formCount.invalid" (click)="submitAttempted = true">{{'global.word.update'|translate|compareText:'Update'}}</button>
-    <button class="btn btn-success" *ngIf="!formCount.invalid" (click)="updateCount()">
-      <span>{{'global.word.update'|translate|compareText:'Update'}}</span>
-      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-  </div>
-  
+   <app-modal 
+   [title]="title"
+   [formGroup]="formCount" 
+   [submitText]="'global.word.update'|translate|compareText:'Update'"
+   [cancelText]="'global.word.cancel'|translate|compareText:'Cancel'"
+   [isSubmitting]="formCount.invalid"
+   (onCancel)="cancel()"
+   (onSubmit)="updateCount()">
+   
+   <!-- Projecting modal body content -->
+   <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alerts.indexOf(alert))">
+     {{alert.msg}}
+   </ngb-alert>
+ 
+   <h3>{{ 'global.country.' + count?.country?.isoCode2 | translate }}</h3>
+ 
+   <div class="row">
+     <div class="col-md-6">
+       <p><span>{{ 'views.usageLog.institutions.hospAndInst.plural' | translate | compareText:'Hospitals/Institutions' }}:</span> 
+         <strong>{{ hospitalsCount | number }}</strong></p>
+     </div>
+     <div class="col-md-6">
+       <p><span>{{ 'views.usageLog.institutions.practices' | translate | compareText:'Practices' }}:</span> 
+         <strong>{{ practicesCount | number }}</strong></p>
+     </div>
+   </div>
+ 
+   <form [formGroup]="formCount" novalidate>
+     <hr>
+     <div class="row">
+       <div class="col-md-12">
+         <div class="form-group">
+           <label>{{ 'views.usageLog.institutions.dataAnalysis.provideStaff' | translate | compareText:'How many Hospitals provide staff to stated Practices?' }}</label> 
+           <input type="number" min="0" class="form-control" formControlName="hospitalsStaffingPractices">
+           <span *ngIf="formCount.get('hospitalsStaffingPractices')?.invalid && submitAttempted" class="help-block">
+             {{ 'form.requiredField' | translate | compareText:'Required Field' }}
+           </span>
+           <span *ngIf="formCount.get('hospitalsStaffingPractices')?.errors?.['number'] && submitAttempted" class="help-block">
+             {{ 'form.invalidNumber' | translate | compareText:'Not a valid number' }}
+           </span>
+         </div>
+       </div>
+     </div>
+     
+     <hr>
+     <div class="row">
+       <div class="col-md-12">
+         <div class="form-group">
+           <label>{{ 'views.usageLog.institutions.dataAnalysis.usingDCSNotHosp' | translate | compareText:'How many Practices are using Data Creation Systems and are NOT part of a Hospital organization?' }}</label> 
+           <input type="number" min="0" class="form-control" formControlName="dataCreationPracticesNotPartOfHospital">
+           <span *ngIf="formCount.get('dataCreationPracticesNotPartOfHospital')?.invalid && submitAttempted" class="help-block">
+             {{ 'form.requiredField' | translate | compareText:'Required Field' }}
+           </span>
+           <span *ngIf="formCount.get('dataCreationPracticesNotPartOfHospital')?.errors?.['number'] && submitAttempted" class="help-block">
+             {{ 'form.invalidNumber' | translate | compareText:'Not a valid number' }}
+           </span>
+         </div>
+       </div>
+     </div>
+ 
+     <hr>
+     <div class="row">
+       <div class="col-md-12">
+         <div class="form-group">
+           <label>{{ 'views.usageLog.institutions.dataAnalysis.usingDCSNotPract' | translate | compareText:'How many Hospitals or other Institutions are using data creation systems and cannot be defined as Practices under the definition of the license?' }}</label> 
+           <input type="number" min="0" class="form-control" formControlName="nonPracticeDataCreationSystems">
+           <span *ngIf="formCount.get('nonPracticeDataCreationSystems')?.invalid && submitAttempted" class="help-block">
+             {{ 'form.requiredField' | translate | compareText:'Required Field' }}
+           </span>
+           <span *ngIf="formCount.get('nonPracticeDataCreationSystems')?.errors?.['number'] && submitAttempted" class="help-block">
+             {{ 'form.invalidNumber' | translate | compareText:'Not a valid number' }}
+           </span>
+         </div>
+       </div>
+     </div>
+ 
+     <hr>
+     <div class="row">
+       <div class="col-md-12">
+         <div class="form-group">
+           <label>{{ 'views.usageLog.institutions.dataAnalysis.howManyDAS' | translate | compareText:'How many Data Analysis Systems have you deployed in this region and how many databases are there per deployment?' }}</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="col-md-2">
+           <label><span>{{ 'views.usageLog.institutions.dataAnalysis.systems' | translate | compareText:'Systems' }}:</span></label>
+         </div>
+         <div class="col-md-4">
+           <input type="number" min="0" class="form-control" formControlName="deployedDataAnalysisSystems">
+           <span *ngIf="formCount.get('deployedDataAnalysisSystems')?.invalid && submitAttempted" class="help-block">
+             {{ 'form.requiredField' | translate | compareText:'Required Field' }}
+           </span>
+           <span *ngIf="formCount.get('deployedDataAnalysisSystems')?.errors?.['number'] && submitAttempted" class="help-block">
+             {{ 'form.invalidNumber' | translate | compareText:'Not a valid number' }}
+           </span>
+         </div>
+         <div class="col-md-2">
+           <label><span>{{ 'views.usageLog.institutions.dataAnalysis.data' | translate | compareText:'Data' }}:</span></label>
+         </div>
+         <div class="col-md-4">
+           <input type="number" min="0" class="form-control" formControlName="databasesPerDeployment">
+           <span *ngIf="formCount.get('databasesPerDeployment')?.invalid && submitAttempted" class="help-block">
+             {{ 'form.requiredField' | translate | compareText:'Required Field' }}
+           </span>
+           <span *ngIf="formCount.get('databasesPerDeployment')?.errors?.['number'] && submitAttempted" class="help-block">
+             {{ 'form.invalidNumber' | translate | compareText:'Not a valid number' }}
+           </span>
+         </div>
+       </div>
+     </div>
+   </form>
+ </app-modal>
+ 

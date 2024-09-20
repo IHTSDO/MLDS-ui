@@ -5,18 +5,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
+import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
   selector: 'app-review-release-license-with-disclaimer-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule,TranslateModule,CompareTextPipe],
+  imports: [CommonModule, FormsModule,TranslateModule,CompareTextPipe,ModalComponent],
   templateUrl: './review-release-license-with-disclaimer-modal.component.html',
   styleUrl: './review-release-license-with-disclaimer-modal.component.scss'
 })
 export class ReviewReleaseLicenseWithDisclaimerModalComponent {
   @Input() releasePackage: any;
   isLicenseAccepted: boolean = false;
-
+  isSubmitting :boolean = false;
   constructor(public activeModal: NgbActiveModal,private releasePackageService: ReleasePackageService) {}
 
   viewReleaseLicense(): void {
@@ -26,6 +27,7 @@ export class ReviewReleaseLicenseWithDisclaimerModalComponent {
   onDownload(): void {
     if (this.isLicenseAccepted) {
       this.activeModal.close('download');
+      this.isSubmitting = true;
     }
   }
 

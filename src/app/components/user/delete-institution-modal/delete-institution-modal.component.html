@@ -1,31 +1,17 @@
-<div class="modal-header">
-   
-    <h3 class="modal-title">
-      <span>{{'global.word.delete'| translate|compareText:'Remove'}}</span>&nbsp; 
-      <span>{{'views.usageLog.institutions.hospAndInst'| translate|compareText:'Hospital/Institution'}}</span>
-    </h3>
-    <button type="button" class="btn-close" aria-label="Close" (click)="cancel()">
-      <span aria-hidden="true"></span>
-    </button>
-  </div>
-  
-  <div class="modal-body">
-    <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="alerts.splice(alerts.indexOf(alert), 1)">
-      {{ alert.msg }}
-    </ngb-alert>
-    <p>
-      <span>{{'views.usageLog.institutions.modal.sure'| translate|compareText:'Are you sure you want to remove' }}</span>&nbsp;
-      <strong>{{ institution.name }}</strong>&nbsp;
-      <span>{{'global.word.from' | translate|compareText:'from'}}</span>
-      {{'global.country.' + country?.isoCode2 | translate}}?
-    </p>
-  </div>
-  
-  <div class="modal-footer">
-    <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel'| translate|compareText:'Cancel'}}</button>
-    <button class="remove-button" (click)="removeInstitution()" [disabled]="submitting">
-      <span>{{'global.word.delete'| translate|compareText:'Remove'}}</span>
-      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-    </button>
-  </div>
-  
+<app-modal
+  [title]="title"
+  [formGroup]="formGroup"
+  [submitText]="'global.word.delete' | translate | compareText:'Remove'"
+  [cancelText]="'global.word.cancel' | translate | compareText:'Cancel'"
+  [alerts]="alerts"
+  [isSubmitting]="submitting"
+  (onSubmit)="removeInstitution()"
+  (onCancel)="cancel()"
+>
+  <p modal-body>
+    <span>{{ 'views.usageLog.institutions.modal.sure' | translate | compareText: 'Are you sure you want to remove' }}</span>&nbsp;
+    <strong>{{ institution.name }}</strong>&nbsp;
+    <span>{{ 'global.word.from' | translate | compareText: 'from' }}</span>
+    {{ 'global.country.' + country?.isoCode2 | translate }}?
+  </p>
+</app-modal>

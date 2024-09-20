@@ -1,94 +1,87 @@
-<div class="modal-header">
-  
-  <h3 class="modal-title">
-   <b> <span>{{'global.word.add' | translate | compareText:'Add'}}</span>
-    <span>{{'views.usageLog.institutions.hospAndInst' | translate | compareText :'Hospital/Institution'}}</span></b>
-  </h3>
-  <button type="button" class="btn-close" aria-hidden="true" (click)="cancel()"></button>
+<app-modal  [title]="title"
+[formGroup]="form"
+[submitText]="'global.word.add' | translate | compareText :'Add'"
+[cancelText]="'global.word.cancel' | translate | compareText:'Cancel'"
+[isSubmitting]="submitting"
+(onSubmit)="add()"
+(onCancel)="cancel()"
+>
+<div *ngIf="country">
+  <h3><strong>{{ 'global.country.' + country?.isoCode2 | translate }}</strong></h3>
 </div>
 
-<div class="modal-body">
-  <div *ngFor="let alert of alerts; let i = index" class="alert alert-dismissible" [ngClass]="'alert-' + alert.type">
-    {{ alert.msg }}
-    <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
+<!-- Injecting custom form fields -->
+<div class="row">
+  <div class="col-md-6 form-group">
+    <label for="name"><b>{{ 'views.usageLog.institutions.modal.subtitle' | translate | compareText: 'Hospital/Institution Name' }}</b></label>
+    <input
+      id="name"
+      formControlName="name"
+      class="form-control"
+      placeholder="{{ 'views.usageLog.institutions.modal.placeholder' | translate }}"
+    />
+    <div *ngIf="form.controls['name']?.invalid && submitAttempted" class="text-danger">
+      {{ 'form.requiredField' | translate | compareText: 'Required Field' }}
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col-md-4 form-group">
+    <h4 class="title">{{ 'views.usageLog.institutions.started' | translate | compareText: 'Started to Use' }}</h4>
+    <div class="input-group datepicker">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="startDate"
+        ngbDatepicker
+        #startDate="ngbDatepicker"
+        (click)="startDate.toggle()"
+      />
+      <span class="input-group-text">
+        <i class="fa fa-calendar"></i>
+      </span>
+    </div>
+    <div *ngIf="form.controls['startDate']?.invalid && submitAttempted" class="text-danger">
+      {{ 'form.requiredField' | translate | compareText: 'Required Field' }}
+    </div>
   </div>
 
-  <h3><strong>{{ 'global.country.' + country?.isoCode2 | translate}}</strong></h3>
-
-  <form [formGroup]="form" (ngSubmit)="add()">
-    <div class="row">
-      <div class="form-group col-md-6">
-        <label><b>{{'views.usageLog.institutions.modal.subtitle' |translate | compareText: 'Hospital/Institution Name'}}</b></label>
-        <input
-          class="form-control"
-          placeholder="{{ 'views.usageLog.institutions.modal.placeholder' | translate }}"
-          formControlName="name"
-        />
-        <div *ngIf="form.controls['name']?.invalid && submitAttempted" class="help-block">
-          {{'form.requiredField' | translate |compareText:'Required Field'}}
-        </div>
-      </div>
+  <div class="col-md-4 form-group">
+    <h4 class="title">{{ 'views.usageLog.institutions.finished' | translate | compareText: 'Ceased Use' }}</h4>
+    <div class="input-group datepicker">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="endDate"
+        ngbDatepicker
+        #endDate="ngbDatepicker"
+        (click)="endDate.toggle()"
+      />
+      <span class="input-group-text">
+        <i class="fa fa-calendar"></i>
+      </span>
     </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-4 form-group">
-        <h4>{{'views.usageLog.institutions.started' | translate | compareText:'Started to Use'}}</h4>
-        <div class="input-group datepicker">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="startDate"
-            ngbDatepicker
-            #startDate="ngbDatepicker"
-            (click)="startDate.toggle()"
-          />
-          <span class="input-group-addon">
-            <i class="fa fa-calendar"></i>
-          </span>
-        </div>
-        <div *ngIf="form.controls['startDate']?.invalid && submitAttempted" class="help-block">
-          {{'form.requiredField' | translate |compareText:'Required Field'}}
-        </div>
-      </div>
-
-      <div class="col-md-4 form-group">
-        <h4>{{'views.usageLog.institutions.finished' | translate|compareText:'Ceased Use'}}</h4>
-        <div class="input-group datepicker">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="endDate"
-            ngbDatepicker
-            #endDate="ngbDatepicker"
-            (click)="endDate.toggle()"
-          />
-          <span class="input-group-addon">
-            <i class="fa fa-calendar"></i>
-          </span>
-        </div>
-        <div *ngIf="form.controls['endDate']?.invalid && submitAttempted" class="help-block">
-          {{'views.usageLog.institutions.modal.dateBefore' | translate|compareText: 'Date before Started to Use date'}}
-        </div>
-      </div>
+    <div *ngIf="form.controls['endDate']?.hasError('dateAfter') && submitAttempted" class="text-danger">
+      {{ 'views.usageLog.institutions.modal.dateBefore' | translate | compareText: 'Date before Started to Use date' }}
     </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-8 form-group">
-        <label>{{'global.word.note' | translate | compareText:'Note'}}</label>
-        <textarea class="form-control" rows="4" formControlName="note"></textarea>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>
 
-<div class="modal-footer">
-  <button class="btn btn-link" (click)="cancel()" [disabled]="submitting">{{'global.word.cancel' | translate | compareText:'Cancel'}}</button>
-  <button class="btn btn-success" (click)="add()">
-    <i class="fa fa-plus"></i> {{'global.word.add' | translate | compareText :'Add'}}
-    <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-  </button>
+<hr />
+
+<div class="row">
+  <div class="col-md-8 form-group">
+    <label for="note" class="title">{{ 'global.word.note' | translate | compareText: 'Note' }}</label>
+    <textarea
+      id="note"
+      formControlName="note"
+      class="form-control"
+      rows="4"
+    ></textarea>
+  </div>
 </div>
+
+</app-modal>

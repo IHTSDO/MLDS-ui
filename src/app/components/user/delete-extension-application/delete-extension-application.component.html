@@ -1,12 +1,15 @@
-<div class="modal-header">
-    <h3 class="modal-title">{{'views.extensionApplication.delete.title' | translate|compareText :'Cancel Application'}}</h3>
+<app-modal 
+  [title]="'views.extensionApplication.delete.title' | translate | compareText:'Cancel Application'"
+  [formGroup]="null"
+  [submitText]="'global.word.yes' | translate | compareText:'Yes'"
+  [cancelText]="'global.word.no' | translate | compareText:'No'"
+  [isSubmitting]="false"
+  (onSubmit)="confirmCancel()"
+  (onCancel)="cancelCancel()"
+>
+  <!-- Modal Content -->
+  <div modal-body>
+    <p>{{'views.extensionApplication.delete.sure' | translate | compareText :'Are you sure you want to cancel this application?'}}</p>
+    <p>{{'views.extensionApplication.delete.sure.detail' | translate | compareText :'Doing so will cause you to lose all saved information on this application.'}}</p>
   </div>
-  <div class="modal-body">
-    <p>{{'views.extensionApplication.delete.sure' | translate|compareText :'Are you sure you want to cancel this application?'}}</p>
-    <p>{{'views.extensionApplication.delete.sure.detail'| translate|compareText :'Doing so will cause you to lose all saved information on this application.'}}</p>
-  </div>
-  <div class="modal-footer">
-    <button class="blue-button" (click)="confirmCancel()" >{{'global.word.yes'| translate|compareText :'Yes'}}</button>
-    <button class="remove-button" (click)="cancelCancel()">{{'global.word.no' | translate|compareText :'No'}}</button>
-  </div>
-  
+</app-modal>

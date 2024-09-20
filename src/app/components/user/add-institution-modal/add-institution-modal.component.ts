@@ -4,19 +4,20 @@ import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } 
 import { NgbActiveModal, NgbAlert, NgbDatepicker, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
   selector: 'app-add-institution-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgbAlert, ReactiveFormsModule, NgbDatepicker, NgbDatepickerModule, CompareTextPipe,TranslateModule],
+  imports: [CommonModule, FormsModule, NgbAlert, ReactiveFormsModule, NgbDatepicker, NgbDatepickerModule, CompareTextPipe, TranslateModule,  ModalComponent],
   templateUrl: './add-institution-modal.component.html',
   styleUrl: './add-institution-modal.component.scss'
 })
 export class AddInstitutionModalComponent implements OnInit {
   @Input() country!: any;
   @Input() usageReport!: any;
-
+  title = '';
   form!: FormGroup;
   alerts: any[] = [];
   submitting: boolean = false;
@@ -34,6 +35,7 @@ submitAttempted: any;
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
+    private translate:TranslateService,
     private commercialUsageService: CommercialUsageService
   ) {}
 
@@ -46,7 +48,7 @@ submitAttempted: any;
       name: ['', Validators.required],
       note: ['']
     });
-
+    this.title = `${this.translate.instant('global.word.add')} ${this.translate.instant('views.usageLog.institutions.hospAndInst')}`;
     // Set the institution's country
     this.institution.country = this.country;
   }
