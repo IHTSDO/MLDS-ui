@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
@@ -35,19 +35,23 @@ export class LandingHeaderComponent {
     { key: 'th', name: 'Thai', flag: 'th' }
   ];
   
- 
+  memberReady: boolean = false;
   memberLogo: string | null = null;
   isAuthenticated: boolean = false;
   userName: string | null = null;
   firstName: string | null = null;
   lastName: string | null = null;
   isUser: boolean = false;
-
+  memberDetails: any = null;
+  memberKey: string | null = null;
+  memberName:any;
+  sessionMember: any = null;
   constructor(
     private memberService: MemberService,
     private router: Router,
     private sessionService: AuthenticationSharedService ,// Inject SessionService
     private translateService: TranslateService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -59,7 +63,16 @@ export class LandingHeaderComponent {
       this.memberLogo = logoUrl;
     });
 
-
+     if (this.sessionMember && this.sessionMember.isAuthenticated) {
+      this.updateFromMember(this.sessionMember);
+    } else {
+      this.route.params.subscribe(params => {
+        this.memberKey = params['memberKey'];
+        console.log('Member key:', this.memberKey);
+        if (this.memberKey) {
+          this.updateFromMemberByKey(this.memberKey);
+        }
+      });
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -69,15 +82,68 @@ export class LandingHeaderComponent {
 
     this.updateUserDetails();
   }
+}
+
+  private updateFromMember(sessionMember: any): void {
+
+    if (sessionMember) {
+      this.memberService.getMemberLogo(sessionMember.key).subscribe({
+        next: (logoUrl: string) => {
+          this.memberLogo = logoUrl; // Set memberLogo here once you get the logo URL
+          this.memberService.setMemberLogo(logoUrl);
+        },
+        error: (error) => {
+          console.error('Error fetching member logo:', error);
+          this.memberLogo = ''; // Fallback in case of error
+        }
+      });
+    } else {
+      this.memberLogo = ''; // Set empty string if no logo is available
+    }
+    this.setMemberDetails(sessionMember);
+  
+  }
+
+  private updateFromMemberByKey(memberKey: string): void {
+    
+    this.memberService.getMembers().subscribe(members => {
+      // Filter the member using the memberKey
+      const filteredMember = members.find(member => member.key === this.memberKey);
+
+    const member = filteredMember;
+    this.setMemberDetails(member);
+  });
+  }
+  private setMemberDetails(member: any): void {
+    if (member) {
+      const memberKey = member.key;
+    const translationKey = `global.member.${memberKey}`;
+    
+
+    // Fetch the translated member name
+    this.translateService.get(translationKey).subscribe((translatedName: string) => {
+      this.memberName = translatedName || member.name || '';
+      console.log(this.memberName)
+    });
+    } else {
+      this.memberName = '';
+      this.memberLogo = '';
+    }
+  }
+  
 
   // Method to update user authentication and details
   updateUserDetails(): void {
+    
     this.isAuthenticated = this.sessionService.isAuthenticated();
     this.isUser = this.sessionService.isUser();
 
     if (this.isAuthenticated) {
       const userDetails = this.sessionService.getUserDetails();
+      
       if (userDetails) {
+        this.updateFromMember(userDetails.member);
+    
         this.firstName = userDetails.firstName;
         this.lastName = userDetails.lastName;
         this.userName = `${this.firstName} ${this.lastName}`;
