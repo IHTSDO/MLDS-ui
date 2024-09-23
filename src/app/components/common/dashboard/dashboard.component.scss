@@ -1,5 +1,6 @@
 
 .sidebar {
+    padding-top: 18px;
     position: fixed;
     top: 50px;
     bottom: 0;
@@ -10,7 +11,7 @@
     // padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #021015;
+    background-color: #333333;
     border-right: 1px solid #EEE;
     color: #a19f9f;
 }

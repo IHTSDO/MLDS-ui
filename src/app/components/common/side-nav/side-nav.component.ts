@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { ROUTES } from 'src/app/routes-config';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { SideBarService } from 'src/app/services/side-bar/side-bar.service';
 
 /**
  * Side navigation component that displays links based on user roles.
@@ -46,7 +47,8 @@ export class SideNavComponent implements OnInit {
    * Routes configuration.
    */
   routes = ROUTES;
-
+  selectedItem: number | null = null; // Track the selected item
+  hoverItem: number | null = null; // Track the hovered item
   /**
    * Constructor.
    *
@@ -55,7 +57,8 @@ export class SideNavComponent implements OnInit {
    */
   constructor(
     private authenticationService: AuthenticationSharedService,
-    private router: Router
+    private router: Router,
+    private sidebarService: SideBarService
   ) {}
 
   /**
@@ -68,8 +71,32 @@ export class SideNavComponent implements OnInit {
       this.isStaffOrAdmin = this.authenticationService.isStaffOrAdmin();
       this.isMemberOrStaffOrAdmin = this.authenticationService.isMemberOrStaffOrAdmin();
     }
+    this.sidebarService.selectedItem$.subscribe((index) => {
+      this.selectedItem = index;
+    });
+
+    // Optionally, set the selectedItem from the service if needed on initialization
+    this.selectedItem = this.sidebarService.getSelectedItem();
   }
+ // This method should trigger a change in selectedItem
+ selectItem(index: number): void {
+  this.sidebarService.selectItem(index);  // Update the BehaviorSubject in the service
+}
 
- 
+// Hover logic if needed
+hoverItemChange(index: number | null): void {
+  this.hoverItem = index;
+}
 
+  // HostListener to detect clicks outside the sidebar
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const sidebar = document.getElementById('sideNav');
+
+    // Check if the click is outside the sidebar
+    if (sidebar && !sidebar.contains(target)) {
+      this.hoverItem = null; // Deselect the hover when clicking outside
+    }
+  }
 }

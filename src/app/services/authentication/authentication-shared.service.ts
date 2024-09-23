@@ -151,6 +151,7 @@ export class AuthenticationSharedService {
 private removeFromLocalStorage(): void {
   localStorage.removeItem('isLoggedIn');
   localStorage.removeItem('userDetails');
+  localStorage.removeItem('selectedItem');
 }
 invalidate(): void {
   this.loginStatus = false;

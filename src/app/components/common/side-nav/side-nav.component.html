@@ -1,117 +1,132 @@
 <div id="sideNav" class="sidebar">
-    <ul class="nav nav-sidebar">
-      <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="[routes.pendingApplications]">
-              <i class="fa fa-tasks"></i>&nbsp;
-              <span>{{'pendingApplications.title' | translate | compareText :'Pending Applications'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="[routes.affiliateManagement]">
-              <i class="fa fa-users"></i>&nbsp;
-              <span>{{'affiliateManagement.title'| translate | compareText : 'Affiliate Management'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="[routes.releaseManagement]">
-              <i class="fas fa-cube"></i>&nbsp;
-              <span>{{'releaseManagement.title'| translate | compareText : 'Release Management'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="[routes.archiveReleases]">
-              <i class="fa fa-archive"></i>&nbsp;
-              <span>{{'Archive Releases'}}</span>
-          </a>
-      </li>
-  
-        <!--MLDS-985 Review Usage Reports-->
-        <li *ngIf="isAdmin">
-                <a [routerLink]="[routes.usageReportsReview]">
-                <i class="fa fa-file-text"></i>&nbsp;
-                <span>{{'reviewUsageReports.title'| translate | compareText :'Review Usage Reports'}}</span>
-            </a>
-        </li>
-        <li *ngIf="isStaff">
-                <a [routerLink]="[routes.reports]">
-                <i class="fa fa-file-text"></i>&nbsp;
-                <span>Reports</span>
-            </a>
-        </li>
-       <!-- MLDS-985 Review Usage Reports-->
-      <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="[routes.memberManagement]">
-              <i class="fa fa-institution"></i>&nbsp;
-              <span>{{'memberManagement.title'| translate | compareText : 'Member Management'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isStaffOrAdmin">
-            <a [routerLink]="[routes.postAnnouncement]">
-              <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
-              <span>{{'postAnnouncement.title'| translate | compareText : 'Post Announcement'}}</span>
-          </a>
-      </li>
-    </ul>
-    <ul class="nav nav-sidebar">
-      <li *ngIf="isMemberOrStaffOrAdmin">
-            <a [routerLink]="[routes.ihtsdoReleases]">
-              <i class="fa fa-download"></i>&nbsp;
-              <span>{{'ihtsdoReleases.title' | translate | compareText :'IHTSDO Releases'}}</span>
-          </a>
-      </li>
-    </ul>
-    <ul class="nav nav-sidebar">
-        <li *ngIf="isAdmin">
-            <a [routerLink]="[routes.fileDownloadReport]">
-                <i class="fa fa-cube"></i>&nbsp;
-                <span> {{ 'Release File Download Count'}}</span>
-            </a>
-        </li>
-      <li *ngIf="isAdmin">
-            <a [routerLink]="[routes.activityLog]">
-              <i class="fa fa-signal"></i>&nbsp;
-              <span>{{'activityLog.title'| translate | compareText :'Activity Log'}}</span>
-          </a>
-         </li>
-      <li *ngIf="isAdmin">
-            <a [routerLink]="[routes.importAffiliates]">
-              <i class="fa fa-upload"></i>&nbsp;
-              <span>{{'importAffiliateRecords.title'| translate | compareText : 'Import Affiliate Records'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isAdmin">
-            <a [routerLink]="[routes.manageBlocklist]">
-              <i class="fa fa-bolt"></i>&nbsp;
-              <span>{{'manageBlocklist.title'| translate | compareText :'Manage Blocklist'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isAdmin">
-            <a [routerLink]="[routes.nationalRegistrationList]">
-              <i class="fa fa-flag"></i>&nbsp;
-              <span>{{'nationalRegistrationList.title'| translate | compareText : 'National Registration List'}}</span>
-          </a>
-      </li>
-    </ul>
-    <ul class="nav nav-sidebar">
-      <li *ngIf="isAdmin">
-          <a [routerLink]="[routes.metrics]">
-              <i class="fa fa-exchange"></i>&nbsp;
-              <span >{{'metrics.title'| translate | compareText : 'System Metrics'}}</span>
-          </a>
-      </li>
-      <li *ngIf="isAdmin">
-            <a [routerLink]="[routes.systemLoggers]">
-              <i class="fa fa-navicon"></i>&nbsp;
-              <span>{{'systemLoggers.title' | translate | compareText :'System Loggers'}}</span>
-          </a>
-      </li>
-    </ul>
-    <ul class="nav nav-sidebar">
-      <li>
-        <a routerLink="/logout">
-            <i class="fa fa-sign-out"></i>&nbsp;
-              <span>Logout</span>
-          </a>
-      </li>
-    </ul>
- </div>
+  <ul class="nav nav-sidebar">
+    <div>
+    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 0" 
+        (mouseenter)="hoverItemChange(0)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.pendingApplications]" (click)="selectItem(0)">
+        <i class="fa fa-tasks"></i>&nbsp;
+        <span>{{ 'pendingApplications.title' | translate | compareText: 'Pending Applications' }}</span>
+      </a>
+    </li>
+    </div>
+    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 1" 
+        (mouseenter)="hoverItemChange(1)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.affiliateManagement]" (click)="selectItem(1)">
+        <i class="fa fa-users"></i>&nbsp;
+        <span>{{ 'affiliateManagement.title' | translate | compareText: 'Affiliate Management' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 2" 
+        (mouseenter)="hoverItemChange(2)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.releaseManagement]" (click)="selectItem(2)">
+        <i class="fas fa-cube"></i>&nbsp;
+        <span>{{ 'releaseManagement.title' | translate | compareText: 'Release Management' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 3" 
+        (mouseenter)="hoverItemChange(3)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.archiveReleases]" (click)="selectItem(3)">
+        <i class="fa fa-archive"></i>&nbsp;
+        <span>Archive Releases</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 4" 
+        (mouseenter)="hoverItemChange(4)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.usageReportsReview]" (click)="selectItem(4)">
+        <i class="fa fa-file-text"></i>&nbsp;
+        <span>{{ 'reviewUsageReports.title' | translate | compareText: 'Review Usage Reports' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isStaff" [class.selected]="selectedItem === 5" 
+        (mouseenter)="hoverItemChange(5)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.reports]" (click)="selectItem(5)">
+        <i class="fa fa-file-text"></i>&nbsp;
+        <span>Reports</span>
+      </a>
+    </li>
+    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 6" 
+        (mouseenter)="hoverItemChange(6)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.memberManagement]" (click)="selectItem(6)">
+        <i class="fa fa-institution"></i>&nbsp;
+        <span>{{ 'memberManagement.title' | translate | compareText: 'Member Management' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 7" 
+        (mouseenter)="hoverItemChange(7)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.postAnnouncement]" (click)="selectItem(7)">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+        <span>{{ 'postAnnouncement.title' | translate | compareText: 'Post Announcement' }}</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav nav-sidebar">
+    <li *ngIf="isMemberOrStaffOrAdmin" [class.selected]="selectedItem === 8" 
+        (mouseenter)="hoverItemChange(8)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.ihtsdoReleases]" (click)="selectItem(8)">
+        <i class="fa fa-download"></i>&nbsp;
+        <span>{{ 'ihtsdoReleases.title' | translate | compareText: 'IHTSDO Releases' }}</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav nav-sidebar">
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 9" 
+        (mouseenter)="hoverItemChange(9)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.fileDownloadReport]" (click)="selectItem(9)" style="width: 267px;">
+        <i class="fa fa-cube"></i>&nbsp;
+        <span>{{ 'Release File Download Count' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 10" 
+        (mouseenter)="hoverItemChange(10)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.activityLog]" (click)="selectItem(10)">
+        <i class="fa fa-signal"></i>&nbsp;
+        <span>{{ 'activityLog.title' | translate | compareText: 'Activity Log' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 11" 
+        (mouseenter)="hoverItemChange(11)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.importAffiliates]" (click)="selectItem(11)">
+        <i class="fa fa-upload"></i>&nbsp;
+        <span>{{ 'importAffiliateRecords.title' | translate | compareText: 'Import Affiliate Records' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 12" 
+        (mouseenter)="hoverItemChange(12)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.manageBlocklist]" (click)="selectItem(12)">
+        <i class="fa fa-bolt"></i>&nbsp;
+        <span>{{ 'manageBlocklist.title' | translate | compareText: 'Manage Blocklist' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 13" 
+        (mouseenter)="hoverItemChange(13)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.nationalRegistrationList]" (click)="selectItem(13)">
+        <i class="fa fa-flag"></i>&nbsp;
+        <span>{{ 'nationalRegistrationList.title' | translate | compareText: 'National Registration List' }}</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav nav-sidebar">
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 14" 
+        (mouseenter)="hoverItemChange(14)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.metrics]" (click)="selectItem(14)">
+        <i class="fa fa-exchange"></i>&nbsp;
+        <span>{{ 'metrics.title' | translate | compareText: 'System Metrics' }}</span>
+      </a>
+    </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 15" 
+        (mouseenter)="hoverItemChange(15)" (mouseleave)="hoverItemChange(null)">
+      <a [routerLink]="[routes.systemLoggers]" (click)="selectItem(15)">
+        <i class="fa fa-navicon"></i>&nbsp;
+        <span>{{ 'systemLoggers.title' | translate | compareText: 'System Loggers' }}</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="nav nav-sidebar">
+    <li>
+      <a routerLink="/logout">
+        <i class="fa fa-sign-out"></i>&nbsp;
+        <span>Logout</span>
+      </a>
+    </li>
+  </ul>
+</div>
