@@ -53,7 +53,13 @@ font-size: 16px;
 .title-colors th i {
     margin-left: 4px; /* Spacing for icons */
 }
-
+.all-retrieved {
+    margin: 40px 0 20px;
+    border-top: 3px dotted #eeeeee;
+    width: 40%;
+    color: #999999;
+    
+}
 /* Ensures the active sorting state remains blue */
 .title-colors th a[ng-reflect-router-link-active="active"] {
     color: #40ACD6;

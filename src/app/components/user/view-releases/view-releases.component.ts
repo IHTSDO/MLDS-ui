@@ -37,7 +37,7 @@ export class ViewReleasesComponent implements OnInit {
   isPrimaryApplicationApproved: boolean = false;
   sessionMember = this.sessionService.getUserDetails()?.member;
   private openAccordions: Set<number> = new Set();
-
+  isLoading: boolean = true; // Add this flag
  
 
 
@@ -57,6 +57,7 @@ export class ViewReleasesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+     this.isLoading = true; // Start loading
     this.loadReleasePackages();
     this.loadAffiliateState();
     this.loadUserState();
@@ -75,6 +76,7 @@ export class ViewReleasesComponent implements OnInit {
         this.updateAlphaReleasePackagesByMember(this.releasePackage);
       }
     });
+    this.isLoading = false;
   }
 
   private loadAffiliateState(): void {
@@ -155,7 +157,8 @@ export class ViewReleasesComponent implements OnInit {
      this.isAccountDeactivated = this.standingStateUtils.isDeactivated(this.standingState);
      this.isPrimaryApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.primaryApplication);
      this.isPrimaryApplicationApproved = this.applicationUtilsService.isApplicationApproved(this.primaryApplication);
-  }
+     this.isLoading = false;
+    }
   
   viewLicense(memberKey: string): void {
     this.memberService.getMemberLicense(memberKey).subscribe();

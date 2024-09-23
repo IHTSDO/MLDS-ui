@@ -327,4 +327,65 @@
     display: inline;
     color: #49A8DB;
 }
+.navbar-default .navbar-nav > li > a {
+    color: #00a7e1;
+    height: 66px;
+    line-height: 3;
+}
+/* Add styles for hover state */
+#topNav li a:hover {
+    background-color: #eeeeee;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+}
+
+#topNav li.active > a {
+    background-color: #eeeeee !important;
+    border-left: 1px solid #999999 !important;
+    border-right: 1px solid #999999 !important;
+}
+
+a:hover, a:focus {
+    color: #2481a6;
+    text-decoration: none;
+    cursor: pointer;
+}
+a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        margin-top: 20px;
+    }
+}
+.navbar-nav > li > a {
+    line-height: 20px;
+    display: block;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 12px 15px;
+}
+a {
+    color: #40ACD6;
+    text-decoration: none;
+}
+a {
+    background: transparent;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #333333;
+    background-color: #eeeeee;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+}
   

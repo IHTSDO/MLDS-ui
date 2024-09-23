@@ -40,6 +40,7 @@ export class UserDashboardComponent implements OnInit {
   releasePackage: any;
   approvedReleasePackagesByMember: any[] = [];
   notApprovedReleasePackagesByMember: any[] = [];
+  isLoading: boolean = true; // Add this flag
 
   constructor(
     private authenticationService: AuthenticationSharedService,
@@ -55,6 +56,7 @@ export class UserDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true; // Start loading
     const userDetails = this.authenticationService.getUserDetails();
     this.firstName = userDetails?.firstName ?? '';
     this.lastName = userDetails?.lastName ?? '';
@@ -114,6 +116,7 @@ export class UserDashboardComponent implements OnInit {
             !this.userAffiliateService.isMembershipApproved(memberRelease.member)
           );
         }
+        this.isLoading = false;
       }
     });
   }

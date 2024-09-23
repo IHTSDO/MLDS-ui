@@ -39,7 +39,7 @@
   <div class="col-sm-2">
     <button class="review-button" (click)="clearSearch()">Clear</button>
   </div>
-  <div class="col-sm-2">Number of results: <strong>{{totalResults}}</strong></div>
+  <div class="col-sm-2">Number of results: <b>{{totalResults}}</b></div>
 </div>
 
 <div class="row">
@@ -224,7 +224,7 @@
           <td colspan="10" class="text-center">No results.</td>
         </tr>
         <tr *ngIf="allRetrieved && !noResults">
-          <td colspan="10" class="text-center">All affiliates retrieved</td>
+          <td colspan="10" class="all-retrieved">All affiliates retrieved</td>
         </tr>
       </tbody>
       <ng-template #loadingData>

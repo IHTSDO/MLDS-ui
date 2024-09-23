@@ -42,7 +42,7 @@ export class ViewReleaseComponent implements OnInit {
   isPrimaryApplicationWaitingForApplicant: boolean = false;
   isPrimaryApplicationApproved: boolean = false;
   matchingExtensionApplication: any;
-
+  isLoading: boolean = true; // Add this flag
 
   constructor(private route: ActivatedRoute, private packagesService: PackagesService,
     private router: Router,
@@ -59,6 +59,7 @@ export class ViewReleaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadReleasePackage();
+    
   }
 
   private loadReleasePackage(): void {
@@ -108,6 +109,7 @@ export class ViewReleaseComponent implements OnInit {
     this.isAccountDeactivated = this.standingStateUtils.isDeactivated(this.standingState);
     this.isPrimaryApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.primaryApplication);
     this.isPrimaryApplicationApproved = this.applicationUtilsService.isApplicationApproved(this.primaryApplication);
+    this.isLoading = false;
   }
 
   isMembershipApproved(): boolean {

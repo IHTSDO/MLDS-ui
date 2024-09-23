@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="page-header">
@@ -14,7 +15,13 @@
   </div>
 </div>
 
-
+<!-- Loader Component (you can customize the spinner or use a library like ngx-spinner) -->
+<div *ngIf="isLoading" class="text-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<!-- <div *ngIf="!isLoading"> -->
 <div *ngFor="let memberReleases of releasePackagesByMember | sortLimit: memberPackageService.orderByJustName : 1">
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
@@ -33,6 +40,7 @@
           <div>
             <h3 class="panel-title"><span class="panel-title-link" (click)="goToViewPackagePage(releasePackage.releasePackageId)">{{releasePackage.name}}</span></h3>
           </div>
+          <div *ngIf="!isLoading">
           <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
           >
           {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
@@ -68,6 +76,7 @@
           {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
           </span>          
         </div>
+      </div>
       </div>
       <div class="panel-body">
         <div [innerHTML]="releasePackage.description"></div>
@@ -315,5 +324,6 @@
   </div>
 </div>
 </div>
+<!-- </div> -->
 
 

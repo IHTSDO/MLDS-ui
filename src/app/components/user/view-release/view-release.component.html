@@ -21,7 +21,7 @@
         <div class="panel panel-default release-package package"
             *ngFor="let releaseVersion of releaseVersions['online']">
             <div class="panel-heading status">
-
+                <div *ngIf="!isLoading">
                 <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
                     >
                     {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
@@ -61,7 +61,7 @@
                     class="badge bg-warning float-end" >
                     {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
                 </span>
-
+                </div>
                 <div class="status">
                     <h3 class="panel-title">{{releaseVersion?.name}}</h3>
                 </div>
