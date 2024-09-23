@@ -17,7 +17,7 @@
               <span *ngIf="!homeMember">{{ 'global.member.IHTSDO'| translate }}</span>
             </td>
             <td class="text-end report-button">
-              <button class="btn btn-primary btn-sm btn-margin" (click)="generateCsv()">
+              <button class="btn-margin csv-button" (click)="generateCsv()">
                 <i class="fa fa-download"></i> Export as CSV
               </button>
             </td>

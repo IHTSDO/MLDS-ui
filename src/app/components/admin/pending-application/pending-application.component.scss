@@ -36,11 +36,11 @@ align-items: center;
 }
 
 .title-colors th span {
-    color: black; /* Black color for non-sortable fields */
+    color: #40ACD6; 
 }
 
 .title-colors th a:hover {
-    color: #007bb8; /* Darker blue on hover for sortable fields */
+    color: #40ACD6; /* Darker blue on hover for sortable fields */
 }
 
 .title-colors th i {

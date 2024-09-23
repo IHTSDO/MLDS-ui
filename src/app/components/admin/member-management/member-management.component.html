@@ -16,6 +16,7 @@
     	</thead>
     	<tbody>
     		<tr *ngFor="let member of members">
+			  <ng-container *ngIf="canAccess(member)">
     			<td>{{member.key}}</td>
     			<td>{{member.name}}</td>
     			<td>{{getMemberLandingPage(member)}}</td>
@@ -28,17 +29,18 @@
 						<button type="button" class="review-button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-pencil"></i> Edit</button>
 						<ul class="dropdown-menu dropdown-menu-right">
 		    				<li><a class="dropdown-item" (click)="viewBranding(member)"><i class="fa fa-image"></i> View Branding</a></li>
-		    				<li><a class="dropdown-item" (click)="openEditMemberModal(member)"><i class="fa fa-edit"></i> Edit Branding</a></li>
+		    				<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="openEditMemberModal(member)"><i class="fa fa-edit"></i> Edit Branding</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" (click)="viewLicense(member.key)"><i class="fa fa-gavel"></i> View License</a></li>
-    						<li><a class="dropdown-item" (click)="editLicense(member)"><i class="fa fa-edit"></i> Edit License</a></li>
+    						<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editLicense(member)"><i class="fa fa-edit"></i> Edit License</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" (click)="editStaffNotificationsEmail(member)"><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
-                            <li><a class="dropdown-item" (click)="editFeedData(member)"><i class="fa fa-edit"></i> Edit Feed Data</a></li>
+							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editStaffNotificationsEmail(member)"><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
+                            <li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editFeedData(member)"><i class="fa fa-edit"></i> Edit Feed Data</a></li>
                         </ul>
 					</div>
     			</td>
-    		</tr>
+			  </ng-container>
+    	    </tr>
     	</tbody>
     </table>
 

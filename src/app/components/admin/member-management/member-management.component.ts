@@ -9,6 +9,7 @@ import { EditLicenseComponent } from '../edit-license/edit-license.component';
 import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.component';
 import { ROUTES } from 'src/app/routes-config';
 import { API_ROUTES } from 'src/app/routes-config-api';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 /**
  * Member Management Component
@@ -51,7 +52,8 @@ export class MemberManagementComponent {
   constructor(
     private memberService: MemberService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private session: AuthenticationSharedService
   ) { }
 
   /**
@@ -61,6 +63,10 @@ export class MemberManagementComponent {
    */
   ngOnInit(): void {
     this.fetchMembers();
+  }
+
+  canAccess(member: any): boolean {
+    return this.session.isAdmin() || member.key === this.session.getUserDetails()?.member?.['key'];
   }
 
   /**
@@ -90,13 +96,9 @@ export class MemberManagementComponent {
    * const url = this.getMemberLandingPage(member);
    */
   getMemberLandingPage(member: any): string {
-    let url = this.apiUrl;
-    const hashIndex = url.indexOf('#');
-    if (hashIndex !== -1) {
-      url = url.slice(0, hashIndex);
-    }
-    url += '/landing/' + member.key;
-    return url;
+    let fullBaseUrl = `${window.location.protocol}//${window.location.host}/#`;
+    fullBaseUrl += '/landing/' + member.key;
+    return fullBaseUrl;
   }
 
   /**

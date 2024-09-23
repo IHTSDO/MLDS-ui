@@ -8,7 +8,7 @@
         <thead>
           <tr>
             <th>Affiliate Name</th>
-            <th (click)="toggleField('submitted')">
+            <th class="sort-title" (click)="toggleField('submitted')">
               Date Submitted
               <span *ngIf="orderByField !== 'submitted'"><i class="fa fa-sort"></i></span>
               <span *ngIf="orderByField === 'submitted'">
@@ -16,7 +16,7 @@
                 <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
               </span>
             </th>
-            <th (click)="toggleField('state')">
+            <th class="sort-title" (click)="toggleField('state')">
               Status
               <span *ngIf="orderByField !== 'state'"><i class="fa fa-sort"></i></span>
               <span *ngIf="orderByField === 'state'">
@@ -24,7 +24,7 @@
                 <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
               </span>
             </th>
-            <th (click)="toggleField('type')">
+            <th class="sort-title" (click)="toggleField('type')">
               Type
               <span *ngIf="orderByField !== 'type'"><i class="fa fa-sort"></i></span>
               <span *ngIf="orderByField === 'type'">
@@ -33,7 +33,7 @@
               </span>
             </th>
             <th>Implementation Status</th>
-            <th (click)="toggleField('startDate')">
+            <th class="sort-title" (click)="toggleField('startDate')">
               Start Date
               <span *ngIf="orderByField !== 'startDate'"><i class="fa fa-sort"></i></span>
               <span *ngIf="orderByField === 'startDate'">
@@ -41,7 +41,7 @@
                 <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
               </span>
             </th>
-            <th (click)="toggleField('endDate')">
+            <th class="sort-title" (click)="toggleField('endDate')">
               End Date
               <span *ngIf="orderByField !== 'endDate'"><i class="fa fa-sort"></i></span>
               <span *ngIf="orderByField === 'endDate'">
