@@ -408,4 +408,11 @@ Actual accordion wrapped in id="accordion-override" div. */
   .edit-button:hover {
     background-color:  #3cb878;
     color: #ffffff;
-  }   
+  } 
+  
+  .loader-center{
+    padding: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

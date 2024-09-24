@@ -269,6 +269,16 @@ alertChecking(){
   if(this.application.approvalState === "CHANGE_REQUESTED"){
     this.showNonPendingAlert = true;
   }
+  this.updateNotesControlState();
+}
+
+private updateNotesControlState() {
+  const notesControl = this.notesForm.get('notesInternal');
+  if (this.isNoteReadOnly) {
+    notesControl?.disable();
+  } else {
+    notesControl?.enable();
+  }
 }
 
 /**

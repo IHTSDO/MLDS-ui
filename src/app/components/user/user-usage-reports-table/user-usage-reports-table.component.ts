@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { LoaderComponent } from "../../common/loader/loader.component";
 
 @Component({
   selector: 'app-user-usage-reports-table',
   standalone: true,
-  imports: [UsageReportsTableComponent,CommonModule,TranslateModule,CompareTextPipe],
+  imports: [UsageReportsTableComponent, CommonModule, TranslateModule, CompareTextPipe, LoaderComponent],
   templateUrl: './user-usage-reports-table.component.html',
   styleUrl: './user-usage-reports-table.component.scss'
 })
@@ -17,12 +18,14 @@ export class UserUsageReportsTableComponent implements OnInit {
   showAllColumns: boolean = true;
   showViewAll: boolean = false;
   affiliates: any;
+  isLoading: boolean = true;
 
   constructor(public usageReportsService: UsageReportsService,private affiliateService: AffiliateService) {}
 
   ngOnInit(): void {
     this.affiliateService.myAffiliates().subscribe((affiliates: any[]) => {
       this.affiliates = affiliates;
+      this.isLoading = false;
     });
     
   }

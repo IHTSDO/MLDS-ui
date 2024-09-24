@@ -1,3 +1,8 @@
+<div *ngIf="isLoading" class="loader-center">
+    <app-loader></app-loader>
+</div>
+
+<div *ngIf="!isLoading">
 <div class="row">
     <div class="col-md-12">
         <button (click)="goToViewPackages()" type="button" class="btn btn-link"><span >
@@ -186,4 +191,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

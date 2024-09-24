@@ -16,11 +16,12 @@ import { ReviewReleaseLicenseModalComponent } from '../review-release-license-mo
 import { ReviewReleaseLicenseWithDisclaimerModalComponent } from '../review-release-license-with-disclaimer-modal/review-release-license-with-disclaimer-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { LoaderComponent } from "../../common/loader/loader.component";
 
 @Component({
   selector: 'app-view-release',
   standalone: true,
-  imports: [CommonModule,TranslateModule,CompareTextPipe],
+  imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent],
   templateUrl: './view-release.component.html',
   styleUrl: './view-release.component.scss'
 })
@@ -77,6 +78,7 @@ export class ViewReleaseComponent implements OnInit {
           this.loadUserState();
         },
         error: (error) => {
+          this.isLoading = false;
           this.goToViewPackages();
         }
       });
@@ -96,10 +98,18 @@ export class ViewReleaseComponent implements OnInit {
   private loadAffiliateState(): void {
     this.affiliateService.myAffiliate().subscribe({
       next: (data) => {
+        if(data[0]){
         this.standingState = data[0].standingState;
         this.primaryApplication = data[0].application;
         this.applications = data[0].applications;
         this.loadStandingState();
+        }
+        else{
+          this.isLoading = false;
+        }
+      },
+      error: (err) =>{
+        this.isLoading = false;
       }
     });
   }

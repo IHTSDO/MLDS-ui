@@ -9,15 +9,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CountryISO, NgxBsTelInputComponent, PhoneNumberFormat, SearchCountryField } from 'ngx-bs-tel-input';
 import { CountryService } from 'src/app/services/country/country.service';
 import { map, Observable, of, startWith } from 'rxjs';
-import { phoneNumberValidator } from 'src/app/validators/phone-number.validator';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoaderComponent } from "../loader/loader.component";
 
 
 @Component({
   selector: 'app-contact-info',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent, CompareTextPipe, TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent, CompareTextPipe, TranslateModule, LoaderComponent],
   templateUrl: './contact-info.component.html',
   styleUrl: './contact-info.component.scss'
 })
@@ -39,6 +39,7 @@ export class ContactInfoComponent implements OnInit {
   isSameAddress: boolean = false;
   availableCountries: any[] = [];
   includeDialCode = true;
+  isLoading: boolean = true;
   agreementTypeOptions: string[] = ['AFFILIATE_NORMAL', 'AFFILIATE_RESEARCH', 'AFFILIATE_PUBLIC_GOOD'];
   public alerts: any[] = [];
 
@@ -58,9 +59,9 @@ export class ContactInfoComponent implements OnInit {
       email: ['', [Validators.required, Validators.email], [this.uniqueEmailValidator('email')]],
       alternateEmail: ['', [Validators.email], [this.uniqueEmailValidator('alternateEmail')]],
       thirdEmail: ['', [Validators.email], [this.uniqueEmailValidator('thirdEmail')]],
-      landlineNumber: ['', [Validators.required, phoneNumberValidator()]],
+      landlineNumber: [''],
       landlineExtension: [''],
-      mobileNumber: ['', phoneNumberValidator()],
+      mobileNumber: [''],
       addressStreetIndividual: [''],
       addressCityIndividual: [''],
       addressPostIndividual: [''],
@@ -98,7 +99,6 @@ export class ContactInfoComponent implements OnInit {
   
       if (type === 'INDIVIDUAL') {
         alternateEmailControl?.setValidators([Validators.email]);
-        mobileNumberControl?.setValidators(phoneNumberValidator());
         addressStreetIndividualControl?.setValidators([Validators.required]);
         addressCityIndividualControl?.setValidators([Validators.required]);
         addressPostIndividualControl?.setValidators([Validators.required,Validators.pattern(/^\+?[a-zA-Z0-9\s]{1,25}$/)]);
@@ -108,7 +108,7 @@ export class ContactInfoComponent implements OnInit {
         billingAddressCountryControl?.setValidators([Validators.required]);
       } else {
         alternateEmailControl?.setValidators([Validators.email,Validators.required]);
-        mobileNumberControl?.setValidators([Validators.required,phoneNumberValidator()]);  
+        mobileNumberControl?.setValidators([Validators.required]);  
         addressStreetIndividualControl?.clearValidators();  
         addressCityIndividualControl?.clearValidators();
         addressPostIndividualControl?.setValidators([Validators.pattern(/^\+?[a-zA-Z0-9\s]{0,25}$/)]);
@@ -166,11 +166,13 @@ export class ContactInfoComponent implements OnInit {
               this.readOnly = !this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
               this.updateForm();
               this.updateAddressStatus();
+              this.isLoading = false;
             } else {
               console.log('No affiliate data found');
             }
           },
           error: (err) => {
+            this.isLoading = false;
             console.error('Error fetching affiliate data:', err);
           }
         });
@@ -289,6 +291,9 @@ export class ContactInfoComponent implements OnInit {
     if (typeValue !== 'OTHER') {
       this.form.get('otherText')?.setValue('');
     }
+    if (typeValue === 'OTHER' && this.formSubmitted) {
+      this.affiliate.affiliateDetails.subType = null;
+    }
   }
 
   get type() {
@@ -357,6 +362,7 @@ export class ContactInfoComponent implements OnInit {
   }
   
   private updateAffiliateDetails(formValues: any): void {
+    this.onTypeChange();
     if (this.form.valid) {
       this.affiliateService.updateAffiliateDetails(this.affiliateId, this.affiliate.affiliateDetails).subscribe(
         () =>{

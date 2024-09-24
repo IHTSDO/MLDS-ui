@@ -1,4 +1,8 @@
+<div *ngIf="isLoading" class="loader-center">
+  <app-loader></app-loader>
+</div>
 
+<div *ngIf="!isLoading">
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="page-header">
@@ -15,13 +19,7 @@
   </div>
 </div>
 
-<!-- Loader Component (you can customize the spinner or use a library like ngx-spinner) -->
-<div *ngIf="isLoading" class="text-center">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-<!-- <div *ngIf="!isLoading"> -->
+
 <div *ngFor="let memberReleases of releasePackagesByMember | sortLimit: memberPackageService.orderByJustName : 1">
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
@@ -61,7 +59,7 @@
          {{'views.releases.warning.pProcessed'  | translate |compareText:'Primary application is being processed'}}
           </span>
 
-          <button class="edit-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
+          <button class="greenbutton" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
           (click)="packageUtilService.openExtensionApplication(releasePackage)">
           {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
           </button>
@@ -124,14 +122,14 @@
             {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
             </span>
   
-            <button class="edit-button"  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)"
+            <button class="greenbutton"  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)"
             (click)="packageUtilService.openExtensionApplication(releasePackage)">
             {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
             </button>
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="badge bg-danger float-end"
             >
-            {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
+            {{'views.releases.warning.aProcessed' | translate |compareText:'Application being processed'}}
             </span>
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
@@ -202,7 +200,7 @@
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
                                   >
-                                  {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
+                                  {{'views.releases.warning.aProcessed' | translate |compareText:'Application being processed'}}
                                   </span>
                         
                                   <button class="greenbutton" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
@@ -212,10 +210,10 @@
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="alert-danger-flag pull-right ng-scope"
                                   >
-                                  {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
+                                  {{'views.releases.warning.aProcessed' | translate |compareText:'Application being processed'}}
                                   </span>
                         
-                                  <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
+                                  <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="alert-danger-flag pull-right ng-scope"
                                   >
                                   {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
                                   </span>        
@@ -296,14 +294,14 @@
                                   {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
                                   </span>
                         
-                                  <button class="edit-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
+                                  <button class="greenbutton" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
                                   (click)="packageUtilService.openExtensionApplication(releasePackage)">
                                   {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
                                   </button>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="badge bg-danger float-end"
                                   >
-                                  {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
+                                  {{'views.releases.warning.aProcessed' | translate |compareText:'Application being processed'}}
                                   </span>
                         
                                   <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)" class="badge bg-warning float-end"
@@ -324,6 +322,5 @@
   </div>
 </div>
 </div>
-<!-- </div> -->
-
+</div>
 

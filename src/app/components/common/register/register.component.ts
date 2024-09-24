@@ -200,18 +200,23 @@ export class RegisterComponent {
 private inputsMatchValidator(formGroup: FormGroup) {
   const password = formGroup.get('password')?.value;
   const confirmPassword = formGroup.get('confirmPassword')?.value;
-  if (password !== confirmPassword) {
-    formGroup.get('confirmPassword')?.setErrors({ match: true });
-  } else {
-    formGroup.get('confirmPassword')?.setErrors(null);
+  if (password && confirmPassword) {
+    if (password !== confirmPassword) {
+      formGroup.get('confirmPassword')?.setErrors({ match: true });
+    } else {
+      formGroup.get('confirmPassword')?.setErrors(null);
+    }
   }
+
 
   const email = formGroup.get('email')?.value;
   const confirmEmail = formGroup.get('confirmEmail')?.value;
-  if (email !== confirmEmail) {
-    formGroup.get('confirmEmail')?.setErrors({ match: true });
-  } else {
-    formGroup.get('confirmEmail')?.setErrors(null);
+  if (email && confirmEmail) {
+    if (email !== confirmEmail) {
+      formGroup.get('confirmEmail')?.setErrors({ match: true });
+    } else {
+      formGroup.get('confirmEmail')?.setErrors(null);
+    }
   }
 }
 

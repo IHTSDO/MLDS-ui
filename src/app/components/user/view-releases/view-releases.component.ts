@@ -15,11 +15,12 @@ import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affil
 import { SortLimitPipe } from "../../../pipes/sort-limit/sort-limit.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { LoaderComponent } from "../../common/loader/loader.component";
 
 @Component({
   selector: 'app-view-releases',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent],
   templateUrl: './view-releases.component.html',
   styleUrl: './view-releases.component.scss'
 })
@@ -57,7 +58,7 @@ export class ViewReleasesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-     this.isLoading = true; // Start loading
+    this.isLoading = true;
     this.loadReleasePackages();
     this.loadAffiliateState();
     this.loadUserState();
@@ -76,16 +77,24 @@ export class ViewReleasesComponent implements OnInit {
         this.updateAlphaReleasePackagesByMember(this.releasePackage);
       }
     });
-    this.isLoading = false;
   }
 
   private loadAffiliateState(): void {
     this.affiliateService.myAffiliate().subscribe({
       next: (data) => {
+        if(data[0]){
         this.standingState = data[0].standingState;
         this.primaryApplication = data[0].application;
         this.applications = data[0].applications;
         this.loadStandingState();
+        }
+        else{
+          this.isLoading = false;
+          console.warn('No affiliate data found');
+        }
+      },
+      error: (err) =>{
+        this.isLoading = false;
       }
     });
   }
@@ -160,8 +169,11 @@ export class ViewReleasesComponent implements OnInit {
      this.isLoading = false;
     }
   
-  viewLicense(memberKey: string): void {
-    this.memberService.getMemberLicense(memberKey).subscribe();
+
+  viewLicense(memberKey: string) {
+    this.memberService.getMemberLicense(memberKey).subscribe((licenseData: string) => {
+      window.open(licenseData, '_blank', 'noopener');
+    });
   }
 
   goToViewPackagePage(releasePackageId: string): void {

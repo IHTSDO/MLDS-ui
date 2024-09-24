@@ -15,12 +15,13 @@ import { ApplicationSummaryModalComponent } from '../../common/application-summa
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { LoaderComponent } from "../../common/loader/loader.component";
 
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, UsageReportsTableComponent,TranslateModule,CompareTextPipe],
+  imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss'
 })
@@ -67,6 +68,7 @@ export class UserDashboardComponent implements OnInit {
   private loadAffiliate(): void {
     this.affiliateService.myAffiliate().subscribe({
       next: (data) => {
+        if(data[0]){
         this.affiliate = data[0];
         this.usageReportsUtils = this.usageReportsService;
         this.standingStateUtils = this.standingStateUtilsService;
@@ -76,6 +78,14 @@ export class UserDashboardComponent implements OnInit {
         this.isPendingInvoice = this.standingStateUtils.isPendingInvoice(this.affiliate.standingState);
         this.isDeactivationPending = this.standingStateUtils.isDeactivationPending(this.affiliate.standingState);
         this.loadReleasePackages();
+        }
+        else{
+          this.isLoading = false;
+          console.warn('No affiliate data found');
+        }
+      },
+      error: (err) =>{
+        this.isLoading = false;
       }
     });
   }
