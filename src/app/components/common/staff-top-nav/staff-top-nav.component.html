@@ -10,30 +10,31 @@
       
       </div>
   
-      <!-- Use ngbDropdown for language selection -->
-      <ul ngbDropdown>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-            <span>
-              <span class="hidden-tablet">
-                {{ 'global.menu.language' | translate | compareText: 'Language' }}
-              </span><b class="caret"></b>
-            </span>
-          </a>
-          <ul ngbDropdownMenu class="dropdown-menu">
-            <li ngbDropdownItem>
-              <a class="dropdown-item" href="javascript:void(0)" (click)="changeLanguage('en')">
-                <span class="famfamfam-flag-gb"></span> &nbsp;<span>{{ 'global.language.en' | translate }}</span>
-              </a>
-            </li>
-            <li ngbDropdownItem>
-              <a class="dropdown-item" href="javascript:void(0)" (click)="changeLanguage('th')">
-                <span class="famfamfam-flag-th"></span> &nbsp;<span>{{ 'global.language.th' | translate }}</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+<!-- Use ngbDropdown for language selection -->
+<ul ngbDropdown>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+      <span>
+        <span class="hidden-tablet language-option">
+          {{ 'global.menu.language' | translate | compareText: 'Language' }}
+        </span><b class="caret"></b>
+      </span>
+    </a>
+    <ul ngbDropdownMenu class="dropdown-menu">
+      <li ngbDropdownItem>
+        <a class="dropdown-item language-option" href="javascript:void(0)" (click)="changeLanguage('en')">
+          <span class="famfamfam-flag-gb"></span> &nbsp;<span>{{ 'global.language.en' | translate }}</span>
+        </a>
+      </li>
+      <li ngbDropdownItem>
+        <a class="dropdown-item language-option" href="javascript:void(0)" (click)="changeLanguage('th')">
+          <span class="famfamfam-flag-th"></span> &nbsp;<span>{{ 'global.language.th' | translate }}</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
     </div>
   </div>
   

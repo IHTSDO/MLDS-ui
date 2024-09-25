@@ -13,7 +13,7 @@
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
-        <tr>
+        <tr >
           <th>{{ 'views.usageReports.reportDate' | translate | compareText:'Report Date' }}</th>
           <th *ngIf="showAllColumns">{{ 'views.usageReports.usageType' | translate | compareText:'Usage Type' }}</th>
           <th *ngIf="showAllColumns">{{ 'global.word.status' | translate | compareText:'Status' }}</th>
@@ -22,7 +22,7 @@
           <th >{{ 'views.usageLog.institutions.practices' | translate | compareText:'Practices' }}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="language-option">
         <tr *ngFor="let usageReport of affiliate?.commercialUsages | dateSort: 'startDate': 'desc'">
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link" (click)="navigateToUsageReport(usageReport)">

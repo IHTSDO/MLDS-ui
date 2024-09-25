@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="loadMoreUsageReports()">
-          <tr *ngFor="let usageReport of usageReports" (click)="goToReviewUsageReport(usageReport)">
+          <tr class="language-option" *ngFor="let usageReport of usageReports" (click)="goToReviewUsageReport(usageReport)">
             <td>{{usageReport.affiliate.affiliateDetails.firstName + ' ' + usageReport.affiliate.affiliateDetails.lastName}}</td>
             <td>{{usageReport.submitted | date: 'yyyy-MM-dd'}}</td>
             <td>{{'usageReport.state.'+usageReport.state|translate}}</td>

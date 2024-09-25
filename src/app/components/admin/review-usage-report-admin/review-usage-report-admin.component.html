@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-      <span><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
+      <span class="language-option"><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
       <h2>Review Usage Report</h2>
     </div>
     <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">

@@ -204,7 +204,7 @@
         </thead>
         <tbody >
           <tbody infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="loadApplications()">
-          <tr
+          <tr class="language-option"
             *ngFor="let application of applications"
             (click)="goToApplication(application)"
           >

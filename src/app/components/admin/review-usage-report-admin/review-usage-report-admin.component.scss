@@ -225,3 +225,11 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   background-clip: padding-box;
   outline: none;
 }
+.language-option {
+  cursor: pointer;
+}
+
+/* Optional: Add hover styles for better visibility */
+.language-option:hover {
+  background-color: #f8f9fa; /* Light background on hover */
+}

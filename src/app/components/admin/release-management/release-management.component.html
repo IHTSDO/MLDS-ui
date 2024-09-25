@@ -43,7 +43,7 @@
           offline, select a release below and set all versions to offline.</p>
       </div>
 
-      <div>
+      <div >
         <label *ngIf="memberEntry.member.key != 'IHTSDO'">
           <input type="checkbox" name="promotePackages" [(ngModel)]="memberEntry.member.promotePackages"
             (ngModelChange)="promoteMemberPackagesChanged(memberEntry.member)">
@@ -71,7 +71,7 @@
 
           </div>
           <h3 class="panel-title">
-            <a (click)="goToPackage(package)"> {{package.name}} - {{package.member.key | enum:'global.member.'|async}}</a>
+            <a class="language-option" (click)="goToPackage(package)"> {{package.name}} - {{package.member.key | enum:'global.member.'|async}}</a>
           </h3>
           <p>Please click on the release title above to manage the release packages.</p>
         </div>

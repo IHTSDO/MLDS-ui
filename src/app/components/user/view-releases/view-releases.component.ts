@@ -80,6 +80,7 @@ export class ViewReleasesComponent implements OnInit {
   }
 
   private loadAffiliateState(): void {
+    if(this.sessionService.isAuthenticated()){
     this.affiliateService.myAffiliate().subscribe({
       next: (data) => {
         if(data[0]){
@@ -97,7 +98,8 @@ export class ViewReleasesComponent implements OnInit {
       error: (err) =>{
         this.isLoading = false;
       }
-    });
+    });}
+    this.isLoading = false;
   }
 
 

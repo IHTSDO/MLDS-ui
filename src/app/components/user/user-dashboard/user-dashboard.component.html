@@ -92,7 +92,7 @@
 							<th>{{'global.word.view'|translate|compareText:'View'}}</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="language-option">
 						<tr *ngFor="let application of getSortedApplications()">
 							<td>
 								{{'application.applicationType.'+application.applicationType|translate}}

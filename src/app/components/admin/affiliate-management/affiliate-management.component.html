@@ -202,7 +202,9 @@
         </tr>
       </thead>
       <tbody infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="loadMoreAffiliates()">
-        <tr *ngFor="let affiliate of affiliates" >
+        <tr class="language-option" *ngFor="let affiliate of affiliates" 
+        (click)="viewAffiliate(affiliate.affiliateId)"
+        >
           <td class="col-md-1">{{affiliate.affiliateId}}</td>
           <td class="col-md-2">{{affiliateActiveDetails(affiliate).firstName + ' ' + affiliateActiveDetails(affiliate).lastName}}</td>
           <td class="col-md-2">

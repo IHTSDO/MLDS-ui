@@ -416,3 +416,12 @@ Actual accordion wrapped in id="accordion-override" div. */
     justify-content: center;
     align-items: center;
   }
+  .language-option {
+    cursor: pointer;
+  }
+  
+  /* Optional: Add hover styles for better visibility */
+  .language-option:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+  }
+  

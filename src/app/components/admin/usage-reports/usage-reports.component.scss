@@ -63,3 +63,11 @@ table {
 .sort-title{
   color: #40ACD6;
 }
+.language-option {
+  cursor: pointer;
+}
+
+/* Optional: Add hover styles for better visibility */
+.language-option:hover {
+  background-color: #f8f9fa; /* Light background on hover */
+}

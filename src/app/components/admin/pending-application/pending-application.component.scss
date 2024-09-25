@@ -51,3 +51,12 @@ align-items: center;
 .title-colors th a[ng-reflect-router-link-active="active"] {
     color: #40ACD6;
 }
+.language-option {
+    cursor: pointer;
+  }
+  
+  /* Optional: Add hover styles for better visibility */
+  .language-option:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+  }
+  

@@ -38,7 +38,7 @@
           <div class="panel panel-default" *ngFor="let package of memberEntry.archivePackages">
             <div class="panel-heading">
               <h3 class="panel-title">
-                <a (click)="goToArchivePackage(package)">
+                <a class="language-option" (click)="goToArchivePackage(package)">
                   {{ package.name }} - {{package.member.key | enum:'global.member.'| async}}
                 </a>
               </h3>

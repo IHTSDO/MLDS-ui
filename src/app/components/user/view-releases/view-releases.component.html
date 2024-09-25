@@ -34,7 +34,7 @@
 <div class="row" *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default release-package">
-      <div class="panel-heading">				
+      <div class="panel-heading language-option">				
           <div>
             <h3 class="panel-title"><span class="panel-title-link" (click)="goToViewPackagePage(releasePackage.releasePackageId)">{{releasePackage.name}}</span></h3>
           </div>
@@ -98,7 +98,7 @@
   <div class="row" *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
     <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="panel panel-default release-package">
-        <div class="panel-heading">				
+        <div class="panel-heading language-option">				
             <div>
               <h3 class="panel-title"><span class="panel-title-link" (click)="goToViewPackagePage(releasePackage.releasePackageId)">{{releasePackage.name}}</span></h3>
             </div>
@@ -177,7 +177,7 @@
                   <div class="accordion-body">
                       <div *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
                           <div class="d-flex justify-content-between">
-                            <div class="panel-heading">
+                            <div class="panel-heading language-option">
                               <h3>
                                   <a class="text-decoration-none" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
                                       {{ releasePackage.name }}
@@ -262,7 +262,7 @@
                   <div class="accordion-body">
                       <div *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
                           <div class="d-flex justify-content-between">
-                            <div class="panel-heading">
+                            <div class="panel-heading language-option">
                               <h3>
                                   <a class="text-decoration-none" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
                                       {{ releasePackage.name }}

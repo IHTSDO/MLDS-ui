@@ -4,8 +4,9 @@
 
 <div *ngIf="!isLoading">
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 language-option" >
         <button (click)="goToViewPackages()" type="button" class="btn btn-link"><span >
+            <i class="fa fa-angle-double-left"></i>
             {{'global.word.back'|translate|compareText:'Back'}}</span></button>
     </div>
 </div>
