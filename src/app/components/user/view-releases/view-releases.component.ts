@@ -98,8 +98,10 @@ export class ViewReleasesComponent implements OnInit {
       error: (err) =>{
         this.isLoading = false;
       }
-    });}
+    });
+  }else{
     this.isLoading = false;
+  }
   }
 
 

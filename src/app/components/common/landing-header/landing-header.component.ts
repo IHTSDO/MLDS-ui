@@ -153,4 +153,7 @@ export class LandingHeaderComponent {
     localStorage.setItem('selectedLang', lang);
   }
 
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

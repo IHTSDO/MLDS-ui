@@ -9,14 +9,17 @@
   <div id="healthCheck" class="row">
     <div class="col-md-3">
       <div class="alert alert-success">
-        <strong>Version info:</strong> <span>OK</span>
+        <b>Version info:</b> <span> {{ version }}</span>
       </div>
     </div>
    
     <div class="col-md-3">
       <div class="alert" [ngClass]="{'alert-success': healthCheck?.details?.database?.status === 'UP', 'alert-danger': healthCheck?.details?.database?.status !== 'UP'}">
-        <strong><span>{{'metrics.health.database' | translate | compareText : 'Database'}}</span> : </strong>
-        <span>{{ healthCheck?.details?.database?.status }}</span>
+        <b><span>{{'metrics.health.database' | translate | compareText : 'Database'}}</span> : </b>
+        <span class="help-block" *ngIf="loadingStatus">
+          <i class="fa fa-spinner fa-spin"></i>
+        </span>
+        <span *ngIf="!loadingStatus">{{ healthCheck?.details?.database?.status }} </span>
         <span *ngIf="healthCheck?.details?.database?.details?.error">
           <a class="hand" (click)="showDatabaseException = !showDatabaseException">
             <i class="fa fa-eye" aria-hidden="true"></i>
@@ -37,8 +40,11 @@
 
     <div class="col-md-3">
       <div class="alert" [ngClass]="{'alert-success': healthCheck?.details?.mail?.status === 'UP', 'alert-danger': healthCheck?.details?.mail?.status !== 'UP'}">
-        <strong><span>{{'metrics.health.email' | translate | compareText: 'Email' }}</span> : </strong>
-        <span>{{ healthCheck?.details?.mail?.status }}</span>
+        <b><span>{{'metrics.health.email' | translate | compareText: 'Email' }}</span> : </b>
+        <span class="help-block" *ngIf="loadingStatus">
+          <i class="fa fa-spinner fa-spin"></i>
+        </span>
+        <span *ngIf="!loadingStatus">{{ healthCheck?.details?.mail?.status }} </span>
         <span *ngIf="healthCheck?.details?.mail?.details?.error">
           <a class="hand" (click)="showMailException = !showMailException">
             <i class="fa fa-eye" aria-hidden="true"></i>

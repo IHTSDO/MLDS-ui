@@ -70,16 +70,16 @@
                       </span>
                     </a>
                     <ul ngbDropdownMenu aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu width">
-                      <li class="dropdown-item">
-                        <a routerLink="/contactInfo" class="nav-link">{{'global.menu.affiliate.accountInformation' | translate | compareText: 'Account Information'}}</a>
+                      <li class="dropdown-item" (click)="navigateTo('/contactInfo')">
+                          <span>{{'global.menu.affiliate.accountInformation' | translate | compareText: 'Account Information'}}</span>
                       </li>
-                      <li class="dropdown-item">
-                        <a routerLink="/password" class="nav-link">{{'global.menu.affiliate.changePassword' | translate | compareText : 'Change Password'}}</a>
+                      <li class="dropdown-item" (click)="navigateTo('/password')">
+                          <span>{{'global.menu.affiliate.changePassword' | translate | compareText: 'Change Password'}}</span>
                       </li>
-                      <li class="dropdown-item">
-                        <a routerLink="/logout" class="nav-link">{{'global.menu.affiliate.logout' | translate | compareText: 'Logout'}}</a>
+                      <li class="dropdown-item" (click)="navigateTo('/logout')">
+                          <span>{{'global.menu.affiliate.logout' | translate | compareText: 'Logout'}}</span>
                       </li>
-                    </ul>
+                  </ul>                  
                   </li>
                   
                 <!-- Login Link -->

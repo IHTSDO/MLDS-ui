@@ -54,6 +54,8 @@ export class MetricsComponent implements OnInit {
    */
   show: boolean = false
 
+  version: string = '';
+  loadingStatus: boolean = true;
   /**
    * Creates an instance of the MetricsComponent.
    * @param metricsService - The MetricsService to use for fetching metrics data.
@@ -71,9 +73,20 @@ export class MetricsComponent implements OnInit {
    * Fetches the health check and metrics data from the backend.
    */
   refresh(): void {
-    this.metricsService.getHealthCheck().subscribe(data => {
-      this.healthCheck = data
-    })
+
+    this.metricsService.getVersion().subscribe(response => {
+      this.version = response.version;
+    });
+
+    this.metricsService.getHealthCheck().subscribe({
+      next: data => {
+        this.healthCheck = data;
+        this.loadingStatus = false;
+      },
+      error: error => {
+        this.loadingStatus = false;
+      }
+    });    
 
     this.metricsService.getMetrics().subscribe(data => {
       this.metrics = data

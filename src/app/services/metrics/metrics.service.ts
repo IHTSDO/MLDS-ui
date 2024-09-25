@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
  * Service for interacting with the metrics API.
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MetricsService {
 
-
+  private apiUrl = API_ROUTES.apiUrl;
   /**
    * Constructor.
    * @param http HTTP client instance.
@@ -39,5 +40,9 @@ export class MetricsService {
    */
   getMetrics(): Observable<any> {
     return this.http.get('/metrics/metrics');
+  }
+
+  getVersion(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/version`);
   }
 }
