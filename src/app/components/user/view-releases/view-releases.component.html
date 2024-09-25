@@ -31,7 +31,7 @@
     </div>
   </div>
 </div>
-<div class="row" *ngFor="let releasePackage of memberReleases.packages">
+<div class="row" *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default release-package">
       <div class="panel-heading">				
@@ -95,7 +95,7 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngFor="let releasePackage of memberReleases.packages">
+  <div class="row" *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
     <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="panel panel-default release-package">
         <div class="panel-heading">				
@@ -175,7 +175,7 @@
               </h2>
               <div *ngIf="isAccordionOpen(i)" class="accordion-collapse collapse show">
                   <div class="accordion-body">
-                      <div *ngFor="let releasePackage of memberReleases.packages">
+                      <div *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
                           <div class="d-flex justify-content-between">
                             <div class="panel-heading">
                               <h3>
@@ -240,13 +240,7 @@
   <div class="col-12">
       <div class="release-divider">
           <h2>{{'views.releases.memberCountries'|translate|compareText:'Member Countries'}} -Alpha/Beta Releases</h2>
-          <p>
-            {{ 'views.releases.countryIsMissing' | translate | compareText: "If the country you're looking for is not in this list, please refer to the" }}
-            <a href="http://www.ihtsdo.org/">
-              {{ 'global.word.ihtsdoWebsite' | translate | compareText: 'IHTSDO website' }}
-            </a>
-            {{ 'views.releases.countryIsMissing2' | translate | compareText: "for release download information." }}
-          </p>
+          <p [innerHTML]="('views.releases.countryIsMissing' | translate)"></p> 
           </div>
   </div>
 </div>
@@ -266,7 +260,7 @@
               </h2>
               <div *ngIf="isAccordionOpen(i)" class="accordion-collapse collapse show">
                   <div class="accordion-body">
-                      <div *ngFor="let releasePackage of memberReleases.packages">
+                      <div *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
                           <div class="d-flex justify-content-between">
                             <div class="panel-heading">
                               <h3>

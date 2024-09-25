@@ -225,4 +225,8 @@ export class ViewReleasesComponent implements OnInit {
   isAccordionOpen(index: number): boolean {
     return this.openAccordions.has(index);
   }
+  // Sort method for packages by packageName
+  sortByPackageName(packages: any[]): any[] {
+    return packages.sort((a, b) => a.name.localeCompare(b.name));
+  }
 }

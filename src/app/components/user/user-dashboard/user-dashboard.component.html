@@ -111,12 +111,12 @@
 									</a>
 									<a *ngIf="!isApplicationWaitingForApplicant(application)"
 										class="btn btn-primary btn-sm" (click)="viewApplication(application)">
-										<i class="fa fa-eye"></i> <span translate="">{{'global.word.edit'|translate|compareText:'View'}}</span>
+										<i class="fa fa-eye"></i> <span translate="">{{'global.word.edit'|translate|compareText:'Edit'}}</span>
 									</a>
 								</span>
 								<a class="btn btn-primary btn-sm" *ngIf="application.applicationType === 'PRIMARY'"
 									(click)="viewApplication(application)">
-									<i class="fa fa-eye"></i> <span>{{'global.word.edit'|translate|compareText:'View'}}</span>
+									<i class="fa fa-eye"></i> <span>{{'global.word.edit'|translate|compareText:'Edit'}}</span>
 								</a>
 							</td>
 						</tr>
@@ -187,7 +187,7 @@
 				<h3 class="panel-title"> {{'global.member.'+memberReleases.member.key|translate}}</h3>
 			</div>
 			<table class="table table-hover">
-				<tr *ngFor="let releasePackage of memberReleases.packages">
+				<tr *ngFor="let releasePackage of getSortedApplications()">
 					<td class="break-text">
 						<a
 							href="#/viewReleases/viewRelease/{{releasePackage.releasePackageId}}">{{releasePackage.name}}</a>

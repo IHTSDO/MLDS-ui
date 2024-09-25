@@ -16,12 +16,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
+import { OrderByPipe } from "../../../pipes/order-by/order-by.pipe";
 
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent],
+  imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, OrderByPipe],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss'
 })
@@ -103,7 +104,6 @@ export class UserDashboardComponent implements OnInit {
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
         this.releasePackage = data;
-        console.log(this.releasePackage);
         const releasePackagesByMember = lodash.chain(this.releasePackage)
           .filter(this.packageUtilsService.isPackagePublished)
           .groupBy(this.getEffectivePackageMemberKey.bind(this))
@@ -159,5 +159,36 @@ export class UserDashboardComponent implements OnInit {
     modalRef.componentInstance.application = application;
     modalRef.componentInstance.audits = [];
   }
-
+    // Sort method for packages by packageName
+    sortByPackageName(packages: any[]): any[] {
+      return packages.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    orderByApprovalState(application: any): boolean {
+      return this.applicationUtilsService.isApplicationApproved(application);
+    }
+  
+    // Method to order by application type
+    orderByApplicationType(application: any): boolean {
+      return !this.applicationUtilsService.isPrimaryApplication(application);
+    }
+  
+    // Combined sort method for sorting by both approval state and application type
+    getSortedApplications(): any[] {
+      if (this.affiliate?.applications) {
+        return this.affiliate.applications.sort((a: any, b: any) => {
+          // First, sort by approval state: move approved applications to the end
+          const approvalComparison = this.orderByApprovalState(a) === this.orderByApprovalState(b) ? 0 
+            : this.orderByApprovalState(a) ? 1 : -1;
+  
+          // If approval states are equal, sort by application type
+          if (approvalComparison === 0) {
+            return this.orderByApplicationType(a) === this.orderByApplicationType(b) ? 0 
+              : this.orderByApplicationType(a) ? -1 : 1;
+          }
+  
+          return approvalComparison;
+        });
+      }
+      return [];
+    }
 }

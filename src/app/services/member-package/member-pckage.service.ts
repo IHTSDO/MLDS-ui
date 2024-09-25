@@ -2,78 +2,60 @@ import { Injectable } from '@angular/core';
 import lodash from 'lodash';
 import { MemberService } from '../member/member.service';
 import { UserAffiliateService } from '../user-affiliate/user-affiliate.service';
+import { TranslateService } from '@ngx-translate/core';
+import _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemberPckageService {
-
+ 
   constructor(
     private userAffiliateService: UserAffiliateService,
     private memberService: MemberService,
-    
+    private translate: TranslateService
   ) {}
 
-  // Method to determine if the member is an IHTSDO member
-  private orderIhtsdo(memberReleases: any): boolean {
-    return memberReleases.member && this.memberService.isIhtsdoMember(memberReleases.member);
-}
+  // Order by IHTSDO member
+  orderIhtsdo(memberReleases: any): boolean {
+    return !(memberReleases.member && this.memberService.isIhtsdoMember(memberReleases.member));
+  }
 
-// Method to order by approved memberships
-private orderApprovedMemberships(memberReleases: any): boolean {
+  // Order by approved memberships
+  orderApprovedMemberships(memberReleases: any): boolean {
+    return !(memberReleases.member && _.some(this.userAffiliateService.approvedMemberships, 
+      _.partial(this.memberService.isMemberEqual, memberReleases.member)));
+  }
 
-  return !(
-    memberReleases.member &&
-    lodash.some(this.userAffiliateService.approvedMemberships, 
-           lodash.partial(this.memberService.isMemberEqual, memberReleases.member))
-  );
-}
+  // Order by incomplete memberships
+  orderIncompleteMemberships(memberReleases: any): boolean {
+    return !(memberReleases.member && _.some(this.userAffiliateService.incompleteMemberships, 
+      _.partial(this.memberService.isMemberEqual, memberReleases.member)));
+  }
 
-// Method to order by incomplete memberships
-private orderIncompleteMemberships(memberReleases: any): boolean {
+  // Order by member name (translated)
+  orderMemberName(memberReleases: any): string {
+    return memberReleases.member 
+      ? (memberReleases.member.key ? this.translate.instant('global.member.' + memberReleases.member.key) : 'NONE')
+      : 'NONE';
+  }
 
-  return !(
-    memberReleases.member &&
-    lodash.some(this.userAffiliateService.incompleteMemberships, 
-           lodash.partial(this.memberService.isMemberEqual, memberReleases.member))
-  );
-}
+   // Comparator function to sort by IHTSDO and member name
+   compareByIhtsdoAndName(a: any, b: any): number {
+    // Compare by IHTSDO (true/false comparison)
+    const ihtsdoComparison = Number(this.orderIhtsdo(a)) - Number(this.orderIhtsdo(b));
+    if (ihtsdoComparison !== 0) {
+      return ihtsdoComparison;
+    }
 
-// Method to get member name (or key if name is not available)
-private orderMemberName(memberReleases: any): string {
-  return memberReleases.member?.name || memberReleases.member?.key || 'NONE';
-}
+    // Compare by member name (string comparison)
+    const nameA = this.orderMemberName(a);
+    const nameB = this.orderMemberName(b);
+    return nameA.localeCompare(nameB);
+  }
 
-// Public methods to get the ordering functions
-public getOrderBy(): Array<(memberReleases: any) => boolean | string> {
-
-  return [
-    this.orderIhtsdo.bind(this),
-    this.orderApprovedMemberships.bind(this),
-    this.orderIncompleteMemberships.bind(this),
-    this.orderMemberName.bind(this)
-  ];
-}
-
-// Sorting function
-get orderByJustName(): (a: any, b: any) => number {
-  return (a: any, b: any) => {
-     // Determine if each item is an IHTSDO member
-     const isIhtsdoA = this.orderIhtsdo(a);
-     const isIhtsdoB = this.orderIhtsdo(b);
-
-     // Ensure IHTSDO members come first
-     if (isIhtsdoA && !isIhtsdoB) return -1; // IHTSDO member comes before non-IHTSDO member
-     if (!isIhtsdoA && isIhtsdoB) return 1; 
-    // Both are IHTSDO or both are not IHTSDO, sort alphabetically
-    const nameA = this.orderMemberName(a).toLowerCase();
-    const nameB = this.orderMemberName(b).toLowerCase();
-
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
-
-    return 0;
-  };
-}
-
+  // Use this comparator in the template for sorting
+  get orderByJustName(): (a: any, b: any) => number {
+    return this.compareByIhtsdoAndName.bind(this);
+  }
 }
