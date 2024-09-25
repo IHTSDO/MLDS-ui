@@ -83,6 +83,7 @@ export class ViewReleasesComponent implements OnInit {
     this.affiliateService.myAffiliate().subscribe({
       next: (data) => {
         if(data[0]){
+        this.userAffiliateService.setAffiliate(data[0]);
         this.standingState = data[0].standingState;
         this.primaryApplication = data[0].application;
         this.applications = data[0].applications;

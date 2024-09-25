@@ -24,13 +24,15 @@ export class UserAffiliateService {
 
   loadUserAffiliate(): Observable<void> {
     return this.affiliateService.myAffiliate().pipe(
-      tap(resp => this.setAffiliate(resp[0])),
+      tap(resp => {
+        this.setAffiliate(resp[0]);
+      }),
       catchError(err => {
         console.error('Error loading affiliate data:', err);
         return of(void 0); 
       })
     );
-  }
+  }  
 
   private initializeMemberships() {
     let primaryApplicationMembers: any[] = [];
@@ -76,7 +78,7 @@ export class UserAffiliateService {
     }
   }
 
-  private setAffiliate(affiliate: any) {
+  setAffiliate(affiliate: any) {
     this.affiliate = affiliate;
     if (affiliate && affiliate.applications) {
       this.initializeMemberships();

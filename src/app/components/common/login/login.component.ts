@@ -100,7 +100,6 @@ export class LoginComponent {
           } else {
             this.userAffiliateService.loadUserAffiliate().subscribe({
               next: () => {
-                console.log(this.userAffiliateService.affiliate);
                 if(this.applicationUtilsService.isApplicationWaitingForApplicant(this.userAffiliateService.affiliate.application))
                 {
                   this.router.navigate(['/affiliateRegistration']);       

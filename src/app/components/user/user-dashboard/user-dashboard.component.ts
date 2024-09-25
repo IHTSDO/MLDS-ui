@@ -70,6 +70,7 @@ export class UserDashboardComponent implements OnInit {
       next: (data) => {
         if(data[0]){
         this.affiliate = data[0];
+        this.userAffiliateService.setAffiliate(this.affiliate);
         this.usageReportsUtils = this.usageReportsService;
         this.standingStateUtils = this.standingStateUtilsService;
         this.anySubmittedUsageReports = this.usageReportsService.anySubmittedUsageReports(this.affiliate);

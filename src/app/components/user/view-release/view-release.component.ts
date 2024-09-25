@@ -99,6 +99,7 @@ export class ViewReleaseComponent implements OnInit {
     this.affiliateService.myAffiliate().subscribe({
       next: (data) => {
         if(data[0]){
+        this.userAffiliateService.setAffiliate(data[0]);
         this.standingState = data[0].standingState;
         this.primaryApplication = data[0].application;
         this.applications = data[0].applications;
@@ -164,12 +165,9 @@ export class ViewReleaseComponent implements OnInit {
   }
 
   downloadReleaseFile(downloadUrl: any) {
-    console.log(this.isMembershipInGoodStanding());
-    console.log(downloadUrl);
   
     this.releaseVersionsService.checkFilePresence(downloadUrl).subscribe({
       next: (isIhtsdoPresent: boolean) => {
-        console.log('Is IHTSDO present:', isIhtsdoPresent);
         this.openReviewModal(isIhtsdoPresent, downloadUrl);
       },
       error: (err) => {

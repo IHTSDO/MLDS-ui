@@ -68,7 +68,6 @@ export class LandingHeaderComponent {
     } else {
       this.route.params.subscribe(params => {
         this.memberKey = params['memberKey'];
-        console.log('Member key:', this.memberKey);
         if (this.memberKey) {
           this.updateFromMemberByKey(this.memberKey);
         }
@@ -123,7 +122,6 @@ export class LandingHeaderComponent {
     // Fetch the translated member name
     this.translateService.get(translationKey).subscribe((translatedName: string) => {
       this.memberName = translatedName || member.name || '';
-      console.log(this.memberName)
     });
     } else {
       this.memberName = '';
