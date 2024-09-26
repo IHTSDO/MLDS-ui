@@ -222,18 +222,14 @@
           <td class="col-md-2"><a [href]="'mailto:' + affiliate.affiliateDetails?.email">{{affiliateActiveDetails(affiliate)?.email}}</a></td>
           <td class="col-md-1"><a class="review-button" (click)="viewAffiliate(affiliate.affiliateId)"><i class="fa fa-eye"></i> View</a></td>
         </tr>
-        <tr *ngIf="noResults">
+        <tr *ngIf="allRetrieved && noResults">
           <td colspan="10" class="text-center">No results.</td>
         </tr>
         <tr *ngIf="allRetrieved && !noResults">
           <td colspan="10" class="all-retrieved">All affiliates retrieved</td>
         </tr>
       </tbody>
-      <ng-template #loadingData>
-        <tr>
-          <td colspan="10" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</td>
-        </tr>
-      </ng-template>
     </table>
+    <div *ngIf="!allRetrieved" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
   </div>
 </div>

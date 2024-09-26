@@ -260,11 +260,12 @@
             
             </td>
           </tr>
-          <tr *ngIf="applications.length === 0">
+          <tr *ngIf="applications.length === 0 && !loadingApplications">
             <td colspan="12" class="text-center">No pending applications</td>
           </tr>
         </tbody>
       </table>
+      <div *ngIf="loadingApplications" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
     </div>
   </div>
 </div>

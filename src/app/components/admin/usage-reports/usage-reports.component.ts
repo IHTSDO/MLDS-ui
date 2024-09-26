@@ -57,6 +57,8 @@ export class UsageReportsComponent implements OnInit {
    */
   downloadingReports = false;
 
+  loading = true;
+
   constructor(private commercialUsageService: CommercialUsageService, private authenticationService: AuthenticationSharedService, private router: Router,private usageReportStateUtilsService: UsageReportStateUtilsService) {}
 
   /**
@@ -76,6 +78,7 @@ export class UsageReportsComponent implements OnInit {
    * @param reset Whether to reset the pagination and load the first page again.
    */
   loadMoreUsageReports(reset = false): void {
+    this.loading = true;
     if (this.downloadingReports || !this.hasMoreData) {
       return;
     }
@@ -95,9 +98,11 @@ export class UsageReportsComponent implements OnInit {
         this.page++;
       },
       error => {
+        this.loading = false;
         console.error('Error fetching usage reports', error);
       },
       () => {
+        this.loading = false;
         this.downloadingReports = false;
       });
   }

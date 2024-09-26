@@ -165,7 +165,7 @@
   <div *ngFor="let memberReleases of releasePackagesByMember; let i = index">
       <div *ngIf="i > 0">
           <div class="header">
-              <h2 class="header" [id]="'heading-' + memberReleases.member.key">
+              <h2 [id]="'heading-' + memberReleases.member.key">
                   <button class="accordion-button header" type="button" (click)="toggleAccordion(i)">
                       <span>{{'global.member.'+ memberReleases.member.key |translate}}</span>
                       <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">
@@ -177,9 +177,9 @@
                   <div class="accordion-body">
                       <div *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
                           <div class="d-flex justify-content-between">
-                            <div class="panel-heading language-option">
+                            <div class="language-option">
                               <h3>
-                                  <a class="text-decoration-none" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
+                                  <a class="back" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
                                       {{ releasePackage.name }}
                                   </a>
 

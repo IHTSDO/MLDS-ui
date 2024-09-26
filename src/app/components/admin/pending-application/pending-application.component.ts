@@ -83,7 +83,7 @@ export class PendingApplicationsComponent implements OnInit {
    * Whether there are more usage reports to load.
    */
   hasMoreData = true;
-  loadingApplications = false;
+  loadingApplications = true;
   routes=ROUTES;
 
   /**
