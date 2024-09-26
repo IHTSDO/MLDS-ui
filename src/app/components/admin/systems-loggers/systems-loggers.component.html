@@ -21,32 +21,50 @@
       <tbody>
         <tr *ngFor="let logger of sortedLoggers">
           <td><small>{{ logger.name | slice:0:140 }}</small></td>
-          <td>
+          <!-- <td>
             <button 
               class="btn-edit" 
-              (click)="changeLevel('TRACE')" 
+              (click)="changeLevel(logger.name,'TRACE')" 
               [ngClass]="{'btn-danger': isActive('TRACE')}">TRACE
             </button>
             <button 
               class="btn-delete" 
-              (click)="changeLevel('DEBUG')" 
+              (click)="changeLevel(logger.name,'DEBUG')" 
               [ngClass]="{'btn-primary': isActive('DEBUG')}">DEBUG
             </button>
             <button 
               class="btn-edit" 
-              (click)="changeLevel('INFO')" 
+              (click)="changeLevel(logger.name,'INFO')" 
               [ngClass]="{'btn-info': isActive('INFO')}">INFO
             </button>
             <button 
               class="btn-delete" 
-              (click)="changeLevel('WARN')" 
+              (click)="changeLevel(logger.name,'WARN')" 
               [ngClass]="{'btn-warning': isActive('WARN')}">WARN
             </button>
             <button 
               class="btn-delete" 
-              (click)="changeLevel('ERROR')" 
+              (click)="changeLevel(logger.name,'ERROR')" 
               [ngClass]="{'btn-danger': isActive('ERROR')}">ERROR
             </button>
+          </td>
+           -->
+           <td>
+            <button (click)="changeLevel(logger.name, 'TRACE')" 
+                    [ngClass]="getButtonClass(logger.level,'TRACE')" 
+                    class="btn btn-xs">TRACE</button>
+            <button (click)="changeLevel(logger.name, 'DEBUG')" 
+                    [ngClass]="getButtonClass(logger.level,'DEBUG')" 
+                    class="btn btn-xs">DEBUG</button>
+            <button (click)="changeLevel(logger.name, 'INFO')" 
+                    [ngClass]="getButtonClass(logger.level,'INFO')" 
+                    class="btn btn-xs">INFO</button>
+            <button (click)="changeLevel(logger.name, 'WARN')" 
+                    [ngClass]="getButtonClass(logger.level,'WARN')" 
+                    class="btn btn-xs">WARN</button>
+            <button (click)="changeLevel(logger.name, 'ERROR')" 
+                    [ngClass]="getButtonClass(logger.level,'ERROR')" 
+                    class="btn btn-xs">ERROR</button>
           </td>
           
           

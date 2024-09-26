@@ -31,11 +31,11 @@ export class SystemsLoggersComponent implements OnInit {
     });
   }
 
-  // changeLevel(name: string, level: string): void {
-  //   this.logsService.changeLevel(name, level).subscribe(() => {
-  //     this.loadLoggers();  // Refresh the list after changing level
-  //   });
-  // }
+  changeLevel(name: string, level: string): void {
+    this.logsService.changeLevel(name, level).subscribe(() => {
+      this.loadLoggers();  // Refresh the list after changing level
+    });
+  }
 
   get filteredLoggers(): any[] {
     // Filter the loggers based on the filter string
@@ -59,9 +59,13 @@ export class SystemsLoggersComponent implements OnInit {
       return 0;
     });
   }
-  changeLevel(level: string) {
-    this.currentLevel = level;
-  }
+ // Method to determine button class based on the log level
+ getButtonClass(level: string,levels: string): { [key: string]: boolean } {
+  return {
+    'btn-delete': level === levels,
+    'btn-edit': level !== levels
+  };
+}
 
   isActive(level: string): boolean {
     // Return true if the button's level matches the currentLevel

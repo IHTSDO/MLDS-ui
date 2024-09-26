@@ -2,13 +2,10 @@
     <app-loader></app-loader>
 </div>
 
-<div *ngIf="!isLoading">
-<div class="row">
-    <div class="col-md-12 language-option" >
-        <button (click)="goToViewPackages()" type="button" class="btn btn-link"><span >
-            <i class="fa fa-angle-double-left"></i>
-            {{'global.word.back'|translate|compareText:'Back'}}</span></button>
-    </div>
+<div class="padding" *ngIf="!isLoading">
+<div>
+            <span class="language-option back" (click)="goToViewPackages()" >
+                {{'global.word.back'|translate|compareText:'Back'}}</span>
 </div>
 
 <div class="row">
@@ -87,13 +84,13 @@
                     <div class="col-md-10">
                         <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
                             <i class="fa fa-file"></i>&nbsp;
-                            <a class="disabled no-padding"
+                            <a class="disabled no-padding " 
                                 [attr.aria-disabled]="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding() ? true : null"
                                 *ngIf="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding()"
                                 [innerHTML]="releaseFile.label">
                             </a>
 
-                            <a class="" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
+                            <a class="language-option" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
                                 (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
                                 [innerHTML]="releaseFile.label">
                             </a>
@@ -182,7 +179,7 @@
                                 [innerHTML]="releaseFile.label">
                             </a>
 
-                            <a class="" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
+                            <a class="language-option" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
                                 (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
                                 [innerHTML]="releaseFile.label">
                             </a>

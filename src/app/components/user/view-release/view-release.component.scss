@@ -58,6 +58,7 @@
     padding: 5px 10px;
     font-size: 12px;
     line-height: 1.5;
+    text-decoration: underline;
 }
 
 .btn-link, .btn-link:hover {
@@ -66,4 +67,22 @@
     cursor: pointer;
     border-radius: 0;
     text-decoration: none;
+}
+.btn-link:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+.back{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: none;
+    font-size: 14px;
+}
+.back:hover{
+    text-decoration: underline;
+}
+.padding{
+    padding-top: 33px;
+    padding-left: 17px;
 }

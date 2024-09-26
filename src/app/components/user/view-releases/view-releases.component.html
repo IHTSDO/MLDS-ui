@@ -164,9 +164,9 @@
 <div class="accordion" id="accordionExample">
   <div *ngFor="let memberReleases of releasePackagesByMember; let i = index">
       <div *ngIf="i > 0">
-          <div class="accordion-item">
-              <h2 class="accordion-header" [id]="'heading-' + memberReleases.member.key">
-                  <button class="accordion-button" type="button" (click)="toggleAccordion(i)">
+          <div class="header">
+              <h2 class="header" [id]="'heading-' + memberReleases.member.key">
+                  <button class="accordion-button header" type="button" (click)="toggleAccordion(i)">
                       <span>{{'global.member.'+ memberReleases.member.key |translate}}</span>
                       <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">
                           {{'global.word.viewlicense'| translate |compareText:'View License'}}
