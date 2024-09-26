@@ -235,7 +235,7 @@
         <div class="country-footer">
             <div class="col-xs-2">
                 <p>
-                    <strong><span>{{ 'views.usageLog.institutions.practices' | translate | compareText: 'Practices' }}:</span></strong>
+                    <strong><span>{{ 'views.usageLog.institutions.practices' | translate | compareText: 'Practices' }}: </span></strong>
                     <span class="label label-default">{{countryUsage.count?.snomedPractices | number}}</span>
                 </p>
             </div>
@@ -263,11 +263,16 @@
                 <div class="col-xs-12">
                     <p><strong>{{ 'views.usageLog.institutions.dataAnalysis.staff' | translate | compareText: 'Hospitals providing staff to practices' }}</strong>: <span class="label label-default">{{countryUsage?.count?.hospitalsStaffingPractices | number}}</span></p>
                     <p><strong>{{ 'views.usageLog.institutions.dataAnalysis.dataCreation' | translate }}</strong>: 
-                        <strong>{{ 'views.usageLog.institutions.dataAnalysis.independent' | translate }}</strong>: <span class="label label-default">{{countryUsage?.count?.dataCreationPracticesNotPartOfHospital | number}}</span> 
-                        <strong>{{ 'views.usageLog.institutions.hospAndInst.plural' | translate | compareText: 'Hospitals/Institutions' }}</strong>: <span class="label label-default">{{countryUsage?.count?.nonPracticeDataCreationSystems | number}}</span>
+                        <strong>{{ 'views.usageLog.institutions.dataAnalysis.independent' | translate }}</strong>: 
+                        <span class="label label-default">{{countryUsage?.count?.dataCreationPracticesNotPartOfHospital | number}}</span>&nbsp;
+                        <strong>{{ 'views.usageLog.institutions.hospAndInst.plural' | translate | compareText: 'Hospitals/Institutions' }}</strong>: 
+                        <span class="label label-default">{{countryUsage?.count?.nonPracticeDataCreationSystems | number}}</span>
                     </p>
-                    <p><strong>{{ 'views.usageLog.institutions.dataAnalysis.dataAnalysis' | translate | compareText: 'Data Analysis Systems' }}</strong> : <strong>{{ 'views.usageLog.institutions.dataAnalysis.systems' | translate | compareText: 'Systems' }}</strong>:  <span class="label label-default">{{countryUsage?.count?.deployedDataAnalysisSystems | number}}</span> 
-                        <strong>{{ 'views.usageLog.institutions.dataAnalysis.data' | translate | compareText: 'Data' }}</strong>:: <span class="label label-default">{{countryUsage?.count?.databasesPerDeployment | number}}</span>
+                    <p><strong>{{ 'views.usageLog.institutions.dataAnalysis.dataAnalysis' | translate | compareText: 'Data Analysis Systems' }}</strong> :
+                         <strong>{{ 'views.usageLog.institutions.dataAnalysis.systems' | translate | compareText: 'Systems' }}</strong>:  
+                         <span class="label label-default">{{countryUsage?.count?.deployedDataAnalysisSystems | number}}</span> &nbsp;
+                        <strong>{{ 'views.usageLog.institutions.dataAnalysis.data' | translate | compareText: 'Data' }}</strong>:
+                         <span class="label label-default">{{countryUsage?.count?.databasesPerDeployment | number}}</span>
                     </p>
                 </div>
             </div>

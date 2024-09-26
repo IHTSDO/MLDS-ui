@@ -32,7 +32,7 @@
                                 <div class="form-group">
 
                                     <label for="usageType">{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}: </label>
-                                    <select formControlName="type" class="form-select input-md">
+                                    <select formControlName="type" class="form-select input-md" (change)="onAffiliateTypeUpdated($event)">
                                         <option value="COMMERCIAL">{{ 'affiliate.types.extended.COMMERCIAL' | translate }}</option>
                                         <option value="ACADEMIC">{{ 'affiliate.types.extended.ACADEMIC' | translate }}</option>
                                         <option value="OTHER">{{ 'affiliate.types.extended.OTHER' | translate }}</option>
@@ -539,7 +539,7 @@
                                                 >{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:</label>
                                             <select formControlName="organizationType" class="form-select">
                                                 <option *ngFor="let type of organizationTypes" [value]="type"
-                                                    (blur)="autoSubmit()">{{ 'affiliate.organizationType.'+type|translate }}
+                                                    (blur)="autoSubmit()">{{ 'affiliate.organizationType.'+ type|translate }}
                                                 </option>
                                             </select>
                                         </div>
@@ -732,7 +732,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <input class="form-control" formControlName="billingPostCode"
-                                                    placeholder="{{ 'affiliateform.affiliateDetails.billingAddress.post' |translate}}"
+                                                    placeholder="{{ 'views.contactInfo.contact.postcode.placeholder' | translate }}"
                                                     (blur)="autoSubmit()" />
                                             </div>
 
@@ -778,7 +778,7 @@
                                             <label for="alternateEmail"
                                                 >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</label>
                                             <input class="form-control" type="email"
-                                                placeholder="{{ 'views.contactInfo.contact.email.placeholder' }}"
+                                                placeholder="{{ 'views.contactInfo.contact.email.placeholder' | translate}}"
                                                 formControlName="alternateEmail" (blur)="autoSubmit()" />
 
                                             <div

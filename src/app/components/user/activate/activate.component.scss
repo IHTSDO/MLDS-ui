@@ -6,3 +6,14 @@ h1 {
 .row{
     padding-bottom: 30rem;
 }
+.alert-success {
+    background-color: #ffffff;
+    border-color: #3cb878;
+    color: #3cb878;
+}
+.alert-warning,
+.alert-danger {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}

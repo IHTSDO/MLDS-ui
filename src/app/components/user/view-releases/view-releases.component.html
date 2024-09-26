@@ -56,7 +56,7 @@
 
           <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
           >
-         {{'views.releases.warning.pProcessed'  | translate |compareText:'Primary application is being processed'}}
+         {{'views.releases.warning.pProcessed'  | translate }}
           </span>
 
           <button class="greenbutton" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
@@ -119,7 +119,7 @@
   
             <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="badge bg-danger float-end"
             >
-            {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
+            {{'views.releases.warning.pProcessed'  | translate }}
             </span>
   
             <button class="greenbutton"  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)"

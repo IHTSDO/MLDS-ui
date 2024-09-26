@@ -44,7 +44,7 @@
                 <span
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved"
                     class="badge bg-danger float-end" >
-                    {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
+                    {{'views.releases.warning.pProcessed'  | translate }}
                 </span>
 
                 <span
@@ -134,7 +134,7 @@
                 <span
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved"
                     class="badge bg-danger float-end">
-                    {{'views.releases.warning.pProcessed'  | translate |compareText:' Primary application is being processed'}}
+                    {{'views.releases.warning.pProcessed'  | translate }}
                 </span>
 
                 <span

@@ -82,6 +82,7 @@ q: string = '';
  
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.commercialUsageReport;
     if (changes['commercialUsageReport']) {
     }
   }
@@ -159,7 +160,6 @@ q: string = '';
 
     this.commercialUsageReport = usageReport;
     this.isActiveUsage = !usageReport.effectiveTo;
-    console.log(usageReport.effectiveTo);
     this.isAffiliateApplying = this.standingStateUtils.isApplying(usageReport.affiliate.standingState);
     this.isEditable = this.session.isUser() || this.session.isAdmin() || this.isAffiliateApplying;
     this.readOnly = this.isEditable ? !this.usageReportStateUtils.isWaitingForApplicant(usageReport.state) : true;
@@ -356,7 +356,6 @@ saveUsage() {
     .subscribe((response: any) => {
       // Handle the success response if needed
       if (response) {
-        console.log('Usage context updated successfully', response);
       }
     });
 }

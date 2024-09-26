@@ -90,7 +90,6 @@ export class AffiliateRegistrationComponent implements OnInit {
     );
     this.isAffiliateLoaded = true;
     if (!this.applicationUtilsService.isApplicationWaitingForApplicant(data)) {
-      console.log('Application does not require input from applicant');
       this.router.navigate(['/userDashboard']);
     }
   }
@@ -292,7 +291,6 @@ export class AffiliateRegistrationComponent implements OnInit {
       )
       .subscribe({
         next: (response: any) => {
-          console.log('Application saved successfully');
         },
         error: (error: any) => {
           this.handleError(error);
@@ -319,7 +317,6 @@ export class AffiliateRegistrationComponent implements OnInit {
     this.submitAttempted = true;
 
     if (!this.affiliateApplicationForm.valid) {
-      console.log('Form is invalid');
       return;
     }
 
@@ -339,7 +336,6 @@ export class AffiliateRegistrationComponent implements OnInit {
       },
       (reason) => {
         if (reason === 'cancel') {
-          console.log('Modal dismissed with reason');
         }
       }
     );
@@ -435,7 +431,6 @@ export class AffiliateRegistrationComponent implements OnInit {
 
   private finalSubmission(): void {
     const finalFormData = this.applicationData;
-    console.log(finalFormData);
     const commercialUsageId = this.applicationData.commercialUsage?.commercialUsageId;
     this.fetchReportAndSubmit(commercialUsageId);
   }
@@ -458,12 +453,28 @@ export class AffiliateRegistrationComponent implements OnInit {
   }
 
   private handleSuccess(): void {
-    console.log('Application submitted successfully');
     this.router.navigate(['/userDashboard']);
   }
 
   private handleSubmitError(error: any): void {
     console.error('Error submitting application:', error);
   }
+  onAffiliateTypeUpdated(event: any) {
+    const newType = event.target.value;
+    const updatedCommercialUsageReport = { ...this.commercialUsageReport };
+    updatedCommercialUsageReport.type = newType;
+    this.commercialUsageReport = updatedCommercialUsageReport;
+  
+    this.commercialUsageService.updateUsageReportType(this.commercialUsageReport)
+      .subscribe(
+        (response: any) => {
+          
+        },
+        (error: any) => {
+          console.error('Failed to update usage type', error);
+        }
+      );
+  }
+  
 
 }

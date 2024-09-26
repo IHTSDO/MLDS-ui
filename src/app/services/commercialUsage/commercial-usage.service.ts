@@ -92,7 +92,6 @@ export class CommercialUsageService {
   }
 
   getUsageReport(commercialUsageId: string): Observable<any> {
-    console.log("commercial Usage Id" + commercialUsageId)
     return this.http.get(`${this.apiUrl}/commercialUsages/${commercialUsageId}`);
   }
 
@@ -101,6 +100,7 @@ export class CommercialUsageService {
   }
 
   updateUsageReportType(usageReport: any, options?: any): Observable<any> {
+
     return this.http.put(
       `${this.apiUrl}/commercialUsages/${usageReport.commercialUsageId}/type/${encodeURIComponent(usageReport.type)}`,
       {},  // This is the body argument
@@ -137,7 +137,6 @@ export class CommercialUsageService {
   }
 
   updateUsageCount(usageReport: any, count: any, options?: any): Observable<any> {
-    console.log('API call - usageReport:', usageReport); // Check what is sent
     return this.http.put(`${this.apiUrl}/commercialUsages/${usageReport.commercialUsageId}/countries/${count.commercialUsageCountId}`, this.serializeCommercialCount(count));
   }
 

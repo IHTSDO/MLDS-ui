@@ -50,7 +50,6 @@ export class FullPageUsageLogComponent implements OnInit {
       this.commercialUsageService.getUsageReport(usageReportId).subscribe(
         result => {
           this.commercialUsageReport = result;
-          console.log("Commercial Usage Report:", this.commercialUsageReport);
         },
         error => {
           console.error('Failed to get initial usage log by param', error);

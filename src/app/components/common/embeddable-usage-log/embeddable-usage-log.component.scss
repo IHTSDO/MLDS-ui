@@ -273,3 +273,21 @@
 .bg-info {
   --bs-bg-opacity: 1;
 }
+.label-default {
+  background-color: #999999;
+}
+.label {
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+}
+b, strong {
+  font-weight: bold;
+}
