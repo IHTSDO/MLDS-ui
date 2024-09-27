@@ -233,3 +233,13 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .language-option:hover {
   background-color: #f8f9fa; /* Light background on hover */
 }
+.rows{
+  margin-top: 64px;
+}
+.back{
+  color: #40ACD6;
+  margin-top: 86px;
+}
+.back:hover{
+  text-decoration: underline;
+}

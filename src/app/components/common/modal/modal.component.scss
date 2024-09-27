@@ -39,3 +39,25 @@
     color: #ffffff !important;
     background-color: #f26c4f !important;
 }
+.blinking-cursor {
+    border: 1px solid #ccc; /* Adjust border as needed */
+    padding: 0.5rem; /* Adjust padding as needed */
+    animation: blink 1s step-end infinite;
+  }
+  
+  @keyframes blink {
+    0% { border-color: transparent; }
+    50% { border-color: #007bff; } /* Adjust color as needed */
+    100% { border-color: transparent; }
+  }
+  /* Add these styles in your styles.css or component-specific CSS file */
+
+.input-group.datepicker .form-control {
+    height: 45px; /* Adjust the height as needed */
+    font-size: 16px; /* Increase font size for better visibility */
+}
+
+.input-group.datepicker .input-group-text {
+    height: 45px; /* Match the height of the input field */
+    font-size: 16px; /* Increase font size for the button */
+}

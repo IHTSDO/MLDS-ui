@@ -38,7 +38,7 @@
           <div class="panel panel-default" *ngFor="let package of memberEntry.archivePackages">
             <div class="panel-heading">
               <h3 class="panel-title">
-                <a class="language-option" (click)="goToArchivePackage(package)">
+                <a class="panel-titles language-option" (click)="goToArchivePackage(package)">
                   {{ package.name }} - {{package.member.key | enum:'global.member.'| async}}
                 </a>
               </h3>
@@ -49,6 +49,11 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="alert alert-warning" *ngIf="memberEntry.archivePackages.length == 0">
+        <i class="fa fa-exclamation-circle"></i> There are currently no Archive Packages of this release.
       </div>
     </div>
   </ng-container>

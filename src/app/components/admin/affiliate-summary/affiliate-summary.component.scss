@@ -93,4 +93,23 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   text-decoration: none;
   cursor: pointer;
 }
+.btn-successs {
+  color: #3cb878;
+  background-color: #ffffff;
+  border-color: #3cb878;
+  border-top-left-radius: 10px;
+  border: 2px solid;
+  font-size: 11px;
+  margin-top: 14px;
+  float: right;
+  margin-bottom: 10px;
+}
 
+.btn-successs:hover, .btn-success:focus {
+  color: #ffffff;
+  background-color: #3cb878;
+}
+.notes-button{
+  padding-right: 5rem;
+  margin-top: 17px;
+}

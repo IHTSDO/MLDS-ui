@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
       <div class="page-header">
-        <h2>{{'views.postAnnouncement.title' | translate| compareText: 'Post Announcement'}}</h2>
+        <h2><b>{{'views.postAnnouncement.title' | translate| compareText: 'Post Announcement'}}</b></h2>
       </div>
     </div>
   </div>
@@ -10,10 +10,10 @@
     <form [formGroup]="announcementForm" (ngSubmit)="postAnnouncement()">
   
       <div class="col-md-12">
-        <h3>{{'views.postAnnouncement.messageContent' | translate | compareText: 'Message Content'}}</h3>
+        <h3><b>{{'views.postAnnouncement.messageContent' | translate | compareText: 'Message Content'}}</b></h3>
   
         <div class="form-group">
-          <label>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}</label>
+          <label><b>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}</b></label>
           <input class="form-control"
             formControlName="subject"
             required 
@@ -22,7 +22,7 @@
         </div>
   
         <div class="form-group">  
-          <label for="body">{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}</label><br>
+          <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}</b></label><br>
           <quill-editor id="body" formControlName="body"  [style]="{'height': '200px'}"></quill-editor><br>
          
           <span class="help-block">{{'views.postAnnouncement.salutationMessage' | translate |compareText: 'Remember to add a salutation and valediction to the email body.'}}</span>
@@ -31,18 +31,18 @@
       </div>
   
       <div class="col-md-12">
-        <h3>{{'views.postAnnouncement.audience' |translate| compareText: 'Audience'}}</h3>
+        <h3><b>{{'views.postAnnouncement.audience' |translate| compareText: 'Audience'}}</b></h3>
         
         <div class="form-group">
-          <label>{{'views.postAnnouncement.affiliates' | translate |compareText: 'Affiliates'}}</label>
+          <label><b>{{'views.postAnnouncement.affiliates' | translate |compareText: 'Affiliates'}}</b></label>
           <div *ngIf="isAdmin">
             <select formControlName="includeAllAffiliates">
-              <option value="0" selected><span>My Affiliates</span> ({{memberKey | enum:'global.member.'|async}})</option>
-              <option value="1"> {{'views.postAnnouncement.allAffiliates' |translate | compareText:  'All Affiliates'}} </option>
+              <option value="0" selected><span><b>My Affiliates</b></span> (<b>{{memberKey | enum:'global.member.'|async}}</b>)</option>
+              <option value="1"><b> {{'views.postAnnouncement.allAffiliates' |translate | compareText:  'All Affiliates'}} </b></option>
             </select>
           </div>
           <div *ngIf="!isAdmin">
-            <div><span>{{'views.postAnnouncement.myAffiliates' |translate |compareText: 'My Affiliates'}}</span> ({{memberKey | enum:'global.member.'|async}})</div>
+            <div><span><b>{{'views.postAnnouncement.myAffiliates' |translate |compareText: 'My Affiliates'}}</b></span> <b>({{memberKey | enum:'global.member.'|async}})</b></div>
           </div>
           <div>
             <span class="help-block">
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group">
-          <label>{{'views.postAnnouncement.additionalEmails' | translate | compareText: 'Additional Email Addresses'}}</label>
+          <label><b>{{'views.postAnnouncement.additionalEmails' | translate | compareText: 'Additional Email Addresses'}}</b></label>
           
           <!-- Binding input to FormControl using formControlName -->
           <input

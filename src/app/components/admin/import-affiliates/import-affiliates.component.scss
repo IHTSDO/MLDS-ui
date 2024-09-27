@@ -8,7 +8,9 @@ body {
     border-color: #e7e7e7;
     z-index: 1030; /* Ensure it stays on top of other content */
 }
-
+.rows{
+    margin-top: 30px;
+}
 .container-fluid {
     padding: 0 20px;
 }

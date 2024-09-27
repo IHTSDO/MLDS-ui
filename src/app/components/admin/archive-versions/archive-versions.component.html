@@ -1,9 +1,9 @@
 <div class="row">
-  <span class="language-option"><a (click)="goToArchiveReleases()"><i class="fa fa-angle-double-left"></i>Back to Archive Releases</a></span>
+  <span class="back language-option"><a (click)="goToArchiveReleases()"><i class="fa fa-angle-double-left"></i>Back to Archive Releases</a></span>
 
   <div class="col-md-12">
     <div>
-      <div class="float-end" *ngIf="isEditableReleasePackage">
+      <div class="float-end" *ngIf="isEditableReleasePackage ">
         <div ngbDropdown>
           <button class="review-button" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
               class="caret"></i></button>
@@ -36,7 +36,7 @@
   <div class="col-lg-12"></div>
 
   <div class="col-lg-12">
-    <h3>Archive Versions</h3>
+    <h3 class="version"><b> Archive Versions</b></h3>
     <table class="table">
       <caption></caption>
       <thead>
@@ -45,7 +45,7 @@
           <th>Description</th>
           <th>Download Files</th>
           <th>Date Published</th>
-          <th>
+          <th *ngIf="isEditableReleasePackage">
             <i class="fa fa-cog"></i>
           </th>
         </tr>
@@ -69,7 +69,7 @@
           </td>
           <td class="col-sm-2">{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
           <td>
-            <div ngbDropdown *ngIf="isEditableReleasePackage">
+            <div ngbDropdown *ngIf="isEditableReleasePackage ">
               <button class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>

@@ -7,13 +7,25 @@
   [alerts]="alerts"
   [iconClass]="'fa fa-plus'"
   (onSubmit)="ok()"
-  (onCancel)="close()">
+  (onCancel)="close()"
+  >
 
 
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" id="name" class="form-control" placeholder="Enter Release Name" formControlName="name" required />
-    <div *ngIf="formPackage.get('name')?.invalid && submitAttempted" class="help-block">Required Field</div>
+    <input
+      #nameInput
+      type="text"
+      id="name"
+  
+      class="form-controls form-control"
+      placeholder="Enter Release Name"
+      formControlName="name"
+      required
+    />
+    <div *ngIf="formPackage.get('name')?.invalid && submitAttempted" class="help-block">
+      Required Field
+    </div>
   </div>
 
   <div class="form-group">

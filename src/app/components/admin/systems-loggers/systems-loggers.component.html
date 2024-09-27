@@ -1,14 +1,14 @@
-<div>
-    <h2>{{'logs.title' | translate | compareText: 'Logs'}}</h2>
+<div class="rows">
+    <h2><b>{{'logs.title' | translate | compareText: 'Logs'}}</b></h2>
   
-    <p>
+    <p class="rows">
       <span>
         {{ 'logs.nbloggers' | translate: { total: loggers.length } | compareText: 'There are ' + loggers.length + ' loggers.' }}
       </span>
     </p>
     
   
-    <label>{{ 'logs.filter' | translate }}</label>
+    <label class="rows"><b>{{ 'logs.filter' | translate }}</b></label>
 <input type="text" [(ngModel)]="filter" class="form-control">
   
     <table class="table table-condensed table-striped">

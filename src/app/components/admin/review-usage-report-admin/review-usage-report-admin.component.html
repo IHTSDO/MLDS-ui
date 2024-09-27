@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-      <span class="language-option"><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
-      <h2>Review Usage Report</h2>
+      <span class="back language-option"><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
+      <h2><b>Review Usage Report</b></h2>
     </div>
     <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">
       {{ alert.msg }}
@@ -27,22 +27,22 @@
       <div class="panel-body" [ngClass]="{'panel-collapse collapse in': !collapsePanel.usage}">
         <ul class="list-group">
           <li class="list-group-item">
-            <strong>License Type: </strong><span>{{ 'affiliate.type.'+usageReport?.type |translate  }}</span>
+            <b>License Type: </b><td>{{ usageReport.type ? ('affiliate.type.' + usageReport.type | translate) : '' }}</td>
           </li>
           <li class="list-group-item">
-            <strong>Implementation Status: </strong>
+            <b>Implementation Status: </b>
             <span>{{ 'affiliate.implementationStatus.'+usageReport?.context?.implementationStatus |translate  }}</span>
           </li>
           <li class="list-group-item">
-            <label>Current Usage:</label>
+            <label><b>Current Usage:</b></label>
             <p>{{ usageReport?.context?.currentUsage }}</p>
           </li>
           <li class="list-group-item">
-            <label>Planned Usage:</label>
+            <label><b>Planned Usage:</b></label>
             <p>{{ usageReport?.context?.plannedUsage }}</p>
           </li>
           <li class="list-group-item">
-            <label>Purpose:</label>
+            <label><b>Purpose:</b></label>
             <p>{{ usageReport?.context?.purpose }}</p>
           </li>
         </ul>
@@ -51,7 +51,7 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Sublicensed Institutions</h4>
+        <h4 class="panel-title"><b>Sublicensed Institutions</b></h4>
       </div>
 
       <div class="panel-body">
@@ -68,7 +68,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <hr>
-                <h4>Hospital(s)/Institution(s)</h4>
+                <h4><b>Hospital(s)/Institution(s)</b></h4>
               </div>
             </div>
           </div>
@@ -76,10 +76,10 @@
           <div class="row">
             <table class="table table-striped">
               <tr>
-                <th class="text-left col-md-3">Name</th>
-                <th class="text-left col-md-2">Started to Use</th>
-                <th class="text-left col-md-2">Ceased Use</th>
-                <th class="text-left col-md-5">Note</th>
+                <th class="text-left col-md-3"><b>Name</b></th>
+                <th class="text-left col-md-2"><b>Started to Use</b></th>
+                <th class="text-left col-md-2"><b>Ceased Use</b></th>
+                <th class="text-left col-md-5"><b>Note</b></th>
               </tr>
               <tr *ngFor="let institution of countryUsage.entries">
                 <td class="col-md-3">{{ institution.name }}</td>
@@ -94,7 +94,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <hr>
-                <h4>Practice(s)</h4>
+                <h4><b>Practice(s)</b></h4>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@
           <div class="row">
             <div class="country-footer">
               <div class="col-xs-12">
-                <p><strong>Practices: </strong><span class="label label-default">{{ countryUsage.count.snomedPractices | number }}</span></p>
+                <p><b>Practices: </b><span class="label label-default">{{ countryUsage.count.snomedPractices | number }}</span></p>
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@
           <div class="row" *ngIf="countryUsage.count.notes">
             <div class="country-footer">
               <div class="col-xs-12">
-                <label>Notes: </label>
+                <label><b>Notes: </b></label>
                 <p>{{ countryUsage.count.notes }}</p>
               </div>
             </div>
@@ -120,7 +120,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <hr>
-                <h4>Data Analysis</h4>
+                <h4><b>Data Analysis</b></h4>
               </div>
             </div>
           </div>
@@ -128,9 +128,9 @@
           <div class="row">
             <div class="country-footer">
               <div class="col-xs-12">
-                <p><strong>Hospitals providing staff to practices:</strong> <span class="label label-default">{{ countryUsage.count.hospitalsStaffingPractices | number }}</span></p>
-                <p><strong>Data Creation Systems: Independent practices:</strong> <span class="label label-default">{{ countryUsage.count.dataCreationPracticesNotPartOfHospital | number }}</span> <strong>Hospitals/Institutions:</strong> <span class="label label-default">{{ countryUsage.count.nonPracticeDataCreationSystems | number }}</span></p>
-                <p><strong>Data Analysis Systems: Systems:</strong> <span class="label label-default">{{ countryUsage.count.deployedDataAnalysisSystems | number }}</span> <strong>Data:</strong> <span class="label label-default">{{ countryUsage.count.databasesPerDeployment | number }}</span></p>
+                <p><b>Hospitals providing staff to practices:</b> &nbsp;<span class="label label-default">{{ countryUsage.count.hospitalsStaffingPractices | number }}</span></p>
+                <p><b>Data Creation Systems: Independent practices:</b> &nbsp;<span class="label label-default">{{ countryUsage.count.dataCreationPracticesNotPartOfHospital | number }}</span> &nbsp;<b>Hospitals/Institutions:</b> &nbsp;<span class="label label-default">{{ countryUsage.count.nonPracticeDataCreationSystems | number }}</span></p>
+                <p><b>Data Analysis Systems: Systems:</b> &nbsp;<span class="label label-default">{{ countryUsage.count.deployedDataAnalysisSystems | number }}</span>&nbsp; <b>Data:</b> &nbsp;<span class="label label-default">{{ countryUsage.count.databasesPerDeployment | number }}</span></p>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title">Other Activities</h4>
+        <h4 class="panel-title"><b>Other Activities</b></h4>
       </div>
       <div class="panel-body">
         <p>{{ usageReport?.context?.otherActivities || 'N/A' }}</p>

@@ -59,7 +59,9 @@ table {
   -ms-user-select: none;
   user-select: none;
 }
-
+th {
+  font-weight: normal;
+}
 .sort-title{
   color: #40ACD6;
 }

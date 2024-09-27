@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="row">
+    <div class="row rows">
       <div class="col-md-12">
         <div class="page-header">
-          <h2>Bulk Affiliate Import/Export</h2>
+          <h2><b>Bulk Affiliate Import/Export</b></h2>
         </div>
         <p>Support for bulk import and export of affiliate records from external member's system using a CSV based file format.</p>
   
@@ -12,11 +12,11 @@
         </div>
   
         <div class="page-header">
-          <h2>Import Affiliate Records</h2>
+          <h2><b>Import Affiliate Records</b></h2>
         </div>
         <form class="form-inline">
           <div class="form-group">
-            <label class="mr-2">Upload Affiliate CSV File</label> &nbsp;
+            <label class="mr-2"><b>Upload Affiliate CSV File</b></label> &nbsp;
             <input type="file" class="form-control mr-2" (change)="onFileChange($event)">
             <br>
             <!-- Updated button class to 'upload-button' -->
@@ -31,12 +31,12 @@
         
   
         <div *ngIf="importResult">
-          <h4>Last Import Result</h4>
+          <h4><b>Last Import Result</b></h4>
           <pre>{{ importResult }}</pre>
         </div>
   
         <div class="page-header">
-          <h2>Export Affiliate Records</h2>
+          <h2><b>Export Affiliate Records</b></h2>
         </div>
         <p>Export all affiliates from the system in the same format as used by the <i>Import Affiliate Records</i> feature.</p>
         <div>
@@ -47,7 +47,7 @@
         </div>
   
         <div class="page-header" *ngIf="importSpec">
-          <h2>Affiliate Record Format</h2>
+          <h2><b>Affiliate Record Format</b></h2>
         </div>
         <p>The Affiliate record format is CSV based, although using <kbd>^</kbd> as a field separator and no support for quoting field entries containing the ^ character.</p>
         <ul>
@@ -58,18 +58,18 @@
           <li>Source member is identified by its ISO 3166-1 alpha-2 country code or <code>IHTSDO</code> for international non-members.</li>
           <li>Files should be encoded as UTF-8 format.</li>
         </ul>
-        <h4>Example Import File with Two Affiliate Records</h4>
+        <h4><b>Example Import File with Two Affiliate Records</b></h4>
         <div><pre>{{ importSpec.example }}</pre></div>
-        <h4>File Format Columns</h4>
+        <h4><b>File Format Columns</b></h4>
         <div class="table-responsive">
           <table class="table table-condensed table-striped">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Example</th>
-                <th>Options</th>
+                <th><b>Name</b></th>
+                <th><b>Type</b></th>
+                <th><b>Required</b></th>
+                <th><b>Example</b></th>
+                <th><b>Options</b></th>
               </tr>
             </thead>
             <tbody>
@@ -87,7 +87,7 @@
         </div>
   
         <div class="page-header" *ngIf="audits.length > 0">
-          <h2>Import Activity</h2>
+          <h2><b>Import Activity</b></h2>
         </div>
         <div *ngIf="audits.length > 0">
           <ul>

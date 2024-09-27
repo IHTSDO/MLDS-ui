@@ -72,6 +72,22 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     border-top-left-radius: 10px;
     border: 2px solid;
 }
+.btn-successs {
+    color: #3cb878;
+    background-color: #ffffff;
+    border-color: #3cb878;
+    border-top-left-radius: 10px;
+    border: 2px solid;
+    font-size: 11px;
+    margin-top: 14px;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.btn-successs:hover, .btn-success:focus {
+    color: #ffffff;
+    background-color: #3cb878;
+}
 
 .btn-danger {
     color: #f26c4f;
@@ -118,4 +134,8 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 
   .notes-button{
     padding-right: 5rem;
+    margin-top: 17px;
+  }
+  .approve{
+        margin-top: 26px;
   }

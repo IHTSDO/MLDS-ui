@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Input, EventEmitter, Output } from '@angular/core';
+import { Component, ViewEncapsulation, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -35,7 +35,7 @@ export class ModalComponent {
   // Outputs to communicate actions back to parent components
   @Output() onSubmit: EventEmitter<void> = new EventEmitter();
   @Output() onCancel: EventEmitter<void> = new EventEmitter();
-
+  @ViewChild('inputField') inputField!: ElementRef;
   // Method to handle submit
   submit() {
     if (this.formGroup && this.formGroup.valid) {
@@ -54,5 +54,12 @@ export class ModalComponent {
   // Method to close alerts
   closeAlert(index: number) {
     this.alerts.splice(index, 1);
+  }
+  // After view initialized lifecycle hook
+  ngAfterViewInit() {
+    // Focus on the input field after the view has been initialized
+    if (this.inputField) {
+      this.inputField.nativeElement.focus();
+    }
   }
 }

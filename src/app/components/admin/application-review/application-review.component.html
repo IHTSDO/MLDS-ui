@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="page-header">
 			<span class="language-option"><a (click)="goToPendingApplication()"><i class="fa fa-angle-double-left"></i>  Back to Pending Applications</a></span>
-      <h1>{{application.applicationType | enum:'application.applicationType.' | async}} Application Review</h1>
+      <h1 style="margin-top: 33px;"><b>{{application?.applicationType | enum:'application.applicationType.' | async}} Application Review</b></h1>
 		</div>
 	</div>
 </div>
@@ -25,7 +25,7 @@
       
         <!-- Applicant Information -->
         <div class="applicant-info">
-          <p><strong>Application No:</strong> {{ application?.applicationId }}</p>
+          <p><b>Application No:</b> {{ application?.applicationId }}</p>
           <div *ngIf="application?.organizationName">
             <h4 class="application-title">
               {{ application?.organizationName }} - {{ application?.name }}
@@ -33,16 +33,16 @@
                 {{'approval.state.'+application.approvalState|translate}}
               </span>
             </h4>
-            <p><strong>Application Date: {{ application?.submittedAt | date: 'yyyy-MM-dd' }}</strong></p>
+            <p><b>Application Date: {{ application?.submittedAt | date: 'yyyy-MM-dd' }}</b></p>
           </div>
           <hr>
         <app-application-summary-block [application]="application" [commercialUsageInstitutionsByCountry]="commercialUsageInstitutionsByCountry" [usageCountryCountslist]="usageCountryCountslist" [showAuditPanel]="true"></app-application-summary-block>
         </div>
       </div>
-      
-      <div class="col-md-4 well-inactive">
+      <div class="col-md-4 container">
+      <div class="well-inactive">
         <div *ngIf="application?.applicationType === 'PRIMARY'">
-            <label>Search Existing Affiliates</label>
+            <label><b>Search Existing Affiliates</b></label>
             <div class="input-group search-box">
                 <input type="text"
                       (input)="onSearch($event)"
@@ -68,9 +68,9 @@
                 <p>
                     {{affiliate.application.affiliateDetails.address.street}}<br>
                     {{affiliate.application.affiliateDetails.address.city}}, {{affiliate.application.affiliateDetails.address.country.commonName}}<br>
-                    <strong>Usage Type:</strong> {{'affiliate.type.'+affiliate.application.type|translate}} - {{'affiliate.subType.'+affiliate.application.subType|translate}}<br>
-                    <strong>Type of Agreement:</strong> {{'affiliate.agreementType.'+affiliate.application.affiliateDetails.agreementType|translate}}<br>
-                    <strong>Account Standing:</strong> {{'affiliate.standingState.'+affiliate.standingState|translate}}
+                    <b>Usage Type:</b> {{'affiliate.type.'+affiliate.application.type|translate}} - {{'affiliate.subType.'+affiliate.application.subType|translate}}<br>
+                    <b>Type of Agreement:</b> {{'affiliate.agreementType.'+affiliate.application.affiliateDetails.agreementType|translate}}<br>
+                    <b>Account Standing:</b> {{'affiliate.standingState.'+affiliate.standingState|translate}}
                 </p>
                 <hr>
             </div>
@@ -95,9 +95,10 @@
             <div class="pull-right" *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></div>
           </div>
           <div class="form-group">
-            <label class="notes-button">Staff Notes</label>
-            <button class="btn btn-success btn-xs pull-right" 
+            <label class="notes-button"><b>Staff Notes</b></label>
+            <button class="btn btn-successs" 
                     type="submit"
+                    style="float:right"
                     [disabled]="isActionDisabled || notesForm.invalid">
               Save
             </button>
@@ -111,13 +112,13 @@
 
 
         <div class="review-buttons">
-          <a class="btn btn-success btn-block" (click)="approveApplication()">Approve Application</a>
+          <a class="btn btn-success btn-block approve" (click)="approveApplication()">Approve Application</a>
           <a class="btn btn-danger btn-block" (click)="changeRequested()">Change Requested from Applicant</a>
           <a class="btn btn-danger btn-block" (click)="reviewRequested()">Review Requested from Staff</a>
           <br><br>
           <a class="btn btn-danger btn-block" (click)="rejectApplication()">Decline Application</a>
         </div>
 
-
+      </div>
       </div>
 </div>

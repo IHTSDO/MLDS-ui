@@ -24,26 +24,26 @@
                 <span *ngIf="audit.data?.message">{{ audit.data?.message }} </span>
                 <span *ngIf="audit.data?.remoteAddress">{{ 'audits.table.data.remoteAddress' | translate  }} {{ audit.data?.remoteAddress }} </span>
   
-                <span *ngIf="audit.data?.['affiliate.creator']"><i class="fa fa-users"></i> <strong> Affiliate:</strong> {{ audit.data?.['affiliate.creator'] }} </span>
-                <span *ngIf="audit.data?.['affiliate.affiliateId']"><strong>No:</strong> {{ audit.data?.['affiliate.affiliateId'] }} </span>
-                <span *ngIf="audit.data?.['affiliate.homeMember']"><strong>Member:</strong> {{ 'global.member.' + audit.data?.['affiliate.homeMember'] | translate }} </span>
-                <span *ngIf="audit.data?.['affiliate.standingState']"><strong>Standing:</strong>
+                <span *ngIf="audit.data?.['affiliate.creator']"><i class="fa fa-users"></i> <b> Affiliate:</b> {{ audit.data?.['affiliate.creator'] }} </span>
+                <span *ngIf="audit.data?.['affiliate.affiliateId']"><b>No:</b> {{ audit.data?.['affiliate.affiliateId'] }} </span>
+                <span *ngIf="audit.data?.['affiliate.homeMember']"><b>Member:</b> {{ 'global.member.' + audit.data?.['affiliate.homeMember'] | translate }} </span>
+                <span *ngIf="audit.data?.['affiliate.standingState']"><b>Standing:</b>
                   <span *ngIf="audit.data?.['affiliate.standingState'] === 'REJECTED'" class="text-danger"><span class="glyphicon glyphicon-remove"></span> </span>
                   <span *ngIf="audit.data?.['affiliate.standingState'] === 'DEREGISTERED'" class="text-danger"><span class="glyphicon glyphicon-remove"></span> </span>
                   {{ 'affiliate.standingState.' + audit.data?.['affiliate.standingState'] | translate}}
                 </span>
-                <span *ngIf="audit.data?.['affiliate.notesInternal']"><strong>Staff Notes:</strong> {{ audit.data?.['affiliate.notesInternal'] }} </span>
+                <span *ngIf="audit.data?.['affiliate.notesInternal']"><b>Staff Notes:</b> {{ audit.data?.['affiliate.notesInternal'] }} </span>
   
-                <span *ngIf="audit.data?.['releasePackage.name']"><i class="fa fa-cube"></i> <strong> Release Package Name:</strong> {{ audit.data?.['releasePackage.name'] }} </span>
-                <span *ngIf="audit.data?.['releaseVersion.name']"><strong>Release Version Name:</strong> {{ audit.data?.['releaseVersion.name'] }} </span>
-                <span *ngIf="audit.data?.['releaseFile.label']"><strong>Release File Label:</strong> {{ audit.data?.['releaseFile.label'] }} </span>
-                <span *ngIf="audit.data?.['download.statusCode']"><strong>Http:</strong> {{ audit.data?.['download.statusCode'] }} </span>
+                <span *ngIf="audit.data?.['releasePackage.name']"><i class="fa fa-cube"></i> <b> Release Package Name:</b> {{ audit.data?.['releasePackage.name'] }} </span>
+                <span *ngIf="audit.data?.['releaseVersion.name']"><b>Release Version Name:</b> {{ audit.data?.['releaseVersion.name'] }} </span>
+                <span *ngIf="audit.data?.['releaseFile.label']"><b>Release File Label:</b> {{ audit.data?.['releaseFile.label'] }} </span>
+                <span *ngIf="audit.data?.['download.statusCode']"><b>Http:</b> {{ audit.data?.['download.statusCode'] }} </span>
   
-                <span *ngIf="audit.data?.['application.name']"><i class="fa fa-tasks"></i> <strong> Application:</strong> {{ audit.data?.['application.name'] }} </span>
-                <span *ngIf="audit.data?.['application.applicationId']"><strong>No:</strong> {{ audit.data?.['application.applicationId'] }} </span>
-                <span *ngIf="audit.data?.['application.type']"><strong>Type:</strong> {{ 'application.applicationType.' + audit.data?.['application.type'] | translate}} </span>
-                <span *ngIf="audit.data?.['application.member']"><strong>Member:</strong> {{ 'global.member.' + audit.data?.['application.member'] | translate}} </span>
-                <span *ngIf="audit.data?.['application.approvalState']"><strong>Application State:</strong>
+                <span *ngIf="audit.data?.['application.name']"><i class="fa fa-tasks"></i> <b> Application:</b> {{ audit.data?.['application.name'] }} </span>
+                <span *ngIf="audit.data?.['application.applicationId']"><b>No:</b> {{ audit.data?.['application.applicationId'] }} </span>
+                <span *ngIf="audit.data?.['application.type']"><b>Type:</b> {{ 'application.applicationType.' + audit.data?.['application.type'] | translate}} </span>
+                <span *ngIf="audit.data?.['application.member']"><b>Member:</b> {{ 'global.member.' + audit.data?.['application.member'] | translate}} </span>
+                <span *ngIf="audit.data?.['application.approvalState']"><b>Application State:</b>
                   <span *ngIf="audit.data?.['application.approvalState'] === 'APPROVED'" class="text-success"><span class="glyphicon glyphicon-ok"></span> </span>
                   <span *ngIf="audit.data?.['application.approvalState'] === 'REJECTED'" class="text-danger"><span class="glyphicon glyphicon-remove"></span> </span>
                   {{ 'approval.state.' + audit.data?.['application.approvalState'] | translate}}
@@ -51,95 +51,95 @@
   
                 <span *ngIf="audit.data?.['import.success'] === 'true'" class="text-success"><i class="fa-solid fa-check"></i> Successful Import </span>
                 <span *ngIf="audit.data?.['import.success'] === 'false'" class="text-danger"><i class="fa-solid fa-xmark"></i> Failed Import </span>
-                <span *ngIf="audit.data?.['import.source']"><strong>Source Member:</strong> {{ audit.data?.['import.source'] }} </span>
-                <span *ngIf="audit.data?.['import.affiliates'] && audit.data?.['import.affiliates'] !== '-1'"><strong>Affiliates:</strong> {{ audit.data?.['import.affiliates'] }} </span>
-                <span *ngIf="audit.data?.['import.errors'] && audit.data['import.errors'] !== '0'"><strong>Errors:</strong> {{ audit.data?.['import.errors'] }} </span>
+                <span *ngIf="audit.data?.['import.source']"><b>Source Member:</b> {{ audit.data?.['import.source'] }} </span>
+                <span *ngIf="audit.data?.['import.affiliates'] && audit.data?.['import.affiliates'] !== '-1'"><b>Affiliates:</b> {{ audit.data?.['import.affiliates'] }} </span>
+                <span *ngIf="audit.data?.['import.errors'] && audit.data['import.errors'] !== '0'"><b>Errors:</b> {{ audit.data?.['import.errors'] }} </span>
   
-                <span *ngIf="audit.data?.['usage.type']"><i class="fa fa-file-text"></i> <strong> Usage:</strong> {{ 'affiliate.type.' + audit.data?.['usage.type'] | translate}} </span>
-                <span *ngIf="audit.data?.['usage.commercialUsageId']"><strong>No:</strong> {{ audit.data?.['usage.commercialUsageId'] }} </span>
-                <span *ngIf="audit.data?.['usage.period.start'] || audit.data?.['usage.period.end']"><strong>Period:</strong> {{ audit.data?.['usage.period.start'] }} &ndash; {{ audit.data?.['usage.period.end'] }} </span>
-                <span *ngIf="audit.data?.['usage.state']"><strong>State:</strong>
+                <span *ngIf="audit.data?.['usage.type']"><i class="fa fa-file-text"></i> <b> Usage:</b> {{ 'affiliate.type.' + audit.data?.['usage.type'] | translate}} </span>
+                <span *ngIf="audit.data?.['usage.commercialUsageId']"><b>No:</b> {{ audit.data?.['usage.commercialUsageId'] }} </span>
+                <span *ngIf="audit.data?.['usage.period.start'] || audit.data?.['usage.period.end']"><b>Period:</b> {{ audit.data?.['usage.period.start'] }} &ndash; {{ audit.data?.['usage.period.end'] }} </span>
+                <span *ngIf="audit.data?.['usage.state']"><b>State:</b>
                   <span *ngIf="audit.data?.['usage.state'] === 'PAID'" class="text-success"><span class="glyphicon glyphicon-ok"></span> </span>
                   {{ 'usageReport.state.' + audit.data?.['usage.state'] | translate }}
                 </span>
   
-                <span *ngIf="audit.data?.['announcement.title']"><i class="fa fa-send"></i> <strong> Announcement:</strong> {{ audit.data?.['announcement.title'] }} </span>
-                <span *ngIf="audit.data?.['announcement.member'] && !audit.data['announcement.allAffiliates']"><strong>Affiliates:</strong> {{ 'global.member.' + audit.data?.['announcement.member'] | translate }} </span>
-                <span *ngIf="audit.data?.['announcement.allAffiliates']"><strong>All Affiliates</strong> </span>
+                <span *ngIf="audit.data?.['announcement.title']"><i class="fa fa-send"></i> <b> Announcement:</b> {{ audit.data?.['announcement.title'] }} </span>
+                <span *ngIf="audit.data?.['announcement.member'] && !audit.data['announcement.allAffiliates']"><b>Affiliates:</b> {{ 'global.member.' + audit.data?.['announcement.member'] | translate }} </span>
+                <span *ngIf="audit.data?.['announcement.allAffiliates']"><b>All Affiliates</b> </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.type'] || audit.data?.['affiliate.affiliateDetails.otherText']">
-                  <strong>Affiliate Type:</strong> {{ 'affiliate.type.' + audit.data?.['affiliate.affiliateDetails.type'] | translate }} {{ audit.data?.['affiliate.affiliateDetails.otherText'] }}
+                  <b>Affiliate Type:</b> {{ 'affiliate.type.' + audit.data?.['affiliate.affiliateDetails.type'] | translate }} {{ audit.data?.['affiliate.affiliateDetails.otherText'] }}
                   <s>{{ 'affiliate.type.' + audit.data?.['originial.affiliate.affiliateDetails.type'] | translate }} {{ audit.data?.['originial.affiliate.affiliateDetails.otherText'] }}</s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.subType']">
-                  <strong>Sub-type:</strong> {{ 'affiliate.subType.' + audit.data?.['affiliate.affiliateDetails.subType'] | translate }}
+                  <b>Sub-type:</b> {{ 'affiliate.subType.' + audit.data?.['affiliate.affiliateDetails.subType'] | translate }}
                   <s> {{ 'affiliate.subType.' + audit.data?.['original.affiliate.affiliateDetails.subType'] | translate}} </s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.agreementType']">
-                  <strong>Agreement Type:</strong>
+                  <b>Agreement Type:</b>
                   {{ 'affiliate.agreementType.' + audit.data?.['affiliate.affiliateDetails.agreementType'] | translate}}
                   <s> {{ 'affiliate.agreementType.' + audit.data?.['original.affiliate.affiliateDetails.agreementType'] | translate }} </s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.organizationType'] || audit.data?.['affiliate.affiliateDetails.organizationTypeOther']">
-                  <strong>Organization Type:</strong>
+                  <b>Organization Type:</b>
                   {{ 'affiliate.organizationType.' + audit.data?.['affiliate.affiliateDetails.organizationType'] | translate}} {{ audit.data?.['affiliate.affiliateDetails.organizationTypeOther'] }}
                   <s> {{ 'affiliate.organizationType.' + audit.data?.['original.affiliate.affiliateDetails.organizationType'] | translate }} {{ audit.data?.['original.affiliate.affiliateDetails.organizationTypeOther'] }}</s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.organizationName']">
-                  <strong>Organization Name:</strong>
+                  <b>Organization Name:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.organizationName'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.organizationName'] }} </s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.firstName']">
-                  <strong>First Name:</strong>
+                  <b>First Name:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.firstName'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.firstName'] }} </s>
                 </span>
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.lastName']">
-                  <strong>Last Name:</strong>
+                  <b>Last Name:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.lastName'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.lastName'] }} </s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.email']">
-                  <strong>Email:</strong>
+                  <b>Email:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.email'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.email'] }} </s>
                 </span>
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.alternateEmail']">
-                  <strong>Alternative Email:</strong>
+                  <b>Alternative Email:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.alternateEmail'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.alternateEmail'] }} </s>
                 </span>
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.thirdEmail']">
-                  <strong>Third Email:</strong>
+                  <b>Third Email:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.thirdEmail'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.thirdEmail'] }} </s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.landlineNumber'] || audit.data?.['affiliate.affiliateDetails.landlineExtension']">
-                  <strong>Landline:</strong>
+                  <b>Landline:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.landlineNumber'] }} <span *ngIf="audit.data?.['affiliate.affiliateDetails.landlineExtension']">ext: {{ audit.data?.['affiliate.affiliateDetails.landlineExtension'] }}</span>
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.landlineNumber'] }} <span *ngIf="audit.data?.['original.affiliate.affiliateDetails.landlineExtension']">ext: {{ audit.data?.['original.affiliate.affiliateDetails.landlineExtension'] }}</span> </s>
                 </span>
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.mobileNumber']">
-                  <strong>Mobile:</strong>
+                  <b>Mobile:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.mobileNumber'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.mobileNumber'] }} </s>
                 </span>
   
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.address.street'] || audit.data?.['affiliate.affiliateDetails.address.city'] || audit.data?.['affiliate.affiliateDetails.address.post']">
-                  <strong>Address:</strong>
+                  <b>Address:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.address.street'] }}, {{ audit.data?.['affiliate.affiliateDetails.address.city'] }}, {{ audit.data?.['affiliate.affiliateDetails.address.post'] }}
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.address.street'] }}, {{ audit.data?.['original.affiliate.affiliateDetails.address.city'] }}, {{ audit.data?.['original.affiliate.affiliateDetails.address.post'] }} </s>
                 </span>
                 <span *ngIf="audit.data?.['affiliate.affiliateDetails.billingAddress.street'] || audit.data?.['affiliate.affiliateDetails.billingAddress.city'] || audit.data?.['affiliate.affiliateDetails.billingAddress.post'] || audit.data?.['affiliate.affiliateDetails.billingAddress.country']">
-                  <strong>Billing:</strong>
+                  <b>Billing:</b>
                   {{ audit.data?.['affiliate.affiliateDetails.billingAddress.street'] }}, {{ audit.data?.['affiliate.affiliateDetails.billingAddress.city'] }}, {{ audit.data?.['affiliate.affiliateDetails.billingAddress.post'] }}
                   <span *ngIf="audit.data?.['affiliate.affiliateDetails.billingAddress.country']">, {{ 'global.country.' + audit.data?.['affiliate.affiliateDetails.billingAddress.country'] | translate}}</span>
                   <s> {{ audit.data?.['original.affiliate.affiliateDetails.billingAddress.street'] }}, {{ audit.data?.['original.affiliate.affiliateDetails.billingAddress.city'] }}, {{ audit.data?.['original.affiliate.affiliateDetails.billingAddress.post'] }}<span *ngIf="audit.data?.['original.affiliate.affiliateDetails.billingAddress.country']">, {{ 'global.country.' + audit.data?.['original.affiliate.affiliateDetails.billingAddress.country'] | translate}}</span> </s>

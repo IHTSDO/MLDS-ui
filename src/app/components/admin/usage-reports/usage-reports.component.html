@@ -59,7 +59,7 @@
             <td>{{usageReport.affiliate.affiliateDetails.firstName + ' ' + usageReport.affiliate.affiliateDetails.lastName}}</td>
             <td>{{usageReport.submitted | date: 'yyyy-MM-dd'}}</td>
             <td>{{'usageReport.state.'+usageReport.state|translate}}</td>
-            <td>{{'affiliate.type.'+usageReport.type  |translate}}</td>
+            <td>{{ usageReport.type ? ('affiliate.type.' + usageReport.type | translate) : '' }}</td>
             <td>{{'affiliate.implementationStatus.'+usageReport.context?.implementationStatus |translate}}</td>
             <td>{{usageReport.startDate}}</td>
             <td>{{usageReport.endDate}}</td>

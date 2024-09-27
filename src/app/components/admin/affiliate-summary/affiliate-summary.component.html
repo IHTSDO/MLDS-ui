@@ -54,8 +54,8 @@
           <div class="float-end" *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></div>
         </div>
         <div class="form-group">
-          <label htmlFor="staff-notes">Staff Notes</label>
-          <button class="edit-button" type="submit" [disabled]="submitting || !isEditable">
+          <label class="notes-button" htmlFor="staff-notes"><b>Staff Notes</b></label>
+          <button class="btn-successs" type="submit" [disabled]="submitting || !isEditable">
             Save
           </button>
           <textarea class="form-control" rows="10" formControlName="notesInternal"

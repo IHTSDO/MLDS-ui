@@ -1,5 +1,5 @@
 <div class="row">
-  <span><a (click)="goToReleaseManagement()"><i class="fa fa-angle-double-left"></i>Back to Release
+  <span class="back language-option"><a (click)="goToReleaseManagement()"><i class="fa fa-angle-double-left"></i>Back to Release
       Management</a></span>
 
   <div class="col-md-12">
@@ -89,7 +89,7 @@
                 <button class="dropdown-item" (click)="takeOfflineModal(releaseVersion)">
                   <i class="fa-solid fa-circle-xmark"></i> Take Offline
                 </button>
-                <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
+                <button class="dropdown-item"  (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
               </div>
@@ -143,14 +143,15 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
+              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
+                (click)="deleteReleaseFile(releaseVersion,releaseFile)">
+                <i class="fa fa-xmark"></i> Remove
+              </button>&nbsp;
               <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
                 (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button> &nbsp;
-              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
-                (click)="deleteReleaseFile(releaseVersion,releaseFile)">
-                <i class="fa fa-xmark"></i> Remove
-              </button>
+              
             </div>
           </td>
           <td>{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
@@ -165,7 +166,7 @@
                 <button class="dropdown-item" (click)="takeOnlineModal(releaseVersion)">
                   <i class="fa-regular fa-circle-check"></i> Publish Online
                 </button>
-                <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
+                <button class="dropdown-item"  (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
                 <button class="dropdown-item" (click)="deleteVersionModal(releaseVersion)">
@@ -220,14 +221,14 @@
                   {{ releaseFile?.label }}
                 </a>
               </div>
+              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
+                (click)="deleteReleaseFile(releaseVersion,releaseFile)">
+                <i class="fa fa-xmark"></i> Remove
+              </button>&nbsp;
               <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
                 (click)="editReleaseFile(releaseVersion,releaseFile)">
                 <i class="fa fa-edit"></i> Edit
               </button> &nbsp;
-              <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
-                (click)="deleteReleaseFile(releaseVersion,releaseFile)">
-                <i class="fa fa-xmark"></i> Remove
-              </button>
             </div>
           </td>
           <td>{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
@@ -242,7 +243,7 @@
                 <button class="dropdown-item" (click)="takeAlphaBetaModal(releaseVersion)">
                   <i class="fa-regular fa-circle-check"></i> Publish Alpha/Beta
                 </button>
-                <button class="dropdown-item" (click)="moveToArchive(releaseVersion)">
+                <button class="dropdown-item"  (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
                 <button class="dropdown-item" (click)="deleteVersionModal(releaseVersion)">

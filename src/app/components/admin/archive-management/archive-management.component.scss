@@ -60,3 +60,32 @@ p {
     font-size: 19px;
     word-wrap: break-word;
 }
+.panel-titles {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 19px;
+    word-wrap: break-word;
+    color: black;
+}
+.panel-titles:hover{
+    color:#8dccdc;
+}
+.alert-warning {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #f26c4f;
+    border-radius: 4px;
+}
+.row{
+    margin-top: 32px;
+}
+.back{
+    color: #8dccdc;
+    text-decoration: underline;
+
+}

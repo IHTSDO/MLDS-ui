@@ -9,7 +9,7 @@
 
   <div class="form-group">
     <label for="name">Name</label>
-    <input class="form-control" placeholder="Enter Version Name" formControlName="name">
+    <input  #nameInput class="form-control" placeholder="Enter Version Name" formControlName="name">
     <div *ngIf="releaseVersionForm.get('name')?.invalid && submitAttempted" class="help-block">Required Field</div>
   </div>
 

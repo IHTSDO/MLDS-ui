@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="page-header">
-            <h1>{{ 'views.contactInfo.title' | translate | compareText: 'Account Information' }}</h1>
+            <h1><b>{{ 'views.contactInfo.title' | translate | compareText: 'Account Information' }}</b></h1>
         </div>
     </div>
 </div>
@@ -38,7 +38,7 @@
 
             <div class="panel panel-default" *ngIf="isStaffOrAdmin">
                 <div class="panel-heading">
-                    <h4 class="panel-title">{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</h4>
+                    <h4 class="panel-title"><b>{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</b></h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -48,7 +48,7 @@
 
                                 <!-- for type -->
                                 <div class="form-group">
-                                    <label for="type">{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</label>
+                                    <label for="type"><b>{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</b></label>
                                     <select id="type" class="form-select" formControlName="type"
                                         (change)="onTypeChange()">
                                         <option value="COMMERCIAL">{{ 'affiliate.type.' + 'COMMERCIAL' | translate}}</option>
@@ -76,7 +76,7 @@
 
                                 <!-- for sub type -->
                                 <div class="form-group" *ngIf="type?.value && type?.value !== 'OTHER'">
-                                    <label for="usageSubType">{{ 'views.contactInfo.admin.subtype.name' | translate | compareText: 'Subtype' }}:</label>
+                                    <label for="usageSubType"><b>{{ 'views.contactInfo.admin.subtype.name' | translate | compareText: 'Subtype' }}:</b></label>
                                     <select id="usageSubType" class="form-select" formControlName="subType">
                                         <option value="DEVELOPER" *ngIf="type?.value === 'COMMERCIAL'">{{ 'affiliate.subType.DEVELOPER' | translate}}
                                         </option>
@@ -98,7 +98,7 @@
 
                                 <!-- for agreement type -->
                                 <div class="form-group">
-                                    <label for="agreementType">{{ 'views.contactInfo.admin.agreementType' | translate | compareText: 'Agreement Type' }}:</label>
+                                    <label for="agreementType"><b>{{ 'views.contactInfo.admin.agreementType' | translate | compareText: 'Agreement Type' }}:</b></label>
                                     <select id="agreementType" class="form-select" formControlName="agreementType">
                                         <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ ('affiliate.agreementType.' + type) | translate }}
                                         </option>
@@ -118,21 +118,21 @@
             <div class="form-group">
                 <input type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">&nbsp;
                 <label for="acceptNotifications">
-                    {{ 'views.contactInfo.acceptNotifications' | translate | compareText: 'Yes notify me when a SNOMED package is updated.' }}
+                    <b>{{ 'views.contactInfo.acceptNotifications' | translate | compareText: 'Yes notify me when a SNOMED package is updated.' }}</b>
                 </label>
                 <span *ngIf="acceptNotifications?.value">
-                    &nbsp;(
+                    &nbsp;(<b>
                     <input type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">&nbsp;
                     <label for="countryNotificationsOnly">
                         {{ 'views.contactInfo.countryNotificationsOnly' | translate | compareText: 'Only for my country extensions' }}
-                    </label>
+                    </label></b>
                     )
                 </span>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"> {{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</h4>
+                    <h4 class="panel-title"> <b>{{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</b></h4>
                 </div>
                 <div class="panel-collapse collapse show">
                     <div class="panel-body">
@@ -141,7 +141,7 @@
 
                                 <!-- for first name -->
                                 <div class="form-group">
-                                    <label for="firstName">{{ 'views.contactInfo.contact.firstName.name' | translate | compareText: 'First Name' }}: </label>
+                                    <label for="firstName"><b>{{ 'views.contactInfo.contact.firstName.name' | translate | compareText: 'First Name' }}:</b> </label>
                                     <input id="firstName" class="form-control" placeholder="{{'views.contactInfo.contact.firstName.placeholder'|translate}}"
                                         formControlName="firstName" [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -152,7 +152,7 @@
 
                                 <!-- for last name -->
                                 <div class="form-group">
-                                    <label for="lastName">{{ 'views.contactInfo.contact.lastName.name' | translate | compareText: 'Last Name' }}:</label>
+                                    <label for="lastName"><b>{{ 'views.contactInfo.contact.lastName.name' | translate | compareText: 'Last Name' }}:</b></label>
                                     <input id="lastName" class="form-control" placeholder="{{'views.contactInfo.contact.lastName.placeholder'| translate}}" formControlName="lastName"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -168,12 +168,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" *ngIf="!isStaffOrAdmin">
-                                    <label for="email">{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</label>
+                                    <label for="email"><b>{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</b></label>
                                     <span>{{ affiliate?.affiliateDetails?.email }}</span>
                                 </div>
 
                                 <div class="form-group" *ngIf="isStaffOrAdmin">
-                                    <label for="email">{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</label>
+                                    <label for="email"><b>{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</b></label>
                                     <input id="email" class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder' | translate }}" 
                                         formControlName="email" [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -194,7 +194,7 @@
                         <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="alternateEmail">{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</label>
+                                    <label for="alternateEmail"><b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</b></label>
                                     <input id="alternateEmail" class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
                                         formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -214,7 +214,7 @@
                         <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thirdEmail">{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</label>
+                                    <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</b></label>
                                     <input id="thirdEmail" class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'| translate}}"
                                         formControlName="thirdEmail" [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -231,10 +231,10 @@
                         <!-- labels for landline and extension -->
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="phoneNumber">{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:</label>
+                                <label for="phoneNumber"><b>{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:</b></label>
                             </div>
                             <div class="col-md-2">
-                                <label for="extension">{{ 'views.contactInfo.contact.landlineExtension.name' | translate | compareText: 'Extension' }}:</label>
+                                <label for="extension"><b>{{ 'views.contactInfo.contact.landlineExtension.name' | translate | compareText: 'Extension' }}:</b></label>
                             </div>
                         </div>
 
@@ -269,7 +269,7 @@
                         <!-- label for mobile number -->
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="mobileNumber">{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}:</label>
+                                <label for="mobileNumber"><b>{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}:</b></label>
                             </div>
                         </div>
 
@@ -297,7 +297,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="address">{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</label>
+                                        <label for="address"><b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</b></label>
                                         <input class="form-control" placeholder="{{'views.contactInfo.contact.address.placeholder'|translate}}"
                                             formControlName="addressStreetIndividual"
                                             [attr.disabled]="readOnly ? true : null" />
@@ -314,10 +314,10 @@
                             <!-- labels for city and post code -->
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
+                                    <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
+                                    <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
                                 </div>
                             </div>
 
@@ -354,7 +354,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
+                                        <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b></label>
                                         <span> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</span>
                                     </div>
                                 </div>
@@ -369,7 +369,7 @@
                                 <div class="row" *ngIf="!isStaffOrAdmin">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="checkbox">{{ 'views.contactInfo.contact.billingAddress.sameAsAddress' | translate | compareText: 'Use Address as Billing Address' }}</label>
+                                            <label for="checkbox"><b>{{ 'views.contactInfo.contact.billingAddress.sameAsAddress' | translate | compareText: 'Use Address as Billing Address' }}</b></label>
                                             <input type="checkbox" formControlName="use" />
                                         </div>
                                     </div>
@@ -379,7 +379,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="billingAddress">{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</label>
+                                            <label for="billingAddress"><b>{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</b></label>
                                             <input class="form-control" placeholder="{{'views.contactInfo.contact.billingAddress.placeholder'|translate}}"
                                                 formControlName="billingAddressStreet"
                                                 [attr.disabled]="readOnly || isSameAddress ? true : null" />
@@ -395,10 +395,10 @@
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
+                                        <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
+                                        <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
                                     </div>
                                 </div>
 
@@ -440,7 +440,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
+                                            <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b></label>
                                             <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postCode.placeholder'|translate}}"
                                                 formControlName="billingAddressCountry" [ngbTypeahead]="search"
                                                 [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
@@ -467,7 +467,7 @@
 
             <div class="panel panel-default" *ngIf="affiliate?.type && affiliate?.type != 'INDIVIDUAL'">
                 <div class="panel-heading">
-                    <h4 class="panel-title">{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</h4>
+                    <h4 class="panel-title"><b>{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</b></h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -476,12 +476,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" *ngIf="!isStaffOrAdmin">
-                                    <label for="organizationName">{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</label>
+                                    <label for="organizationName"><b>{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</b></label>
                                     <span>{{affiliate?.affiliateDetails?.organizationName}}</span>
                                 </div>
 
                                 <div class="form-group" *ngIf="isStaffOrAdmin">
-                                    <label for="organizationName">{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</label>
+                                    <label for="organizationName"><b>{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</b></label>
                                     <input class="form-control" placeholder="{{'views.contactInfo.organization.name.placeholder'|translate}}" formControlName="organizationName"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -498,7 +498,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address">{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</label>
+                                    <label for="address"><b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</b></label>
                                     <input class="form-control" placeholder="{{'views.contactInfo.contact.address.placeholder'|translate}}" formControlName="addressStreet"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -512,10 +512,10 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
+                                <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
                             </div>
                             <div class="col-md-3">
-                                <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
+                                <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
                             </div>
                         </div>
 
@@ -550,7 +550,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
+                                    <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b></label>
                                     <span> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</span>
                                 </div>
                             </div>
@@ -562,7 +562,7 @@
                             <div class="row" *ngIf="!isStaffOrAdmin">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="checkbox">{{ 'views.contactInfo.contact.billingAddress.useOrganizationAddress' | translate | compareText: 'Use Organization Address as Billing Address' }}</label>
+                                        <label for="checkbox"><b>{{ 'views.contactInfo.contact.billingAddress.useOrganizationAddress' | translate | compareText: 'Use Organization Address as Billing Address' }}</b></label>
                                         <input type="checkbox" formControlName="use" />
                                     </div>
                                 </div>
@@ -571,7 +571,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="billingAddress">{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</label>
+                                        <label for="billingAddress"><b>{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</b></label>
                                         <input class="form-control" placeholder="{{'views.contactInfo.contact.billingAddress.placeholder'|translate}}"
                                             formControlName="billingAddressStreet"
                                             [attr.disabled]="readOnly || isSameAddress ? true : null" />
@@ -586,10 +586,10 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="city">{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</label>
+                                    <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="postCode">{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</label>
+                                    <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
                                 </div>
                             </div>
 
@@ -624,7 +624,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="country">{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</label>
+                                        <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b></label>
                                         <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.country.placeholder'|translate}}"
                                             formControlName="billingAddressCountry" [ngbTypeahead]="search"
                                             [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
@@ -643,8 +643,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="alternateEmail">{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</label>
-                                    <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
+                                    <label for="alternateEmail"><b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</b></label>
+                                    <input class="form-control" type="email" style="border-color: #f26c4f;" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
                                         formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null"
                                         required />
                                     <div
@@ -663,7 +663,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thirdEmail">{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</label>
+                                    <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</b></label>
                                     <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'| translate}}" formControlName="thirdEmail"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div

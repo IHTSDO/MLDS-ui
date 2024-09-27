@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
@@ -17,7 +17,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 export class AddEditReleaseVersionModalComponent implements OnInit {
   @Input() releasePackage: any;
   @Input() releaseVersion: any;
-
+  @ViewChild('nameInput', { static: false }) nameInput!: ElementRef;
   releaseVersionForm!: FormGroup;
   isNewObject = false;
   submitAttempted = false;
@@ -34,6 +34,9 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
   ngOnInit(): void {
     this.isNewObject = !this.releaseVersion?.releaseVersionId;
     this.initializeForm();
+    setTimeout(() => {
+      this.nameInput.nativeElement.focus();
+    }, 0);
   }
 
   private initializeForm(): void {

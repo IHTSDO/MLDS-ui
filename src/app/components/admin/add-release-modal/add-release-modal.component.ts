@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +23,7 @@ export class AddReleaseModalComponent implements OnInit {
   public alerts: any[] = [];
   public members: any[] = [];
   public isAdmin: boolean = false;
-
+  @ViewChild('nameInput', { static: false }) nameInput!: ElementRef;
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
@@ -48,6 +48,9 @@ export class AddReleaseModalComponent implements OnInit {
       releasePackageURI: [''],
       copyrights: ['']
     });
+    setTimeout(() => {
+      this.nameInput.nativeElement.focus();
+    }, 0);
   }
 
   public ok(): void {
@@ -78,5 +81,6 @@ export class AddReleaseModalComponent implements OnInit {
   closeAlert(index: number): void {
     this.alerts.splice(index, 1);
   }
+
 
 }

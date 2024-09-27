@@ -10,6 +10,7 @@ import { EditReleaseFileModalComponent } from '../edit-release-file-modal/edit-r
 import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version-modal/add-edit-release-version-modal.component';
 import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 @Component({
   selector: 'app-archive-versions',
@@ -27,11 +28,15 @@ export class ArchiveVersionsComponent implements OnInit {
   versions: { [key: string]: any[] } = {
     archive: []
   };
+  isAdmin: boolean | undefined ;
 
-  constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService) { }
+  constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService
+    ,private sessionService: AuthenticationSharedService
+  ) { }
 
   ngOnInit(): void {
     this.loadReleasePackageId();
+    this.isAdmin=this.sessionService.isAdmin();
   }
 
   loadReleasePackageId(): void {

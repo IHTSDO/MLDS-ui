@@ -1,232 +1,228 @@
 <div [ngSwitch]="application?.applicationType">
 
-    <div class="panel panel-default" *ngSwitchCase="'EXTENSION'">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            {{ 'global.member.' + application.member.key | translate }} 
-            <span>{{ 'views.applicationSummary.ext.title' | translate | compareText :'Extension Application Info'}}</span>
-          </h3>
-        </div>
+  <div class="panel panel-default" *ngSwitchCase="'EXTENSION'">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{ 'global.member.' + application.member.key | translate }} 
+          <span>{{ 'views.applicationSummary.ext.title' | translate | compareText :'Extension Application Info'}}</span>
+        </h3>
+      </div>
 
-        <div class="panel-body">
-          <p><strong>{{ 'views.applicationSummary.reason' | translate | compareText :'Reason' }}:</strong> {{application?.reason}}</p>
-        </div>
+      <div class="panel-body">
+        <p><strong>{{ 'views.applicationSummary.reason' | translate | compareText :'Reason' }}:</strong> {{application?.reason}}</p>
+      </div>
+  </div>
+
+
+  <div class="panel panel-default">
+      <div class="panel-heading">         
+        <h3 class="panel-title">{{ 'pendingApplications.table.applicationType' | translate | compareText: 'Application Type'}}</h3>
+      </div>
+      <div class="panel-body">
+        <p *ngIf="application?.type !== 'INDIVIDUAL'">
+          <b>{{ 'views.contactInfo.organization.type.name' | translate | compareText: 'Organization Type'}}:</b>
+          <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType === 'OTHER'">
+            {{application?.affiliateDetails?.organizationTypeOther}}
+          </span>
+          <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType !== 'OTHER'">
+            {{ 'affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate}}
+          </span>
+        </p>
+        <p *ngSwitchCase="'PRIMARY'">
+          <b>{{ 'views.applicationSummary.useType' | translate | compareText: 'Use Type'}}:</b>
+          {{ 'affiliate.type.' + application?.type | translate}}
+        </p>
+        <p *ngSwitchCase="'EXTENSION'">
+          <b>{{ 'views.applicationSummary.useType' | translate | compareText: 'Use Type'}}:</b>
+          {{ 'affiliate.type.' + application?.affiliateDetails?.type | translate}}
+        </p>
+        <p *ngSwitchCase="'PRIMARY'">
+          <b>{{ 'views.applicationSummary.useSubType' | translate | compareText: 'Use SubType'}}:</b>
+          {{ 'affiliate.subType.' + application?.subType | translate}}
+        </p>
+        <p *ngSwitchCase="'PRIMARY'">
+          <b>{{ 'register.affiliateRegistration.typeOfAgreement' | translate | compareText: 'Type of Agreement'}}:</b>
+          {{ 'affiliate.agreementType.' + application?.affiliateDetails?.agreementType | translate}}
+        </p>
+        <p *ngIf="application?.affiliate?.standingState">
+          <b>{{ 'views.contactInfo.admin.accountStanding' | translate | compareText: 'Account Standing'}}</b>
+          {{ 'affiliate.standingState.' + application?.affiliate?.standingState | translate }}
+        </p>
+      </div>
+  </div>
+
+  <div class="panel panel-default" *ngIf="application?.type !== 'INDIVIDUAL'">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</h3>
+      </div>
+      <div class="panel-body application-review">
+        <p>
+          <b>{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</b>
+          {{ application?.affiliateDetails?.organizationName }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}:</b>
+          {{ application?.affiliateDetails?.address?.street }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b>
+          {{ application?.affiliateDetails?.address?.city }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b>
+          {{ application?.affiliateDetails?.address?.post }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b>
+          {{ application?.affiliateDetails?.address?.country?.commonName }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.landline.short' | translate | compareText: 'Phone Number' }}:</b>
+          {{ application?.affiliateDetails?.landlineNumber }}
+          <span *ngIf="application?.affiliateDetails?.contactextension">ext: {{ application?.affiliateDetails?.landlineExtension }}</span>
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</b>
+          {{ application?.affiliateDetails?.alternateEmail }}
+        </p>
+        <p *ngIf="application?.affiliateDetails?.thirdEmail">
+          <b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</b>
+          {{ application?.affiliateDetails?.thirdEmail }}
+        </p>
+        <p *ngIf="application?.type === 'OTHER'">
+          <b>{{ 'views.contactInfo.admin.other.name' | translate | compareText: 'Other' }}:</b>
+          {{ application?.otherText }}
+        </p>
+      </div>
+  </div>
+
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ 'global.word.user' | translate | compareText: 'User' }}</h3>
+      </div>
+      <div class="panel-body application-review">
+          <p><b>{{ 'views.contactInfo.contact.fullName' | translate | compareText: 'Name' }}: </b>{{application?.affiliateDetails?.firstName}} {{application?.affiliateDetails?.lastName}}</p>
+          <p><b>{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}: </b>{{application?.affiliateDetails?.email}}</p>
+          <p *ngIf="application?.type=='INDIVIDUAL'"><b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}: </b>{{application?.affiliateDetails?.alternateEmail}}</p>
+          <p *ngIf="application?.type=='INDIVIDUAL' && application.affiliateDetails.thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}: </b>{{application?.affiliateDetails?.thirdEmail}}</p>
+          <p>
+            <b>{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:</b>{{application?.affiliateDetails?.landlineNumber}}
+              <span *ngIf="application?.affiliateDetails?.landlineExtension"><span>{{ 'views.contactInfo.contact.landlineExtension.short' | translate | compareText: 'Ext' }}: </span>{{application?.affiliateDetails?.landlineExtension}}</span>
+          </p>
+          <p><b>{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}: </b>{{application?.affiliateDetails?.mobileNumber}}</p>
+      </div>
+  </div>
+    
+  
+  <div class="panel panel-default" *ngIf="application?.type === 'INDIVIDUAL'">
+      <div class="panel-heading">
+      <h3 class="panel-title">{{ 'views.contactInfo.contact.address.title' | translate | compareText: 'Address' }}</h3>
+      </div>
+      <div class="panel-body application-review">
+        <p>
+          <b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}: </b>
+          {{ application?.affiliateDetails?.address?.street }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}: </b> 
+          {{ application?.affiliateDetails?.address?.city }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}: </b>
+          {{ application?.affiliateDetails?.address?.post }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}: </b>
+          {{ application?.affiliateDetails?.address?.country?.commonName }}
+        </p>
+      </div>
+  </div>
+
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ 'views.applicationSummary.billingInfo' | translate | compareText: 'Billing Information' }}</h3>
+      </div>
+      <div class="panel-body application-review">
+        <p>
+          <b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}: </b>
+          {{ application?.affiliateDetails?.billingAddress?.street }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}: </b> 
+          {{ application?.affiliateDetails?.billingAddress?.city }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}: </b>
+          {{ application?.affiliateDetails?.billingAddress?.post }}
+        </p>
+        <p>
+          <b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}: </b>
+          {{ application?.affiliateDetails?.billingAddress?.country?.commonName }}           
+        </p>
+      </div>
+  </div>
+
+  
+  <div class="panel panel-default" *ngSwitchCase="'PRIMARY'">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ 'views.applicationSummary.context' | translate | compareText: 'Usage Context Information' }}</h3>
     </div>
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">         
-          <h3 class="panel-title">{{ 'pendingApplications.table.applicationType' | translate | compareText: 'Application Type'}}</h3>
-        </div>
-        <div class="panel-body">
-          <p *ngIf="application?.type !== 'INDIVIDUAL'">
-            <strong>{{ 'views.contactInfo.organization.type.name' | translate | compareText: 'Organization Type'}}:</strong>
-            <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType === 'OTHER'">
-              {{application?.affiliateDetails?.organizationTypeOther}}
-            </span>
-            <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType !== 'OTHER'">
-              {{ 'affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate}}
-            </span>
-          </p>
-          <p *ngSwitchCase="'PRIMARY'">
-            <strong>{{ 'views.applicationSummary.useType' | translate | compareText: 'Use Type'}}:</strong>
-            {{ 'affiliate.type.' + application?.type | translate}}
-          </p>
-          <p *ngSwitchCase="'EXTENSION'">
-            <strong>{{ 'views.applicationSummary.useType' | translate | compareText: 'Use Type'}}:</strong>
-            {{ 'affiliate.type.' + application?.affiliateDetails?.type | translate}}
-          </p>
-          <p *ngSwitchCase="'PRIMARY'">
-            <strong>{{ 'views.applicationSummary.useSubType' | translate | compareText: 'Use SubType'}}:</strong>
-            {{ 'affiliate.subType.' + application?.subType | translate}}
-          </p>
-          <p *ngSwitchCase="'PRIMARY'">
-            <strong>{{ 'register.affiliateRegistration.typeOfAgreement' | translate | compareText: 'Type of Agreement'}}:</strong>
-            {{ 'affiliate.agreementType.' + application?.affiliateDetails?.agreementType | translate}}
-          </p>
-          <p *ngIf="application?.affiliate?.standingState">
-            <strong>{{ 'views.contactInfo.admin.accountStanding' | translate | compareText: 'Account Standing'}}</strong>
-            {{ 'affiliate.standingState.' + application?.affiliate?.standingState | translate }}
-          </p>
-        </div>
-    </div>
-
-    <div class="panel panel-default" *ngIf="application?.type !== 'INDIVIDUAL'">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</h3>
-        </div>
-        <div class="panel-body application-review">
-          <p>
-            <strong>{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</strong>
-            {{ application?.affiliateDetails?.organizationName }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}:</strong>
-            {{ application?.affiliateDetails?.address?.street }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</strong>
-            {{ application?.affiliateDetails?.address?.city }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</strong>
-            {{ application?.affiliateDetails?.address?.post }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</strong>
-            {{ application?.affiliateDetails?.address?.country?.commonName }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.landline.short' | translate | compareText: 'Phone Number' }}:</strong>
-            {{ application?.affiliateDetails?.landlineNumber }}
-            <span *ngIf="application?.affiliateDetails?.contactextension">ext: {{ application?.affiliateDetails?.landlineExtension }}</span>
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</strong>
-            {{ application?.affiliateDetails?.alternateEmail }}
-          </p>
-          <p *ngIf="application?.affiliateDetails?.thirdEmail">
-            <strong>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</strong>
-            {{ application?.affiliateDetails?.thirdEmail }}
-          </p>
-          <p *ngIf="application?.type === 'OTHER'">
-            <strong>{{ 'views.contactInfo.admin.other.name' | translate | compareText: 'Other' }}:</strong>
-            {{ application?.otherText }}
-          </p>
-        </div>
-    </div>
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ 'global.word.user' | translate | compareText: 'User' }}</h3>
-        </div>
-        <div class="panel-body application-review">
-            <p><strong>{{ 'views.contactInfo.contact.fullName' | translate | compareText: 'Name' }}: </strong>{{application?.affiliateDetails?.firstName}} {{application?.affiliateDetails?.lastName}}</p>
-            <p><strong>{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}: </strong>{{application?.affiliateDetails?.email}}</p>
-            <p *ngIf="application?.type=='INDIVIDUAL'"><strong>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}: </strong>{{application?.affiliateDetails?.alternateEmail}}</p>
-            <p *ngIf="application?.type=='INDIVIDUAL' && application.affiliateDetails.thirdEmail"><strong>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}: </strong>{{application?.affiliateDetails?.thirdEmail}}</p>
+    <div class="panel-body application-review">
+          <div>
             <p>
-              <strong>{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:</strong>{{application?.affiliateDetails?.landlineNumber}}
-                <span *ngIf="application?.affiliateDetails?.landlineExtension"><span>{{ 'views.contactInfo.contact.landlineExtension.short' | translate | compareText: 'Ext' }}: </span>{{application?.affiliateDetails?.landlineExtension}}</span>
+              <b>{{ 'views.usageLog.currentUsage' | translate | compareText: 'Current Usage' }}: </b>
+              {{ application?.commercialUsage?.context?.currentUsage }}
             </p>
-            <p><strong>{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}: </strong>{{application?.affiliateDetails?.mobileNumber}}</p>
-        </div>
-    </div>
-      
-    
-    <div class="panel panel-default" *ngIf="application?.type === 'INDIVIDUAL'">
-        <div class="panel-heading">
-        <h3 class="panel-title">{{ 'views.contactInfo.contact.address.title' | translate | compareText: 'Address' }}</h3>
-        </div>
-        <div class="panel-body application-review">
-          <p>
-            <strong>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}: </strong>
-            {{ application?.affiliateDetails?.address?.street }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}: </strong> 
-            {{ application?.affiliateDetails?.address?.city }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}: </strong>
-            {{ application?.affiliateDetails?.address?.post }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}: </strong>
-            {{ application?.affiliateDetails?.address?.country?.commonName }}
-          </p>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ 'views.applicationSummary.billingInfo' | translate | compareText: 'Billing Information' }}</h3>
-        </div>
-        <div class="panel-body application-review">
-          <p>
-            <strong>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}: </strong>
-            {{ application?.affiliateDetails?.billingAddress?.street }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}: </strong> 
-            {{ application?.affiliateDetails?.billingAddress?.city }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}: </strong>
-            {{ application?.affiliateDetails?.billingAddress?.post }}
-          </p>
-          <p>
-            <strong>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}: </strong>
-            {{ application?.affiliateDetails?.billingAddress?.country?.commonName }}           
-          </p>
-        </div>
-    </div>
-
-    
-    <div class="panel panel-default" *ngSwitchCase="'PRIMARY'">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{ 'views.applicationSummary.context' | translate | compareText: 'Usage Context Information' }}</h3>
-      </div>
-      <div class="panel-body application-review">
-            <div>
-              <p>
-                <strong>{{ 'views.usageLog.currentUsage' | translate | compareText: 'Current Usage' }}: </strong>
-                {{ application?.commercialUsage?.context?.currentUsage }}
-              </p>
-            </div>
-            <div>
-              <p>
-                <strong>{{ 'views.usageLog.plannedUsage' | translate | compareText: 'Planned Usage' }}: </strong>
-                {{ application?.commercialUsage?.context?.plannedUsage }}
-              </p>
-            </div>
-            <div>
-              <p>
-                <strong>{{ 'views.usageLog.purpose' | translate | compareText: 'Purpose' }}: </strong>
-                {{ application?.commercialUsage?.context?.purpose }}
-              </p>
-            </div>
-            <div>
-              <p>
-                <strong>{{ 'views.usageLog.impStatus' | translate | compareText: 'Implementation Status' }}: </strong>
-                {{ 'affiliate.implementationStatus.' + application?.commercialUsage?.context?.implementationStatus | translate}}
-              </p>
-            </div>
-            <div *ngFor="let countryRecord of usageCountryCountslist">
-              <strong>{{ 'views.applicationSummary.subLicence' | translate | compareText: 'Sub-license Usage' }}: </strong>
-              <p>
-                <strong>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}: </strong>
-                {{ 'global.country.' + countryRecord.country.isoCode2 | translate }}
-              </p>
-              <p>
-                <strong>{{ 'views.usageLog.institutions.practices' | translate | compareText: 'Practices' }}: </strong>
-                {{ countryRecord.snomedPractices | number }}
-              </p>
-              <p *ngIf="(commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]?.length ?? 0) > 0">
-                <strong>{{ 'views.usageLog.institutions.hospAndInst' | translate | compareText: 'Hospitals/Institutions' }}: </strong>
-                <ng-container *ngFor="let entry of commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]; let last = last">
-                    {{ entry.name }}<span *ngIf="!last">,</span>
-                </ng-container>
-              </p>
-            </div>
-            <div *ngIf="application?.commercialUsage?.context?.otherActivities">
-              <strong>{{ 'views.usageLog.otherActivities' | translate | compareText: 'Other Activities' }}: </strong>
-              <p>{{ application?.commercialUsage?.context?.otherActivities }}</p>
-            </div>
           </div>
-    </div>
+          <div>
+            <p>
+              <b>{{ 'views.usageLog.plannedUsage' | translate | compareText: 'Planned Usage' }}: </b>
+              {{ application?.commercialUsage?.context?.plannedUsage }}
+            </p>
+          </div>
+          <div>
+            <p>
+              <b>{{ 'views.usageLog.purpose' | translate | compareText: 'Purpose' }}: </b>
+              {{ application?.commercialUsage?.context?.purpose }}
+            </p>
+          </div>
+          <div>
+            <p>
+              <b>{{ 'views.usageLog.impStatus' | translate | compareText: 'Implementation Status' }}: </b>
+              {{ 'affiliate.implementationStatus.' + application?.commercialUsage?.context?.implementationStatus | translate}}
+            </p>
+          </div>
+          <div *ngFor="let countryRecord of usageCountryCountslist">
+            <b>{{ 'views.applicationSummary.subLicence' | translate | compareText: 'Sub-license Usage' }}: </b>
+            <p>
+              <b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}: </b>
+              {{ 'global.country.' + countryRecord.country.isoCode2 | translate }}
+            </p>
+            <p>
+              <b>{{ 'views.usageLog.institutions.practices' | translate | compareText: 'Practices' }}: </b>
+              {{ countryRecord.snomedPractices | number }}
+            </p>
+            <p *ngIf="(commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]?.length ?? 0) > 0">
+              <b>{{ 'views.usageLog.institutions.hospAndInst' | translate | compareText: 'Hospitals/Institutions' }}: </b>
+              <ng-container *ngFor="let entry of commercialUsageInstitutionsByCountry[countryRecord.country.isoCode2]; let last = last">
+                  {{ entry.name }}<span *ngIf="!last">,</span>
+              </ng-container>
+            </p>
+          </div>
+          <div *ngIf="application?.commercialUsage?.context?.otherActivities">
+            <b>{{ 'views.usageLog.otherActivities' | translate | compareText: 'Other Activities' }}: </b>
+            <p>{{ application?.commercialUsage?.context?.otherActivities }}</p>
+          </div>
+        </div>
+  </div>
 
-    <div *ngIf="showAuditPanel && audits.length != 0"  class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{ 'views.applicationSummary.applicationActivity' | translate | compareText: 'Application Activity' }}</h3>
-      </div>
-      <div class="panel-body application-review">
-        <app-audits-embed [audits]="audits"></app-audits-embed>
-      </div>
+  <div *ngIf="showAuditPanel && audits.length != 0"  class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ 'views.applicationSummary.applicationActivity' | translate | compareText: 'Application Activity' }}</h3>
     </div>
+    <div class="panel-body application-review">
+      <app-audits-embed [audits]="audits"></app-audits-embed>
+    </div>
+  </div>
 </div>
-      
-      
-      
-

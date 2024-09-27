@@ -106,7 +106,7 @@
           </th>
           <th class="col-md-2">
             <div class="btn-group" ngbDropdown>
-              <a id="standingDropdown" ngbDropdownToggle>
+              <a id="standingDropdown" ngbDropdownToggle >
                 Standing
                 <!-- <ng-container *ngIf="standingStateFilter">
                   : {{standingStateNotApplying ? 'Not' : ''}} {{standingStateFilter | enum:'affiliate.standingState.'}}
@@ -119,7 +119,7 @@
                   <i class="fa fa-sort"></i>
                 </ng-container>
               </a>
-              <div ngbDropdownMenu aria-labelledby="standingDropdown">
+              <div ngbDropdownMenu aria-labelledby="standingDropdown" style="font-size: 14px;">
                 <button class="dropdown-item" (click)="toggleField('standingState', false)">
                   <i class="fa fa-sort-alpha-asc"></i> Sort A to Z
                 </button>
@@ -208,8 +208,8 @@
           <td class="col-md-1">{{affiliate.affiliateId}}</td>
           <td class="col-md-2">{{affiliateActiveDetails(affiliate).firstName + ' ' + affiliateActiveDetails(affiliate).lastName}}</td>
           <td class="col-md-2">
-            {{'affiliate.type.' + affiliateActiveDetails(affiliate).type | translate}} -
-            {{'affiliate.subType.' + affiliateActiveDetails(affiliate).subType | translate}}
+            {{ affiliateActiveDetails(affiliate).type ? ('affiliate.type.' + affiliateActiveDetails(affiliate).type | translate) : '' }} -
+            {{ affiliateActiveDetails(affiliate).subType ? ('affiliate.subType.' + affiliateActiveDetails(affiliate).subType | translate) : '' }}
             {{affiliateActiveDetails(affiliate).otherText}}
           </td>
           <td class="col-md-2">

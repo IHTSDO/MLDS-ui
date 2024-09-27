@@ -18,6 +18,7 @@ import { DeleteVersionModalComponent } from '../delete-version-modal/delete-vers
 import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
 import { DeleteReleasePackageComponent } from '../delete-release-package/delete-release-package.component';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 
 @Component({
@@ -39,11 +40,14 @@ export class ReleaseComponent {
     alphabeta: [],
     archive: []
   };
+  isAdmin : boolean | undefined;
 
-  constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService, private releaseFileService: ReleaseFileService) { }
+  constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService,
+     private releaseFileService: ReleaseFileService,private sessionService: AuthenticationSharedService) { }
 
   ngOnInit(): void {
     this.loadReleasePackageId();
+    this.isAdmin=this.sessionService.isAdmin();
   }
 
   loadReleasePackageId(): void {

@@ -97,3 +97,21 @@ h3,
   position: relative;
   font-size: 12px;
 }
+.alert-warning {
+  background-color: #ffffff;
+  border-color: #f26c4f;
+  color: #f26c4f;
+}
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 2px solid #f26c4f;
+  border-radius: 4px;
+}
+.back{
+  color: #40ACD6;
+  margin-top: 86px;
+}
+.back:hover{
+  text-decoration: underline;
+}

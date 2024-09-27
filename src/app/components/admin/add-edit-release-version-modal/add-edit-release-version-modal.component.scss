@@ -67,3 +67,14 @@ label {
     border-radius: 0;
     text-decoration: underline;
 }
+/* Add these styles in your styles.css or component-specific CSS file */
+
+.input-group.datepicker .form-control {
+    height: 45px; /* Adjust the height as needed */
+    font-size: 16px; /* Increase font size for better visibility */
+}
+
+.input-group.datepicker .input-group-text {
+    height: 45px; /* Match the height of the input field */
+    font-size: 16px; /* Increase font size for the button */
+}

@@ -27,7 +27,7 @@ p {
 
 .page-header {
     padding-bottom: 9px;
-    margin: 40px 0 20px;
+    margin: 85px 0 20px;
     border-bottom: 1px solid #eeeeee;
 }
 
@@ -64,4 +64,27 @@ p {
 a {
     color: #40ACD6;
     text-decoration: none;
+}
+
+
+.panel-titles {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 19px;
+    word-wrap: break-word;
+    color: black;
+}
+.panel-titles:hover{
+    color:#8dccdc;
+}
+.alert-warning {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #f26c4f;
+    border-radius: 4px;
 }

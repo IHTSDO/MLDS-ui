@@ -2,6 +2,7 @@
     padding-top: 30px;
     margin-left: 15px;
     margin-right: 15px;
+    margin-top: 40px;
 }
 
 .dropdown-menu.show {
@@ -70,5 +71,37 @@ h1, .h1, h2, .h2, h3, .h3 {
     position: relative; 
     font-size: 12px;
   }
+  .panel-titles {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 19px;
+    word-wrap: break-word;
+    color: black;
+}
+.panel-titles:hover{
+    color:#8dccdc;
+}
+.alert-warning {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #f26c4f;
+    border-radius: 4px;
+}
+.back{
+  color: #8dccdc;
+  
+  margin-bottom: 30px;
+}
+.back:hover{
+  text-decoration: underline;
+}
+.version{
+  margin-bottom: 20px
+}
 
   
