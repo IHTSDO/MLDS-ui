@@ -26,7 +26,7 @@ export class LandingHeaderComponent {
     { key: 'en', name: 'English', flag: 'gb' },
     { key: 'fr', name: 'French', flag: 'fr' },
     { key: 'de', name: 'German', flag: 'de' },
-    { key: 'de-at', name: 'German (Austria)', flag: 'at' },
+    { key: 'de-at', name: 'German', flag: 'at' },
     { key: 'id', name: 'Indonesian', flag: 'id' },
     { key: 'pl', name: 'Polish', flag: 'pl' },
     { key: 'pt', name: 'Portuguese', flag: 'pt' },
