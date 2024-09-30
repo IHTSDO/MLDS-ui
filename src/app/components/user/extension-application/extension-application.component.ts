@@ -92,6 +92,7 @@ export class ExtensionApplicationComponent implements OnInit {
     }
 
     this.extensionForm.approvalState = 'SUBMITTED';
+    this.extensionForm.reason = this.extensionApplicationForm.get('reason')?.value;
 
     this.userRegistrationService.updateApplication(this.extensionForm).subscribe(
       (result) => {
