@@ -19,6 +19,7 @@ export class CountryComponent {
    * Array of country objects.
    */
   countries: any[] = [];
+  isLoading: boolean = true;
 
   constructor(private countryService: CountryService, private modalService: NgbModal) { }
 
@@ -33,11 +34,14 @@ export class CountryComponent {
    * Fetches the list of countries from the country service.
    */
   fetchCountries(): void {
+    this.isLoading = true;
     this.countryService.getCountries().subscribe({
       next: (data) => {
         this.countries = data.sort((a, b) => (a.commonName > b.commonName) ? 1 : -1);
+        this.isLoading = false;
       },
       error: (error) => {
+        this.isLoading = false;
         console.error('Error fetching countries:', error);
       }
     });

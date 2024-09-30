@@ -57,7 +57,7 @@
                     <ul ngbDropdownMenu class="dropdown-menu">
                       <li *ngFor="let lang of languages" class="dropdown-item language-option" (click)="changeLanguage(lang.key)">
                         <span class="famfamfam-flag-{{ lang.flag }}"></span> &nbsp;
-                        <span [translate]="'global.language.' + lang.key">{{ lang.name }}</span>
+                        <span>{{ lang.name }}</span>
                       </li>
                     </ul>
                   </li>

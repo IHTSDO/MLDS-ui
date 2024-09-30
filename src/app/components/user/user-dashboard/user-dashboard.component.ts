@@ -17,12 +17,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
 import { OrderByPipe } from "../../../pipes/order-by/order-by.pipe";
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, OrderByPipe],
+  imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, OrderByPipe, RouterModule],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss'
 })
@@ -54,7 +55,8 @@ export class UserDashboardComponent implements OnInit {
     private packagesService: PackagesService,
     private memberService: MemberService,
     private userAffiliateService: UserAffiliateService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -136,6 +138,10 @@ export class UserDashboardComponent implements OnInit {
     return this.applicationUtilsService.isApplicationWaitingForApplicant(application);
   }
 
+  isApplicationPending(application: any): boolean {
+    return this.applicationUtilsService.isApplicationPending(application);
+  }
+
   wasApproved(standingState: any): boolean {
     return this.standingStateUtilsService.wasApproved(standingState);
   }
@@ -190,5 +196,9 @@ export class UserDashboardComponent implements OnInit {
         });
       }
       return [];
+    }
+
+    navigateTo(route: string) {
+      this.router.navigate([route]);
     }
 }

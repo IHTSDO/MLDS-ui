@@ -100,13 +100,13 @@
 									*ngIf="application.applicationType === 'EXTENSION'">({{'global.member.'+application.member.key|translate}})</span>
 							</td>
 							<td>{{(application.completedAt || application.submittedAt) | date:'yyyy-MM-dd' }}</td>
-							<td>
+							<td [ngClass]="{'text-danger': isApplicationPending(application) || isApplicationWaitingForApplicant(application)}">
 								<strong>{{'approval.state.'+application.approvalState|translate}}</strong>
 							</td>
 							<td>
 								<span *ngIf="application.applicationType === 'EXTENSION'">
 									<a *ngIf="isApplicationWaitingForApplicant(application)"
-										class="btn btn-warning btn-sm">
+										class="btn btn-warning btn-sm" [routerLink]="['/extensionApplication', application.applicationId]">
 										<i class="fa fa-edit"></i> <span>{{'global.word.edit'|translate|compareText:'Edit'}}</span>
 									</a>
 									<a *ngIf="!isApplicationWaitingForApplicant(application)"

@@ -6,7 +6,7 @@
   [isSubmitting]="submitStatus.submitting"
   [formGroup]="memberBrandForm"
   (onSubmit)="submit()"
-  (onCancel)="activeModal.dismiss()">
+  (onCancel)="activeModal.close()">
 
   <div class="modal-body">
     <form [formGroup]="memberBrandForm" (ngSubmit)="submit()">

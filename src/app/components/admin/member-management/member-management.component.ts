@@ -42,6 +42,8 @@ export class MemberManagementComponent {
    */
   routes = ROUTES;
 
+  isLoading: boolean = true;
+
   /**
    * Constructor
    * 
@@ -76,11 +78,14 @@ export class MemberManagementComponent {
    * this.fetchMembers();
    */
   fetchMembers(): void {
+    this.isLoading = true;
     this.memberService.getMembers().subscribe({
       next: (data) => {
         this.members = data.sort((a, b) => (a.key > b.key) ? 1 : -1);
+        this.isLoading = false;
       },
       error: (error) => {
+        this.isLoading = false;
         console.error('Error fetching members:', error);
       }
     });

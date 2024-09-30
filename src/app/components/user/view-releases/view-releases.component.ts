@@ -216,6 +216,10 @@ export class ViewReleasesComponent implements OnInit {
     );
   }
 
+  goToExtensionApplication(): void {
+    this.router.navigate(['/extensionApplication', this.matchingExtensionApplication.applicationId]);
+  }
+
 
   
   toggleAccordion(index: number): void {
@@ -232,5 +236,9 @@ export class ViewReleasesComponent implements OnInit {
   // Sort method for packages by packageName
   sortByPackageName(packages: any[]): any[] {
     return packages.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }

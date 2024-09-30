@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, switchMap, tap } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 import { User } from 'src/model/user.model';
 import { ROUTES } from 'src/app/routes-config';
@@ -113,6 +113,19 @@ export class AuthenticationSharedService {
         error: () => this.logout()
       });
     }
+  }
+
+  AccountFromActivate(): Observable<any> {
+    if (this.isLoggedIn()) {
+      return this.getAccountDetails().pipe(
+        tap(user => this.handleUserDetails(user)),
+        catchError(() => {
+          this.logout();
+          return EMPTY;
+        })
+      );
+    }
+    return of(null); 
   }
 
   /**

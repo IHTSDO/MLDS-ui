@@ -27,6 +27,7 @@ export class IhtsdoReleasesComponent implements OnInit {
   offlinePackages: any[] = [];
   alphabetaPackages: any[] = [];
   releasePackage: any[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private packageUtilsService: PackageUtilsService,
@@ -85,6 +86,8 @@ export class IhtsdoReleasesComponent implements OnInit {
       .reject(p => this.packageUtilsService.isPackageEmpty(p))
       .sortBy('createdAt')
       .value();
+
+    this.isLoading = false;
   }
 
   isLatestVersion(version: any, versions: any[]): boolean {

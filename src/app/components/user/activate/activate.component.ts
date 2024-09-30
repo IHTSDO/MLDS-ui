@@ -46,7 +46,7 @@ export class ActivateComponent implements OnInit {
   }
 
   handleAccountDetails(): void {
-    this.sessionService.getAccountDetails().subscribe({
+    this.sessionService.AccountFromActivate().subscribe({
       next: () => {
         setTimeout(() => this.router.navigate(['/affiliateRegistration']), 2000);
       },

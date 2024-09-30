@@ -101,7 +101,8 @@
   </div>
 
   <div class="col-md-12">
-    <div *ngIf="versions['online'].length === 0" class="alert alert-warning">
+    <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+    <div *ngIf="!isLoading && versions['online'].length === 0" class="alert alert-warning">
       <i class="fa fa-exclamation-circle"></i> There are currently no online versions of this release.
     </div>
   </div>
@@ -181,7 +182,8 @@
   </div>
 
   <div class="col-md-12">
-    <div *ngIf="versions['alphabeta'].length === 0" class="alert alert-warning">
+    <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+    <div *ngIf="!isLoading && versions['alphabeta'].length === 0" class="alert alert-warning">
       <i class="fa fa-exclamation-circle"></i> There are currently no Alpha/Beta versions of this release.
     </div>
   </div>
@@ -258,7 +260,8 @@
   </div>
 
   <div class="col-md-12">
-    <div *ngIf="versions['offline'].length === 0" class="alert alert-warning">
+    <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+    <div *ngIf="!isLoading && versions['offline'].length === 0" class="alert alert-warning">
       <i class="fa fa-exclamation-circle"></i> There are currently no offline versions of this release.
     </div>
   </div>

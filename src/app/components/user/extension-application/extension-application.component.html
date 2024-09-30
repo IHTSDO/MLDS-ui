@@ -27,7 +27,7 @@
             <label class="font" for="reason">
             <b >{{'views.extensionApplication.form.purpose'|translate|compareText:'Purpose of Use'}}</b></label>
             <textarea id="reason" class="form-control" formControlName="reason" rows="10" cols="135"></textarea>
-            <div *ngIf="extensionApplicationForm.get('reason')?.touched && extensionApplicationForm.get('reason')?.invalid" class="text-danger">
+            <div *ngIf="extensionApplicationForm.get('reason')?.touched && extensionApplicationForm.get('reason')?.invalid" class="help-block">
               <small *ngIf="extensionApplicationForm.get('reason')?.hasError('required')">{{'form.requiredField'|translate|compareText:'Required field.'}}</small>
               <small *ngIf="extensionApplicationForm.get('reason')?.hasError('minlength')">{{'views.extensionApplication.form.error'|translate|compareText:'Reason needs to be longer.'}}</small>
             </div>
@@ -49,9 +49,8 @@
               <input type="checkbox" formControlName="snoMedTC" style="vertical-align: middle;    margin: -1px 0px 0px"/>&nbsp;
               <b style="vertical-align: middle;">{{'register.affiliateRegistration.license.confirm'|translate|compareText:'I agree to the license'}}</b> 
             </label>
-            <div *ngIf="extensionApplicationForm.get('snoMedTC')?.touched && extensionApplicationForm.get('snoMedTC')?.invalid" class="text-danger">
-              <small>{{'register.affiliateRegistration.license.error'|translate|compareText:'
-                You must agree to the terms and conditions of the SNOMED CT License in order to register, which also indicates potential fees that be required.'}}</small>
+            <div *ngIf="extensionApplicationForm.get('snoMedTC')?.touched && extensionApplicationForm.get('snoMedTC')?.invalid" class="help-block">
+              <small><b>{{'register.affiliateRegistration.license.error' | translate}}</b></small>
             </div>
           </div>
         </div>
@@ -60,7 +59,7 @@
       <!-- Form Buttons -->
       <div class="panel-footer" *ngIf="!readOnly">
         <button type="button" class="remove-button" (click)="cancelApplication()">{{'global.word.cancel'|translate|compareText:'Cancel'}}</button>
-        <button type="submit" class="add-button" [disabled]="extensionApplicationForm.invalid">{{'global.word.apply'|translate|compareText:'Apply'}}</button>        
+        <button type="submit" class="add-button">{{'global.word.apply'|translate|compareText:'Apply'}}</button>      
       </div>
     </form>
   </div>

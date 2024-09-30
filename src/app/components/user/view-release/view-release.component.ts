@@ -47,7 +47,7 @@ export class ViewReleaseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private packagesService: PackagesService,
     private router: Router,
-    private packageUtilsService: PackageUtilsService,
+    public packageUtilsService: PackageUtilsService,
     public sessionService: AuthenticationSharedService,
     private userAffiliateService: UserAffiliateService,
     private affiliateService: AffiliateService,
@@ -87,8 +87,7 @@ export class ViewReleaseComponent implements OnInit {
   }
 
   private updateVersionsLists(releasePackage: any): void {
-    this.releaseVersions = this.packageUtilsService.updateVersionsLists(releasePackage);
-  
+    this.releaseVersions = this.packageUtilsService.updateVersionsLists(releasePackage); 
   }
 
   private loadUserState(): void {
@@ -180,7 +179,9 @@ export class ViewReleaseComponent implements OnInit {
     const modalRef = this.modalService.open(isIhtsdoPresent 
       ? ReviewReleaseLicenseModalComponent 
       : ReviewReleaseLicenseWithDisclaimerModalComponent, 
-      { backdrop: 'static' }
+      { backdrop: 'static',
+        size: 'xl'
+       }
     );
 
     modalRef.componentInstance.releasePackage = this.releasePackage;
@@ -201,5 +202,9 @@ export class ViewReleaseComponent implements OnInit {
 
   goToViewPackages(): void {
     this.router.navigate(['/viewReleases']);
+  }
+
+  goToExtensionApplication(): void {
+    this.router.navigate(['/extensionApplication', this.matchingExtensionApplication.applicationId]);
   }
 }

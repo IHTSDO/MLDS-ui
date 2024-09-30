@@ -37,7 +37,7 @@
           <td *ngIf="showAllColumns">
             <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
               <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
-                {{ 'affiliate.type.' + usageReport.type | translate}}
+                {{ usageReport.type ? ('affiliate.type.' + usageReport.type | translate) : '' }}
               </span>
             </span>
           </td>

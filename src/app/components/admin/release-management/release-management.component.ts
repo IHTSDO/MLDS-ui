@@ -30,6 +30,7 @@ export class ReleaseManagementComponent {
     showAllMembers: ''
   };
 session: any;
+  isLoading: boolean = true;
 
 
 
@@ -54,6 +55,7 @@ session: any;
   }
 
   private loadReleasePackages(): void {
+    this.isLoading = true;
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
 
@@ -80,6 +82,8 @@ session: any;
             .reject(this.packageUtilsService.isPackageFullyArchived.bind(this))
             .sortBy('createdAt')
             .value();
+          
+          this.isLoading = false;
 
           return {
             member: this.memberService.getMemberByKey(memberKey),

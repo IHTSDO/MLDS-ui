@@ -45,12 +45,6 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="input-group" *ngIf="submitting">
-        <p class="help-block">
-          Loading..
-          <i class="fa fa-spinner fa-spin"></i>
-        </p>
-      </div>
       <div class="table-responsive">
         <table class="table table-condensed table-striped">
           <thead>
@@ -70,6 +64,7 @@
             </tr>
           </tbody>
         </table>
+        <div *ngIf="submitting" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
       </div>
     </div>
   </div>

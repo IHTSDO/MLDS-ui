@@ -26,6 +26,7 @@ export class IhtsdoReleaseComponent implements OnInit {
     alphabeta: [],
     offline: []
   };
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -74,6 +75,7 @@ export class IhtsdoReleaseComponent implements OnInit {
 
   private initReleasePackageState(releasePackage: any): void {
     this.releaseVersions = this.packageUtilsService.updateVersionsLists(releasePackage);
+    this.isLoading = false;
   }
 
   goToViewPackages(): void {

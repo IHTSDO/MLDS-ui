@@ -29,6 +29,7 @@ export class ArchiveVersionsComponent implements OnInit {
     archive: []
   };
   isAdmin: boolean | undefined ;
+  isLoading: boolean = true;
 
   constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService
     ,private sessionService: AuthenticationSharedService
@@ -49,6 +50,7 @@ export class ArchiveVersionsComponent implements OnInit {
   }
 
   getReleasePackage(id: string): void {
+    this.isLoading = true;
     this.packagesService.getReleasePackageById(id).subscribe({
       next: (data) => {
         if (this.packageUtilsService.isReleasePackageInactive(this.packageEntity)) {
@@ -58,8 +60,10 @@ export class ArchiveVersionsComponent implements OnInit {
         this.isEditableReleasePackage = this.packageUtilsService.isEditableReleasePackage(this.packageEntity);
         this.isRemovableReleasePackage = this.packageUtilsService.isRemovableReleasePackage(this.packageEntity);
         this.versions = this.packageUtilsService.updateVersionsLists(this.packageEntity);
+        this.isLoading = false;
       },
       error: (error) => {
+        this.isLoading = false;
         console.error('Error fetching release package:', error);
         this.goToArchiveReleases();
       }

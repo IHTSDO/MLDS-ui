@@ -25,45 +25,39 @@
             *ngFor="let releaseVersion of releaseVersions['online']">
             <div class="panel-heading status">
                 <div *ngIf="!isLoading">
-                <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
+                <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="alert-danger-flag float-end"
                     >
                     {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
                 </span>
 
-                <span *ngIf="sessionService.isAuthenticated() && isPendingInvoice && isMembershipApproved"
-                    class="badge bg-danger float-end" >
+                <span *ngIf="sessionService.isAuthenticated() && isPendingInvoice && isMembershipApproved()"
+                  class="alert-danger-flag float-end" >
                     {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
                 </span>
 
                 <span
-                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant"
-                    class="badge bg-warning float-end" \>
-                    {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
-                </span>
-
-                <span
-                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved"
-                    class="badge bg-danger float-end" >
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationApproved"
+                    class="alert-danger-flag float-end" >
                     {{'views.releases.warning.pProcessed'  | translate }}
                 </span>
 
-                <span
+                <button
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipUnstarted()"
-                    class="badge bg-success float-end" >
+                    class="greenbutton" (click)="packageUtilsService.openExtensionApplication(releasePackage)">
                     {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
-                </span>
+                 </button>
 
                 <span
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && !isApplicationWaitingForApplicant()"
-                    class="badge bg-danger float-end" \>
-                    {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
+                     class="alert-danger-flag float-end">
+                    {{'views.releases.warning.aProcessed' | translate }}
                 </span>
 
-                <span
+                <button
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && isApplicationWaitingForApplicant()"
-                    class="badge bg-warning float-end" >
-                    {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
-                </span>
+                    class="red-button" (click)="goToExtensionApplication()">
+                    {{'views.releases.warning.aAttention' | translate }}
+                </button>
                 </div>
                 <div class="status">
                     <h3 class="panel-title">{{releaseVersion?.name}}</h3>
@@ -115,45 +109,39 @@
         <div class="panel panel-default release-package package"
             *ngFor="let releaseVersion of releaseVersions['alphabeta']">
             <div class="panel-heading status">
-                <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="badge bg-danger float-end"
+                <span *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="alert-danger-flag float-end" 
                     >
                     {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
                 </span>
 
-                <span *ngIf="sessionService.isAuthenticated() && isPendingInvoice && isMembershipApproved"
-                    class="badge bg-danger float-end" >
+                <span *ngIf="sessionService.isAuthenticated() && isPendingInvoice && isMembershipApproved()"
+                  class="alert-danger-flag float-end" >
                     {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
                 </span>
 
                 <span
-                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant"
-                    class="badge bg-warning float-end" >
-                    {{ 'views.releases.warning.pAttention'| translate |compareText:' Primary application needs attention'}}
-                </span>
-
-                <span
-                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved"
-                    class="badge bg-danger float-end">
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationApproved"
+                    class="alert-danger-flag float-end">
                     {{'views.releases.warning.pProcessed'  | translate }}
                 </span>
 
-                <span
-                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipUnstarted()"
-                    class="badge bg-success float-end" >
+                <button
+                    *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipUnstarted()"
+                    class="greenbutton" (click)="packageUtilsService.openExtensionApplication(releasePackage)">
                     {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
-                </span>
+                </button>
 
                 <span
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && !isApplicationWaitingForApplicant()"
-                    class="badge bg-danger float-end" >
-                    {{'views.releases.warning.apply' | translate |compareText:'Application being processed'}}
+                    class="alert-danger-flag float-end" >
+                    {{'views.releases.warning.aProcessed' | translate }}
                 </span>
 
-                <span
+                <button
                     *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage() && isMembershipIncomplete() && isApplicationWaitingForApplicant()"
-                    class="badge bg-warning float-end" >
-                    {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
-                </span>
+                    class="red-button" (click)="goToExtensionApplication()">
+                    {{'views.releases.warning.aAttention' | translate }}
+                </button>
                 <div class="status">
                     <h3 class="panel-title">{{releaseVersion?.name}}</h3>
                 </div>

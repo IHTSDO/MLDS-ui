@@ -18,6 +18,7 @@ export class SystemsLoggersComponent implements OnInit {
   predicate: string = 'name';
   reverse: boolean = false;
   currentLevel: string = '';
+  isLoading: boolean = true;
 
   constructor(private logsService: SystemsLoggersService) {}
 
@@ -28,6 +29,7 @@ export class SystemsLoggersComponent implements OnInit {
   loadLoggers(): void {
     this.logsService.findAll().subscribe(loggers => {
       this.loggers = loggers;
+      this.isLoading = false;
     });
   }
 
