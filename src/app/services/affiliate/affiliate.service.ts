@@ -5,6 +5,8 @@ import { AuthenticationSharedService } from '../authentication/authentication-sh
 import { ApplicationUtilsService } from '../application-utils/application-utils.service'
 import { API_ROUTES } from 'src/app/routes-config-api';
 
+
+
 /**
  * Affiliate service provides methods for interacting with the affiliate API.
  */
@@ -47,8 +49,25 @@ export class AffiliateService {
    * @example
    * affiliateService.filterAffiliates('searchQuery', 1, 10, 'member', 'ACTIVE', false, 'name', true).subscribe(affiliates => console.log(affiliates));
    */
-  filterAffiliates(q: string, page: number, pageSize: number, member: any, standingState: string, standingStateNot: boolean, orderBy: string, reverseSort: boolean): Observable<any> {
-    let url = `${this.apiUrl}/affiliates?q=${encodeURIComponent(q)}&$page=${encodeURIComponent(page)}&$pageSize=${encodeURIComponent(pageSize)}`;
+  filterAffiliates(q: string, page: number, member: any, standingState: string, standingStateNot: boolean, orderBy: string, reverseSort: boolean): Observable<any> {
+    let url = `${this.apiUrl}/affiliates?q=${encodeURIComponent(q)}&$page=${encodeURIComponent(page)}&$pageSize=${encodeURIComponent(50)}`;
+    if (member) {
+      const filterString = `homeMember eq '${member}'`;
+      url += `&$filter=${encodeURIComponent(filterString)}`;
+    }
+    if (orderBy) {
+      url += `&$orderby=${encodeURIComponent(orderBy)}${reverseSort ? ' desc' : ''}`;
+    }
+    if (standingState) {
+      const standingStateFilter = `${standingStateNot ? 'not ' : ''}standingState eq '${standingState}'`;
+      url += `&$filter=${encodeURIComponent(standingStateFilter)}`;
+    }
+    return this.http.get(url);
+  }
+
+  generateCsv(q: string, page: number, member: any, standingState: string, standingStateNot: boolean, orderBy: string, reverseSort: boolean): Observable<any> {
+    let url = `${this.apiUrl}/affiliates?q=${encodeURIComponent(q)}&$page=${encodeURIComponent(page)}&$pageSize=${encodeURIComponent(
+      999999999)}`;
     if (member) {
       const filterString = `homeMember eq '${member}'`;
       url += `&$filter=${encodeURIComponent(filterString)}`;

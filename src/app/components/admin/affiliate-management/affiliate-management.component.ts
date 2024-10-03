@@ -211,7 +211,6 @@ export class AffiliateManagementComponent implements OnInit {
       .filterAffiliates(
         this.query,
         this.page,
-        50,
         this.showAllAffiliates == '0' ? homeMemberKey : null,
         this.standingStateFilter,
         this.standingStateNotApplying,
@@ -269,7 +268,6 @@ loadMoreAffiliatess(): void {
     .filterAffiliates(
       this.query,
       this.page,
-      50, // Page size
       this.showAllAffiliates === '0' ? homeMemberKey : null,
       this.standingStateFilter,
       this.standingStateNotApplying,
@@ -469,10 +467,9 @@ loadMoreAffiliatess(): void {
     this.generatingCsv = true;
   
     this.affiliateService
-      .filterAffiliates(
+      .generateCsv(
         this.query,
         0,
-        999999999,
         this.showAllAffiliates === '1' ? null : this.homeMember,
         this.standingStateFilter,
         this.standingStateNotApplying,

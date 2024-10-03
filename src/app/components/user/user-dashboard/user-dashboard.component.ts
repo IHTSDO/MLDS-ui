@@ -177,45 +177,46 @@ export class UserDashboardComponent implements OnInit {
     orderByApplicationType(application: any): boolean {
       return !this.applicationUtilsService.isPrimaryApplication(application);
     }
-  
-    // Combined sort method for sorting by both approval state and application type
-    getSortedApplications(): any[] {
-      if (this.affiliate?.applications) {
-        return this.affiliate.applications.sort((a: any, b: any) => {
-          // First, determine approval states for both applications
-          const approvalStateA = this.orderByApprovalState(a);
-          const approvalStateB = this.orderByApprovalState(b);
-    
-          // Compare approval states: move approved applications to the end
-          let approvalComparison: number;
-    
-          if (approvalStateA === approvalStateB) {
-            approvalComparison = 0; // Equal approval states
-          } else if (approvalStateA) {
-            approvalComparison = 1; // Move approved applications to the end
-          } else {
-            approvalComparison = -1; // Unapproved applications should come first
-          }
-    
-          // If approval states are equal, compare application types
-          if (approvalComparison === 0) {
-            const applicationTypeA = this.orderByApplicationType(a);
-            const applicationTypeB = this.orderByApplicationType(b);
-    
-            if (applicationTypeA === applicationTypeB) {
-              return 0; // Equal application types
-            } else {
-              return applicationTypeA ? -1 : 1; // Sort by application type
-            }
-          }
-    
-          return approvalComparison; // Return approval comparison result
-        });
+  // Helper function to compare approval states
+private compareApprovalStates(a: any, b: any): number {
+  const approvalStateA = this.orderByApprovalState(a);
+  const approvalStateB = this.orderByApprovalState(b);
+
+  if (approvalStateA === approvalStateB) {
+    return 0; // Equal approval states
+  }
+  return approvalStateA ? 1 : -1; // Move approved applications to the end
+}
+
+// Helper function to compare application types
+private compareApplicationTypes(a: any, b: any): number {
+  const applicationTypeA = this.orderByApplicationType(a);
+  const applicationTypeB = this.orderByApplicationType(b);
+
+  if (applicationTypeA === applicationTypeB) {
+    return 0; // Equal application types
+  }
+  return applicationTypeA ? -1 : 1; // Sort by application type
+}
+
+// Combined sort method for sorting by both approval state and application type
+getSortedApplications(): any[] {
+  if (this.affiliate?.applications) {
+    return this.affiliate.applications.sort((a: any, b: any) => {
+      const approvalComparison = this.compareApprovalStates(a, b);
+
+      // If approval states are equal, compare application types
+      if (approvalComparison === 0) {
+        return this.compareApplicationTypes(a, b);
       }
-      
-      return [];
-    }
-    
+
+      return approvalComparison; // Return approval comparison result
+    });
+  }
+
+  return [];
+}
+
 
     navigateTo(route: string) {
       this.router.navigate([route]);
