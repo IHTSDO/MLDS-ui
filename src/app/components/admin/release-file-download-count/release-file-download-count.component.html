@@ -23,9 +23,9 @@
     <div class="col-md-4">
       <div class="input-group">
         <div class="dropdown" style="display: inline-block; width: 100%;">
-          <button class="review-button dropdown-toggle " type="button" id="omitUsersDropdown" [disabled]="userList.length === 0" aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown()">
-            Exclude Users
-            <span class="caret"></span>
+          <button class="review-button dropdown-toggle" type="button" id="omitUsersDropdown" aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown()">
+            Exclude Users &nbsp;
+            <div *ngIf="usersLoading && !submitting" class="text-center"><i class="fa fa-spinner fa-spin"></i></div>
           </button>
           <div class="dropdown-menu dropdown-scrollable" [ngClass]="{ 'show': dropdownOpen }" aria-labelledby="omitUsersDropdown" style="width: 100%;">
             <div *ngFor="let user of userList" class="custom-select-item language-option" (click)="toggleUserSelection(user)">

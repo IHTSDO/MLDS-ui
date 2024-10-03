@@ -55,6 +55,8 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
    */
   releaseFileDownloadCounts: any;
 
+  usersLoading = false;
+
   constructor(private releaseFileDownloadCountService: ReleaseFileDownloadCountService) {}
 
   /**
@@ -111,7 +113,6 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
         data => {
           this.releaseFileDownloadCounts = data;
           this.loadUsers(this.fromDate!, this.toDate!);
-          this.submitting = false;
         },
         error => {
           console.error('Error loading release file download counts:', error);
@@ -161,12 +162,17 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
    * @param toDate - The end date of the range
    */
   loadUsers(fromDate: string, toDate: string) {
+    this.usersLoading = true;
     this.releaseFileDownloadCountService.getUsers(fromDate, toDate)
       .subscribe(
         (data: string[]) => {
+          this.usersLoading = false;
+          this.submitting = false;
           this.userList = data; // Handle the list of usernames
         },
         error => {
+          this.usersLoading = false;
+          this.submitting = false;
           console.error('Error loading users:', error);
         }
       );
