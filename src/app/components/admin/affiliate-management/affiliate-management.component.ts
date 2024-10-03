@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { SessionStateService } from 'src/app/services/session-state/session-state.service';
@@ -11,6 +10,7 @@ import { StandingStateUtilsService } from 'src/app/services/standing-state-utils
 import { saveAs } from 'file-saver';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
+import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 
 /**
  * Affiliate Management Component
@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-affiliate-management',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, FormsModule, NgbModule, EnumPipe,TranslateModule],
+  imports: [CommonModule, FormsModule, NgbModule, EnumPipe,TranslateModule,ScrollTrackerDirective],
   templateUrl: './affiliate-management.component.html',
   styleUrl: './affiliate-management.component.scss'
 })
@@ -251,6 +251,70 @@ export class AffiliateManagementComponent implements OnInit {
       });
       
   }
+loadMoreAffiliatess(): void {
+  let homeMemberKey = this.homeMember;
+  this.saveVisualState();
+
+  // Prevent multiple simultaneous requests
+  if (this.downloadingAffiliates || this.allRetrieved) {
+    return;
+  }
+
+  this.loadReset = false;
+  this.downloadingAffiliates = true;
+  this.alerts = [];
+
+  // Fetching affiliates
+  this.affiliateService
+    .filterAffiliates(
+      this.query,
+      this.page,
+      50, // Page size
+      this.showAllAffiliates === '0' ? homeMemberKey : null,
+      this.standingStateFilter,
+      this.standingStateNotApplying,
+      this.orderByField,
+      this.reverseSort
+    )
+    .subscribe({
+      next: response => {
+        // Add affiliates to the list
+        response.affiliates.forEach((a: any) => {
+          this.affiliates.push(a);
+        });
+
+        // Update state
+        if (this.affiliates.length > 0) {
+          this.noResults = false;
+        }
+        this.page += 1;
+        this.downloadingAffiliates = false;
+        this.totalResults = response.totalResults;
+        this.totalPages = response.totalPages;
+
+        // Check if all affiliates are retrieved
+        if (this.affiliates.length >= this.totalResults) {
+          this.allRetrieved = true;
+        }
+
+        // Reset loading if applicable
+        if (this.loadReset) {
+          this.loadAffiliates();
+        }
+      },
+      error: error => {
+        this.downloadingAffiliates = false;
+        console.error('Error fetching applications', error);
+        if (this.loadReset) {
+          this.loadAffiliates();
+        }
+      },
+      complete: () => {
+        console.log('Affiliate loading completed');
+      }
+    });
+}
+
 /**
  * Load affiliates
  *

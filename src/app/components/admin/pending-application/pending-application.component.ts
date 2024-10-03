@@ -9,7 +9,6 @@
  */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { saveAs } from 'file-saver';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { FormsModule } from '@angular/forms';
@@ -19,13 +18,14 @@ import { ROUTES } from 'src/app/routes-config'
 import { TranslateModule } from '@ngx-translate/core';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 /**
  * Pending Applications Component
  */
 @Component({
   selector: 'app-pending-applications',
   standalone: true,
-  imports: [InfiniteScrollModule, CommonModule, FormsModule, TranslateModule, EnumPipe, CompareTextPipe],
+  imports: [ScrollTrackerDirective, CommonModule, FormsModule, TranslateModule, EnumPipe, CompareTextPipe],
   templateUrl: './pending-application.component.html',
   styleUrls: ['./pending-application.component.scss']
 })

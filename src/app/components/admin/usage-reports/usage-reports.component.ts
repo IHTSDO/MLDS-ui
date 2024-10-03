@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { ROUTES } from 'src/app/routes-config'
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
+import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 /**
  * Component for displaying usage reports.
  */
 @Component({
   selector: 'app-usage-reports',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, EnumPipe,TranslateModule],
+  imports: [CommonModule, ScrollTrackerDirective, EnumPipe,TranslateModule],
   templateUrl: './usage-reports.component.html',
   styleUrl: './usage-reports.component.scss'
 })
@@ -81,6 +81,7 @@ export class UsageReportsComponent implements OnInit {
     this.downloadingReports = true;
     if (reset) {
       this.page = 0;
+      
       this.usageReports = [];
       this.hasMoreData = true;
     }
