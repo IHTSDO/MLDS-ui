@@ -100,6 +100,10 @@ export class UsageReportsComponent implements OnInit {
         console.error('Error fetching usage reports', error);
 
       },
+      complete: () => {
+        this.loading = false;
+        this.downloadingReports = false;
+      }
     });
   }
 
