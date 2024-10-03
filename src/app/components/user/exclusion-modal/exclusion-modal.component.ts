@@ -45,7 +45,6 @@ isSubmitting: boolean=false;
   ngOnInit(): void {
     const acceptText = this.translate.instant('register.messages.excludemessage.accept');
     this.submitText = `${acceptText} ${this.countryName}`;
-    console.log(this.submitText);
   }
   /**
    * Confirms the exclusion and closes the modal.

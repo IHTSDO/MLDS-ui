@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
@@ -193,7 +193,7 @@ export class AffiliateManagementComponent implements OnInit {
    * Example usage:
    * this.loadMoreAffiliates();
    */
-    var homeMemberKey =  this.homeMember;
+    let homeMemberKey =  this.homeMember;
     this.saveVisualState();
 
     if (this.downloadingAffiliates) {
@@ -218,8 +218,8 @@ export class AffiliateManagementComponent implements OnInit {
         this.orderByField,
         this.reverseSort
       )
-      .subscribe(
-        response => {
+      .subscribe({
+        next: response => {
           response.affiliates.forEach((a: any) => {
             this.affiliates.push(a);
           });
@@ -237,14 +237,19 @@ export class AffiliateManagementComponent implements OnInit {
             this.loadAffiliates();
           }
         },
-        error => {
+        error: error => {
           this.downloadingAffiliates = false;
           console.error('Error fetching applications', error);
           if (this.loadReset) {
             this.loadAffiliates();
           }
+        },
+        complete: () => {
+          // Optional: You can handle the completion if needed
+          console.log('Affiliate loading completed');
         }
-      );
+      });
+      
   }
 /**
  * Load affiliates
@@ -371,7 +376,7 @@ export class AffiliateManagementComponent implements OnInit {
   affiliateActiveDetails(affiliate: any): any {
     return (
       affiliate.affiliateDetails ||
-      (affiliate.application && affiliate.application.affiliateDetails) ||
+      (affiliate.application?.affiliateDetails) ||
       {}
     );
   }
@@ -409,8 +414,8 @@ export class AffiliateManagementComponent implements OnInit {
         this.orderByField,
         this.reverseSort
       )
-      .subscribe(
-        response => {
+      .subscribe({
+        next: (response: any) => {
           const expressions = [
             (affiliate: any) => affiliate.affiliateId,
             (affiliate: any) => `${this.affiliateActiveDetails(affiliate).firstName} ${this.affiliateActiveDetails(affiliate).lastName}`,
@@ -452,12 +457,12 @@ export class AffiliateManagementComponent implements OnInit {
           ]);
           this.generatingCsv = false;
         },
-        error => {
+       error: (error: any) => {
           this.generatingCsv = false;
           console.error('Error fetching affiliates', error);
           // Handle the error appropriately
         }
-      );
+      });
   }
   
 /**

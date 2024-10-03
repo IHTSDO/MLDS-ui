@@ -223,32 +223,51 @@ export class AffiliateRegistrationComponent implements OnInit {
   }
 
 
-  updateForm() {
+  updateForm(): void {
+    const affiliateDetails = this.applicationData?.affiliateDetails || {};
+    const billingAddress = affiliateDetails?.billingAddress || {};
+    const address = affiliateDetails?.address || {};
+    const otherData = this.applicationData?.other || {};
+  
     this.affiliateApplicationForm.patchValue({
-      type: this.applicationData?.affiliateDetails.type || '',
-      subType: this.applicationData?.affiliateDetails.subType || '',
-      otherText: this.applicationData?.affiliateDetails.otherText || '',
-      agreementType: this.applicationData?.affiliateDetails?.agreementType || '',
-      alternateEmail: this.applicationData?.affiliateDetails?.alternateEmail || '',
-      thirdEmail: this.applicationData?.affiliateDetails?.thirdEmail || '',
-      contactPhone: this.applicationData?.affiliateDetails?.landlineNumber || '',
-      contactExtension: this.applicationData?.affiliateDetails?.landlineExtension || '',
-      mobilePhone: this.applicationData?.affiliateDetails?.mobileNumber || '',
-      address: this.applicationData?.affiliateDetails?.address?.street || '',
-      city: this.applicationData?.affiliateDetails?.address?.city || '',
-      postalCode: this.applicationData?.affiliateDetails?.address?.post || '',
+      type: affiliateDetails.type || '',
+      subType: affiliateDetails.subType || '',
+      otherText: affiliateDetails.otherText || '',
+      agreementType: affiliateDetails.agreementType || '',
+      alternateEmail: affiliateDetails.alternateEmail || '',
+      thirdEmail: affiliateDetails.thirdEmail || '',
+      contactPhone: affiliateDetails.landlineNumber || '',
+      contactExtension: affiliateDetails.landlineExtension || '',
+      mobilePhone: affiliateDetails.mobileNumber || '',
+      ...this.mapAddress(address),
       isSameAddress: this.isSameAddress,
-      billingAddress: this.applicationData?.affiliateDetails?.billingAddress?.street || '',
-      billingCity: this.applicationData?.affiliateDetails?.billingAddress?.city || '',
-      billingPostCode: this.applicationData?.affiliateDetails?.billingAddress?.post || '',
-      billingCountry: this.applicationData?.affiliateDetails?.billingAddress?.country || '',
-      organizationName: this.applicationData?.affiliateDetails?.organizationName || '',
-      organizationType: this.applicationData?.affiliateDetails?.organizationType || '',
-      organizationTypeOther: this.applicationData?.affiliateDetails?.organizationTypeOther || '',
-      otherTextArea: this.applicationData?.other?.textArea || '',
-    })
+      ...this.mapBillingAddress(billingAddress),
+      organizationName: affiliateDetails.organizationName || '',
+      organizationType: affiliateDetails.organizationType || '',
+      organizationTypeOther: affiliateDetails.organizationTypeOther || '',
+      otherTextArea: otherData.textArea || '',
+    });
+  
     this.updateValidations();
   }
+  
+  private mapAddress(address: any): any {
+    return {
+      address: address.street || '',
+      city: address.city || '',
+      postalCode: address.post || '',
+    };
+  }
+  
+  private mapBillingAddress(billingAddress: any): any {
+    return {
+      billingAddress: billingAddress.street || '',
+      billingCity: billingAddress.city || '',
+      billingPostCode: billingAddress.post || '',
+      billingCountry: billingAddress.country || '',
+    };
+  }
+  
 
   autoSubmit() {
     this.saveApplication();
@@ -335,8 +354,7 @@ export class AffiliateRegistrationComponent implements OnInit {
         }
       },
       (reason) => {
-        if (reason === 'cancel') {
-        }
+       
       }
     );
   }
@@ -430,7 +448,6 @@ export class AffiliateRegistrationComponent implements OnInit {
   }
 
   private finalSubmission(): void {
-    const finalFormData = this.applicationData;
     const commercialUsageId = this.applicationData.commercialUsage?.commercialUsageId;
     this.fetchReportAndSubmit(commercialUsageId);
   }
@@ -466,14 +483,14 @@ export class AffiliateRegistrationComponent implements OnInit {
     this.commercialUsageReport = updatedCommercialUsageReport;
   
     this.commercialUsageService.updateUsageReportType(this.commercialUsageReport)
-      .subscribe(
+      .subscribe({next:
         (response: any) => {
           
         },
-        (error: any) => {
+        error:(error: any) => {
           console.error('Failed to update usage type', error);
         }
-      );
+  });
   }
   
 

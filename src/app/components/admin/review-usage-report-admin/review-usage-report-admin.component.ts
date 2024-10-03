@@ -97,19 +97,31 @@ collapsePanel = {
     array.sort((a, b) => {
       const x = (a[expression] || '').toLowerCase();
       const y = (b[expression] || '').toLowerCase();
-      return x < y ? -1 : x > y ? 1 : 0;
-    });
+  
+      let comparisonResult;
+  
+      if (x < y) {
+          comparisonResult = -1;
+      } else if (x > y) {
+          comparisonResult = 1;
+      } else {
+          comparisonResult = 0;
+      }
+  
+      return comparisonResult;
+  });
+  
   }
 
   private findUsageReport(reportId: string): void {
-    this.commercialUsageService.getUsageReport(reportId).subscribe(
+    this.commercialUsageService.getUsageReport(reportId).subscribe({
       
       /**
        * Handle the successful response
        *
        * @param {any} result The usage report data
        */
-      result => {
+      next:result => {
        
         this.usageReport = result;
   
@@ -117,13 +129,13 @@ collapsePanel = {
         this.affiliate = this.usageReport?.affiliate|| {};
   
         if (this.affiliate?.affiliateId) {
-          this.affiliateService.affiliate(this.affiliate?.affiliateId).subscribe(
+          this.affiliateService.affiliate(this.affiliate?.affiliateId).subscribe({
             /**
              * Handle the successful affiliate data response
              *
              * @param {any} affiliateResult The affiliate data
              */
-            affiliateResult => {
+           next: affiliateResult => {
               this.affiliate = affiliateResult;
             },
             /**
@@ -131,10 +143,10 @@ collapsePanel = {
              *
              * @param {any} affiliateError The error object
              */
-            affiliateError => {
+            error :(affiliateError) => {
               console.error("Failed to load affiliate data:", affiliateError);
             }
-          );
+        });
         }
   
         // Process usage report countries
@@ -158,11 +170,11 @@ collapsePanel = {
        *
        * @param {any} message The error object
        */
-      message => {
+      error:(message) => {
         console.error("Find usage report failure:", message);
         this.router.navigate(['/usageReportsReview']);
       }
-    );
+  });
   }
   
 

@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule} from '@ngx-translate/core';
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
@@ -42,7 +42,6 @@ export class AddUsageReportModalComponent implements OnInit {
       selectedRange: [this.selectedRange, Validators.required]
     });
 
-    console.log(this.selectedRange);
   }
 
   add(): void {
@@ -54,12 +53,9 @@ export class AddUsageReportModalComponent implements OnInit {
     this.submitting = true;
     this.alerts = [];
 
-    const { startDate, endDate } = this.addRangeForm.get('selectedRange')?.value;
-    console.log(this.affiliateId);
+    const { startDate = null, endDate = null } = this.addRangeForm.get('selectedRange')?.value || {};
     this.commercialUsageService?.createUsageReport(this.affiliateId.toString(), startDate.toString(), endDate.toString()).subscribe({
       next: (result) => {
-       
-        console.log(result);
         const commercialUsageId = result.commercialUsageId;
         if (this.isAdminOrStaff) {
           this.router.navigate(['/usageReports/usageLog', commercialUsageId]);

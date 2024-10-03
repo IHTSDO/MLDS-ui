@@ -257,7 +257,6 @@ private showExclusionModal(country: any): void {
 
   modalRef.result.then((result) => {
     if (result) {
-      console.log("accepted")
     }
   }, (reason) => {
     this.router.navigate([this.routes.landingPage]).then(() => {

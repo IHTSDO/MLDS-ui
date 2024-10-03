@@ -191,7 +191,6 @@ session: any;
   promoteMemberPackagesChanged(m: any) {
     this.memberService.updateMember(m).subscribe({
       next: (result) => {
-        console.log("updated - promote package");
       },
       error: (err) => {
         this.alerts.push({ type: 'danger', msg: 'Network request failure [12]: please try again later.' });

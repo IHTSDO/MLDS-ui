@@ -160,8 +160,6 @@ export class ContactInfoComponent implements OnInit {
             if (response) {
               this.affiliateId = response[0].affiliateId;
               this.affiliate = response[0];
-              
-              console.log('Affiliate ID from myAccount:', this.affiliateId);
               this.approved = this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
               this.readOnly = !this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
               this.updateForm();

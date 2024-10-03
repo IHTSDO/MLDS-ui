@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component,Input} from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
@@ -34,17 +34,17 @@ export class RemoveCountryModalComponent {
 
     // Call the delete usage count service
     this.commercialUsageService.deleteUsageCount(this.usageReport, this.count)
-      .subscribe(
+      .subscribe({next:
         () => {
           // Close the modal on success
           this.activeModal.close('Country removed');
         },
-        (error) => {
+        error:(error) => {
           // Handle error, show alert, and stop submitting state
           this.alerts.push({ type: 'danger', msg: 'Network request failure [38]: please try again later.' });
           this.submitting = false;  // Stop spinner
         }
-      );
+  });
   }
 
   closeAlert(index: number) {

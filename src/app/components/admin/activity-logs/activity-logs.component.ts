@@ -53,18 +53,20 @@ export class ActivityLogsComponent implements OnInit {
    */
   loadActivity(): void {
     this.submitting = true;
-    this.activityLogsService.findByDates(this.fromDate, this.toDate).subscribe(
-      data => {
+    this.activityLogsService.findByDates(this.fromDate, this.toDate).subscribe({
+      next: data => {
         this.audits = data;
         this.submitting = false;
       },
-      error => {
+      error: error => {
         this.submitting = false;
         console.error(error);
+      },
+      complete: () => {
       }
-    );
+    });
   }
-
+  
   /**
    * Called when the date range changes
    */

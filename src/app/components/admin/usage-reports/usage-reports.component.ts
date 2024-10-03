@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
-import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service'
 import { ROUTES } from 'src/app/routes-config'
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
@@ -65,10 +64,7 @@ export class UsageReportsComponent implements OnInit {
    * Initializes the component by loading the first page of usage reports.
    */
   ngOnInit(): void {
-    const userDetails = this.authenticationService.getUserDetails();
     this.isAdmin = this.authenticationService.isAdmin();
-    console.log(userDetails?.member?.['key'])
-    // this.homeMember = userDetails?.member?.['key'];
     this.loadMoreUsageReports();
   }
 
@@ -90,21 +86,20 @@ export class UsageReportsComponent implements OnInit {
     }
     const orderByParam = `${this.orderByField},${this.reverseSort ? 'desc' : 'asc'}`;
     this.commercialUsageService.getSubmittedUsageReports(this.page, this.pageSize, orderByParam)
-      .subscribe(results => {
+      .subscribe({next:results => {
         if (results.length < this.pageSize) {
           this.hasMoreData = false;
         }
         this.usageReports = [...this.usageReports, ...results];
         this.page++;
       },
-      error => {
-        this.loading = false;
-        console.error('Error fetching usage reports', error);
-      },
-      () => {
+      error:(error) => {
         this.loading = false;
         this.downloadingReports = false;
-      });
+        console.error('Error fetching usage reports', error);
+
+      },
+    });
   }
 
   /**

@@ -54,35 +54,54 @@ export class ArchiveManagementComponent implements OnInit {
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
         this.packages = data;
-
         if (!this.packages) {
           return;
         }
-
-        const memberFiltered = this.releaseManagementFilter.showAllMembers
-          ? this.packages
-          : this.packages.filter(p => this.packageUtilsService.isReleasePackageMatchingMember(p));
-
-        this.packagesByMember = lodash.chain(memberFiltered)
-          .groupBy('member.key')
-          .map((memberPackages, memberKey) => {
-            const archivePackages = memberPackages.filter(releasePackage =>
-              releasePackage.releaseVersions.some((version: { archive: any; }) => version.archive)
-            );
-            return {
-              member: this.memberService.membersByKey[memberKey],
-              archivePackages: archivePackages
-            };
-          })
-          .sortBy(memberEntry => memberEntry.member.key === 'IHTSDO'
-            ? '!IHTSDO'
-            : memberEntry.member.key)
-          .value();
-        ;
+  
+        // Apply member filtering
+        const memberFiltered = this.filterPackagesByMember(this.packages);
+  
+        // Process packages by member
+        this.packagesByMember = this.processPackagesByMember(memberFiltered);
       }
-    })
+    });
   }
-
+  
+  // Helper function to filter packages by member
+  filterPackagesByMember(packages: any[]): any[] {
+    return this.releaseManagementFilter.showAllMembers
+      ? packages
+      : packages.filter(p => this.packageUtilsService.isReleasePackageMatchingMember(p));
+  }
+  
+  // Helper function to check if a version is archived
+  isArchivedVersion(releasePackage: any): boolean {
+    return releasePackage.releaseVersions.some((version: { archive: any }) => version.archive);
+  }
+  
+  // Helper function to group and process packages by member
+  processPackagesByMember(memberFiltered: any[]): any[] {
+    return lodash.chain(memberFiltered)
+      .groupBy('member.key')
+      .map((memberPackages, memberKey) => this.createMemberPackageEntry(memberPackages, memberKey))
+      .sortBy(memberEntry => this.sortByMemberKey(memberEntry))
+      .value();
+  }
+  
+  // Helper function to create the member package entry
+  createMemberPackageEntry(memberPackages: any[], memberKey: string): any {
+    const archivePackages = memberPackages.filter(releasePackage => this.isArchivedVersion(releasePackage));
+    return {
+      member: this.memberService.membersByKey[memberKey],
+      archivePackages: archivePackages
+    };
+  }
+  
+  // Helper function to sort by member key
+  sortByMemberKey(memberEntry: any): string {
+    return memberEntry.member.key === 'IHTSDO' ? '!IHTSDO' : memberEntry.member.key;
+  }
+  
 
   goToArchivePackage(packageEntity: any): void {
     this.router.navigate(['/archiveReleases/archivePackage', encodeURIComponent(packageEntity.releasePackageId)]);

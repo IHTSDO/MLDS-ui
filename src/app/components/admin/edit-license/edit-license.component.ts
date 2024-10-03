@@ -100,19 +100,19 @@ export class EditLicenseComponent implements OnInit {
     formData.append('licenseName', this.licenseForm.get('licenseName')?.value || '');
     formData.append('licenseVersion', this.licenseForm.get('licenseVersion')?.value || '');
 
-    this.memberService.updateLicense(this.member.key, formData).subscribe(
-      result => {
+    this.memberService.updateLicense(this.member.key, formData).subscribe({
+     next: result => {
         const message = this.file ? 'New license has been uploaded.' : 'License name and version updated.';
         this.alerts.push({ type: 'success', msg: message });
         this.submitStatus.submitSuccessful = true;
         this.submitStatus.submitting = false;
       },
-      error => {
+      error: (error: any) => {
         console.error(error);
         this.alerts.push({ type: 'danger', msg: 'Network request failure: please try again later.' });
         this.submitStatus.submitting = false;
       }
-    );
+  });
   }
 
   /**

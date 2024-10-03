@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -43,12 +42,12 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
   /**
    * From date for the download count
    */
-  fromDate: any | undefined;
+  fromDate: any;
 
   /**
    * To date for the download count
    */
-  toDate: any | undefined;
+  toDate: any;
 
   /**
    * Release file download counts data
@@ -109,16 +108,16 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
     };
 
     this.releaseFileDownloadCountService.findReleaseFileDownloadCounts(params)
-      .subscribe(
-        data => {
+      .subscribe({
+       next: data => {
           this.releaseFileDownloadCounts = data;
-          this.loadUsers(this.fromDate!, this.toDate!);
+          this.loadUsers(this.fromDate, this.toDate);
         },
-        error => {
+        error: (error: any) => {
           console.error('Error loading release file download counts:', error);
           this.submitting = false;
         }
-      );
+  });
   }
 
   /**
@@ -164,17 +163,17 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
   loadUsers(fromDate: string, toDate: string) {
     this.usersLoading = true;
     this.releaseFileDownloadCountService.getUsers(fromDate, toDate)
-      .subscribe(
-        (data: string[]) => {
+      .subscribe({
+        next:(data: string[]) => {
           this.usersLoading = false;
           this.submitting = false;
           this.userList = data; // Handle the list of usernames
         },
-        error => {
+        error: (error: any)=> {
           this.usersLoading = false;
           this.submitting = false;
           console.error('Error loading users:', error);
         }
-      );
+  });
   }
 }

@@ -30,16 +30,17 @@ ok(): void {
   // Call the service to create an extension application
   this.userRegistrationService.createExtensionApplication(this.releasePackage.member)
     .subscribe(
+      {next:
       (result: any) => {
         // Close the modal and pass the result back to the parent component
         this.activeModal.close(result);
       },
-      (error: any) => {
+      error:(error: any) => {
         // Handle error and show an alert
         this.alerts.push({ type: 'danger', msg: 'Network request failure: please try again later.' });
         this.submitting = false;
       }
-    );
+});
 }
 
 

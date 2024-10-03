@@ -78,7 +78,6 @@ export class UserRegistrationService {
   }
 
   createExtensionApplication(member: { key: string }): Observable<any> {
-    console.log('createExtensionApplication');
     const payload = {
       memberKey: member.key,
       applicationType: 'EXTENSION',

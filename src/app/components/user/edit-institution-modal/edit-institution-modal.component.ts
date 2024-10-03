@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbAlert, NgbDatepicker, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
-import { compact } from 'lodash';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { ModalComponent } from "../../common/modal/modal.component";
@@ -57,7 +56,6 @@ export class EditInstitutionModalComponent implements OnInit {
       endDate: [this.convertDateToNgb(this.institution?.endDate)],
       note: [this.institution?.note || '']
     });
-    console.log(this.formInstitution);
   }
 
   // Helper method to convert string date to NgbDateStruct

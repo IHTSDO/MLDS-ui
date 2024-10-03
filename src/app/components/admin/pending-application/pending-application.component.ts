@@ -122,17 +122,17 @@ export class PendingApplicationsComponent implements OnInit {
     }
     this.userRegistrationService
       .filterPendingApplications(this.query,this.page, this.pageSize, homeMember, this.orderByField, this.reverseSort)
-      .subscribe((response) => {
+      .subscribe({next:(response) => {
         if (response.length < this.pageSize) {
           this.hasMoreData = false;
         }
         this.applications = [...this.applications, ...response];
         this.page++;
         this.loadingApplications = false;
-      }, error => {
+      },error: (error: any) => {
         console.error('Error fetching applications', error);
         this.loadingApplications = false;
-      });
+      }});
 }
 
 
@@ -158,8 +158,8 @@ export class PendingApplicationsComponent implements OnInit {
     this.generatingCsv = true;
     this.userRegistrationService
       .filterPendingApplications(this.query, 0, 999999999, this.showAllApplications === '1' ? null : this.homeMember, this.orderByField, this.reverseSort)
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next:(response) => {
           const expressions = [
             (application: any) => application.applicationId,
             (application: any) => application.affiliateDetails.firstName + ' ' + application.affiliateDetails.lastName,
@@ -198,11 +198,11 @@ export class PendingApplicationsComponent implements OnInit {
           ]);
           this.generatingCsv = false;
         },
-        (error) => {
+        error: (error: any) => {
           console.error('CSV generation failure: ', error);
           this.generatingCsv = false;
         }
-      );
+  });
   }
 
  /**

@@ -37,7 +37,7 @@ export class CountryComponent {
     this.isLoading = true;
     this.countryService.getCountries().subscribe({
       next: (data) => {
-        this.countries = data.sort((a, b) => (a.commonName > b.commonName) ? 1 : -1);
+        this.countries = [...data].sort((a, b) => a.commonName.localeCompare(b.commonName));
         this.isLoading = false;
       },
       error: (error) => {
@@ -52,12 +52,14 @@ export class CountryComponent {
    * @param isoCode - The ISO code of the country to delete.
    */
   delete(isoCode: string): void {
-    this.countryService.deleteCountry(isoCode).subscribe(
-      () => {
+    this.countryService.deleteCountry(isoCode).subscribe({
+      next: () => {
         this.fetchCountries(); // Reload countries after deletion
       },
-      (error: any) => console.error('Error deleting country', error)
-    );
+      error: (error: any) => {
+        console.error('Error deleting country', error);
+      }
+    });
   }
 
   /**

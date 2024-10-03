@@ -64,7 +64,7 @@ export class ExtensionApplicationComponent implements OnInit {
 
   // Fetch application data
   loadApplicationData() {
-    this.userRegistrationService.getApplicationById(String(this.applicationId)).subscribe(
+    this.userRegistrationService.getApplicationById(String(this.applicationId)).subscribe({next:
       (result) => {
         this.extensionForm = result;
         this.readOnly = !this.applicationUtilsService.isApplicationWaitingForApplicant(result);
@@ -72,11 +72,11 @@ export class ExtensionApplicationComponent implements OnInit {
         this.isApplicationApproved = this.applicationUtilsService.isApplicationApproved(result);
         this.isApplicationRejected = this.applicationUtilsService.isApplicationRejected(result);
       },
-      (error) => {
+      error:(error) => {
         console.error('Application not found', error);
         this.router.navigate(['/viewReleases']);
       }
-    );
+  });
   }
 
   viewLicense(memberKey: string) {
@@ -94,15 +94,15 @@ export class ExtensionApplicationComponent implements OnInit {
     this.extensionForm.approvalState = 'SUBMITTED';
     this.extensionForm.reason = this.extensionApplicationForm.get('reason')?.value;
 
-    this.userRegistrationService.updateApplication(this.extensionForm).subscribe(
+    this.userRegistrationService.updateApplication(this.extensionForm).subscribe({next:
       (result) => {
         this.userAffiliateService.refreshAffiliate();
         this.router.navigate(['/userDashboard']);
       },
-      (error) => {
+      error:(error) => {
         console.error('Failed to submit the application', error);
       }
-    );
+  });
   }
 
   cancelApplication() {
@@ -110,15 +110,15 @@ export class ExtensionApplicationComponent implements OnInit {
 
     modalRef.result.then(
       () => {
-        this.userRegistrationService.deleteApplication(this.applicationId!).subscribe(
+        this.userRegistrationService.deleteApplication(this.applicationId!).subscribe({next:
           () => {
             this.userAffiliateService.refreshAffiliate();
             this.router.navigate(['/userDashboard']);
           },
-          (error) => {
+          error:(error) => {
             console.error('Failed to delete the application', error);
           }
-        );
+      });
       },
       () => {
         // Handle cancel case

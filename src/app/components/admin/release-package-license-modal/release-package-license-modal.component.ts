@@ -36,7 +36,7 @@ export class ReleasePackageLicenseModalComponent {
 
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length) {
+    if (input.files) {
       this.licenseForm.file = input.files[0];
     }
   }
@@ -60,7 +60,6 @@ export class ReleasePackageLicenseModalComponent {
     });
 
     modalRef.result.then(() => {
-      console.log("confirmed");
       this.updateReleasePackageLicense();
     });
   }

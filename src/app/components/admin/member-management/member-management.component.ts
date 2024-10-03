@@ -80,8 +80,11 @@ export class MemberManagementComponent {
   fetchMembers(): void {
     this.isLoading = true;
     this.memberService.getMembers().subscribe({
-      next: (data) => {
-        this.members = data.sort((a, b) => (a.key > b.key) ? 1 : -1);
+      next: (data) => {// Assuming 'data' is the array you want to sort
+        const unsortedMembers = data; // Keep the original array intact
+        this.members = this.sortMembers(unsortedMembers);
+        
+
         this.isLoading = false;
       },
       error: (error) => {
@@ -90,7 +93,10 @@ export class MemberManagementComponent {
       }
     });
   }
-
+// Function to sort members by key
+private sortMembers(members: any[]): any[] {
+  return members.sort((a, b) => (a.key > b.key ? 1 : -1));
+}
   /**
    * Gets member landing page URL
    * 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbActiveModal, NgbAlert, NgbDatepicker, NgbDatepickerModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbAlert, NgbDatepicker, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -98,15 +98,6 @@ submitAttempted: any;
     this.activeModal.dismiss('cancel');
   }
 
-  // openDatepicker(picker: 'startDate' | 'endDate'): void {
-  //   this.datepickers[picker] = true;
-  // }
-  
-  // dateOptions = {
-  //   formatYear: 'yyyy',
-  //   startingDay: 1,
-  //   format: 'yyyy-MM-dd'
-  // };
 
   formatDate(date: { day: number, month: number, year: number } | null): string | null {
     if (date) {

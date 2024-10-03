@@ -24,12 +24,14 @@ export class ChangePasswordComponent {
     private fb: FormBuilder,
     private passwordService: ChangePasswordService
   ) {
-    this.passwordForm =  this.fb.group({
+    this.passwordForm = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
-    }, { 
-      validator: this.passwordMatchValidator()
     });
+    
+    // Set the custom validator for the password match after group creation
+    this.passwordForm.setValidators(this.passwordMatchValidator());
+    
   }
 
   passwordMatchValidator(): ValidatorFn {
@@ -50,16 +52,16 @@ export class ChangePasswordComponent {
     }
     const { password } = this.passwordForm.value;
 
-    this.passwordService.changePassword(password).subscribe(
+    this.passwordService.changePassword(password).subscribe({next:
       () => {
         this.error = null;
         this.success = 'Password changed!';
         this.formDisabled = true; 
       },
-      () => {
+      error:() => {
         this.success = null;
         this.error = 'An error has occurred. The password could not be changed.';
       }
-    );
+  });
   }
 }

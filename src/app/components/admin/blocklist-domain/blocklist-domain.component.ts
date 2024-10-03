@@ -37,10 +37,12 @@ export class BlocklistDomainComponent implements OnInit {
    * Fetches the blocklisted domains from the service.
    */
   getDomainBlacklist(): void {
-    this.domainBlacklistService.getDomainBlacklist().subscribe(
-      data => this.domainBlacklist = data,
-      error => console.error('Error fetching domain blacklist', error)
-    );
+    this.domainBlacklistService.getDomainBlacklist().subscribe({
+     next: data => this.domainBlacklist = data,
+     error: (error: any) => {
+         console.error('Error fetching domain blacklist', error)
+     },
+   });
   }
 
   /**
@@ -51,13 +53,15 @@ export class BlocklistDomainComponent implements OnInit {
    */
   newDomainSubmit(): void {
     if (this.domainForm.name) {
-      this.domainBlacklistService.addDomain(this.domainForm.name).subscribe(
-        () => {
+      this.domainBlacklistService.addDomain(this.domainForm.name).subscribe({
+        next:() => {
           this.domainForm.name = '';
           this.getDomainBlacklist();
         },
-        error => console.error('Error adding domain', error)
-      );
+        error: (error: any) => {
+           console.error('Error adding domain', error)
+        },
+    });
     }
   }
 
@@ -69,9 +73,10 @@ export class BlocklistDomainComponent implements OnInit {
    * <button (click)="removeDomain('example.com')">Remove Domain</button>
    */
   removeDomain(domain: string): void {
-    this.domainBlacklistService.removeDomain(domain).subscribe(
-      () => this.getDomainBlacklist(),
-      error => console.error('Error removing domain', error)
-    );
+    this.domainBlacklistService.removeDomain(domain).subscribe({
+      next:() => this.getDomainBlacklist(),
+      error: (error: any) => {
+        console.error('Error removing domain', error)
+    },});
   }
 }

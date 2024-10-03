@@ -29,19 +29,19 @@ export class ActivateComponent implements OnInit {
   ngOnInit(): void {
     const key = this.route.snapshot.queryParamMap.get('key');
     if (key) {
-      this.activateService.get({ key }).subscribe(
+      this.activateService.get({ key }).subscribe({next:
         (response: string) => {
           this.success = 'OK';
           localStorage.setItem('isLoggedIn', 'true');
           this.handleAccountDetails();
           this.setSuccessMessage(); // Set the success message after activation
         },
-        (error: any) => {
+        error:(error: any) => {
           console.error('Activation error', error);
           this.success = null;
           this.error = 'ERROR';
         }
-      );
+    });
     }
   }
 

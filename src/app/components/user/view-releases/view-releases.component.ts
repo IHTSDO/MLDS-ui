@@ -123,14 +123,23 @@ export class ViewReleasesComponent implements OnInit {
 
       if (memberRelease) {
         lodash.each(this.releasePackagesByMember, (item) => {
-          if (item.member.key === "IHTSDO" && memberRelease) {
-            lodash.each(memberRelease.packages, (releasePackage) => {
-              item.packages.push(releasePackage);
-            });
-            item.packages = this.packageUtilsService.releasePackageSort(item.packages);
-          }
+            if (item.member.key === "IHTSDO") {
+                // Ensure item.packages is initialized
+                if (!item.packages) {
+                    item.packages = []; // Initialize as an empty array if undefined
+                }
+    
+                // Push each release package from memberRelease.packages into item.packages
+                lodash.each(memberRelease.packages, (releasePackage) => {
+                    item.packages.push(releasePackage);
+                });
+    
+                // Sort item.packages after pushing the release packages
+                item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+            }
         });
-      }
+    }
+    
     }
   }
 
@@ -155,14 +164,23 @@ export class ViewReleasesComponent implements OnInit {
 
       if (alphaMemberRelease) {
         lodash.each(this.alphaReleasePackagesByMember, (item) => {
-          if (item.member.key === "IHTSDO" && alphaMemberRelease) {
-            lodash.each(alphaMemberRelease.packages, (releasePackage) => {
-              item.packages.push(releasePackage);
-            });
-            item.packages = this.packageUtilsService.releasePackageSort(item.packages);
-          }
+            if (item.member.key === "IHTSDO") {
+                // Ensure item.packages is initialized
+                if (!item.packages) {
+                    item.packages = []; // Initialize as an empty array if undefined
+                }
+    
+                // Push each release package from alphaMemberRelease.packages into item.packages
+                lodash.each(alphaMemberRelease.packages, (releasePackage) => {
+                    item.packages.push(releasePackage);
+                });
+    
+                // Sort item.packages after pushing the release packages
+                item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+            }
         });
-      }
+    }
+    
     }
   }
 

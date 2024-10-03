@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
@@ -53,16 +53,16 @@ export class IhtsdoReleaseComponent implements OnInit {
   
 
   private loadReleasePackage(): void {
-    if (this.releasePackage && this.releasePackage.id) {
+    if (this.releasePackage?.id) {
       this.initReleasePackageState(this.releasePackage);
     } else if (this.releasePackageId) {
-      this.packagesService.getReleasePackageById(this.releasePackageId).subscribe(
-        (result) => this.setReleasePackage(result),
-        (error) => {
+      this.packagesService.getReleasePackageById(this.releasePackageId).subscribe({
+        next:(result) => this.setReleasePackage(result),
+        error: (error: any) => {
           console.error('ReleasePackage not found', error);
           this.goToViewPackages();
         }
-      );
+    });
     } else {
       this.goToViewPackages();
     }

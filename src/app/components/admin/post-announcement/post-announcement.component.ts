@@ -55,7 +55,7 @@ export class PostAnnouncementComponent implements OnInit {
     this.memberKey = userDetails?.member['key'];
   }
 
-  sessionMemberPopulated(): Observable<any | null> {
+  sessionMemberPopulated(): Observable<any> {
     const userDetails = this.sessionService.getUserDetails();
     const memberKey = userDetails?.member['key'];
 
@@ -86,7 +86,7 @@ export class PostAnnouncementComponent implements OnInit {
           subject: this.announcementForm.value.subject,
           body: this.announcementForm.value.body,
           member: member,
-          allAffiliates: this.isAdmin && this.announcementForm.value.includeAllAffiliates ? true : false,
+          allAffiliates: this.isAdmin && this.announcementForm.value.includeAllAffiliates,
           additionalEmails: this.announcementForm.value.emailListString.split(/[ ,;]+/)
         };
 

@@ -70,7 +70,7 @@ export class ShowMemberBrandingComponent implements OnInit {
    * Initialize component
    */
   ngOnInit(): void {
-    this.memberKey = this.route.snapshot.paramMap.get('memberKey') || '';
+    this.memberKey = this.route.snapshot.paramMap.get('memberKey') ?? '';
     this.loadMemberDetails();
     const userDetails = this.authenticationService.getUserDetails();
     this.userFirstName = userDetails?.firstName ?? '';

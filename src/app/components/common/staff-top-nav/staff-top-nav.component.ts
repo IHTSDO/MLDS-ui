@@ -46,7 +46,6 @@ langkey: string | undefined;
   ngOnInit(): void {
     this.updateHomePageUrl();
     this.session = this.sessionService.getUserDetails();
-    console.log(this.sessionService.getUserDetails()?.langKey);
  
   }
 

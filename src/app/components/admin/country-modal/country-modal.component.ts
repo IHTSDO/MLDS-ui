@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModule, NgbTypeaheadModule, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
-import { debounceTime, distinctUntilChanged, map, Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Observable } from 'rxjs';
 import { MemberService } from 'src/app/services/member/member.service'
 import { ModalComponent } from '../../common/modal/modal.component';
 
@@ -96,14 +96,14 @@ export class CountryModalComponent {
    * Loads the available members from the member service
    */
   loadMembers() {
-    this.memberService.getMembers().subscribe(
-      (members: Member[]) => {
+    this.memberService.getMembers().subscribe({
+      next:(members: Member[]) => {
         this.availableMembers = members;
       },
-      error => {
+      error: (error: any) => {
         console.error('Error fetching members', error);
       }
-    );
+    });
   }
 
   /**

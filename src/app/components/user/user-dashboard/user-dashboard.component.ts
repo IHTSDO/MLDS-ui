@@ -182,21 +182,40 @@ export class UserDashboardComponent implements OnInit {
     getSortedApplications(): any[] {
       if (this.affiliate?.applications) {
         return this.affiliate.applications.sort((a: any, b: any) => {
-          // First, sort by approval state: move approved applications to the end
-          const approvalComparison = this.orderByApprovalState(a) === this.orderByApprovalState(b) ? 0 
-            : this.orderByApprovalState(a) ? 1 : -1;
-  
-          // If approval states are equal, sort by application type
-          if (approvalComparison === 0) {
-            return this.orderByApplicationType(a) === this.orderByApplicationType(b) ? 0 
-              : this.orderByApplicationType(a) ? -1 : 1;
+          // First, determine approval states for both applications
+          const approvalStateA = this.orderByApprovalState(a);
+          const approvalStateB = this.orderByApprovalState(b);
+    
+          // Compare approval states: move approved applications to the end
+          let approvalComparison: number;
+    
+          if (approvalStateA === approvalStateB) {
+            approvalComparison = 0; // Equal approval states
+          } else if (approvalStateA) {
+            approvalComparison = 1; // Move approved applications to the end
+          } else {
+            approvalComparison = -1; // Unapproved applications should come first
           }
-  
-          return approvalComparison;
+    
+          // If approval states are equal, compare application types
+          if (approvalComparison === 0) {
+            const applicationTypeA = this.orderByApplicationType(a);
+            const applicationTypeB = this.orderByApplicationType(b);
+    
+            if (applicationTypeA === applicationTypeB) {
+              return 0; // Equal application types
+            } else {
+              return applicationTypeA ? -1 : 1; // Sort by application type
+            }
+          }
+    
+          return approvalComparison; // Return approval comparison result
         });
       }
+      
       return [];
     }
+    
 
     navigateTo(route: string) {
       this.router.navigate([route]);

@@ -89,8 +89,7 @@ export class MetricsComponent implements OnInit {
     });    
 
     this.metricsService.getMetrics().subscribe(data => {
-      this.metrics = data
-      console.log('metrics: ' + this.metrics.gauges['jvm.buffers.direct.used'].value)
+      this.metrics = data;
       this.processMetrics(data)
     })
   }

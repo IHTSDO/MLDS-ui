@@ -56,34 +56,12 @@ export class EditCountDataAnalysisComponent implements OnInit {
     const editText = this.translate.instant('global.word.edit');
     const dataAnalysisText = this.translate.instant('views.usageLog.institutions.dataAnalysis.title');
     this.title = `${editText} ${dataAnalysisText}`;
-    console.log(this.title);
   }
 
   cancel(): void {
     this.activeModal.dismiss();
   }
 
-  // updateCount(): void {
-  //   this.submitAttempted = true;
-
-  //   if (this.formCount.invalid) {
-  //     return;
-  //   }
-
-  //   this.submitting = true;
-  //   this.alerts = [];
-  //   console.log("Usage Report" +this.usageReport)
-  //   this.commercialUsageService.updateUsageCount(this.usageReport, this.formCount.value)
-  //     .subscribe({
-  //       next: (result) => {
-  //         this.activeModal.close(result);
-  //       },
-  //       error: () => {
-  //         this.alerts.push({ type: 'danger', msg: 'Network request failure [26]: please try again later.' });
-  //         this.submitting = false;
-  //       }
-  //     });
-  // }
   updateCount(): void {
     this.submitAttempted = true;
   
@@ -93,8 +71,6 @@ export class EditCountDataAnalysisComponent implements OnInit {
   
     this.submitting = true;
     this.alerts = [];
-  
-    console.log("Usage Report:", JSON.stringify(this.usageReport, null, 2)); // Enhanced logging
   
     this.commercialUsageService.updateUsageCount(this.usageReport, this.formCount.value)
       .subscribe({

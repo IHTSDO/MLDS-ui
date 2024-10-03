@@ -34,7 +34,6 @@ session: any;
   ngOnInit(): void {
     const userDetails = this.authenticationService.getUserDetails();
     this.homeMember = userDetails?.member?.['key'];
-    console.log('Home Member:', this.homeMember);
     this.session  = userDetails?.member?.['key'];
   }
 
@@ -45,20 +44,17 @@ session: any;
     }
     
     this.generatingCsv = true;
-    console.log('Generating CSV for Home Member:', this.homeMember);
 
-    this.commercialusageService.getReviewUsageReport().subscribe(
-      data => {
+    this.commercialusageService.getReviewUsageReport().subscribe({
+      next:data => {
         const csvString = this.createCsvString(data);
         this.downloadCsv(csvString);
       },
-      error => {
+      error:(error) => {
         console.error('Error fetching usage reports', error);
-      },
-      () => {
         this.generatingCsv = false;
-      }
-    );
+      },
+    });
   }
 
   private createCsvString(data: any[]): string {

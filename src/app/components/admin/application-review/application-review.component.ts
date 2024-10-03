@@ -225,13 +225,13 @@ private loadApplication(): void {
  * @private
  */
 private fetchApplicationById(applicationId: string): void {
-  this.userRegistrationService.getApplicationById(applicationId).subscribe(
+  this.userRegistrationService.getApplicationById(applicationId).subscribe({
     /**
      * Handle the successful response
      *
      * @param {any} data The application data
      */
-    data => {
+    next:data => {
       this.application = data;
       this.processCommercialUsageData();
       this.loadNotes();
@@ -243,11 +243,11 @@ private fetchApplicationById(applicationId: string): void {
      *
      * @param {any} error The error object
      */
-    error => {
+    error: (error: any) => {
       this.errorMessage = 'Error retrieving application data';
       console.error(error);
     }
-  );
+  });
 }
 
 /**
@@ -466,20 +466,20 @@ onSearch(event: Event): void {
   const input = event.target as HTMLInputElement;
   const term = input.value.trim();
   if (term) {
-    this.affiliateService.allAffiliates(term).subscribe(
-      (response: any) => {
+    this.affiliateService.allAffiliates(term).subscribe({
+      next:(response: any) => {
         const affiliates = Array.isArray(response.affiliates) ? response.affiliates : [];
         this.searchResults = affiliates.filter((a: any) =>
           this.originalAffiliate === null || a.affiliateId !== this.originalAffiliate.affiliateId
         );
         this.showComparisonAffiliate = this.searchResults.length > 0;
       },
-      err => {
-        console.error('Error fetching affiliates:', err);
+      error: (error: any) => {
+        console.error('Error fetching affiliates:', error);
         this.searchResults = [];
         this.showComparisonAffiliate = false;
       }
-    );
+  });
   } else {
     this.searchResults = [];
     this.showComparisonAffiliate = false;
@@ -503,13 +503,13 @@ selectAffiliate(affiliate: any): void {
   /**
    * Fetch the application data for the selected affiliate
    */
-  this.userRegistrationService.getApplicationById(this.comparisonAffiliate.application.applicationId).subscribe(
+  this.userRegistrationService.getApplicationById(this.comparisonAffiliate.application.applicationId).subscribe({
     /**
      * On success, update the comparison affiliate with the fetched data
      *
      * @param {any} data The fetched application data
      */
-    data => {
+   next: (data: any) => {
       this.comparisonAffiliate = data;
     },
     /**
@@ -517,11 +517,11 @@ selectAffiliate(affiliate: any): void {
      *
      * @param {any} error The error object
      */
-    error => {
+    error: (error: any) => {
       this.errorMessage = 'Error retrieving application data';
       console.error(error);
     }
-  );
+});
 }
 
 /**
