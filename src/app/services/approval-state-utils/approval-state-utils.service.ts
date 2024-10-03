@@ -23,7 +23,7 @@ export class ApprovalStateUtilsService {
    * console.log(approvalStateUtils.isWaitingForApplicant(approvalState)); // true
    * ```
    */
-  isWaitingForApplicant(approvalState: any | null): boolean {
+  isWaitingForApplicant(approvalState: any): boolean {
     return (
       !approvalState ||
       approvalState === 'NOT_SUBMITTED'||

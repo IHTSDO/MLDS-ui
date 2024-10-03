@@ -86,7 +86,7 @@ export class UsageReportsService {
     modalRef.componentInstance.commercialUsageReport = commercialUsageReport;
     modalRef.result
       .then((result) => {
-        if (result && result && result.commercialUsageId) {
+        if (result?.commercialUsageId) {
           if(this.sessionService.isStaffOrAdmin()){
           this.router.navigate(['/usageReports/usageLog/', result.commercialUsageId]);
           }

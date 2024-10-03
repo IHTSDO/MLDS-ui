@@ -13,7 +13,6 @@ export class UsageReportStateUtilsService {
  private static readonly INVOICE_SENT = 'INVOICE_SENT';
  private static readonly REJECTED = 'REJECTED';
 
- constructor() {}
 
  isWaitingForApplicant(usageState: string | null): boolean {
    return !usageState || 
@@ -47,6 +46,6 @@ usageReportHospitals(usageReport: { entries: any[] }): number {
 }
 
 usageReportPractices(usageReport: { countries: { snomedPractices?: number }[] }): number {
-  return usageReport.countries.reduce((total, count) => total + (count.snomedPractices || 0), 0);
+  return usageReport.countries.reduce((total, count) => total + (count.snomedPractices ?? 0), 0);
 }
 }

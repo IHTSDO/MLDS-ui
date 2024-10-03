@@ -13,10 +13,22 @@ export class ActivityLogsService {
   constructor(private http: HttpClient) {}
 
   findFilteredAudits(filter?: string): Observable<any[]> {
-    const url = `${this.apiUrl}/audits${filter ? `?$filter=${encodeURIComponent(filter)}` : ''}`;
+
+    let url = `${this.apiUrl}/audits`;
+   
+    if (filter) {
+      url += `?$filter=${encodeURIComponent(filter)}`;
+    }
+   
     return this.http.get<any[]>(url).pipe(
-      map(response => response.sort((a, b) => b.timestamp - a.timestamp))
+      map(response => {
+        return this.sortAuditsByTimestamp(response);
+      })
     );
+  }
+   
+  private sortAuditsByTimestamp(audits: any[]): any[] {
+    return audits.sort((a, b) => b.timestamp - a.timestamp);
   }
 
   findAll(): Observable<any> {

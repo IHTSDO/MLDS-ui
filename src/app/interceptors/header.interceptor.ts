@@ -29,10 +29,7 @@ import {
    */
   @Injectable()
   export class HeaderInterceptor implements HttpInterceptor {
-    /**
-     * Constructor for the interceptor.
-     */
-    constructor() {}
+
   
     /**
      * Intercepts an HTTP request and adds the `withCredentials` flag if necessary.

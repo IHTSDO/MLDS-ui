@@ -3,7 +3,6 @@ import lodash from 'lodash';
 import { MemberService } from '../member/member.service';
 import { UserAffiliateService } from '../user-affiliate/user-affiliate.service';
 import { TranslateService } from '@ngx-translate/core';
-import _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -23,22 +22,26 @@ export class MemberPckageService {
 
   // Order by approved memberships
   orderApprovedMemberships(memberReleases: any): boolean {
-    return !(memberReleases.member && _.some(this.userAffiliateService.approvedMemberships, 
-      _.partial(this.memberService.isMemberEqual, memberReleases.member)));
+    return !(memberReleases.member && lodash.some(this.userAffiliateService.approvedMemberships, 
+      lodash.partial(this.memberService.isMemberEqual, memberReleases.member)));
   }
 
   // Order by incomplete memberships
   orderIncompleteMemberships(memberReleases: any): boolean {
-    return !(memberReleases.member && _.some(this.userAffiliateService.incompleteMemberships, 
-      _.partial(this.memberService.isMemberEqual, memberReleases.member)));
+    return !(memberReleases.member && lodash.some(this.userAffiliateService.incompleteMemberships, 
+      lodash.partial(this.memberService.isMemberEqual, memberReleases.member)));
   }
 
   // Order by member name (translated)
   orderMemberName(memberReleases: any): string {
-    return memberReleases.member 
-      ? (memberReleases.member.key ? this.translate.instant('global.member.' + memberReleases.member.key) : 'NONE')
-      : 'NONE';
-  }
+    if (!memberReleases.member) {
+        return 'NONE';
+    }
+
+    const memberKey = memberReleases.member.key;
+    return memberKey ? this.translate.instant('global.member.' + memberKey) : 'NONE';
+}
+
 
    // Comparator function to sort by IHTSDO and member name
    compareByIhtsdoAndName(a: any, b: any): number {

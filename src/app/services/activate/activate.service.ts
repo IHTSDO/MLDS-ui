@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 @Injectable({
   providedIn: 'root'

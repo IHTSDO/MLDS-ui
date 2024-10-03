@@ -10,7 +10,6 @@ button.close {
     -webkit-appearance: none;
 }
 .close {
-    // float: right;
     font-size: 21px;
     font-weight: bold;
     line-height: 1;
@@ -18,7 +17,6 @@ button.close {
     text-shadow: 0 1px 0 #fff;
     opacity: 0.2;
     filter: alpha(opacity = 20);
-    // float: inline-end;
 }
 .add-button {
     display: inline-block;

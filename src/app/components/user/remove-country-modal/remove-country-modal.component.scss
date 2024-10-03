@@ -17,7 +17,7 @@
     -ms-user-select: none;
     user-select: none;
     color:  #f26c4f;
-    background-color: #fde3dd;;
+    background-color: #fde3dd;
     border-color:  #f26c4f;
     border-top-left-radius: 10px;
 
@@ -47,10 +47,6 @@
     border-radius: 0;
     text-decoration: underline;
 }
-dl {
-  margin-top: 0;
-  margin-bottom: 20px;
-}
 
 * {
   -webkit-box-sizing: border-box;
@@ -64,6 +60,8 @@ dl {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   unicode-bidi: isolate;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 .dl-horizontal dt {
   float: left;

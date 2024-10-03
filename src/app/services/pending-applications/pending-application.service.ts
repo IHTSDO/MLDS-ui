@@ -55,7 +55,8 @@ export class PendingApplicationsService {
       page
     )}&$pageSize=${encodeURIComponent(pageSize)}`;
     if (member) {
-      url += `&$filter=${encodeURIComponent(`homeMember eq '${member}'`)}`;
+      const filter = `homeMember eq '${member}'`;
+      url += `&$filter=${encodeURIComponent(filter)}`;
     }
     if (orderBy) {
       url += `&$orderby=${encodeURIComponent(orderBy)}${reverseSort ? ' desc' : ''}`;

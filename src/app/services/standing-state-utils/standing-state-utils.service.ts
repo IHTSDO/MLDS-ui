@@ -8,10 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class StandingStateUtilsService {
 
-  /**
-   * Constructor.
-   */
-  constructor() { }
+
 
   /**
    * Returns an array of all possible standing state options.

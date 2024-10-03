@@ -80,7 +80,7 @@ export class UserAffiliateService {
 
   setAffiliate(affiliate: any) {
     this.affiliate = affiliate;
-    if (affiliate && affiliate.applications) {
+    if (affiliate?.applications) {
       this.initializeMemberships();
     }
   }

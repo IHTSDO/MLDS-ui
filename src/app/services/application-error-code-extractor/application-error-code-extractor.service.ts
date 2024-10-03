@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ApplicationErrorCodeExtractorService {
 
-  constructor() { }
   extractErrorCodeFromMessage(message: string): string | null {
     const errorCodePattern = /MLDS_ERR_[A-Z_]+/;
     const errorCodePatternResult = errorCodePattern.exec(message);

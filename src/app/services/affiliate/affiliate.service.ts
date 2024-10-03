@@ -50,13 +50,15 @@ export class AffiliateService {
   filterAffiliates(q: string, page: number, pageSize: number, member: any, standingState: string, standingStateNot: boolean, orderBy: string, reverseSort: boolean): Observable<any> {
     let url = `${this.apiUrl}/affiliates?q=${encodeURIComponent(q)}&$page=${encodeURIComponent(page)}&$pageSize=${encodeURIComponent(pageSize)}`;
     if (member) {
-      url += `&$filter=${encodeURIComponent(`homeMember eq '${member}'`)}`;
+      const filterString = `homeMember eq '${member}'`;
+      url += `&$filter=${encodeURIComponent(filterString)}`;
     }
     if (orderBy) {
       url += `&$orderby=${encodeURIComponent(orderBy)}${reverseSort ? ' desc' : ''}`;
     }
     if (standingState) {
-      url += `&$filter=${encodeURIComponent(`${standingStateNot ? 'not ' : ''}standingState eq '${standingState}'`)}`;
+      const standingStateFilter = `${standingStateNot ? 'not ' : ''}standingState eq '${standingState}'`;
+      url += `&$filter=${encodeURIComponent(standingStateFilter)}`;
     }
     return this.http.get(url);
   }

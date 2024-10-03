@@ -25,10 +25,16 @@ export class AuditsService {
     if (filter) {
       params = params.set('$filter', filter);
     }
-    
+ 
     return this.http.get<any[]>(`${this.apiUrl}/audits`, { params }).pipe(
-      map(response => response.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()))
+      map(response => {
+        return this.sortByTimestamp(response);
+      })
     );
+  }
+ 
+  private sortByTimestamp(audits: any[]): any[] {
+    return audits.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   }
 
   /**

@@ -82,7 +82,6 @@ p {
     border-top-left-radius: 10px;
     float: right !important;
     font-family: inherit;
-    line-height: inherit;
     overflow: visible;
     text-wrap: yes;
     text-transform: none;
@@ -93,9 +92,6 @@ p {
     background-color:  #3cb878;
     color: #ffffff;
   }   
-  .pull-right {
-    float: right;
-}
 
 .pull-right {
     float: right !important;
@@ -177,7 +173,6 @@ border-radius: 4px;
 }
 
 .panel-heading:hover {
-    /* border-bottom: 4px solid #8dccdc; */
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
 }
@@ -216,7 +211,6 @@ border-radius: 4px;
     border-top-left-radius: 10px;
     float: right !important;
     font-family: inherit;
-    line-height: inherit;
     overflow: visible;
     text-wrap: yes;
     text-transform: none;

@@ -56,7 +56,7 @@ export class MemberService {
     );
   }
 
-  getMemberByKey(key: string): any | undefined {
+  getMemberByKey(key: string): any {
     return this.membersByKey[key];
   }
 

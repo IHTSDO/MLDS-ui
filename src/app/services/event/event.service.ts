@@ -9,5 +9,4 @@ export class EventService {
   public readonly commercialUsageUpdated = 'ihtsdo.mlds.commercialUsageUpdated';
   public readonly affiliateTypeUpdated = 'ihtsdo.mlds.affiliateTypeUpdated';
 
-  constructor() { }
 }

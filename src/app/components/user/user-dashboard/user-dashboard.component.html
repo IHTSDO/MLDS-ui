@@ -83,7 +83,7 @@
 				<h3 class="panel-title">{{'global.menu.applications'|translate|compareText:'Applications'}}</h3>
 			</div>
 			<div class="table-responsive user-dashboard-item">
-				<table class="table table-hover">
+				<table class="table table-hover" aria-label="user-dashboard">
 					<thead>
 						<tr>
 							<th>{{'global.word.type'|translate|compareText:'Type'}}</th>
@@ -186,7 +186,8 @@
 			<div class="panel-heading">
 				<h3 class="panel-title"> {{'global.member.'+memberReleases.member.key|translate}}</h3>
 			</div>
-			<table class="table table-hover">
+			<table class="table table-hover" aria-label="release-package">
+				<th></th>
 				<tr *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
 					<td class="break-text">
 						<a
