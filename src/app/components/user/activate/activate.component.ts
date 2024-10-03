@@ -48,7 +48,7 @@ export class ActivateComponent implements OnInit {
   handleAccountDetails(): void {
     this.sessionService.AccountFromActivate().subscribe({
       next: () => {
-        setTimeout(() => this.router.navigate(['/affiliateRegistration']), 2000);
+        setTimeout(() => {this.router.navigate(['/affiliateRegistration']);}, 2000);
       },
       error: (err) => {
         console.error('Error fetching account details:', err);

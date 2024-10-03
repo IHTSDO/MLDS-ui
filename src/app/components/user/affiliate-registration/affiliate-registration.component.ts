@@ -162,7 +162,7 @@ export class AffiliateRegistrationComponent implements OnInit {
   private setupTypeChangeSubscription(): void {
     this.typeSubscription = this.affiliateApplicationForm.get('type')?.valueChanges.subscribe(newValue => {
       this.onTypeChange(newValue);
-    }) || new Subscription();
+    }) ?? new Subscription();
   }
 
   private onTypeChange(newValue: string): void {
@@ -224,12 +224,25 @@ export class AffiliateRegistrationComponent implements OnInit {
 
 
   updateForm(): void {
-    const affiliateDetails = this.applicationData?.affiliateDetails || {};
-    const billingAddress = affiliateDetails?.billingAddress || {};
-    const address = affiliateDetails?.address || {};
-    const otherData = this.applicationData?.other || {};
+    const affiliateDetails = this.getAffiliateDetails();
+    const billingAddress = this.getBillingAddress(affiliateDetails);
+    const address = this.getAddress(affiliateDetails);
+    const otherData = this.getOtherData();
   
     this.affiliateApplicationForm.patchValue({
+      ...affiliateDetails,
+      ...this.mapAddress(address),
+      isSameAddress: this.isSameAddress,
+      ...this.mapBillingAddress(billingAddress),
+      ...otherData,
+    });
+  
+    this.updateValidations();
+  }
+  
+  private getAffiliateDetails(): any {
+    const affiliateDetails = this.applicationData?.affiliateDetails || {};
+    return {
       type: affiliateDetails.type || '',
       subType: affiliateDetails.subType || '',
       otherText: affiliateDetails.otherText || '',
@@ -239,17 +252,27 @@ export class AffiliateRegistrationComponent implements OnInit {
       contactPhone: affiliateDetails.landlineNumber || '',
       contactExtension: affiliateDetails.landlineExtension || '',
       mobilePhone: affiliateDetails.mobileNumber || '',
-      ...this.mapAddress(address),
-      isSameAddress: this.isSameAddress,
-      ...this.mapBillingAddress(billingAddress),
       organizationName: affiliateDetails.organizationName || '',
       organizationType: affiliateDetails.organizationType || '',
       organizationTypeOther: affiliateDetails.organizationTypeOther || '',
-      otherTextArea: otherData.textArea || '',
-    });
-  
-    this.updateValidations();
+    };
   }
+  
+  private getBillingAddress(affiliateDetails: any): any {
+    return affiliateDetails?.billingAddress || {};
+  }
+  
+  private getAddress(affiliateDetails: any): any {
+    return affiliateDetails?.address || {};
+  }
+  
+  private getOtherData(): any {
+    const otherData = this.applicationData?.other || {};
+    return {
+      otherTextArea: otherData.textArea || '',
+    };
+  }
+  
   
   private mapAddress(address: any): any {
     return {
