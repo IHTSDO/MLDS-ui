@@ -3,7 +3,7 @@
 
   <div class="col-md-12">
     <div>
-      <div class="float-end" *ngIf="isEditableReleasePackage ">
+      <div class="float-end" *ngIf="isEditableReleasePackage && isAdmin ">
         <div ngbDropdown>
           <button class="review-button" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">Edit <i
               class="caret"></i></button>
@@ -45,7 +45,7 @@
           <th>Description</th>
           <th>Download Files</th>
           <th>Date Published</th>
-          <th *ngIf="isEditableReleasePackage">
+          <th *ngIf="isEditableReleasePackage && isAdmin">
             <i class="fa fa-cog"></i>
           </th>
         </tr>
@@ -61,7 +61,7 @@
                 <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl"
                   [innerHTML]="releaseFile.label">releaseFile.label</a>
                 <button class="btn btn-success btn-xs file-edit" style="margin-bottom: 10px;"
-                  *ngIf="isEditableReleasePackage" (click)="editReleaseFile(releaseVersion,releaseFile)">
+                  *ngIf="isEditableReleasePackage && isAdmin" (click)="editReleaseFile(releaseVersion,releaseFile)">
                   <i class="fa fa-edit"></i> Edit
                 </button>
               </p>
@@ -69,7 +69,7 @@
           </td>
           <td class="col-sm-2">{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
           <td>
-            <div ngbDropdown *ngIf="isEditableReleasePackage ">
+            <div ngbDropdown *ngIf="isEditableReleasePackage && isAdmin ">
               <button class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>

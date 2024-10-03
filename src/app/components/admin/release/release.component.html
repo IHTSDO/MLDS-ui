@@ -89,9 +89,9 @@
                 <button class="dropdown-item" (click)="takeOfflineModal(releaseVersion)">
                   <i class="fa-solid fa-circle-xmark"></i> Take Offline
                 </button>
-                <button class="dropdown-item"  (click)="moveToArchive(releaseVersion)">
+                <!-- <button class="dropdown-item" *ngIf="isAdmin" (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
-                </button>
+                </button> -->
               </div>
             </div>
           </td>
@@ -167,7 +167,7 @@
                 <button class="dropdown-item" (click)="takeOnlineModal(releaseVersion)">
                   <i class="fa-regular fa-circle-check"></i> Publish Online
                 </button>
-                <button class="dropdown-item"  (click)="moveToArchive(releaseVersion)">
+                <button class="dropdown-item" *ngIf="isAdmin" (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
                 <button class="dropdown-item" (click)="deleteVersionModal(releaseVersion)">
@@ -245,7 +245,7 @@
                 <button class="dropdown-item" (click)="takeAlphaBetaModal(releaseVersion)">
                   <i class="fa-regular fa-circle-check"></i> Publish Alpha/Beta
                 </button>
-                <button class="dropdown-item"  (click)="moveToArchive(releaseVersion)">
+                <button class="dropdown-item" *ngIf="isAdmin" (click)="moveToArchive(releaseVersion)">
                   <i class="fa fa-archive"></i> Move to Archive
                 </button>
                 <button class="dropdown-item" (click)="deleteVersionModal(releaseVersion)">
