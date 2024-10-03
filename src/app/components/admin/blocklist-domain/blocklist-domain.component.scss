@@ -2,7 +2,6 @@ h2{
     padding-top: 30px;
 }
 .btn-btn-default{
-    // color: #78bcf3;
     color: #00a7e1;
     background-color: #ffffff;
     border-color: transparent;
@@ -31,8 +30,9 @@ label {
     margin-left: 10px;
     font-size: 1.5rem;
 }
-.form-group{
+.form-group {
     display: flex;
+    align-items: center;
 }
 .custom-btn:hover {
     background-color: #00a7e1; /* Background color on hover */
@@ -73,7 +73,6 @@ label {
     -ms-user-select: none;
     user-select: none;
     font-family: inherit;
-    line-height: inherit;
 }
 
 .btn:hover {
@@ -89,7 +88,7 @@ input, button, select, textarea {
 }
 
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
-    -webkit-appearance: button;
+   
     cursor: pointer;
 }
 
@@ -105,20 +104,13 @@ button {
     margin-bottom: 20px; /* Space below the form */
 }
 
-.form-group {
-    display: flex;
-    align-items: center;
-}
+
 
 .form-group label {
     margin-right: 10px; /* Space between label and input */
 }
 
-.form-control {
-    font-size: 1.4rem;
-    border: 1px solid;
-    width: 25%;
-}
+
 
 .input-group {
     display: flex;
@@ -141,7 +133,4 @@ button {
     padding: 12px; /* Padding inside table cells */
 }
 
-label {
-    margin-left: 10px;
-    font-size: 1.5rem;
-}
+

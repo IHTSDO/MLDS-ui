@@ -467,6 +467,7 @@ loadMoreAffiliatess(): void {
  */
   generateCsv(): void {
     this.generatingCsv = true;
+  
     this.affiliateService
       .filterAffiliates(
         this.query,
@@ -480,55 +481,62 @@ loadMoreAffiliatess(): void {
       )
       .subscribe({
         next: (response: any) => {
-          const expressions = [
-            (affiliate: any) => affiliate.affiliateId,
-            (affiliate: any) => `${this.affiliateActiveDetails(affiliate).firstName} ${this.affiliateActiveDetails(affiliate).lastName}`,
-            (affiliate: any) => this.affiliateActiveDetails(affiliate).organizationName || '',
-            (affiliate: any) => this.affiliateActiveDetails(affiliate).organizationType || '',
-            (affiliate: any) => `${this.affiliateActiveDetails(affiliate).type || ''} - ${this.affiliateActiveDetails(affiliate).subType || ''} ${this.affiliateActiveDetails(affiliate).otherText || ''}`,
-            (affiliate: any) => affiliate.standingState || '',
-            (affiliate: any) => this.affiliateActiveDetails(affiliate).address.country.commonName || '',
-            (affiliate: any) => affiliate.homeMember.key || '',
-            (affiliate: any) => this.affiliateActiveDetails(affiliate).email || '',
-            (affiliate: any) => (this.affiliateActiveDetails(affiliate).billingAddress?.street || ''),
-            (affiliate: any) => (this.affiliateActiveDetails(affiliate).billingAddress?.city || ''),
-            (affiliate: any) => (this.affiliateActiveDetails(affiliate).billingAddress?.post || ''),
-            (affiliate: any) => (affiliate.application?.submittedAt || ''),
-            (affiliate: any) => (affiliate.application?.completedAt || ''),
-            (affiliate: any) => this.affiliateActiveDetails(affiliate).agreementType || ''
-          ];
-  
-          const result = response.affiliates.map((affiliate: any) => {
-            return expressions.map((expression) => expression(affiliate));
-          });
-  
-          this.exportToCsv('affiliates.csv', result, [
-            'Affiliate ID',
-            'Affiliate Name',
-            'Organization Name',
-            'Organization Type',
-            'Use Type',
-            'Standing State',
-            'Country',
-            'Member',
-            'Email',
-            'Billing Street',
-            'Billing City',
-            'Billing Post',
-            'Submitted At',
-            'Completed At',
-            'Agreement Type'
-          ]);
+          const csvData = this.buildCsvData(response.affiliates);
+          this.exportToCsv('affiliates.csv', csvData, this.getCsvHeaders());
           this.generatingCsv = false;
         },
-       error: (error: any) => {
+        error: (error: any) => {
           this.generatingCsv = false;
           console.error('Error fetching affiliates', error);
-          // Handle the error appropriately
         }
       });
   }
   
+  private buildCsvData(affiliates: any[]): any[] {
+    return affiliates.map((affiliate) => this.buildCsvRow(affiliate));
+  }
+  
+  private buildCsvRow(affiliate: any): any[] {
+    const affiliateDetails = this.affiliateActiveDetails(affiliate);
+    return [
+      affiliate.affiliateId,
+      `${affiliateDetails.firstName} ${affiliateDetails.lastName}`,
+      affiliateDetails.organizationName || '',
+      affiliateDetails.organizationType || '',
+      `${affiliateDetails.type || ''} - ${affiliateDetails.subType || ''} ${affiliateDetails.otherText || ''}`,
+      affiliate.standingState || '',
+      affiliateDetails.address.country.commonName || '',
+      affiliate.homeMember.key || '',
+      affiliateDetails.email || '',
+      affiliateDetails.billingAddress?.street || '',
+      affiliateDetails.billingAddress?.city || '',
+      affiliateDetails.billingAddress?.post || '',
+      affiliate.application?.submittedAt || '',
+      affiliate.application?.completedAt || '',
+      affiliateDetails.agreementType || ''
+    ];
+  }
+  
+  private getCsvHeaders(): string[] {
+    return [
+      'Affiliate ID',
+      'Affiliate Name',
+      'Organization Name',
+      'Organization Type',
+      'Use Type',
+      'Standing State',
+      'Country',
+      'Member',
+      'Email',
+      'Billing Street',
+      'Billing City',
+      'Billing Post',
+      'Submitted At',
+      'Completed At',
+      'Agreement Type'
+    ];
+  }
+   
 /**
  * Export to CSV
  *

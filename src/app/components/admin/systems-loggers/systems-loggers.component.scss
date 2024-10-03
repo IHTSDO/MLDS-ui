@@ -13,7 +13,6 @@
   padding-bottom: 9px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #eeeeee;
-  // border: 1px solid;
   }
   .rows{
     margin-top: 40px;
@@ -46,6 +45,7 @@
   background-color: white !important;      /* White background */
   border-top-left-radius: 10px !important; /* Top left border radius */
   transition: background-color 0.3s ease, color 0.3s ease !important;
+ 
 }
 
 .btn-edit:hover {
@@ -103,40 +103,7 @@
   color: black;
 }
 
-/* Define styles for default button colors */
-.btn-edit {
-  border: 2px solid #40ACD6;  /* Blue border */
-  color: #40ACD6;             /* Blue font color */
-  background-color: white;  /* White background */
-  border-top-left-radius: 10px; /* Top left border radius */
-}
 
-.btn-delete {
-  border: 2px solid #f05837;    /* Red border */
-  color: #f05837;               /* Red font color */
-  background-color: white;  /* White background */
-  border-top-left-radius: 10px; /* Top left border radius */
-}
-/* Button base styles */
-.btn-edit, .btn-delete {
-  padding: 4px 8px;             /* Adjust padding for button size */
-  font-size: 12px;              /* Adjust font size */
-  border-top-left-radius: 10px; /* Border radius */
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Default button colors */
-.btn-edit {
-  border: 2px solid #40ACD6;   /* Blue border */
-  color: #40ACD6;              /* Blue font color */
-  background-color: white;    /* White background */
-}
-
-.btn-delete {
-  border: 2px solid #f05837;   /* Red border */
-  color: #f05837;              /* Red font color */
-  background-color: white;    /* White background */
-}
 
 /* Active button states */
 .btn-danger.active { 
@@ -159,9 +126,5 @@
   color: black;
 }
 
-/* Example of a specific active state */
-.btn-danger.active {
-  background-color: red;
-  color: white;
-}
+
 

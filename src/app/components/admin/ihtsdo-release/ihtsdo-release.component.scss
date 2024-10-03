@@ -116,7 +116,7 @@ p {
 
 .fa {
     display: inline-block;
-    font: normal normal normal 14px / 1 FontAwesome;
+    font: normal normal normal 14px ;
     font-size: inherit;
     color: #49A8DB;
     text-rendering: auto;
@@ -131,17 +131,14 @@ p {
     font-variant: normal;
     line-height: 1;
     text-rendering: auto;
-}
-.fa {
     font-family: var(--fa-style-family, "Font Awesome 6 Free");
     font-weight: var(--fa-style, 900);
 }
-.pull-right {
-    float: right;
-}
+
 .pull-right {
     float: right !important;
 }
+
 .alert-danger-flag {
     background-color: #fde3dd;
     color: #f26c4f;
@@ -181,7 +178,6 @@ p {
 .alert {
     padding: 15px;
     margin-bottom: 20px;
-    // border: 2px solid transparent;
     border-radius: 4px;
 }
 .alert-warning {

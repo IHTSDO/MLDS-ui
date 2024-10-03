@@ -16,7 +16,10 @@ th {
   }
 
 .page-header {
-    margin-top: 20px;
+
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .space {
@@ -33,13 +36,7 @@ th {
     font-size: 3.4rem;
     font-weight: 400;
   }
-  .page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee;
-  // border: 1px solid;
-  }
-  
+ 
   .d-flex {
   display: flex;
   }

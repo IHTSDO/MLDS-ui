@@ -19,7 +19,6 @@ import { SideNavComponent } from "./components/common/side-nav/side-nav.componen
 import { AdminFooterComponent } from "./components/common/admin-footer/admin-footer.component";
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -51,7 +50,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MemberManagementComponent,
     StaffTopNavComponent,
     SideNavComponent,
-    InfiniteScrollModule,
     AdminFooterComponent,
     TranslateModule.forRoot({
         loader: {

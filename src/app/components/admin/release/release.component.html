@@ -46,7 +46,7 @@
       To take a version offline, click the dropdown of a version below and select "Take Offline". Take all versions
       offline to remove this release from public view.
     </p>
-    <table class="table">
+    <table class="table"aria-label="release">
       <thead>
         <tr>
           <th>Version</th>
@@ -89,9 +89,6 @@
                 <button class="dropdown-item" (click)="takeOfflineModal(releaseVersion)">
                   <i class="fa-solid fa-circle-xmark"></i> Take Offline
                 </button>
-                <!-- <button class="dropdown-item" *ngIf="isAdmin" (click)="moveToArchive(releaseVersion)">
-                  <i class="fa fa-archive"></i> Move to Archive
-                </button> -->
               </div>
             </div>
           </td>
@@ -113,7 +110,7 @@
     <h3>Alpha/Beta Versions</h3>
     <p>Set one or more versions of a release to public view by selecting "Publish Online" from the drop down menu. Set
       one or more versions online to move this release to public view. </p>
-    <table class="table">
+    <table class="table"aria-label="release">
       <thead>
         <tr>
           <th class="col-sm-2">Version</th>
@@ -192,7 +189,7 @@
 
   <div class="col-lg-12">
     <h3>Offline Versions</h3>
-    <table class="table">
+    <table class="table" aria-label="release">
       <thead>
         <tr>
           <th class="col-sm-2">Version</th>

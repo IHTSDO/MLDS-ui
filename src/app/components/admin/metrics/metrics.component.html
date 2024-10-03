@@ -191,8 +191,8 @@
       }}</b> - {{'metrics.jvm.http.total' | translate}} <b>{{
       metrics?.timers?.['io.dropwizard.metrics.servlet.InstrumentedFilter.requests']?.count }}</b></p>
 
-  <div class="table-responsive">
-    <table class="table table-striped">
+  <div class="table-responsive" >
+    <table class="table table-striped" aria-label="metrics">
       <thead>
         <tr>
           <th>{{'metrics.jvm.http.table.code' |translate |compareText: 'Code'}}</th>
@@ -283,7 +283,7 @@
   </div>
   <h3>{{'metrics.servicesstats.title' | translate|compareText: 'Services statistics (time in millisecond)'}}</h3>
     <div class="table-responsive">
-      <table class="table table-striped">
+      <table class="table table-striped" aria-label="metrics">
         <thead>
           <tr>
             <th>{{ 'metrics.servicesstats.table.name' | translate | compareText: 'Service name' }}</th>

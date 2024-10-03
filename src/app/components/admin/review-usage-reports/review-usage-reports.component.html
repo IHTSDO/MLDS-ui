@@ -6,24 +6,14 @@
       </h2>
     </div>
     <div class="report-content">
-      <table>
-        <tbody>
-          <tr>
-            <td>
               <b>Affiliate Usage Report</b>
               <br />
               This report contains the usage report for the affiliates of 
               <span *ngIf="homeMember">{{'global.member.'+ homeMember |translate}}</span>
               <span *ngIf="!homeMember">{{ 'global.member.IHTSDO'| translate }}</span>
-            </td>
-            <td class="text-end report-button">
-              <button class="btn-margin csv-button" (click)="generateCsv()">
+            <button class="btn-margin csv-button" (click)="generateCsv()">
                 <i class="fa fa-download"></i> Export as CSV
               </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+   </div>
   </div>
 </div>

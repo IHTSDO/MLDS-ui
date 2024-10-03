@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { map, Observable, startWith } from 'rxjs';
 import { CountryService } from 'src/app/services/country/country.service';
@@ -93,7 +93,7 @@ export class RegisterComponent {
     this.countryService.getCountries().subscribe(countries => {
       this.availableCountries = countries;
     });
-
+  
     this.createUserForm = this.fb.group({
       country: ['', Validators.required],
       firstName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
@@ -103,12 +103,13 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
       tos: [false, Validators.requiredTrue]
-    }, { validator: this.inputsMatchValidator });
-
+    }, { validators: this.inputsMatchValidator } as AbstractControlOptions);  // Updated syntax
+  
     this.createUserForm.get('country')?.valueChanges.subscribe(newValue => {
       this.handleCountryChange(newValue);
     });
   }
+  
 
   /**
    * Searches for countries based on the input text
@@ -256,8 +257,7 @@ private showExclusionModal(country: any): void {
   modalRef.componentInstance.urlRegistration = country.alternateRegistrationUrl;
 
   modalRef.result.then((result) => {
-    if (result) {
-    }
+  
   }, (reason) => {
     this.router.navigate([this.routes.landingPage]).then(() => {
     });

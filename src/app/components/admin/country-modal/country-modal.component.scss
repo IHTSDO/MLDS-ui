@@ -16,14 +16,13 @@
 .form-group label {
     margin-bottom: 10px; /* Add spacing below the label */
     display: inline-block; /* Ensure the label respects the margin */
+    font-weight: bold;
 }
 
 .form-group input[type="checkbox"] {
     margin-left: 10px; /* Add spacing between the label and the checkbox */
 }
-.form-group label {
-    font-weight: bold;
-}
+
 .modal-title {
     font-weight: bold;
 }

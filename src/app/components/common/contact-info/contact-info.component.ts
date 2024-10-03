@@ -245,36 +245,61 @@ export class ContactInfoComponent implements OnInit {
 
 
   updateForm(): void {
-    this.form.patchValue({
-      type: this.affiliate?.affiliateDetails.type || '',
-      otherText: this.affiliate?.affiliateDetails.otherText || '',
-      subType: this.affiliate?.affiliateDetails?.subType || '',
-      agreementType: this.affiliate?.affiliateDetails?.agreementType || '',
-      acceptNotifications: this.affiliate?.affiliateDetails?.acceptNotifications ?? false,
-      countryNotificationsOnly: this.affiliate?.affiliateDetails?.countryNotificationsOnly ?? false,
-      firstName: this.affiliate?.affiliateDetails?.firstName || '',
-      lastName: this.affiliate?.affiliateDetails?.lastName || '',
-      email: this.affiliate?.affiliateDetails?.email || '',
-      alternateEmail: this.affiliate?.affiliateDetails?.alternateEmail || '',
-      thirdEmail: this.affiliate?.affiliateDetails?.thirdEmail || '',
-      landlineNumber: this.affiliate?.affiliateDetails?.landlineNumber || '',
-      landlineExtension: this.affiliate?.affiliateDetails?.landlineExtension || '',
-      mobileNumber: this.affiliate?.affiliateDetails?.mobileNumber || '',
-      addressStreetIndividual: this.affiliate?.affiliateDetails?.address?.street || '',
-      addressCityIndividual: this.affiliate?.affiliateDetails?.address?.city || '',
-      addressPostIndividual: this.affiliate?.affiliateDetails?.address?.post || '',
-      billingAddressStreet: this.affiliate?.affiliateDetails?.billingAddress?.street || '',
-      billingAddressCity: this.affiliate?.affiliateDetails?.billingAddress?.city || '',
-      billingAddressPost: this.affiliate?.affiliateDetails?.billingAddress?.post || '',
-      billingAddressCountry: this.affiliate?.affiliateDetails?.billingAddress?.country || '',
-      organizationName: this.affiliate?.affiliateDetails?.organizationName || '',
-      addressStreet: this.affiliate?.affiliateDetails?.address?.street || '',
-      addressCity: this.affiliate?.affiliateDetails?.address?.city || '',
-      addressPost: this.affiliate?.affiliateDetails?.address?.post || ''
-    });
+  if (!this.affiliate?.affiliateDetails) return;
 
-    this.updateReadOnly();
-  }
+  this.patchBasicDetails();
+  this.patchAddressDetails();
+  this.patchBillingAddressDetails();
+
+  this.updateReadOnly();
+}
+
+private patchBasicDetails(): void {
+  const details = this.affiliate?.affiliateDetails;
+
+  this.form.patchValue({
+    type: details.type || '',
+    otherText: details.otherText || '',
+    subType: details?.subType || '',
+    agreementType: details?.agreementType || '',
+    acceptNotifications: details?.acceptNotifications ?? false,
+    countryNotificationsOnly: details?.countryNotificationsOnly ?? false,
+    firstName: details?.firstName || '',
+    lastName: details?.lastName || '',
+    email: details?.email || '',
+    alternateEmail: details?.alternateEmail || '',
+    thirdEmail: details?.thirdEmail || '',
+    landlineNumber: details?.landlineNumber || '',
+    landlineExtension: details?.landlineExtension || '',
+    mobileNumber: details?.mobileNumber || ''
+  });
+}
+
+private patchAddressDetails(): void {
+  const address = this.affiliate?.affiliateDetails?.address || {};
+
+  this.form.patchValue({
+    addressStreetIndividual: address?.street || '',
+    addressCityIndividual: address?.city || '',
+    addressPostIndividual: address?.post || '',
+    addressStreet: address?.street || '',
+    addressCity: address?.city || '',
+    addressPost: address?.post || ''
+  });
+}
+
+private patchBillingAddressDetails(): void {
+  const billingAddress = this.affiliate?.affiliateDetails?.billingAddress || {};
+
+  this.form.patchValue({
+    billingAddressStreet: billingAddress?.street || '',
+    billingAddressCity: billingAddress?.city || '',
+    billingAddressPost: billingAddress?.post || '',
+    billingAddressCountry: billingAddress?.country || '',
+    organizationName: this.affiliate?.affiliateDetails?.organizationName || ''
+  });
+}
+
 
   updateReadOnly(){
     if (this.readOnly) {
