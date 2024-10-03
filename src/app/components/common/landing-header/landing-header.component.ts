@@ -63,7 +63,7 @@ export class LandingHeaderComponent {
       this.memberLogo = logoUrl;
     });
 
-     if (this.sessionMember && this.sessionMember.isAuthenticated) {
+     if (this.sessionMember?.isAuthenticated) {
       this.updateFromMember(this.sessionMember);
     } else {
       this.route.params.subscribe(params => {

@@ -2,9 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
-import { CountryService } from 'src/app/services/country/country.service';
 import { EmbeddableUsageLogComponent } from "../embeddable-usage-log/embeddable-usage-log.component";
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
@@ -18,7 +16,7 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 })
 export class FullPageUsageLogComponent implements OnInit {
   usageLogCanSubmit = true;
-  usageReportReady: any | undefined;
+  usageReportReady: any = {};
   commercialUsageReport: any = {};
   isEditable: boolean = false;
   readOnly: boolean = false;
@@ -34,7 +32,6 @@ export class FullPageUsageLogComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router:Router,
-    // private countryService: CountryService,
     private commercialUsageService: CommercialUsageService,
 
   ) {}
@@ -45,20 +42,20 @@ export class FullPageUsageLogComponent implements OnInit {
 
   loadUsageReportFromRoute(): void {
     const usageReportId = this.route.snapshot.paramMap.get('commercialUsageId');
-    
+  
     if (usageReportId) {
-      this.commercialUsageService.getUsageReport(usageReportId).subscribe(
-        result => {
+      this.commercialUsageService.getUsageReport(usageReportId).subscribe({
+        next: (result: any) => {
           this.commercialUsageReport = result;
         },
-        error => {
-          console.error('Failed to get initial usage log by param', error);
+        error: (err: any) => {
+          console.error('Failed to get initial usage log by param', err);
         }
-      );
+      });
     } else {
       console.error('Missing usage report id');
     }
-  }
+  }  
   
    // Helper function to check if commercialUsageReport has keys
    hasCommercialUsageReport(): boolean {

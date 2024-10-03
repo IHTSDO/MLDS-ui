@@ -15,7 +15,6 @@
 					<span [innerHTML]="translatedDetails"></span>
 				  </p>
 				<a class="btn btn-success btn-lg" [routerLink]="['/register']" >{{'global.menu.account.register' | translate | compareText : 'Register'}}</a>
-				<!-- <p><span translate="global.word.or">or</span> <a [routerLink]="['/login']"> login here</a> -->
 					<p>
 						<span>{{ 'global.word.or' | translate }}</span>&nbsp;
 						<a [routerLink]="['/login']">{{ 'views.landingPage.loginHere' | translate | compareText: 'login here' }}</a>

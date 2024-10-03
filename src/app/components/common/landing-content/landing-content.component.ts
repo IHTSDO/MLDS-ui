@@ -102,7 +102,7 @@ export class LandingContentComponent implements OnInit{
   // Load member data
   this.subscriptions.add(
     this.memberService.getMembers().subscribe(members => {
-      const member = this.memberService.membersByKey[this.memberKey || ''];
+      const member = this.memberService.membersByKey[this.memberKey ?? ''];
       if (member) {
         this.setLandingText();
       }
@@ -115,7 +115,7 @@ private setLandingText(): void {
     // Load country data
     this.subscriptions.add(
       this.countryService.getCountries().subscribe(countries => {
-        const country = this.countryService.countriesByIsoCode2[this.memberKey || ''];
+        const country = this.countryService.countriesByIsoCode2[this.memberKey ?? ''];
         if (country) {
           this.landingText = `
             ${this.translateService.instant('views.landingPage.member.purpose1')}

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { EditAffiliateStandingModalComponent } from '../../admin/edit-affiliate-standing-modal/edit-affiliate-standing-modal.component';
@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './affiliate-details-summary.component.html',
   styleUrl: './affiliate-details-summary.component.scss'
 })
-export class AffiliateDetailsSummaryComponent implements OnInit,OnChanges {
+export class AffiliateDetailsSummaryComponent implements OnChanges {
 
   @Input() showEdit: boolean = true;
   @Input() affiliate: any;
@@ -31,10 +31,6 @@ export class AffiliateDetailsSummaryComponent implements OnInit,OnChanges {
     }
   }
 
-  ngOnInit(): void {
-  
-    
-  }
 
   changeStanding() {
 

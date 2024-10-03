@@ -24,11 +24,6 @@ export class AdminFooterComponent implements OnInit{
 
   copyright!: string; 
 
-  /**
-   * Constructor
-   */
-  constructor() { }
-
 
   ngOnInit(): void {
      this.updateCopyright();

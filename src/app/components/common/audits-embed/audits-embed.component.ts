@@ -57,7 +57,6 @@ export class AuditsEmbedComponent implements OnInit {
    */
   reverse: boolean = false;
 
-  constructor() {}
 
   /**
    * Initializes the component

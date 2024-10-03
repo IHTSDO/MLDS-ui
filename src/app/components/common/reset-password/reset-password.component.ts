@@ -122,7 +122,9 @@ export class ResetPasswordComponent {
         next: () => {
           this.success = 'Password changed successfully!';
           this.error = {};
-          setTimeout(() => this.router.navigate([this.routes.login]), 2000);
+          setTimeout(() => {
+            this.router.navigate([this.routes.login]);
+          }, 2000);
         },
         error: (response) => {
           this.success = null;

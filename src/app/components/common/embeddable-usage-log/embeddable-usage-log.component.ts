@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbDropdown, NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { catchError, forkJoin, map, Observable, of } from 'rxjs';
+import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { catchError, of } from 'rxjs';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CountryService } from 'src/app/services/country/country.service';
@@ -27,7 +27,7 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
   templateUrl: './embeddable-usage-log.component.html',
   styleUrl: './embeddable-usage-log.component.scss'
 })
-export class EmbeddableUsageLogComponent implements OnInit,OnChanges {
+export class EmbeddableUsageLogComponent implements OnInit {
 
   usageForm!: FormGroup;
   collapsePanel: any = {};
@@ -41,7 +41,6 @@ export class EmbeddableUsageLogComponent implements OnInit,OnChanges {
   implementationStatusOptions = ['IMPLEMENTED', 'DEVELOPMENT', 'PLANNING'];
   availableCountries: any[] = [];
   currentCountries: any[] = [];
-  // @Input()commercialUsageReport: any = {};
   usageByCountry: any = {};
   usageByCountryList: any[] = [];
   readOnly = false;
@@ -51,7 +50,6 @@ export class EmbeddableUsageLogComponent implements OnInit,OnChanges {
   homeCountry: any = null;
   canSubmit = false;
   private events: EventEmitter<any> = new EventEmitter<any>();
-// isAffiliateApplying: any;
 isAffiliateApplying = false;
 country: any;
 countryUsage: any;
@@ -81,11 +79,6 @@ q: string = '';
   }
  
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.commercialUsageReport;
-    if (changes['commercialUsageReport']) {
-    }
-  }
   initForm(): void {
     this.usageForm = this.fb.group({
       currentUsage: [{ value: this.commercialUsageReport.context?.currentUsage || '', disabled: this.readOnly }, Validators.required],
@@ -106,27 +99,28 @@ q: string = '';
     
   }
 
-  onCommercialUsageUpdated() {
-    this.commercialUsageService.getUsageReport(this.commercialUsageReport.commercialUsageId)
-      .subscribe(
-        (result: any) => this.updateFromUsageReport(result),
-        (error: any) => console.error('Failed commercialUsageUpdated', error)
-      );
-  }
+  onCommercialUsageUpdated(): void {
+    this.commercialUsageService.getUsageReport(this.commercialUsageReport.commercialUsageId).subscribe({
+      next: (result: any) => this.updateFromUsageReport(result),
+      error: (err: any) => console.error('Failed commercialUsageUpdated', err)
+    });
+  }  
   
 
-  onAffiliateTypeUpdated(newType: any) {
+  onAffiliateTypeUpdated(newType: any): void {
     if (newType !== this.commercialUsageReport.type) {
       this.commercialUsageReport.type = newType;
-      this.commercialUsageService.updateUsageReportType(this.commercialUsageReport)
-        .subscribe(
-          (response: any) => {
-            // Handle success response if needed
-          },
-          (error: any) => console.error('Failed to update usage type', error)
-        );
+      this.commercialUsageService.updateUsageReportType(this.commercialUsageReport).subscribe({
+        next: (response: any) => {
+          // Handle success response if needed
+        },
+        error: (err: any) => {
+          console.error('Failed to update usage type', err);
+        }
+      });
     }
   }
+  
   
 
   addHomeCountryIfNotSelected() {
@@ -135,20 +129,21 @@ q: string = '';
     }
   }
 
-  loadParentsUsageReport() {
+  loadParentsUsageReport(): void {
     if (this.commercialUsageReport) {
-      this.commercialUsageService.getUsageReport(this.commercialUsageReport?.commercialUsageId)
-        .subscribe(
-          (usageReport: any) => {
-            this.commercialUsageReport = usageReport;
-            this.updateFromUsageReport(usageReport);
-          },
-          (error: any) => console.error('Failed to get initial usage log by param', error)
-        );
+      this.commercialUsageService.getUsageReport(this.commercialUsageReport?.commercialUsageId).subscribe({
+        next: (usageReport: any) => {
+          this.commercialUsageReport = usageReport;
+          this.updateFromUsageReport(usageReport);
+        },
+        error: (err: any) => {
+          console.error('Failed to get initial usage log by param', err);
+        }
+      });
     } else {
       console.error('Cannot submit usage log');
     }
-  }
+  }  
   
   
 
@@ -244,7 +239,13 @@ q: string = '';
     array.sort((a, b) => {
       const x = (a[expression] || '').toLowerCase();
       const y = (b[expression] || '').toLowerCase();
-      return x < y ? -1 : x > y ? 1 : 0;
+      let result = 0;
+      if (x < y) {
+        result = -1;
+      } else if (x > y) {
+        result = 1;
+      }
+      return result;
     });
   }
 
@@ -354,9 +355,7 @@ saveUsage() {
       })
     )
     .subscribe((response: any) => {
-      // Handle the success response if needed
-      if (response) {
-      }
+        console.log('Usage context has been successfully updated.');
     });
 }
 

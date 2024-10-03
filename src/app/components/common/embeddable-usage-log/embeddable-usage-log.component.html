@@ -69,7 +69,6 @@
 			<h4 class="panel-title">{{ 'views.usageLog.countries.title' | translate | compareText: 'Countries in Use' }}</h4>
 		</div>
 		<div class="panel-body panel-collapse collapse show">
-			<!-- <alert *ngFor="alert in geographicAlerts" [(type)]="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert> -->
 		<p>
 			<strong>{{ 'views.usageLog.countries.subTitle' | translate | compareText: 'Select the non-member countries in which SNOMED CT will be used.' }}</strong>
 		</p>
@@ -171,7 +170,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <table class="table table-striped">
+                <table class="table table-striped" aria-label="embeddable-usage-log">
                     <tr>
                         <th class="text-left col-md-2">{{ 'global.word.name' | translate | compareText: 'Name' }}</th>
                         <th class="text-left col-md-2">{{ 'views.usageLog.institutions.started' | translate | compareText: 'Started to Use' }}</th>

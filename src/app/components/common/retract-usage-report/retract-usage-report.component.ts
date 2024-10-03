@@ -18,7 +18,7 @@ export class RetractUsageReportComponent  {
   @Input() commercialUsageReport: any;
   submitting = false;
   alerts: any[] = [];
-type: any|string;
+type: any;
 close: any;
 
 

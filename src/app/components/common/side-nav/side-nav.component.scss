@@ -23,13 +23,6 @@
     width: 300px;
 }
 
-/* Sidebar link styles */
-.sidebar li a {
-    text-decoration: none;
-    color: inherit; /* Inherit text color from li */
-    display: block;
-}
-
 /* Hover effect - change background to white and text to blue */
 .sidebar li:hover {
     // background-color: #ffffff; /* White background on hover */
@@ -51,11 +44,6 @@
 .sidebar li.active a {
     color: inherit; /* Maintain the same color as the li */
 }
-/* Sidebar default styles */
-// .sidebar {
-//     width: 230px;
-//     background-color: #333333; /* Default sidebar background */
-// }
 
 /* List item default styles */
 .sidebar-item {
@@ -83,19 +71,6 @@
 .sidebar-item.selected {
     background-color: #2481a6;
     color: #ffffff;
-}
-
-/* Sidebar container */
-.sidebar {
-    width: 230px;
-    background-color: #333333; /* Default background color */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Sidebar list styles */
-.sidebar ul {
-    list-style: none;
-    padding: 0;
 }
 
 /* Selected item styles */

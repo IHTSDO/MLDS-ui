@@ -38,11 +38,7 @@ export class ModalComponent {
   @ViewChild('inputField') inputField!: ElementRef;
   // Method to handle submit
   submit() {
-    if (this.formGroup && this.formGroup.valid) {
       this.onSubmit.emit();
-    } else {
-      this.onSubmit.emit();
-    }
   }
   
 

@@ -273,6 +273,10 @@ export class ContactInfoComponent implements OnInit {
       addressPost: this.affiliate?.affiliateDetails?.address?.post || ''
     });
 
+    this.updateReadOnly();
+  }
+
+  updateReadOnly(){
     if (this.readOnly) {
       this.form.get('countryNotificationsOnly')?.disable();
       this.form.get('agreementType')?.disable();
@@ -281,7 +285,6 @@ export class ContactInfoComponent implements OnInit {
       this.form.get('countryNotificationsOnly')?.enable();
       this.form.get('acceptNotifications')?.enable();
     }
-
   }
 
   onTypeChange(): void {
@@ -362,18 +365,21 @@ export class ContactInfoComponent implements OnInit {
   private updateAffiliateDetails(formValues: any): void {
     this.onTypeChange();
     if (this.form.valid) {
-      this.affiliateService.updateAffiliateDetails(this.affiliateId, this.affiliate.affiliateDetails).subscribe(
-        () =>{
-          if(this.isStaffOrAdmin){
-           this.router.navigate([`/affiliateManagement/${this.affiliateId}`])
+      this.affiliateService.updateAffiliateDetails(this.affiliateId, this.affiliate.affiliateDetails).subscribe({
+        next: () => {
+          if (this.isStaffOrAdmin) {
+            this.router.navigate([`/affiliateManagement/${this.affiliateId}`]);
+          }
+          this.alerts = [];
+          this.alerts.push({ type: 'success', msg: 'Contact information has been successfully saved.' });
+        },
+        error: (err) => {
+          this.alerts.push({ type: 'danger', msg: 'Network request failure [29]: please try again later.' });
         }
-        this.alerts = [];
-        this.alerts.push({ type: 'success', msg: 'Contact information has been successfully saved.' });
-       },
-        (error) => this.alerts.push({ type: 'danger', msg: 'Network request failure [29]: please try again later.' })
-      );
+      });
     }
   }
+  
 
   transformFormToAffiliate(formValues: any): any {
     return {
