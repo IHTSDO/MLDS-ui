@@ -19,25 +19,30 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
   templateUrl: './archive-versions.component.html',
   styleUrl: './archive-versions.component.scss'
 })
+
 export class ArchiveVersionsComponent implements OnInit {
 
   packageId: string | null = null;
   packageEntity: any = { releaseVersions: [] };
   isEditableReleasePackage: boolean = false;
   isRemovableReleasePackage: boolean = false;
-  versions: { [key: string]: any[] } = {
-    archive: []
-  };
-  isAdmin: boolean | undefined ;
+  versions: { [key: string]: any[] } = { archive: [] };
+  isAdmin: boolean | undefined;
   isLoading: boolean = true;
 
-  constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService
-    ,private sessionService: AuthenticationSharedService
+  constructor(
+    private packagesService: PackagesService, 
+    private route: ActivatedRoute, 
+    private packageUtilsService: PackageUtilsService, 
+    private router: Router, 
+    private modalService: NgbModal, 
+    private releasePackageService: ReleasePackageService,
+    private sessionService: AuthenticationSharedService
   ) { }
 
   ngOnInit(): void {
     this.loadReleasePackageId();
-    this.isAdmin=this.sessionService.isAdmin();
+    this.isAdmin = this.sessionService.isAdmin();
   }
 
   loadReleasePackageId(): void {
@@ -63,19 +68,14 @@ export class ArchiveVersionsComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        this.isLoading = false;
-        console.error('Error fetching release package:', error);
-        this.goToArchiveReleases();
+        this.handleError(error);
       }
     });
   }
 
-
   goToArchiveReleases(): void {
     this.router.navigate(['/archiveReleases']);
   }
-
-
 
   moveToRelease(selectedReleaseVersion: any): void {
     const releaseVersionId = selectedReleaseVersion.releaseVersionId;
@@ -88,25 +88,29 @@ export class ArchiveVersionsComponent implements OnInit {
     this.releasePackageService.getReleaseLicense(this.packageEntity.releasePackageId);
   }
 
+  // Common method for opening modals
+  openModal(modalComponent: any, size: string, backdrop: boolean | 'static', modalData: any): void {
+    const modalRef = this.modalService.open(modalComponent, { size: size, backdrop: backdrop });
+    Object.assign(modalRef.componentInstance, modalData);
+  
+    modalRef.result.then(() => {
+      this.loadReleasePackageId();
+    }).catch((reason) => {
+      this.handleAlertDismiss(reason);
+    });
+  }
+  
+
+  // Specific modal opening methods
   updateLicense(): void {
-    const modalRef = this.modalService.open(ReleasePackageLicenseModalComponent, { backdrop: 'static' });
-    modalRef.componentInstance.releasePackage = this.packageEntity;
+    this.openModal(ReleasePackageLicenseModalComponent, 'lg', 'static', { releasePackage: this.packageEntity });
   }
 
   editReleaseFile(releaseVersion: any, releaseFile: any): void {
-    const modalRef = this.modalService.open(EditReleaseFileModalComponent, {
-      size: 'lg',
-      backdrop: 'static'
-    });
-
-    modalRef.componentInstance.releasePackage = { ...this.packageEntity };
-    modalRef.componentInstance.releaseVersion = { ...releaseVersion };
-    modalRef.componentInstance.releaseFile = { ...releaseFile };
-
-    modalRef.result.then(() => {
-      this.loadReleasePackageId();
-    }, (reason) => {
-      console.log('Modal dismissed:', reason);
+    this.openModal(EditReleaseFileModalComponent, 'lg', 'static', {
+      releasePackage: { ...this.packageEntity },
+      releaseVersion: { ...releaseVersion },
+      releaseFile: { ...releaseFile }
     });
   }
 
@@ -114,37 +118,32 @@ export class ArchiveVersionsComponent implements OnInit {
     this.openReleaseVersionModal();
   }
 
-  private openReleaseVersionModal(releaseVersion: any = {}): void {
-    const modalRef = this.modalService.open(AddEditReleaseVersionModalComponent, {
-      size: 'lg',
-      backdrop: 'static'
-    });
-
-    modalRef.componentInstance.releasePackage = { ...this.packageEntity };
-    modalRef.componentInstance.releaseVersion = { ...releaseVersion };
-
-    modalRef.result.then(() => {
-      this.loadReleasePackageId();
-    }).catch((error) => {
-      console.log('Modal dismissed');
-    });
-  }
-
   editReleaseVersion(selectedReleaseVersion: any): void {
     this.openReleaseVersionModal(selectedReleaseVersion);
   }
 
-  editPackage(releasePackage: any) {
-    const modalRef = this.modalService.open(EditReleasePackageModalComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.releasePackage = { ...releasePackage };
-    modalRef.result.then(result => {
-      if (result) {
-        this.loadReleasePackageId();
-      }
-    }).catch(error => {
-      console.log('Modal dismissed', error);
+  editPackage(releasePackage: any): void {
+    this.openModal(EditReleasePackageModalComponent, 'lg', 'static', { releasePackage: { ...releasePackage } });
+  }
+
+  // Handle adding/editing release versions
+  private openReleaseVersionModal(releaseVersion: any = {}): void {
+    this.openModal(AddEditReleaseVersionModalComponent, 'lg', 'static', {
+      releasePackage: { ...this.packageEntity },
+      releaseVersion: { ...releaseVersion }
     });
   }
 
+  // Error handling method
+  private handleError(error: any): void {
+    this.isLoading = false;
+    console.error('Error fetching release package:', error);
+    this.goToArchiveReleases();
+  }
 
+  // Handle modal dismiss or alert reason
+  private handleAlertDismiss(reason: any): void {
+    console.log('Modal dismissed:', reason);
+  }
 }
+
