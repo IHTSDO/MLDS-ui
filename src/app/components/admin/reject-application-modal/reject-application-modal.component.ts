@@ -53,18 +53,47 @@ export class RejectApplicationModalComponent {
    */
   ok() {
     this.submitting = true;
-    this.alerts = [];
+    this.clearAlerts();
 
     this.userRegistrationService.approveApplication(this.application, 'REJECTED')
       .subscribe({
-        next: () => {
-          this.activeModal.close();
-        },
-        error: () => {
-          this.alerts.push({ type: 'danger', msg: 'Network request failure [32]: please try again later.' });
-          this.submitting = false;
-        }
+        next: () => this.closeModal(),
+        error: () => this.handleError('Network request failure [32]: please try again later.')
       });
+  }
+
+  /**
+   * Handle modal success response by closing the modal
+   */
+  private closeModal(): void {
+    this.activeModal.close();
+  }
+
+  /**
+   * Error handling for network failures
+   *
+   * @param errorMessage The message to display in case of an error
+   */
+  private handleError(errorMessage: string): void {
+    this.addAlert('danger', errorMessage);
+    this.submitting = false;
+  }
+
+  /**
+   * Add an alert message to the alerts array
+   *
+   * @param type The type of the alert (e.g., 'danger')
+   * @param msg The alert message
+   */
+  private addAlert(type: string, msg: string): void {
+    this.alerts.push({ type, msg });
+  }
+
+  /**
+   * Clear all alerts
+   */
+  private clearAlerts(): void {
+    this.alerts = [];
   }
 
   /**
@@ -86,5 +115,4 @@ export class RejectApplicationModalComponent {
   closeAlert(alert: { type: string, msg: string }) {
     this.alerts = this.alerts.filter(a => a !== alert);
   }
-
 }

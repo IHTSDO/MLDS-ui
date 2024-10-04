@@ -25,64 +25,90 @@ export class DeleteVersionDependentModalComponent {
     private releaseFilesService: ReleaseFileService
   ) { }
 
+  /**
+   * Initiates the deletion process for release version and its files.
+   */
   ok(): void {
     this.submitting = true;
-    this.alerts = [];
+    this.clearAlerts();
 
-
-    const promises = this.releaseVersion.releaseFiles.map((releaseFile: any) =>
-      lastValueFrom(
-        this.releaseFilesService.delete(
-          this.releasePackage.releasePackageId,
-          this.releaseVersion.releaseVersionId,
-          releaseFile.releaseFileId
-        ).pipe(
-          tap((response) => {
-            console.log('Release file deleted successfully');
-          }),
-          catchError((error) => {
-            console.error('Error deleting release file:', error);
-            this.alerts.push({ type: 'danger', msg: 'Error deleting release file.' });
-            return EMPTY;
-          })
-        )
-      )
+    const fileDeletePromises = this.releaseVersion.releaseFiles.map((releaseFile: any) =>
+      this.deleteReleaseFile(releaseFile)
     );
 
-    Promise.all(promises)
-      .then(() => {
-
-        const releasePackageId = Number(this.releasePackage.releasePackageId);
-
-        return lastValueFrom(
-          this.releaseVersionsService.delete(releasePackageId, this.releaseVersion.releaseVersionId).pipe(
-            tap((result) => {
-              console.log('Release version deleted successfully');
-            }),
-            catchError((error) => {
-              console.error('Error deleting release version:', error);
-              this.alerts.push({ type: 'danger', msg: 'Network request failure [13]: please try again later.' });
-              this.submitting = false;
-              return EMPTY;
-            })
-          )
-        );
-      })
+    Promise.all(fileDeletePromises)
+      .then(() => this.deleteReleaseVersion())
       .then(result => {
         this.activeModal.close(result);
       })
       .catch(() => {
-
-        this.alerts.push({ type: 'danger', msg: 'Network request failure [13]: please try again later.' });
-        this.submitting = false;
+        this.handleError('Network request failure [13]: please try again later.');
       });
   }
 
+  /**
+   * Cancels the modal
+   */
   cancel(): void {
     this.activeModal.dismiss('cancel');
   }
 
+  /**
+   * Closes the alert at the given index.
+   */
   closeAlert(index: number): void {
     this.alerts.splice(index, 1);
+  }
+
+  /**
+   * Deletes a specific release file.
+   */
+  private deleteReleaseFile(releaseFile: any): Promise<any> {
+    return lastValueFrom(
+      this.releaseFilesService.delete(
+        this.releasePackage.releasePackageId,
+        this.releaseVersion.releaseVersionId,
+        releaseFile.releaseFileId
+      ).pipe(
+        tap(() => console.log('Release file deleted successfully')),
+        catchError((error) => {
+          console.error('Error deleting release file:', error);
+          this.handleError('Error deleting release file.');
+          return EMPTY;
+        })
+      )
+    );
+  }
+
+  /**
+   * Deletes the release version after all files have been deleted.
+   */
+  private deleteReleaseVersion(): Promise<any> {
+    const releasePackageId = Number(this.releasePackage.releasePackageId);
+    return lastValueFrom(
+      this.releaseVersionsService.delete(releasePackageId, this.releaseVersion.releaseVersionId).pipe(
+        tap(() => console.log('Release version deleted successfully')),
+        catchError((error) => {
+          console.error('Error deleting release version:', error);
+          this.handleError('Error deleting release version.');
+          return EMPTY;
+        })
+      )
+    );
+  }
+
+  /**
+   * Handles errors by adding an alert and resetting the submission state.
+   */
+  private handleError(message: string): void {
+    this.alerts.push({ type: 'danger', msg: message });
+    this.submitting = false;
+  }
+
+  /**
+   * Clears all alerts.
+   */
+  private clearAlerts(): void {
+    this.alerts = [];
   }
 }

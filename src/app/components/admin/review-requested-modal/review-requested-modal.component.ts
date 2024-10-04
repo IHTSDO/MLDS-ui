@@ -12,6 +12,7 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
 import { ModalComponent } from '../../common/modal/modal.component';
+import { catchError, of } from 'rxjs';
 
 /**
  * Review Requested Modal Component
@@ -39,32 +40,25 @@ export class ReviewRequestedModalComponent {
    */
   alerts: { type: string, msg: string }[] = [];
 
-  /**
-   * Constructor
-   *
-   * @param activeModal The active modal instance
-   * @param userRegistrationService The user registration service
-   */
   constructor(
     public activeModal: NgbActiveModal,
     private userRegistrationService: UserRegistrationService
   ) {}
 
   /**
-   * Approve the application
+   * Approve the application with 'REVIEW_REQUESTED' status
    */
-  ok() {
+  ok(): void {
     this.submitting = true;
-    this.alerts = [];
+    this.clearAlerts();
 
     this.userRegistrationService.approveApplication(this.application, 'REVIEW_REQUESTED')
-      .subscribe({
-        next: () => {
-          this.activeModal.close();
-        },
-        error: () => {
-          this.alerts.push({ type: 'danger', msg: 'Network request failure [19]: please try again later.' });
-          this.submitting = false;
+      .pipe(
+        catchError(() => this.handleError('Network request failure [19]: please try again later.'))
+      )
+      .subscribe(result => {
+        if (result) {
+          this.closeModal();
         }
       });
   }
@@ -72,7 +66,7 @@ export class ReviewRequestedModalComponent {
   /**
    * Dismiss the modal
    */
-  dismiss() {
+  dismiss(): void {
     this.activeModal.dismiss();
   }
 
@@ -81,7 +75,32 @@ export class ReviewRequestedModalComponent {
    *
    * @param alert The alert to be closed
    */
-  closeAlert(alert: { type: string, msg: string }) {
+  closeAlert(alert: { type: string, msg: string }): void {
     this.alerts = this.alerts.filter(a => a !== alert);
+  }
+
+  /**
+   * Close the modal
+   */
+  private closeModal(): void {
+    this.activeModal.close();
+  }
+
+  /**
+   * Handle errors and display appropriate alert messages
+   *
+   * @param errorMessage The error message to display
+   */
+  private handleError(errorMessage: string) {
+    this.alerts.push({ type: 'danger', msg: errorMessage });
+    this.submitting = false;
+    return of(null); // Returning a fallback observable to prevent break in the stream
+  }
+
+  /**
+   * Clear all alerts
+   */
+  private clearAlerts(): void {
+    this.alerts = [];
   }
 }
