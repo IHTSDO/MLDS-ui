@@ -11,12 +11,13 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule } from '@ngx-translate/core';
+import { IhtsdoReleasesModalComponent } from "../../common/ihtsdo-releases-modal/ihtsdo-releases-modal.component";
 
 
 @Component({
   selector: 'app-ihtsdo-releases',
   standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FilterAlphabetaPipe, FilterOfflinePipe, EnumPipe, CompareTextPipe,TranslateModule],
+  imports: [CommonModule, FilterOnlinePipe, FilterAlphabetaPipe, FilterOfflinePipe, EnumPipe, CompareTextPipe, TranslateModule, IhtsdoReleasesModalComponent],
   templateUrl: './ihtsdo-releases.component.html',
   styleUrl: './ihtsdo-releases.component.scss'
 })

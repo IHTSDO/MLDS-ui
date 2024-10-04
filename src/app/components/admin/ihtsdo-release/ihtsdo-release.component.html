@@ -1,3 +1,4 @@
+
 <!-- back to releases button -->
 <div class="row">
     <div class="col-md-12">
@@ -23,55 +24,17 @@
         </div>
     </div>
 </div>
-
 <!-- public versions -->
 <div class="row">
     <div class="col-md-12">
-        <h3>{{'views.ihtsdoReleases.publicVersions' | translate | compareText : 'Public Versions'}}</h3>
+        <h3>{{ 'views.ihtsdoReleases.publicVersions' | translate | compareText : 'Public Versions' }}</h3>
 
-        <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.online">
-            <div class="panel-heading status">
-              <div class="status">
-                <h3 class="panel-title panel-titles" >{{ releaseVersion?.name }}</h3>
-              </div>
-            </div>
-            <div class="panel-body">
-                <p [innerHTML]="releaseVersion.description"></p>
-                <span>
-                    <b><span>{{'global.word.publishedOn' | translate | compareText : 'Published On'}}</span>:</b> 
-                    {{releaseVersion?.publishedAt | date: 'yyyy-MM-dd'}}
-                </span>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="version-title"><b><span>{{'global.word.file' | translate | compareText: 'File'}}</span>:</b></span>
-                    </div>
-                    <div class="col-md-10">
-                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
-                            <i class="fa fa-file"></i>
-                            <button class="btn btn-link disabled no-padding" 
-                                    [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
-                                    *ngIf="!releaseFile.clientDownloadUrl" 
-                                    [innerHTML]="releaseFile.label">
-                            </button>
-                            <a *ngIf="releaseFile.clientDownloadUrl" 
-                               [href]="releaseFile.clientDownloadUrl" 
-                               (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
-                               target="_blank" 
-                               [innerHTML]="releaseFile.label">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
+        <app-ihtsdo-release-version-modal *ngFor="let releaseVersion of releaseVersions.online" [releaseVersion]="releaseVersion"></app-ihtsdo-release-version-modal>
+
         <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
         <div class="alert alert-warning" *ngIf="!isLoading && releaseVersions.online.length == 0">
-            <i class="fa fa-exclamation-circle"></i> 
-            <span>{{'views.ihtsdoReleases.noOnlineVersions' |translate | compareText : 'There are currently no online versions of this release.'}}</span>
+            <i class="alert-warning fa fa-exclamation-circle"></i> &nbsp;
+            <span>{{ 'views.ihtsdoReleases.noOnlineVersions' |translate | compareText : 'There are currently no online versions of this release.' }}</span>
         </div>
     </div>
 </div>
@@ -81,48 +44,11 @@
     <div class="col-md-12">
         <h3>Alpha/Beta Versions</h3>
 
-        <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.alphabeta">
-            <div class="panel-heading status">
-                <span class="alert-danger-flag pull-right "  >Alpha/Beta</span>
-                <div class="status">
-                    <h3 class="panel-title panel-titles">{{releaseVersion.name}}</h3>
-                </div>
-            </div>
-            <div class="panel-body">
-                <p [innerHTML]="releaseVersion.description"></p>
-                <span>
-                    <b><span>{{'global.word.publishedOn' | translate | compareText :'Published On'}}</span>:</b> 
-                    {{releaseVersion.publishedAt | date: 'yyyy-MM-dd'}}
-                </span>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="version-title"><b><span>{{'global.word.file' | translate | compareText : 'File'}}</span> :</b></span>
-                    </div>
-                    <div class="col-md-10">
-                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
-                            <i class="fa fa-file"></i>
-                            <button class="btn btn-link disabled no-padding" 
-                                    [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
-                                    *ngIf="!releaseFile.clientDownloadUrl" 
-                                    [innerHTML]="releaseFile.label">
-                            </button>
-                            <a *ngIf="releaseFile.clientDownloadUrl" 
-                               [href]="releaseFile.clientDownloadUrl" 
-                               target="_blank" 
-                               [innerHTML]="releaseFile.label">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
+        <app-ihtsdo-release-version-modal *ngFor="let releaseVersion of releaseVersions.alphabeta" [releaseVersion]="releaseVersion"></app-ihtsdo-release-version-modal>
+
         <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
         <div class="alert alert-warning" *ngIf="!isLoading && releaseVersions.alphabeta.length == 0">
-            <i class="fa fa-exclamation-circle"></i> 
+            <i class="alert-warning fa fa-exclamation-circle"></i> &nbsp;
             <span>There are currently no alpha/beta versions of this release.</span>
         </div>
     </div>
@@ -131,50 +57,13 @@
 <!-- offline versions -->
 <div class="row">
     <div class="col-md-12">
-        <h3 >Offline Versions</h3>
+        <h3>Offline Versions</h3>
 
-        <div class="panel panel-default release-package package" *ngFor="let releaseVersion of releaseVersions.offline">
-            <div class="panel-heading status">
-                <span class="alert-danger-flag pull-right" >Offline</span>
-                <div class="status">
-                    <h3 class="panel-title panel-titles">{{releaseVersion.name}}</h3>
-                </div>
-            </div>
-            <div class="panel-body">
-                <p [innerHTML]="releaseVersion.description"></p>
-                <span>
-                    <b><span>{{'global.word.publishedOn' | translate | compareText :'Published On'}}</span>:</b> 
-                    {{releaseVersion.publishedAt | date: 'yyyy-MM-dd'}}
-                </span>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="version-title"><b> <span>{{'global.word.file' | translate | compareText : 'File'}}</span>  :</b></span>
-                    </div>
-                    <div class="col-md-10">
-                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
-                            <i class="fa fa-file"></i>
-                            <button class="btn btn-link disabled no-padding" 
-                                    [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
-                                    *ngIf="!releaseFile.clientDownloadUrl" 
-                                    [innerHTML]="releaseFile.label">
-                            </button>
-                            <a *ngIf="releaseFile.clientDownloadUrl" 
-                               [href]="releaseFile.clientDownloadUrl" 
-                               target="_blank" 
-                               [innerHTML]="releaseFile.label">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
+        <app-ihtsdo-release-version-modal *ngFor="let releaseVersion of releaseVersions.offline" [releaseVersion]="releaseVersion"></app-ihtsdo-release-version-modal>
+
         <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
         <div class="alert alert-warning" *ngIf="!isLoading && releaseVersions.offline.length == 0">
-            <i class="fa fa-exclamation-circle"></i> 
+            <i class="alert-warning fa-exclamation-circle"></i> &nbsp;
             <span>There are currently no offline versions of this release.</span>
         </div>
     </div>

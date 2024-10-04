@@ -10,11 +10,12 @@ import { ReleasePackageService } from 'src/app/services/release-package/release-
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
+import { IhtsdoReleaseVersionModalComponent } from '../../common/ihtsdo-release-version-modal/ihtsdo-release-version-modal.component';
 
 @Component({
   selector: 'app-ihtsdo-release',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, TranslateModule, CompareTextPipe,IhtsdoReleaseVersionModalComponent],
   templateUrl: './ihtsdo-release.component.html',
   styleUrl: './ihtsdo-release.component.scss',
 })
