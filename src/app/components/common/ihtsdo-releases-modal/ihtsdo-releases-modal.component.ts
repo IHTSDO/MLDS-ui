@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule} from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { DateSortPipe } from 'src/app/pipes/date-sort/date-sort.pipe';
 
