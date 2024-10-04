@@ -10,10 +10,10 @@
 					<i class="fa fa-angle-right"></i>
 					<span [innerHTML]="landingText"></span>
 				  </p>
-				<p>
-					<i class="fa fa-angle-right"></i>
-					<span [innerHTML]="translatedDetails"></span>
+				  <p><i class="fa fa-angle-right"></i> 
+					<span [innerHTML]="'views.landingPage.furtherDetails' | translate"></span>
 				  </p>
+				   
 				<a class="btn btn-success btn-lg" [routerLink]="['/register']" >{{'global.menu.account.register' | translate | compareText : 'Register'}}</a>
 					<p>
 						<span>{{ 'global.word.or' | translate }}</span>&nbsp;

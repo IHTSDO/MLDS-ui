@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -34,7 +33,6 @@ export class LandingContentComponent implements OnInit{
   * Default member key to use if none is provided
   */
  defaultMemberKey = 'IHTSDO';
- translatedDetails: SafeHtml = '';
   landingText: string = '';
   private langISO: string | null = null;
   private subscriptions = new Subscription();
@@ -54,14 +52,10 @@ export class LandingContentComponent implements OnInit{
  constructor(
    private route: ActivatedRoute,
    private memberService: MemberService,
-   private sanitizer: DomSanitizer,
    private countryService: CountryService,
    private translateService: TranslateService
  ) {
-  this.setTranslatedDetails();
-  this.translateService.onLangChange.subscribe(() => {
-    this.setTranslatedDetails();
-  });
+
 }
 
  /**
@@ -123,6 +117,8 @@ private setLandingText(): void {
             ${this.translateService.instant('views.landingPage.member.purpose2')}
             ${this.translateService.instant('global.country.' + this.memberKey)}
             ${this.translateService.instant('views.landingPage.member.purpose3')}
+            
+            
           `;
         } else {
           this.landingText = this.translateService.instant('views.landingPage.purpose');
@@ -134,9 +130,4 @@ private setLandingText(): void {
   }
 }
 
- setTranslatedDetails(): void {
-  this.translateService.get('views.landingPage.furtherDetails').subscribe((translation: string) => {
-    this.translatedDetails = this.sanitizer.bypassSecurityTrustHtml(translation);
-  });
-}
 }
