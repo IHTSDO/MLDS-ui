@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import moment from 'moment';
 import { AuditsService } from 'src/app/services/audits/audits.service';
 import { AuditsEmbedComponent } from '../../common/audits-embed/audits-embed.component';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule } from '@ngx-translate/core';
+import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-filter-utils.service';
 
 /**
  * ActivityLogsComponent - displays activity logs for a given date range
@@ -38,13 +38,15 @@ export class ActivityLogsComponent implements OnInit {
    */
   toDate!: string;
 
-  constructor(private activityLogsService: AuditsService) {}
+  constructor(private activityLogsService: AuditsService, private dateFilterUtils: DateFilterUtilsService) {}
 
   /**
    * Initializes the component
    */
   ngOnInit(): void {
-    this.previousWeek();
+    const { fromDate, toDate } = this.dateFilterUtils.previousWeek();
+    this.fromDate = fromDate;
+    this.toDate = toDate;
     this.loadActivity();
   }
 
@@ -72,38 +74,5 @@ export class ActivityLogsComponent implements OnInit {
    */
   onChangeDate(): void {
     this.loadActivity();
-  }
-
-  /**
-   * Formats a moment object as a string in the format 'YYYY-MM-DD'
-   * @param m - moment object
-   * @returns formatted string
-   */
-  toDateFilter(m: moment.Moment): string {
-    return m.format('YYYY-MM-DD');
-  }
-
-  /**
-   * Sets the date range to today
-   */
-  today() {
-    this.fromDate = this.toDateFilter(moment());
-    this.toDate = this.toDateFilter(moment().add(1, 'days'));
-  }
-
-  /**
-   * Sets the date range to the previous week
-   */
-  previousWeek() {
-    this.fromDate = this.toDateFilter(moment().subtract(1, 'weeks'));
-    this.toDate = this.toDateFilter(moment().add(1, 'days'));
-  }
-
-  /**
-   * Sets the date range to the previous month
-   */
-  previousMonth() {
-    this.fromDate = this.toDateFilter(moment().subtract(1, 'months'));
-    this.toDate = this.toDateFilter(moment().add(1, 'days'));
   }
 }

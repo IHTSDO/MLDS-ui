@@ -16,6 +16,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 })
 export class ReviewReleaseLicenseModalComponent {
   @Input() releasePackage: any;
+  @Input() isIhtsdoPresent: boolean = true; 
   isLicenseAccepted: boolean = false;
   isSubmitting : boolean=false;
   constructor(public activeModal: NgbActiveModal,private releasePackageService: ReleasePackageService) {}
