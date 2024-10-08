@@ -217,25 +217,25 @@
               *ngIf="application.applicationType === 'PRIMARY'"
               class="col-md-1"
             >
-            {{'affiliate.agreementType.'+application.affiliateDetails.agreementType | translate}}
+            {{application.affiliateDetails.agreementType ? ('affiliate.agreementType.'+application.affiliateDetails.agreementType | translate) : ''}}
             </td>
             <td
               *ngIf="application.applicationType === 'EXTENSION'"
               class="col-md-1"
             >
-            {{ 'affiliate.agreementType.'+ application.affiliate.affiliateDetails.agreementType| translate}}
+            {{ application.affiliate.affiliateDetails.agreementType ? ('affiliate.agreementType.'+ application.affiliate.affiliateDetails.agreementType| translate) : ''}}
             </td>
             <td
               *ngIf="application.applicationType === 'PRIMARY'"
               class="col-md-1"
             >
-            {{'affiliate.type.'+application.type |translate}} - {{'affiliate.subType.'+application.subType|translate}}
+            {{application.type ? ('affiliate.type.'+application.type |translate) : ''}} - {{application.subType ? ('affiliate.subType.'+application.subType | translate) : ''}}
             </td>
             <td
               *ngIf="application.applicationType === 'EXTENSION'"
               class="col-md-1"
             >
-            {{ 'affiliate.type.'+application.affiliate.type | translate}}
+            {{ application.affiliate.type ? ('affiliate.type.'+application.affiliate.type | translate) : ''}}
             </td>
             <td class="col-md-1">
               {{ application.submittedAt | date: 'yyyy-MM-dd' }}

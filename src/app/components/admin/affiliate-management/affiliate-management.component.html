@@ -210,7 +210,7 @@
             {{affiliateActiveDetails(affiliate).otherText}}
           </td>
           <td class="col-md-2">
-            {{'affiliate.standingState.' + affiliate.standingState | translate}}
+            {{affiliate.standingState ? ('affiliate.standingState.' + affiliate.standingState | translate) : ''}}
           </td>
           
 

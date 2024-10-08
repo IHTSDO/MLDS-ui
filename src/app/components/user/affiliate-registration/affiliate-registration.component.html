@@ -71,7 +71,7 @@
 
                                     <p *ngIf="affiliateApplicationForm?.get('subType')?.hasError('required') && (affiliateApplicationForm?.get('subType')?.touched || submitAttempted)"
                                         class="help-block">
-                                        {{'register.messages.validate.registration.subtyperequired'|translate|compareText:'Subtype field is required.'}}
+                                        {{'register.messages.validate.registration.subtyperequired' | translate}}
                                     </p>
                                 </div>
 
@@ -87,7 +87,7 @@
                                         *ngIf="(affiliateApplicationForm?.get('otherText')?.touched || submitAttempted)">
                                         <p *ngIf="affiliateApplicationForm?.get('otherText')?.hasError('required')"
                                             class="help-block">
-                                            {{'register.messages.validate.registration.other.required'|translate|compareText:'Other field is required.'}}
+                                            {{'register.affiliateRegistration.validation.other.required' | translate}}
                                         </p>
                                         <p *ngIf="affiliateApplicationForm?.get('otherText')?.hasError('maxlength')"
                                             class="help-block">
@@ -450,7 +450,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <input class="form-control" formControlName="billingPostCode"
-                                                        placeholder="{{ 'affiliateform.affiliateDetails.billingAddress.post' |translate}}"
+                                                        placeholder="{{ 'views.contactInfo.contact.postcode.placeholder' |translate}}"
                                                         (blur)="autoSubmit()" />
 
                                                     <div

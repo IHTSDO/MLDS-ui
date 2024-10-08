@@ -22,31 +22,31 @@
         <p *ngIf="application?.type !== 'INDIVIDUAL'">
           <b>{{ 'views.contactInfo.organization.type.name' | translate | compareText: 'Organization Type'}}:</b>
           <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType === 'OTHER'">
-            {{application?.affiliateDetails?.organizationTypeOther}}
+            {{ application?.affiliateDetails?.organizationTypeOther || (application?.affiliateDetails?.organizationType ? ('affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate) : '') }}
           </span>
           <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType !== 'OTHER'">
-            {{ 'affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate}}
+            {{ application?.affiliateDetails?.organizationType ? ('affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate) : ''}}
           </span>
         </p>
         <p *ngSwitchCase="'PRIMARY'">
           <b>{{ 'views.applicationSummary.useType' | translate | compareText: 'Use Type'}}:</b>
-          {{ 'affiliate.type.' + application?.type | translate}}
+          {{ application?.type ? ('affiliate.type.' + application?.type | translate) : ''}}
         </p>
         <p *ngSwitchCase="'EXTENSION'">
           <b>{{ 'views.applicationSummary.useType' | translate | compareText: 'Use Type'}}:</b>
-          {{ 'affiliate.type.' + application?.affiliateDetails?.type | translate}}
+          {{ application?.affiliateDetails?.type ? ('affiliate.type.' + application?.affiliateDetails?.type | translate) : ''}}
         </p>
         <p *ngSwitchCase="'PRIMARY'">
           <b>{{ 'views.applicationSummary.useSubType' | translate | compareText: 'Use SubType'}}:</b>
-          {{ 'affiliate.subType.' + application?.subType | translate}}
+          {{ application?.subType ? ('affiliate.subType.' + application?.subType | translate) : ''}}
         </p>
         <p *ngSwitchCase="'PRIMARY'">
           <b>{{ 'register.affiliateRegistration.typeOfAgreement' | translate | compareText: 'Type of Agreement'}}:</b>
-          {{ 'affiliate.agreementType.' + application?.affiliateDetails?.agreementType | translate}}
+          {{ application?.affiliateDetails?.agreementType ? ('affiliate.agreementType.' + application?.affiliateDetails?.agreementType | translate) : ''}}
         </p>
         <p *ngIf="application?.affiliate?.standingState">
           <b>{{ 'views.contactInfo.admin.accountStanding' | translate | compareText: 'Account Standing'}}</b>
-          {{ 'affiliate.standingState.' + application?.affiliate?.standingState | translate }}
+          {{ application?.affiliate?.standingState ? ('affiliate.standingState.' + application?.affiliate?.standingState | translate) : '' }}
         </p>
       </div>
   </div>
@@ -190,7 +190,7 @@
           <div>
             <p>
               <b>{{ 'views.usageLog.impStatus' | translate | compareText: 'Implementation Status' }}: </b>
-              {{ 'affiliate.implementationStatus.' + application?.commercialUsage?.context?.implementationStatus | translate}}
+              {{ application?.commercialUsage?.context?.implementationStatus ? ('affiliate.implementationStatus.' + application?.commercialUsage?.context?.implementationStatus | translate) : ''}}
             </p>
           </div>
           <div *ngFor="let countryRecord of usageCountryCountslist">

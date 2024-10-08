@@ -68,9 +68,9 @@
                 <p>
                     {{affiliate.application.affiliateDetails.address.street}}<br>
                     {{affiliate.application.affiliateDetails.address.city}}, {{affiliate.application.affiliateDetails.address.country.commonName}}<br>
-                    <b>Usage Type:</b> {{'affiliate.type.'+affiliate.application.type|translate}} - {{'affiliate.subType.'+affiliate.application.subType|translate}}<br>
-                    <b>Type of Agreement:</b> {{'affiliate.agreementType.'+affiliate.application.affiliateDetails.agreementType|translate}}<br>
-                    <b>Account Standing:</b> {{'affiliate.standingState.'+affiliate.standingState|translate}}
+                    <b>Usage Type:</b> {{affiliate.application.type ? ('affiliate.type.'+affiliate.application.type | translate) : ''}} - {{affiliate.application.subType ? ('affiliate.subType.'+affiliate.application.subType | translate) : ''}}<br>
+                    <b>Type of Agreement:</b> {{ affiliate.application.affiliateDetails.agreementType ? ('affiliate.agreementType.'+affiliate.application.affiliateDetails.agreementType | translate) : ''}}<br>
+                    <b>Account Standing:</b> {{ affiliate.standingState ? ('affiliate.standingState.'+affiliate.standingState | translate) : ''}}
                 </p>
                 <hr>
             </div>
