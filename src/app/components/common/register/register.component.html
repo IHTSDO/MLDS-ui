@@ -101,7 +101,7 @@
             <small class="muted" [innerHTML]="('register.form.tos' | translate)"></small>
           </label>
           <div *ngIf="submitted && createUserForm.get('tos')?.invalid">
-            <div class="help-block">You must agree to the IHTSDO Terms and Conditions to continue.</div>
+            <div class="help-block">{{ 'register.form.tc' | translate }}</div>
           </div>
         </div>
   
