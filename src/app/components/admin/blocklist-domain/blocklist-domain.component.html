@@ -21,9 +21,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let domain of domainBlacklist">
-            <td>{{ domain.domainname }}</td>
+            <td>{{ domain.domainName }}</td>
             <td>
-              <button class="btn btn-danger" (click)="removeDomain(domain.domainname)">
+              <button class="btn btn-danger" (click)="removeDomain(domain.domainName)">
                 <i class="fa fa-times"></i> Remove Domain
               </button>
             </td>
