@@ -16,7 +16,9 @@ body {
 }
 
 .page-header {
-    margin-top: 20px;
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .space {
@@ -32,9 +34,6 @@ body {
 
 .col-md-6 {
     width: 50%;
-}
-h2{
-    padding-top: 30px;
 }
 
 button.btn {
@@ -98,4 +97,30 @@ button.btn {
 .upload-button:hover {
     background-color: #3cb878;
     color: #ffffff;
+}
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #333333;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+code, kbd, pre, samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: monospace;
+    font-size: 1em;
+}
+b {
+    font-weight: 600px !important;
+}
+h2{
+    font-size: 30px !important;
+    padding-top: 30px;
 }

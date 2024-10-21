@@ -418,8 +418,7 @@ Actual accordion wrapped in id="accordion-override" div. */
     cursor: pointer;
   }
   
-  /* Optional: Add hover styles for better visibility */
-  .language-option:hover {
-    // background-color: #f8f9fa; /* Light background on hover */
-  }
+  .ql-editor strong{
+    font-weight:bold;
+}
   

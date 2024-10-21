@@ -29,6 +29,7 @@ export class ArchiveManagementComponent implements OnInit {
   packagesByMember: any[] = [];
   archivePackages: any[] = [];
   member:any;
+  isLoading:boolean=true;
   constructor(
     private router: Router,
     private packageUtilsService: PackageUtilsService,
@@ -48,11 +49,16 @@ export class ArchiveManagementComponent implements OnInit {
   onShowAllMembersChange(): void {
     this.extractPackages();
   }
-
+  hasNoArchivePackages(): boolean {
+    // Check if all members have no archive packages
+    return this.packagesByMember.every(memberEntry => memberEntry.archivePackages.length === 0);
+  }
 
   extractPackages(): void {
+    this.isLoading=true;
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
+        this.isLoading=false;
         this.packages = data;
         if (!this.packages) {
           return;

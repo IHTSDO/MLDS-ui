@@ -80,7 +80,7 @@
           <td class="col-sm-2">{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
           <td>
             <div ngbDropdown *ngIf="isEditableReleasePackage">
-              <button class="dropdown-toggle" ngbDropdownToggle>
+              <button id="releaseOption" class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>
                 <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
@@ -155,7 +155,7 @@
           <td>{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
           <td>
             <div ngbDropdown *ngIf="isEditableReleasePackage">
-              <button class="dropdown-toggle" ngbDropdownToggle>
+              <button id="releaseOption" class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>
                 <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
@@ -233,7 +233,7 @@
           <td>{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
           <td>
             <div ngbDropdown *ngIf="isEditableReleasePackage">
-              <button class="dropdown-toggle" ngbDropdownToggle>
+              <button id="releaseOption" class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>
                 <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">

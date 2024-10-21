@@ -15,9 +15,9 @@ import { BolcklistDomainService } from 'src/app/services/blocklist-domain/bolckl
 })
 export class BlocklistDomainComponent implements OnInit {
   /**
-   * Object containing the blocklisted domains.
+   * Array containing the blocklisted domains.
    */
-  domainBlacklist: any = {};
+  domainBlacklist: any[] = [];  // Initialize as an empty array
 
   /**
    * Form data for adding a new domain to the blocklist.
@@ -26,57 +26,39 @@ export class BlocklistDomainComponent implements OnInit {
 
   constructor(private domainBlacklistService: BolcklistDomainService) { }
 
-  /**
-   * Initializes the component by fetching the blocklisted domains.
-   */
   ngOnInit(): void {
     this.getDomainBlacklist();
   }
 
-  /**
-   * Fetches the blocklisted domains from the service.
-   */
   getDomainBlacklist(): void {
     this.domainBlacklistService.getDomainBlacklist().subscribe({
-     next: data => this.domainBlacklist = data,
-     error: (error: any) => {
-         console.error('Error fetching domain blacklist', error)
-     },
-   });
+      next: data => this.domainBlacklist = data || [],  // Ensure data is an array
+      error: (error: any) => {
+        console.error('Error fetching domain blacklist', error);
+      }
+    });
   }
 
-  /**
-   * Submits a new domain to be added to the blocklist.
-   *
-   * @example
-   * <button (click)="newDomainSubmit()">Add Domain</button>
-   */
   newDomainSubmit(): void {
     if (this.domainForm.name) {
       this.domainBlacklistService.addDomain(this.domainForm.name).subscribe({
-        next:() => {
+        next: () => {
           this.domainForm.name = '';
           this.getDomainBlacklist();
         },
         error: (error: any) => {
-           console.error('Error adding domain', error)
-        },
-    });
+          console.error('Error adding domain', error);
+        }
+      });
     }
   }
 
-  /**
-   * Removes a domain from the blocklist.
-   *
-   * @param domain - The domain to be removed.
-   * @example
-   * <button (click)="removeDomain('example.com')">Remove Domain</button>
-   */
   removeDomain(domain: string): void {
     this.domainBlacklistService.removeDomain(domain).subscribe({
-      next:() => this.getDomainBlacklist(),
+      next: () => this.getDomainBlacklist(),
       error: (error: any) => {
-        console.error('Error removing domain', error)
-    },});
+        console.error('Error removing domain', error);
+      }
+    });
   }
 }

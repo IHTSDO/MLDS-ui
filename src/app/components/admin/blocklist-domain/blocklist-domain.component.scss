@@ -133,4 +133,42 @@ button {
     padding: 12px; /* Padding inside table cells */
 }
 
-
+.alert-warning {
+    background-color: #ffffff;
+    border-color: #f26c4f;
+    color: #f26c4f;
+}
+.alert {
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #f26c4f;
+    border-radius: 4px;
+}
+.table tr {
+    border-bottom: 1px solid #eeeeee;
+}
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 4px solid #eeeeee;
+    padding-right: 5px;
+    text-align: left;
+    font-family: 'Oxygen', sans-serif;
+    background-color: #ffffff;
+    font-weight: 400;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
