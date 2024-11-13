@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ihtsdo.otf</groupId>
-    <artifactId>MLDS-ui</artifactId>
+    <artifactId>mlds-ui</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <properties>
         <packageName>${project.artifactId}</packageName>
