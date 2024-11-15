@@ -62,7 +62,7 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
    * Initializes the component by setting the initial date range to the previous week
    */
   ngOnInit() {
-    const { fromDate, toDate } = this.dateFilterUtils.previousWeek();
+    const { fromDate, toDate } = this.dateFilterUtils.previousMonth();
     this.fromDate = fromDate;
     this.toDate = toDate;
   }
