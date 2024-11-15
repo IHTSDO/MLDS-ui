@@ -23,6 +23,7 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 export class LandingHeaderComponent {
   routes = ROUTES;
   languages = [
+    { key: 'da', name: 'Danish', flag: 'dk' },
     { key: 'en', name: 'English', flag: 'gb' },
     { key: 'fr', name: 'French', flag: 'fr' },
     { key: 'de', name: 'German', flag: 'de' },
