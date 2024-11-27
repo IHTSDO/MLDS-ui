@@ -21,6 +21,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { QuillModule } from 'ngx-quill';
+import Quill from 'quill';
+import MagicUrl from 'quill-magic-url';
 
 // SERVICE IMPORTS
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -28,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   }
 
 // SERVICE IMPORTS
+Quill.register('modules/magicUrl', MagicUrl)
 
 
 @NgModule({
@@ -51,6 +55,14 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     StaffTopNavComponent,
     SideNavComponent,
     AdminFooterComponent,
+    QuillModule.forRoot({
+        modules: {
+            magicUrl: {
+              urlRegularExpression: /(https?:\/\/[\S]+)|(www.[\S]+)|(tel:[\S]+)/g,
+              globalRegularExpression: /(https?:\/\/|www\.|tel:)[\S]+/g,
+            },
+          },
+      }),
     TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
