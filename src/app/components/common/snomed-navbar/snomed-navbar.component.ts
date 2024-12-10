@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
  */
 @Component({
     selector: 'app-snomed-navbar',
+    standalone: true,
     templateUrl: './snomed-navbar.component.html',
     styleUrls: ['./snomed-navbar.component.scss']
 })

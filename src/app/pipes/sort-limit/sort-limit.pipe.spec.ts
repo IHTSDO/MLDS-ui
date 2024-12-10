@@ -1,4 +1,4 @@
-import { SortLimitPipe } from '../sort-limit.pipe';
+import { SortLimitPipe } from "./sort-limit.pipe";
 
 describe('SortLimitPipe', () => {
   it('create an instance', () => {

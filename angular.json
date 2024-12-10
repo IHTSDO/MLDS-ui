@@ -46,7 +46,13 @@
                             "moment",
                             "file-saver",
                             "lodash",
-                            "google-libphonenumber"
+                            "google-libphonenumber",
+                            "quill-magic-url",
+                            "quill-delta"
+                        ],
+                        "polyfills": [
+                             "zone.js",
+                             "@angular/localize/init"
                         ]
                     },
                     "configurations": {

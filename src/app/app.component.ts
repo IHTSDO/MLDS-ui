@@ -2,11 +2,13 @@ import {Component, Inject, OnInit} from '@angular/core';
 import 'jquery';
 import { Title } from '@angular/platform-browser';
 import { EnvService } from './services/environment/env.service';
-import { ToastrService } from 'ngx-toastr';
 import {DOCUMENT} from "@angular/common";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
+    imports: [RouterOutlet],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
@@ -15,7 +17,6 @@ export class AppComponent implements OnInit {
     environment: string = '';
 
     constructor(private envService: EnvService,
-                private toastr: ToastrService,
                 private titleService: Title,
                 @Inject(DOCUMENT) private document: Document) {
     }

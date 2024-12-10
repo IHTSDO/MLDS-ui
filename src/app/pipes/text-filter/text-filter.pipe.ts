@@ -11,7 +11,8 @@ import {Pipe, PipeTransform} from '@angular/core';
  * @returns A new array of strings that match the search text.
  */
 @Pipe({
-    name: 'textFilter'
+    name: 'textFilter',
+    standalone: true
 })
 export class TextFilterPipe implements PipeTransform {
 

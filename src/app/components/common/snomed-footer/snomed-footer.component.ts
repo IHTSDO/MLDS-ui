@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
  */
 @Component({
     selector: 'app-snomed-footer',
+    standalone: true,
     templateUrl: './snomed-footer.component.html',
     styleUrls: ['./snomed-footer.component.scss']
 })
