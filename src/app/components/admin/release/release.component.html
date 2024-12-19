@@ -32,7 +32,7 @@
 
     </div>
 
-    <div [innerHTML]="packageEntity.description"></div>
+    <div [innerHTML]="packageEntity.description | linkAddblank"></div>
   </div>
 
 
@@ -61,7 +61,7 @@
       <tbody>
         <tr *ngFor="let releaseVersion of versions['online']">
           <td class="col-sm-2">{{ releaseVersion?.name }}</td>
-          <td class="col-sm-5" [innerHTML]="releaseVersion?.description"></td>
+          <td class="col-sm-5" [innerHTML]="releaseVersion?.description | linkAddblank"></td>
           <td class="col-sm-3">
             <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
               <i class="fa fa-file" style="margin-bottom:10px;"></i>
@@ -125,7 +125,7 @@
       <tbody>
         <tr *ngFor="let releaseVersion of versions['alphabeta']">
           <td>{{ releaseVersion?.name }}</td>
-          <td [innerHTML]="releaseVersion?.description"></td>
+          <td [innerHTML]="releaseVersion?.description | linkAddblank"></td>
           <td>
             <p>
               <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
@@ -204,7 +204,7 @@
       <tbody>
         <tr *ngFor="let releaseVersion of versions['offline']">
           <td>{{releaseVersion?.name}}</td>
-          <td [innerHTML]="releaseVersion?.description"></td>
+          <td [innerHTML]="releaseVersion?.description | linkAddblank"></td>
           <td>
             <p>
               <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"

@@ -16,11 +16,12 @@ import { SortLimitPipe } from "../../../pipes/sort-limit/sort-limit.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { LoaderComponent } from "../../common/loader/loader.component";
+import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
   selector: 'app-view-releases',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent],
+  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
   templateUrl: './view-releases.component.html',
   styleUrl: './view-releases.component.scss'
 })
@@ -63,7 +64,6 @@ export class ViewReleasesComponent implements OnInit {
     this.loadAffiliateState();
     this.loadUserState();
   }
-
 
   private loadUserState(): void {
     this.userAffiliateService.loadUserAffiliate();
@@ -182,6 +182,8 @@ export class ViewReleasesComponent implements OnInit {
     }
     
     }
+
+    this.scrollToFragment();
   }
 
   private loadStandingState(): void {
@@ -258,5 +260,28 @@ export class ViewReleasesComponent implements OnInit {
 
   navigateTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  sortByMemberKey(releasePackagesByMember: any[]): any[] {
+    if (releasePackagesByMember.length > 1) {
+      const sortedArray = releasePackagesByMember.slice(1).sort((a, b) => a.member.key.localeCompare(b.member.key));
+      return [releasePackagesByMember[0], ...sortedArray];
+    }
+    return releasePackagesByMember;
+  }
+
+  scrollToFragment(): void {
+    this.activatedRoute.fragment.subscribe((fragment) => {
+      if (fragment) {
+        setTimeout(() => {
+          const element = document.getElementById(fragment);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            console.error('Could not find element with id:', fragment);
+          }
+        }, 100);
+      }
+    });
   }
 }

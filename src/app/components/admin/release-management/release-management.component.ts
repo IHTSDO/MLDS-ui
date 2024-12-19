@@ -13,11 +13,12 @@ import { AddReleaseModalComponent } from '../add-release-modal/add-release-modal
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
+import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
   selector: 'app-release-management',
   standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, CompareTextPipe, TranslateModule, EnumPipe],
+  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, CompareTextPipe, TranslateModule, EnumPipe, LinkAddblankPipe],
   templateUrl: './release-management.component.html',
   styleUrl: './release-management.component.scss'
 })

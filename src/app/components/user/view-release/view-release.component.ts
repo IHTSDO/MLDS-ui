@@ -16,11 +16,12 @@ import { ReviewReleaseLicenseModalComponent } from '../review-release-license-mo
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
+import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
   selector: 'app-view-release',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent],
+  imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
   templateUrl: './view-release.component.html',
   styleUrl: './view-release.component.scss'
 })

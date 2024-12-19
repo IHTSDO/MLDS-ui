@@ -12,11 +12,12 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { SessionStateService } from 'src/app/services/session-state/session-state.service';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
+import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
   selector: 'app-archive-management',
   standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, EnumPipe,TranslateModule],
+  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, EnumPipe,TranslateModule,LinkAddblankPipe],
   templateUrl: './archive-management.component.html',
   styleUrl: './archive-management.component.scss'
 })

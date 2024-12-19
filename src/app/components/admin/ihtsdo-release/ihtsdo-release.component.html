@@ -20,7 +20,7 @@
                     <span>{{'global.word.viewlicense' | translate | compareText : 'View License'}}</span>
                 </button>
             </h2>
-            <div [innerHTML]="releasePackage.description"></div>
+            <div [innerHTML]="releasePackage.description | linkAddblank"></div>
         </div>
     </div>
 </div>
@@ -63,7 +63,7 @@
 
         <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
         <div class="alert alert-warning" *ngIf="!isLoading && releaseVersions.offline.length == 0">
-            <i class="alert-warning fa-exclamation-circle"></i> &nbsp;
+            <i class="alert-warning fa fa-exclamation-circle"></i> &nbsp;
             <span>There are currently no offline versions of this release.</span>
         </div>
     </div>

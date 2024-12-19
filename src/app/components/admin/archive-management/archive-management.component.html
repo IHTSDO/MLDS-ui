@@ -50,7 +50,7 @@
               <p>Please click on the release title above to manage the release packages.</p>
             </div>
             <div class="panel-body">
-              <div [innerHTML]="package.description"></div>
+              <div [innerHTML]="package.description | linkAddblank"></div>
             </div>
           </div>
         </div>

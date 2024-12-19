@@ -19,12 +19,13 @@ import { EditReleasePackageModalComponent } from '../edit-release-package-modal/
 import { DeleteReleasePackageComponent } from '../delete-release-package/delete-release-package.component';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 
 @Component({
   selector: 'app-release',
   standalone: true,
-  imports: [CommonModule, NgbModule, EnumPipe],
+  imports: [CommonModule, NgbModule, EnumPipe, LinkAddblankPipe],
   templateUrl: './release.component.html',
   styleUrl: './release.component.scss'
 })

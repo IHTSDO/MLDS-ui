@@ -13,7 +13,7 @@
         <div class="page-header">
             <h2>{{releasePackage?.name}} <button class="btn btn-sm btn-link" (click)="viewReleaseLicense()"><span
                         >{{'global.word.viewlicense'|translate|compareText:'View License'}}</span></button></h2>
-            <div [innerHTML]="releasePackage?.description"></div>
+            <div [innerHTML]="releasePackage?.description | linkAddblank"></div>
         </div>
     </div>
 </div>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="panel-body">
-                <p [innerHTML]="releaseVersion?.description"></p>
+                <p [innerHTML]="releaseVersion?.description | linkAddblank"></p>
                 <span><strong><span>{{'global.word.publishedOn'|translate|compareText:'Published On'}}</span>:</strong> {{releaseVersion?.publishedAt | date:
                     'yyyy-MM-dd'}}</span>
             </div>
@@ -148,7 +148,7 @@
             </div>
 
             <div class="panel-body">
-                <p [innerHTML]="releaseVersion?.description"></p>
+                <p [innerHTML]="releaseVersion?.description | linkAddblank"></p>
                 <span><strong><span>{{'global.word.publishedOn'|translate|compareText:'Published On'}}</span>:</strong> {{releaseVersion?.publishedAt | date:
                     'yyyy-MM-dd'}}</span>
             </div>

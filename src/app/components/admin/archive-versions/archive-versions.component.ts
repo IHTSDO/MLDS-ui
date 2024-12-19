@@ -11,11 +11,12 @@ import { AddEditReleaseVersionModalComponent } from '../add-edit-release-version
 import { EditReleasePackageModalComponent } from '../edit-release-package-modal/edit-release-package-modal.component';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
   selector: 'app-archive-versions',
   standalone: true,
-  imports: [CommonModule, NgbModule, EnumPipe],
+  imports: [CommonModule, NgbModule, EnumPipe, LinkAddblankPipe],
   templateUrl: './archive-versions.component.html',
   styleUrl: './archive-versions.component.scss'
 })

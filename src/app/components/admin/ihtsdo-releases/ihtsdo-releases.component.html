@@ -16,7 +16,7 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <div [innerHTML]="package.description"></div>
+                <div [innerHTML]="package.description | linkAddblank"></div>
             </div>
 
             <!-- Latest Versions -->
@@ -60,7 +60,7 @@
                 </h4>
             </div>
             <div class="panel-body">
-                <div [innerHTML]="package.description"></div>
+                <div [innerHTML]="package.description | linkAddblank"></div>
             </div>
             <div class="panel-footer" *ngFor="let version of package.releaseVersions | filterAlphabeta">
                 <app-ihtsdo-releases-modal [version]="version" label="Alpha/Beta"></app-ihtsdo-releases-modal>
@@ -88,7 +88,7 @@
                 </h4>
             </div>
             <div class="panel-body">
-                <div [innerHTML]="package.description"></div>
+                <div [innerHTML]="package.description | linkAddblank"></div>
             </div>
             <div class="panel-footer" *ngFor="let version of package.releaseVersions | filterOffline">
                 <app-ihtsdo-releases-modal [version]="version" label="{{ 'views.ihtsdoReleases.offline' | translate | compareText:'Offline' }}"></app-ihtsdo-releases-modal>
