@@ -188,7 +188,7 @@
 			</div>
 			<table class="table table-hover" aria-label="release-package">
 				<th></th>
-				<tr *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
+				<tr *ngFor="let releasePackage of memberReleases.packages">
 					<td class="break-text">
 						<a
 							href="#/viewReleases/viewRelease/{{releasePackage.releasePackageId}}">{{releasePackage.name}}</a>
@@ -202,10 +202,11 @@
 
 <div class="row" *ngIf="notApprovedReleasePackagesByMember.length > 0">
 	<div class="col-lg-12">
-		<h3>{{'views.userDashboard.otherPackages'|translate|compareText:'Other Available Releases'}}</h3>
+		<h3 class="other-release">{{'views.userDashboard.otherPackages'|translate|compareText:'Other Available Releases'}}</h3>
 	</div>
-	<div *ngFor="let memberReleases of notApprovedReleasePackagesByMember">
-		<a href="#/viewReleases#{{'section-'+memberReleases.packages[0].member.key}}" class="btn btn-link">
+	<br>
+	<div *ngFor="let memberReleases of sortByMemberKey(notApprovedReleasePackagesByMember)">
+		<a [routerLink]="['/viewReleases']" [fragment]="'section-' + memberReleases.packages[0].member.key"  class="btn btn-link country-list">
 			{{'global.member.'+memberReleases.packages[0].member.key|translate}}
 		</a>
 	</div>

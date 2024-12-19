@@ -221,4 +221,11 @@ getSortedApplications(): any[] {
     navigateTo(route: string) {
       this.router.navigate([route]);
     }
+  
+    sortByMemberKey(releasePackagesByMember: any[]): any[] {
+      if (releasePackagesByMember.length > 1) {
+        return releasePackagesByMember.sort((a, b) => a.member.key.localeCompare(b.member.key));
+      }
+      return releasePackagesByMember;
+    }
 }
