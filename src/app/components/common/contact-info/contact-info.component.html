@@ -141,7 +141,7 @@
 
                                 <!-- for first name -->
                                 <div class="form-group">
-                                    <label for="firstName"><b>{{ 'views.contactInfo.contact.firstName.name' | translate | compareText: 'First Name' }}:</b> </label>
+                                    <label for="firstName"><b>{{ 'views.contactInfo.contact.firstName.name' | translate | compareText: 'First Name' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b> </label>
                                     <input id="firstName" class="form-control" placeholder="{{'views.contactInfo.contact.firstName.placeholder'|translate}}"
                                         formControlName="firstName" [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -152,7 +152,7 @@
 
                                 <!-- for last name -->
                                 <div class="form-group">
-                                    <label for="lastName"><b>{{ 'views.contactInfo.contact.lastName.name' | translate | compareText: 'Last Name' }}:</b></label>
+                                    <label for="lastName"><b>{{ 'views.contactInfo.contact.lastName.name' | translate | compareText: 'Last Name' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                     <input id="lastName" class="form-control" placeholder="{{'views.contactInfo.contact.lastName.placeholder'| translate}}" formControlName="lastName"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -191,7 +191,7 @@
                         </div>
 
                         <!-- for alternate email -->
-                        <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
+                        <div class="row" *ngIf="affiliateType == 'INDIVIDUAL'">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="alternateEmail"><b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</b></label>
@@ -211,7 +211,7 @@
                         </div>
 
                         <!-- for third email -->
-                        <div class="row" *ngIf="affiliate?.type == 'INDIVIDUAL'">
+                        <div class="row" *ngIf="affiliateType == 'INDIVIDUAL'">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</b></label>
@@ -231,7 +231,7 @@
                         <!-- labels for landline and extension -->
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="phoneNumber"><b>{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:</b></label>
+                                <label for="phoneNumber"><b>{{ 'views.contactInfo.contact.landline.name' | translate | compareText: 'Landline Phone Number' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                             </div>
                             <div class="col-md-2">
                                 <label for="extension"><b>{{ 'views.contactInfo.contact.landlineExtension.name' | translate | compareText: 'Extension' }}:</b></label>
@@ -269,7 +269,7 @@
                         <!-- label for mobile number -->
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="mobileNumber"><b>{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}:</b></label>
+                                <label for="mobileNumber"><b>{{ 'views.contactInfo.contact.mobile.name' | translate | compareText: 'Mobile Phone Number' }}:<span *ngIf="!isStaffOrAdmin && affiliateType !== 'INDIVIDUAL'" class="text-danger">*</span></b></label>
                             </div>
                         </div>
 
@@ -292,12 +292,12 @@
                             </div>
                         </div>
 
-                        <div *ngIf="affiliate?.type == 'INDIVIDUAL'">
+                        <div *ngIf="affiliateType == 'INDIVIDUAL'">
                             <!-- for address -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="address"><b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</b></label>
+                                        <label for="address"><b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                         <input class="form-control" placeholder="{{'views.contactInfo.contact.address.placeholder'|translate}}"
                                             formControlName="addressStreetIndividual"
                                             [attr.disabled]="readOnly ? true : null" />
@@ -314,10 +314,10 @@
                             <!-- labels for city and post code -->
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
+                                    <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
+                                    <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                 </div>
                             </div>
 
@@ -362,7 +362,7 @@
 
 
                             <!-- for billing fields -->
-                            <div>
+                            <div *ngIf="!billingHide">
                                 <hr>
 
                                 
@@ -370,7 +370,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="checkbox"><b>{{ 'views.contactInfo.contact.billingAddress.sameAsAddress' | translate | compareText: 'Use Address as Billing Address' }}</b></label>
-                                            <input type="checkbox" formControlName="use" />
+                                            &nbsp;<input type="checkbox" (change)="copyAddress()" formControlName="use" />
                                         </div>
                                     </div>
                                 </div>
@@ -379,7 +379,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="billingAddress"><b>{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</b></label>
+                                            <label for="billingAddress"><b>{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                             <input class="form-control" placeholder="{{'views.contactInfo.contact.billingAddress.placeholder'|translate}}"
                                                 formControlName="billingAddressStreet"
                                                 [attr.disabled]="readOnly || isSameAddress ? true : null" />
@@ -395,10 +395,10 @@
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
+                                        <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
+                                        <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                     </div>
                                 </div>
 
@@ -421,7 +421,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postCode.placeholder'|translate}}"
+                                            <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postcode.placeholder'|translate}}"
                                                 formControlName="billingAddressPost"
                                                 [attr.disabled]="readOnly || isSameAddress ? true : null" />
                                             <div
@@ -440,11 +440,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b></label>
-                                            <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.postCode.placeholder'|translate}}"
+                                            <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
+                                            <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.country.name'|translate}}"
                                                 formControlName="billingAddressCountry" [ngbTypeahead]="search"
                                                 [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
-                                                autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
+                                                autocomplete="off" aria-autocomplete="list" aria-expanded="false" [attr.disabled]="readOnly || isSameAddress ? true : null"/>
                                             <div
                                                 *ngIf="form.get('billingAddressCountry')?.invalid && (form.get('billingAddressCountry')?.touched || formSubmitted)">
                                                 <p class="help-block"
@@ -465,7 +465,7 @@
             </div>
 
 
-            <div class="panel panel-default" *ngIf="affiliate?.type && affiliate?.type != 'INDIVIDUAL'">
+            <div class="panel panel-default" *ngIf="affiliateType && affiliateType != 'INDIVIDUAL'">
                 <div class="panel-heading">
                     <h4 class="panel-title"><b>{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</b></h4>
                 </div>
@@ -498,7 +498,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address"><b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}</b></label>
+                                    <label for="address"><b>{{ 'views.contactInfo.contact.address.name' | translate | compareText: 'Address' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                     <input class="form-control" placeholder="{{'views.contactInfo.contact.address.placeholder'|translate}}" formControlName="addressStreet"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div
@@ -512,10 +512,10 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
+                                <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                             </div>
                             <div class="col-md-3">
-                                <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
+                                <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                             </div>
                         </div>
 
@@ -556,14 +556,14 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div *ngIf="!billingHide">
                             <hr>
 
                             <div class="row" *ngIf="!isStaffOrAdmin">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="checkbox"><b>{{ 'views.contactInfo.contact.billingAddress.useOrganizationAddress' | translate | compareText: 'Use Organization Address as Billing Address' }}</b></label>
-                                        <input type="checkbox" formControlName="use" />
+                                        &nbsp;<input type="checkbox" (change)="copyAddress()" formControlName="use" />
                                     </div>
                                 </div>
                             </div>
@@ -571,7 +571,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="billingAddress"><b>{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:</b></label>
+                                        <label for="billingAddress"><b>{{ 'views.contactInfo.contact.billingAddress.name' | translate | compareText: 'Billing Address' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                         <input class="form-control" placeholder="{{'views.contactInfo.contact.billingAddress.placeholder'|translate}}"
                                             formControlName="billingAddressStreet"
                                             [attr.disabled]="readOnly || isSameAddress ? true : null" />
@@ -586,10 +586,10 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:</b></label>
+                                    <label for="city"><b>{{ 'views.contactInfo.contact.city.name' | translate | compareText: 'City' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:</b></label>
+                                    <label for="postCode"><b>{{ 'views.contactInfo.contact.postcode.name' | translate | compareText: 'Post Code' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                 </div>
                             </div>
 
@@ -624,11 +624,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:</b></label>
+                                        <label for="country"><b>{{ 'views.contactInfo.contact.country.name' | translate | compareText: 'Country' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                         <input class="form-control" type="text" placeholder="{{'views.contactInfo.contact.country.placeholder'|translate}}"
                                             formControlName="billingAddressCountry" [ngbTypeahead]="search"
                                             [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
-                                            autocomplete="off" aria-autocomplete="list" aria-expanded="false" />
+                                            autocomplete="off" aria-autocomplete="list" aria-expanded="false"  [attr.disabled]="readOnly || isSameAddress ? true : null"/>
                                         <div
                                             *ngIf="form.get('billingAddressCountry')?.invalid && (form.get('billingAddressCountry')?.touched || formSubmitted)">
                                             <p class="help-block"
@@ -643,8 +643,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="alternateEmail"><b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:</b></label>
-                                    <input class="form-control" type="email" style="border-color: #f26c4f;" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
+                                    <label for="alternateEmail"><b>{{ 'views.contactInfo.contact.alternateEmail.name' | translate | compareText: 'Alternate Email' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
+                                    <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'|translate}}"
                                         formControlName="alternateEmail" [attr.disabled]="readOnly ? true : null"
                                         required />
                                     <div
@@ -663,7 +663,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</b></label>
+                                    <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
                                     <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'| translate}}" formControlName="thirdEmail"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div

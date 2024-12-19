@@ -297,7 +297,6 @@ export class AffiliateRegistrationComponent implements OnInit {
   }
 
   private saveApplication(): void {
-
     this.applicationData.type = this.affiliateApplicationForm.get('type')?.value;
     this.applicationData.subType = this.affiliateApplicationForm.get('subType')?.value;
     this.applicationData.otherText = this.affiliateApplicationForm.get('otherText')?.value;
@@ -311,6 +310,14 @@ export class AffiliateRegistrationComponent implements OnInit {
       this.applicationData.affiliateDetails.address.street = this.affiliateApplicationForm.get('address')?.value;
       this.applicationData.affiliateDetails.address.city = this.affiliateApplicationForm.get('city')?.value;
       this.applicationData.affiliateDetails.address.post = this.affiliateApplicationForm.get('postalCode')?.value;
+    }
+    if (!this.applicationData.affiliateDetails.billingAddress) {
+      this.applicationData.affiliateDetails.billingAddress = {
+        street: '',
+        city: '',
+        post: '',
+        country: ''
+      };
     }
     if (this.applicationData.affiliateDetails.billingAddress) {
       this.applicationData.affiliateDetails.billingAddress.street = this.affiliateApplicationForm.get('billingAddress')?.value;
@@ -357,7 +364,7 @@ export class AffiliateRegistrationComponent implements OnInit {
 
   submit() {
     this.submitAttempted = true;
-
+    this.saveApplication();
     if (!this.affiliateApplicationForm.valid) {
       return;
     }

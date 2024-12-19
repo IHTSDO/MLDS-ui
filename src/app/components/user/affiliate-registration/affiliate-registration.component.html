@@ -31,7 +31,7 @@
                                 <!-- for usage type -->
                                 <div class="form-group">
 
-                                    <label for="usageType">{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}: </label>
+                                    <label for="usageType">{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}:<span class="text-danger">*</span></label>
                                     <select formControlName="type" class="form-select input-md" (change)="onAffiliateTypeUpdated($event)">
                                         <option value="COMMERCIAL">{{ 'affiliate.types.extended.COMMERCIAL' | translate }}</option>
                                         <option value="ACADEMIC">{{ 'affiliate.types.extended.ACADEMIC' | translate }}</option>
@@ -49,7 +49,7 @@
                                 <div class="form-group"
                                     *ngIf="affiliateApplicationForm?.get('type')?.value && affiliateApplicationForm?.get('type')?.value !== 'OTHER'">
                                     <label for="subType"
-                                        >{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:</label>
+                                        >{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:<span class="text-danger">*</span></label>
                                     <select formControlName="subType" class="form-select input-md"
                                         (blur)="autoSubmit()">
                                         <option value="" disabled selected>Select a subtype</option>
@@ -78,7 +78,7 @@
                                 <!-- other type text -->
                                 <div class="form-group"
                                     *ngIf="affiliateApplicationForm?.get('type')?.value === 'OTHER'">
-                                    <label for="other">{{'views.contactInfo.admin.other.name'|translate|compareText:'Other'}}:</label>
+                                    <label for="other">{{'views.contactInfo.admin.other.name'|translate|compareText:'Other'}}:<span class="text-danger">*</span></label>
                                     <input type="text" formControlName="otherText" class="form-control"
                                         (blur)="autoSubmit()">
 
@@ -99,7 +99,7 @@
 
                                 <!-- agreement type -->
                                 <div *ngIf="!billingHide" class="form-group">
-                                    <label for="agreementType">{{'register.affiliateRegistration.typeOfAgreement'|translate|compareText:'Type of Agreement'}}:</label>
+                                    <label for="agreementType">{{'register.affiliateRegistration.typeOfAgreement'|translate|compareText:'Type of Agreement'}}:<span class="text-danger">*</span></label>
                                     <select formControlName="agreementType" class="form-select" (blur)="autoSubmit()">
                                         <option *ngFor="let type of agreementTypeOptions" [value]="type">{{ 'affiliate.agreementType.'+type|translate }}
                                         </option>
@@ -147,7 +147,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="alternateEmail"
-                                                >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</label>
+                                                >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:<span class="text-danger">*</span></label>
                                             <input class="form-control" type="email" formControlName="alternateEmail"
                                                 (blur)="autoSubmit()" />
 
@@ -205,7 +205,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="landline"
-                                            >{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:</label>
+                                            >{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:<span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="extension"
@@ -254,7 +254,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="mobile"
-                                            >{{'views.contactInfo.contact.mobile.name'|translate|compareText:'Mobile Phone Number'}}:</label>
+                                            >{{'views.contactInfo.contact.mobile.name'|translate|compareText:'Mobile Phone Number'}}:<span *ngIf="affiliateApplicationForm?.get('type')?.value !== 'INDIVIDUAL'" class="text-danger">*</span>                                      </label>
                                     </div>
                                 </div>
 
@@ -291,7 +291,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address"
-                                                    >{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</label>
+                                                    >{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:<span class="text-danger">*</span></label>
                                                 <input class="form-control" formControlName="address"
                                                     placeholder="{{ 'views.contactInfo.contact.address.placeholder' | translate}}"
                                                     (change)="copyAddress()" (blur)="autoSubmit()" />
@@ -313,11 +313,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="city"
-                                                >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
+                                                >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:<span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-md-3">
                                             <label for="postCode"
-                                                >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
+                                                >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:<span class="text-danger">*</span></label>
                                         </div>
                                     </div>
 
@@ -397,7 +397,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="billingAddress"
-                                                        >{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:</label>
+                                                        >{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:<span class="text-danger">*</span></label>
                                                     <input class="form-control" formControlName="billingAddress"
                                                         placeholder="{{ 'views.contactInfo.contact.address.placeholder' |translate}}"
                                                         (blur)="autoSubmit()" />
@@ -419,11 +419,11 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label for="city"
-                                                   >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
+                                                   >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:<span class="text-danger">*</span></label>
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="postCode"
-                                                    >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
+                                                    >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:<span class="text-danger">*</span></label>
                                             </div>
                                         </div>
 
@@ -473,7 +473,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label
-                                                        >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</label>
+                                                        >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:<span class="text-danger">*</span></label>
                                                     <input class="form-control" type="text" placeholder="{{ 'views.contactInfo.contact.country.placeholder' | translate }}"
                                                         formControlName="billingCountry" [ngbTypeahead]="search"
                                                         [resultFormatter]="formatCountry"
@@ -513,7 +513,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="organizationName"
-                                                >{{'views.contactInfo.organization.name.name'|translate|compareText:'Organization Name'}}:</label>
+                                                >{{'views.contactInfo.organization.name.name'|translate|compareText:'Organization Name'}}:<span class="text-danger">*</span></label>
                                             <input class="form-control" formControlName="organizationName"
                                                 placeholder="{{'views.contactInfo.organization.name.placeholder'|translate}}"
                                                 (blur)="autoSubmit()" />
@@ -536,7 +536,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="organizationType"
-                                                >{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:</label>
+                                                >{{'views.contactInfo.organization.type.name'|translate|compareText:'Organization Type'}}:<span class="text-danger">*</span></label>
                                             <select formControlName="organizationType" class="form-select">
                                                 <option *ngFor="let type of organizationTypes" [value]="type"
                                                     (blur)="autoSubmit()">{{ 'affiliate.organizationType.'+ type|translate }}
@@ -580,7 +580,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="address"
-                                                >{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:</label>
+                                                >{{'views.contactInfo.contact.address.name'|translate|compareText:'Address'}}:<span class="text-danger">*</span></label>
                                             <input class="form-control" formControlName="address"
                                                 placeholder="{{ 'views.contactInfo.contact.address.placeholder'|translate}}"
                                                 (change)="copyAddress()" (blur)="autoSubmit()">
@@ -603,11 +603,11 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="city"
-                                            >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
+                                            >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:<span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="postCode"
-                                            >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
+                                            >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:<span class="text-danger">*</span></label>
                                     </div>
                                 </div>
 
@@ -679,7 +679,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="billingAddress"
-                                                    >{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:</label>
+                                                    >{{'views.contactInfo.contact.billingAddress.name'|translate|compareText:'Billing Address'}}:<span class="text-danger">*</span></label>
                                                 <input class="form-control" formControlName="billingAddress"
                                                     placeholder="{{ 'views.contactInfo.contact.address.placeholder'|translate}}"
                                                     (blur)="autoSubmit()" />
@@ -702,11 +702,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="city"
-                                                >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</label>
+                                                >{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:<span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-md-3">
                                             <label for="postCode"
-                                                >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</label>
+                                                >{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:<span class="text-danger">*</span></label>
                                         </div>
                                     </div>
 
@@ -754,7 +754,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country"
-                                                    >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</label>
+                                                    >{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:<span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" placeholder="{{ 'views.contactInfo.contact.country.placeholder' | translate }}"
                                                     formControlName="billingCountry" [ngbTypeahead]="search"
                                                     [resultFormatter]="formatCountry" [inputFormatter]="formatCountry"
@@ -776,7 +776,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="alternateEmail"
-                                                >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</label>
+                                                >{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:<span class="text-danger">*</span></label>
                                             <input class="form-control" type="email"
                                                 placeholder="{{ 'views.contactInfo.contact.email.placeholder' | translate}}"
                                                 formControlName="alternateEmail" (blur)="autoSubmit()" />
@@ -785,7 +785,7 @@
                                                 *ngIf="(affiliateApplicationForm?.get('alternateEmail')?.touched || submitAttempted) && affiliateApplicationForm?.get('alternateEmail')?.errors">
                                                 <p *ngIf="affiliateApplicationForm?.get('alternateEmail')?.hasError('required')"
                                                     class="help-block">
-                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
+                                                    {{'form.requiredField'|translate}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('alternateEmail')?.hasError('required') && affiliateApplicationForm?.get('alternateEmail')?.hasError('email')"
                                                     class="help-block"
@@ -807,7 +807,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="thirdEmail"
-                                                >{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</label>
+                                                >{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:<span class="text-danger">*</span></label>
                                             <input class="form-control" type="email"
                                                 placeholder="{{ 'views.contactInfo.contact.email.placeholder' |translate}}"
                                                 formControlName="thirdEmail" (blur)="autoSubmit()" />
@@ -872,7 +872,7 @@
 
                             <div class="help-block"
                                 *ngIf="submitAttempted && affiliateApplicationForm.get('snoMedTC')?.invalid">
-                                {{'register.affiliateRegistration.license.error'|translate|compareText:'You must agree to the terms and conditions of the SNOMED CT License to register, which may include potential fees.'}}
+                                {{'register.affiliateRegistration.license.error' | translate}}
                             </div>
                         </div>
                         <div class="panel-footer">

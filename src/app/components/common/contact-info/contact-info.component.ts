@@ -41,6 +41,9 @@ export class ContactInfoComponent implements OnInit {
   includeDialCode = true;
   isLoading: boolean = true;
   agreementTypeOptions: string[] = ['AFFILIATE_NORMAL', 'AFFILIATE_RESEARCH', 'AFFILIATE_PUBLIC_GOOD'];
+  countriesUsingMLDS: string[] = [];
+  billingHide: boolean = false;
+  addressOverride: boolean = false;
   public alerts: any[] = [];
 
 
@@ -72,7 +75,8 @@ export class ContactInfoComponent implements OnInit {
       organizationName: [''],
       addressStreet: [''],
       addressCity: [''],
-      addressPost: ['']
+      addressPost: [''],
+      use: [false]
     });
 
     this.form.get('type')?.valueChanges.subscribe(type => {
@@ -163,7 +167,13 @@ export class ContactInfoComponent implements OnInit {
               this.approved = this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
               this.readOnly = !this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
               this.updateForm();
-              this.updateAddressStatus();
+              // this.updateAddressStatus();
+              this.countriesUsingMLDS = this.countryService.getCountriesUsingMLDS();
+       
+              if (this.affiliate?.application?.member?.key && Array.isArray(this.countriesUsingMLDS)) {
+                this.billingHide = this.countriesUsingMLDS.includes(this.affiliate?.application?.member?.key);
+                this.addressOverride = this.billingHide;
+              }
               this.isLoading = false;
             } else {
               console.log('No affiliate data found');
@@ -194,7 +204,7 @@ export class ContactInfoComponent implements OnInit {
         this.isEditable = this.isAdmin || (userDetails?.member?.['key'] === this.affiliate?.application?.member?.key);
         this.readOnly = !this.applicationUtilsService?.isApplicationApproved(this.affiliate?.application);
         this.updateForm();
-        this.updateAddressStatus();
+        // this.updateAddressStatus();
       }
     });
 
@@ -234,14 +244,14 @@ export class ContactInfoComponent implements OnInit {
   checkAddresses(a: any, b: any): boolean {
     if (
       a && b &&
-      a.street !== '' && a.street === b.street &&
-      a.city !== '' && a.city === b.city &&
-      a.country !== '' && a.country === b.country
+      a.street?.trim() !== '' && a.street?.trim() === b.street?.trim() &&
+      a.city?.trim() !== '' && a.city?.trim() === b.city?.trim() &&
+      a.country?.isoCode2?.trim() !== '' && a.country?.isoCode2 === b.country?.isoCode2
     ) {
       return true;
     }
     return false;
-  }
+  }  
 
 
   updateForm(): void {
@@ -351,10 +361,8 @@ private patchBillingAddressDetails(): void {
   
     formValues.landlineNumber = this.extractPhoneNumber(formValues.landlineNumber);
     formValues.mobileNumber = this.extractPhoneNumber(formValues.mobileNumber);
-  
     this.updateAddress(formValues);
     this.updateBillingAddress(formValues);
-  
     return formValues;
   }
 
@@ -380,11 +388,21 @@ private patchBillingAddressDetails(): void {
   
   
   private updateBillingAddress(formValues: any): void {
+    if(this.addressOverride){
+      this.copyAddress();
+      const billingAddress = this.affiliate.affiliateDetails.billingAddress;
+      billingAddress.street = this.form.value.billingAddressStreet;
+      billingAddress.city = this.form.value.billingAddressCity;
+      billingAddress.post = this.form.value.billingAddressPost;
+      billingAddress.country = this.affiliate?.affiliateDetails?.address?.country;
+    }
+    else{
     const billingAddress = this.affiliate.affiliateDetails.billingAddress;
     billingAddress.street = formValues.billingAddressStreet;
     billingAddress.city = formValues.billingAddressCity;
     billingAddress.post = formValues.billingAddressPost;
     billingAddress.country = formValues.billingAddressCountry;
+    }
   }
   
   private updateAffiliateDetails(formValues: any): void {
@@ -439,6 +457,23 @@ private patchBillingAddressDetails(): void {
      
     }
 
+    get affiliateType() {
+      return this.affiliate?.type || this.affiliate?.affiliateDetails?.type;
+    }
+
+    copyAddress(){
+      this.updateAddressStatus();     
+      this.form.patchValue({
+        billingAddressStreet: this.form.value.addressStreet,
+        billingAddressCity: this.form.value.addressCity,
+        billingAddressPost: this.form.value.addressPost,
+        billingAddressCountry: this.affiliate?.affiliateDetails?.address?.country
+      });
+
+      this.isSameAddress = !!this.form.get('use')?.value;
+    }
+
+    
  
 
 }
