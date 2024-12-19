@@ -27,36 +27,36 @@
                     </div>
                   
                     <div class="form-group"style="margin-bottom: 15px">
-                      <label class="name" for="currentUsage">{{ 'views.usageLog.currentUsage' | translate | compareText: 'Current Usage' }}: </label>
+                      <label class="name" for="currentUsage">{{ 'views.usageLog.currentUsage' | translate | compareText: 'Current Usage' }}:<span class="text-danger">*</span></label>
                       <textarea class="form-control" rows="3" formControlName="currentUsage" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('currentUsage')?.invalid && usageForm?.get('currentUsage')?.touched">
-                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
+                        <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
                   
                     <div class="form-group"style="margin-bottom: 15px">
-                        <label class="name" for="plannedUsage">{{ 'views.usageLog.plannedUsage' | translate | compareText: 'Planned Usage' }}:</label>
+                        <label class="name" for="plannedUsage">{{ 'views.usageLog.plannedUsage' | translate | compareText: 'Planned Usage' }}:<span class="text-danger">*</span></label>
                       <textarea class="form-control" rows="3" formControlName="plannedUsage" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('plannedUsage')?.invalid && usageForm?.get('plannedUsage')?.touched">
-                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
+                        <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
                   
                     <div class="form-group"style="margin-bottom: 15px">
-                      <label class="name" for="purpose">{{ 'views.usageLog.purpose' | translate | compareText: 'Purpose' }}:</label>
+                      <label class="name" for="purpose">{{ 'views.usageLog.purpose' | translate | compareText: 'Purpose' }}:<span class="text-danger">*</span></label>
                       <textarea class="form-control" rows="3" formControlName="purpose" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('purpose')?.invalid && usageForm?.get('purpose')?.touched">
-                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
+                        <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
                   
                     <div class="form-group"style="margin-bottom: 15px">
-                      <label class="name" for="implementationStatus">{{ 'views.usageLog.impStatus' | translate | compareText: 'Implementation Status' }}:</label>
+                      <label class="name" for="implementationStatus">{{ 'views.usageLog.impStatus' | translate | compareText: 'Implementation Status' }}:<span class="text-danger">*</span></label>
                       <select formControlName="implementationStatus" class="form-select" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()">
                         <option *ngFor="let status of implementationStatusOptions" [value]="status">{{ 'affiliate.implementationStatus.' + status | translate }}</option>
                       </select>
                       <div *ngIf="usageForm?.get('implementationStatus')?.invalid && usageForm?.get('implementationStatus')?.touched">
-                        <p class="help-block">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
+                        <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
                   </form>
@@ -147,29 +147,30 @@
         <div class="row">
             <div class="country-heading">
                 <div class="col-xs-8 col-sm-6 col-md-4 col-lg-6">
-                    <h3 class="country-title"> {{'global.country.' + countryUsage?.country?.isoCode2 | translate}}</h3>
+                    <h3 class="country-title"><b>{{'global.country.' + countryUsage?.country?.isoCode2 | translate}}</b></h3>
                 </div>
                 <div class="col-xs-4 col-sm-6	col-md-8 col-lg-6" *ngIf="!readOnly">
                     <div class="form-group float-end">
-                    <a class="remove-button" (click)="removeCountryModal(countryUsage.count)"><i class="fa fa-times"></i> <span>{{ 'views.usageLog.institutions.deleteCountry' | translate | compareText: 'Remove Country' }}</span></a>
+                    <a class="remove-button" (click)="removeCountryModal(countryUsage.count)"><i class="fa fa-times"></i> <span> {{ 'views.usageLog.institutions.deleteCountry' | translate | compareText: 'Remove Country' }}</span></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="country-section">
                     <hr>
-                    <div class="row">
-                        <div class="col-xs-8">
-                            <h4>{{ 'views.usageLog.institutions.hospAndInst.title' | translate | compareText: 'Hospital(s)/Institution(s)' }}</h4>
+                    <div class="sublicense-details">
+                        <div>
+                            <h4><b>{{ 'views.usageLog.institutions.hospAndInst.title' | translate | compareText: 'Hospital(s)/Institution(s)' }}</b></h4>
                         </div>
-                        <div class="col-xs-4" *ngIf="!readOnly">
+                        <div  *ngIf="!readOnly">
                             <div class="form-group pull-right">
                                 <a class="add-button" (click)="addInstitutionModal(countryUsage.country)"><i class="fa fa-plus"></i> <span> {{ 'global.word.add' | translate | compareText: 'Add' }}</span><span> {{ 'views.usageLog.institutions.hospAndInst' | translate | compareText: 'Hospital/Institution' }}</span></a>
                             </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
-                <div class="row">
+                <div>
                 <table class="table table-striped" aria-label="embeddable-usage-log">
                     <tr>
                         <th class="text-left col-md-2">{{ 'global.word.name' | translate | compareText: 'Name' }}</th>
@@ -192,7 +193,7 @@
                         <td class="col-md-5">{{institution.note}}</td>
                         <td class="col-md-1">
                             <div class="btn-group" ngbDropdown *ngIf="!readOnly">
-                                <button class="blue-button" ngbDropdownToggle>
+                                <button class="blue-button" type="button" ngbDropdownToggle>
                                   <i class="fa fa-pencil"></i>&nbsp; <span>{{ 'global.word.edit' | translate | compareText: 'Edit' }}</span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
@@ -218,11 +219,11 @@
             </div>
             <div class="country-section">
                 <hr>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <h4>{{ 'views.usageLog.institutions.practices.title' | translate | compareText: 'Practice(s)' }}</h4>
+                <div class="sublicense-details">
+                    <div>
+                        <h4><b>{{ 'views.usageLog.institutions.practices.title' | translate | compareText: 'Practice(s)' }}</b></h4>
                     </div>
-                    <div class="col-xs-4">
+                    <div>
                         <button *ngIf="!readOnly" type="button" class="blue-button" (click)="editCountModal(countryUsage.count, countryUsage.country)"><i class="fa fa-pencil"></i>&nbsp; 
                             <span>{{ 'global.word.edit' | translate | compareText: 'Edit' }}</span>
                             <span> {{ 'views.usageLog.institutions.practices' | translate | compareText: 'Practices' }}</span>
@@ -248,11 +249,11 @@
     </div>
     <div class="country-section">
         <hr>
-        <div class="row">
-            <div class="col-xs-8">
-                <h4>{{ 'views.usageLog.institutions.dataAnalysis.title' | translate | compareText: 'Data Analysis' }}</h4>
+        <div class="sublicense-details">
+            <div>
+                <h4><b>{{ 'views.usageLog.institutions.dataAnalysis.title' | translate | compareText: 'Data Analysis' }}</b></h4>
             </div>
-            <div class="col-xs-4">
+            <div>
                 <button *ngIf="!readOnly" type="button" class="blue-button" (click)="editCountDataAnalysisModal(countryUsage?.count,countryUsage.country)"><i class="fa fa-pencil"></i> &nbsp;<span> {{ 'global.word.edit' | translate | compareText: 'Edit' }}</span><span> {{ 'views.usageLog.institutions.dataAnalysis.title' | translate | compareText: 'Data Analysis' }}</span></button>
             </div>
         </div>

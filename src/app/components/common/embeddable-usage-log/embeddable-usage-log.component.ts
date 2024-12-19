@@ -442,7 +442,11 @@ autoSubmit(){
     modalRef.componentInstance.institution = institution;
     modalRef.componentInstance.country = country;
     modalRef.componentInstance.usageReport = this.commercialUsageReport;
-    this.loadParentsUsageReport();
+    modalRef.result.then(
+      () => {
+        this.loadParentsUsageReport();
+      }
+    );
   }
 
   editCountModal(count: any, country: any): void {

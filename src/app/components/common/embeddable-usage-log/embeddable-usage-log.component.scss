@@ -43,7 +43,7 @@
   .country-heading {
     margin-top: 5px;
     border-top: 2px solid #8dccdc;
-    padding: 10px 0 15px;
+    padding: 10px 15px;
     display: flex;
 }
 .green-button {
@@ -163,7 +163,7 @@
     border: 2px solid  #3cb878;
     white-space: nowrap;
     padding: 4px 9px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.42857143;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -200,7 +200,7 @@
     border: 2px solid  #00a7e1;
     white-space: nowrap;
     padding: 4px 9px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.42857143;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -290,4 +290,20 @@
 }
 b, strong {
   font-weight: bold;
+}
+
+.sublicense-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+  overflow: auto;
+}
+
+.country-title{
+  margin-top: 1rem;
+}
+
+ul.dropdown-menu li a.dropdown-item {
+  cursor: pointer !important;
 }
