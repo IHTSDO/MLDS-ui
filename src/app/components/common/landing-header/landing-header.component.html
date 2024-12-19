@@ -1,89 +1,89 @@
 <nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-        
-            <a [href]="isAuthenticated ? '/userDashboard' : '#'">
-                <span *ngIf="memberLogo">
-                  <img class="img-responsive" [src]="memberLogo" alt="member-logo">
-                </span>
-                <span *ngIf="!memberLogo">
-                  <img class="img-responsive" src="assets/logo.png" alt="ihtsdo-logo">
-                </span>
-              </a>
-              
-            <div class="brand">{{ memberName }}</div>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul id="topNav" class="nav navbar-nav navbar-right">
+  <div class="container">
+      <div class="navbar-header">
+      
+          <a [href]="isAuthenticated ? '/userDashboard' : '#'">
+              <span *ngIf="memberLogo">
+                <img class="img-responsive" [src]="memberLogo" alt="member-logo">
+              </span>
+              <span *ngIf="!memberLogo">
+                <img class="img-responsive" src="assets/logo.png" alt="ihtsdo-logo">
+              </span>
+            </a>
+            
+          <div class="brand">{{ memberName }}</div>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul id="topNav" class="nav navbar-nav navbar-right">
 
-                <!-- Home link when user is not authenticated -->
-                <li *ngIf="!isAuthenticated">
-                    <a routerLink="/"> <span >{{'global.menu.home' | translate | compareText:'Home'}}</span></a>
+              <!-- Home link when user is not authenticated -->
+              <li *ngIf="!isAuthenticated">
+                  <a routerLink="/"> <span >{{'global.menu.home' | translate | compareText:'Home'}}</span></a>
+              </li>
+              
+              <!-- Dashboard link when user is authenticated -->
+              <li *ngIf="isAuthenticated">
+                  <a routerLink="/userDashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> <span>{{'global.menu.dashboard' | translate | compareText: 'Dashboard'}}</span></a>
+              </li>
+
+
+              <!-- Usage Reports Link -->
+              <li *ngIf="isAuthenticated">
+                  <a routerLink="/usageReport" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+                      <span>{{'global.menu.usageReports' |translate | compareText: 'Usage Reports'}}</span>
+                  </a>
+              </li>
+
+              <!-- Release Packages Link -->
+              <li>
+                  <a routerLink="/viewReleases" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+                      <span>{{'global.menu.releasePackages' |translate | compareText: 'Release Packages'}}</span>
+                  </a>
+              </li>
+
+              <li ngbDropdown class="dropdown pointer">
+                  <a ngbDropdownToggle class="dropdown-toggle" href="javascript:void(0);">
+                    <span>
+                      <span class="hidden-tablet" >{{'global.menu.language'|translate | compareText:'Language'}}</span>
+                      <b class="caret"></b>
+                    </span>
+                  </a>
+                  <ul ngbDropdownMenu class="dropdown-menu">
+                    <li *ngFor="let lang of languages" class="dropdown-item language-option" (click)="changeLanguage(lang.key)">
+                      <span class="famfamfam-flag-{{ lang.flag }}"></span> &nbsp;
+                      <span>{{ lang.name }}</span>
+                    </li>
+                  </ul>
                 </li>
                 
-                <!-- Dashboard link when user is authenticated -->
-                <li *ngIf="isAuthenticated">
-                    <a routerLink="/userDashboard"> <span>{{'global.menu.dashboard' | translate | compareText: 'Dashboard'}}</span></a>
+              <li ngbDropdown class="nav-item dropdown pointer " *ngIf="isUser">
+                  <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="userDropdown">
+                    <span>
+                      <i class="fa fa-user"></i> {{ firstName }} {{ lastName }}
+                      <b class="caret"></b>
+                    </span>
+                  </a>
+                  <ul ngbDropdownMenu aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu width">
+                    <li class="dropdown-item" (click)="navigateTo('/contactInfo')">
+                        <span>{{'global.menu.affiliate.accountInformation' | translate | compareText: 'Account Information'}}</span>
+                    </li>
+                    <li class="dropdown-item" (click)="navigateTo('/password')">
+                        <span>{{'global.menu.affiliate.changePassword' | translate | compareText: 'Change Password'}}</span>
+                    </li>
+                    <li class="dropdown-item" (click)="navigateTo('/logout')">
+                        <span>{{'global.menu.affiliate.logout' | translate | compareText: 'Logout'}}</span>
+                    </li>
+                </ul>                  
                 </li>
-  
-
-                <!-- Usage Reports Link -->
-                <li *ngIf="isAuthenticated">
-                    <a routerLink="/usageReport">
-                        <span>{{'global.menu.usageReports' |translate | compareText: 'Usage Reports'}}</span>
-                    </a>
-                </li>
-
-                <!-- Release Packages Link -->
-                <li>
-                    <a routerLink="/viewReleases">
-                        <span>{{'global.menu.releasePackages' |translate | compareText: 'Release Packages'}}</span>
-                    </a>
-                </li>
-
-                <li ngbDropdown class="dropdown pointer">
-                    <a ngbDropdownToggle class="dropdown-toggle" href="javascript:void(0);">
-                      <span>
-                        <span class="hidden-tablet" >{{'global.menu.language'|translate | compareText:'Language'}}</span>
-                        <b class="caret"></b>
-                      </span>
-                    </a>
-                    <ul ngbDropdownMenu class="dropdown-menu">
-                      <li *ngFor="let lang of languages" class="dropdown-item language-option" (click)="changeLanguage(lang.key)">
-                        <span class="famfamfam-flag-{{ lang.flag }}"></span> &nbsp;
-                        <span>{{ lang.name }}</span>
-                      </li>
-                    </ul>
-                  </li>
-                  
-                <li ngbDropdown class="nav-item dropdown pointer " *ngIf="isUser">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="userDropdown">
-                      <span>
-                        <i class="fa fa-user"></i> {{ firstName }} {{ lastName }}
-                        <b class="caret"></b>
-                      </span>
-                    </a>
-                    <ul ngbDropdownMenu aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu width">
-                      <li class="dropdown-item" (click)="navigateTo('/contactInfo')">
-                          <span>{{'global.menu.affiliate.accountInformation' | translate | compareText: 'Account Information'}}</span>
-                      </li>
-                      <li class="dropdown-item" (click)="navigateTo('/password')">
-                          <span>{{'global.menu.affiliate.changePassword' | translate | compareText: 'Change Password'}}</span>
-                      </li>
-                      <li class="dropdown-item" (click)="navigateTo('/logout')">
-                          <span>{{'global.menu.affiliate.logout' | translate | compareText: 'Logout'}}</span>
-                      </li>
-                  </ul>                  
-                  </li>
-                  
-                <!-- Login Link -->
-                <li *ngIf="!isAuthenticated">
-                    <a routerLink="/login">
-                        {{'global.menu.account.login' | translate | compareText : 'Login'}}
-                        <i class="fa fa-caret-right"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+                
+              <!-- Login Link -->
+              <li *ngIf="!isAuthenticated">
+                  <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                      {{'global.menu.account.login' | translate | compareText : 'Login'}}
+                      <i class="fa fa-caret-right"></i>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
 </nav>

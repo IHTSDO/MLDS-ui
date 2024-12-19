@@ -7,6 +7,7 @@
     height: 28px;
     border-top: 1px solid #999999;
     padding-top: 10px;
+    white-space: nowrap;
 }
 
 .navbar-collapse.collapse {
@@ -333,17 +334,33 @@
     height: 66px;
     line-height: 3;
 }
-/* Add styles for hover state */
-#topNav li a:hover {
+
+#topNav li a {
+    padding: 12px 15px;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    display: block;
+}
+
+#topNav li a.active {
     background-color: #eeeeee;
     border-left: 1px solid #999999;
     border-right: 1px solid #999999;
+    color: #333333;
+}
+
+#topNav li a:hover {
+    background-color: #eeeeee;
+    color: #333333;
+}
+
+#topNav li a:focus {
+    background-color: #eeeeee;
+    color: #333333;
 }
 
 #topNav li.active > a {
     background-color: #eeeeee !important;
-    border-left: 1px solid #999999 !important;
-    border-right: 1px solid #999999 !important;
 }
 
 a:hover, a:focus {

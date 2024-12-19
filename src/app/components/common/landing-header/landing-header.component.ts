@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
@@ -16,7 +16,7 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 @Component({
   selector: 'app-landing-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, NgbModule, NgbDropdown, NgbDropdownModule, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, RouterLink, NgbModule, NgbDropdown, NgbDropdownModule, TranslateModule, CompareTextPipe, RouterModule],
   templateUrl: './landing-header.component.html',
   styleUrls: ['./landing-header.component.scss']
 })

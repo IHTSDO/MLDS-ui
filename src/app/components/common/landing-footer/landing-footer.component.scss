@@ -11,6 +11,7 @@
   .nav{
     display: flex;
     justify-content: space-between;
+    padding: 5px 10px;
   }
   
   .famfamfam-flag-zw { background-position: 0px 0px; width: 16px; height: 11px; }
@@ -284,7 +285,7 @@
 
 footer a {
     color: #555555;
-    font-size: smaller;
+    font-size: 12px;
     font-weight: 500;
 }
 
@@ -295,3 +296,14 @@ hr {
     border-top: 1px solid #eeeeee;
 }
 
+ul.nav li a {
+  text-decoration: none;
+  padding: 12px 15px;
+}
+
+ul.nav li a:hover,
+ul.nav li a:focus {
+  background-color: #eeeeee;
+  color: #2481a6;
+  padding: 12px 15px;
+}
