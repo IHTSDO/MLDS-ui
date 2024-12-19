@@ -18,7 +18,7 @@
       <!-- Registration form -->
       <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()" *ngIf="!success">
         <div class="form-group">
-          <label for="country">{{ 'settings.form.countryOfResidence' | translate | compareText:'Country of Residence' }}</label>
+          <label for="country">{{ 'settings.form.countryOfResidence' | translate | compareText:'Country of Residence' }}<span class="text-danger">*</span></label>
           <input class="form-control" type="text" placeholder="{{'settings.form.countryOfResidence.placeholder' | translate}}" formControlName="country" [ngbTypeahead]="search" [resultFormatter]="formatCountry" [inputFormatter]="formatCountry" [ngClass]="{ 'border-red': submitted && createUserForm.get('country')?.invalid }" autocomplete="off" aria-autocomplete="list" aria-expanded="false"/>
           <div *ngIf="submitted && createUserForm.get('country')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('country')?.errors?.['required']">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</div>
@@ -28,7 +28,7 @@
         </div>
   
         <div class="form-group">
-          <label for="firstName">{{ 'settings.form.firstname' | translate | compareText:'First Name' }}</label>
+          <label for="firstName">{{ 'settings.form.firstname' | translate | compareText:'First Name' }}<span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="{{'settings.form.firstname.placeholder' | translate}}" formControlName="firstName" [ngClass]="{ 'border-red': submitted && createUserForm.get('firstName')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('firstName')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('firstName')?.errors?.['required']">{{ 'settings.messages.validate.firstname.required' | translate }}</div>
@@ -38,7 +38,7 @@
         </div>
   
         <div class="form-group">
-          <label for="lastName">{{ 'settings.form.lastname' | translate | compareText:'Last Name' }}</label>
+          <label for="lastName">{{ 'settings.form.lastname' | translate | compareText:'Last Name' }}<span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="{{'settings.form.lastname.placeholder' | translate}}" formControlName="lastName" [ngClass]="{ 'border-red': submitted && createUserForm.get('lastName')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('lastName')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('lastName')?.errors?.['required']">{{ 'settings.messages.validate.lastname.required' | translate }}</div>
@@ -48,7 +48,7 @@
         </div>
   
         <div class="form-group">
-          <label for="email" [innerHTML]="('global.form.email' | translate )"></label>
+          <label for="email" [innerHTML]="('global.form.email' | translate) + ' <span class=\'text-danger\'>*</span>'"></label>
           <input type="email" class="form-control" placeholder="{{'global.form.email.placeholder' | translate}}" formControlName="email" [ngClass]="{ 'border-red': submitted && createUserForm.get('email')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('email')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('email')?.errors?.['required']"><div>{{ 'global.messages.validate.email.required' | translate }}</div>          </div>
@@ -59,7 +59,7 @@
         </div>
   
         <div class="form-group">
-          <label for="confirmEmail">{{ 'register.form.confirmemail' | translate }}</label>
+          <label for="confirmEmail">{{ 'register.form.confirmemail' | translate }}<span class="text-danger">*</span></label>
           <input type="email" class="form-control" placeholder="{{'global.form.email.placeholder' | translate}}" formControlName="confirmEmail" [ngClass]="{ 'border-red': submitted && createUserForm.get('confirmEmail')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('confirmEmail')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('confirmEmail')?.errors?.['required']">{{ 'global.messages.validate.email.required' | translate }}</div>
@@ -71,7 +71,7 @@
         </div>
   
         <div class="form-group">
-          <label for="newPassword">{{ 'global.form.newpassword' | translate | compareText:'New password' }}</label>
+          <label for="newPassword">{{ 'global.form.newpassword' | translate | compareText:'New password' }}<span class="text-danger">*</span></label>
           <input type="password" class="form-control" placeholder="{{'global.form.newpassword.placeholder' | translate}}" formControlName="password" [ngClass]="{ 'border-red': submitted && createUserForm.get('password')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('password')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('password')?.errors?.['required']">{{ 'global.messages.validate.newpassword.required' | translate }}</div>
@@ -85,7 +85,7 @@
         </div>
   
         <div class="form-group">
-          <label for="newPasswordConfirmation">{{ 'global.form.confirmpassword' | translate | compareText:'New password confirmation' }}</label>
+          <label for="newPasswordConfirmation">{{ 'global.form.confirmpassword' | translate | compareText:'New password confirmation' }}<span class="text-danger">*</span></label>
           <input type="password" class="form-control" placeholder="{{'global.form.confirmpassword.placeholder' | translate}}" formControlName="confirmPassword" [ngClass]="{ 'border-red': submitted && createUserForm.get('confirmPassword')?.invalid }" />
           <div *ngIf="submitted && createUserForm.get('confirmPassword')?.invalid">
             <div class="help-block" *ngIf="createUserForm.get('confirmPassword')?.errors?.['required']">{{ 'global.messages.validate.confirmpassword.required' | translate }}</div>

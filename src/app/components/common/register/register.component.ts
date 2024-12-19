@@ -249,7 +249,7 @@ private inputsMatchValidator(formGroup: FormGroup) {
  */
 private showExclusionModal(country: any): void {
   const modalRef = this.modalService.open(ExclusionModalComponent, {
-    size: 'lg',
+    size: 'xl',
     backdrop: 'static'
   });
 
