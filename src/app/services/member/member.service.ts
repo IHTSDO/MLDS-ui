@@ -93,7 +93,7 @@ export class MemberService {
   getMemberLogo(memberKey: string): Observable<string> {
     return this.http.get(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/logo`, { responseType: 'blob' }).pipe(
       map((blob: Blob) => {
-        if (blob.type.startsWith('image/')) {
+        if (blob.type.startsWith('image/') && blob.size > 0) {
           return URL.createObjectURL(blob);
         } else {
           throw new Error('Received non-image blob');

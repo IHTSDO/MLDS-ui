@@ -122,7 +122,7 @@ export class LandingHeaderComponent {
 
     // Fetch the translated member name
     this.translateService.get(translationKey).subscribe((translatedName: string) => {
-      this.memberName = translatedName || member.name || '';
+      this.memberName = member.name || translatedName || '';
     });
     } else {
       this.memberName = '';
