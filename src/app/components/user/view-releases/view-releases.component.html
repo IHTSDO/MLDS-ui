@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
       <div class="page-header">
-          <h1 translate="">{{'views.releases.title'|translate}}</h1>
+          <h1>{{'views.releases.title'|translate}}</h1>
           <p *ngIf="!sessionService.isAuthenticated()">
             <span>
               <p [innerHTML]="'views.releases.noAuth' | translate: { loginLink: '<a href=\'#/login\'>', registerLink: '<a href=\'#/register\'>' }"></p>

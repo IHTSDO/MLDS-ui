@@ -111,7 +111,7 @@
 									</a>
 									<a *ngIf="!isApplicationWaitingForApplicant(application)"
 										class="btn btn-primary btn-sm" (click)="viewApplication(application)">
-										<i class="fa fa-eye"></i> <span translate="">{{'global.word.edit'|translate|compareText:'Edit'}}</span>
+										<i class="fa fa-eye"></i> <span>{{'global.word.edit'|translate|compareText:'Edit'}}</span>
 									</a>
 								</span>
 								<a class="btn btn-primary btn-sm" *ngIf="application.applicationType === 'PRIMARY'"

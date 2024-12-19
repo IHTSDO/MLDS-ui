@@ -784,7 +784,7 @@
                                             <div
                                                 *ngIf="(affiliateApplicationForm?.get('alternateEmail')?.touched || submitAttempted) && affiliateApplicationForm?.get('alternateEmail')?.errors">
                                                 <p *ngIf="affiliateApplicationForm?.get('alternateEmail')?.hasError('required')"
-                                                    class="help-block" translate="form.requiredField">
+                                                    class="help-block">
                                                     {{'form.requiredField'|translate|compareText:'Required field.'}}
                                                 </p>
                                                 <p *ngIf="!affiliateApplicationForm?.get('alternateEmail')?.hasError('required') && affiliateApplicationForm?.get('alternateEmail')?.hasError('email')"

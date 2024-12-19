@@ -25,7 +25,7 @@
         <ul class="list-group">
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.fullName'|translate|compareText:'Name'}}:</strong> {{affiliate?.affiliateDetails?.firstName}} {{affiliate?.affiliateDetails?.lastName}}</li>
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.email.name'|translate|compareText:'Email'}}:</strong> {{affiliate?.affiliateDetails?.email}}</li>
-          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension" translate="views.contactInfo.contact.landlineExtension.short">ext: {{affiliateform?.contactExtension}}</span></li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.name'|translate|compareText:'Landline Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension">Ext: {{affiliateform?.contactExtension}}</span></li>
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.mobile.name'|translate|compareText:'Mobile Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.mobileNumber}}</li>
         </ul>
 
@@ -55,7 +55,7 @@
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.city.name'|translate|compareText:'City'}}:</strong> {{affiliateform?.city}}</li>
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.postcode.name'|translate|compareText:'Post Code'}}:</strong> {{affiliateform?.postalCode}}</li>
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.country.name'|translate|compareText:'Country'}}:</strong> {{affiliate?.affiliateDetails?.address?.country?.commonName}}</li>
-          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.short'|translate|compareText:'Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension"><span translate="views.contactInfo.contact.landlineExtension.short">ext:</span> {{affiliateform?.contactExtension}}</span></li>
+          <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.landline.short'|translate|compareText:'Phone Number'}}:</strong> {{affiliate?.affiliateDetails?.landlineNumber}} <span *ngIf="affiliateform.contactExtension"><span>Ext:</span> {{affiliateform?.contactExtension}}</span></li>
           <li class="list-group-item-light"><strong>{{'views.contactInfo.contact.alternateEmail.name'|translate|compareText:'Alternate Email'}}:</strong> {{affiliateform?.alternateEmail}}</li>
           <li class="list-group-item-light" *ngIf="affiliateform.type=='COMMERCIAL'"><strong>{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</strong> {{affiliateform?.thirdEmail}}</li>
         </ul>
