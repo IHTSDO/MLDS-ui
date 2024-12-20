@@ -8,20 +8,20 @@
   (onCancel)="activeModal.dismiss()">
 
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="name">Name<span class="text-danger">*</span></label>
     <input  #nameInput class="form-control" placeholder="Enter Version Name" formControlName="name">
     <div *ngIf="releaseVersionForm.get('name')?.invalid && submitAttempted" class="help-block">Required Field</div>
   </div>
 
   <div class="form-group">
-    <label for="desc">Description</label>
+    <label for="desc">Description<span class="text-danger">*</span></label>
     <quill-editor id="description" formControlName="description" [style]="{'height': '200px','width':'780px'}"></quill-editor>
     <div *ngIf="releaseVersionForm.get('description')?.invalid && submitAttempted" class="help-block">Required Field
     </div>
   </div>
 
   <div class="form-group">
-    <label for="packageType">Package Type</label>
+    <label for="packageType">Package Type<span class="text-danger">*</span></label>
     <select class="form-select" formControlName="packageType">
       <option value="">Select Package Type</option>
       <option value="SCT_RF2_ALL">SNOMED CT RF2 All</option>
@@ -56,7 +56,7 @@
   </div>
 
   <div class="form-group">
-    <label for="releaseType">Release Type</label>
+    <label for="releaseType">Release Type<span class="text-danger">*</span></label>
     <select class="form-select" formControlName="releaseType">
       <option value="">Select Release Type</option>
       <option value="online">Online</option>

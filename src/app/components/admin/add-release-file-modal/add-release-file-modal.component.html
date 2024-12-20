@@ -12,13 +12,13 @@
 
 
   <div class="form-group">
-    <label for="label">Label</label>
+    <label for="label">Label<span class="text-danger">*</span></label>
     <quill-editor id="label" formControlName="label" [style]="{'height': '200px','width':'780px'}"></quill-editor>
     <div *ngIf="formReleaseFile.get('label')?.invalid && submitAttempted" class="help-block">Required Field</div>
   </div>
 
   <div class="form-group">
-    <label for="downloadUrl">Download URL</label>
+    <label for="downloadUrl">Download URL<span class="text-danger">*</span></label>
     <input class="form-control" id="downloadUrl" placeholder="Enter File Download URL" formControlName="downloadUrl" type="url" />
     <div *ngIf="formReleaseFile.get('downloadUrl')?.invalid && submitAttempted" class="help-block">
       <div *ngIf="formReleaseFile.get('downloadUrl')?.errors?.['required']">Required Field</div>

@@ -13,20 +13,20 @@
         <h3><b>{{'views.postAnnouncement.messageContent' | translate | compareText: 'Message Content'}}</b></h3>
   
         <div class="form-group">
-          <label><b>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}</b></label>
+          <label><b>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}<span class="text-danger">*</span></b></label>
           <input class="form-control"
             formControlName="subject"
             required 
             [disabled]="completed">
-          <span *ngIf="announcementForm.get('subject')?.invalid && announcementForm.get('subject')?.touched" class="help-block">{{'form.requiredField' | translate | compareText: 'Required Field'}}</span>
+          <span *ngIf="announcementForm.get('subject')?.invalid && announcementForm.get('subject')?.touched" class="help-block">{{'form.requiredField' | translate }}</span>
         </div>
   
         <div class="form-group">  
-          <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}</b></label><br>
+          <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}<span class="text-danger">*</span></b></label><br>
           <quill-editor id="body" formControlName="body"  [style]="{'height': '200px'}"></quill-editor><br>
          
           <span class="help-block">{{'views.postAnnouncement.salutationMessage' | translate |compareText: 'Remember to add a salutation and valediction to the email body.'}}</span>
-          <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block">{{'form.requiredField' | translate | compareText: 'Required Field'}}</span>
+          <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block"> {{'form.requiredField' | translate }}</span>
         </div>
       </div>
   
@@ -71,7 +71,7 @@
         </div>
         
       </div>
-  
+ <br> 
       <div class="col-md-12">
         <div class="button-group">
           <button class="upload-button" 
@@ -81,8 +81,7 @@
       <i class="fa fa-paper-plane" aria-hidden="true"></i>
       {{'views.postAnnouncement.post' | translate |compareText: 'Post Announcement'}}
       <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-  </button>
-      
+  </button> 
           <!-- Disabled Post Announcement Button -->
           <button class="upload-button" 
                   [disabled]="true" 

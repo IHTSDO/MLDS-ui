@@ -25,7 +25,7 @@
           <h4 class="content">{{'views.extensionApplication.form.why'|translate|compareText:'Please describe why you would like access to this extension.'}}</h4>
           <div class="form-group">
             <label class="font" for="reason">
-            <b >{{'views.extensionApplication.form.purpose'|translate|compareText:'Purpose of Use'}}</b></label>
+            <b >{{'views.extensionApplication.form.purpose'|translate|compareText:'Purpose of Use'}}<span class="text-danger">*</span></b></label>
             <textarea id="reason" class="form-control" formControlName="reason" rows="10" cols="135"></textarea>
             <div *ngIf="extensionApplicationForm.get('reason')?.touched && extensionApplicationForm.get('reason')?.invalid" class="help-block">
               <small *ngIf="extensionApplicationForm.get('reason')?.hasError('required')">{{'form.requiredField'|translate|compareText:'Required field.'}}</small>
