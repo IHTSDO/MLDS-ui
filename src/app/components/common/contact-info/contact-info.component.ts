@@ -461,17 +461,28 @@ private patchBillingAddressDetails(): void {
       return this.affiliate?.type || this.affiliate?.affiliateDetails?.type;
     }
 
-    copyAddress(){
-      this.updateAddressStatus();     
-      this.form.patchValue({
-        billingAddressStreet: this.form.value.addressStreet,
-        billingAddressCity: this.form.value.addressCity,
-        billingAddressPost: this.form.value.addressPost,
-        billingAddressCountry: this.affiliate?.affiliateDetails?.address?.country
-      });
-
+    copyAddress() {   
+      this.updateAddressStatus();
+      if(this.form.get('use')?.value) {
+      if (this.form.value.type === 'INDIVIDUAL') {
+        this.form.patchValue({
+          billingAddressStreet: this.form.value.addressStreetIndividual,
+          billingAddressCity: this.form.value.addressCityIndividual,
+          billingAddressPost: this.form.value.addressPostIndividual,
+          billingAddressCountry: this.affiliate?.affiliateDetails?.address?.country
+        });
+      } else {
+        this.form.patchValue({
+          billingAddressStreet: this.form.value.addressStreet,
+          billingAddressCity: this.form.value.addressCity,
+          billingAddressPost: this.form.value.addressPost,
+          billingAddressCountry: this.affiliate?.affiliateDetails?.address?.country
+        });
+      }
+    }
       this.isSameAddress = !!this.form.get('use')?.value;
     }
+    
 
     
  
