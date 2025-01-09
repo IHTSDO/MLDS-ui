@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
@@ -94,13 +94,34 @@ export class MemberService {
     return this.http.get(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/logo`, { responseType: 'blob' }).pipe(
       map((blob: Blob) => {
         if (blob.type.startsWith('image/') && blob.size > 0) {
-          return URL.createObjectURL(blob);
+          const img = new Image();
+          img.src = URL.createObjectURL(blob);
+          
+          return new Observable<string>((observer) => {
+            img.onload = () => {
+              observer.next(img.src); 
+              observer.complete(); 
+            };
+            
+            img.onerror = () => {
+              observer.next('assets/logo.png'); 
+              observer.complete(); 
+            };
+          });
         } else {
           throw new Error('Received non-image blob');
         }
       }),
       catchError(error => {
         return of('assets/logo.png');
+      })
+    ).pipe(
+      switchMap((result) => {
+        if (result instanceof Observable) {
+          return result; 
+        } else {
+          return of(result); 
+        }
       })
     );
   }
