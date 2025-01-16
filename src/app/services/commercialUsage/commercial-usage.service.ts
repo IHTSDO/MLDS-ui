@@ -70,12 +70,16 @@ export class CommercialUsageService {
     return this.http.get(`${this.apiUrl}/affiliates/${affiliateId}/commercialUsages`);
   }
 
-  getSubmittedUsageReports(page: number, pageSize: number, orderby: string): Observable<any> {
+  getSubmittedUsageReports(page: number, pageSize: number, orderby: string, searchText: string): Observable<any> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('size', pageSize.toString())
       .set('orderby', orderby)
       .set('$filter', 'approvalState/not submitted eq false');
+
+    if (searchText && searchText.trim() !== '') {
+        params = params.set('searchText', searchText); // Add searchText to query params
+    }
 
     return this.http.get(`${this.apiUrl}/commercialUsages/`, { params });
   }

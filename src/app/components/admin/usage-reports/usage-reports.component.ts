@@ -8,13 +8,15 @@ import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
+import { Subject } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 /**
  * Component for displaying usage reports.
  */
 @Component({
   selector: 'app-usage-reports',
   standalone: true,
-  imports: [CommonModule, ScrollTrackerDirective, EnumPipe,TranslateModule],
+  imports: [CommonModule, ScrollTrackerDirective, EnumPipe,TranslateModule,FormsModule],
   templateUrl: './usage-reports.component.html',
   styleUrl: './usage-reports.component.scss'
 })
@@ -57,56 +59,77 @@ export class UsageReportsComponent implements OnInit {
   downloadingReports = false;
 
   loading = true;
+  searchText = ''; // Holds the current search text
+
+  private searchSubject = new Subject<string>(); // For debouncing search
 
   constructor(private commercialUsageService: CommercialUsageService, private authenticationService: AuthenticationSharedService, private router: Router,private usageReportStateUtilsService: UsageReportStateUtilsService) {}
 
   /**
    * Initializes the component by loading the first page of usage reports.
    */
+
   ngOnInit(): void {
     this.isAdmin = this.authenticationService.isAdmin();
     this.loadMoreUsageReports();
+  }
+
+  onSearchChange(searchText: string): void {
+    this.hasMoreData = true;
+    this.searchText = searchText;
+    this.searchSubject.next(searchText);
+    this.loadMoreUsageReports(true, searchText); // Emit the search text for debouncing
+  }
+
+  clearText(){
+    this.searchText = '';
+    this.hasMoreData = true;
+    this.loadMoreUsageReports(true, this.searchText);
   }
 
   /**
    * Loads more usage reports from the server.
    *
    * @param reset Whether to reset the pagination and load the first page again.
+   * @param searchText The search text to filter results.
    */
-  loadMoreUsageReports(reset = false): void {
+  loadMoreUsageReports(reset = false, searchText: string = ''): void {
     this.loading = true;
     if (this.downloadingReports || !this.hasMoreData) {
+      this.loading = false;
       return;
     }
+
     this.downloadingReports = true;
     if (reset) {
       this.page = 0;
-      
       this.usageReports = [];
       this.hasMoreData = true;
     }
+
     const orderByParam = `${this.orderByField},${this.reverseSort ? 'desc' : 'asc'}`;
-    this.commercialUsageService.getSubmittedUsageReports(this.page, this.pageSize, orderByParam)
-      .subscribe({next:results => {
-        if (results.length < this.pageSize) {
-          this.hasMoreData = false;
+
+    this.commercialUsageService
+      .getSubmittedUsageReports(this.page, this.pageSize, orderByParam, searchText)
+      .subscribe({
+        next: (results) => {
+          if (results.length < this.pageSize) {
+            this.hasMoreData = false;
+          }
+          this.usageReports = [...this.usageReports, ...results];
+          this.page++;
+        },
+        error: (error) => {
+          this.loading = false;
+          this.downloadingReports = false;
+          console.error('Error fetching usage reports', error);
+        },
+        complete: () => {
+          this.loading = false;
+          this.downloadingReports = false;
         }
-        this.usageReports = [...this.usageReports, ...results];
-        this.page++;
-      },
-      error:(error) => {
-        this.loading = false;
-        this.downloadingReports = false;
-        console.error('Error fetching usage reports', error);
-
-      },
-      complete: () => {
-        this.loading = false;
-        this.downloadingReports = false;
-      }
-    });
+      });
   }
-
   /**
    * Toggles the sort order of the usage reports by the specified field.
    *
@@ -124,7 +147,7 @@ export class UsageReportsComponent implements OnInit {
       this.orderByField = field;
       this.reverseSort = false;
     }
-    this.loadMoreUsageReports(true);
+    this.loadMoreUsageReports(true,this.searchText);
   }
 
   /**
@@ -166,6 +189,7 @@ export class UsageReportsComponent implements OnInit {
     usageReportPractices(usageReport: any): number {
     return this.usageReportStateUtilsService.usageReportPractices(usageReport);
   }
+  
 }
 
 
