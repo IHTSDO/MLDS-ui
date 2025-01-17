@@ -9,7 +9,7 @@ import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-
 /**
  * Release File Download Count component
  *
- * This component displays the release file download count for a given date range and allows users to filter by excluding specific users.
+ * This component displays the release file download count for a given date range and allows users to filter by excluding admin and staff.
  */
 @Component({
   selector: 'app-release-file-download-count',
@@ -19,25 +19,11 @@ import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-
   styleUrl: './release-file-download-count.component.scss'
 })
 export class ReleaseFileDownloadCountComponent implements OnInit {
-  /**
-   * Whether the dropdown menu is open
-   */
-  dropdownOpen = false;
 
   /**
    * Whether the component is submitting a request
    */
   submitting = false;
-
-  /**
-   * List of users to omit from the download count
-   */
-  omitUsers: string[] = [];
-
-  /**
-   * List of all users
-   */
-  userList: string[] = [];
 
   /**
    * From date for the download count
@@ -54,7 +40,9 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
    */
   releaseFileDownloadCounts: any;
 
-  usersLoading = false;
+  ExcludeAdminAndStaff = true;
+
+  downloading = false;
 
   constructor(private releaseFileDownloadCountService: ReleaseFileDownloadCountService, private dateFilterUtils: DateFilterUtilsService) {}
 
@@ -65,55 +53,29 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
     const { fromDate, toDate } = this.dateFilterUtils.previousMonth();
     this.fromDate = fromDate;
     this.toDate = toDate;
+    this.loadReleaseFileDownloadCounts();
+  }
+
+  private getParams() {
+    return {
+      startDate: this.fromDate,
+      endDate: this.toDate,
+      excludeAdminAndStaff: this.ExcludeAdminAndStaff
+    };
   }
 
   /**
-   * Toggles the dropdown menu
-   */
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-
-  /**
-   * Toggles the selection of a user to omit from the download count
-   *
-   * @param user - The user to toggle
-   */
-  toggleUserSelection(user: string) {
-    const index = this.omitUsers.indexOf(user);
-    if (index === -1) {
-      this.omitUsers.push(user);
-    } else {
-      this.omitUsers.splice(index, 1);
-    }
-  }
-
-  /**
-   * Checks if a user is selected to be omitted from the download count
-   *
-   * @param user - The user to check
-   * @returns Whether the user is selected
-   */
-  isUserSelected(user: string): boolean {
-    return this.omitUsers.includes(user);
-  }
-
-  /**
-   * Loads the release file download counts for the given date range and excluded users
+   * Loads the release file download counts for the given date range and excludeAdminAndStaff
    */
   loadReleaseFileDownloadCounts() {
     this.submitting = true;
-    const params = {
-      startDate: this.fromDate,
-      endDate: this.toDate,
-      excludeUsers: this.omitUsers
-    };
+    const params = this.getParams();
 
     this.releaseFileDownloadCountService.findReleaseFileDownloadCounts(params)
       .subscribe({
        next: data => {
           this.releaseFileDownloadCounts = data;
-          this.loadUsers(this.fromDate, this.toDate);
+          this.submitting = false;
         },
         error: (error: any) => {
           console.error('Error loading release file download counts:', error);
@@ -122,26 +84,57 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
   });
   }
 
-  /**
-   * Loads the list of users for the given date range
-   *
-   * @param fromDate - The start date of the range
-   * @param toDate - The end date of the range
-   */
-  loadUsers(fromDate: string, toDate: string) {
-    this.usersLoading = true;
-    this.releaseFileDownloadCountService.getUsers(fromDate, toDate)
+  loadReleaseFileDownloadCountsCSV() {
+    this.downloading = true;
+    const params = this.getParams();
+
+    this.releaseFileDownloadCountService.findReleaseFileDownloadCountsCSV(params)
       .subscribe({
-        next:(data: string[]) => {
-          this.usersLoading = false;
-          this.submitting = false;
-          this.userList = data; // Handle the list of usernames
+       next: data => {
+          this.downloadCSV(data);
+          this.downloading = false;
         },
-        error: (error: any)=> {
-          this.usersLoading = false;
-          this.submitting = false;
-          console.error('Error loading users:', error);
+        error: (error: any) => {
+          console.error('Error loading release file download details:', error);
+          this.downloading = false;
         }
   });
   }
+
+  //relese file download cound csv download function
+
+  downloadCSV(data: any[]) {
+
+    const header = [
+      "Date (UTC)",
+      "Time (UTC)",
+      "Username",
+      "Release Package",
+      "Release Version",
+      "Release File Name"
+    ];
+  
+    const csvRows = data.map(item => {
+      const [date, time] = item.auditEventDate.split('T');
+      return [
+        date,
+        time.replace('Z', ''), 
+        item.principal,
+        item.data["releasePackage.name"] || '',
+        item.data["releaseVersion.name"] || '',
+        item.data["releaseFile.label"] || ''
+      ].join(','); 
+    });
+  
+    const csvContent = [header.join(','), ...csvRows].join('\n');
+  
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `ReleaseFileDownloadData.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+  
 }

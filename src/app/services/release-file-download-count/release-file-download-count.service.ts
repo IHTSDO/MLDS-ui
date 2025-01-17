@@ -44,23 +44,7 @@ export class ReleaseFileDownloadCountService {
     return this.http.post<any>(`${this.apiUrl}/audits/getAllAuditEvents`, params);
   }
 
-  /**
-   * Retrieves users for a given date range.
-   *
-   * Retrieves an array of users who have performed actions within the specified date range.
-   *
-   * @param startDate Start date of the range (inclusive).
-   * @param endDate End date of the range (inclusive).
-   * @returns Observable of users.
-   * @example
-   * const startDate = '2022-01-01';
-   * const endDate = '2022-01-31';
-   * this.releaseFileDownloadCountService.getUsers(startDate, endDate).subscribe(response => {
-   *   console.log(response); // Output: [{ userId: 1, username: 'john Doe' }, { userId: 2, username: 'Jane Doe' }]
-   * });
-   */
-  getUsers(startDate: string, endDate: string): Observable<any> {
-    let params = new HttpParams().set('startDate', startDate).set('endDate', endDate);
-    return this.http.get(`${this.apiUrl}/audits/getAllUsersonSelectedDate`, { params });
+  findReleaseFileDownloadCountsCSV(params: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/audits/getAllAuditEventsCSV`, params);
   }
 }
