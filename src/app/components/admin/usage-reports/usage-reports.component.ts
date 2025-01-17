@@ -147,6 +147,7 @@ export class UsageReportsComponent implements OnInit {
       this.orderByField = field;
       this.reverseSort = false;
     }
+    this.hasMoreData=true;
     this.loadMoreUsageReports(true,this.searchText);
   }
 
