@@ -30,6 +30,10 @@
              type="email"
              placeholder="Enter Contact email of the Member organization"
              formControlName="contactEmail">
+      
+      <div *ngIf="memberFeedForm.get('contactEmail')?.errors?.['email']" class="help-block">
+        Invalid email address
+      </div>
     </div>
   </ng-container>
 </app-modal>
