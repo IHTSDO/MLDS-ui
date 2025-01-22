@@ -57,7 +57,7 @@ export class ArchiveManagementComponent implements OnInit {
 
   extractPackages(): void {
     this.isLoading=true;
-    this.packagesService.loadPackages().subscribe({
+    this.packagesService.loadArchievePackages().subscribe({
       next: (data) => {
         this.isLoading=false;
         this.packages = data;
@@ -67,7 +67,6 @@ export class ArchiveManagementComponent implements OnInit {
   
         // Apply member filtering
         const memberFiltered = this.filterPackagesByMember(this.packages);
-  
         // Process packages by member
         this.packagesByMember = this.processPackagesByMember(memberFiltered);
       }
@@ -81,10 +80,6 @@ export class ArchiveManagementComponent implements OnInit {
       : packages.filter(p => this.packageUtilsService.isReleasePackageMatchingMember(p));
   }
   
-  // Helper function to check if a version is archived
-  isArchivedVersion(releasePackage: any): boolean {
-    return releasePackage.releaseVersions.some((version: { archive: any }) => version.archive);
-  }
   
   // Helper function to group and process packages by member
   processPackagesByMember(memberFiltered: any[]): any[] {
@@ -97,10 +92,9 @@ export class ArchiveManagementComponent implements OnInit {
   
   // Helper function to create the member package entry
   createMemberPackageEntry(memberPackages: any[], memberKey: string): any {
-    const archivePackages = memberPackages.filter(releasePackage => this.isArchivedVersion(releasePackage));
-    return {
+     return {
       member: this.memberService.membersByKey[memberKey],
-      archivePackages: archivePackages
+      archivePackages: memberPackages
     };
   }
   
