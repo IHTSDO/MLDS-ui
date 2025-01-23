@@ -65,7 +65,7 @@
               <tr *ngFor="let release of releaseFileDownloadCounts">
                 <td>{{ release.releasePackageName }}</td>
                 <td>{{ release.releaseVersionName }}</td>
-                <td>{{ release.releaseFileName }}</td>
+                <td>{{ transformToPlainText(release.releaseFileName) }}</td>
                 <td>{{ release.count }}</td>
               </tr>
             </ng-template>
