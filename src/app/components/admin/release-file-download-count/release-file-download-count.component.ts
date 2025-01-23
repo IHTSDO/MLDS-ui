@@ -44,6 +44,10 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
 
   downloading = false;
 
+  orderByField: string = 'count'; 
+  
+  reverseSort: boolean = true;
+
   constructor(private releaseFileDownloadCountService: ReleaseFileDownloadCountService, private dateFilterUtils: DateFilterUtilsService) {}
 
   /**
@@ -75,6 +79,7 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
       .subscribe({
        next: data => {
           this.releaseFileDownloadCounts = data;
+          this.sortData();
           this.submitting = false;
         },
         error: (error: any) => {
@@ -144,10 +149,43 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
     URL.revokeObjectURL(url);
   }
 
+
+  toggleField(field: string) {
+    if (this.orderByField === field) {
+      this.reverseSort = !this.reverseSort;
+    } else {
+      this.orderByField = field;
+      this.reverseSort = false;
+    }
+
+    this.sortData();
+  }
+
   transformToPlainText(richText: string): string {
     const div = document.createElement('div');
     div.innerHTML = richText;
     return (div.innerText || div.textContent || '').trim();
+  }
+
+  private sortData() {
+    this.releaseFileDownloadCounts.sort((a: { [x: string]: any; }, b: { [x: string]: any; }) => {
+      let fieldA = a[this.orderByField];
+      let fieldB = b[this.orderByField];
+  
+      if (this.orderByField !== 'count') {
+        fieldA = fieldA.toLowerCase();
+        fieldB = fieldB.toLowerCase();
+      }
+  
+      if (this.orderByField === 'releaseFileName') {
+        fieldA = this.transformToPlainText(fieldA);
+        fieldB = this.transformToPlainText(fieldB);
+      }
+  
+      if (fieldA < fieldB) return this.reverseSort ? 1 : -1;
+      if (fieldA > fieldB) return this.reverseSort ? -1 : 1;
+      return 0;
+    });
   }
   
 }

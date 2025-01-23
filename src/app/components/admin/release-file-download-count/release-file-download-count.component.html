@@ -46,11 +46,39 @@
       <div class="table-responsive">
         <table class="table table-condensed table-striped">
           <thead>
-            <tr>
-              <th>Release Package</th>
-              <th>Release Version</th>
-              <th>Release File Name</th>
-              <th>Count</th>
+            <tr style="white-space: nowrap;">
+              <th class="sort-title" (click)="toggleField('releasePackageName')">
+                Release Package
+                <span *ngIf="orderByField !== 'releasePackageName'"><i class="fa fa-sort"></i></span>
+                <span *ngIf="orderByField === 'releasePackageName'">
+                  <span *ngIf="!reverseSort"><i class="fa fa-sort-asc"></i></span>
+                  <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
+                </span>
+              </th>
+              <th class="sort-title" (click)="toggleField('releaseVersionName')">
+                Release Version
+                <span *ngIf="orderByField !== 'releaseVersionName'"><i class="fa fa-sort"></i></span>
+                <span *ngIf="orderByField === 'releaseVersionName'">
+                  <span *ngIf="!reverseSort"><i class="fa fa-sort-asc"></i></span>
+                  <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
+                </span>
+              </th>
+              <th class="sort-title" (click)="toggleField('releaseFileName')">
+                Release File Name
+                <span *ngIf="orderByField !== 'releaseFileName'"><i class="fa fa-sort"></i></span>
+                <span *ngIf="orderByField === 'releaseFileName'">
+                  <span *ngIf="!reverseSort"><i class="fa fa-sort-asc"></i></span>
+                  <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
+                </span>
+              </th>
+              <th class="sort-title" (click)="toggleField('count')">
+                Count
+                <span *ngIf="orderByField !== 'count'"><i class="fa fa-sort"></i></span>
+                <span *ngIf="orderByField === 'count'">
+                  <span *ngIf="!reverseSort"><i class="fa fa-sort-asc"></i></span>
+                  <span *ngIf="reverseSort"><i class="fa fa-sort-desc"></i></span>
+                </span>
+              </th>
             </tr>
           </thead>
 
