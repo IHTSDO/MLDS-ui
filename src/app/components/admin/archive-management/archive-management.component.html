@@ -1,7 +1,7 @@
    <div class="row">
     <div class="col-md-12">
       <div class="page-header">
-        <h2>Archive Release Management</h2>
+        <h2>Archived Release Management</h2>
         <div *ngIf="isAdmin">
           <span>Show releases for: </span>
           <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
@@ -27,7 +27,7 @@
   <!-- Show warning if no memberEntry has archivePackages -->
   
     <div class="alert alert-warning">
-      <i class="fa fa-exclamation-circle"></i> There are currently no Archive Packages for any release.
+      <i class="fa fa-exclamation-circle"></i> There are currently no Archived Packages for any release.
     </div>
   </div>
   
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-lg-8">
           <h3>
-            Archive Releases:
+            Archived Releases:
             <span>{{ memberEntry.member.key | enum:'global.member.' | async }}</span>
           </h3>
           <div class="panel panel-default" *ngFor="let package of memberEntry.archivePackages">
