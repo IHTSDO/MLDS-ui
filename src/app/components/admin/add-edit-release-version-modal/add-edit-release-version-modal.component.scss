@@ -78,3 +78,10 @@ label {
     height: 45px; /* Match the height of the input field */
     font-size: 16px; /* Increase font size for the button */
 }
+
+.disabled-select {
+    pointer-events: none; 
+    background-color: #f8f9fa;
+    color: #6c757d; 
+    border-color: #ced4da;
+  }
