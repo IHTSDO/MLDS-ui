@@ -24,7 +24,7 @@
       <div *ngIf="submitAttempted && formReleaseFile.get('downloadUrl')?.errors?.['required']" class="help-block">
         Required Field
       </div>
-      <div *ngIf="submitAttempted && formReleaseFile.get('downloadUrl')?.errors?.['pattern']" class="help-block">
+      <div *ngIf="formReleaseFile.get('downloadUrl')?.errors?.['pattern']" class="help-block">
         Invalid URL
       </div>
     </div>
@@ -37,7 +37,7 @@
     <div class="form-group">
       <label for="fileSize">File Size in Octets</label>
       <input id="fileSize" class="form-control" formControlName="fileSize" placeholder="File Size" />
-      <div *ngIf="submitAttempted && formReleaseFile.get('fileSize')?.errors?.['pattern']" class="help-block">
+      <div *ngIf="formReleaseFile.get('fileSize')?.errors?.['pattern']" class="help-block">
         Only numbers are allowed. Remove commas or special characters if entered.
       </div>
     </div>

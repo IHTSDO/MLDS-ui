@@ -19,6 +19,9 @@
       formControlName="staffNotificationEmail"
       [disabled]="submitStatus.submitSuccessful"
     />
+    <div *ngIf="memberForm.get('staffNotificationEmail')?.errors?.['email']" class="help-block">
+      Invalid email address
+    </div>
     <p class="help-block">Mailing list email address that member notifications will be sent to.</p>
   </div>
 </app-modal>

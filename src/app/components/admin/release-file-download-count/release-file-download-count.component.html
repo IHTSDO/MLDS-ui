@@ -33,7 +33,7 @@
     
     <div class="col-md-4">
       <button class="review-button" style="margin-left: 10rem; margin-top: 5px;"
-        (click)="loadReleaseFileDownloadCountsCSV()" [disabled]="releaseFileDownloadCounts.length === 0 || downloading">
+        (click)="loadReleaseFileDownloadCountsCSV()" [disabled]="releaseFileDownloadCounts?.length === 0 || downloading">
         <span *ngIf="!downloading"><i class="fa fa-download"></i></span>
         <span *ngIf="downloading"><i class="fa fa-spinner fa-spin"></i></span>
         Export Details as CSV
@@ -55,7 +55,7 @@
           </thead>
 
           <tbody *ngIf="!submitting">
-            <ng-container *ngIf="releaseFileDownloadCounts.length === 0; else dataRows">
+            <ng-container *ngIf="releaseFileDownloadCounts?.length === 0; else dataRows">
               <tr>
                 <td colspan="4" class="text-center">No data found</td>
               </tr>
