@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="page-header">
 			<span class="language-option"><a (click)="goToPendingApplication()"><i class="fa fa-angle-double-left"></i>  Back to Pending Applications</a></span>
-      <h1 style="margin-top: 33px;"><b>{{application?.applicationType | enum:'application.applicationType.' | async}} Application Review</b></h1>
+      <h1 style="margin-top: 33px;">{{application?.applicationType | enum:'application.applicationType.' | async}} Application Review</h1>
 		</div>
 	</div>
 </div>
@@ -25,7 +25,7 @@
       
         <!-- Applicant Information -->
         <div class="applicant-info">
-          <p><b>Application No:</b> {{ application?.applicationId }}</p>
+          <p><strong>Application No:</strong> {{ application?.applicationId }}</p>
           <div *ngIf="application?.organizationName">
             <h4 class="application-title">
               {{ application?.organizationName }} - {{ application?.name }}

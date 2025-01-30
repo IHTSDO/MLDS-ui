@@ -1,5 +1,5 @@
 <div class="rows">
-    <h2><b>{{'logs.title' | translate | compareText: 'Logs'}}</b></h2>
+    <h2>{{'logs.title' | translate | compareText: 'Logs'}}</h2>
   
     <p class="rows">
       <span>
@@ -8,7 +8,7 @@
     </p>
     
   
-    <label class="rows"><b>{{ 'logs.filter' | translate }}</b></label>
+    <label class="rows">{{ 'logs.filter' | translate }}</label>
 <input type="text" [(ngModel)]="filter" class="form-control">
   
     <table class="table table-condensed table-striped"aria-label="syatem-loggers">

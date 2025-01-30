@@ -9,13 +9,13 @@
   <div id="healthCheck" class="row">
     <div class="col-md-3">
       <div class="alert alert-success">
-        <b>Version info:</b> <span> {{ version }}</span>
+        Version info: <span> {{ version }}</span>
       </div>
     </div>
    
     <div class="col-md-3">
       <div class="alert" [ngClass]="{'alert-success': healthCheck?.details?.database?.status === 'UP', 'alert-danger': healthCheck?.details?.database?.status !== 'UP'}">
-        <b><span>{{'metrics.health.database' | translate | compareText : 'Database'}}</span> : </b>
+        <span>{{'metrics.health.database' | translate | compareText : 'Database'}}</span> : 
         <span class="help-block" *ngIf="loadingStatus">
           <i class="fa fa-spinner fa-spin"></i>
         </span>
@@ -40,7 +40,7 @@
 
     <div class="col-md-3">
       <div class="alert" [ngClass]="{'alert-success': healthCheck?.details?.mail?.status === 'UP', 'alert-danger': healthCheck?.details?.mail?.status !== 'UP'}">
-        <b><span>{{'metrics.health.email' | translate | compareText: 'Email' }}</span> : </b>
+        <span>{{'metrics.health.email' | translate | compareText: 'Email' }}</span> : 
         <span class="help-block" *ngIf="loadingStatus">
           <i class="fa fa-spinner fa-spin"></i>
         </span>
@@ -69,7 +69,7 @@
   <h3>{{'metrics.jvm.title' | translate | compareText :'JVM Metrics'}}</h3>
   <div class="row">
     <div class="col-md-4">
-      <b>{{'metrics.jvm.memory.title' | translate | compareText: 'Memory'}}</b>
+     <b> {{'metrics.jvm.memory.title' | translate | compareText: 'Memory'}}</b>
       <p>{{'metrics.jvm.memory.total' | translate}} ({{ (metrics?.gauges?.['jvm.memory.total.used']?.value / 1000000) | toFixed }}M /
         {{ (metrics?.gauges?.['jvm.memory.total.max']?.value / 1000000) | toFixed }}M)
       </p>
@@ -187,8 +187,8 @@
 
 
   <h3>{{'metrics.jvm.http.title' |translate| compareText: 'HTTP requests (events per second)'}}</h3>
-  <p>{{'metrics.jvm.http.active' | translate}}<b>{{ metrics?.counters?.['io.dropwizard.metrics.servlet.InstrumentedFilter.activeRequests']?.count
-      }}</b> - {{'metrics.jvm.http.total' | translate}} <b>{{
+  <p>{{'metrics.jvm.http.active' | translate}} <b>{{ metrics?.counters?.['io.dropwizard.metrics.servlet.InstrumentedFilter.activeRequests']?.count
+      }} </b>- {{'metrics.jvm.http.total' | translate}} <b>{{
       metrics?.timers?.['io.dropwizard.metrics.servlet.InstrumentedFilter.requests']?.count }}</b></p>
 
   <div class="table-responsive" >

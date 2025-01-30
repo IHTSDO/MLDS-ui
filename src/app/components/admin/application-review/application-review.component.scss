@@ -139,3 +139,37 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   .approve{
         margin-top: 26px;
   }
+  h1, .h1 {
+    font-size: 36px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Oxygen", sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #000000;
+}
+h1 {
+    font-size: 36px;
+    margin: 0.67em 0;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1 {
+    display: block;
+    font-size: 36px;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+    unicode-bidi: isolate;
+}
