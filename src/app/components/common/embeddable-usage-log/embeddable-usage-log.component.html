@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="panel panel-default" >
-			<div class="panel-heading " style="padding-top: 50px;">
+			<div class="panel-heading " style="padding-top: 30px;">
 				<h4 class="panel-title ">
 					<span class="font">{{ 'views.usageLog.subTitle' | translate | compareText: 'License Usage' }}</span>
 					<span class="pull-right">{{commercialUsageReport?.startDate | date : 'yyyy-MM'}} - {{commercialUsageReport?.endDate | date : 'yyyy-MM'}}</span>
@@ -147,7 +147,7 @@
         <div class="row">
             <div class="country-heading">
                 <div class="col-xs-8 col-sm-6 col-md-4 col-lg-6">
-                    <h3 class="country-title"><b>{{'global.country.' + countryUsage?.country?.isoCode2 | translate}}</b></h3>
+                    <h3 class="country-title">{{'global.country.' + countryUsage?.country?.isoCode2 | translate}}</h3>
                 </div>
                 <div class="col-xs-4 col-sm-6	col-md-8 col-lg-6" *ngIf="!readOnly">
                     <div class="form-group float-end">

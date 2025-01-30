@@ -10,9 +10,9 @@
         </b> 
         {{ version.publishedAt | date: 'yyyy-MM-dd' }}
       </span>
-      <p class="download-files" *ngFor="let file of version.releaseFiles">
+      <p class="download-files" *ngFor="let file of version.releaseFiles" style="display: flex;">
         <i class="fa fa-file"></i>&nbsp;
-        <a [href]="file.clientDownloadUrl" target="_blank" [innerHTML]="file.label">{{ file.label }}</a>
+        <a [href]="file.clientDownloadUrl" target="_blank">{{ file.label | removeHtml}}</a>
       </p>
     </div>
   </div>

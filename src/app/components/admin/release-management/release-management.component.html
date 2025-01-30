@@ -90,8 +90,8 @@
                   <h4 class="version">{{version.name}}</h4>
                   <span><b>Published On:</b> {{version.publishedAt | date: 'yyyy-MM-dd'}}</span>
                   <p class="download-files" *ngFor="let file of version.releaseFiles">
-                    <a [href]="file.clientDownloadUrl" target="_blank" [innerHTML]="file.label">
-                      <p class="download-files">{{file.label}}</p>
+                    <a [href]="file.clientDownloadUrl" target="_blank">
+                      <p class="download-files">{{file.label | removeHtml}}</p>
                     </a>
                   </p>
                 </div>

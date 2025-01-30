@@ -67,8 +67,8 @@
               <i class="fa fa-file" style="margin-bottom:10px;"></i>
               <div class="file-label">
                 <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
-                  [innerHTML]="releaseFile.label" style="white-space: nowrap;">
-                  {{ releaseFile?.label }}
+                  style="white-space: nowrap;">
+                  {{ releaseFile?.label | removeHtml}}
                 </a>
               </div>
               <button class="btn btn-success btn-xs file-edit" *ngIf="isEditableReleasePackage"
@@ -137,8 +137,8 @@
               <i class="fa fa-file" style="margin-bottom:10px;"></i>
               <div class="file-label">
                 <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
-                  [innerHTML]="releaseFile.label" style="white-space: nowrap;">
-                  {{ releaseFile?.label }}
+                  style="white-space: nowrap;">
+                  {{ releaseFile?.label | removeHtml}}
                 </a>
               </div>
               <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"
@@ -216,8 +216,8 @@
               <i class="fa fa-file" style="margin-bottom:10px;"></i>
               <div class="file-label">
                 <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
-                  [innerHTML]="releaseFile.label" style="white-space: nowrap;">
-                  {{ releaseFile?.label }}
+                  style="white-space: nowrap;">
+                  {{ releaseFile?.label | removeHtml}}
                 </a>
               </div>
               <button class="btn btn-danger btn-xs file-remove" *ngIf="isEditableReleasePackage"

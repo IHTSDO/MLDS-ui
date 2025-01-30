@@ -22,6 +22,22 @@
     text-decoration: none;
 }
 
+.btn-link :hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}
+
+.fa-angle-double-right :hover{
+    color: #40ACD6;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+    text-decoration: underline;
+}
+
 .edit-button {
     display: inline-block;
     margin-bottom: 0;

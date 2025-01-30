@@ -20,18 +20,17 @@
                 <span class="version-title"><b><span>{{ 'global.word.file' | translate | compareText : 'File' }}</span>:</b></span>
             </div>
             <div class="col-md-10">
-                <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
-                    <i class="fa fa-file"></i>
+                <div *ngFor="let releaseFile of releaseVersion.releaseFiles" style="display: flex;">
+                    <i class="fa fa-file"></i>&nbsp;
                     <button class="btn btn-link disabled no-padding" 
                             [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
-                            *ngIf="!releaseFile.clientDownloadUrl" 
-                            [innerHTML]="releaseFile.label">
+                            *ngIf="!releaseFile.clientDownloadUrl">{{releaseFile.label | removeHtml}}
                     </button>
                     <a *ngIf="releaseFile.clientDownloadUrl" 
                        [href]="releaseFile.clientDownloadUrl" 
                        target="_blank" 
-                       aria-label="Download" 
-                       [innerHTML]="releaseFile.label">
+                       aria-label="Download" >
+                       {{releaseFile.label | removeHtml}}
                     </a>
                 </div>
             </div>

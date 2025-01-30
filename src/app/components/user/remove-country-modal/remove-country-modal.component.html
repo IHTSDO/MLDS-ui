@@ -21,12 +21,12 @@
   </p>
 
   <dl class="dl-horizontal">
-    <dt>{{ 'views.usageLog.institutions.country' | translate | compareText:'Country' }}&nbsp;&nbsp;</dt>
-    <dd>{{ count?.country?.commonName }}</dd>
-    <dt>{{ 'views.usageLog.institutions.hospAndInst.plural' | translate | compareText:'Hospitals/Institutions' }}&nbsp;&nbsp;</dt>
-    <dd>{{ hospitalsCount | number }}</dd>
-    <dt>{{ 'views.usageLog.institutions.practices' | translate | compareText:'Practices' }}&nbsp;&nbsp;</dt>
-    <dd>{{ practicesCount | number }}</dd>
+    <dt>{{ 'views.usageLog.institutions.country' | translate | compareText:'Country' }}</dt>
+    <dd>&nbsp;&nbsp;{{ count?.country?.commonName }}</dd>
+    <dt>{{ 'views.usageLog.institutions.hospAndInst.plural' | translate | compareText:'Hospitals/Institutions' }}</dt>
+    <dd>&nbsp;&nbsp;{{ hospitalsCount | number }}</dd>
+    <dt>{{ 'views.usageLog.institutions.practices' | translate | compareText:'Practices' }}</dt>
+    <dd>&nbsp;&nbsp;{{ practicesCount | number }}</dd>
   </dl>
   </div>
 </app-modal>

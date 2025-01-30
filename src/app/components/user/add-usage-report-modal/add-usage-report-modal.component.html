@@ -34,7 +34,7 @@
       </div>
     </form>
   </div>
-
+  <hr>
   <ng-template #modalFooter>
     <button class="btn-link" (click)="cancel()" [disabled]="submitting">{{ 'global.word.cancel' | translate | compareText:'Cancel' }}</button>
     <button class="edit-button" (click)="add()" [disabled]="submitting || addRangeForm.invalid">

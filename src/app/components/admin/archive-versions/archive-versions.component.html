@@ -54,8 +54,7 @@
             <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
               <p style="display: flex; gap: 10px; align-items: center;">
                 <i class="fa fa-file" style="margin-bottom: 10px;"></i>
-                <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl"
-                  [innerHTML]="releaseFile.label">releaseFile.label</a>
+                <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl">{{releaseFile.label | removeHtml}}</a>
                 <button class="btn btn-success btn-xs file-edit" style="margin-bottom: 10px;"
                   *ngIf="isEditableReleasePackage && isAdmin" (click)="editReleaseFile(releaseVersion,releaseFile)">
                   <i class="fa fa-edit"></i> Edit
