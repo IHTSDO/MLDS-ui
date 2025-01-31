@@ -12,7 +12,7 @@
         </div>
   
         <div class="page-header">
-          <h2>Import Affiliate Records</h2>
+          <h2 class="size">Import Affiliate Records</h2>
         </div>
         <form class="form-inline">
           <div class="form-group">
@@ -31,12 +31,12 @@
         
   
         <div *ngIf="importResult">
-          <h4>Last Import Result</h4>
+          <h4 class="size">Last Import Result</h4>
           <pre>{{ importResult }}</pre>
         </div>
   
         <div class="page-header">
-          <h2>Export Affiliate Records</h2>
+          <h2 class="size">Export Affiliate Records</h2>
         </div>
         <p>Export all affiliates from the system in the same format as used by the <i>Import Affiliate Records</i> feature.</p>
         <div>
@@ -47,7 +47,7 @@
         </div>
   
         <div class="page-header" *ngIf="importSpec">
-          <h2>Affiliate Record Format</h2>
+          <h2 class="size">Affiliate Record Format</h2>
         </div>
         <p>The Affiliate record format is CSV based, although using <kbd>^</kbd> as a field separator and no support for quoting field entries containing the ^ character.</p>
         <ul>
@@ -60,7 +60,7 @@
         </ul>
         <h4>Example Import File with Two Affiliate Records</h4>
         <div><pre>{{ importSpec.example }}</pre></div>
-        <h4>File Format Columns</h4>
+        <h4 class="size">File Format Columns</h4>
         <div class="table-responsive">
           <table class="table table-condensed table-striped" aria-label="import-affiliates">
             <thead>
@@ -87,7 +87,7 @@
         </div>
   
         <div class="page-header" *ngIf="audits.length > 0">
-          <h2>Import Activity</h2>
+          <h2 class="size">Import Activity</h2>
         </div>
         <div *ngIf="audits.length > 0">
           <ul>

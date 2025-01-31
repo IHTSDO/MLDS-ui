@@ -1,7 +1,7 @@
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 27px;
+  padding-left: 17px;
   padding-right: 15px;
   height: 38px;
 }
@@ -29,11 +29,13 @@
 }
 
 .navbar-brand {
-  font-weight: 500;
   font-size: 18px;
+  font-weight: bold;
+  color: #555555;
 }
 
 .navbar[role=admin] {
+  padding-bottom: 16px;
   background-color: #eeeeee;
   border-bottom: 3px solid #8dccdc;
   position: fixed;
@@ -59,11 +61,13 @@ body {
 }
 
 .dropdown-menu {
+  margin-top: 20px;
   background-color: #fff;
   color: #262626;
   right: 0;
   left: auto;
   border: none;
+  border: 0.1px solid #ccc
 }
 
 
@@ -109,5 +113,14 @@ ul {
 }
 .language-option {
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 100;
 }
 
+.navbar-header{
+  padding-top: 12px;
+}
+
+.nav-link {
+  color: #40ACD6;
+}

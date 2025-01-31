@@ -7,11 +7,11 @@
     </div>
   </div>
 
-  <div class="row margin">
+  <div class="row margin row-margin">
 
 
     <div class="col-md-4">
-      <div class="input-group">
+      <div class="input-group ">
         <span class="input-group-addon">{{'audits.filter.from' | translate | compareText: 'from'}}</span>
         <input type="date" class="input-sm form-control" name="fromDate" [(ngModel)]="fromDate"
           (change)="loadReleaseFileDownloadCounts()" required />

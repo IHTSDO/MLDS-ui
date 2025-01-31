@@ -13,7 +13,9 @@ body {
 }
 
 .page-header {
-    margin-top: 20px;
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
 }
 
 .space {
@@ -72,8 +74,9 @@ body {
 }
 
 /* General layout and padding */
-.h2, h2 {
-    padding-top: 30px;
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 37px;
+    margin-bottom: 10px;
 }
 
 .content {
@@ -109,7 +112,9 @@ button.btn {
 .help-block {
     color: #d9534f;
 }
-
+.message{
+    margin-top: 5px;
+}
 /* Alert box styling */
 .alert {
     position: relative;
@@ -135,7 +140,24 @@ button.btn {
 .alert.space {
     margin-top: 20px;
 }
+.content-row{
+       margin-bottom: 40px;
+       margin-top: -29px;
+}
 .row{
     margin-top: 64px;
     margin-bottom: 40px;
+}
+body {
+    font-family: "robotoregular", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+    margin-bottom: 60px;
+}
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-top: 5px;
 }

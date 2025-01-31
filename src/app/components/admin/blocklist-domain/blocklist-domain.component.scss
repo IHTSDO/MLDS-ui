@@ -1,5 +1,6 @@
-h2{
-    padding-top: 30px;
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 102px;
+    margin-bottom: 10px;
 }
 .btn-btn-default{
     color: #00a7e1;
@@ -7,9 +8,7 @@ h2{
     border-color: transparent;
     border-top-left-radius: 10px;
 }
-.rows{
-    margin-top: 40px;
-}
+
 .custom-btn {
     margin-left: 10px;
     background-color: #00a7e1; /* Initial background color */
@@ -126,12 +125,21 @@ button {
 }
 
 .table-responsive {
-    margin-top: 20px; /* Space above the table */
+    margin-top:-13px; /* Space above the table */
 }
 
 .table th, .table td {
     padding: 12px; /* Padding inside table cells */
 }
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #fffffe;
+  }
 
 .alert-warning {
     background-color: #ffffff;

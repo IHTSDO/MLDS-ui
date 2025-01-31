@@ -22,12 +22,11 @@ body {
 .space {
     margin-top: 10px;
 }
-.margin{
-  margin-bottom: 20px;
-  margin-top: 20px;
+.margin {
+  margin-bottom: 3px;
+  margin-top: 11px;
 }
 
-.h2{padding-top: 30px;}
 
 .content{
     padding-top: 30px;
@@ -36,8 +35,9 @@ body {
 .col-md-6 {
     width: 50%;
 }
-h2{
-    padding-top: 30px;
+.row-margin{
+  margin-bottom: 3px;
+  margin-top: 5px;
 }
 
 button.btn {
@@ -56,7 +56,7 @@ button.btn {
   
 .input-group-addon {
   padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
