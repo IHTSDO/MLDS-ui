@@ -36,7 +36,7 @@
 
 <div *ngFor="let memberEntry of packagesByMember">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <!-- online package -->
       <div class="page-header">
         <h3>Public Releases: <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span></h3>
@@ -112,7 +112,7 @@
 
   <!-- alpha/beta -->
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <div class="page-header">
         <h3>Alpha/Beta Releases: <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span></h3>
         <p>Releases that do not have any online versions are taken offline or made available for alpha/beta reviews. To
@@ -141,7 +141,7 @@
 
   <!-- offline -->
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <div class="page-header">
         <h3>Offline Releases: <span>{{memberEntry.member.key | enum:'global.member.'|async}}</span></h3>
         <p>Releases that do not have any online versions are taken offline or made available for alpha/beta reviews. To

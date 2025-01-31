@@ -1,14 +1,14 @@
-<div class="rows">
+<div class="row rows">
     <h2>{{'logs.title' | translate | compareText: 'Logs'}}</h2>
   
-    <p class="rows">
+    <p>
       <span>
         {{ 'logs.nbloggers' | translate: { total: loggers.length } | compareText: 'There are ' + loggers.length + ' loggers.' }}
       </span>
     </p>
     
   
-    <label class="rows">{{ 'logs.filter' | translate }}</label>
+    <label>{{ 'logs.filter' | translate }}</label>
 <input type="text" [(ngModel)]="filter" class="form-control">
   
     <table class="table table-condensed table-striped"aria-label="syatem-loggers">

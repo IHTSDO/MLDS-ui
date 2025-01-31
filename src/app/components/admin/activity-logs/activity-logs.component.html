@@ -1,30 +1,30 @@
-<div class="top">
-    <h2>Activity Log</h2>
-  
-      <div class="col-md-5">
-        <h4>{{'audits.filter.title' | translate | compareText : 'Filter per date'}}</h4>
-      </div>
- 
-    <div class="row margin row-margin">
-      <div class="col-md-6">
-        <div class="input-group">
-          <span class="input-group-addon">{{'audits.filter.from' | translate | compareText : 'from'}}</span>
-          <input type="date" class="form-control" name="fromDate" [(ngModel)]="fromDate" (change)="onChangeDate()" required />
-          <span class="input-group-addon">{{'audits.filter.to' | translate |compareText :'to'}}</span>
-          <input type="date" class="form-control" name="toDate" [(ngModel)]="toDate" (change)="onChangeDate()" required />
-        </div>
-      </div>
-      
-      
-      <div class="col-md-5">
-        <div class="input-group" *ngIf="submitting">
-          <p class="help-block">
-            Loading..
-            <i class="fa fa-spinner fa-spin"></i>
-          </p>
-        </div>
+<div class="row top">
+  <h2>Activity Log</h2>
+
+  <div class="col-md-5">
+    <h4>{{'audits.filter.title' | translate | compareText : 'Filter per date'}}</h4>
+  </div>
+
+  <div class="margin">
+    <div class="col-md-6">
+      <div class="input-group">
+        <span class="input-group-addon">{{'audits.filter.from' | translate | compareText : 'from'}}</span>
+        <input type="date" class="form-control" name="fromDate" [(ngModel)]="fromDate" (change)="onChangeDate()"
+          required />
+        <span class="input-group-addon">{{'audits.filter.to' | translate |compareText :'to'}}</span>
+        <input type="date" class="form-control" name="toDate" [(ngModel)]="toDate" (change)="onChangeDate()" required />
       </div>
     </div>
-    <app-audits-embed [audits]="audits"></app-audits-embed>
+
+
+    <div class="col-md-5">
+      <div class="input-group" *ngIf="submitting">
+        <p class="help-block">
+          Loading..
+          <i class="fa fa-spinner fa-spin"></i>
+        </p>
+      </div>
+    </div>
   </div>
-  
+  <app-audits-embed [audits]="audits"></app-audits-embed>
+</div>

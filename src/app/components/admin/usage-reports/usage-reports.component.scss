@@ -5,6 +5,8 @@
 
 h2{
     padding-top: 30px;
+    font-size: 3.4rem;
+    font-weight: 400;
 }
 .page-header {
   padding-bottom: 9px;
@@ -72,4 +74,9 @@ th {
 .form-control {
   display: inline-block;
   width: 30%;
+}
+
+hr {
+  color: #eeeeee;
+  opacity: 1.25;
 }

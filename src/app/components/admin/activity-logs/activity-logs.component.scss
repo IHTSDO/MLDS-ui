@@ -4,7 +4,7 @@
   }
 
 h2{
-    padding-top: 7px;
+    padding-top: 20px;
     font-size: 3.4rem;
     font-weight: 400;
 }
@@ -17,8 +17,14 @@ h2{
 .margin{
   margin-bottom: 4px;
   margin-top: 14px;
+  display: flex;
+  gap: 20px;
 }
 
+.help-block{
+  margin-top: 5px;
+  color: #f26c4f;
+}
 
 .form-control.date-input {
   width: 150px; /* Adjust the width as needed */
@@ -48,5 +54,5 @@ h2{
   align-items: center;
 }
 .top{
-  margin-top: 40px;
+  margin-top: 80px;
 }

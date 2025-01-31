@@ -35,7 +35,7 @@
   <ng-container *ngFor="let memberEntry of packagesByMember">
     <div *ngIf="memberEntry.archivePackages.length > 0">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <h3>
             Archive Releases:
             <span>{{ memberEntry.member.key | enum:'global.member.' | async }}</span>

@@ -76,7 +76,7 @@ p {
     margin: 2px;
 }
 .rows{
-    margin-top: 64px;
+    margin-top: 32px;
 }
 .panel-titles {
     margin-top: 0;
@@ -106,4 +106,9 @@ p {
 
 .download-files:hover{
     color: #0091c8;
+}
+
+h2 {
+    font-size: 3.4rem;
+    font-weight: 400;
 }

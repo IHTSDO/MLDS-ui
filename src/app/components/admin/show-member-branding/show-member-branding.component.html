@@ -25,10 +25,12 @@
 			<!-- Handle logo display -->
 			<ng-container *ngIf="!isLoading">
 			  <ng-container *ngIf="memberLogo$ | async as memberLogo">
+				<div class="image-container">
 				<img *ngIf="memberLogo; else defaultLogo" class="img-responsive" [src]="memberLogo" alt="member-logo">
 				<ng-template #defaultLogo>
 				  <img class="img-responsive" src="assets/logo.png" alt="default-logo">
 				</ng-template>
+				</div>
 			  </ng-container>
 			</ng-container>
   

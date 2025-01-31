@@ -3,6 +3,7 @@
 		<div class="page-header">
       <span class="back language-option"><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
       <h2>Review Usage Report</h2>
+      <br>
     </div>
     <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">
       {{ alert.msg }}

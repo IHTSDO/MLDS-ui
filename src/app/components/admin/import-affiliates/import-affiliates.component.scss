@@ -9,7 +9,7 @@ body {
     z-index: 1030; /* Ensure it stays on top of other content */
 }
 .rows{
-    margin-top: 30px;
+    margin-top: 62px;
 }
 .container-fluid {
     padding: 0 20px;
@@ -120,10 +120,11 @@ code, kbd, pre, samp {
 b {
     font-weight: 600px !important;
 }
-h2{
-    font-size: 30px !important;
-
-}
+h2, .h2 {
+    margin-top: 20px;
+    font-size: 3.4rem;
+    font-weight: 400;
+ }
 .size{
     margin-top: 10px;
 }

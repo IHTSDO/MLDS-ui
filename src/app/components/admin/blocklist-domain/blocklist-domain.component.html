@@ -3,7 +3,7 @@
     <div class="page-header">
       <h2>Blocklist Domains</h2>
     </div>
-    <form class="form-inline rows" (ngSubmit)="newDomainSubmit()">
+    <form class="form-inline" (ngSubmit)="newDomainSubmit()">
       <div class="form-group">
         <label><b>Add to Blocklist</b></label>&nbsp;&nbsp;
         <input type="text" class="form-control" [(ngModel)]="domainForm.name" name="domainName" required>&nbsp;

@@ -51,20 +51,19 @@ h1, .h1, h2, .h2, h3, .h3 {
   border-top-left-radius: 10px;
 }
   
-  .file-info {
-    display: flex;
-    flex-grow: 1;
+.file-info {
+  display: flex;
+  flex-grow: 1;
+  padding: 5px;
+  align-items: center;
+  gap: 10px;
 
-    align-items: center;
-    gap: 10px; 
+}
 
-  }
-  
-  .file-label {
-    flex-grow: 1; 
-    overflow: hidden;
-  }
-
+.file-label {
+  flex-grow: 1;
+  overflow: hidden;
+}
 
   
 .btn.dropdown-toggle {

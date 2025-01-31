@@ -1,9 +1,9 @@
-<div class="metrics-page">
+<div class="row metrics-page">
+  <div style="display: flex;justify-content: space-between;">
   <h2>{{'metrics.title' | translate | compareText : 'System Metrics'}}</h2>
-  <div>
-    <button type="button" class="refresh-button" (click)="refresh()">
-      <span class="fa fa-refresh" aria-hidden="true"></span>&nbsp;{{'metrics.refresh.button' | translate}}
-    </button>
+  <button type="button" class="refresh-button" (click)="refresh()">
+    <span class="fa fa-refresh" aria-hidden="true"></span>&nbsp;{{'metrics.refresh.button' | translate}}
+  </button>
   </div>
   <h3>{{'metrics.health.title' | translate | compareText : 'Heath Checks'}}</h3>
   <div id="healthCheck" class="row">
@@ -192,7 +192,7 @@
       metrics?.timers?.['io.dropwizard.metrics.servlet.InstrumentedFilter.requests']?.count }}</b></p>
 
   <div class="table-responsive" >
-    <table class="table table-striped" aria-label="metrics">
+    <table class="table table-hover" aria-label="metrics">
       <thead>
         <tr>
           <th>{{'metrics.jvm.http.table.code' |translate |compareText: 'Code'}}</th>
@@ -283,7 +283,7 @@
   </div>
   <h3>{{'metrics.servicesstats.title' | translate|compareText: 'Services statistics (time in millisecond)'}}</h3>
     <div class="table-responsive">
-      <table class="table table-striped" aria-label="metrics">
+      <table class="table table-hover" aria-label="metrics">
         <thead>
           <tr>
             <th>{{ 'metrics.servicesstats.table.name' | translate | compareText: 'Service name' }}</th>

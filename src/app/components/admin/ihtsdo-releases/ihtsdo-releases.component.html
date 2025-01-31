@@ -1,15 +1,16 @@
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="page-header">
-            <h1>{{ 'views.ihtsdoReleases.title' | translate | compareText: 'IHTSDO Releases' }}</h1>
+            <h2>{{ 'views.ihtsdoReleases.title' | translate | compareText: 'IHTSDO Releases' }}</h2>
             <p>This page contains IHTSDO releases, both production and alpha/beta (technology previews), available for Members to download</p>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="panel panel-default" *ngFor="let package of onlinePackages">
+            <br>
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <a class="panel-titles language-option" (click)="goToPackage(package)">{{ package.name }}</a>
@@ -47,14 +48,15 @@
 
 <!-- Alpha/Beta Releases -->
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="page-header">
             <h3>Alpha/Beta Releases</h3>
         </div>
         <div class="panel panel-default" *ngFor="let package of alphabetaPackages">
+            <br>
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a (click)="goToPackage(package)">
+                    <a class="panel-titles language-option" (click)="goToPackage(package)">
                         {{ package.name }} - {{ package.member.key | enum:'global.member.' | async }}
                     </a>
                 </h4>
@@ -75,14 +77,15 @@
 
 <!-- Offline Releases -->
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="page-header">
             <h3>Offline Releases</h3>
         </div>
         <div class="panel panel-default" *ngFor="let package of offlinePackages">
+            <br>
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a (click)="goToPackage(package)">
+                    <a class="panel-titles language-option" (click)="goToPackage(package)">
                         {{ package.name }} - {{ package.member.key | enum:'global.member.' | async }}
                     </a>
                 </h4>
