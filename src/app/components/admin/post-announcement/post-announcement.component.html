@@ -24,7 +24,7 @@
   
         <div class="form-group">  
           <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}<span class="text-danger">*</span></b></label><br>
-          <quill-editor id="body" formControlName="body"  [style]="{'height': '200px'}"></quill-editor><br>
+          <quill-editor id="body" formControlName="body"  [style]="{'height': '200px','width':'100%'}"></quill-editor><br>
           <div class="message">
           <span class="help-block">{{'views.postAnnouncement.salutationMessage' | translate |compareText: 'Remember to add a salutation and valediction to the email body.'}}</span>
           <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block"> {{'form.requiredField' | translate }}</span>

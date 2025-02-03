@@ -72,7 +72,7 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-lg-4" style="margin-top: 5px;">
 		<app-usage-reports-table [affiliate]="affiliate" [showAllColumns]="false"
 			[showViewAll]="true"></app-usage-reports-table>
 	</div>
@@ -106,17 +106,17 @@
 							<td>
 								<span *ngIf="application.applicationType === 'EXTENSION'">
 									<a *ngIf="isApplicationWaitingForApplicant(application)"
-										class="btn btn-warning btn-sm" [routerLink]="['/extensionApplication', application.applicationId]">
-										<i class="fa fa-edit"></i> <span>{{'global.word.edit'|translate|compareText:'Edit'}}</span>
+										class="btn btn-warning btn-sm" [routerLink]="['/extensionApplication', application.applicationId]" style="width: 60px;">
+										<i class="fa fa-edit"></i> <span> {{'global.word.edit'|translate|compareText:'Edit'}}</span>
 									</a>
 									<a *ngIf="!isApplicationWaitingForApplicant(application)"
-										class="btn btn-primary btn-sm" (click)="viewApplication(application)">
-										<i class="fa fa-eye"></i> <span>{{'global.word.edit'|translate|compareText:'Edit'}}</span>
+										class="btn btn-primary btn-sm" (click)="viewApplication(application)" style="width: 60px;">
+										<i class="fa fa-eye"></i> <span> {{'global.word.edit'|translate|compareText:'Edit'}}</span>
 									</a>
 								</span>
 								<a class="btn btn-primary btn-sm" *ngIf="application.applicationType === 'PRIMARY'"
-									(click)="viewApplication(application)">
-									<i class="fa fa-eye"></i> <span>{{'global.word.edit'|translate|compareText:'Edit'}}</span>
+									(click)="viewApplication(application)" style="width: 60px;">
+									<i class="fa fa-eye"></i> <span> {{'global.word.edit'|translate|compareText:'Edit'}}</span>
 								</a>
 							</td>
 						</tr>
@@ -171,7 +171,7 @@
 		<div class="page-header">
 			<h1>
 				<span>{{'views.userDashboard.myPackages'|translate|compareText:'My Release Packages'}} </span>
-				<a href="#/viewReleases" class="btn btn-link">
+				<a href="#/viewReleases" class="btn btn-link" style="font-size: 14px;">
 					<span>{{'global.word.viewAll'|translate|compareText:'View All'}}</span>
 					<i class="fa fa-angle-double-right"></i>
 				</a>

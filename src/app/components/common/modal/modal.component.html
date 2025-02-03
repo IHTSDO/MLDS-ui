@@ -26,8 +26,7 @@
   <button
   [ngClass]="buttonType === 'delete' ? 'btn btn-danger' : 'btn btn-success'" *ngIf="submitText != ''"
   (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)|| buttonDisabled">
-  <i *ngIf="iconClass" [class]="iconClass"></i>&nbsp; 
-    {{ submitText }}
+  <i *ngIf="iconClass" [class]="iconClass"></i><span *ngIf="iconClass">&nbsp;</span>{{ submitText }}
     <span *ngIf="isSubmitting"><i class="fa fa-spinner fa-spin"></i></span>
   </button>
 </div>

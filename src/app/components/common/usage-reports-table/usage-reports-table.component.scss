@@ -1,8 +1,19 @@
 .panel-heading {
-    padding: 15px 0;
     border-bottom: 4px solid #8dccdc;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
+}
+
+.panel-title{
+    font-size: 19px;
+}
+
+.usage-table-heading{
+    margin-top: 50px;
+}
+
+button.btn {
+    font-size: 12px;
 }
 
 .table > thead > tr > th {
@@ -28,6 +39,10 @@
     cursor: pointer;
     border-radius: 0;
     text-decoration: underline;
+}
+
+button.btn:hover {
+    color: #40ACD6;
 }
 
 .fa-angle-double-right :hover{
@@ -75,12 +90,17 @@
     padding-top: 6rem;
    
 }
-#email-verification{
-    padding-bottom: 15rem;
-}
+
 #welcome{
     border-bottom: 4px solid #8dccdc;
 }
 .pad{
     padding-top: 10rem;
 }
+
+.btn-link .fa {
+    transition: none !important; /* Prevents unwanted effects */
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro", "FontAwesome" !important;
+    font-weight: 900; /* Ensures the correct icon weight */
+  }
+  

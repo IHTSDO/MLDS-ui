@@ -4,7 +4,7 @@
 
 <div *ngIf="!isLoading || isStaffOrAdmin">
 <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="col-sm-12 col-md-12 col-lg-12"  style="padding-left: 0px;">
         <div class="page-header">
             <h1>{{ 'views.contactInfo.title' | translate | compareText: 'Account Information' }}</h1>
         </div>
@@ -682,10 +682,11 @@
         </span>
     </div>
 
-
+    <div style="margin-left: 22px;">
     <button class="btn btn-link" (click)="cancel()"> {{ 'global.word.cancel' | translate | compareText: 'Cancel' }}</button>
     <button type="submit" class="edit-button" *ngIf="!readOnly"><span>{{ 'global.word.save' | translate | compareText: 'Save' }}</span>
     </button>
+    </div>
 
 
 

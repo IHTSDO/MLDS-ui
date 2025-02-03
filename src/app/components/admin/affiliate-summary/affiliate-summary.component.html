@@ -40,11 +40,9 @@
 
         <app-affiliate-details-summary [affiliate]="affiliate"
           [isEditable]="isEditable"></app-affiliate-details-summary>
-        <div class="row">
           <div class="col-sm-12">
             <app-usage-reports-table [affiliate]="affiliate"></app-usage-reports-table>
           </div>
-        </div>
       </div>
     </div>
 
@@ -58,8 +56,8 @@
           <button class="btn-successs" type="submit" [disabled]="submitting || !isEditable">
             Save
           </button>
-          <textarea class="form-control" rows="10" formControlName="notesInternal"
-            [attr.disabled]="!isEditable ? true : null">
+          <textarea class="form-control" contenteditable rows="10" formControlName="notesInternal"
+            [attr.disabled]="!isEditable ? true : null" style="resize: both;">
           </textarea>
         </div>
       </form>

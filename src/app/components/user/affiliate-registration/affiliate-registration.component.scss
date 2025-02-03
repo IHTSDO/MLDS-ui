@@ -1,5 +1,6 @@
 .container {
     margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .form-group {
@@ -78,4 +79,12 @@
 .small, small {
     font-size: .875em;
     color: #999999;
+}
+
+.row{
+    padding: 0px;
+}
+
+.usage-log-embed{
+    margin-left: -20px;
 }

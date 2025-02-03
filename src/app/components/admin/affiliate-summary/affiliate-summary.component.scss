@@ -16,7 +16,7 @@
 
 .page-header {
     padding-bottom: 9px;
-    margin: 40px 0 20px;
+    margin: 80px 0 20px;
     border-bottom: 1px solid #eeeeee;
 }
 
@@ -26,7 +26,6 @@
   gap: 10px;
   padding: 5px;
 }
-
 
 
 b, strong {
@@ -42,6 +41,11 @@ b, strong {
 
 .accordion-button{
   font-size: 14px;
+}
+
+.accordion-header {
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .accordion-item{
@@ -106,4 +110,8 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .notes-button{
   padding-right: 5rem;
   margin-top: 17px;
+}
+
+.list-group-item {
+  border-bottom: 1px solid #eeeeee;
 }

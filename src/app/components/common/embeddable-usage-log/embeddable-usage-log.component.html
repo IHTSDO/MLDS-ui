@@ -28,7 +28,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" for="currentUsage">{{ 'views.usageLog.currentUsage' | translate | compareText: 'Current Usage' }}:<span class="text-danger">*</span></label>
-                      <textarea class="form-control" rows="3" formControlName="currentUsage" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
+                      <textarea class="form-control" rows="3" formControlName="currentUsage" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('currentUsage')?.invalid && usageForm?.get('currentUsage')?.touched">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
@@ -36,7 +36,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                         <label class="name" for="plannedUsage">{{ 'views.usageLog.plannedUsage' | translate | compareText: 'Planned Usage' }}:<span class="text-danger">*</span></label>
-                      <textarea class="form-control" rows="3" formControlName="plannedUsage" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
+                      <textarea class="form-control" rows="3" formControlName="plannedUsage" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('plannedUsage')?.invalid && usageForm?.get('plannedUsage')?.touched">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
@@ -44,7 +44,7 @@
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" for="purpose">{{ 'views.usageLog.purpose' | translate | compareText: 'Purpose' }}:<span class="text-danger">*</span></label>
-                      <textarea class="form-control" rows="3" formControlName="purpose" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
+                      <textarea class="form-control" rows="3" formControlName="purpose" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
                       <div *ngIf="usageForm?.get('purpose')?.invalid && usageForm?.get('purpose')?.touched">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
@@ -280,7 +280,7 @@
     </div>
 </div>
 </div>
-<div class="panel panel-default">
+<div class="panel panel-default" style="padding-bottom: 30px;">
     <div class="panel-heading">
         <h4 class="panel-title font">{{ 'views.usageLog.otherActivities' | translate | compareText: 'Other Activities' }}</h4>
     </div>
@@ -289,7 +289,7 @@
             <p>{{ 'views.usageLog.notificationRequired' | translate }}</p>
             <p>{{ 'views.usageLog.pleaseDescribe' | translate | compareText: 'Please describe activity below.' }}</p>            
             <div class="form-group">
-                <textarea rows="4" class="form-control" formControlName="otherActivities" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()"></textarea>
+                <textarea rows="4" class="form-control" formControlName="otherActivities" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
             </div>
         </form>
     </div>

@@ -2,8 +2,9 @@
     cursor: pointer;
 }
 
-.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+.btn-link:hover, .btn-link:focus, .btn-link:active {
     border-color: transparent;
+    text-decoration: underline;
 }
 .btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
     background-color: transparent;
@@ -15,6 +16,8 @@
     font-weight: normal;
     cursor: pointer;
     border-radius: 0;
+    text-decoration: none;
+    border-color: transparent;
 }
 .btn {
     display: inline-block;
@@ -33,4 +36,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.usage-log-heading{
+    padding-left: 20px;
 }

@@ -1,11 +1,14 @@
 <div>
-  <span><a style="padding-top: 30px;padding-bottom: 30px;" class="btn btn-link" (click)="goToUsageReport()"><i class="fa fa-angle-double-left"></i>  <span>{{ 'global.word.back' | translate | compareText:'Back'}}</span></a></span>
-  <h1>{{ 'views.usage.title' | translate | compareText:'Usage Log'}}</h1>
-	<p>{{ 'views.usage.instructions' | translate | compareText:'Please complete your usage declaration for the time period selected.'}}</p>
-	<app-embeddable-usage-log 
-    *ngIf="hasCommercialUsageReport()"
-    [commercialUsageReport]="commercialUsageReport"
+  <div class="usage-log-heading">
+    <span><a style="padding-top: 30px;padding-bottom: 30px;" class="btn btn-link" (click)="goToUsageReport()"> <span><i
+            class="fa fa-angle-double-left"></i> {{ 'global.word.back' | translate |
+          compareText:'Back'}}</span></a></span>
+    <h1>{{ 'views.usage.title' | translate | compareText:'Usage Log'}}</h1>
+    <p>{{ 'views.usage.instructions' | translate | compareText:'Please complete your usage declaration for the time
+      period selected.'}}</p>
+  </div>
+  <app-embeddable-usage-log *ngIf="hasCommercialUsageReport()" [commercialUsageReport]="commercialUsageReport"
     [usageLogCanSubmit]="true">
   </app-embeddable-usage-log>
-  
-  </div>
+
+</div>

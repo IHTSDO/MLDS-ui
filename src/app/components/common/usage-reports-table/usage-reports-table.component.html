@@ -1,14 +1,16 @@
 <div class="panel panel-default " id="email-verification">
   <div class="panel-heading">
+    <div class="usage-table-heading">
     <span class="float-end">
       <button class="edit-button" (click)="openAddUsageReportModal(affiliate)"> <span><i class="fa fa-plus" aria-hidden="true"></i> {{ 'views.usageReports.newReport' | translate | compareText:'New Report' }}</span></button>
     </span>
     <h3 class="panel-title">
-      <span>{{ 'global.menu.usageReports' | translate | compareText:'Usage Reports' }}</span>
+      <span>{{ 'global.menu.usageReports' | translate | compareText:'Usage Reports' }}</span>&nbsp;
       <button (click)="viewUsageReports()" *ngIf="showViewAll" class="btn btn-link btn-xs">
-        <span> {{ 'global.word.viewAll' | translate | compareText:'View All' }}</span> <i class="fa fa-angle-double-right"></i>
+        <span> {{ 'global.word.viewAll' | translate | compareText:'View All' }} <i class="fa fa-angle-double-right"></i></span>
       </button>
     </h3>
+  </div>
   </div>
   <div class="table-responsive">
     <table class="table table-hover" aria-label="usage-reports">
