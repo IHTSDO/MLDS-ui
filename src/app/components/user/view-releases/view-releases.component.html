@@ -260,7 +260,7 @@
                       <div *ngFor="let releasePackage of sortByPackageName(memberReleases.packages)">
                           <div class="d-flex justify-content-between">
                               <h3>
-                                  <a class="text-decoration-none" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
+                                  <a class="back" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
                                       {{ releasePackage.name }}
                                   </a>
                               </h3>

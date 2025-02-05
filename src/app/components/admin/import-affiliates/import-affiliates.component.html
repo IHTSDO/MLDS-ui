@@ -7,7 +7,7 @@
   
         <div *ngFor="let alert of alerts; let i = index" class="alert" [ngClass]="'alert-' + alert.type">
           {{ alert.msg }}
-          <button type="button" class="close" (click)="closeAlert(i)">&times;</button>
+          <button type="button" class="btn-close" (click)="closeAlert(i)"></button>
         </div>
   
         <div class="page-header">

@@ -128,3 +128,9 @@ h2, .h2 {
 .size{
     margin-top: 10px;
 }
+
+.alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

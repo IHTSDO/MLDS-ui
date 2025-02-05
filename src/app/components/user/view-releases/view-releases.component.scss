@@ -59,6 +59,7 @@ p {
     margin-bottom: 0;
     font-size: 19px;
     word-wrap: break-word;
+    padding-top: 20px;
 }
 .greenbutton {
     margin-bottom: 10px;
@@ -182,11 +183,11 @@ border-radius: 4px;
     cursor: pointer;
     border-radius: 0;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 19px;
 }
 .back:hover{
     text-decoration: underline;
-    font-size: 16px;
+    font-size: 19px;
 }
 
 .red-button {
@@ -234,4 +235,7 @@ border-radius: 4px;
 .panel-title .panel-title-link {
     color: #40ACD6;
 }
-  
+
+.language-option:hover{
+    text-decoration: underline;
+}

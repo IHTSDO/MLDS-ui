@@ -58,6 +58,11 @@ td,
     word-break: break-all;
 }
 
+.break-text:hover,.break-text a:hover{
+    word-break: break-all;
+    background-color: #f9f9f9;
+}
+
 .list-group {
     margin-bottom: 20px;
     padding-left: 0;
@@ -141,7 +146,7 @@ strong {
 }
 
 .text-danger {
-    color: #f26c4f;
+    color: #f26c4f !important;
 }
 
 .other-release {
@@ -150,4 +155,12 @@ strong {
 
 .country-list {
     font-size: 14px;
+}
+
+.country-list:hover {
+    text-decoration: underline;
+}
+
+.other-country{
+    padding-bottom: 30px;
 }
