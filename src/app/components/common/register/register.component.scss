@@ -1,11 +1,11 @@
 /* Highlight invalid form fields with a red border */
 .form-control.ng-invalid.ng-touched {
-    border-color: #dc3545; /* Bootstrap's red for danger */
+    border-color: #f26c4f; /* Bootstrap's red for danger */
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); /* Light red shadow */
   }
   
   .help-block {
-    color: #dc3545; /* Red text for error messages */
+    color: #f26c4f; /* Red text for error messages */
   }
   
 

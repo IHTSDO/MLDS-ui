@@ -506,6 +506,14 @@ loadMoreAffiliatess(): void {
   
   private buildCsvRow(affiliate: any): any[] {
     const affiliateDetails = this.affiliateActiveDetails(affiliate);
+    const formatDate = (dateString: string | undefined) => {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      const day = String(date.getDate()).padStart(2, '0'); // Ensure two digits
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    };
     return [
       affiliate.affiliateId,
       `${affiliateDetails.firstName} ${affiliateDetails.lastName}`,
@@ -519,28 +527,30 @@ loadMoreAffiliatess(): void {
       affiliateDetails.billingAddress?.street || '',
       affiliateDetails.billingAddress?.city || '',
       affiliateDetails.billingAddress?.post || '',
-      affiliate.application?.submittedAt || '',
-      affiliate.application?.completedAt || '',
+      
+      affiliate.application?.submittedAt ?  formatDate(affiliate.application.submittedAt) : '',
+      affiliate.application?.completedAt ? formatDate(affiliate.application.completedAt): '',
+      
       affiliateDetails.agreementType || ''
     ];
   }
   
   private getCsvHeaders(): string[] {
     return [
-      'Affiliate ID',
+      'No.',
       'Affiliate Name',
       'Organization Name',
       'Organization Type',
-      'Use Type',
-      'Standing State',
-      'Country',
+      'Agreement Type',
+      'Standing',
+      'Home Country',
       'Member',
       'Email',
       'Billing Street',
       'Billing City',
       'Billing Post',
-      'Submitted At',
-      'Completed At',
+      'Application Submission Date',
+      'Application Completion Date',
       'Agreement Type'
     ];
   }
