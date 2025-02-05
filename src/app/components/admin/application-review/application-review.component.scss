@@ -56,14 +56,21 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: black;
-        color: white;
+        color: #333333;
         font-size: 14px;
+        height: 40px;
+        padding: 10px;
+        background-color: #999999;
+        margin-top: 10px;
 }
 
 .btn-close{
     color: white;
     height: 14px;
+}
+
+.close{
+    padding: 10px;
 }
 
 .btn-success {
@@ -76,9 +83,8 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-successs {
     color: #3cb878;
     background-color: #ffffff;
-    border-color: #3cb878;
     border-top-left-radius: 10px;
-    border: 2px solid;
+    border: 2px solid #2d8a5a;
     font-size: 11px;
     margin-top: 14px;
     float: right;
@@ -88,11 +94,12 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-successs:hover, .btn-success:focus {
     color: #ffffff;
     background-color: #3cb878;
+    border: 2px solid #2d8a5a;
 }
 
 .btn-danger {
     color: #f26c4f;
-    background-color: #ffffff;
+    background-color: #fde3dd;
     border-color: #f26c4f;
     border-top-left-radius: 10px;
     border: 2px solid;
@@ -106,6 +113,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-danger:hover, .btn-danger:focus {
     color: #ffffff;
     background-color: #f26c4f;
+    border: 2px solid #ee3c16;
 }
 
 .fa {
@@ -123,7 +131,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   }
   
   .input-group.search-box .input-group-append .input-group-text {
-    background-color: #fff;
+    background-color: #eeeeee;
     border-left: 0;
     cursor: pointer;
     height: 34px;
@@ -173,4 +181,17 @@ h1 {
     margin-inline-end: 0px;
 
     unicode-bidi: isolate;
+}
+
+.search-results{
+    background: white;
+    margin-top: 3px;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-result{
+    background: white;
+    margin-top: 3px;
 }

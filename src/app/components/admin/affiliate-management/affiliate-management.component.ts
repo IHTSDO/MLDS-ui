@@ -131,6 +131,8 @@ export class AffiliateManagementComponent implements OnInit {
    */
   homeMember: string = '';
 
+  private searchTimeout: any; 
+
   constructor(
     private router: Router,
     private affiliateService: AffiliateService,
@@ -184,6 +186,15 @@ export class AffiliateManagementComponent implements OnInit {
   getMemberKey(){
     const userDetails = this.sessionService.getUserDetails();
     return userDetails?.member?.['key'];
+  }
+
+  onSearchChange(): void {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+    this.searchTimeout = setTimeout(() => {
+      this.loadAffiliates();
+    }, 500);
   }
  /**
    * Load more affiliates

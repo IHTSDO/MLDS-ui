@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRegistrationService } from 'src/app/services/user-registration/user-registration.service';
 import { ApplicationSummaryBlockComponent } from "../../common/application-summary-block/application-summary-block.component";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { catchError, finalize, of } from 'rxjs';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ApproveApplicationModalComponent } from '../approve-application-modal/approve-application-modal.component';
@@ -26,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-application-review',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ApplicationSummaryBlockComponent, EnumPipe, CompareTextPipe,TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, ApplicationSummaryBlockComponent, EnumPipe, CompareTextPipe,TranslateModule,FormsModule],
   templateUrl: './application-review.component.html',
   styleUrl: './application-review.component.scss'
 })
@@ -172,6 +172,8 @@ export class ApplicationReviewComponent implements OnInit {
    */
   routes = ROUTES;
 
+  searchInputValue: string = '';  
+
   /**
    * Constructor
    *
@@ -307,6 +309,7 @@ setOriginalAffiliate(affiliate: any) {
  * Close the comparison affiliate
  */
 closeComparisonAffiliate(): void {
+  this.searchInputValue = '';
   this.comparisonAffiliate = null; 
 }
 
@@ -511,6 +514,9 @@ selectAffiliate(affiliate: any): void {
      */
    next: (data: any) => {
       this.comparisonAffiliate = data;
+      if(data.affiliateDetails.organizationName){
+        this.searchInputValue = data.affiliateDetails.organizationName; 
+      }
     },
     /**
      * On error, display an error message and log the error

@@ -45,6 +45,7 @@
             <label><b>Search Existing Affiliates</b></label>
             <div class="input-group search-box">
                 <input type="text"
+                [(ngModel)]="searchInputValue"
                       (input)="onSearch($event)"
                        placeholder="Search affiliate or contact name"
                        class="form-control" />
@@ -57,12 +58,7 @@
 
 
         <div class="search-results" *ngIf="showComparisonAffiliate">
-            <div class="search-close">
-                Selected Search Result
-                <button class="close btn-close" (click)="showComparisonAffiliate = false">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
+
             <div *ngFor="let affiliate of searchResults" class="search-item" (click)="selectAffiliate(affiliate)">
                 <h5>{{affiliate.application.affiliateDetails.organizationName}} - {{affiliate.application.affiliateDetails.firstName}} {{affiliate.application.affiliateDetails.lastName}}</h5>
                 <p>
@@ -77,11 +73,10 @@
         </div>
 
 
-        <div class="search-results" *ngIf="comparisonAffiliate">
+        <div class="search-result" *ngIf="comparisonAffiliate">
           <div class="search-close">
               Selected Search Result
               <button class="close btn-close" (click)="closeComparisonAffiliate()">
-                  <i class="fa fa-times"></i>
               </button>
           </div>
           <div class="muted">

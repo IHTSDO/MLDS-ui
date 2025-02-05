@@ -38,7 +38,7 @@
 
             <div class="panel panel-default" *ngIf="isStaffOrAdmin">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><b>{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</b></h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -48,7 +48,7 @@
 
                                 <!-- for type -->
                                 <div class="form-group">
-                                    <label for="type"><b>{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</b></label>
+                                    <label for="type">{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</label>
                                     <select id="type" class="form-select" formControlName="type"
                                         (change)="onTypeChange()">
                                         <option value="COMMERCIAL">{{ 'affiliate.type.' + 'COMMERCIAL' | translate}}</option>
@@ -132,7 +132,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"> <b>{{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</b></h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</h4>
                 </div>
                 <div class="panel-collapse collapse show">
                     <div class="panel-body">
@@ -467,7 +467,7 @@
 
             <div class="panel panel-default" *ngIf="affiliateType && affiliateType != 'INDIVIDUAL'">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><b>{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</b></h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
