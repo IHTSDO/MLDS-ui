@@ -138,7 +138,7 @@ export class AffiliateManagementComponent implements OnInit {
     private affiliateService: AffiliateService,
     private sessionService: AuthenticationSharedService,
     private standingStateUtilsService: StandingStateUtilsService,
-    private sessionStateService: SessionStateService,private readonly translateService:TranslateService
+    private sessionStateService: SessionStateService,private translateService:TranslateService
   ) {}
 
   /**
