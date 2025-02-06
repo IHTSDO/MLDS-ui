@@ -9,7 +9,7 @@ import { SessionStateService } from 'src/app/services/session-state/session-stat
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { saveAs } from 'file-saver';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 
 /**
@@ -138,7 +138,7 @@ export class AffiliateManagementComponent implements OnInit {
     private affiliateService: AffiliateService,
     private sessionService: AuthenticationSharedService,
     private standingStateUtilsService: StandingStateUtilsService,
-    private sessionStateService: SessionStateService
+    private sessionStateService: SessionStateService,private translateService:TranslateService
   ) {}
 
   /**
@@ -519,8 +519,8 @@ loadMoreAffiliatess(): void {
       `${affiliateDetails.firstName} ${affiliateDetails.lastName}`,
       affiliateDetails.organizationName || '',
       affiliateDetails.organizationType || '',
-      `${affiliateDetails.type || ''} - ${affiliateDetails.subType || ''} ${affiliateDetails.otherText || ''}`,
-      affiliate.standingState || '',
+      `${this.translateService.instant('affiliate.type.' + (affiliateDetails.type || ''))} -  ${this.translateService.instant('affiliate.subType.' + (affiliateDetails.subType || ''))}  ${affiliateDetails.otherText || ''}`,
+      this.translateService.instant('affiliate.standingState.' + (affiliate?.standingState || '')),
       affiliateDetails.address.country.commonName || '',
       affiliate.homeMember.key || '',
       affiliateDetails.email || '',
