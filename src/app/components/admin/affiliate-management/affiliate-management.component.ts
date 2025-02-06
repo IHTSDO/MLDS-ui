@@ -506,8 +506,8 @@ loadMoreAffiliatess(): void {
   
   private buildCsvRow(affiliate: any): any[] {
     const affiliateDetails = this.affiliateActiveDetails(affiliate);
-    const type = affiliateDetails.type ? this.translateService.instant('affiliate.type.' + affiliateDetails.type) : '';
-    const subType = affiliateDetails.subType ? this.translateService.instant('affiliate.subType.' + affiliateDetails.subType) : '';
+    const type = affiliateDetails?.type ? this.translateService.instant('affiliate.type.' + affiliateDetails.type) : '';
+    const subType = affiliateDetails?.subType ? this.translateService.instant('affiliate.subType.' + affiliateDetails.subType) : '';
     const otherText = affiliateDetails.otherText || '';
     const response = type + ' - ' + subType;
     const formatDate = (dateString: string | undefined) => {
