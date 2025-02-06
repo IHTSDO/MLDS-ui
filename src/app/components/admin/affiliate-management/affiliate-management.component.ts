@@ -509,6 +509,7 @@ loadMoreAffiliatess(): void {
     const type = affiliateDetails.type ? this.translateService.instant('affiliate.type.' + affiliateDetails.type) : '';
     const subType = affiliateDetails.subType ? this.translateService.instant('affiliate.subType.' + affiliateDetails.subType) : '';
     const otherText = affiliateDetails.otherText || '';
+    const response = type + ' - ' + subType;
     const formatDate = (dateString: string | undefined) => {
       if (!dateString) return '';
       const date = new Date(dateString);
@@ -522,7 +523,7 @@ loadMoreAffiliatess(): void {
       `${affiliateDetails.firstName} ${affiliateDetails.lastName}`,
       affiliateDetails.organizationName || '',
       affiliateDetails.organizationType || '',
-      [type, subType, otherText].filter(value => value).join(' - '), this.translateService.instant('affiliate.standingState.' + (affiliate?.standingState || '')),
+      [response ,otherText].filter(value => value), this.translateService.instant('affiliate.standingState.' + (affiliate?.standingState || '')),
       affiliateDetails.address.country.commonName || '',
       affiliate.homeMember.key || '',
       affiliateDetails.email || '',
