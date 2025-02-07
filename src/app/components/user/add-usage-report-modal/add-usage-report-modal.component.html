@@ -16,11 +16,11 @@
       </button>
     </div>
 
-    <p>{{ 'views.usage.modal.instructions' | translate | compareText:'Please complete your usage declaration for all time periods. Please include reports for past and current use.' }}</p>
+    <p style="margin: 0 -18px 10px;">{{ 'views.usage.modal.instructions' | translate | compareText:'Please complete your usage declaration for all time periods. Please include reports for past and current use.' }}</p>
 
     <form [formGroup]="addRangeForm" (ngSubmit)="add()">
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" style="margin: 0 -45px 10px">
           <label for="selectedRange" style="font-weight: bold;">{{ 'views.usage.modal.period' | translate | compareText:'Declaration Period' }}</label>
           <select id="selectedRange" formControlName="selectedRange" class="form-select">
             <option *ngFor="let range of ranges" [ngValue]="range">

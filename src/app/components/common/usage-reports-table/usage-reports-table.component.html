@@ -13,7 +13,7 @@
   </div>
   </div>
   <div class="table-responsive">
-    <table class="table table-hover" aria-label="usage-reports">
+    <table class="table" aria-label="usage-reports">
       <thead>
         <tr >
           <th>{{ 'views.usageReports.reportDate' | translate | compareText:'Report Date' }}</th>
@@ -29,7 +29,7 @@
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">
-                <i class="fas fa-minus-square"></i>
+                <i class="fas fa-minus-square" ></i>
               </span>
               <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{usageReport.startDate | date: 'yyyy-MM'}} - {{usageReport.endDate | date: 'yyyy-MM'}}

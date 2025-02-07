@@ -14,7 +14,7 @@
         <h3>{{'views.postAnnouncement.messageContent' | translate | compareText: 'Message Content'}}</h3>
   
         <div class="form-group">
-          <label><b>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}<span class="text-danger">*</span></b></label>
+          <label><b>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}<span class="text-danger"> * </span></b></label>
           <input class="form-control"
             formControlName="subject"
             required 
@@ -23,7 +23,7 @@
         </div>
   
         <div class="form-group">  
-          <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}<span class="text-danger">*</span></b></label><br>
+          <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}<span class="text-danger"> * </span></b></label><br>
           <quill-editor id="body" formControlName="body"  [style]="{'height': '200px','width':'100%'}"></quill-editor><br>
           <div class="message">
           <span class="help-block">{{'views.postAnnouncement.salutationMessage' | translate |compareText: 'Remember to add a salutation and valediction to the email body.'}}</span>
