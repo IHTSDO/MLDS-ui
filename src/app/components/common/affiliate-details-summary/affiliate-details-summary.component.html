@@ -29,10 +29,10 @@
             <strong>Account Standing:</strong>
             {{ affiliate.standingState ? ('affiliate.standingState.' + affiliate.standingState | translate) : ''}}
             <span class="text-warning" *ngIf="standingStateUtils.isWarningCategory(affiliate?.standingState)">
-              <i class="fa fa-exclamation-circle"></i>
+              <i class="fa fa-exclamation-circle" *ngIf="isEditable"></i>
             </span>
             <span class="text-danger" *ngIf="standingStateUtils.isDangerCategory(affiliate?.standingState)">
-              <i class="fa fa-exclamation-circle"></i>
+              <i class="fa fa-exclamation-circle" *ngIf="isEditable"></i>
             </span>
             <span class="float-end" *ngIf="isEditable">
               <button class="edit-button" *ngIf="!standingStateUtils.isApplying(affiliate?.standingState)"
