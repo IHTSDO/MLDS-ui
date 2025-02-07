@@ -61,16 +61,54 @@ export class SystemsLoggersComponent implements OnInit {
       return 0;
     });
   }
- // Method to determine button class based on the log level
- getButtonClass(level: string,levels: string): { [key: string]: boolean } {
-  return {
-    'btn-delete': level === levels,
-    'btn-edit': level !== levels
-  };
-}
+  
+  getButtonClass(currentLevel: string, buttonLevel: string): string {
+    let buttonClass = 'btn btn-xs';
+    if (currentLevel === 'ERROR') {
+
+      if (['TRACE', 'DEBUG', 'INFO'].includes(buttonLevel)) {
+        buttonClass += ' btn-edit'; 
+      } else {
+        buttonClass += ' btn-delete'; 
+      }
+    } else if (currentLevel === 'WARN') {
+
+      if (['TRACE', 'DEBUG', 'INFO'].includes(buttonLevel)) {
+        buttonClass += ' btn-edit';
+      } else {
+        buttonClass += ' btn-delete';
+      }
+    } else if (currentLevel === 'INFO') {
+
+      if (buttonLevel === 'INFO') {
+        buttonClass += ' btn-active'; 
+      }
+      else if (['TRACE', 'DEBUG'].includes(buttonLevel)) {
+        buttonClass += ' btn-edit'; 
+      } 
+      else {
+        buttonClass += ' btn-delete'; 
+      }
+    } else if (currentLevel === 'DEBUG') {
+
+      if (['TRACE', 'INFO'].includes(buttonLevel)) {
+        buttonClass += ' btn-edit';
+      } else {
+        buttonClass += ' btn-delete'; 
+      }
+    } else if (currentLevel === 'TRACE') {
+
+      if (['DEBUG', 'INFO'].includes(buttonLevel)) {
+        buttonClass += ' btn-edit'; 
+      } else {
+        buttonClass += ' btn-delete'; 
+      }
+    }
+
+    return buttonClass;
+  }
 
   isActive(level: string): boolean {
-    // Return true if the button's level matches the currentLevel
     return this.currentLevel === level;
   }
 }

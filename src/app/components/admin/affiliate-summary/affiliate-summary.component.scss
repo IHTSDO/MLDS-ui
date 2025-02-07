@@ -60,7 +60,7 @@ b, strong {
   border-top-left-radius: 10px;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+.btn-primary:hover,.open .dropdown-toggle.btn-primary {
   color: #ffffff;
   background-color: #00a7e1;
   border-color: #007aa4;
@@ -114,4 +114,13 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 
 .list-group-item {
   border-bottom: 1px solid #eeeeee;
+}
+
+.application-history{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.help-block{
+  color: #f26c4f;
 }

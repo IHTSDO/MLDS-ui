@@ -12,7 +12,7 @@
     </h3>
   </div>
   </div>
-  <div class="table-responsive">
+  <div class="table-responsive" [ngStyle]="{'height': isUserDashboardPage ? '250px' : 'auto', 'overflow-y': isUserDashboardPage ? 'auto' : 'visible'}">
     <table class="table" aria-label="usage-reports">
       <thead>
         <tr >
@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody class="language-option">
-        <tr *ngFor="let usageReport of affiliate?.commercialUsages | dateSort: 'startDate': 'desc'">
+        <tr *ngFor="let usageReport of sortedUsages">
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">

@@ -8,7 +8,9 @@
   (onSubmit)="activeModal.close()">
 
   <ng-container modal-body>
-    <app-application-summary-block [application]="application"></app-application-summary-block>
+    <div class="modal-body">
+      <app-application-summary-block [application]="application"></app-application-summary-block>
+    </div>
   </ng-container>
 
 </app-modal>
