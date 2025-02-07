@@ -13,6 +13,7 @@ import { ROUTES } from 'src/app/routes-config'
 import { ErrorCodes } from 'src/app/error-codes'
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { MemberService } from 'src/app/services/member/member.service';
 
 /**
  * Register component
@@ -80,6 +81,7 @@ export class RegisterComponent {
     private commercialUsageService: CommercialUsageService, 
     private router: Router, 
     private modalService: NgbModal,
+    private memberService: MemberService,
     private translate: TranslateService
   ) 
   {  
@@ -92,7 +94,21 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.countryService.getCountries().subscribe(countries => {
       this.availableCountries = countries;
+      const memberKey=this.memberService.getMemberKey();
+    
+    if (memberKey) {
+      
+      const selectedCountry = this.availableCountries.find(c => c.member.key === memberKey);
+      
+      if (selectedCountry) {
+        
+        this.createUserForm.patchValue({ country: selectedCountry });
+        
+        }
+    }
     });
+    
+  
   
     this.createUserForm = this.fb.group({
       country: ['', Validators.required],
