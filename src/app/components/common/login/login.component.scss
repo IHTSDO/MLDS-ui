@@ -14,7 +14,13 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
 }
-
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    opacity: 1;
+}
 .btn-lg, .btn-group-lg > .btn {
     padding: 10px 66px;
     font-size: 18px;
