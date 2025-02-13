@@ -17,12 +17,18 @@
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
 }
+.col-sm-12{
+padding-top: 35px;
+}
 
 .panel-body {
     border: 1px solid #eeeeee;
     padding: 15px;
 }
-
+.row{
+    padding-left: 0;
+    padding-right: 0;
+}
 .dashboard {
     height: 380px;
     margin-bottom: 20px;
@@ -106,6 +112,7 @@ a {
     background-color: #ffffff;
     border-color: #f26c4f;
     color: #f26c4f;
+    padding-bottom: 5px;
 }
 
 b,
@@ -155,10 +162,12 @@ strong {
 
 .country-list {
     font-size: 14px;
+    padding-left: 0;
 }
 
 .country-list:hover {
     text-decoration: underline;
+    color: #2481a6;
 }
 
 .other-country{

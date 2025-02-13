@@ -846,7 +846,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="affiliateApplicationForm?.get('type')?.value" class="usage-log-embed">
+                <div *ngIf="affiliateApplicationForm?.get('type')?.value" >
                     <app-embeddable-usage-log [commercialUsageReport]="commercialUsageReport"
                         [usageLogCanSubmit]="false"></app-embeddable-usage-log>
                 </div>
