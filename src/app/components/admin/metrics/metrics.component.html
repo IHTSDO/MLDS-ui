@@ -6,7 +6,7 @@
   </button>
   </div>
   <h3>{{'metrics.health.title' | translate | compareText : 'Heath Checks'}}</h3>
-  <div id="healthCheck" class="row">
+  <div id="healthCheck" class="row metrics-list">
     <div class="col-md-3">
       <div class="alert alert-success">
         Version info: <span> {{ version }}</span>
@@ -67,7 +67,7 @@
 
 
   <h3>{{'metrics.jvm.title' | translate | compareText :'JVM Metrics'}}</h3>
-  <div class="row">
+  <div class="row metrics-list">
     <div class="col-md-4">
      <b> {{'metrics.jvm.memory.title' | translate | compareText: 'Memory'}}</b>
       <p>{{'metrics.jvm.memory.total' | translate}} ({{ (metrics?.gauges?.['jvm.memory.total.used']?.value / 1000000) | toFixed }}M /

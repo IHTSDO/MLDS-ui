@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <label for="label">Label<span class="text-danger">*</span></label>
-    <quill-editor id="label" formControlName="label" [style]="{'height': '200px','width':'780px'}"></quill-editor>
+    <quill-editor id="label" formControlName="label" [style]="{'height': '200px','width':'780px'}" bounds="self"></quill-editor>
     <div *ngIf="formReleaseFile.get('label')?.invalid && submitAttempted" class="help-block">Required Field</div>
   </div>
 

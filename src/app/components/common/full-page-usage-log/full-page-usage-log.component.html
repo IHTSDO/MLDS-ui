@@ -1,4 +1,4 @@
-<div>
+<div [ngStyle]="isAdminOrStaff ? {'padding-left': '40px', 'padding-right': '40px'} : {'padding': '0'}">
   <div class="usage-log-heading">
     <span><a style="padding-top: 30px;padding-bottom: 30px;" class="btn btn-link" (click)="goToUsageReport()"> <span><i
             class="fa fa-angle-double-left"></i> {{ 'global.word.back' | translate |

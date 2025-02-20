@@ -30,7 +30,7 @@
 
   <div class="form-group">
     <label for="description">Description</label>
-    <quill-editor id="Description" formControlName="description" [style]="{'height': '200px','width':'780px'}"></quill-editor>
+    <quill-editor id="Description" formControlName="description" [style]="{'height': '200px','width':'780px'}" bounds="self"></quill-editor>
   </div>
 
   <div class="form-group" *ngIf="isAdmin">

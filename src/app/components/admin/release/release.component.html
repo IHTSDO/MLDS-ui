@@ -64,7 +64,7 @@
           <td class="col-sm-5" [innerHTML]="releaseVersion?.description | linkAddblank"></td>
           <td class="col-sm-3">
             <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
-              <i class="fa fa-file" style="margin-bottom:10px;"></i>
+              <i class="fa fa-file"></i>
               <div class="file-label">
                 <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
                   style="white-space: nowrap;">
@@ -134,7 +134,7 @@
               </button>
             </p>
             <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
-              <i class="fa fa-file" style="margin-bottom:10px;"></i>
+              <i class="fa fa-file"></i>
               <div class="file-label">
                 <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
                   style="white-space: nowrap;">
@@ -213,7 +213,7 @@
               </button>
             </p>
             <div *ngFor="let releaseFile of releaseVersion?.releaseFiles" class="file-info">
-              <i class="fa fa-file" style="margin-bottom:10px;"></i>
+              <i class="fa fa-file"></i>
               <div class="file-label">
                 <a [href]="releaseFile?.clientDownloadUrl" target="_blank" *ngIf="releaseFile?.clientDownloadUrl"
                   style="white-space: nowrap;">

@@ -20,7 +20,7 @@
                 <span class="version-title"><b><span>{{ 'global.word.file' | translate | compareText : 'File' }}</span>:</b></span>
             </div>
             <div class="col-md-10">
-                <div *ngFor="let releaseFile of releaseVersion.releaseFiles" style="display: flex;">
+                <div *ngFor="let releaseFile of releaseVersion.releaseFiles" style="display: flex;align-items: center;">
                     <i class="fa fa-file"></i>&nbsp;
                     <button class="btn btn-link disabled no-padding" 
                             [attr.disabled]="!releaseFile.clientDownloadUrl ? true : null"
