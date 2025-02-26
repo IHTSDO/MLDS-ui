@@ -79,6 +79,8 @@ export class ContactInfoComponent implements OnInit {
       use: [false]
     });
 
+
+
     this.form.get('type')?.valueChanges.subscribe(type => {
       const alternateEmailControl = this.form.get('alternateEmail');
       const otherTextControl = this.form.get('otherText');
@@ -283,6 +285,17 @@ private patchBasicDetails(): void {
     landlineExtension: details?.landlineExtension || '',
     mobileNumber: details?.mobileNumber || ''
   });
+
+  if (this.readOnly) {
+    this.form.get('firstName')?.disable();
+    this.form.get('lastName')?.disable();
+    this.form.get('alternateEmail')?.disable();
+    this.form.get('thirdEmail')?.disable();
+    this.form.get('landlineNumber')?.disable();
+    this.form.get('mobileNumber')?.disable();
+    this.form.get('landlineExtension')?.disable();
+    this.form.get('use')?.disable();
+  }
 }
 
 private patchAddressDetails(): void {
@@ -296,6 +309,15 @@ private patchAddressDetails(): void {
     addressCity: address?.city || '',
     addressPost: address?.post || ''
   });
+
+  if (this.readOnly) {
+    this.form.get('addressStreetIndividual')?.disable();
+    this.form.get('addressCityIndividual')?.disable();
+    this.form.get('addressPostIndividual')?.disable();
+    this.form.get('addressStreet')?.disable();
+    this.form.get('addressCity')?.disable();
+    this.form.get('addressPost')?.disable();
+  }
 }
 
 private patchBillingAddressDetails(): void {
@@ -308,6 +330,15 @@ private patchBillingAddressDetails(): void {
     billingAddressCountry: billingAddress?.country || '',
     organizationName: this.affiliate?.affiliateDetails?.organizationName || ''
   });
+
+  if (this.readOnly) {
+    this.form.get('billingAddressStreet')?.disable();
+    this.form.get('billingAddressCity')?.disable();
+    this.form.get('addressPostIndividual')?.disable();
+    this.form.get('billingAddressPost')?.disable();
+    this.form.get('billingAddressCountry')?.disable();
+    this.form.get('organizationName')?.disable();
+  }
 }
 
 

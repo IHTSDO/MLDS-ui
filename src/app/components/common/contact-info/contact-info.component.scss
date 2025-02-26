@@ -135,3 +135,30 @@ h1, .h1, h2, .h2, h3, .h3 {
   font-size: 14px;
 }
 
+.phone-input{
+  border: none;
+  padding-left: 0px;
+}
+
+::ng-deep ngx-bs-tel-input .input-group .dropdown-toggle{
+  border: 1px solid #dee2e6;
+}
+
+::ng-deep ngx-bs-tel-input.readonly-mode .input-group .dropdown-toggle {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+.alert-warning {
+  background-color: #ffffff;
+  border-color: #f26c4f;
+  border: 1px solid;
+  color: #f26c4f;
+  margin-bottom: 20px;
+}
+
+.alert-warning p{
+  background-color: #ffffff;
+  color: #f26c4f;
+}
+

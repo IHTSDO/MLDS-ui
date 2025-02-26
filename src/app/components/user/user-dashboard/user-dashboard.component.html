@@ -154,10 +154,10 @@
 					<span class="alert alert-success btn-block" *ngIf="isSuccessCategory(affiliate?.standingState)">
 						<strong>{{'views.contactInfo.admin.accountStanding'|translate|compareText:'Account Standing'}}:</strong>
 						{{'affiliate.standingState.'+affiliate?.standingState|translate}}</span>
-					<span class="alert alert-warning btn-block" *ngIf="isWarningCategory(affiliate?.standingState)">
+					<span class="alert alert-warning btn-block" *ngIf="isWarningCategory(affiliate?.standingState)" style="padding-bottom: 15px;">
 						<strong>{{'views.contactInfo.admin.accountStanding'|translate|compareText:'Account Standing'}}:</strong>
 						{{'affiliate.standingState.'+affiliate.standingState|translate}}</span>
-					<span class="alert alert-danger btn-block" *ngIf="isDangerCategory(affiliate?.standingState)">
+					<span class="alert alert-danger btn-block" *ngIf="isDangerCategory(affiliate?.standingState)" style="padding-bottom: 15px;">
 						<strong>{{'views.contactInfo.admin.accountStanding'|translate|compareText:'Account Standing'}}:</strong>
 						{{'affiliate.standingState.'+affiliate.standingState|translate}}</span>
 				</div>

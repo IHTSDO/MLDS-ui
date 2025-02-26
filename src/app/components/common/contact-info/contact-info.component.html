@@ -243,9 +243,9 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <ngx-bs-tel-input class="form-control" formControlName="landlineNumber"
+                                    <ngx-bs-tel-input class="form-control phone-input" formControlName="landlineNumber"
                                         [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                        [attr.disabled]="readOnly ? true : null"></ngx-bs-tel-input>
+                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"></ngx-bs-tel-input>
                                     <div
                                         *ngIf="form.get('landlineNumber')?.invalid && (form.get('landlineNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('landlineNumber')?.errors?.['required']">
@@ -261,7 +261,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Extension"
-                                        formControlName="landlineExtension" [attr.disabled]="readOnly ? true : null" />
+                                        formControlName="landlineExtension" [attr.disabled]="readOnly ? true : null" style="margin-top: 3px;"/>
                                 </div>
                             </div>
                         </div>
@@ -278,9 +278,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <ngx-bs-tel-input class="form-control" formControlName="mobileNumber"
+                                    <ngx-bs-tel-input class="form-control phone-input" formControlName="mobileNumber"
                                         [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                        [attr.disabled]="readOnly ? true : null"></ngx-bs-tel-input>
+                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"></ngx-bs-tel-input>
                                     <div
                                         *ngIf="form.get('mobileNumber')?.invalid && (form.get('mobileNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('mobileNumber')?.errors?.['required']">
