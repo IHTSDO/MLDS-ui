@@ -142,6 +142,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   font-size: 19px;
   font-family: "Oxygen", sans-serif;
   word-wrap: break-word;
+  font-weight: 400;
 }
 .list-group {
   margin-top: 0;
@@ -206,7 +207,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   cursor: pointer;
   background-image: none;
   white-space: nowrap;
-  padding: 6px 12px;
+  padding: 10px 12px;
   font-size: 14px;
   line-height: 1.42857143;
   -webkit-user-select: none;
