@@ -1,17 +1,27 @@
-.jumbotron {
-    margin-bottom: 40px;
-    color: jumbotron-color;
-    margin-top: 20px;
-    background-image: url("src/assets/home-banner.jpg");
-    height: 542px;
-    border: 1px solid gray-lighter;
-    background-repeat: round;
+p {
+    margin-bottom: 2rem;
+}
+
+h2{
+    margin-bottom: 2rem;
 }
 
 .jumbotron p{
     font-size: 17px;
     font-weight: 400;
 }
+
+.jumbotron{
+    margin-bottom: 50px;
+    color: jumbotron-color;
+    margin-top: 20px;
+    background-image: url("src/assets/home-banner.jpg");
+    height: 542px;
+    border: 1px solid #eee;
+    background-repeat: round;
+    border-radius: 10px;
+}
+
 ::ng-deep a {
     font-weight: 400 !important;
     font-size: 1.6rem;
@@ -66,4 +76,3 @@
     color: #ffffff;
     background-color: #3cb878;
 }
-
