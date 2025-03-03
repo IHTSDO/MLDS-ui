@@ -61,8 +61,10 @@ export class ViewReleasesComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.loadReleasePackages();
+    if(this.sessionService.isAuthenticated()){
     this.loadAffiliateState();
     this.loadUserState();
+    }
   }
 
   private loadUserState(): void {
@@ -182,7 +184,7 @@ export class ViewReleasesComponent implements OnInit {
     }
     
     }
-
+    this.isLoading = false;
     this.scrollToFragment();
   }
 
