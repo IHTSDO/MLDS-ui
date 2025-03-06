@@ -10,6 +10,7 @@ import { EditFeedDataComponent } from '../edit-feed-data/edit-feed-data.componen
 import { ROUTES } from 'src/app/routes-config';
 import { API_ROUTES } from 'src/app/routes-config-api';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
+import { OpenAutoDeactivateConfigComponent } from '../../common/open-auto-deactivate-config/open-auto-deactivate-config.component';
 
 /**
  * Member Management Component
@@ -226,4 +227,25 @@ editFeedData(member: any): void {
     this.fetchMembers();
   });
 }
+openAutoDeactivateConfigModal(member: any): void {
+  if (!member) {
+    console.error('Error: Member data is null or undefined');
+    return;
+  }
+
+  const modalRef = this.modalService.open(OpenAutoDeactivateConfigComponent, {
+    size: 'lg',
+    backdrop: 'static'
+  });
+
+  modalRef.componentInstance.member = member; // Pass member safely
+
+  modalRef.result.then(() => {
+    this.fetchMembers();
+  }).catch(() => {
+    console.log('Modal dismissed');
+  });
+}
+
+
 }

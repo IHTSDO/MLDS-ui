@@ -253,4 +253,24 @@ export class MemberService {
         return member1.key === member2.key;
       }
       
+      getAutoDeactivationDetails(memberKey: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}`);
+      }
+
+      updateAutoDeactivationDetails(
+        memberKey: string,
+        pendingApplications: number,
+        invoicesPending: number,
+        usageReports: number
+      ): Observable<string> {  // Explicitly define response type as string
+        return this.http.put<string>(
+          `${this.apiUrl}/members/${encodeURIComponent(memberKey)}/autoDeactivation`,
+          { pendingApplications, invoicesPending, usageReports },
+          { responseType: 'text' as 'json' } // Important: Ensure Angular treats response as text
+        );
+      }
+      
+    
+    
+    
   }
