@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of, tap } from 'rxjs';
 import { AuthenticationSharedService } from '../authentication/authentication-shared.service';
@@ -224,5 +224,27 @@ affiliateIsCommercial(affiliate: any): boolean {
  */
 isApplicationApproved(affiliate: any): boolean {
   return affiliate && this.applicationUtilsService.isApplicationApproved(affiliate.application);
+}
+
+/**
+   * Fetch user details by login and affiliateDetailsId
+   */
+getUserDetails(login: string, affiliateDetailsId: number): Observable<any> {
+  const params = new HttpParams()
+    .set('login', login)
+    .set('affiliateDetailsId', affiliateDetailsId.toString());
+
+  return this.http.post(`${this.apiUrl}/getUserDetails`, params);
+}
+
+/**
+ * Update primary email for the user
+ */
+updatePrimaryEmail(login: string, updatedEmail: string): Observable<string> {
+  const params = new HttpParams()
+    .set('login', login)
+    .set('updatedEmail', updatedEmail);
+
+  return this.http.post(`${this.apiUrl}/updatePrimaryEmail`, params, { responseType: 'text' });
 }
 }

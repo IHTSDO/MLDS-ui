@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h5 class="modal-title">Edit Primary Email</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="emailForm">
+      <div class="mb-3">
+        <label class="form-label">Current Email</label>
+        <input type="email" class="form-control" [value]="currentEmail" disabled />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">New Email</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="newEmail"
+          placeholder="Enter new email"
+        />
+        <div *ngIf="emailForm.get('newEmail')?.invalid && emailForm.get('newEmail')?.touched" class="text-danger">
+          <small *ngIf="emailForm.get('newEmail')?.errors?.['required']">Email is required</small>
+          <small *ngIf="emailForm.get('newEmail')?.errors?.['email']">Invalid email format</small>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-link" (click)="activeModal.dismiss()">Cancel</button>
+    <button type="button" class="edit-button" [disabled]="emailForm.invalid" (click)="updateEmail()">Update</button>
+  </div>
+  

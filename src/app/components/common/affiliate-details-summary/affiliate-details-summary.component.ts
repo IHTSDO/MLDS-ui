@@ -6,6 +6,7 @@ import { EditAffiliateStandingModalComponent } from '../../admin/edit-affiliate-
 import { Router, RouterLink } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config';
 import { TranslateModule } from '@ngx-translate/core';
+import { EditPeimaryEmailComponent } from '../edit-peimary-email/edit-peimary-email.component';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AffiliateDetailsSummaryComponent implements OnChanges {
   @Input() showEdit: boolean = true;
   @Input() affiliate: any;
   @Input() isEditable: boolean = false;
+  @Input() editPrimaryEmail: boolean = true; 
   affiliateId :any;
   routes = ROUTES;
   constructor(public standingStateUtils: StandingStateUtilsService, private modalService: NgbModal,private router: Router) { }
@@ -56,4 +58,22 @@ export class AffiliateDetailsSummaryComponent implements OnChanges {
   editAffiliate(affiliateId: string): void {
     this.router.navigate(['/affiliateManagement', affiliateId, 'edit']);
   }
+  
+  openEditEmailModal(currentEmail: string, affiliateDetailsId: number, affiliateId: number) {
+  
+    const modalRef = this.modalService.open(EditPeimaryEmailComponent, { centered: true });
+    modalRef.componentInstance.currentEmail = currentEmail;
+    modalRef.componentInstance.affiliateDetailsId = affiliateDetailsId; 
+    modalRef.componentInstance.affiliateId = affiliateId;
+    modalRef.result.then(
+      (newEmail) => {
+        if (newEmail) {
+          this.affiliate.affiliateDetails.email = newEmail; // Update email in the parent component
+          console.log('Updated Email:', newEmail);
+        }
+      },
+      () => {}
+    );
+  }
+  
 }

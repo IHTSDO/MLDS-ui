@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h5 class="modal-title"><b>User Details Found</b></h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <p><b>First Name:</b> {{ userDetails.affiliateDetails.firstName }}</p>
+    <p><b>Last Name:</b> {{ userDetails.affiliateDetails.lastName }}</p>
+    <p><b>Email:</b> {{ userDetails.affiliateDetails.email }}</p>
+    <p><b>Organization:</b> {{ userDetails.affiliate.organizationName }}</p>
+    <p><b>Type:</b> {{ userDetails.affiliateDetails.type }}</p>
+    <p><b>Sub Type:</b> {{ userDetails.affiliateDetails.subType }}</p>
+    <p><b>Application Type:</b> {{ userDetails.applicationType }}</p>
+    <p><b>Standing State:</b> {{ userDetails.standingState }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="edit-button" (click)="updateAnyway()">Update Anyway</button>
+    <button type="button" class="btn btn-link" (click)="cancel()">Cancel</button>
+  </div>
+  
