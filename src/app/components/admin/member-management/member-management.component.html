@@ -37,7 +37,8 @@
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editStaffNotificationsEmail(member)"><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
                             <li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editFeedData(member)"><i class="fa fa-edit"></i> Edit Feed Data</a></li>
-                        </ul>
+							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="openAutoDeactivateConfigModal(member)"><i class="fa fa-edit"></i> Auto Deactivation Config</a></li>
+						</ul>
 					</div>
     			</td>
 			  </ng-container>

@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title">Auto Deactivation Config</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+
+<p class="modal-body">Define Number of Days for Auto Deactivation for the below-mentioned categories</p>
+
+<div class="modal-body">
+  <div class="form-group">
+    <label>Application Not Submitted</label>
+    <input type="number" class="form-control" [(ngModel)]="application" />
+  </div>
+
+  <div class="form-group">
+    <label>Usage Reports</label>
+    <input type="number" class="form-control" [(ngModel)]="usageReports" />
+  </div>
+
+  <div class="form-group" *ngIf="showAutoDeactivateField">
+    <label>Accounts in Pending Invoices</label>
+    <input type="number" class="form-control" [(ngModel)]="accountsWithPendingInvoice" />
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="edit-button" (click)="onSubmit()">OK</button>
+  <button class="btn btn-link" (click)="onCancel()">Cancel</button>
+</div>
