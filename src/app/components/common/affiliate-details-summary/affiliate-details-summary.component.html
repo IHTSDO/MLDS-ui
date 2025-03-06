@@ -55,9 +55,14 @@
             {{affiliate?.affiliateDetails?.firstName}} {{affiliate?.affiliateDetails?.lastName}}
           </li>
           <li class="list-group-item">
-            <strong>Email:</strong>
-            {{affiliate?.affiliateDetails?.email}}
+            <strong>Email:</strong> {{affiliate?.affiliateDetails?.email}}
+            <button class="edit-button" *ngIf="editPrimaryEmail"
+              (click)="openEditEmailModal(affiliate?.affiliateDetails?.email, affiliate?.affiliateDetails?.affiliateDetailsId,affiliate?.affiliateId)">
+              Edit Primary Email
+            </button>
           </li>
+
+          
           <li class="list-group-item" *ngIf="affiliate?.affiliateDetails?.type === 'INDIVIDUAL'">
             <strong>Alternate Email:</strong>
             {{affiliate?.affiliateDetails?.alternateEmail}}
