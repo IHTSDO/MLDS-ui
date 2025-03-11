@@ -18,7 +18,7 @@ h2{
     background-image: url("src/assets/home-banner.jpg");
     height: 542px;
     border: 1px solid #eee;
-    background-repeat: round;
+    background-size: cover;
     border-radius: 10px;
 }
 
@@ -32,7 +32,7 @@ h2{
 .h1 {
     color: jumbotron-heading-color;
   }
-  
+
   p {
     margin-bottom: (jumbotron-padding / 2);
     font-size: jumbotron-font-size;
@@ -64,7 +64,7 @@ h2{
 
 .jumbotron a{
         font-size: 17px;
-        font-weight: 400;   
+        font-weight: 400;
 }
 
 .row{
