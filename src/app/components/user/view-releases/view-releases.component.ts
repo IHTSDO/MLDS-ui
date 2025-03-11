@@ -38,7 +38,7 @@ export class ViewReleasesComponent implements OnInit {
   isPrimaryApplicationWaitingForApplicant: boolean = false;
   isPrimaryApplicationApproved: boolean = false;
   sessionMember = this.sessionService.getUserDetails()?.member;
-  private openAccordions: Set<number> = new Set();
+  private openAccordions: Set<String> = new Set();
   isLoading: boolean = true; // Add this flag
  
 
@@ -244,17 +244,20 @@ export class ViewReleasesComponent implements OnInit {
 
 
   
-  toggleAccordion(index: number): void {
-    if (this.openAccordions.has(index)) {
-      this.openAccordions.delete(index);
+  toggleAccordion(index: number, section: 'online' | 'alphaBeta'): void {
+    const key = `${section}-${index}`;  
+    if (this.openAccordions.has(key)) {
+      this.openAccordions.delete(key);
     } else {
-      this.openAccordions.add(index);
+      this.openAccordions.add(key);
     }
   }
 
-  isAccordionOpen(index: number): boolean {
-    return this.openAccordions.has(index);
+  isAccordionOpen(index: number, section: 'online' | 'alphaBeta'): boolean {
+    const key = `${section}-${index}`;
+    return this.openAccordions.has(key);
   }
+
   // Sort method for packages by packageName
   sortByPackageName(packages: any[]): any[] {
     return packages.sort((a, b) => a.name.localeCompare(b.name));
@@ -266,8 +269,10 @@ export class ViewReleasesComponent implements OnInit {
 
   sortByMemberKey(releasePackagesByMember: any[]): any[] {
     if (releasePackagesByMember.length > 1) {
-      const sortedArray = releasePackagesByMember.slice(1).sort((a, b) => a.member.key.localeCompare(b.member.key));
-      return [releasePackagesByMember[0], ...sortedArray];
+      const sortedArray = releasePackagesByMember
+      .sort((a, b) => a.member.key.localeCompare(b.member.key))
+      .filter(item => item.member.key !== 'IHTSDO');
+      return sortedArray;
     }
     return releasePackagesByMember;
   }

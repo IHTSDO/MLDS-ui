@@ -117,7 +117,7 @@ export class UserDashboardComponent implements OnInit {
           .groupBy(this.getEffectivePackageMemberKey.bind(this))
           .map((packages, memberKey) => ({
             member: this.memberService.membersByKey[memberKey] || {}, // Ensure a default object
-            packages: lodash.orderBy(packages, ['name'], ['asc']) // Sort packages by name
+            packages: this.packageUtilsService.releasePackageSort(packages)
           }))
           .value();
   
