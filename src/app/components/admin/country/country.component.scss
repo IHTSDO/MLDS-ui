@@ -1,5 +1,7 @@
-body {
-    padding-top: 70px; /* Adjust according to your navbar height */
+
+h2 {
+font-size: 3.4rem;
+font-weight: 400;
 }
 
 .navbar-fixed-top {
@@ -12,10 +14,18 @@ body {
     padding: 0 15px;
 }
 
-.page-header {
-    margin-top: 20px;
-}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #fffffe;
+  }
 
+
+
+.page-header {
+    padding-bottom: 9px;
+    
+    margin-top: -40px;
+    border-bottom: 1px solid #eeeeee;
+}
 .space {
     margin-top: 10px;
 }

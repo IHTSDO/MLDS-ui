@@ -1,26 +1,25 @@
 <div class="row page-header">
-  <h2><b>List of Release File Download Counts Per Versions</b></h2>
+  <h2>List of Release File Download Counts Per Versions</h2>
 
-  <div class="row margin">
+  <div class="margin">
     <div class="col-md-5">
       <h4>{{'audits.filter.title' | translate |compareText: 'Filter per date'}}</h4>
     </div>
   </div>
 
-  <div class="row margin">
 
 
-    <div class="col-md-4">
-      <div class="input-group">
-        <span class="input-group-addon">{{'audits.filter.from' | translate | compareText: 'from'}}</span>
-        <input type="date" class="input-sm form-control" name="fromDate" [(ngModel)]="fromDate"
-          (change)="loadReleaseFileDownloadCounts()" required />
-        <span class="input-group-addon">{{'audits.filter.to' | translate | compareText: 'to'}}</span>
-        <input type="date" class="input-sm form-control" name="toDate" [(ngModel)]="toDate"
-          (change)="loadReleaseFileDownloadCounts()" required />
-      </div>
+  <div class="col-md-4">
+    <div class="input-group ">
+      <span class="input-group-addon">{{'audits.filter.from' | translate | compareText: 'from'}}</span>
+      <input type="date" class="input-sm form-control" name="fromDate" [(ngModel)]="fromDate"
+        (change)="loadReleaseFileDownloadCounts()" required />
+      <span class="input-group-addon">{{'audits.filter.to' | translate | compareText: 'to'}}</span>
+      <input type="date" class="input-sm form-control" name="toDate" [(ngModel)]="toDate"
+        (change)="loadReleaseFileDownloadCounts()" required />
     </div>
-    
+  </div>
+
 
     <div class="col-md-4">
       <div class="input-group">

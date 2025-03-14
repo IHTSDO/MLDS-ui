@@ -28,7 +28,7 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="input-group search-box">
-      <input class="form-control" type="search" (ngModelChange)="loadAffiliates()" [(ngModel)]="query" placeholder="Search Affiliates">
+      <input class="form-control" type="search" (ngModelChange)="onSearchChange()" [(ngModel)]="query" placeholder="Search Affiliates">
       <span class="input-group-append">
         <span class="input-group-text"><i class="fa fa-search"></i></span>
       </span>
@@ -37,9 +37,9 @@
     <hr>
   </div>
   <div class="col-sm-2">
-    <button class="review-button" (click)="clearSearch()">Clear</button>
+    <button class="review-button clear-search" (click)="clearSearch()">Clear</button>
   </div>
-  <div class="col-sm-2">Number of results: <b>{{totalResults}}</b></div>
+  <div class="col-sm-2" style="padding-top: 0.8rem;">Number of results: <b>{{totalResults}}</b></div>
 </div>
 
 <div class="row">
@@ -222,11 +222,11 @@
         <tr *ngIf="allRetrieved && noResults">
           <td colspan="10" class="text-center">No results.</td>
         </tr>
-        <tr *ngIf="allRetrieved && !noResults">
-          <td colspan="10" class="all-retrieved">All affiliates retrieved</td>
-        </tr>
       </tbody>
     </table>
+    <div *ngIf="allRetrieved && !noResults">
+      <p class="all-retrieved">All affiliates retrieved</p>
+    </div>
     <div *ngIf="!allRetrieved" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
   </div>
 </div>

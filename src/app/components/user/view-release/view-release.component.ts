@@ -17,11 +17,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
+import { RemoveHtmlPipe } from 'src/app/pipes/remove-html/remove-html.pipe';
 
 @Component({
   selector: 'app-view-release',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
+  imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe, RemoveHtmlPipe],
   templateUrl: './view-release.component.html',
   styleUrl: './view-release.component.scss'
 })

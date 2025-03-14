@@ -6,7 +6,7 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 /**
@@ -63,7 +63,8 @@ export class ShowMemberBrandingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
-    private authenticationService: AuthenticationSharedService
+    private authenticationService: AuthenticationSharedService,
+    private translateService: TranslateService
   ) {}
 
   /**
@@ -88,7 +89,12 @@ export class ShowMemberBrandingComponent implements OnInit {
       switchMap(members => {
         this.member = members.find(member => member.key === this.memberKey) || null;
         if (this.member) {
-          this.memberName = this.member.name || '';
+          const translationKey = `global.member.${this.member.key}`;
+          this.translateService.get(translationKey).subscribe(
+            (translatedName: string) => {
+              this.memberName = this.member.name || translatedName || '';
+            }
+          );         
           this.memberLogo$ = this.memberService.getMemberLogo(this.memberKey).pipe(
             catchError(error => {
               console.error('Error fetching member logo', error);

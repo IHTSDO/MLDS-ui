@@ -8,9 +8,14 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 }
 
 .page-header {
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
+    padding-bottom: 0px;
+    margin: 40px 0 0px;
     border-bottom: 1px solid #eeeeee;
+    padding-top: 40px;
+}
+
+hr{
+  opacity: 0.1;
 }
 
 .well-inactive {
@@ -47,7 +52,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 
 .muted {
         border: 1px solid #999999;
-        padding: 10px 0;
+        padding: 10px 8px;
         background-color: #ffffff;
 }
 
@@ -55,14 +60,21 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: black;
-        color: white;
+        color: #333333;
         font-size: 14px;
+        height: 40px;
+        padding: 10px;
+        background-color: #999999;
+        margin-top: 10px;
 }
 
 .btn-close{
     color: white;
     height: 14px;
+}
+
+.close{
+    padding: 10px;
 }
 
 .btn-success {
@@ -75,23 +87,23 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-successs {
     color: #3cb878;
     background-color: #ffffff;
-    border-color: #3cb878;
     border-top-left-radius: 10px;
-    border: 2px solid;
-    font-size: 11px;
-    margin-top: 14px;
+    border: 2px solid #3cb878;
+    font-size: 12px;
     float: right;
-    margin-bottom: 10px;
+    margin-top: 2rem;
+    font-weight: 500;
 }
 
 .btn-successs:hover, .btn-success:focus {
     color: #ffffff;
     background-color: #3cb878;
+    border: 2px solid #2d8a5a;
 }
 
 .btn-danger {
     color: #f26c4f;
-    background-color: #ffffff;
+    background-color: #fde3dd;
     border-color: #f26c4f;
     border-top-left-radius: 10px;
     border: 2px solid;
@@ -105,6 +117,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .btn-danger:hover, .btn-danger:focus {
     color: #ffffff;
     background-color: #f26c4f;
+    border: 2px solid #ee3c16;
 }
 
 .fa {
@@ -122,7 +135,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   }
   
   .input-group.search-box .input-group-append .input-group-text {
-    background-color: #fff;
+    background-color: #eeeeee;
     border-left: 0;
     cursor: pointer;
     height: 34px;
@@ -135,7 +148,55 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   .notes-button{
     padding-right: 5rem;
     margin-top: 17px;
+    padding-top: 1.5rem;
   }
   .approve{
         margin-top: 26px;
   }
+  h1, .h1 {
+    font-size: 36px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Oxygen", sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #000000;
+}
+h1 {
+    font-size: 36px;
+    margin: 0.67em 0;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1 {
+    display: block;
+    font-size: 36px;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+    unicode-bidi: isolate;
+}
+
+.search-results{
+    background: white;
+    margin-top: 3px;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-result{
+    background: white;
+    margin-top: 3px;
+}

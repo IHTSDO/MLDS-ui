@@ -1,9 +1,9 @@
 <div class="row rows">
   <div class="col-md-12">
     <div class="page-header">
-      <h2><b>Blocklist Domains</b></h2>
+      <h2>Blocklist Domains</h2>
     </div>
-    <form class="form-inline rows" (ngSubmit)="newDomainSubmit()">
+    <form class="form-inline" (ngSubmit)="newDomainSubmit()">
       <div class="form-group">
         <label><b>Add to Blocklist</b></label>&nbsp;&nbsp;
         <input type="text" class="form-control" [(ngModel)]="domainForm.name" name="domainName" required>&nbsp;
@@ -12,7 +12,7 @@
     </form>
 
     <div class="table-responsive space">
-      <table class="table table-striped">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Domain</th>

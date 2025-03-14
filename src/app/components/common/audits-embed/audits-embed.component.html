@@ -13,7 +13,7 @@
           <tbody>
             <tr *ngFor="let audit of sortedAudits">
               <td><span>{{ audit.timestamp | date: 'yyyy-MM-dd HH:mm:ss' }}</span></td>
-              <td><small>{{ audit.principal }}</small></td>
+              <td><span>{{ audit.principal }}</span></td>
               <td>
                 {{ 'audits.type.' + audit.type | translate }}
                 <span *ngIf="audit.type === 'AFFILIATE_DELETED'" class="text-danger">

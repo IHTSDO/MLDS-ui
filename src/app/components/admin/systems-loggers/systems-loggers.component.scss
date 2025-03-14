@@ -15,7 +15,7 @@
   border-bottom: 1px solid #eeeeee;
   }
   .rows{
-    margin-top: 40px;
+    margin-top: 70px;
   }
   .d-flex {
   display: flex;
@@ -48,6 +48,16 @@
  
 }
 
+.btn-active {
+  padding: 4px 8px !important;  /* Reduce padding for a smaller button size */
+  font-size: 12px !important;   /* Decrease font size */
+  border: 2px solid #8dccdc !important;    /* Blue border */
+  color: #8dccdc !important;               /* Blue font color */
+  background-color: white !important;      /* White background */
+  border-top-left-radius: 10px !important; /* Top left border radius */
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
 .btn-edit:hover {
   background-color: #40ACD6 !important;    /* Blue background on hover */
   color: white !important;                 /* White font color on hover */
@@ -68,7 +78,8 @@
   color: white !important;             /* White font color on hover */
 }
 .btn-edit,
-.btn-delete {
+.btn-delete,
+.btn-active {
     margin-right: 8px; /* Adjust this value to increase/decrease spacing */
 }
 

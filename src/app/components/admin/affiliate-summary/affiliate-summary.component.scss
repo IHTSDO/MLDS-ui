@@ -16,7 +16,7 @@
 
 .page-header {
     padding-bottom: 9px;
-    margin: 40px 0 20px;
+    margin: 80px 0 20px;
     border-bottom: 1px solid #eeeeee;
 }
 
@@ -27,13 +27,6 @@
   padding: 5px;
 }
 
-h1, .h1 {
-  font-size: 36px;
-}
-h1, .h1, h2, .h2, h3, .h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
 
 b, strong {
   font-weight: bold;
@@ -50,6 +43,11 @@ b, strong {
   font-size: 14px;
 }
 
+.accordion-header {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 .accordion-item{
   margin-top: 20px;
 }
@@ -62,7 +60,7 @@ b, strong {
   border-top-left-radius: 10px;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+.btn-primary:hover,.open .dropdown-toggle.btn-primary {
   color: #ffffff;
   background-color: #00a7e1;
   border-color: #007aa4;
@@ -112,4 +110,17 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .notes-button{
   padding-right: 5rem;
   margin-top: 17px;
+}
+
+.list-group-item {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.application-history{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.help-block{
+  color: #f26c4f;
 }

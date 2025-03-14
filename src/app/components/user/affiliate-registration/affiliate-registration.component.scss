@@ -1,5 +1,6 @@
 .container {
     margin-top: 20px;
+    margin-bottom: 10rem;
 }
 
 .form-group {
@@ -73,4 +74,27 @@
     margin-top: 5px;
     margin-bottom: 10px;
     color: #f26c4f;
+}
+
+.small, small {
+    font-size: .875em;
+    color: #999999;
+}
+
+.row{
+    padding: 0px;
+}
+
+.usage-log-embed{
+    margin-left: -20px;
+}
+
+.phone-input{
+    border: none;
+    padding-left: 0px;
+    padding-bottom: 0px;
+}
+
+::ng-deep ngx-bs-tel-input .input-group .dropdown-toggle{
+    border: 1px solid #dee2e6;
 }

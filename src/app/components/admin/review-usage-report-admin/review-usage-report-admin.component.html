@@ -2,7 +2,8 @@
 	<div class="col-md-12">
 		<div class="page-header">
       <span class="back language-option"><a (click)="goBackToPrevious()"><i class="fa fa-angle-double-left"></i>  Back to Review Usage Reports</a></span>
-      <h2><b>Review Usage Report</b></h2>
+      <h2>Review Usage Report</h2>
+      <br>
     </div>
     <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">
       {{ alert.msg }}
@@ -51,7 +52,7 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title"><b>Sublicensed Institutions</b></h4>
+        <h4 class="panel-title">Sublicensed Institutions</h4>
       </div>
 
       <div class="panel-body">
@@ -140,7 +141,7 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4 class="panel-title"><b>Other Activities</b></h4>
+        <h4 class="panel-title">Other Activities</h4>
       </div>
       <div class="panel-body">
         <p>{{ usageReport?.context?.otherActivities || 'N/A' }}</p>
@@ -148,7 +149,7 @@
     </div>
   </div>
 
-  <div class="col-md-4" style="width: 25.333333%;">
+  <div class="col-md-4">
     <div>
       <button *ngIf="usageReportsUtils.isSubmitted(usageReport)" class="btn btn-success btn-block" (click)="updateUsageReport('PENDING_INVOICE')">
         Mark as Pending Invoice

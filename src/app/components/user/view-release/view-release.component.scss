@@ -4,9 +4,13 @@
     border-bottom: 1px solid #eeeeee;
 }
 
+h2{
+    margin-top: 0px !important;
+}
+
 .row {
-    margin-left: -15px;
-    margin-right: -15px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .panel-title {
@@ -15,6 +19,7 @@
     font-size: 19px;
     font-family: "Oxygen", sans-serif;
     word-wrap: break-word;
+    padding-top: 20px;
 }
 
 .panel-body {
@@ -162,5 +167,9 @@
     background-color:  #f26c4f;
     color: #ffffff;
   }  
+
+  .no-padding{
+    padding: 5px;
+  }
   
 

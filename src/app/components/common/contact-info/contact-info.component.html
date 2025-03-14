@@ -3,10 +3,10 @@
 </div>
 
 <div *ngIf="!isLoading || isStaffOrAdmin">
-<div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12">
+<div class="contact-title">
+    <div class="col-sm-12 col-md-12 col-lg-12"  style="padding-left: 0px;">
         <div class="page-header">
-            <h1><b>{{ 'views.contactInfo.title' | translate | compareText: 'Account Information' }}</b></h1>
+            <h1>{{ 'views.contactInfo.title' | translate | compareText: 'Account Information' }}</h1>
         </div>
     </div>
 </div>
@@ -38,7 +38,7 @@
 
             <div class="panel panel-default" *ngIf="isStaffOrAdmin">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><b>{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</b></h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.admin.title' | translate | compareText: 'Admin Editable' }}</h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -48,7 +48,7 @@
 
                                 <!-- for type -->
                                 <div class="form-group">
-                                    <label for="type"><b>{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</b></label>
+                                    <label for="type">{{ 'views.contactInfo.admin.usageType.name' | translate | compareText: 'Type' }}:</label>
                                     <select id="type" class="form-select" formControlName="type"
                                         (change)="onTypeChange()">
                                         <option value="COMMERCIAL">{{ 'affiliate.type.' + 'COMMERCIAL' | translate}}</option>
@@ -116,14 +116,14 @@
 
             <!-- for accept notifications and country notifications -->
             <div class="form-group">
-                <input type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">&nbsp;
+                <input  style="vertical-align: middle;" type="checkbox" formControlName="acceptNotifications" [disabled]="readOnly">&nbsp;
                 <label for="acceptNotifications">
                     <b>{{ 'views.contactInfo.acceptNotifications' | translate | compareText: 'Yes notify me when a SNOMED package is updated.' }}</b>
                 </label>
                 <span *ngIf="acceptNotifications?.value">
-                    &nbsp;(<b>
-                    <input type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">&nbsp;
-                    <label for="countryNotificationsOnly">
+                    &nbsp;( <b>
+                    <input  style="vertical-align: middle;" type="checkbox" formControlName="countryNotificationsOnly" [disabled]="readOnly">&nbsp;
+                    <label  style="vertical-align: middle;" for="countryNotificationsOnly">
                         {{ 'views.contactInfo.countryNotificationsOnly' | translate | compareText: 'Only for my country extensions' }}
                     </label></b>
                     )
@@ -132,7 +132,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title"> <b>{{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</b></h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.contact.title' | translate | compareText: 'Contact Information' }}</h4>
                 </div>
                 <div class="panel-collapse collapse show">
                     <div class="panel-body">
@@ -168,7 +168,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" *ngIf="!isStaffOrAdmin">
-                                    <label for="email"><b>{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:</b></label>
+                                    <label for="email"><b>{{ 'views.contactInfo.contact.email.name' | translate | compareText: 'Email' }}:&nbsp; </b></label>
                                     <span>{{ affiliate?.affiliateDetails?.email }}</span>
                                 </div>
 
@@ -243,9 +243,9 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <ngx-bs-tel-input class="form-control" formControlName="landlineNumber"
+                                    <ngx-bs-tel-input class="form-control phone-input" formControlName="landlineNumber"
                                         [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                        [attr.disabled]="readOnly ? true : null"></ngx-bs-tel-input>
+                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"></ngx-bs-tel-input>
                                     <div
                                         *ngIf="form.get('landlineNumber')?.invalid && (form.get('landlineNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('landlineNumber')?.errors?.['required']">
@@ -261,7 +261,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Extension"
-                                        formControlName="landlineExtension" [attr.disabled]="readOnly ? true : null" />
+                                        formControlName="landlineExtension" [attr.disabled]="readOnly ? true : null" style="margin-top: 3px;"/>
                                 </div>
                             </div>
                         </div>
@@ -278,9 +278,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <ngx-bs-tel-input class="form-control" formControlName="mobileNumber"
+                                    <ngx-bs-tel-input class="form-control phone-input" formControlName="mobileNumber"
                                         [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                        [attr.disabled]="readOnly ? true : null"></ngx-bs-tel-input>
+                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"></ngx-bs-tel-input>
                                     <div
                                         *ngIf="form.get('mobileNumber')?.invalid && (form.get('mobileNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('mobileNumber')?.errors?.['required']">
@@ -467,7 +467,7 @@
 
             <div class="panel panel-default" *ngIf="affiliateType && affiliateType != 'INDIVIDUAL'">
                 <div class="panel-heading">
-                    <h4 class="panel-title"><b>{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</b></h4>
+                    <h4 class="panel-title">{{ 'views.contactInfo.organization.title' | translate | compareText: 'Organization' }}</h4>
                 </div>
 
                 <div class="panel-collapse collapse show">
@@ -476,7 +476,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group" *ngIf="!isStaffOrAdmin">
-                                    <label for="organizationName"><b>{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:</b></label>
+                                    <label for="organizationName"><b>{{ 'views.contactInfo.organization.name.name' | translate | compareText: 'Organization Name' }}:&nbsp;</b></label>
                                     <span>{{affiliate?.affiliateDetails?.organizationName}}</span>
                                 </div>
 
@@ -682,10 +682,11 @@
         </span>
     </div>
 
-
-    <button class="btn btn-link" (click)="cancel()"> {{ 'global.word.cancel' | translate | compareText: 'Cancel' }}</button>
+    <div style="margin-left: 22px;">
+    <button class="btn btn-link" style="margin-left: 8px;" (click)="cancel()"> {{ 'global.word.cancel' | translate | compareText: 'Cancel' }}</button>
     <button type="submit" class="edit-button" *ngIf="!readOnly"><span>{{ 'global.word.save' | translate | compareText: 'Save' }}</span>
     </button>
+    </div>
 
 
 

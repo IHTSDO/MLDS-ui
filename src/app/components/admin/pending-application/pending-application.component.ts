@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { PendingApplicationsService } from 'src/app/services/pending-applications/pending-application.service';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config'
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
@@ -91,7 +91,7 @@ export class PendingApplicationsComponent implements OnInit {
    * 
    * @param userRegistrationService Pending Applications Service
    */
-  constructor(private userRegistrationService: PendingApplicationsService, private authenticationService: AuthenticationSharedService, private router: Router) { }
+  constructor(private userRegistrationService: PendingApplicationsService, private authenticationService: AuthenticationSharedService, private router: Router,private translateService:TranslateService) { }
 
   /**
    * Initializes the component
@@ -163,19 +163,50 @@ export class PendingApplicationsComponent implements OnInit {
           const expressions = [
             (application: any) => application.applicationId,
             (application: any) => application.affiliateDetails.firstName + ' ' + application.affiliateDetails.lastName,
-            (application: any) => this.enumTransform('application.applicationType.', application.applicationType),
-            (application: any, isPrimary: boolean) =>
-              isPrimary
-                ? this.enumTransform('affiliate.agreementType.', application.affiliateDetails.agreementType)
-                : this.enumTransform('affiliate.agreementType.', application.affiliate.affiliateDetails.agreementType),
-            (application: any, isPrimary: boolean) =>
-              isPrimary
-                ? `${this.enumTransform('affiliate.type.', application.type)} - ${this.enumTransform('affiliate.subType.', application.subType)}`
-                : this.enumTransform('affiliate.type.', application.affiliate.type),
+            (application: any) => this.translateService.instant('application.applicationType.' + (application.applicationType??'')),
+
+
+
+            
+            (application: any, isPrimary: boolean) => {
+              let agreementTypeKey = '';
+            
+              if (isPrimary) {
+                agreementTypeKey = application.affiliateDetails?.agreementType 
+                  ? 'affiliate.agreementType.' + application.affiliateDetails.agreementType 
+                  : '';
+              } else {
+                agreementTypeKey = application.affiliate?.affiliateDetails?.agreementType 
+                  ? 'affiliate.agreementType.' + application.affiliate.affiliateDetails.agreementType 
+                  : '';
+              }
+            
+              return agreementTypeKey ? this.translateService.instant(agreementTypeKey) : '';
+            },
+            
+            
+            (application: any, isPrimary: boolean) => {
+              let typeKey = '';
+              let subTypeKey = '';
+            
+              if (isPrimary) {
+                typeKey = application.type ? 'affiliate.type.' + application.type : '';
+                subTypeKey = application.subType ? 'affiliate.subType.' + application.subType : '';
+              } else {
+                typeKey = application.affiliate?.type ? 'affiliate.type.' + application.affiliate.type : '';
+              }
+            
+              // Translate only if a valid key exists
+              const translatedType = typeKey ? this.translateService.instant(typeKey) : '';
+              const translatedSubType = subTypeKey ? this.translateService.instant(subTypeKey) : '';
+            
+              return isPrimary ? `${translatedType} - ${translatedSubType}` : translatedType;
+            },
+            
             (application: any) => new Date(application.submittedAt).toISOString().split('T')[0],
-            (application: any) => this.enumTransform('approval.state.', application.approvalState),
+            (application: any) => this.translateService.instant('approval.state.'+ (application.approvalState ?? '')),
             (application: any) => application.affiliateDetails.address.country.commonName,
-            (application: any) => this.enumTransform('global.member.', application.member.key),
+            (application: any) => this.translateService.instant('global.member.'+ (application.member.key?? '')),
             (application: any) => application.affiliateDetails.email,
           ];
 

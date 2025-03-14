@@ -9,7 +9,7 @@ import { SessionStateService } from 'src/app/services/session-state/session-stat
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { saveAs } from 'file-saver';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 
 /**
@@ -131,12 +131,14 @@ export class AffiliateManagementComponent implements OnInit {
    */
   homeMember: string = '';
 
+  private searchTimeout: any; 
+
   constructor(
     private router: Router,
     private affiliateService: AffiliateService,
     private sessionService: AuthenticationSharedService,
     private standingStateUtilsService: StandingStateUtilsService,
-    private sessionStateService: SessionStateService
+    private sessionStateService: SessionStateService,private translateService:TranslateService
   ) {}
 
   /**
@@ -184,6 +186,15 @@ export class AffiliateManagementComponent implements OnInit {
   getMemberKey(){
     const userDetails = this.sessionService.getUserDetails();
     return userDetails?.member?.['key'];
+  }
+
+  onSearchChange(): void {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+    this.searchTimeout = setTimeout(() => {
+      this.loadAffiliates();
+    }, 500);
   }
  /**
    * Load more affiliates
@@ -495,41 +506,54 @@ loadMoreAffiliatess(): void {
   
   private buildCsvRow(affiliate: any): any[] {
     const affiliateDetails = this.affiliateActiveDetails(affiliate);
+    const type = affiliateDetails.type ? this.translateService.instant('affiliate.type.' + affiliateDetails.type) : '';
+    const subType = affiliateDetails.subType ? this.translateService.instant('affiliate.subType.' + affiliateDetails.subType) : '';
+    const otherText = affiliateDetails.otherText || '';
+    const response = type + ' - ' + subType;
+    const formatDate = (dateString: string | undefined) => {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      const day = String(date.getDate()).padStart(2, '0'); // Ensure two digits
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    };
     return [
       affiliate.affiliateId,
       `${affiliateDetails.firstName} ${affiliateDetails.lastName}`,
       affiliateDetails.organizationName || '',
       affiliateDetails.organizationType || '',
-      `${affiliateDetails.type || ''} - ${affiliateDetails.subType || ''} ${affiliateDetails.otherText || ''}`,
-      affiliate.standingState || '',
+      [response ,otherText].filter(value => value), this.translateService.instant('affiliate.standingState.' + (affiliate?.standingState || '')),
       affiliateDetails.address.country.commonName || '',
       affiliate.homeMember.key || '',
       affiliateDetails.email || '',
       affiliateDetails.billingAddress?.street || '',
       affiliateDetails.billingAddress?.city || '',
       affiliateDetails.billingAddress?.post || '',
-      affiliate.application?.submittedAt || '',
-      affiliate.application?.completedAt || '',
+      
+      affiliate.application?.submittedAt ?  formatDate(affiliate.application.submittedAt) : '',
+      affiliate.application?.completedAt ? formatDate(affiliate.application.completedAt): '',
+      
       affiliateDetails.agreementType || ''
     ];
   }
   
   private getCsvHeaders(): string[] {
     return [
-      'Affiliate ID',
+      'No.',
       'Affiliate Name',
       'Organization Name',
       'Organization Type',
-      'Use Type',
-      'Standing State',
-      'Country',
+      'Agreement Type',
+      'Standing',
+      'Home Country',
       'Member',
       'Email',
       'Billing Street',
       'Billing City',
       'Billing Post',
-      'Submitted At',
-      'Completed At',
+      'Application Submission Date',
+      'Application Completion Date',
       'Agreement Type'
     ];
   }

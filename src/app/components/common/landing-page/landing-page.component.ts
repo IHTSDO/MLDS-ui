@@ -3,9 +3,10 @@ import { LandingHeaderComponent } from "../landing-header/landing-header.compone
 import { LandingContentComponent } from "../landing-content/landing-content.component";
 import { LandingFooterComponent } from "../landing-footer/landing-footer.component";
 import { LoginComponent } from "../login/login.component";
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
+import { CommonModule } from '@angular/common';
 /**
  * Landing page component that displays the landing page with header, content, and footer.
  * It also handles member key parameter from the route and sets the member logo accordingly.
@@ -13,7 +14,7 @@ import { ROUTES } from 'src/app/routes-config';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [LandingHeaderComponent, LandingContentComponent, LandingFooterComponent, LoginComponent, RouterOutlet],
+  imports: [LandingHeaderComponent, LandingContentComponent, LandingFooterComponent, LoginComponent, RouterOutlet, CommonModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
@@ -25,7 +26,7 @@ export class LandingPageComponent {
    * @param memberService - The member service instance.
    * @param route - The activated route instance.
    */
-  constructor(private memberService: MemberService, private route: ActivatedRoute) {}
+  constructor(private memberService: MemberService, private route: ActivatedRoute, private router: Router) {}
 
   /**
    * Initializes the component by subscribing to the route parameters and setting the member key if present.
@@ -37,6 +38,7 @@ export class LandingPageComponent {
         this.setMemberKey(memberKey);
       }
     });
+    this.getLandingPageStyle();
   }
 
   /**
@@ -56,4 +58,9 @@ export class LandingPageComponent {
       }
     });
   }
+
+  getLandingPageStyle() {
+    return (this.router.url.startsWith('/landing') || this.router.url.startsWith('/viewReleases'))  ? { 'margin-bottom': '10rem' } : {'margin-bottom':'5rem'};
+  }
 }
+

@@ -15,7 +15,7 @@
   
   <div class="row branding-showcase space">
 	<div class="col-xs-12">
-	  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <nav class="navbar navbar-expand-lg navbar-light">
 		<div class="container">
 		  <div class="navbar-header">
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,10 +25,12 @@
 			<!-- Handle logo display -->
 			<ng-container *ngIf="!isLoading">
 			  <ng-container *ngIf="memberLogo$ | async as memberLogo">
+				<div class="brand-image">
 				<img *ngIf="memberLogo; else defaultLogo" class="img-responsive" [src]="memberLogo" alt="member-logo">
 				<ng-template #defaultLogo>
 				  <img class="img-responsive" src="assets/logo.png" alt="default-logo">
 				</ng-template>
+				</div>
 			  </ng-container>
 			</ng-container>
   
@@ -37,16 +39,16 @@
 		  <div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul id="topNav" class="nav navbar-nav navbar-right">
 			  <li class="nav-item">
-				<a class="nav-link" href="#"><span>{{'global.menu.dashboard' |translate | compareText:'Dashboard'}}</span></a>
+				<a class="nav-link"><span>{{'global.menu.dashboard' |translate | compareText:'Dashboard'}}</span></a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#"><span>{{'global.menu.usageReports' |translate|compareText:'Usage Reports'}}</span></a>
+				<a class="nav-link"><span>{{'global.menu.usageReports' |translate|compareText:'Usage Reports'}}</span></a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="#"><span>{{'global.menu.releasePackages' | translate |compareText :'Release Packages'}}</span></a>
+				<a class="nav-link"><span>{{'global.menu.releasePackages' | translate |compareText :'Release Packages'}}</span></a>
 			  </li>
 			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				  <i class="fa fa-user"></i> {{userFirstName}} {{userLastName}}
 				</a>
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,15 +60,15 @@
 		</div>
 	  </nav>
   
-	  <div class="row">
+	  <div>
 		<div class="col-md-12">
-		  <div class="page-header">
+		  <div class="page-header-brand">
 			<h2>Example Page</h2>
 		  </div>
 		</div>
 	  </div>
   
-	  <div class="row">
+	  <div>
 		<div class="col-md-12">
 		  <p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra sapien quis libero feugiat tristique. Morbi accumsan, tellus vel interdum pretium, leo massa pretium tellus, id vestibulum ligula libero nec nibh. Morbi diam erat, mattis vel viverra eget, ornare vitae lectus. Suspendisse potenti. Cras id neque enim. Curabitur eu nibh sem. Nam vulputate, diam non porttitor vehicula, tellus lorem eleifend arcu, quis volutpat metus leo vitae odio. Nulla facilisi. Duis sit amet mi mauris. Morbi quis lectus quis nunc dictum accumsan. Vivamus vulputate id risus vitae mattis. Aliquam viverra fringilla dignissim.

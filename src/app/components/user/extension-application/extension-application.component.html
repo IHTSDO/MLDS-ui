@@ -26,7 +26,7 @@
           <div class="form-group">
             <label class="font" for="reason">
             <b >{{'views.extensionApplication.form.purpose'|translate|compareText:'Purpose of Use'}}<span class="text-danger">*</span></b></label>
-            <textarea id="reason" class="form-control" formControlName="reason" rows="10" cols="135"></textarea>
+            <textarea id="reason" class="form-control" formControlName="reason" rows="10" cols="135" style="resize: both;"></textarea>
             <div *ngIf="extensionApplicationForm.get('reason')?.touched && extensionApplicationForm.get('reason')?.invalid" class="help-block">
               <small *ngIf="extensionApplicationForm.get('reason')?.hasError('required')">{{'form.requiredField'|translate|compareText:'Required field.'}}</small>
               <small *ngIf="extensionApplicationForm.get('reason')?.hasError('minlength')">{{'views.extensionApplication.form.error'|translate|compareText:'Reason needs to be longer.'}}</small>

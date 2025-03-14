@@ -1,60 +1,62 @@
-   <div class="row">
-    <div class="col-md-12">
-      <div class="page-header">
-        <h2>Archived Release Management</h2>
-        <div *ngIf="isAdmin">
-          <span>Show releases for: </span>
-          <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
-            <option value="" [selected]="true">
-              {{ (member | enum:'global.member.') | async }}
-            </option>
-            <option [value]="1">All Members</option>
-          </select>&nbsp;&nbsp;
-          <i class="fa fa-question-circle fa-2x" [ngbPopover]="popoverContent" placement="top"
-            triggers="mouseenter:mouseleave"></i>
-          <ng-template #popoverContent>
-            Switch between your releases and releases from all members
-          </ng-template>
-        </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h2>Archived Release Management</h2>
+      <div *ngIf="isAdmin">
+        <span>Show releases for: </span>
+        <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
+          <option value="" [selected]="true">
+            {{ (member | enum:'global.member.') | async }}
+          </option>
+          <option [value]="1">All Members</option>
+        </select>&nbsp;&nbsp;
+        <i class="fa fa-question-circle fa-2x" [ngbPopover]="popoverContent" placement="top"
+          triggers="mouseenter:mouseleave"></i>
+        <ng-template #popoverContent>
+          <span style="font-size: 14px;">Switch between your releases and releases from all members</span>
+        </ng-template>
       </div>
-      <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">
-        {{ alert.msg }}
-      </ngb-alert>
     </div>
+    <ngb-alert *ngFor="let alert of alerts" [type]="alert.type" (close)="closeAlert(alert)">
+      {{ alert.msg }}
+    </ngb-alert>
   </div>
+
   <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
-    <div class="col-md-12" *ngIf="hasNoArchivePackages()&& !isLoading">
-  <!-- Show warning if no memberEntry has archivePackages -->
-  
+  <div class="col-md-12" *ngIf="hasNoArchivePackages()&& !isLoading">
+    <!-- Show warning if no memberEntry has archivePackages -->
+
     <div class="alert alert-warning">
       <i class="fa fa-exclamation-circle"></i> There are currently no Archived Packages for any release.
     </div>
   </div>
-  
-  <!-- Show packages if any member has archive packages -->
-  <ng-container *ngFor="let memberEntry of packagesByMember">
-    <div *ngIf="memberEntry.archivePackages.length > 0">
-      <div class="row">
-        <div class="col-lg-8">
-          <h3>
-            Archived Releases:
-            <span>{{ memberEntry.member.key | enum:'global.member.' | async }}</span>
-          </h3>
-          <div class="panel panel-default" *ngFor="let package of memberEntry.archivePackages">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                <a class="panel-titles language-option" (click)="goToArchivePackage(package)">
-                  {{ package.name }} - {{ package.member.key | enum:'global.member.' | async }}
-                </a>
-              </h3>
-              <p>Please click on the release title above to manage the release packages.</p>
-            </div>
-            <div class="panel-body">
-              <div [innerHTML]="package.description | linkAddblank"></div>
-            </div>
+
+
+
+<!-- Show packages if any member has archive packages -->
+<ng-container *ngFor="let memberEntry of packagesByMember">
+  <div *ngIf="memberEntry.archivePackages.length > 0">
+    <div>
+      <div class="col-lg-12">
+        <h3>
+          Archived Releases:
+          <span>{{ memberEntry.member.key | enum:'global.member.' | async }}</span>
+        </h3>
+        <div class="panel panel-default" *ngFor="let package of memberEntry.archivePackages">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <a class="panel-titles language-option" (click)="goToArchivePackage(package)">
+                {{ package.name }} - {{ package.member.key | enum:'global.member.' | async }}
+              </a>
+            </h3>
+            <p>Please click on the release title above to manage the release packages.</p>
+          </div>
+          <div class="panel-body">
+            <div [innerHTML]="package.description | linkAddblank"></div>
           </div>
         </div>
       </div>
     </div>
-  </ng-container>
-  
+  </div>
+</ng-container>
+</div>

@@ -18,6 +18,7 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
 import { OrderByPipe } from "../../../pipes/order-by/order-by.pipe";
 import { Router, RouterModule } from '@angular/router';
+import { MemberPckageService } from 'src/app/services/member-package/member-pckage.service';
 
 
 @Component({
@@ -44,6 +45,8 @@ export class UserDashboardComponent implements OnInit {
   approvedReleasePackagesByMember: any[] = [];
   notApprovedReleasePackagesByMember: any[] = [];
   isLoading: boolean = true; // Add this flag
+  approvedReleasePackagesByIHDSTO: any[] = [];
+  approvedReleasePackagesByMemberName: any[] = [];
 
   constructor(
     private authenticationService: AuthenticationSharedService,
@@ -57,6 +60,7 @@ export class UserDashboardComponent implements OnInit {
     private userAffiliateService: UserAffiliateService,
     private modalService: NgbModal,
     private router: Router,
+    private memberPackageService : MemberPckageService
   ) { }
 
   ngOnInit(): void {
@@ -106,33 +110,53 @@ export class UserDashboardComponent implements OnInit {
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
         this.releasePackage = data;
+  
+        // Grouping release packages by member key
         const releasePackagesByMember = lodash.chain(this.releasePackage)
           .filter(this.packageUtilsService.isPackagePublished)
           .groupBy(this.getEffectivePackageMemberKey.bind(this))
-          .map((packages, memberKey) => {
-            return {
-              member: this.memberService.membersByKey[memberKey],
-              packages: this.packageUtilsService.releasePackageSort(packages)
-            };
-          })
+          .map((packages, memberKey) => ({
+            member: this.memberService.membersByKey[memberKey] || {}, // Ensure a default object
+            packages: this.packageUtilsService.releasePackageSort(packages)
+          }))
           .value();
+  
         if (this.isDeactivated) {
           this.approvedReleasePackagesByMember = [];
           this.notApprovedReleasePackagesByMember = releasePackagesByMember;
-        }
-        else {
-          this.approvedReleasePackagesByMember = releasePackagesByMember.filter(memberRelease =>
-            this.userAffiliateService.isMembershipApproved(memberRelease.member)
+        } else {
+          this.approvedReleasePackagesByMember = lodash.orderBy(
+            releasePackagesByMember.filter(memberRelease =>
+              this.userAffiliateService.isMembershipApproved(memberRelease.member)
+            ),
+            [(memberRelease) => this.memberPackageService.orderMemberName(memberRelease)],
+            ['asc']
           );
-
-          this.notApprovedReleasePackagesByMember = releasePackagesByMember.filter(memberRelease =>
-            !this.userAffiliateService.isMembershipApproved(memberRelease.member)
+  
+          this.notApprovedReleasePackagesByMember = lodash.orderBy(
+            releasePackagesByMember.filter(memberRelease =>
+              !this.userAffiliateService.isMembershipApproved(memberRelease.member)
+            ),
+            [(memberRelease) => this.memberPackageService.orderMemberName(memberRelease)],
+            ['asc']
           );
         }
+  
+        this.isLoading = false;
+      },
+      error: (err) => {
         this.isLoading = false;
       }
     });
   }
+  
+  get sortedApprovedReleasePackages(): any[] {
+    return lodash.orderBy(this.approvedReleasePackagesByMember, 
+      [(memberRelease) => this.memberPackageService.orderMemberName(memberRelease)],
+      ['asc']);
+  }  
+  
+  
 
   isApplicationWaitingForApplicant(application: any): boolean {
     return this.applicationUtilsService.isApplicationWaitingForApplicant(application);

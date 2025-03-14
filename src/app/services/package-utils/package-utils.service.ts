@@ -113,7 +113,7 @@ export class PackageUtilsService {
       this.getMemberOrder.bind(this),
       'priority',
       this.getLatestPublishedDate.bind(this)
-    ], ['desc', 'asc', 'desc']).reverse();
+    ], ['asc', 'asc', 'desc']).reverse();
   }
 
   isVersionOnline(releaseVersion: any): boolean {

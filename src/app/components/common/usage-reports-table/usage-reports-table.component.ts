@@ -22,12 +22,17 @@ export class UsageReportsTableComponent implements OnInit {
   @Input() showAllColumns: boolean = true;
   @Input() showViewAll: boolean = false;
   isAdminOrStaff = false;
+  sortedUsages: any[] = [];
+
+  isUserDashboardPage: boolean = false;
 
   constructor(public usageReportsUtils: UsageReportStateUtilsService, private usageReportsService: UsageReportsService, private router: Router, private session: AuthenticationSharedService,) {
   }
 
   ngOnInit(): void {
     this.isAdminOrStaff = this.session.isStaffOrAdmin();
+    this.sortUsages();
+    this.isUserDashboardPage = this.router.url.includes('userDashboard');
   }
   openAddUsageReportModal(affiliate: any): void {
     this.usageReportsService.openAddUsageReportModal(affiliate);
@@ -48,6 +53,42 @@ export class UsageReportsTableComponent implements OnInit {
     } else {
       this.router.navigate(['/usageReport/usageLog', usageReportId]);
     }
+  }
+
+  isActiveUsageReport(usageReport: any): boolean {
+    return !!usageReport.effectiveTo;
+  }
+
+
+  sortUsages() {
+    if (this.affiliate?.commercialUsages) {
+
+      const groupedByYear = this.groupByYear(this.affiliate.commercialUsages);
+      this.sortedUsages = [];
+
+      Object.keys(groupedByYear).sort((a, b) => b.localeCompare(a)).forEach(year => {
+        const usagesForYear = groupedByYear[year];
+        const activeReports = usagesForYear.filter((report: any) => this.isActiveUsageReport(report));
+        const inactiveReports = usagesForYear.filter((report: any) => !this.isActiveUsageReport(report));
+
+        const sortedActive = activeReports.sort((a: { startDate: number; }, b: { startDate: number; }) => b.startDate - a.startDate);
+        const sortedInactive = inactiveReports.sort((a: { startDate: number; }, b: { startDate: number; }) => b.startDate - a.startDate);
+        this.sortedUsages.push(...sortedInactive,...sortedActive);
+
+      });
+    }
+  }
+
+
+  groupByYear(reports: any[]) {
+    return reports.reduce((groups, report) => {
+      const year = new Date(report.startDate).getFullYear().toString();
+      if (!groups[year]) {
+        groups[year] = [];
+      }
+      groups[year].push(report);
+      return groups;
+    }, {});
   }
 
 

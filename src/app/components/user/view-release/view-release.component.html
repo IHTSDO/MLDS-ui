@@ -76,17 +76,16 @@
                         <span class="version-title">{{'global.word.file'|translate|compareText:'File'}}:</span>
                     </div>
                     <div class="col-md-10">
-                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles" style="display: flex;align-items: center;">
                             <i class="fa fa-file"></i>&nbsp;
                             <a class="disabled no-padding " 
                                 [attr.aria-disabled]="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding() ? true : null"
-                                *ngIf="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding()"
-                                [innerHTML]="releaseFile.label">
+                                *ngIf="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding()">{{ releaseFile.label | removeHtml}}
                             </a>
 
-                            <a class="language-option" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
+                            <a class="language-option no-padding" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
                                 (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
-                                [innerHTML]="releaseFile.label">
+                               >{{ releaseFile.label | removeHtml}}
                             </a>
 
                         </div>
@@ -159,17 +158,17 @@
                         <span class="version-title">{{'global.word.file'|translate|compareText:'File'}}:</span>
                     </div>
                     <div class="col-md-10">
-                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles">
+                        <div *ngFor="let releaseFile of releaseVersion.releaseFiles" style="display: flex;align-items: center;">
                             <i class="fa fa-file"></i>&nbsp;
                             <a class="disabled no-padding"
                                 [attr.aria-disabled]="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding() ? true : null"
                                 *ngIf="!releaseFile.clientDownloadUrl || !isMembershipInGoodStanding()"
-                                [innerHTML]="releaseFile.label">
+                                >{{ releaseFile.label | removeHtml}}
                             </a>
 
-                            <a class="language-option" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
+                            <a class="language-option no-padding" *ngIf="releaseFile.clientDownloadUrl && isMembershipInGoodStanding()"
                                 (click)="downloadReleaseFile(releaseFile.clientDownloadUrl)"
-                                [innerHTML]="releaseFile.label">
+                                >{{ releaseFile.label | removeHtml}}
                             </a>
                         </div>
                     </div>

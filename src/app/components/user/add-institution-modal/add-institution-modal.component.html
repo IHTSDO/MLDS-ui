@@ -8,12 +8,12 @@
 (onCancel)="cancel()"
 >
 <div *ngIf="country">
-  <h3><strong>{{ 'global.country.' + country?.isoCode2 | translate }}</strong></h3>
+  <h3>{{ 'global.country.' + country?.isoCode2 | translate }}</h3>
 </div>
 
 <!-- Injecting custom form fields -->
 <div class="row">
-  <div class="col-md-6 form-group">
+  <div class="col-md-12 form-group">
     <label for="name"><b>{{ 'views.usageLog.institutions.modal.subtitle' | translate | compareText: 'Hospital/Institution Name' }}<span class="text-danger">*</span></b></label>
     <input
       id="name"
@@ -30,7 +30,7 @@
 <hr />
 
 <div class="row">
-  <div class="col-md-4 form-group">
+  <div class="col-md-6 form-group">
     <h4 class="title">{{ 'views.usageLog.institutions.started' | translate | compareText: 'Started to Use' }}</h4>
     <div class="input-group datepicker">
       <input
@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <div class="col-md-4 form-group">
+  <div class="col-md-6 form-group">
     <h4 class="title">{{ 'views.usageLog.institutions.finished' | translate | compareText: 'Ceased Use' }}</h4>
     <div class="input-group datepicker">
       <input
@@ -74,13 +74,13 @@
 <hr />
 
 <div class="row">
-  <div class="col-md-8 form-group">
+  <div class="col-md-12 form-group">
     <label for="note" class="title">{{ 'global.word.note' | translate | compareText: 'Note' }}</label>
     <textarea
       id="note"
       formControlName="note"
       class="form-control"
-      rows="4"
+      rows="4" style="resize: both;"
     ></textarea>
   </div>
 </div>

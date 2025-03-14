@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-			<span class="language-option"><a (click)="goToPendingApplication()"><i class="fa fa-angle-double-left"></i>  Back to Pending Applications</a></span>
-      <h1 style="margin-top: 33px;"><b>{{application?.applicationType | enum:'application.applicationType.' | async}} Application Review</b></h1>
+			<span class="language-option" ><a (click)="goToPendingApplication()" style="padding-top: 42px;"><i class="fa fa-angle-double-left"></i>  Back to Pending Applications</a></span>
+      <h1 style="margin-top: 33px;">{{application?.applicationType | enum:'application.applicationType.' | async}} Application Review</h1>
 		</div>
 	</div>
 </div>
@@ -25,7 +25,7 @@
       
         <!-- Applicant Information -->
         <div class="applicant-info">
-          <p><b>Application No:</b> {{ application?.applicationId }}</p>
+          <p><strong>Application No:</strong> {{ application?.applicationId }}</p>
           <div *ngIf="application?.organizationName">
             <h4 class="application-title">
               {{ application?.organizationName }} - {{ application?.name }}
@@ -45,6 +45,7 @@
             <label><b>Search Existing Affiliates</b></label>
             <div class="input-group search-box">
                 <input type="text"
+                [(ngModel)]="searchInputValue"
                       (input)="onSearch($event)"
                        placeholder="Search affiliate or contact name"
                        class="form-control" />
@@ -57,12 +58,7 @@
 
 
         <div class="search-results" *ngIf="showComparisonAffiliate">
-            <div class="search-close">
-                Selected Search Result
-                <button class="close btn-close" (click)="showComparisonAffiliate = false">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
+
             <div *ngFor="let affiliate of searchResults" class="search-item" (click)="selectAffiliate(affiliate)">
                 <h5>{{affiliate.application.affiliateDetails.organizationName}} - {{affiliate.application.affiliateDetails.firstName}} {{affiliate.application.affiliateDetails.lastName}}</h5>
                 <p>
@@ -77,11 +73,10 @@
         </div>
 
 
-        <div class="search-results" *ngIf="comparisonAffiliate">
+        <div class="search-result" *ngIf="comparisonAffiliate">
           <div class="search-close">
               Selected Search Result
               <button class="close btn-close" (click)="closeComparisonAffiliate()">
-                  <i class="fa fa-times"></i>
               </button>
           </div>
           <div class="muted">
@@ -92,20 +87,17 @@
 
         <form [formGroup]="notesForm" (ngSubmit)="saveNotes()">
           <div class="form-group">
-            <div class="pull-right" *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></div>
-          </div>
-          <div class="form-group">
             <label class="notes-button"><b>Staff Notes</b></label>
             <button class="btn btn-successs" 
                     type="submit"
                     style="float:right"
                     [disabled]="isActionDisabled || notesForm.invalid">
-              Save
+                    <i class="fa fa-spinner fa-spin" *ngIf="submitting"></i> Save
             </button>
             <textarea class="form-control" 
                       rows="10" 
                       formControlName="notesInternal" 
-                      [attr.disabled]="isNoteReadOnly ? true : null">
+                      [attr.disabled]="isNoteReadOnly ? true : null" style="resize: both;">
             </textarea>
           </div>
         </form>

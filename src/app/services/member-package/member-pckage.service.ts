@@ -15,10 +15,14 @@ export class MemberPckageService {
     private translate: TranslateService
   ) {}
 
-  // Order by IHTSDO member
-  orderIhtsdo(memberReleases: any): boolean {
-    return !(memberReleases.member && this.memberService.isIhtsdoMember(memberReleases.member));
+  // Order by IHTSDO member (handling undefined cases)
+orderIhtsdo(memberReleases: any): boolean {
+  if (!memberReleases || !memberReleases.member) {
+    return true; // Default behavior when member is missing
   }
+  return !this.memberService.isIhtsdoMember(memberReleases.member);
+}
+
 
   // Order by approved memberships
   orderApprovedMemberships(memberReleases: any): boolean {
@@ -42,20 +46,30 @@ export class MemberPckageService {
     return memberKey ? this.translate.instant('global.member.' + memberKey) : 'NONE';
 }
 
-
-   // Comparator function to sort by IHTSDO and member name
-   compareByIhtsdoAndName(a: any, b: any): number {
-    // Compare by IHTSDO (true/false comparison)
-    const ihtsdoComparison = Number(this.orderIhtsdo(a)) - Number(this.orderIhtsdo(b));
-    if (ihtsdoComparison !== 0) {
-      return ihtsdoComparison;
-    }
-
-    // Compare by member name (string comparison)
-    const nameA = this.orderMemberName(a);
-    const nameB = this.orderMemberName(b);
-    return nameA.localeCompare(nameB);
+compareByIhtsdoAndName(a: any, b: any): number {
+  // Handle undefined values
+  if (!a || !b) {
+    return 0;
   }
+
+  // Check if 'member' property exists
+  const memberA = a.member || {};
+  const memberB = b.member || {};
+
+  // Compare by IHTSDO membership status
+  const ihtsdoComparison = Number(this.orderIhtsdo(a)) - Number(this.orderIhtsdo(b));
+  if (ihtsdoComparison !== 0) {
+    return ihtsdoComparison;
+  }
+
+  // Compare by translated member name (string comparison)
+  const nameA = this.orderMemberName(a) || 'ZZZ'; // Default fallback
+  const nameB = this.orderMemberName(b) || 'ZZZ';
+
+  return nameA.localeCompare(nameB);
+}
+
+
 
   // Use this comparator in the template for sorting
   get orderByJustName(): (a: any, b: any) => number {

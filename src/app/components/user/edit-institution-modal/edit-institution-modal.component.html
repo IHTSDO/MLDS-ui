@@ -10,7 +10,7 @@
 >
   <!-- Injecting custom form fields -->
   <div class="row">
-    <div class="col-md-6 form-group">
+    <div class="col-md-12 form-group">
       <label for="name">{{ 'views.usageLog.institutions.modal.subtitle' | translate | compareText: 'Hospital/Institution Name' }}<span class="text-danger">*</span></label>
       <input
         id="name"
@@ -27,7 +27,7 @@
   <hr />
 
   <div class="row">
-    <div class="col-md-4 form-group">
+    <div class="col-md-6 form-group">
       <h4 class="title">{{ 'views.usageLog.institutions.started' | translate | compareText: 'Started to Use' }}</h4>
       <div class="input-group datepicker">
         <input
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="col-md-4 form-group">
+    <div class="col-md-6 form-group">
       <h4 class="title">{{ 'views.usageLog.institutions.finished' | translate | compareText: 'Ceased Use' }}</h4>
       <div class="input-group datepicker">
         <input
@@ -69,9 +69,9 @@
   </div>
 
   <div class="row">
-    <div class="col-md-8 form-group">
+    <div class="col-md-12 form-group">
       <label class="title" for="note">{{ 'global.word.note' | translate | compareText: 'Note' }}</label>
-      <textarea id="note" formControlName="note" class="form-control" rows="4"></textarea>
+      <textarea id="note" formControlName="note" class="form-control" rows="4" style="resize: both;"></textarea>
     </div>
   </div>
 </app-modal>

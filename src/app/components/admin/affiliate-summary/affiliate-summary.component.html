@@ -40,26 +40,21 @@
 
         <app-affiliate-details-summary [affiliate]="affiliate"
           [isEditable]="isEditable"></app-affiliate-details-summary>
-        <div class="row">
           <div class="col-sm-12">
             <app-usage-reports-table [affiliate]="affiliate"></app-usage-reports-table>
           </div>
-        </div>
       </div>
     </div>
 
     <div class="col-md-4">
       <form [formGroup]="notesForm" (ngSubmit)="saveNotes()">
         <div class="form-group">
-          <div class="float-end" *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></div>
-        </div>
-        <div class="form-group">
           <label class="notes-button" htmlFor="staff-notes"><b>Staff Notes</b></label>
           <button class="btn-successs" type="submit" [disabled]="submitting || !isEditable">
-            Save
+            <i class="fa fa-spinner fa-spin" *ngIf="submitting"></i> Save
           </button>
-          <textarea class="form-control" rows="10" formControlName="notesInternal"
-            [attr.disabled]="!isEditable ? true : null">
+          <textarea class="form-control" contenteditable rows="10" formControlName="notesInternal"
+            [attr.disabled]="!isEditable ? true : null" style="resize: both;">
           </textarea>
         </div>
       </form>
@@ -87,26 +82,25 @@
               <ul class="list-group">
                 <li *ngFor="let application of affiliate.applications | orderBy:'submittedAt':'createdAt'"
                   class="list-group-item">
-                  <div class="row">
+                  <div class="row application-history">
                     <div class="col-4">
                       <strong>{{'application.applicationType.' + application?.applicationType | translate }}</strong><br>
 
                       <small>{{ application.submittedAt | date: 'yyyy-MM-dd' }}</small>
                     </div>
                     <div class="col-2" [ngClass]="{
-                                   'text-warning': isApplicationPending(application),
-                                   'text-danger': isApplicationWaitingForApplicant(application)
+                                   'help-block': isApplicationPending(application) || isApplicationWaitingForApplicant(application)
                                  }" style="margin-top: 0.5em;">
                      <strong>{{'approval.state.'+ application.approvalState | translate}}</strong>
                      
                            
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                      <button class="btn btn-primary btn-sm" style="font-size: 1rem;" *ngIf="isApplicationApproved(application)"
+                      <button class="btn btn-primary btn-sm" style="height: 3rem;font-size: 12px;" *ngIf="isApplicationApproved(application)"
                         (click)="viewApplication(application)">
                         <i class="fa fa-eye"></i> Application
                       </button>
-                      <button class="btn btn-primary btn-sm" style="font-size: 1rem;" *ngIf="!isApplicationApproved(application)"
+                      <button class="btn btn-primary btn-sm" style="height: 3rem;font-size: 12px;" *ngIf="!isApplicationApproved(application)"
                         (click)="approveApplication(application)">
                         <i class="fa fa-warning"></i> Application
                       </button>

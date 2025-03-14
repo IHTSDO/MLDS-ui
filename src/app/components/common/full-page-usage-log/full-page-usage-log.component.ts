@@ -6,6 +6,7 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { EmbeddableUsageLogComponent } from "../embeddable-usage-log/embeddable-usage-log.component";
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 @Component({
   selector: 'app-full-page-usage-log',
@@ -28,15 +29,17 @@ export class FullPageUsageLogComponent implements OnInit {
   usageByCountryList: any[] = [];
   implementationStatusOptions: any[] = [];
   homeCountry: any = {};
+  isAdminOrStaff: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router:Router,
     private commercialUsageService: CommercialUsageService,
-
+    private session: AuthenticationSharedService
   ) {}
 
   ngOnInit() {
+    this.isAdminOrStaff = this.session.isStaffOrAdmin();
     this.usageReportReady = this.loadUsageReportFromRoute();
   }
 

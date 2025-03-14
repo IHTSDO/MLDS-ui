@@ -1,17 +1,19 @@
 <div class="panel panel-default " id="email-verification">
   <div class="panel-heading">
+    <div class="usage-table-heading">
     <span class="float-end">
       <button class="edit-button" (click)="openAddUsageReportModal(affiliate)"> <span><i class="fa fa-plus" aria-hidden="true"></i> {{ 'views.usageReports.newReport' | translate | compareText:'New Report' }}</span></button>
     </span>
     <h3 class="panel-title">
-      <span>{{ 'global.menu.usageReports' | translate | compareText:'Usage Reports' }}</span>
+      <span>{{ 'global.menu.usageReports' | translate | compareText:'Usage Reports' }}</span>&nbsp;
       <button (click)="viewUsageReports()" *ngIf="showViewAll" class="btn btn-link btn-xs">
-        <span> {{ 'global.word.viewAll' | translate | compareText:'View All' }}</span> <i class="fa fa-angle-double-right"></i>
+        <span> {{ 'global.word.viewAll' | translate | compareText:'View All' }} <i class="fa fa-angle-double-right"></i></span>
       </button>
     </h3>
   </div>
-  <div class="table-responsive">
-    <table class="table table-hover" aria-label="usage-reports">
+  </div>
+  <div class="table-responsive" [ngStyle]="{'height': isUserDashboardPage ? '250px' : 'auto', 'overflow-y': isUserDashboardPage ? 'auto' : 'visible'}">
+    <table class="table" aria-label="usage-reports">
       <thead>
         <tr >
           <th>{{ 'views.usageReports.reportDate' | translate | compareText:'Report Date' }}</th>
@@ -23,11 +25,11 @@
         </tr>
       </thead>
       <tbody class="language-option">
-        <tr *ngFor="let usageReport of affiliate?.commercialUsages | dateSort: 'startDate': 'desc'">
+        <tr *ngFor="let usageReport of sortedUsages">
           <td [ngClass]="{'text-muted': usageReport.effectiveTo}">
             <span class="btn-link" (click)="navigateToUsageReport(usageReport)">
               <span *ngIf="usageReport.effectiveTo" class="text-muted">
-                <i class="fas fa-minus-square"></i>
+                <i class="fas fa-minus-square" ></i>
               </span>
               <span [ngClass]="{'text-muted': usageReport.effectiveTo}">
                 {{usageReport.startDate | date: 'yyyy-MM'}} - {{usageReport.endDate | date: 'yyyy-MM'}}

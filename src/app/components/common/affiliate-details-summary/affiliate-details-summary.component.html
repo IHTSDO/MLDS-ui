@@ -1,10 +1,10 @@
-<div class="row">
+<div>
   <div class="col-sm-12 col-md-12 col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
         <button   class="edit-button" *ngIf="isEditable" (click)="editAffiliate(affiliate?.affiliateId)">Edit Contact Info</button>
         <h4 >
-          <a class="anchor language-option" (click)="goToAffiliateSummary()"><b> Affiliate Summary</b></a>
+          <a class="anchor language-option" (click)="goToAffiliateSummary()">Affiliate Summary</a>
         </h4>
       </div>
     </div>
@@ -29,10 +29,10 @@
             <strong>Account Standing:</strong>
             {{ affiliate.standingState ? ('affiliate.standingState.' + affiliate.standingState | translate) : ''}}
             <span class="text-warning" *ngIf="standingStateUtils.isWarningCategory(affiliate?.standingState)">
-              <i class="fa fa-exclamation-circle"></i>
+              <i class="fa fa-exclamation-circle" *ngIf="isEditable"></i>
             </span>
             <span class="text-danger" *ngIf="standingStateUtils.isDangerCategory(affiliate?.standingState)">
-              <i class="fa fa-exclamation-circle"></i>
+              <i class="fa fa-exclamation-circle" *ngIf="isEditable"></i>
             </span>
             <span class="float-end" *ngIf="isEditable">
               <button class="edit-button" *ngIf="!standingStateUtils.isApplying(affiliate?.standingState)"

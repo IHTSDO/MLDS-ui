@@ -55,7 +55,9 @@ export class MemberService {
       })
     );
   }
-
+  getMemberKey(): string | null {
+    return this.memberKeySubject.value;
+  }
   getMemberByKey(key: string): any {
     return this.membersByKey[key];
   }

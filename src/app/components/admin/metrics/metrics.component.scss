@@ -1,9 +1,12 @@
 /* Styles for the metrics page */
-
-h2, h3 {
+h2 {
+  margin-top: 42px;
+  font-size: 3.4rem;
+  font-weight: 400;
+}
+h3 {
     margin-top: 20px;
-    font-weight: bold;
-  }
+}
   
   .refresh-button {
     float: right !important;
@@ -29,6 +32,8 @@ h2, h3 {
     font-family: inherit;
     overflow: visible;
     text-transform: none;
+    height: 35px;
+    margin-top: 36px;
   }
   
   .refresh-button:hover {
@@ -106,4 +111,8 @@ h2, h3 {
   .metrics-page{
     padding-top: 60px;
   }
-  
+
+  .metrics-list{
+    padding-left:10px;
+    padding-right: 10px;
+  }

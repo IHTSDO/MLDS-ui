@@ -1,18 +1,4 @@
 
-h2, .h2 {
-    font-size: 30px;
-}
-h3, .h3 {
-    font-size: 24px;
-}
-h1, .h1, h2, .h2, h3, .h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-p {
-    margin: 0 0 10px;
-}
-
 .panel-default > .panel-heading {
     color: #00a7e1;
     background-color: #ffffff;
@@ -27,7 +13,7 @@ p {
 
 .page-header {
     padding-bottom: 9px;
-    margin: 40px 0 20px;
+    margin: 0px 0 20px;
     border-bottom: 1px solid #eeeeee;
 }
 
@@ -67,7 +53,7 @@ p {
 .btn-success {
     color: #3cb878;
     background-color: #ffffff;
-    border: 1px solid;
+    border: 2px solid;
     border-color: #3cb878;
     border-top-left-radius: 10px;
 }
@@ -86,7 +72,7 @@ p {
     margin: 2px;
 }
 .rows{
-    margin-top: 64px;
+    margin-top: 32px;
 }
 .panel-titles {
     margin-top: 0;
@@ -108,4 +94,23 @@ p {
     margin-bottom: 20px;
     border: 2px solid #f26c4f;
     border-radius: 4px;
+}
+
+.download-files{
+    color: #40ACD6;
+    margin: 0;
+}
+
+.download-files:hover{
+    color: #0091c8;
+}
+
+h2 {
+    font-size: 3.4rem;
+    font-weight: 400;
+}
+
+.fa-question-circle {
+color: #40ACD6;
+font-size: 2rem;
 }
