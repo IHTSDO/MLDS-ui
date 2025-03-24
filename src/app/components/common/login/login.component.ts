@@ -97,7 +97,11 @@ export class LoginComponent {
         next: (data) => {
           if(this.authenticationService.isStaffOrAdmin()){
             this.router.navigate([this.routes.pendingApplications]);
-          } else {
+          }
+          else if(this.authenticationService.isMember()){
+            this.router.navigate([this.routes.ihtsdoReleases]);
+          }
+          else {
             this.userAffiliateService.loadUserAffiliate().subscribe({
               next: () => {
                 if(this.applicationUtilsService.isApplicationWaitingForApplicant(this.userAffiliateService.affiliate.application))
