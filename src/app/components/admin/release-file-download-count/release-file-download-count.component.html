@@ -11,12 +11,32 @@
 
   <div class="col-md-4">
     <div class="input-group ">
-      <span class="input-group-addon">{{'audits.filter.from' | translate | compareText: 'from'}}</span>
-      <input type="date" class="input-sm form-control" name="fromDate" [(ngModel)]="fromDate"
-        (change)="loadReleaseFileDownloadCounts()" required />
-      <span class="input-group-addon">{{'audits.filter.to' | translate | compareText: 'to'}}</span>
-      <input type="date" class="input-sm form-control" name="toDate" [(ngModel)]="toDate"
-        (change)="loadReleaseFileDownloadCounts()" required />
+        <div class="input-group">
+          <span class="input-group-addon">{{ 'audits.filter.from' | translate | compareText: 'from' }}</span>
+          <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dp1"
+          [(ngModel)]="fromDate"
+          ngbDatepicker
+          #fromDatepicker="ngbDatepicker"
+          (click)="fromDatepicker.toggle()"
+          (ngModelChange)="onDateChange('from', fromDate)"
+          />
+          <span class="input-group-addon"  (click)="fromDatepicker.toggle()"> <i class="fa fa-calendar"></i></span>
+          <span class="input-group-addon">{{ 'audits.filter.to' | translate | compareText: 'to' }}</span>
+          <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dp2"
+          [(ngModel)]="toDate"
+          ngbDatepicker
+          #toDatepicker="ngbDatepicker"
+        (click)="toDatepicker.toggle()" 
+        (ngModelChange)="onDateChange('to', toDate)"
+        />
+        <span class="input-group-addon"  (click)="toDatepicker.toggle()"> <i class="fa fa-calendar"></i></span>
+        </div>
     </div>
   </div>
 

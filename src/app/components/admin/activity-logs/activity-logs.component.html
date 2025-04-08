@@ -8,11 +8,30 @@
   <div class="margin">
     <div class="col-md-6">
       <div class="input-group">
-        <span class="input-group-addon">{{'audits.filter.from' | translate | compareText : 'from'}}</span>
-        <input type="date" class="form-control" name="fromDate" [(ngModel)]="fromDate" (change)="onChangeDate()"
-          required />
-        <span class="input-group-addon">{{'audits.filter.to' | translate |compareText :'to'}}</span>
-        <input type="date" class="form-control" name="toDate" [(ngModel)]="toDate" (change)="onChangeDate()" required />
+        <span class="input-group-addon">{{ 'audits.filter.from' | translate | compareText: 'from' }}</span>
+        <input
+				class="form-control"
+				placeholder="yyyy-mm-dd"
+				name="dp1"
+				[(ngModel)]="fromDate"
+				ngbDatepicker
+				#fromDatePicker="ngbDatepicker"
+      (click)="fromDatePicker.toggle()" 
+      (ngModelChange)="onDateChange('from', fromDate)"
+			/>
+      <span class="input-group-addon" (click)="fromDatePicker.toggle()"> <i class="fa fa-calendar"></i></span>
+        <span class="input-group-addon">{{ 'audits.filter.to' | translate | compareText: 'to' }}</span>
+        <input
+				class="form-control"
+				placeholder="yyyy-mm-dd"
+				name="dp2"
+				[(ngModel)]="toDate"
+				ngbDatepicker
+				#toDatepicker="ngbDatepicker"
+      (click)="toDatepicker.toggle()" 
+      (ngModelChange)="onDateChange('to', toDate)"
+			/>
+      <span class="input-group-addon"  (click)="toDatepicker.toggle()"> <i class="fa fa-calendar"></i></span>
       </div>
     </div>
 

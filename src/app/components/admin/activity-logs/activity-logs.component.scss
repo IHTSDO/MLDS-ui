@@ -56,3 +56,26 @@ h2{
 .top{
   margin-top: 80px;
 }
+
+
+::ng-deep .ngb-dp {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+::ng-deep .ngb-dp-calendar {
+  width: 100% !important;
+}
+
+::ng-deep .ngb-dp-day {
+  min-width: 40px;
+}
+
+::ng-deep .ngb-dp-weekday {
+  min-width: 40px;
+}
+
+.input-group .btn {
+  position: relative;
+  z-index: 1;
+}

@@ -6,6 +6,7 @@ import { AuditsEmbedComponent } from '../../common/audits-embed/audits-embed.com
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-filter-utils.service';
+import { NgbDate, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * ActivityLogsComponent - displays activity logs for a given date range
@@ -13,7 +14,7 @@ import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-
 @Component({
   selector: 'app-activity-logs',
   standalone: true,
-  imports: [CommonModule, FormsModule, AuditsEmbedComponent, CompareTextPipe,TranslateModule],
+  imports: [CommonModule, FormsModule, AuditsEmbedComponent, CompareTextPipe,TranslateModule,NgbDatepickerModule],
   templateUrl: './activity-logs.component.html',
   styleUrl: './activity-logs.component.scss'
 })
@@ -31,12 +32,12 @@ export class ActivityLogsComponent implements OnInit {
   /**
    * From date for filtering audits
    */
-  fromDate!: string;
+  fromDate!: NgbDate;
 
   /**
    * To date for filtering audits
    */
-  toDate!: string;
+  toDate!: NgbDate;
 
   constructor(private activityLogsService: AuditsService, private dateFilterUtils: DateFilterUtilsService) {}
 
@@ -45,8 +46,8 @@ export class ActivityLogsComponent implements OnInit {
    */
   ngOnInit(): void {
     const { fromDate, toDate } = this.dateFilterUtils.previousWeek();
-    this.fromDate = fromDate;
-    this.toDate = toDate;
+    this.fromDate = this.dateFilterUtils.convertToNgbDateStruct(fromDate);
+    this.toDate = this.dateFilterUtils.convertToNgbDateStruct(toDate);
     this.loadActivity();
   }
 
@@ -55,7 +56,7 @@ export class ActivityLogsComponent implements OnInit {
    */
   loadActivity(): void {
     this.submitting = true;
-    this.activityLogsService.findByDates(this.fromDate, this.toDate).subscribe({
+    this.activityLogsService.findByDates(this.dateFilterUtils.convertNgbDateToString(this.fromDate), this.dateFilterUtils.convertNgbDateToString(this.toDate)).subscribe({
       next: data => {
         this.audits = data;
         this.submitting = false;
@@ -69,10 +70,12 @@ export class ActivityLogsComponent implements OnInit {
     });
   }
   
-  /**
-   * Called when the date range changes
-   */
-  onChangeDate(): void {
+
+  onDateChange(dateType: 'from' | 'to', dateValue: NgbDate): void {
+    if (!this.dateFilterUtils.isValidDate(dateValue)) {
+      console.error(`${dateType} date is invalid`);
+      return; 
+    }
     this.loadActivity();
   }
 }
