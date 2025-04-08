@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReleaseFileDownloadCountService } from 'src/app/services/release-file-download-count/release-file-download-count.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-filter-utils.service';
+import { NgbDate, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * Release File Download Count component
@@ -14,7 +15,7 @@ import { DateFilterUtilsService } from 'src/app/services/date-filter-utils/date-
 @Component({
   selector: 'app-release-file-download-count',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe],
+  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, NgbDatepickerModule],
   templateUrl: './release-file-download-count.component.html',
   styleUrl: './release-file-download-count.component.scss'
 })
@@ -55,15 +56,15 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
    */
   ngOnInit() {
     const { fromDate, toDate } = this.dateFilterUtils.previousMonth();
-    this.fromDate = fromDate;
-    this.toDate = toDate;
+    this.fromDate = this.dateFilterUtils.convertToNgbDateStruct(fromDate);
+    this.toDate = this.dateFilterUtils.convertToNgbDateStruct(toDate);
     this.loadReleaseFileDownloadCounts();
   }
 
   private getParams() {
     return {
-      startDate: this.fromDate,
-      endDate: this.toDate,
+      startDate: this.dateFilterUtils.convertNgbDateToString(this.fromDate),
+      endDate: this.dateFilterUtils.convertNgbDateToString(this.toDate),
       excludeAdminAndStaff: this.ExcludeAdminAndStaff
     };
   }
@@ -87,6 +88,14 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
           this.submitting = false;
         }
   });
+  }
+
+  onDateChange(dateType: 'from' | 'to', dateValue: NgbDate): void {
+      if (!this.dateFilterUtils.isValidDate(dateValue)) {
+        console.error(`${dateType} date is invalid`);
+        return; 
+      }
+      this.loadReleaseFileDownloadCounts();
   }
 
   loadReleaseFileDownloadCountsCSV() {
