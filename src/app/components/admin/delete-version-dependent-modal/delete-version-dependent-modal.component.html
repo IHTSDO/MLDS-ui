@@ -1,24 +1,33 @@
-<app-modal
-  [title]="'Confirm Deletion'"
-  [submitText]="'Yes'"
-  [cancelText]="'No'"
-  [alerts]="alerts"
-  [isSubmitting]="submitting"
-  (onSubmit)="ok()"
-  (onCancel)="cancel()">
+<app-modal [title]="'Confirm Deletion'" [submitText]="'Yes'" [cancelText]="'No'" [alerts]="alerts"
+  [isSubmitting]="submitting" (onSubmit)="ok()" (onCancel)="cancel()">
 
   <ng-container modal-body>
     <p>You are about to delete the Package that is a dependency for another Live Package. Do you want to proceed?</p>
 
     <div class="info-row">
-      <label for="packageName"><strong>Package Name:</strong></label>
-      <span>{{ releasePackage.name }}</span>
+      <label><strong>Package Name:</strong></label>
+      <span>{{ releasePackage?.name }}</span>
     </div>
 
     <div class="info-row">
-      <label for="packageVersion"><strong>Package Version:</strong></label>
-      <span>{{ releaseVersion.name }}</span>
+      <label><strong>Package Version:</strong></label>
+      <span>{{ releaseVersion?.name }}</span>
+    </div>
+
+    <div class="info-row" *ngIf="dependentNames.length > 0">
+      <label><strong>Dependent Version(s):</strong></label>
+      <ul>
+        <li *ngFor="let version of dependentNames.slice(0, 5)" (click)="goToVersion(version?.releasePackageId)"
+          style="cursor: pointer;">
+          <strong>Version Name:</strong> {{ version?.releaseVersionName }}
+        </li>
+
+        <li *ngIf="dependentNames.length > 5">
+          <em>Still {{ dependentNames.length - 5 }} more version(s) available</em>
+        </li>
+      </ul>
     </div>
   </ng-container>
+
 
 </app-modal>
