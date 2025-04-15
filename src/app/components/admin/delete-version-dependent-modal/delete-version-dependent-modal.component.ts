@@ -5,6 +5,8 @@ import { catchError, EMPTY, lastValueFrom, tap } from 'rxjs';
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
 import { ModalComponent } from '../../common/modal/modal.component';
+import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-version-dependent-modal',
@@ -18,13 +20,38 @@ export class DeleteVersionDependentModalComponent {
   @Input() releaseVersion: any;
   alerts: { type: string; msg: string }[] = [];
   submitting = false;
+  dependentNames: any[] = [];
 
   constructor(
     public activeModal: NgbActiveModal,
     private releaseVersionsService: ReleaseVersionsService,
+    private releasePackagesService: ReleasePackageService,
+    private router: Router,
     private releaseFilesService: ReleaseFileService
   ) { }
 
+  ngOnInit(): void {
+    const releaseVersionId = this.releaseVersion?.releaseVersionId;
+    if (releaseVersionId) {
+      this.loadDependentVersions(releaseVersionId);
+    } else {
+      console.warn('releaseVersionId is not available');
+    }
+    
+  }
+  
+  loadDependentVersions(releaseVersionId: string): void {
+    this.releasePackagesService.getVersionDependencyNames(releaseVersionId).subscribe({
+      next: (versions: any[]) => {
+        this.dependentNames = versions || [];
+      },
+      error: (err) => {
+        console.error('Error fetching dependent versions:', err);
+        this.dependentNames = [];
+      }
+    });
+  }
+  
   /**
    * Initiates the deletion process for release version and its files.
    */
@@ -110,5 +137,12 @@ export class DeleteVersionDependentModalComponent {
    */
   private clearAlerts(): void {
     this.alerts = [];
+  }
+
+  goToVersion(releasePackageId: number): void {
+    if (releasePackageId) {
+      this.cancel();
+      this.router.navigate([`/releaseManagement/release/${releasePackageId}`]);
+    }
   }
 }
