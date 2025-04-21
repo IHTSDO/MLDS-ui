@@ -202,20 +202,20 @@
         <tr class="language-option" *ngFor="let affiliate of affiliates" 
         (click)="viewAffiliate(affiliate.affiliateId)"
         >
-          <td class="col-md-1">{{affiliate.affiliateId}}</td>
-          <td class="col-md-2">{{affiliateActiveDetails(affiliate).firstName + ' ' + affiliateActiveDetails(affiliate).lastName}}</td>
+          <td class="col-md-1">{{affiliate?.affiliateId}}</td>
+          <td class="col-md-2">{{affiliateActiveDetails(affiliate)?.firstName + ' ' + affiliateActiveDetails(affiliate).lastName}}</td>
           <td class="col-md-2">
-            {{ affiliateActiveDetails(affiliate).type ? ('affiliate.type.' + affiliateActiveDetails(affiliate).type | translate) : '' }} -
-            {{ affiliateActiveDetails(affiliate).subType ? ('affiliate.subType.' + affiliateActiveDetails(affiliate).subType | translate) : '' }}
-            {{affiliateActiveDetails(affiliate).otherText}}
+            {{ affiliateActiveDetails(affiliate)?.type ? ('affiliate.type.' + affiliateActiveDetails(affiliate).type | translate) : '' }} -
+            {{ affiliateActiveDetails(affiliate)?.subType ? ('affiliate.subType.' + affiliateActiveDetails(affiliate).subType | translate) : '' }}
+            {{affiliateActiveDetails(affiliate)?.otherText}}
           </td>
           <td class="col-md-2">
-            {{affiliate.standingState ? ('affiliate.standingState.' + affiliate.standingState | translate) : ''}}
+            {{affiliate?.standingState ? ('affiliate.standingState.' + affiliate.standingState | translate) : ''}}
           </td>
           
 
-          <td class="col-md-1">{{affiliateActiveDetails(affiliate).address.country.commonName}}</td>
-          <td class="col-md-1">{{affiliate.homeMember.key}}</td>
+          <td class="col-md-1">{{affiliateActiveDetails(affiliate)?.address?.country?.commonName}}</td>
+          <td class="col-md-1">{{affiliate?.homeMember?.key}}</td>
           <td class="col-md-2"><a [href]="'mailto:' + affiliate.affiliateDetails?.email">{{affiliateActiveDetails(affiliate)?.email}}</a></td>
           <td class="col-md-1"><a class="review-button" (click)="viewAffiliate(affiliate.affiliateId)"><i class="fa fa-eye"></i> View</a></td>
         </tr>
