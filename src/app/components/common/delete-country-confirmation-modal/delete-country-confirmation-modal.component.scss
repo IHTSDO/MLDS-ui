@@ -1,0 +1,29 @@
+.btn-delete {
+    padding: 4px 8px;             /* Reduce padding for a smaller button size */
+    font-size: 12px; 
+    border: 2px solid  #f05837;    /* Red border */
+    color:  #f05837;               /* Red font color */
+    background-color: white;  /* White background */
+    border-top-left-radius: 10px; /* Top left border radius */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color:  #f05837;    /* Red background on hover */
+    color: white;             /* White font color on hover */
+} 
+.btn-link {
+    color: #40ACD6 !important;
+    font-weight: normal !important;
+    cursor: pointer !important;
+    border-radius: 0 !important;
+    text-decoration: none !important;
+}
+ 
+.btn-link:hover {
+    color: #40ACD6 !important;
+    font-weight: normal !important;
+    cursor: pointer !important;
+    border-radius: 0 !important;
+    text-decoration: underline !important;
+}
