@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { CountryService } from 'src/app/services/country/country.service';
 import { CountryModalComponent } from '../country-modal/country-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteCountryConfirmationModalComponent } from '../../common/delete-country-confirmation-modal/delete-country-confirmation-modal.component';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 /**
  * Country component that displays a list of countries and allows CRUD operations.
@@ -20,8 +23,9 @@ export class CountryComponent {
    */
   countries: any[] = [];
   isLoading: boolean = true;
-
-  constructor(private countryService: CountryService, private modalService: NgbModal) { }
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
+  constructor(private countryService: CountryService, private modalService: NgbModal,private toastr: ToastrService) { }
 
   /**
    * Initializes the component by fetching the list of countries.
@@ -47,21 +51,34 @@ export class CountryComponent {
     });
   }
 
-  /**
-   * Deletes a country by its ISO code.
-   * @param isoCode - The ISO code of the country to delete.
-   */
+  openDeleteConfirmation(isoCode: string): void {
+    const modalRef = this.modalService.open(DeleteCountryConfirmationModalComponent);
+    modalRef.componentInstance.isoCode = isoCode;
+  
+    modalRef.result.then((result) => {
+      if (result === 'confirm') {
+        this.delete(isoCode);
+      }
+    }).catch(() => {});
+  }
+  
   delete(isoCode: string): void {
     this.countryService.deleteCountry(isoCode).subscribe({
       next: () => {
-        this.fetchCountries(); // Reload countries after deletion
+        this.fetchCountries();
+        this.toastr.success(`Country with ISO code ${isoCode} deleted successfully.`, 'Success');
       },
-      error: (error: any) => {
-        console.error('Error deleting country', error);
+      error: (error: HttpErrorResponse) => {
+        let message = `Failed to delete country ${isoCode}. As this country is mapped with affiliates`;
+  
+        if (error.error?.message) {
+          message = error.error.message;
+        }
+  
+        this.toastr.error(message, 'Delete Failed');
       }
     });
   }
-
   /**
    * Opens the create country modal.
    */

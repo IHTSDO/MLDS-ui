@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title">Delete Country</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete the country <strong>{{ isoCode }}</strong>?
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger btn-xs btn-delete" (click)="confirmDelete()">Delete</button>
+    <button class="btn btn-link" (click)="cancel()">Cancel</button>
+  </div>
+  
