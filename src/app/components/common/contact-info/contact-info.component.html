@@ -251,7 +251,7 @@
                                         <p class="help-block" *ngIf="form.get('landlineNumber')?.errors?.['required']">
                                             {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block"
-                                            *ngIf="form.get('landlineNumber')?.errors?.['invalidPhoneNumber']">{{ 'views.contactInfo.contact.landline.invalid' | translate | compareText: 'Invalid Phone Number.' }}</p>
+                                            *ngIf="form.get('landlineNumber')?.errors?.['phoneNumberInvalid']">{{ 'views.contactInfo.contact.landline.invalid' | translate | compareText: 'Invalid Phone Number.' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +286,7 @@
                                         <p class="help-block" *ngIf="form.get('mobileNumber')?.errors?.['required']">
                                             {{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                                         <p class="help-block"
-                                            *ngIf="form.get('mobileNumber')?.errors?.['invalidPhoneNumber']">{{ 'views.contactInfo.contact.landline.invalid' | translate | compareText: 'Invalid Phone Number.' }}</p>
+                                            *ngIf="form.get('mobileNumber')?.errors?.['mobileNumber']">{{ 'views.contactInfo.contact.landline.invalid' | translate | compareText: 'Invalid Phone Number.' }}</p>
                                     </div>
                                 </div>
                             </div>
