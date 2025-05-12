@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
@@ -112,9 +112,11 @@ export class ContactInfoComponent implements OnInit {
         billingAddressCityControl?.setValidators([Validators.required]);
         billingAddressPostControl?.setValidators([Validators.required,Validators.pattern(/^\+?[a-zA-Z0-9\s]{1,25}$/)]);
         billingAddressCountryControl?.setValidators([Validators.required]);
+        mobileNumberControl?.setValidators([this.mobileNumberValidator()]);
       } else {
         alternateEmailControl?.setValidators([Validators.email,Validators.required]);
-        mobileNumberControl?.setValidators([Validators.required]);  
+        // mobileNumberControl?.setValidators([Validators.required]);  
+        mobileNumberControl?.setValidators([Validators.required, this.mobileNumberValidator()]);
         addressStreetIndividualControl?.clearValidators();  
         addressCityIndividualControl?.clearValidators();
         addressPostIndividualControl?.setValidators([Validators.pattern(/^\+?[a-zA-Z0-9\s]{0,25}$/)]);
@@ -514,6 +516,32 @@ private patchBillingAddressDetails(): void {
       this.isSameAddress = !!this.form.get('use')?.value;
     }
     
+    mobileNumberValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        debugger;
+        const mobileNumber = control.value;
+        if (!mobileNumber || typeof mobileNumber !== 'object') {
+          const typeValue = this.form.get('type')?.value;
+          if (typeValue !== 'INDIVIDUAL'){
+            return { required: true };
+          }
+        }
+    
+        const phoneNumber = mobileNumber?.number;
+    
+        if (!phoneNumber) {
+          return null;
+        }
+
+        const validPhoneNumberPattern = /^(\+|00)[1-9][0-9 \-\(\)\.]{10,32}$/;
+
+        if (phoneNumber && !validPhoneNumberPattern.test(phoneNumber)) {
+          return { mobileNumberInvalid: true };
+        }
+    
+        return null;
+      };
+    }
 
     
  
