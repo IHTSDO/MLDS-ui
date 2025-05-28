@@ -29,6 +29,7 @@ export class ViewReleasesComponent implements OnInit {
   releasePackagesByMember: { member: any, packages: any[] }[] = [];
   public releasePackage: any;
   alphaReleasePackagesByMember: { member: any, packages: any[] }[] = [];
+  offlinePackagesByMember: { member: any, packages: any[] }[] = [];
   standingState!: string;
   primaryApplication: any[] = [];
   applications: any;
@@ -77,6 +78,7 @@ export class ViewReleasesComponent implements OnInit {
         this.releasePackage = data;
         this.updateReleasePackagesByMember(this.releasePackage);
         this.updateAlphaReleasePackagesByMember(this.releasePackage);
+        this.updateOfflinePackagesByMember(this.releasePackage);
       }
     });
   }
@@ -143,6 +145,48 @@ export class ViewReleasesComponent implements OnInit {
     }
     
     }
+    this.isLoading = false;
+    this.scrollToFragment();
+  }
+
+
+   updateOfflinePackagesByMember(releasePackages: any[]): void {
+    const filteredPackages = lodash.filter(releasePackages, this.packageUtilsService.isPackageOffline);
+    const nonPublishedPackages = lodash.reject(filteredPackages, this.packageUtilsService.isPackagePublished);
+    const removeEmptyFiles = lodash.reject(nonPublishedPackages, this.packageUtilService.isPackageEmpty);
+
+    const groupedByMember = lodash.groupBy(removeEmptyFiles, (p) => p.member.key);
+
+    this.offlinePackagesByMember = lodash.map(groupedByMember, (packages, memberKey) => ({
+      member: this.memberService.membersByKey[memberKey],
+      packages: this.packageUtilsService.releasePackageSort(packages)
+    }));
+
+    const sessionMember = this.sessionMember;
+    if (sessionMember != null) {
+      const offlineMemberRelease = lodash.find(this.offlinePackagesByMember, (item) => {
+        return sessionMember['key'] != null && sessionMember['key'] !== 'undefined' && sessionMember['key'] !== "IHTSDO" &&
+               item.member.key === sessionMember['key'];
+      });
+
+      if (offlineMemberRelease) {
+        lodash.each(this.offlinePackagesByMember, (item) => {
+            if (item.member.key === "IHTSDO") {           
+                if (!item.packages) {
+                    item.packages = []; 
+                }
+    
+                lodash.each(offlineMemberRelease.packages, (releasePackage) => {
+                    item.packages.push(releasePackage);
+                });
+    
+                item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+            }
+        });
+    }
+    
+    }
+
   }
 
   updateAlphaReleasePackagesByMember(releasePackages: any[]): void {
@@ -242,9 +286,7 @@ export class ViewReleasesComponent implements OnInit {
     this.router.navigate(['/extensionApplication', this.matchingExtensionApplication.applicationId]);
   }
 
-
-  
-  toggleAccordion(index: number, section: 'online' | 'alphaBeta'): void {
+  toggleAccordion(index: number, section: 'online' | 'alphaBeta' | 'offline'): void {
     const key = `${section}-${index}`;  
     if (this.openAccordions.has(key)) {
       this.openAccordions.delete(key);
@@ -253,7 +295,7 @@ export class ViewReleasesComponent implements OnInit {
     }
   }
 
-  isAccordionOpen(index: number, section: 'online' | 'alphaBeta'): boolean {
+  isAccordionOpen(index: number, section: 'online' | 'alphaBeta' | 'offline'): boolean {
     const key = `${section}-${index}`;
     return this.openAccordions.has(key);
   }

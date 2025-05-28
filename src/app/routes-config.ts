@@ -136,5 +136,7 @@ export const ROUTES = {
 
   logout : '/logout',
 
+  releaseConfig:'/releaseConfig',
+
   activate : '/activate'
 };

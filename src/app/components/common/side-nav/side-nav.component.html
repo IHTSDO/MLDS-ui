@@ -23,6 +23,12 @@
         <span>{{ 'releaseManagement.title' | translate | compareText: 'Release Management' }}</span>
       </a>
     </li>
+    <li *ngIf="isAdmin" [class.selected]="selectedItem === 16" 
+    (mouseenter)="hoverItemChange(23)" (mouseleave)="hoverItemChange(null)">
+       <a [routerLink]="[routes.releaseConfig]" (click)="selectItem(16)">
+      <i class="fas fa-cube"></i>&nbsp;
+      <span>Releases - Config</span>
+  </a>
     <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 3" 
         (mouseenter)="hoverItemChange(3)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.archiveReleases]" (click)="selectItem(3)">

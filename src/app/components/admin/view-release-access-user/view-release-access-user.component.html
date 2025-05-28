@@ -1,0 +1,29 @@
+<app-modal
+  [title]="'Users with Access'"
+  (onCancel)="activeModal.dismiss()"
+  [submitText]="submitText"
+>
+<div modal-body>
+    <div class="scrollable-table">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>User Email</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of sortUsersByLogin(users); let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user }}</td>
+        <td>
+          <i class="fa fa-times-circle" aria-hidden="true" (click)="removeUser(user)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+</app-modal>

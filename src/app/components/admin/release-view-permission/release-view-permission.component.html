@@ -1,0 +1,67 @@
+<div class="row" style="padding-top: 5rem;">
+    <span><a [routerLink]="['/releaseConfig']"><i class="fa fa-angle-double-left"></i> Back to Configuration</a></span>
+    <br><br>
+    <h2>Releases - View Permission</h2>
+
+    <div *ngIf="masterReleasePermissions.length > 0">
+        <h4>Master Configuration</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Release Type</th>
+                    <th>Permission Type</th>
+                    <th>Remove Permission</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let releasePermission of masterReleasePermissions; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{releasePermission.releaseType}}</td>
+                    <td>{{ getReleasePermissionText(releasePermission.releasePermissionType) }}
+
+                        <button type="button" class="btn btn-info" *ngIf="releasePermission.releasePermissionType === 'ADMIN_STAFF_SELECTED_USERS'" 
+                        (click)="getMasterUserAccess(releasePermission.releaseType)" class="btn btn-primary btn-sm ml-2">
+                        View Selected Users
+                    </button>
+                    </td>
+                    <td>
+                      <i class="fa fa-times-circle" aria-hidden="true" (click)="removePermission(releasePermission)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="releasePermissions.length > 0">
+        <h4>Each Release Configuration</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Release Name</th>
+                    <th>Permission Type</th>
+                    <th>Remove Permission</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let releasePermission of sortedReleaseNames; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{releasePermission.name}}</td>
+                    <td>{{ getReleasePermissionText(releasePermission.permissionType) }}
+
+                        <button type="button" class="btn btn-info" *ngIf="releasePermission.permissionType === 'ADMIN_STAFF_SELECTED_USERS'" 
+                            (click)="getUserAccess(releasePermission.releasePackageId)" 
+                            class="btn btn-primary btn-sm ml-2">
+                        View Selected Users
+
+                        </button>
+                    </td>
+                    <td>
+                        <i class="fa fa-times-circle" aria-hidden="true" (click)="removePermission(releasePermission)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
