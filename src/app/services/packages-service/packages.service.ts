@@ -73,6 +73,73 @@ export class PackagesService {
     );
   }
 
+   getReleaseTypes(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/releaseTypes`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+   getReleasePermission(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/releasePermission`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getMasterReleasePermission(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/masterReleasePermission`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPermissionedUser(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}/usersAccess`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getMasterPermissionedUser(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/masterUsersAccess?releaseType=${id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getReleaseVisiblity(id: string): Observable<string> {
+  return this.http.get<string>(`${this.apiUrl}/viewVisiblity/${id}`).pipe(
+    catchError(this.handleError)
+  );
+  }
+
+
+  updateReleasesPackageType(selectedReleses: string[], releasePackageType: string, selectedUsers: string[]): Observable<any> {
+    const body = { releases: selectedReleses, releasePackageType: releasePackageType, users: selectedUsers };
+    return this.http.put<any>(`${this.apiUrl}/releasePackages/updatePermissionType`, body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  updateReleasesPackageMasterType(selectedReleses: string, releasePermissionType: string, selectedUsers: string[]): Observable<any> {
+    const body = { releaseType: selectedReleses, releasePackage: "ALL", releasePermissionType: releasePermissionType, users: selectedUsers};
+    return this.http.post<any>(`${this.apiUrl}/releasePackages/ConfigPermissionType`, body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  updateUserAccess(releaseId: string, user: string): Observable<any> {
+    const body = { releaseId: releaseId, user: user};
+    return this.http.put(`${this.apiUrl}/userAccessRevoke`, body, { responseType: 'text' }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  releaseAccessRevoke(releaseId: string, permissionType: string): Observable<any> {
+    const body = { releaseId: releaseId, permissionType: permissionType};
+    return this.http.put(`${this.apiUrl}/releaseAccessRevoke`, body, { responseType: 'text' }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Something went wrong; please try again later.'));

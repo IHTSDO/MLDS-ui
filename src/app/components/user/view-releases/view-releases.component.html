@@ -19,7 +19,7 @@
   </div>
 </div>
 
-
+<!-- online packages -->
 <div *ngFor="let memberReleases of releasePackagesByMember | sortLimit: memberPackageService.orderByJustName : 1">
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-12">
@@ -80,7 +80,8 @@
   </div>
 </div>
 <br>
-<div *ngIf="sessionService.isAuthenticated()">
+<!-- alpha beta packages -->
+<div>
 <div *ngFor="let memberReleases of alphaReleasePackagesByMember | sortLimit: memberPackageService.orderByJustName : 1">
   <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -146,9 +147,75 @@
 </div>
 <br>
 
+<!-- snomed international offline releases -->
+ <div>
+  <div *ngFor="let memberReleases of offlinePackagesByMember | sortLimit: memberPackageService.orderByJustName : 1">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="release-header">
+          <h2 >
+            {{'global.member.'+memberReleases.member.key| translate}} - Offline Releases
+            <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">{{'global.word.viewlicense' | translate |compareText:'View License'}}</a>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngFor="let releasePackage of memberReleases.packages">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default release-package">
+          <div class="panel-heading">				
+  
+                <h3 class="panel-title"><span class="panel-title-link language-option" (click)="goToViewPackagePage(releasePackage.releasePackageId)">{{releasePackage.name}}</span>
+  
+              <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="alert-danger-flag float-end"
+              >
+              {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
+              </span>
+    
+              <span  *ngIf="sessionService.isAuthenticated() && isPendingInvoice && userAffiliateService.isMembershipApproved(memberReleases.member)" class="alert-danger-flag float-end"
+              >
+              {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
+              </span>
+    
+              <button class="red-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" (click)="navigateTo('/affiliateRegistration')"
+              >
+              {{ 'views.releases.warning.pAttention'| translate }}
+            </button>
+    
+              <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="alert-danger-flag float-end"
+              >
+              {{'views.releases.warning.pProcessed'  | translate }}
+              </span>
+    
+              <button class="greenbutton"  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)"
+              (click)="packageUtilService.openExtensionApplication(releasePackage)">
+              {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
+              </button>
+    
+              <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="alert-danger-flag float-end"
+              >
+              {{'views.releases.warning.aProcessed' | translate |compareText:'Application being processed'}}
+              </span>
+    
+              <button class="red-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)"
+              (click)="goToExtensionApplication()">
+              {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
+            </button>     
+              </h3>     
+  
+          </div>
+          <div class="panel-body">
+            <div [innerHTML]="releasePackage?.description | linkAddblank"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <br>
 
 
-
+<!-- member country -->
 
 <div class="row">
   <div class="col-12">
@@ -232,7 +299,7 @@
 
 <br><br>
 
-<div *ngIf="sessionService.isAuthenticated()">
+<div>
 <div class="row">
   <div class="col-12">
       <div class="release-divider">
@@ -312,5 +379,91 @@
   </div>
 </div>
 </div>
+
+
+<br><br>
+
+<div>
+<div class="row">
+  <div class="col-12">
+      <div class="release-divider">
+          <h2>{{'views.releases.memberCountries'|translate|compareText:'Member Countries'}} -Offline Releases</h2>
+          <p [innerHTML]="('views.releases.countryIsMissing' | translate)"></p> 
+          </div>
+  </div>
+</div>
+
+
+<div class="accordion" style="width: 131rem;" id="accordionExample">
+  <div *ngFor="let memberReleases of sortByMemberKey(offlinePackagesByMember); let i = index">
+      <div>
+          <div class="header">
+              <h2 [id]="'heading-' + memberReleases.member.key">
+                     <button class="accordion-button header" type="button" (click)="toggleAccordion(i, 'offline')"  [ngClass]="isAccordionOpen(i, 'offline') ? 'open' : 'closed'" >
+                      <span>{{'global.member.'+ memberReleases.member.key |translate}}</span>
+                      <a class="btn btn-sm btn-link" (click)="viewLicense(memberReleases.packages[0].member.key)">
+                          {{'global.word.viewlicense'|translate|compareText:'View License'}}
+                      </a>
+                  </button>
+              </h2>
+              <div *ngIf="isAccordionOpen(i, 'offline')" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                      <div *ngFor="let releasePackage of memberReleases.packages">
+                          <div class="d-flex justify-content-between">
+                              <h3>
+                                  <a class="back" (click)="goToViewPackagePage(releasePackage.releasePackageId)">
+                                      {{ releasePackage.name }}
+                                  </a>
+                              </h3>
+                              <h3>
+                                  <span  *ngIf="sessionService.isAuthenticated() && isAccountDeactivated" class="alert-danger-flag float-end"
+                                  >
+                                  {{'views.releases.warning.deactivated' | translate |compareText:'Account Deactivated'}}
+                                  </span>
+                        
+                                  <span  *ngIf="sessionService.isAuthenticated() && isPendingInvoice && userAffiliateService.isMembershipApproved(memberReleases.member)" class="alert-danger-flag float-end"
+                                  >
+                                  {{'views.releases.warning.pending'  | translate |compareText: 'Pending Invoice'}}
+                                  </span>
+                        
+                                  <button class="red-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationWaitingForApplicant" (click)="navigateTo('/affiliateRegistration')"
+                                  >
+                                  {{ 'views.releases.warning.pAttention'| translate }}
+                                </button>
+                        
+                                  <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && !isPrimaryApplicationWaitingForApplicant && !isPrimaryApplicationApproved" class="alert-danger-flag float-end"
+                                  >
+                                  {{'views.releases.warning.pProcessed'  | translate }}
+                                  </span>
+                        
+                                  <button class="greenbutton" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipUnstarted(memberReleases.member)" 
+                                  (click)="packageUtilService.openExtensionApplication(releasePackage)">
+                                  {{'views.releases.warning.apply' | translate |compareText:'Apply for extension'}}
+                                  </button>
+                        
+                                  <span  *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && !isApplicationWaitingForApplicant(memberReleases)" class="alert-danger-flag float-end"
+                                  >
+                                  {{'views.releases.warning.aProcessed' | translate |compareText:'Application being processed'}}
+                                  </span>
+                        
+                                  <button class="red-button" *ngIf="sessionService.isAuthenticated() && !isAccountDeactivated && isPrimaryApplicationApproved && !isIHTSDOPackage(memberReleases.member) && isMembershipIncomplete(memberReleases.member) && isApplicationWaitingForApplicant(memberReleases)"
+                                  (click)="goToExtensionApplication()">
+                                  {{'views.releases.warning.aAttention' | translate |compareText:'Application needs attention, click to continue application'}}
+                                </button>        
+                              </h3>
+                          </div>
+                          <div style="border-top: 4px solid #8dccdc; padding-top: 5px;">
+                              <div [innerHTML]="releasePackage?.description | linkAddblank"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>
+
 </div>
 

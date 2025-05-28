@@ -45,6 +45,8 @@ import { ExtensionApplicationComponent } from './components/user/extension-appli
 import { FullPageUsageLogComponent } from './components/common/full-page-usage-log/full-page-usage-log.component';
 import { AffiliateRegistrationComponent } from './components/user/affiliate-registration/affiliate-registration.component';
 import { UserNotificationComponent } from './components/common/user-notification/user-notification.component';
+import { ReleaseManagementConfigComponent } from './components/admin/release-management-config/release-management-config.component';
+import { ReleaseViewPermissionComponent } from './components/admin/release-view-permission/release-view-permission.component';
 
 
 
@@ -93,6 +95,8 @@ const routes: Routes = [
       { path: 'importAffiliates', component: ImportAffiliatesComponent},
       { path: 'releaseManagement', component: ReleaseManagementComponent},
       { path: 'releaseManagement/release/:packageId', component: ReleaseComponent},
+      { path: 'releaseConfig', component: ReleaseManagementConfigComponent},
+      { path: 'releaseConfig/viewPermissions', component: ReleaseViewPermissionComponent},
       { path: 'archiveReleases', component: ArchiveManagementComponent},
       { path: 'archiveReleases/archivePackage/:packageId', component: ArchiveVersionsComponent},
       { path: 'ihtsdoReleases', component: IhtsdoReleasesComponent},

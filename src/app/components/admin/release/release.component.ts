@@ -21,6 +21,7 @@ import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 import { RemoveHtmlPipe } from 'src/app/pipes/remove-html/remove-html.pipe';
+import { ViewReleaseAccessUserComponent } from '../view-release-access-user/view-release-access-user.component';
 
 
 @Component({
@@ -44,20 +45,54 @@ export class ReleaseComponent {
   };
   isAdmin : boolean | undefined;
   isLoading: boolean = true;
+  isMasterPermissionPresent: boolean = true;
+  viewPermission: string = '';
+  releaseType: string = '';
 
   constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService,
      private releaseFileService: ReleaseFileService,private sessionService: AuthenticationSharedService) { }
 
   ngOnInit(): void {
-    this.loadReleasePackageId();
     this.isAdmin=this.sessionService.isAdmin();
+    this.loadReleasePackageId();
   }
 
-  loadReleasePackageId(): void {
+ loadReleasePackageId(): void {
     this.route.paramMap.subscribe(params => {
       this.packageId = params.get('packageId');
       if (this.packageId) {
         this.getReleasePackage(this.packageId);
+        if(this.isAdmin){
+          this.packagesService.getReleaseVisiblity(this.packageId).subscribe({
+            next: (data: any) => {
+              let permissionType = data.permissionType;
+              this.isMasterPermissionPresent = data.masterPermission;
+              this.releaseType = data.releaseType;
+              if(permissionType == "NOT_SELECTED"){
+                this.viewPermission = "NOT CONFIGURED"
+              }
+              if(permissionType == "ADMIN_ONLY"){
+                this.viewPermission = "ADMIN"
+              }
+              if(permissionType == "ADMIN_AND_STAFF"){
+                this.viewPermission = "ADMIN, STAFF, MEMBER"
+              }
+              if(permissionType == "ADMIN_STAFF_AFFILIATES"){
+                this.viewPermission = "ADMIN, STAFF, MEMBER, AFFLIATES"
+              }
+              if(permissionType == "ADMIN_STAFF_SELECTED_USERS"){
+                this.viewPermission = "ADMIN, STAFF, MEMBER, SELECTED AFFILIATES"
+              }
+              if(permissionType == "EVERYONE"){
+                this.viewPermission = permissionType;
+              }
+              
+            },
+            error: (error) => {
+              console.error(error);
+            }
+          })
+        }
       }
     });
   }
@@ -269,6 +304,53 @@ export class ReleaseComponent {
       }
     );
   }
+
+
+  
+  getPermissionedUsers(){
+    if(this.packageId){
+    if(this.isMasterPermissionPresent){
+      this.getMasterUserAccess(this.releaseType)
+    }
+    else{
+      this.getUserAccess(this.packageId)
+    }}
+  }
+
+
+   getUserAccess(id: string) {
+      this.packagesService.getPermissionedUser(id).subscribe({
+        next: (data: any[]) => {
+            const modalRef = this.modalService.open(ViewReleaseAccessUserComponent, {
+                  size: 'lg',
+                  backdrop: 'static'
+                });
+            modalRef.componentInstance.users = data;
+            modalRef.componentInstance.id = id;
+        },
+        error: (error) => {
+          console.error('Error', error);
+        }
+    });
+    }
+  
+  
+    getMasterUserAccess(id: string) {
+      this.packagesService.getMasterPermissionedUser(id).subscribe({
+        next: (data: any[]) => {
+            const modalRef = this.modalService.open(ViewReleaseAccessUserComponent, {
+                  size: 'lg',
+                  backdrop: 'static'
+                });
+            modalRef.componentInstance.users = data;
+            modalRef.componentInstance.id = id.toUpperCase();
+        },
+        error: (error) => {
+          console.error('Error', error);
+        }
+    });
+    }
+
 
 
 }

@@ -35,6 +35,11 @@
     <div [innerHTML]="packageEntity.description | linkAddblank"></div>
   </div>
 
+   <button type="button" *ngIf="isAdmin" class="btn btn-primary view-access">
+     <i class="fa fa-eye" aria-hidden="true"></i> Release Visibility: {{viewPermission}}
+     <i *ngIf="viewPermission.includes('SELECTED AFFILIATES')" class="fa fa-info-circle" aria-hidden="true" (click)="getPermissionedUsers()"></i>
+   </button>
+
 
   <div class="col-lg-12">
   </div>
