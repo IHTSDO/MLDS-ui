@@ -44,6 +44,7 @@ import { ContactInfoComponent } from './components/common/contact-info/contact-i
 import { ExtensionApplicationComponent } from './components/user/extension-application/extension-application.component';
 import { FullPageUsageLogComponent } from './components/common/full-page-usage-log/full-page-usage-log.component';
 import { AffiliateRegistrationComponent } from './components/user/affiliate-registration/affiliate-registration.component';
+import { UserNotificationComponent } from './components/common/user-notification/user-notification.component';
 
 
 
@@ -120,6 +121,7 @@ const routes: Routes = [
       { path: 'affiliateRegistration',component: AffiliateRegistrationComponent},
       { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent },
       { path: 'usageReport/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
+      { path: 'unsubscribenotification/:affiliateId/:key', component: UserNotificationComponent },
       
     ]
   },
