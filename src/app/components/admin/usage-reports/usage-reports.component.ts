@@ -8,7 +8,7 @@ import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 /**
  * Component for displaying usage reports.
@@ -69,16 +69,22 @@ export class UsageReportsComponent implements OnInit {
    * Initializes the component by loading the first page of usage reports.
    */
 
+
   ngOnInit(): void {
     this.isAdmin = this.authenticationService.isAdmin();
     this.loadMoreUsageReports();
+  
+    // Subscribe to the searchSubject with debounce
+    this.searchSubject.pipe(
+      debounceTime(300), // Wait 300ms after the last event
+    ).subscribe((searchText) => {
+      this.loadMoreUsageReports(true, searchText);
+    });
   }
-
+  
   onSearchChange(searchText: string): void {
     this.hasMoreData = true;
-    this.searchText = searchText;
-    this.searchSubject.next(searchText);
-    this.loadMoreUsageReports(true, searchText); // Emit the search text for debouncing
+    this.searchSubject.next(searchText); // Emit the search text for debouncing
   }
 
   clearText(){
