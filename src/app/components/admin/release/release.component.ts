@@ -336,7 +336,7 @@ export class ReleaseComponent {
   
   
     getMasterUserAccess(id: string) {
-      this.packagesService.getMasterPermissionedUser(id).subscribe({
+      this.packagesService.getMasterPermissionedUser(id.toUpperCase()).subscribe({
         next: (data: any[]) => {
             const modalRef = this.modalService.open(ViewReleaseAccessUserComponent, {
                   size: 'lg',

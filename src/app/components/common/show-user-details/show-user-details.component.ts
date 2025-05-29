@@ -21,7 +21,6 @@ export class ShowUserDetailsComponent {
   constructor(private toastr: ToastrService,public activeModal: NgbActiveModal, private affiliateService: AffiliateService,private router: Router) {}
 
   updateAnyway() {
-    debugger;
     if (this.currentEmail && this.newEmail) {
       this.affiliateService.updatePrimaryEmail(this.currentEmail, this.newEmail).subscribe(
         (response) => {

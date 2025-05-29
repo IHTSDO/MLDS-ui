@@ -83,7 +83,6 @@ export class EditPeimaryEmailComponent {
     
   
     updateEmailProcess() {
-      debugger;
       if (this.emailForm.valid && this.currentEmail) {
         const newEmail = this.emailForm.value.newEmail;
         this.affiliateService.updatePrimaryEmail(this.currentEmail, newEmail).subscribe(

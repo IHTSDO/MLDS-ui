@@ -518,7 +518,6 @@ private patchBillingAddressDetails(): void {
     
     mobileNumberValidator(): ValidatorFn {
       return (control: AbstractControl): ValidationErrors | null => {
-        debugger;
         const mobileNumber = control.value;
         if (!mobileNumber || typeof mobileNumber !== 'object') {
           const typeValue = this.form.get('type')?.value;

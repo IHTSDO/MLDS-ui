@@ -25,7 +25,6 @@ export class UserNotificationComponent implements OnInit {
   ngOnInit(): void {
     const affiliateId = this.route.snapshot.paramMap.get('affiliateId');
     const key = this.route.snapshot.paramMap.get('key');
-    debugger;
     if (affiliateId && key) {
       this.userNotificationService.unsubscribeUser(affiliateId, key).subscribe({
         next: () => {
