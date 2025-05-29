@@ -25,14 +25,14 @@ export class PackagesService {
     );
   }
 
-  loadArchievePackages(): Observable<any[]> {
+  loadArchivePackages(): Observable<any[]> {
     return this.memberService.getMembers().pipe(
-      switchMap(() => this.fetchArchieveReleasePackages())
+      switchMap(() => this.fetchArchiveReleasePackages())
     );
   }
 
-  fetchArchieveReleasePackages(): Observable<any[]> {
-    return this.getArchieveReleasePackages().pipe(
+  fetchArchiveReleasePackages(): Observable<any[]> {
+    return this.getArchiveReleasePackages().pipe(
       catchError(this.handleError)
     );
   }
@@ -49,8 +49,8 @@ export class PackagesService {
     );
   }
   
-  private getArchieveReleasePackages(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/archieveReleasePackages`).pipe(
+  private getArchiveReleasePackages(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/archiveReleasePackages`).pipe(
       catchError(this.handleError)
     );
   }

@@ -57,7 +57,7 @@ export class ArchiveManagementComponent implements OnInit {
 
   extractPackages(): void {
     this.isLoading=true;
-    this.packagesService.loadArchievePackages().subscribe({
+    this.packagesService.loadArchivePackages().subscribe({
       next: (data) => {
         this.isLoading=false;
         this.packages = data;

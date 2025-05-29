@@ -1,5 +1,5 @@
 <div class="row">
-  <span class="back language-option"><a (click)="goToArchiveReleases()"><i class="fa fa-angle-double-left"></i>Back to Archive Releases</a></span>
+  <span class="back language-option"><a (click)="goToArchiveReleases()"><i class="fa fa-angle-double-left"></i>Back to Archived Releases</a></span>
 
   <div class="col-md-12">
     <div>
@@ -32,7 +32,7 @@
   <div class="col-lg-12"></div>
 
   <div class="col-lg-12">
-    <h3 class="version">Archive Versions</h3>
+    <h3 class="version"><b> Archived Versions</b></h3>
     <table class="table">
       <caption></caption>
       <thead>
@@ -87,7 +87,7 @@
   <div class="col-md-12">
     <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
     <div class="alert alert-warning" *ngIf="!isLoading && versions['archive'].length == 0">
-      <i class="fa fa-exclamation-circle"></i> There are currently no archive versions of this release.
+      <i class="fa fa-exclamation-circle"></i> There are currently no archived versions of this release.
     </div>
   </div>
 </div>
