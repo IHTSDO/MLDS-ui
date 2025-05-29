@@ -132,7 +132,8 @@ export class ArchiveVersionsComponent implements OnInit {
   private openReleaseVersionModal(releaseVersion: any = {}): void {
     this.openModal(AddEditReleaseVersionModalComponent, 'lg', 'static', {
       releasePackage: { ...this.packageEntity },
-      releaseVersion: { ...releaseVersion }
+      releaseVersion: { ...releaseVersion },
+      isArchivePage: true
     });
   }
 

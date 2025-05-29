@@ -57,7 +57,7 @@
 
   <div class="form-group">
     <label for="releaseType">Release Type<span class="text-danger">*</span></label>
-    <select class="form-select" formControlName="releaseType">
+    <select class="form-select" formControlName="releaseType" [ngClass]="{ 'disabled-select': isArchivePage }">
       <option value="">Select Release Type</option>
       <option value="online">Online</option>
       <option value="offline">Offline</option>

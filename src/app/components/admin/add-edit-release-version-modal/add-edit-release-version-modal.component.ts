@@ -17,6 +17,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 export class AddEditReleaseVersionModalComponent implements OnInit {
   @Input() releasePackage: any;
   @Input() releaseVersion: any;
+  @Input() isArchivePage: boolean = false;
   @ViewChild('nameInput', { static: false }) nameInput!: ElementRef;
   releaseVersionForm!: FormGroup;
   isNewObject = false;
@@ -49,7 +50,6 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
       versionDependentURI: [this.releaseVersion?.versionDependentURI || ''],
       versionDependentDerivativeURI: [this.releaseVersion?.versionDependentDerivativeURI || ''],
       releaseType: [this.releaseVersion?.releaseType || '', Validators.required],
-      // publishedAt: [this.releaseVersion?.publishedAt ? this.convertToNgbDate(new Date(this.releaseVersion.publishedAt)) : ''],
       publishedAt: [this.releaseVersion?.publishedAt ? this.convertToNgbDate(new Date(this.releaseVersion.publishedAt)) : null],
     });
   }
