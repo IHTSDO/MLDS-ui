@@ -21,25 +21,24 @@
   </div>
 
 
-  <div class="col-md-4">
-    <div class="input-group">
-      <label class="exclude-checkbox">
-        <input type="checkbox" [(ngModel)]="ExcludeAdminAndStaff" (change)="loadReleaseFileDownloadCounts()" />
-        Exclude
-        Admin and Staff
-      </label>
+    <div class="col-md-4">
+      <div class="input-group">
+        <label class="exclude-checkbox">
+          <input type="checkbox" [(ngModel)]="ExcludeAdminAndStaff" (change)="loadReleaseFileDownloadCounts()" /> Exclude
+          SNOMED International users
+        </label>
+      </div>
     </div>
-  </div>
-
-  <div class="col-md-4">
-    <button class="review-button" style="margin-left: 10rem; margin-top: 5px;"
-      (click)="loadReleaseFileDownloadCountsCSV()" [disabled]="releaseFileDownloadCounts?.length === 0 || downloading">
-      <span *ngIf="!downloading"><i class="fa fa-download"></i></span>
-      <span *ngIf="downloading"><i class="fa fa-spinner fa-spin"></i></span>
-      Export Details as CSV
-    </button>
-  </div>
-
+    
+    <div class="col-md-4">
+      <button class="review-button" style="margin-left: 10rem; margin-top: 5px;"
+        (click)="loadReleaseFileDownloadCountsCSV()" [disabled]="releaseFileDownloadCounts?.length === 0 || downloading">
+        <span *ngIf="!downloading"><i class="fa fa-download"></i></span>
+        <span *ngIf="downloading"><i class="fa fa-spinner fa-spin"></i></span>
+        Export Details as CSV
+      </button>
+    </div>
+    </div>
 
   <div class="col-md-12">
     <div class="table-responsive">
