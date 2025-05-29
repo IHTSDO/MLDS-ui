@@ -52,24 +52,24 @@
           </tr>
         </thead>
 
-        <tbody *ngIf="!submitting">
-          <ng-container *ngIf="releaseFileDownloadCounts?.length === 0; else dataRows">
-            <tr>
-              <td colspan="4" class="text-center">No data found</td>
-            </tr>
-          </ng-container>
-
-          <ng-template #dataRows>
-            <tr *ngFor="let release of releaseFileDownloadCounts">
-              <td>{{ release.releasePackageName }}</td>
-              <td>{{ release.releaseVersionName }}</td>
-              <td>{{ release.releaseFileName }}</td>
-              <td>{{ release.count }}</td>
-            </tr>
-          </ng-template>
-        </tbody>
-      </table>
-      <div *ngIf="submitting" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+          <tbody *ngIf="!submitting">
+            <ng-container *ngIf="releaseFileDownloadCounts?.length === 0; else dataRows">
+              <tr>
+                <td colspan="4" class="text-center">No data found</td>
+              </tr>
+            </ng-container>
+            
+            <ng-template #dataRows>
+              <tr *ngFor="let release of releaseFileDownloadCounts">
+                <td>{{ release.releasePackageName }}</td>
+                <td>{{ release.releaseVersionName }}</td>
+                <td>{{ transformToPlainText(release.releaseFileName) }}</td>
+                <td>{{ release.count }}</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+        <div *ngIf="submitting" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+      </div>
     </div>
   </div>
-</div>

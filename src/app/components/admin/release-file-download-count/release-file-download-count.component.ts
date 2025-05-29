@@ -113,6 +113,13 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
       "Release Version",
       "Release File Name"
     ];
+
+    const escapeCSVField = (field: string): string => {
+      if (typeof field === 'string' && (field.includes(',') || field.includes('"') || field.includes('\n'))) {
+        return `"${field.replace(/"/g, '""')}"`;
+      }
+      return field || '';
+    };
   
     const csvRows = data.map(item => {
       const [date, time] = item.auditEventDate.split('T');
@@ -120,9 +127,9 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
         date,
         time.replace('Z', ''), 
         item.principal,
-        item.data["releasePackage.name"] || '',
-        item.data["releaseVersion.name"] || '',
-        item.data["releaseFile.label"] || ''
+        escapeCSVField(item.data["releasePackage.name"] || ''),
+        escapeCSVField(item.data["releaseVersion.name"] || ''),
+        escapeCSVField(this.transformToPlainText(item.data["releaseFile.label"] || ''))
       ].join(','); 
     });
   
@@ -135,6 +142,12 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
     link.download = `ReleaseFileDownloadData.csv`;
     link.click();
     URL.revokeObjectURL(url);
+  }
+
+  transformToPlainText(richText: string): string {
+    const div = document.createElement('div');
+    div.innerHTML = richText;
+    return (div.innerText || div.textContent || '').trim();
   }
   
 }
