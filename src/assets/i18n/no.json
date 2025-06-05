@@ -1056,11 +1056,11 @@
         "landingPage": {
             "appName": "Lisens- og distribusjonsportalen for SNOMED CT",
             "purpose": "Denne portal benyttes av terminologisenteret i det norske Direktoratet for e-helse til lisensadministrasjon og brukerrapportering for den internasjonale og norsk release av Snomed CT ved bruk i Norge.",
-            "furtherDetails": "Mer informasjon finner du på den <a href=\"https://ehelse.no/standarder-kodeverk-og-referansekatalog/helsefaglige-kodeverk/snomed-ct\" target=_blank>SNOMED CTs norske hjemmeside</a> og <a href=\"https://www.snomed.org\" target=_blank>SNOMED International:s hjemmeside</a> og på internettsiden med <a href=\"https://ihtsdo.freshdesk.com/support/solutions/4000002199\" target=_blank>vanlige spørsmål</a>.",
+            "furtherDetails": "Mer informasjon finner du på den <a href=\"https://www.helsedirektoratet.no/digitalisering-og-e-helse/helsefaglig-terminologi/hvordan-ta-i-bruk-snomed-ct\" target=_blank>SNOMED CTs norske hjemmeside</a> og <a href=\"https://www.snomed.org\" target=_blank>SNOMED International:s hjemmeside</a> og på internettsiden med <a href=\"https://ihtsdo.freshdesk.com/support/solutions/4000002199\" target=_blank>vanlige spørsmål</a>.",
             "loginHere": "login here",
-            "member.purpose1": "MLDS is a tool used by the NRC in ",
-            "member.purpose2": " to manage the Affiliate Licensing of SNOMED CT including new applications, renewals and usage reporting within ",
-            "member.purpose3": " and where relevant in non member countries."
+            "member.purpose1": "MLDS er verktøyet det norske NRC (national release center) bruker til å administrere SNOMED CT-lisenser i ",
+            "member.purpose2": " på vegne av Helsedirektoratet. Det omfatter behandling av nye lisenssøknader, fornying av eksisterende lisenser og rapportering om bruk i ",
+            "member.purpose3": " og eventuell bruk i ikke-medlemsland."
         },
         "releases": {
             "title": "Releaser som er tilgjengelig for registrerte brukere",
