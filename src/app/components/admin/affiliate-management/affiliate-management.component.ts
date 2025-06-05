@@ -508,7 +508,7 @@ loadMoreAffiliatess(): void {
     const affiliateDetails = this.affiliateActiveDetails(affiliate);
     const type = affiliateDetails.type ? this.translateService.instant('affiliate.type.' + affiliateDetails.type) : '';
     const subType = affiliateDetails.subType ? this.translateService.instant('affiliate.subType.' + affiliateDetails.subType) : '';
-    const otherText = affiliateDetails.otherText || '';
+    const otherText = affiliateDetails?.otherText || '';
     const response = type + ' - ' + subType;
     const formatDate = (dateString: string | undefined) => {
       if (!dateString) return '';
@@ -519,22 +519,22 @@ loadMoreAffiliatess(): void {
       return `${day}/${month}/${year}`;
     };
     return [
-      affiliate.affiliateId,
-      `${affiliateDetails.firstName} ${affiliateDetails.lastName}`,
-      affiliateDetails.organizationName || '',
-      affiliateDetails.organizationType || '',
+      affiliate?.affiliateId,
+      `${affiliateDetails?.firstName || ''} ${affiliateDetails?.lastName || ''}`.trim(),
+      affiliateDetails?.organizationName || '',
+      affiliateDetails?.organizationType || '',
       [response ,otherText].filter(value => value), this.translateService.instant('affiliate.standingState.' + (affiliate?.standingState || '')),
-      affiliateDetails.address.country.commonName || '',
-      affiliate.homeMember.key || '',
-      affiliateDetails.email || '',
-      affiliateDetails.billingAddress?.street || '',
-      affiliateDetails.billingAddress?.city || '',
-      affiliateDetails.billingAddress?.post || '',
+      affiliateDetails?.address?.country?.commonName || '',
+      affiliate?.homeMember?.key || '',
+      affiliateDetails?.email || '',
+      affiliateDetails?.billingAddress?.street || '',
+      affiliateDetails?.billingAddress?.city || '',
+      affiliateDetails?.billingAddress?.post || '',
       
       affiliate.application?.submittedAt ?  formatDate(affiliate.application.submittedAt) : '',
       affiliate.application?.completedAt ? formatDate(affiliate.application.completedAt): '',
       
-      affiliateDetails.agreementType || ''
+      affiliateDetails?.agreementType || ''
     ];
   }
   

@@ -203,11 +203,11 @@ export class PendingApplicationsComponent implements OnInit {
               return isPrimary ? `${translatedType} - ${translatedSubType}` : translatedType;
             },
             
-            (application: any) => new Date(application.submittedAt).toISOString().split('T')[0],
+            (application: any) => application?.submittedAt ? new Date(application.submittedAt).toISOString().split('T')[0] : '',
             (application: any) => this.translateService.instant('approval.state.'+ (application.approvalState ?? '')),
-            (application: any) => application.affiliateDetails.address.country.commonName,
+            (application: any) => application?.affiliateDetails?.address?.country?.commonName || '',
             (application: any) => this.translateService.instant('global.member.'+ (application.member.key?? '')),
-            (application: any) => application.affiliateDetails.email,
+            (application: any) => application?.affiliateDetails?.email || ''
           ];
 
           const result = response.map((application: any) => {
