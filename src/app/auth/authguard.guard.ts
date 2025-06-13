@@ -40,6 +40,9 @@ export const authguardGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  router.navigate(['/']);
+  const fullUrl = window.location.href; // 🧠 Use full URL to preserve hash-based paths
+  localStorage.setItem('redirectAfterLogin', fullUrl); // ✅ Save before redirect
+
+  router.navigate(['/login']); // or router.navigate([ROUTES.login]);
   return false;
 };

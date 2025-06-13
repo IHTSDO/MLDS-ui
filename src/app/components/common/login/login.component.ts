@@ -87,6 +87,7 @@ export class LoginComponent {
    */
   login() {
     this.submitting = true;
+  
     this.authenticationService.login(this.username, this.password, this.rememberMe)
       .pipe(
         finalize(() => {
@@ -95,25 +96,37 @@ export class LoginComponent {
       )
       .subscribe({
         next: (data) => {
-          if(this.authenticationService.isStaffOrAdmin()){
-            this.router.navigate([this.routes.pendingApplications]);
-          }
-          else if(this.authenticationService.isMember()){
-            this.router.navigate([this.routes.ihtsdoReleases]);
-          }
-          else {
+          const redirectUrl = localStorage.getItem('redirectAfterLogin');
+  
+          if (this.authenticationService.isStaffOrAdmin()) {
+            if (redirectUrl) {
+              localStorage.removeItem('redirectAfterLogin');
+              window.location.href = redirectUrl; // ✅ Full URL redirect
+              return;
+            } else {
+              this.router.navigate([this.routes.pendingApplications]);
+            }
+          } else {
             this.userAffiliateService.loadUserAffiliate().subscribe({
               next: () => {
-                if(this.applicationUtilsService.isApplicationWaitingForApplicant(this.userAffiliateService.affiliate.application))
-                {
-                  this.router.navigate(['/affiliateRegistration']);       
-                }
-                else{
+                const isWaitingForApplicant =
+                  this.applicationUtilsService.isApplicationWaitingForApplicant(
+                    this.userAffiliateService.affiliate.application
+                  );
+  
+                if (redirectUrl) {
+                  localStorage.removeItem('redirectAfterLogin');
+                  window.location.href = redirectUrl; // ✅ Full URL redirect
+                  return;
+                } else if (isWaitingForApplicant) {
+                  this.router.navigate(['/affiliateRegistration']);
+                } else {
                   this.router.navigate([this.routes.userDashboard]);
                 }
               },
               error: () => {
                 console.error('Failed to load affiliate data');
+                this.router.navigate([this.routes.userDashboard]);
               }
             });
           }
@@ -124,4 +137,5 @@ export class LoginComponent {
         }
       });
   }
+   
 }

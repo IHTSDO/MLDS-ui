@@ -77,6 +77,7 @@ export class SideNavComponent implements OnInit {
 
     // Optionally, set the selectedItem from the service if needed on initialization
     this.selectedItem = this.sidebarService.getSelectedItem();
+    
   }
  // This method should trigger a change in selectedItem
  selectItem(index: number): void {
@@ -93,10 +94,13 @@ hoverItemChange(index: number | null): void {
   onClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     const sidebar = document.getElementById('sideNav');
-
     // Check if the click is outside the sidebar
     if (sidebar && !sidebar.contains(target)) {
       this.hoverItem = null; // Deselect the hover when clicking outside
     }
+  }
+
+  checkUrl(route: string): boolean {
+    return this.router.url.includes(route);
   }
 }

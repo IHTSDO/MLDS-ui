@@ -1,7 +1,7 @@
 <div id="sideNav" class="sidebar">
   <ul class="nav nav-sidebar">
     <div>
-    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 0" 
+    <li *ngIf="isStaffOrAdmin" [class.selected]="checkUrl(routes.pendingApplications)" 
         (mouseenter)="hoverItemChange(0)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.pendingApplications]" (click)="selectItem(0)">
         <i class="fa fa-tasks"></i>&nbsp;
@@ -9,55 +9,55 @@
       </a>
     </li>
     </div>
-    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 1" 
+    <li *ngIf="isStaffOrAdmin" [class.selected]="checkUrl(routes.affiliateManagement)" 
         (mouseenter)="hoverItemChange(1)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.affiliateManagement]" (click)="selectItem(1)">
         <i class="fa fa-users"></i>&nbsp;
         <span>{{ 'affiliateManagement.title' | translate | compareText: 'Affiliate Management' }}</span>
       </a>
     </li>
-    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 2" 
+    <li *ngIf="isStaffOrAdmin" [class.selected]="checkUrl(routes.releaseManagement)" 
         (mouseenter)="hoverItemChange(2)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.releaseManagement]" (click)="selectItem(2)">
         <i class="fas fa-cube"></i>&nbsp;
         <span>{{ 'releaseManagement.title' | translate | compareText: 'Release Management' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 16" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.releaseConfig)" 
     (mouseenter)="hoverItemChange(23)" (mouseleave)="hoverItemChange(null)">
        <a [routerLink]="[routes.releaseConfig]" (click)="selectItem(16)">
       <i class="fas fa-cube"></i>&nbsp;
       <span>Releases - Config</span>
   </a>
-    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 3" 
+    <li *ngIf="isStaffOrAdmin" [class.selected]="checkUrl(routes.archiveReleases)" 
         (mouseenter)="hoverItemChange(3)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.archiveReleases]" (click)="selectItem(3)">
         <i class="fa fa-archive"></i>&nbsp;
         <span>Archived Releases</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 4" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.usageReportsReview)" 
         (mouseenter)="hoverItemChange(4)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.usageReportsReview]" (click)="selectItem(4)">
         <i class="fa fa-file-text"></i>&nbsp;
         <span>{{ 'reviewUsageReports.title' | translate | compareText: 'Review Usage Reports' }}</span>
       </a>
     </li>
-    <li *ngIf="isStaff" [class.selected]="selectedItem === 5" 
+    <li *ngIf="isStaff" [class.selected]="checkUrl(routes.reports)" 
         (mouseenter)="hoverItemChange(5)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.reports]" (click)="selectItem(5)">
         <i class="fa fa-file-text"></i>&nbsp;
         <span>Reports</span>
       </a>
     </li>
-    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 6" 
+    <li *ngIf="isStaffOrAdmin" [class.selected]="checkUrl(routes.memberManagement)" 
         (mouseenter)="hoverItemChange(6)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.memberManagement]" (click)="selectItem(6)">
         <i class="fa fa-institution"></i>&nbsp;
         <span>{{ 'memberManagement.title' | translate | compareText: 'Member Management' }}</span>
       </a>
     </li>
-    <li *ngIf="isStaffOrAdmin" [class.selected]="selectedItem === 7" 
+    <li *ngIf="isStaffOrAdmin" [class.selected]="checkUrl(routes.postAnnouncement)" 
         (mouseenter)="hoverItemChange(7)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.postAnnouncement]" (click)="selectItem(7)">
         <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
@@ -66,7 +66,7 @@
     </li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li *ngIf="isMemberOrStaffOrAdmin" [class.selected]="selectedItem === 8" 
+    <li *ngIf="isMemberOrStaffOrAdmin" [class.selected]="checkUrl(routes.ihtsdoReleases)" 
         (mouseenter)="hoverItemChange(8)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.ihtsdoReleases]" (click)="selectItem(8)">
         <i class="fa fa-download"></i>&nbsp;
@@ -75,35 +75,35 @@
     </li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 9" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.fileDownloadReport)" 
         (mouseenter)="hoverItemChange(9)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.fileDownloadReport]" (click)="selectItem(9)" style="width: 267px;">
         <i class="fa fa-cube"></i>&nbsp;
         <span>{{ 'Release File Download Count' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 10" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.activityLog)" 
         (mouseenter)="hoverItemChange(10)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.activityLog]" (click)="selectItem(10)">
         <i class="fa fa-signal"></i>&nbsp;
         <span>{{ 'activityLog.title' | translate | compareText: 'Activity Log' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 11" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.importAffiliates)" 
         (mouseenter)="hoverItemChange(11)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.importAffiliates]" (click)="selectItem(11)">
         <i class="fa fa-upload"></i>&nbsp;
         <span>{{ 'importAffiliateRecords.title' | translate | compareText: 'Import Affiliate Records' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 12" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.manageBlocklist)" 
         (mouseenter)="hoverItemChange(12)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.manageBlocklist]" (click)="selectItem(12)">
         <i class="fa fa-bolt"></i>&nbsp;
         <span>{{ 'manageBlocklist.title' | translate | compareText: 'Manage Blocklist' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 13" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.metrics)" 
         (mouseenter)="hoverItemChange(13)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.nationalRegistrationList]" (click)="selectItem(13)">
         <i class="fa fa-flag"></i>&nbsp;
@@ -112,14 +112,14 @@
     </li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 14" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.metrics)" 
         (mouseenter)="hoverItemChange(14)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.metrics]" (click)="selectItem(14)">
         <i class="fa fa-exchange"></i>&nbsp;
         <span>{{ 'metrics.title' | translate | compareText: 'System Metrics' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="selectedItem === 15" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.systemLoggers)" 
         (mouseenter)="hoverItemChange(15)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.systemLoggers]" (click)="selectItem(15)">
         <i class="fa fa-navicon"></i>&nbsp;
