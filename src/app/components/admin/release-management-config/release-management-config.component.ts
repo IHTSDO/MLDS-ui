@@ -6,11 +6,14 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import lodash from 'lodash';
 import { Router } from '@angular/router';
+import { ReleaseConfigWarningModalComponent } from '../release-config-warning-modal/release-config-warning-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoaderComponent } from '../../common/loader/loader.component';
 
 @Component({
   selector: 'app-release-management-config',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent],
   templateUrl: './release-management-config.component.html',
   styleUrl: './release-management-config.component.scss'
 })
@@ -35,10 +38,11 @@ export class ReleaseManagementConfigComponent implements OnInit {
   releaseTypes: any[] = [];
   showSuccessMessage: boolean = false;
   isEveryOneChecked: boolean = false;
+  isLoading: boolean = false;
 
 
   constructor(private releaseManagementService: ReleasePackageService, private cdr: ChangeDetectorRef, private fb: FormBuilder,
-    private packagesService: PackagesService, private packageUtilsService: PackageUtilsService,  private router: Router,
+    private packagesService: PackagesService, private packageUtilsService: PackageUtilsService,  private router: Router, private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -46,7 +50,7 @@ export class ReleaseManagementConfigComponent implements OnInit {
     this.getReleaseTypes();
     this.loadReleasePackages();
 
-      this.permissionForm = this.fb.group({
+    this.permissionForm = this.fb.group({
       isAdmin: [{ value: true, disabled: true }],
       isStaff: false,
       isAllAffiliates: false,
@@ -55,14 +59,14 @@ export class ReleaseManagementConfigComponent implements OnInit {
       isMember: false
     });
 
-this.permissionForm.valueChanges.subscribe(() => {
-  if (this.isEveryOneChecked) {
-    this.permissionReset();
-    this.isEveryOneChecked = false;
-  } else {
-    this.onCheckboxChange(); 
-  }
-});
+    this.permissionForm.valueChanges.subscribe(() => {
+      if (this.isEveryOneChecked) {
+        this.permissionReset();
+        this.isEveryOneChecked = false;
+      } else {
+        this.onCheckboxChange();
+      }
+    });
 
   }
 
@@ -123,22 +127,22 @@ this.permissionForm.valueChanges.subscribe(() => {
 
 
   getUserList() {
-  this.releaseManagementService.getUserList().subscribe(
-    (data: any[]) => {
-      this.users = data
-        .sort((a, b) => a.login.localeCompare(b.login))
-        .map(item => ({
-          login: item.login,
-          userId: item.userId,
-          selected: false
-        }));
+    this.releaseManagementService.getUserList().subscribe(
+      (data: any[]) => {
+        this.users = data
+          .sort((a, b) => a.login.localeCompare(b.login))
+          .map(item => ({
+            login: item.login,
+            userId: item.userId,
+            selected: false
+          }));
 
-    },
-    (error) => {
-      console.error('Error fetching user list:', error);
-    }
-  );
-}
+      },
+      (error) => {
+        console.error('Error fetching user list:', error);
+      }
+    );
+  }
 
 
 
@@ -252,27 +256,29 @@ this.permissionForm.valueChanges.subscribe(() => {
 
   save() {
     const selectedUsers = this.users.filter(user => user.selected).map(user => String(user.userId));
+
     if(!this.selectedPermission){
       this.selectedPermission = 'ADMIN_ONLY';
     }
-    if(this.selectedReleses.length > 0 && this.selectedPermission && !this.selectAllChecked){
-      this.packagesService.updateReleasesPackageType(this.selectedReleses, this.selectedPermission, selectedUsers).subscribe({
-        next: (response) => {
-          this.isUpdatedRecently = true;
-          this.loadReleasePackages();
 
-          this.showSuccessMessage = true;
-          setTimeout(() => {
-            this.showSuccessMessage = false;
-            this.reset();
-          }, 2000);
-        },
-        error: (err) => {
-          console.error('Error updating release package:', err);
+    if(this.selectedReleses.length > 0 && this.selectedPermission && !this.selectAllChecked){
+      this.isLoading = true;
+      this.packagesService.checkUpdateReleasesPackageType(this.selectedReleses, this.selectedPermission, selectedUsers)
+      .subscribe(response => {
+        if (response) {
+          this.isLoading = false;
+          this.openWarningModal('update');
+        } else {
+          this.updateReleasePacakgeType();
         }
+      }, (err) => {
+        this.isLoading = false;
+        console.error('Error checking configuration:', err);
       });
     }
+
     if((this.selectedReleaseType === '4' && this.selectAllChecked) || this.selectAllChecked){
+      this.isLoading = true;
       switch (this.selectedReleaseType) {
         case '1': 
           this.selectedType = 'ONLINE';
@@ -287,13 +293,33 @@ this.permissionForm.valueChanges.subscribe(() => {
           this.selectedType = 'ALL';
           break;
       }
-      const selectedUsers = this.users.filter(user => user.selected).map(user => String(user.userId));
-      this.packagesService.updateReleasesPackageMasterType(this.selectedType, this.selectedPermission, selectedUsers).subscribe({
+
+      this.packagesService.checkUpdateReleasesPackageMasterType(this.selectedType, this.selectedPermission, selectedUsers)
+      .subscribe(response => {
+        if (response) {
+          this.isLoading = false;
+          this.openWarningModal('master');
+        } else {
+          this.updateReleasePackageMasterType();
+        }
+      }, (err) => {
+        this.isLoading = false;
+        console.error('Error checking configuration:', err);
+      });     
+      
+    }
+
+  }
+
+
+  updateReleasePacakgeType(){
+    this.isLoading = true;
+    this.packagesService.updateReleasesPackageType(this.selectedReleses, this.selectedPermission, this.users.filter(user => user.selected).map(user => String(user.userId))).subscribe({
         next: (response) => {
           this.isUpdatedRecently = true;
           this.loadReleasePackages();
-
-            this.showSuccessMessage = true;
+          this.isLoading = false;
+          this.showSuccessMessage = true;
           setTimeout(() => {
             this.showSuccessMessage = false;
             this.reset();
@@ -301,10 +327,47 @@ this.permissionForm.valueChanges.subscribe(() => {
         },
         error: (err) => {
           console.error('Error updating release package:', err);
+          this.isLoading = false;
+        }
+      });
+  }
+
+  updateReleasePackageMasterType(){
+    this.isLoading = true;
+    this.packagesService.updateReleasesPackageMasterType(this.selectedType, this.selectedPermission, this.users.filter(user => user.selected).map(user => String(user.userId))).subscribe({
+        next: (response) => {
+          this.isUpdatedRecently = true;
+          this.loadReleasePackages();
+          this.isLoading = false;
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+            this.reset();
+          }, 2000);
+        },
+        error: (err) => {
+          console.error('Error updating release package:', err);
+          this.isLoading = false;
         }
       });  
-    }
+  }
 
+  openWarningModal(type: string) {
+    const modalRef = this.modalService.open(ReleaseConfigWarningModalComponent, { backdrop: 'static' });
+
+    modalRef.result.then((result) => {
+      if (result) {
+        if (type === 'update') {
+          this.updateReleasePacakgeType();
+        } else if (type === 'master') {
+          this.updateReleasePackageMasterType();
+        }
+      } else {
+        console.log('User canceled the action');
+      }
+    }, (reason) => {
+      console.log('Modal dismissed');
+    });
   }
 
   onReleaseChange() {
@@ -372,7 +435,7 @@ this.permissionForm.valueChanges.subscribe(() => {
 permissionForm!: FormGroup;
 permission = 'ADMIN_ONLY';
 
-//working
+
 onCheckboxChange(): void {
   const form = this.permissionForm;
 
@@ -425,10 +488,6 @@ onCheckboxChange(): void {
   this.cdr.detectChanges();
   this.updatePermission();
 }
-
-
-
-
 
 
   updatePermission(): void {

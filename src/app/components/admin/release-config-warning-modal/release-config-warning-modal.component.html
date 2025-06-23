@@ -1,0 +1,10 @@
+<app-modal
+  [title]="'Configuration Exists'"
+  [submitText]="'Yes, proceed and override'"
+  [cancelText]="'Cancel'"
+  (onCancel)="dismiss()"
+  (onSubmit)="ok()">
+  <div modal-body>
+    <p>The selected release packages and their associated configurations are already present. Please verify before proceeding, as it will override the existing master/each release configuration.</p>
+  </div>
+</app-modal>

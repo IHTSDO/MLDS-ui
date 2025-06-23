@@ -3,6 +3,10 @@
     <br><br>
     <h2>Releases - View Permission</h2>
 
+    <div *ngIf="masterReleasePermissions.length === 0 && releasePermissions.length === 0" class="alert alert-warning">
+        No configurations have been set up for any release yet.
+    </div>
+
     <div *ngIf="masterReleasePermissions.length > 0">
         <h4>Master Configuration</h4>
         <table class="table">

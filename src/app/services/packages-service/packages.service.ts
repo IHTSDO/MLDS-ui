@@ -117,6 +117,19 @@ export class PackagesService {
     );
   }
 
+  checkUpdateReleasesPackageType(selectedReleses: string[], releasePackageType: string, selectedUsers: string[]): Observable<any> {
+    const body = { releases: selectedReleses, releasePackageType: releasePackageType, users: selectedUsers };
+    return this.http.post<any>(`${this.apiUrl}/releasePackages/checkUpdatePermissionType`, body).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  checkUpdateReleasesPackageMasterType(selectedReleses: string, releasePermissionType: string, selectedUsers: string[]): Observable<any> {
+    const body = { releaseType: selectedReleses, releasePackage: "ALL", releasePermissionType: releasePermissionType, users: selectedUsers};
+    return this.http.post<any>(`${this.apiUrl}/releasePackages/checkConfigPermissionType`, body).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   updateReleasesPackageMasterType(selectedReleses: string, releasePermissionType: string, selectedUsers: string[]): Observable<any> {
     const body = { releaseType: selectedReleses, releasePackage: "ALL", releasePermissionType: releasePermissionType, users: selectedUsers};

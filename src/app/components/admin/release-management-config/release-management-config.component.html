@@ -4,6 +4,11 @@
     Release Management - Configuration screen
   </h2>
 
+
+  <div *ngIf="isLoading" class="loader-center">
+    <app-loader></app-loader>
+  </div>
+
   <button type="button" class="review-button " style="padding: 3px;
   margin-top: 125px;
   margin-left: 30rem;
@@ -18,7 +23,7 @@
   <div class="form-container" style="padding-top: 40px;">
     <!-- Release Type Selection -->
     <div>
-      <span>Release Type</span>
+      <span>Release Type<span class="text-danger">*</span></span>
       <select [(ngModel)]="selectedReleaseType" (change)="onReleaseTypeSelect()">
         <option value="" disabled selected>Select a Release Type</option>
         <option *ngFor="let type of releaseTypes; let i = index" [value]="i+1">{{ type }}</option>
@@ -26,7 +31,7 @@
     </div>
 
     <div class="release-container" (mouseleave)="dropdownOpen = false">
-      <span>Releases</span>
+      <span>Releases<span class="text-danger">*</span></span>
 
       <button (click)="toggleDropdown()" class="dropdown-btn">
         Select a Release
@@ -48,7 +53,7 @@
     </div>
 
     <div class="release-container" (mouseleave)="dropdownPermission = false">
-  <span>Release Permission</span>
+  <span>Release Permission<span class="text-danger">*</span></span>
   <button (click)="toggleDropdownForPermission()" class="dropdown-btn">
     Select a User permission
   </button>
