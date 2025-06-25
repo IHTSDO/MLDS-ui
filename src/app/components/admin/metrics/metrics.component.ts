@@ -12,11 +12,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
  * services, and caches.
  */
 @Component({
-  selector: 'app-metrics',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ToFixedPipe, NumberRoundPipe, TranslateModule, CompareTextPipe],
-  templateUrl: './metrics.component.html',
-  styleUrls: ['./metrics.component.scss']
+    selector: 'app-metrics',
+    imports: [CommonModule, FormsModule, ToFixedPipe, NumberRoundPipe, TranslateModule, CompareTextPipe],
+    templateUrl: './metrics.component.html',
+    styleUrls: ['./metrics.component.scss']
 })
 export class MetricsComponent implements OnInit {
   /**

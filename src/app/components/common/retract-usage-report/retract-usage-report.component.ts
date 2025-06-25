@@ -8,11 +8,10 @@ import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affil
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-  selector: 'app-retract-usage-report',
-  standalone: true,
-  imports: [CommonModule,NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
-  templateUrl: './retract-usage-report.component.html',
-  styleUrl: './retract-usage-report.component.scss'
+    selector: 'app-retract-usage-report',
+    imports: [CommonModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './retract-usage-report.component.html',
+    styleUrl: './retract-usage-report.component.scss'
 })
 export class RetractUsageReportComponent  {
   @Input() commercialUsageReport: any;

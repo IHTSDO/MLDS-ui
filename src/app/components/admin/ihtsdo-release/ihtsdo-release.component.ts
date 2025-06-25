@@ -14,11 +14,10 @@ import { IhtsdoReleaseVersionModalComponent } from '../../common/ihtsdo-release-
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
-  selector: 'app-ihtsdo-release',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, CompareTextPipe,IhtsdoReleaseVersionModalComponent,LinkAddblankPipe],
-  templateUrl: './ihtsdo-release.component.html',
-  styleUrl: './ihtsdo-release.component.scss',
+    selector: 'app-ihtsdo-release',
+    imports: [CommonModule, TranslateModule, CompareTextPipe, IhtsdoReleaseVersionModalComponent, LinkAddblankPipe],
+    templateUrl: './ihtsdo-release.component.html',
+    styleUrl: './ihtsdo-release.component.scss'
 })
 export class IhtsdoReleaseComponent implements OnInit {
   releasePackageId: string | null = null;

@@ -13,11 +13,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
  * Component to display member branding information
  */
 @Component({
-  selector: 'app-show-member-branding',
-  standalone: true,
-  imports: [CommonModule, RouterLink, EnumPipe, TranslateModule, CompareTextPipe],
-  templateUrl: './show-member-branding.component.html',
-  styleUrl: './show-member-branding.component.scss'
+    selector: 'app-show-member-branding',
+    imports: [CommonModule, RouterLink, EnumPipe, TranslateModule, CompareTextPipe],
+    templateUrl: './show-member-branding.component.html',
+    styleUrl: './show-member-branding.component.scss'
 })
 export class ShowMemberBrandingComponent implements OnInit {
   /**

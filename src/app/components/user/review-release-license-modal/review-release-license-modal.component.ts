@@ -8,11 +8,10 @@ import { ReleasePackageService } from 'src/app/services/release-package/release-
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-review-release-license-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule,TranslateModule,CompareTextPipe,ModalComponent],
-  templateUrl: './review-release-license-modal.component.html',
-  styleUrl: './review-release-license-modal.component.scss'
+    selector: 'app-review-release-license-modal',
+    imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './review-release-license-modal.component.html',
+    styleUrl: './review-release-license-modal.component.scss'
 })
 export class ReviewReleaseLicenseModalComponent {
   @Input() releasePackage: any;

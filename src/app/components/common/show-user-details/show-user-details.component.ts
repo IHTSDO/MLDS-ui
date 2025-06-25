@@ -5,11 +5,10 @@ import { ToastrService } from 'ngx-toastr';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { ROUTES } from 'src/app/routes-config';
 @Component({
-  selector: 'app-show-user-details',
-  standalone: true,
-  imports: [],
-  templateUrl: './show-user-details.component.html',
-  styleUrl: './show-user-details.component.scss'
+    selector: 'app-show-user-details',
+    imports: [],
+    templateUrl: './show-user-details.component.html',
+    styleUrl: './show-user-details.component.scss'
 })
 export class ShowUserDetailsComponent {
   @Input() userDetails!: any;

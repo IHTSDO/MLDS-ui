@@ -14,11 +14,10 @@ import { CommonModule } from '@angular/common';
  * <app-exclusion-modal [countryName]="'United States'" [urlRegistration]="'https://example.com/register'"></app-exclusion-modal>
  */
 @Component({
-  selector: 'app-exclusion-modal',
-  standalone: true,
-  imports: [TranslateModule,CompareTextPipe,ModalComponent,CommonModule],
-  templateUrl: './exclusion-modal.component.html',
-  styleUrls: ['./exclusion-modal.component.scss']
+    selector: 'app-exclusion-modal',
+    imports: [TranslateModule, CompareTextPipe, ModalComponent, CommonModule],
+    templateUrl: './exclusion-modal.component.html',
+    styleUrls: ['./exclusion-modal.component.scss']
 })
 export class ExclusionModalComponent implements OnInit{
   /**

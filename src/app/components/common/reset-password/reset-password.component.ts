@@ -15,11 +15,10 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
  * <app-reset-password></app-reset-password>
  */
 @Component({
-  selector: 'app-reset-password',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
-  templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss'
+    selector: 'app-reset-password',
+    imports: [ReactiveFormsModule, CommonModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
+    templateUrl: './reset-password.component.html',
+    styleUrl: './reset-password.component.scss'
 })
 export class ResetPasswordComponent {
   /**

@@ -17,11 +17,10 @@ import { MemberService } from 'src/app/services/member/member.service';
  * <app-landing-content></app-landing-content>
  */
 @Component({
-  selector: 'app-landing-content',
-  standalone: true,
-  imports: [RouterLink,TranslateModule,CompareTextPipe],
-  templateUrl: './landing-content.component.html',
-  styleUrl: './landing-content.component.scss'
+    selector: 'app-landing-content',
+    imports: [RouterLink, TranslateModule, CompareTextPipe],
+    templateUrl: './landing-content.component.html',
+    styleUrl: './landing-content.component.scss'
 })
 export class LandingContentComponent implements OnInit{
  /**

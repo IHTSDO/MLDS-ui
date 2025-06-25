@@ -14,11 +14,10 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-admin-footer',
-  standalone: true,
-  imports: [TranslateModule],
-  templateUrl: './admin-footer.component.html',
-  styleUrls: ['./admin-footer.component.scss']
+    selector: 'app-admin-footer',
+    imports: [TranslateModule],
+    templateUrl: './admin-footer.component.html',
+    styleUrls: ['./admin-footer.component.scss']
 })
 export class AdminFooterComponent implements OnInit{
 

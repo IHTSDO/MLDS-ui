@@ -16,11 +16,10 @@ import { TranslateModule } from '@ngx-translate/core';
  * <app-application-summary-block [application]="application" [commercialUsageInstitutionsByCountry]="commercialUsageInstitutionsByCountry" [usageCountryCountslist]="usageCountryCountslist" [showAuditPanel]="true"></app-application-summary-block>
  */
 @Component({
-  selector: 'app-application-summary-block',
-  standalone: true,
-  imports: [CommonModule, AuditsEmbedComponent, CompareTextPipe, TranslateModule],
-  templateUrl: './application-summary-block.component.html',
-  styleUrl: './application-summary-block.component.scss'
+    selector: 'app-application-summary-block',
+    imports: [CommonModule, AuditsEmbedComponent, CompareTextPipe, TranslateModule],
+    templateUrl: './application-summary-block.component.html',
+    styleUrl: './application-summary-block.component.scss'
 })
 export class ApplicationSummaryBlockComponent implements OnInit {
 

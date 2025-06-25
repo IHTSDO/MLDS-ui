@@ -7,11 +7,10 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
-  selector: 'app-activate',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, CompareTextPipe],
-  templateUrl: './activate.component.html',
-  styleUrl: './activate.component.scss'
+    selector: 'app-activate',
+    imports: [CommonModule, TranslateModule, CompareTextPipe],
+    templateUrl: './activate.component.html',
+    styleUrl: './activate.component.scss'
 })
 export class ActivateComponent implements OnInit {
   success: string | null = null;

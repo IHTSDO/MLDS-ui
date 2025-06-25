@@ -11,11 +11,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from '../../common/loader/loader.component';
 
 @Component({
-  selector: 'app-release-management-config',
-  standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent],
-  templateUrl: './release-management-config.component.html',
-  styleUrl: './release-management-config.component.scss'
+    selector: 'app-release-management-config',
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent],
+    templateUrl: './release-management-config.component.html',
+    styleUrl: './release-management-config.component.scss'
 })
 
 export class ReleaseManagementConfigComponent implements OnInit {

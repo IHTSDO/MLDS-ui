@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-delete-country-confirmation-modal',
-  standalone: true,
-  imports: [],
-  templateUrl: './delete-country-confirmation-modal.component.html',
-  styleUrl: './delete-country-confirmation-modal.component.scss'
+    selector: 'app-delete-country-confirmation-modal',
+    imports: [],
+    templateUrl: './delete-country-confirmation-modal.component.html',
+    styleUrl: './delete-country-confirmation-modal.component.scss'
 })
 export class DeleteCountryConfirmationModalComponent {
   @Input() isoCode!: string;

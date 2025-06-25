@@ -15,11 +15,10 @@ import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe
 import { RemoveHtmlPipe } from 'src/app/pipes/remove-html/remove-html.pipe';
 
 @Component({
-  selector: 'app-archive-versions',
-  standalone: true,
-  imports: [CommonModule, NgbModule, EnumPipe, LinkAddblankPipe, RemoveHtmlPipe],
-  templateUrl: './archive-versions.component.html',
-  styleUrl: './archive-versions.component.scss'
+    selector: 'app-archive-versions',
+    imports: [CommonModule, NgbModule, EnumPipe, LinkAddblankPipe, RemoveHtmlPipe],
+    templateUrl: './archive-versions.component.html',
+    styleUrl: './archive-versions.component.scss'
 })
 
 export class ArchiveVersionsComponent implements OnInit {

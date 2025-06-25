@@ -14,11 +14,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * <app-edit-license [member]="member"></app-edit-license>
  */
 @Component({
-  selector: 'app-edit-license',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslateModule, ModalComponent],
-  templateUrl: './edit-license.component.html',
-  styleUrl: './edit-license.component.scss'
+    selector: 'app-edit-license',
+    imports: [CommonModule, ReactiveFormsModule, TranslateModule, ModalComponent],
+    templateUrl: './edit-license.component.html',
+    styleUrl: './edit-license.component.scss'
 })
 export class EditLicenseComponent implements OnInit {
 

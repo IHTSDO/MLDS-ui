@@ -8,11 +8,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
-  selector: 'app-delete-institution-modal',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, CompareTextPipe, TranslateModule, ModalComponent],
-  templateUrl: './delete-institution-modal.component.html',
-  styleUrl: './delete-institution-modal.component.scss'
+    selector: 'app-delete-institution-modal',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, CompareTextPipe, TranslateModule, ModalComponent],
+    templateUrl: './delete-institution-modal.component.html',
+    styleUrl: './delete-institution-modal.component.scss'
 })
 export class DeleteInstitutionModalComponent {
   @Input() country!: any;

@@ -7,11 +7,10 @@ import { ReleasePackageService } from 'src/app/services/release-package/release-
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-release-package-license-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent],
-  templateUrl: './release-package-license-modal.component.html',
-  styleUrl: './release-package-license-modal.component.scss'
+    selector: 'app-release-package-license-modal',
+    imports: [CommonModule, FormsModule, ModalComponent],
+    templateUrl: './release-package-license-modal.component.html',
+    styleUrl: './release-package-license-modal.component.scss'
 })
 export class ReleasePackageLicenseModalComponent {
   @Input() releasePackage:any;

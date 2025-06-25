@@ -9,11 +9,10 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 @Component({
-  selector: 'app-full-page-usage-log',
-  standalone: true,
-  imports: [CommonModule, FormsModule, EmbeddableUsageLogComponent, TranslateModule, CompareTextPipe],
-  templateUrl: './full-page-usage-log.component.html',
-  styleUrl: './full-page-usage-log.component.scss'
+    selector: 'app-full-page-usage-log',
+    imports: [CommonModule, FormsModule, EmbeddableUsageLogComponent, TranslateModule, CompareTextPipe],
+    templateUrl: './full-page-usage-log.component.html',
+    styleUrl: './full-page-usage-log.component.scss'
 })
 export class FullPageUsageLogComponent implements OnInit {
   usageLogCanSubmit = true;

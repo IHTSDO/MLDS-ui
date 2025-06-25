@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { LandingPageComponent } from './components/common/landing-page/landing-page.component';
 import { DashboardComponent } from './components/common/dashboard/dashboard.component';
 import { authguardGuard } from './auth/authguard.guard';
@@ -49,8 +48,7 @@ import { ReleaseManagementConfigComponent } from './components/admin/release-man
 import { ReleaseViewPermissionComponent } from './components/admin/release-view-permission/release-view-permission.component';
 
 
-
-const routes: Routes = [
+export const appRoutes: Routes = [
   {
     path: '',
     redirectTo: '/landing',
@@ -137,10 +135,3 @@ const routes: Routes = [
   ]
 }
 ];
-
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, scrollPositionRestoration: 'enabled',anchorScrolling: 'enabled' })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

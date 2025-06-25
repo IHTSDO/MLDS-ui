@@ -15,11 +15,10 @@ import { SideBarService } from 'src/app/services/side-bar/side-bar.service';
  * <app-side-nav></app-side-nav>
  */
 @Component({
-  selector: 'app-side-nav',
-  standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule, CompareTextPipe, EnumPipe],
-  templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.scss']
+    selector: 'app-side-nav',
+    imports: [CommonModule, RouterLink, TranslateModule, CompareTextPipe, EnumPipe],
+    templateUrl: './side-nav.component.html',
+    styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
 

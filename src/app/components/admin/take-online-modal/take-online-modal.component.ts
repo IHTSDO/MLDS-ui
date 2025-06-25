@@ -7,11 +7,10 @@ import { ReleaseVersionsService } from 'src/app/services/release-versions/releas
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-take-online-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent],
-  templateUrl: './take-online-modal.component.html',
-  styleUrl: './take-online-modal.component.scss'
+    selector: 'app-take-online-modal',
+    imports: [CommonModule, FormsModule, ModalComponent],
+    templateUrl: './take-online-modal.component.html',
+    styleUrl: './take-online-modal.component.scss'
 })
 export class TakeOnlineModalComponent {
 

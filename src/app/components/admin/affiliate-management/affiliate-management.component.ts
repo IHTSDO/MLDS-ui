@@ -16,11 +16,10 @@ import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.direct
  * Affiliate Management Component
  */
 @Component({
-  selector: 'app-affiliate-management',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgbModule, EnumPipe,TranslateModule,ScrollTrackerDirective],
-  templateUrl: './affiliate-management.component.html',
-  styleUrl: './affiliate-management.component.scss'
+    selector: 'app-affiliate-management',
+    imports: [CommonModule, FormsModule, NgbModule, EnumPipe, TranslateModule, ScrollTrackerDirective],
+    templateUrl: './affiliate-management.component.html',
+    styleUrl: './affiliate-management.component.scss'
 })
 export class AffiliateManagementComponent implements OnInit {
   /**

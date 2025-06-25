@@ -5,11 +5,10 @@ import { ROUTES } from 'src/app/routes-config';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 @Component({
-  selector: 'app-logout',
-  standalone: true,
-  imports: [TranslateModule, CompareTextPipe],
-  templateUrl: './logout.component.html',
-  styleUrl: './logout.component.scss'
+    selector: 'app-logout',
+    imports: [TranslateModule, CompareTextPipe],
+    templateUrl: './logout.component.html',
+    styleUrl: './logout.component.scss'
 })
 export class LogoutComponent implements OnInit{
   routes = ROUTES;

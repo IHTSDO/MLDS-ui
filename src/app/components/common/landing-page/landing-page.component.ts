@@ -12,11 +12,10 @@ import { CommonModule } from '@angular/common';
  * It also handles member key parameter from the route and sets the member logo accordingly.
  */
 @Component({
-  selector: 'app-landing-page',
-  standalone: true,
-  imports: [LandingHeaderComponent, LandingContentComponent, LandingFooterComponent, LoginComponent, RouterOutlet, CommonModule],
-  templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.scss'
+    selector: 'app-landing-page',
+    imports: [LandingHeaderComponent, LandingContentComponent, LandingFooterComponent, LoginComponent, RouterOutlet, CommonModule],
+    templateUrl: './landing-page.component.html',
+    styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
 

@@ -17,11 +17,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
-  selector: 'app-affiliate-registration',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxBsTelInputComponent, NgbModule, EmbeddableUsageLogComponent,TranslateModule,CompareTextPipe],
-  templateUrl: './affiliate-registration.component.html',
-  styleUrl: './affiliate-registration.component.scss'
+    selector: 'app-affiliate-registration',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxBsTelInputComponent, NgbModule, EmbeddableUsageLogComponent, TranslateModule, CompareTextPipe],
+    templateUrl: './affiliate-registration.component.html',
+    styleUrl: './affiliate-registration.component.scss'
 })
 export class AffiliateRegistrationComponent implements OnInit {
 

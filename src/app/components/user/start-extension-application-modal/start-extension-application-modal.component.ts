@@ -7,11 +7,10 @@ import { UserRegistrationService } from 'src/app/services/user-registration/user
 import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
-  selector: 'app-start-extension-application-modal',
-  standalone: true,
-  imports: [CommonModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
-  templateUrl: './start-extension-application-modal.component.html',
-  styleUrl: './start-extension-application-modal.component.scss'
+    selector: 'app-start-extension-application-modal',
+    imports: [CommonModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './start-extension-application-modal.component.html',
+    styleUrl: './start-extension-application-modal.component.scss'
 })
 export class StartExtensionApplicationModalComponent {
 @Input() releasePackage: any; // Receive data passed to modal

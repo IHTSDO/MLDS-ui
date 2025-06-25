@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 
 @Component({
-  selector: 'app-view-release-access-user',
-  standalone: true,
-  imports: [ModalComponent,CommonModule],
-  templateUrl: './view-release-access-user.component.html',
-  styleUrl: './view-release-access-user.component.scss'
+    selector: 'app-view-release-access-user',
+    imports: [ModalComponent, CommonModule],
+    templateUrl: './view-release-access-user.component.html',
+    styleUrl: './view-release-access-user.component.scss'
 })
 export class ViewReleaseAccessUserComponent {
 

@@ -6,11 +6,10 @@ import { ReleaseVersionsService } from 'src/app/services/release-versions/releas
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-take-offline-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './take-offline-modal.component.html',
-  styleUrl: './take-offline-modal.component.scss'
+    selector: 'app-take-offline-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './take-offline-modal.component.html',
+    styleUrl: './take-offline-modal.component.scss'
 })
 export class TakeOfflineModalComponent {
   @Input() releasePackage: any;

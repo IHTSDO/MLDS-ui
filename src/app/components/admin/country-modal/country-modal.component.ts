@@ -20,11 +20,10 @@ interface Member {
  * It uses a reactive form to validate user input and provides a typeahead feature to search for members.
  */
 @Component({
-  selector: 'app-country-modal',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgbModule, NgbTypeaheadModule, ModalComponent],
-  templateUrl: './country-modal.component.html',
-  styleUrl: './country-modal.component.scss'
+    selector: 'app-country-modal',
+    imports: [ReactiveFormsModule, CommonModule, NgbModule, NgbTypeaheadModule, ModalComponent],
+    templateUrl: './country-modal.component.html',
+    styleUrl: './country-modal.component.scss'
 })
 
 export class CountryModalComponent {

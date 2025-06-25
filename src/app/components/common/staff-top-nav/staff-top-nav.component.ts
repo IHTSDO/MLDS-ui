@@ -21,11 +21,10 @@ import { EnumPipe } from 'src/app/pipes/enum/enum.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { ROUTES } from 'src/app/routes-config';
 @Component({
-  selector: 'app-staff-top-nav',
-  standalone: true,
-  imports: [RouterModule,CommonModule,FormsModule,ReactiveFormsModule,NgbCollapseModule,TranslateModule,NgbDropdownModule,NgbDropdown,EnumPipe,CompareTextPipe],
-  templateUrl: './staff-top-nav.component.html',
-  styleUrls: ['./staff-top-nav.component.scss'] // note: styleUrl is deprecated, use styleUrls instead
+    selector: 'app-staff-top-nav',
+    imports: [RouterModule, CommonModule, FormsModule, ReactiveFormsModule, NgbCollapseModule, TranslateModule, NgbDropdownModule, NgbDropdown, EnumPipe, CompareTextPipe],
+    templateUrl: './staff-top-nav.component.html',
+    styleUrls: ['./staff-top-nav.component.scss'] // note: styleUrl is deprecated, use styleUrls instead
 })
 export class StaffTopNavComponent implements OnInit {
   homePageUrl: string | null = null;

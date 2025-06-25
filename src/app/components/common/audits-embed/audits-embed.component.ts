@@ -13,11 +13,10 @@ import { TranslateModule } from '@ngx-translate/core';
  * ```
  */
 @Component({
-  selector: 'app-audits-embed',
-  standalone: true,
-  imports: [CommonModule, TranslateModule],
-  templateUrl: './audits-embed.component.html',
-  styleUrls: ['./audits-embed.component.scss']
+    selector: 'app-audits-embed',
+    imports: [CommonModule, TranslateModule],
+    templateUrl: './audits-embed.component.html',
+    styleUrls: ['./audits-embed.component.scss']
 })
 export class AuditsEmbedComponent implements OnInit {
   /**

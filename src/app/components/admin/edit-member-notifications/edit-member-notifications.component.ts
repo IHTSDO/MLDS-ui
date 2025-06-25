@@ -15,11 +15,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * <app-edit-member-notifications [member]="member"></app-edit-member-notifications>
  */
 @Component({
-  selector: 'app-edit-member-notifications',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslateModule,ModalComponent],
-  templateUrl: './edit-member-notifications.component.html',
-  styleUrls: ['./edit-member-notifications.component.scss']
+    selector: 'app-edit-member-notifications',
+    imports: [CommonModule, ReactiveFormsModule, TranslateModule, ModalComponent],
+    templateUrl: './edit-member-notifications.component.html',
+    styleUrls: ['./edit-member-notifications.component.scss']
 })
 export class EditMemberNotificationsComponent implements OnInit {
   /**

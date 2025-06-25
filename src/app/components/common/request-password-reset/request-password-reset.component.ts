@@ -13,11 +13,10 @@ import { PasswordResetService } from 'src/app/services/passwordReset/password-re
  * This component allows users to request a password reset by entering their email address.
  */
 @Component({
-  selector: 'app-request-password-reset',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, CompareTextPipe],
-  templateUrl: './request-password-reset.component.html',
-  styleUrl: './request-password-reset.component.scss'
+    selector: 'app-request-password-reset',
+    imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, CompareTextPipe],
+    templateUrl: './request-password-reset.component.html',
+    styleUrl: './request-password-reset.component.scss'
 })
 export class RequestPasswordResetComponent implements OnInit {
   /**

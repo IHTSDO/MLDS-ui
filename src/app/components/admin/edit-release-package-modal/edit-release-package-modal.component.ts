@@ -13,11 +13,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
 
 
 @Component({
-  selector: 'app-edit-release-package-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule, TranslateModule, EnumPipe, ModalComponent],
-  templateUrl: './edit-release-package-modal.component.html',
-  styleUrl: './edit-release-package-modal.component.scss'
+    selector: 'app-edit-release-package-modal',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule, TranslateModule, EnumPipe, ModalComponent],
+    templateUrl: './edit-release-package-modal.component.html',
+    styleUrl: './edit-release-package-modal.component.scss'
 })
 export class EditReleasePackageModalComponent {
   @Input() releasePackage: any;

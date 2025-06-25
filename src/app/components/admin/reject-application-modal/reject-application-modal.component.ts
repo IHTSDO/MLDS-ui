@@ -13,11 +13,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * <app-reject-application-modal [application]="application"></app-reject-application-modal>
  */
 @Component({
-  selector: 'app-reject-application-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './reject-application-modal.component.html',
-  styleUrl: './reject-application-modal.component.scss'
+    selector: 'app-reject-application-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './reject-application-modal.component.html',
+    styleUrl: './reject-application-modal.component.scss'
 })
 export class RejectApplicationModalComponent {
   /**

@@ -15,11 +15,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
-  selector: 'app-archive-management',
-  standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, EnumPipe,TranslateModule,LinkAddblankPipe],
-  templateUrl: './archive-management.component.html',
-  styleUrl: './archive-management.component.scss'
+    selector: 'app-archive-management',
+    imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, EnumPipe, TranslateModule, LinkAddblankPipe],
+    templateUrl: './archive-management.component.html',
+    styleUrl: './archive-management.component.scss'
 })
 export class ArchiveManagementComponent implements OnInit {
   isAdmin: boolean;

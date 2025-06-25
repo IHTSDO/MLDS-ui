@@ -15,11 +15,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 
 @Component({
-  selector: 'app-post-announcement',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, QuillModule, TranslateModule, EnumPipe, CompareTextPipe],
-  templateUrl: './post-announcement.component.html',
-  styleUrl: './post-announcement.component.scss'
+    selector: 'app-post-announcement',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, QuillModule, TranslateModule, EnumPipe, CompareTextPipe],
+    templateUrl: './post-announcement.component.html',
+    styleUrl: './post-announcement.component.scss'
 })
 export class PostAnnouncementComponent implements OnInit {
   alerts: Array<{ type: string, msg: string }> = [];

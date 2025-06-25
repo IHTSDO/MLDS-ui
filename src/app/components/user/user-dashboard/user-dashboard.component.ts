@@ -22,11 +22,10 @@ import { MemberPckageService } from 'src/app/services/member-package/member-pcka
 
 
 @Component({
-  selector: 'app-user-dashboard',
-  standalone: true,
-  imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, OrderByPipe, RouterModule],
-  templateUrl: './user-dashboard.component.html',
-  styleUrl: './user-dashboard.component.scss'
+    selector: 'app-user-dashboard',
+    imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, OrderByPipe, RouterModule],
+    templateUrl: './user-dashboard.component.html',
+    styleUrl: './user-dashboard.component.scss'
 })
 
 export class UserDashboardComponent implements OnInit {

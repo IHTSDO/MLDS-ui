@@ -9,11 +9,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-edit-affiliate-standing-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, ModalComponent],
-  templateUrl: './edit-affiliate-standing-modal.component.html',
-  styleUrl: './edit-affiliate-standing-modal.component.scss'
+    selector: 'app-edit-affiliate-standing-modal',
+    imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './edit-affiliate-standing-modal.component.html',
+    styleUrl: './edit-affiliate-standing-modal.component.scss'
 })
 export class EditAffiliateStandingModalComponent {
   @Input() affiliate: any;

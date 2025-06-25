@@ -11,11 +11,10 @@ import { HttpErrorResponse } from '@angular/common/http';
  * Country component that displays a list of countries and allows CRUD operations.
  */
 @Component({
-  selector: 'app-country',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './country.component.html',
-  styleUrl: './country.component.scss'
+    selector: 'app-country',
+    imports: [CommonModule],
+    templateUrl: './country.component.html',
+    styleUrl: './country.component.scss'
 })
 export class CountryComponent {
   /**

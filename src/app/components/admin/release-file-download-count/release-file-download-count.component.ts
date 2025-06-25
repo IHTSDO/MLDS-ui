@@ -13,11 +13,10 @@ import { NgbDate, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
  * This component displays the release file download count for a given date range and allows users to filter by excluding admin and staff.
  */
 @Component({
-  selector: 'app-release-file-download-count',
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, NgbDatepickerModule],
-  templateUrl: './release-file-download-count.component.html',
-  styleUrl: './release-file-download-count.component.scss'
+    selector: 'app-release-file-download-count',
+    imports: [CommonModule, FormsModule, TranslateModule, CompareTextPipe, NgbDatepickerModule],
+    templateUrl: './release-file-download-count.component.html',
+    styleUrl: './release-file-download-count.component.scss'
 })
 export class ReleaseFileDownloadCountComponent implements OnInit {
 

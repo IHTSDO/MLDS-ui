@@ -19,11 +19,10 @@ import { LoaderComponent } from "../../common/loader/loader.component";
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
-  selector: 'app-view-releases',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
-  templateUrl: './view-releases.component.html',
-  styleUrl: './view-releases.component.scss'
+    selector: 'app-view-releases',
+    imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
+    templateUrl: './view-releases.component.html',
+    styleUrl: './view-releases.component.scss'
 })
 export class ViewReleasesComponent implements OnInit {
   releasePackagesByMember: { member: any, packages: any[] }[] = [];

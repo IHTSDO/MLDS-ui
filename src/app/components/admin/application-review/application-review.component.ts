@@ -24,11 +24,10 @@ import { TranslateModule } from '@ngx-translate/core';
  * <app-application-review [application]="application"></app-application-review>
  */
 @Component({
-  selector: 'app-application-review',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ApplicationSummaryBlockComponent, EnumPipe, CompareTextPipe,TranslateModule,FormsModule],
-  templateUrl: './application-review.component.html',
-  styleUrl: './application-review.component.scss'
+    selector: 'app-application-review',
+    imports: [CommonModule, ReactiveFormsModule, ApplicationSummaryBlockComponent, EnumPipe, CompareTextPipe, TranslateModule, FormsModule],
+    templateUrl: './application-review.component.html',
+    styleUrl: './application-review.component.scss'
 })
 export class ApplicationReviewComponent implements OnInit {
   /**

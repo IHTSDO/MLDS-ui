@@ -12,11 +12,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * A modal component for editing a member's details.
  */
 @Component({
-  selector: 'app-edit-member-modal',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule,TranslateModule, ModalComponent],
-  templateUrl: './edit-member-modal.component.html',
-  styleUrls: ['./edit-member-modal.component.scss']
+    selector: 'app-edit-member-modal',
+    imports: [CommonModule, ReactiveFormsModule, NgbModule, TranslateModule, ModalComponent],
+    templateUrl: './edit-member-modal.component.html',
+    styleUrls: ['./edit-member-modal.component.scss']
 })
 export class EditMemberModalComponent implements OnInit {
   /**

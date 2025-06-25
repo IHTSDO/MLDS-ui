@@ -11,11 +11,10 @@ import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affil
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-submit-usage-report-modal',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert,TranslateModule,CompareTextPipe,ModalComponent],
-  templateUrl: './submit-usage-report-modal.component.html',
-  styleUrl: './submit-usage-report-modal.component.scss'
+    selector: 'app-submit-usage-report-modal',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './submit-usage-report-modal.component.html',
+    styleUrl: './submit-usage-report-modal.component.scss'
 })
 export class SubmitUsageReportModalComponent implements OnInit {
   commercialUsageReport: any;  // Type this appropriately

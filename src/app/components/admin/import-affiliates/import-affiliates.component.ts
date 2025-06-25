@@ -6,11 +6,10 @@ import { ImportAffiliatesService } from 'src/app/services/import-affiliates/impo
 import { AuditsEmbedComponent } from "../../common/audits-embed/audits-embed.component";
 
 @Component({
-  selector: 'app-import-affiliates',
-  standalone: true,
-  imports: [CommonModule, FormsModule, AuditsEmbedComponent],
-  templateUrl: './import-affiliates.component.html',
-  styleUrl: './import-affiliates.component.scss'
+    selector: 'app-import-affiliates',
+    imports: [CommonModule, FormsModule, AuditsEmbedComponent],
+    templateUrl: './import-affiliates.component.html',
+    styleUrl: './import-affiliates.component.scss'
 })
 export class ImportAffiliatesComponent implements OnInit {
   submitting = false;

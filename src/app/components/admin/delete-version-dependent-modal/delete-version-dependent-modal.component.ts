@@ -9,11 +9,10 @@ import { ReleasePackageService } from 'src/app/services/release-package/release-
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-delete-version-dependent-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './delete-version-dependent-modal.component.html',
-  styleUrl: './delete-version-dependent-modal.component.scss'
+    selector: 'app-delete-version-dependent-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './delete-version-dependent-modal.component.html',
+    styleUrl: './delete-version-dependent-modal.component.scss'
 })
 export class DeleteVersionDependentModalComponent {
   @Input() releasePackage: any;

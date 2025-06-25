@@ -25,11 +25,10 @@ import { ViewReleaseAccessUserComponent } from '../view-release-access-user/view
 
 
 @Component({
-  selector: 'app-release',
-  standalone: true,
-  imports: [CommonModule, NgbModule, EnumPipe, LinkAddblankPipe, RemoveHtmlPipe],
-  templateUrl: './release.component.html',
-  styleUrl: './release.component.scss'
+    selector: 'app-release',
+    imports: [CommonModule, NgbModule, EnumPipe, LinkAddblankPipe, RemoveHtmlPipe],
+    templateUrl: './release.component.html',
+    styleUrl: './release.component.scss'
 })
 export class ReleaseComponent {
 

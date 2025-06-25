@@ -8,11 +8,10 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-edit-count-data-analysis',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,NgbAlert,TranslateModule,CompareTextPipe,ModalComponent],
-  templateUrl: './edit-count-data-analysis.component.html',
-  styleUrl: './edit-count-data-analysis.component.scss'
+    selector: 'app-edit-count-data-analysis',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './edit-count-data-analysis.component.html',
+    styleUrl: './edit-count-data-analysis.component.scss'
 })
 export class EditCountDataAnalysisComponent implements OnInit {
   formCount: FormGroup;

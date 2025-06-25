@@ -6,11 +6,10 @@ import { ReleaseVersionsService } from 'src/app/services/release-versions/releas
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-take-alpha-beta-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './take-alpha-beta-modal.component.html',
-  styleUrl: './take-alpha-beta-modal.component.scss'
+    selector: 'app-take-alpha-beta-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './take-alpha-beta-modal.component.html',
+    styleUrl: './take-alpha-beta-modal.component.scss'
 })
 export class TakeAlphaBetaModalComponent {
   /**

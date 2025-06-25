@@ -8,11 +8,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
  * <app-password-strength-bar [passwordToCheck]="'mysecretpassword'"></app-password-strength-bar>
  */
 @Component({
-  selector: 'app-password-strength-bar',
-  standalone: true,
-  imports: [],
-  templateUrl: './password-strength-bar.component.html',
-  styleUrl: './password-strength-bar.component.scss'
+    selector: 'app-password-strength-bar',
+    imports: [],
+    templateUrl: './password-strength-bar.component.html',
+    styleUrl: './password-strength-bar.component.scss'
 })
 export class PasswordStrengthBarComponent implements OnChanges {
   /**

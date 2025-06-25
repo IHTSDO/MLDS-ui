@@ -13,11 +13,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * <app-edit-license-modal [member]="member"></app-edit-license-modal>
  */
 @Component({
-  selector: 'app-edit-license-modal',
-  standalone: true,
-  imports: [CommonModule,TranslateModule, ModalComponent],
-  templateUrl: './edit-license-modal.component.html',
-  styleUrls: ['./edit-license-modal.component.scss']
+    selector: 'app-edit-license-modal',
+    imports: [CommonModule, TranslateModule, ModalComponent],
+    templateUrl: './edit-license-modal.component.html',
+    styleUrls: ['./edit-license-modal.component.scss']
 })
 export class EditLicenseModalComponent {
   /**

@@ -10,11 +10,10 @@ import { EditPeimaryEmailComponent } from '../edit-peimary-email/edit-peimary-em
 
 
 @Component({
-  selector: 'app-affiliate-details-summary',
-  standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule],
-  templateUrl: './affiliate-details-summary.component.html',
-  styleUrl: './affiliate-details-summary.component.scss'
+    selector: 'app-affiliate-details-summary',
+    imports: [CommonModule, RouterLink, TranslateModule],
+    templateUrl: './affiliate-details-summary.component.html',
+    styleUrl: './affiliate-details-summary.component.scss'
 })
 export class AffiliateDetailsSummaryComponent implements OnChanges {
 

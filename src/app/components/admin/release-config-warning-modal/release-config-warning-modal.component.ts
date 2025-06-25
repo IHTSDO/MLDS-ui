@@ -4,11 +4,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-release-config-warning-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './release-config-warning-modal.component.html',
-  styleUrl: './release-config-warning-modal.component.scss'
+    selector: 'app-release-config-warning-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './release-config-warning-modal.component.html',
+    styleUrl: './release-config-warning-modal.component.scss'
 })
 export class ReleaseConfigWarningModalComponent {
 

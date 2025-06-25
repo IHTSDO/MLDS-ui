@@ -13,11 +13,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * <app-change-requested-modal [application]="application"></app-change-requested-modal>
  */
 @Component({
-  selector: 'app-change-requested-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './change-requested-modal.component.html',
-  styleUrls: ['./change-requested-modal.component.scss']
+    selector: 'app-change-requested-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './change-requested-modal.component.html',
+    styleUrls: ['./change-requested-modal.component.scss']
 })
 export class ChangeRequestedModalComponent {
   /**

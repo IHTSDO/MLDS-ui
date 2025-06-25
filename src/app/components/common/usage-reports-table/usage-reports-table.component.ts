@@ -9,11 +9,10 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 
 @Component({
-  selector: 'app-usage-reports-table',
-  standalone: true,
-  imports: [CommonModule,DateSortPipe, TranslateModule, CompareTextPipe],
-  templateUrl: './usage-reports-table.component.html',
-  styleUrl: './usage-reports-table.component.scss'
+    selector: 'app-usage-reports-table',
+    imports: [CommonModule, DateSortPipe, TranslateModule, CompareTextPipe],
+    templateUrl: './usage-reports-table.component.html',
+    styleUrl: './usage-reports-table.component.scss'
 })
 export class UsageReportsTableComponent implements OnInit {
   

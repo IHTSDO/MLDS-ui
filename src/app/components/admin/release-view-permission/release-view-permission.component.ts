@@ -7,11 +7,10 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { ViewReleaseAccessUserComponent } from '../view-release-access-user/view-release-access-user.component';
 
 @Component({
-  selector: 'app-release-view-permission',
-  standalone: true,
-  imports: [CommonModule,RouterLink],
-  templateUrl: './release-view-permission.component.html',
-  styleUrl: './release-view-permission.component.scss'
+    selector: 'app-release-view-permission',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './release-view-permission.component.html',
+    styleUrl: './release-view-permission.component.scss'
 })
 export class ReleaseViewPermissionComponent {
 

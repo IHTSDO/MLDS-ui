@@ -21,11 +21,10 @@ import { OpenAutoDeactivateConfigComponent } from '../../common/open-auto-deacti
  * <app-member-management></app-member-management>
  */
 @Component({
-  selector: 'app-member-management',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './member-management.component.html',
-  styleUrl: './member-management.component.scss'
+    selector: 'app-member-management',
+    imports: [CommonModule],
+    templateUrl: './member-management.component.html',
+    styleUrl: './member-management.component.scss'
 })
 export class MemberManagementComponent {
   /**

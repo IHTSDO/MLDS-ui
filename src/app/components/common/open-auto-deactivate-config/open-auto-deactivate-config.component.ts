@@ -8,11 +8,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 @Component({
-  selector: 'app-open-auto-deactivate-config',
-  standalone: true,
-  imports: [CommonModule,FormsModule],
-  templateUrl: './open-auto-deactivate-config.component.html',
-  styleUrl: './open-auto-deactivate-config.component.scss'
+    selector: 'app-open-auto-deactivate-config',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './open-auto-deactivate-config.component.html',
+    styleUrl: './open-auto-deactivate-config.component.scss'
 })
 export class OpenAutoDeactivateConfigComponent implements OnInit {
   @Input() member: any;

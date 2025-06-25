@@ -15,11 +15,10 @@ import { TranslateModule } from '@ngx-translate/core';
  * <app-review-usage-reports></app-review-usage-reports>
  */
 @Component({
-  selector: 'app-review-usage-reports',
-  standalone: true,
-  imports: [CommonModule, EnumPipe,TranslateModule],
-  templateUrl: './review-usage-reports.component.html',
-  styleUrls: ['./review-usage-reports.component.scss']
+    selector: 'app-review-usage-reports',
+    imports: [CommonModule, EnumPipe, TranslateModule],
+    templateUrl: './review-usage-reports.component.html',
+    styleUrls: ['./review-usage-reports.component.scss']
 })
 export class ReviewUsageReportsComponent implements OnInit {
   generatingCsv = false;

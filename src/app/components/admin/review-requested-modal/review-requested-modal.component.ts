@@ -18,11 +18,10 @@ import { catchError, of } from 'rxjs';
  * Review Requested Modal Component
  */
 @Component({
-  selector: 'app-review-requested-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './review-requested-modal.component.html',
-  styleUrl: './review-requested-modal.component.scss'
+    selector: 'app-review-requested-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './review-requested-modal.component.html',
+    styleUrl: './review-requested-modal.component.scss'
 })
 export class ReviewRequestedModalComponent {
   /**

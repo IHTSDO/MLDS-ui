@@ -5,11 +5,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-delete-extension-application',
-  standalone: true,
-  imports: [TranslateModule, CompareTextPipe,ModalComponent],
-  templateUrl: './delete-extension-application.component.html',
-  styleUrl: './delete-extension-application.component.scss'
+    selector: 'app-delete-extension-application',
+    imports: [TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './delete-extension-application.component.html',
+    styleUrl: './delete-extension-application.component.scss'
 })
 export class DeleteExtensionApplicationComponent {
   constructor(public activeModal: NgbActiveModal) {}

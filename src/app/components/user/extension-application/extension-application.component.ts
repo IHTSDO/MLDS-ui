@@ -12,11 +12,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
-  selector: 'app-extension-application',
-  standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbAlert,TranslateModule,CompareTextPipe],
-  templateUrl: './extension-application.component.html',
-  styleUrl: './extension-application.component.scss'
+    selector: 'app-extension-application',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAlert, TranslateModule, CompareTextPipe],
+    templateUrl: './extension-application.component.html',
+    styleUrl: './extension-application.component.scss'
 })
 export class ExtensionApplicationComponent implements OnInit {
   extensionForm: any = {};

@@ -10,11 +10,10 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-add-release-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgbAlert, QuillModule, ReactiveFormsModule, ModalComponent],
-  templateUrl: './add-release-modal.component.html',
-  styleUrl: './add-release-modal.component.scss'
+    selector: 'app-add-release-modal',
+    imports: [CommonModule, FormsModule, NgbAlert, QuillModule, ReactiveFormsModule, ModalComponent],
+    templateUrl: './add-release-modal.component.html',
+    styleUrl: './add-release-modal.component.scss'
 })
 export class AddReleaseModalComponent implements OnInit {
   public formPackage!: FormGroup;

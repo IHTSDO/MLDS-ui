@@ -7,11 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
 @Component({
-  selector: 'app-change-password',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
-  templateUrl: './change-password.component.html',
-  styleUrl: './change-password.component.scss'
+    selector: 'app-change-password',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
+    templateUrl: './change-password.component.html',
+    styleUrl: './change-password.component.scss'
 })
 export class ChangePasswordComponent {
   passwordForm: FormGroup;

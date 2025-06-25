@@ -21,11 +21,10 @@ import { MemberService } from 'src/app/services/member/member.service';
  * Handles user registration
  */
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+    selector: 'app-register',
+    imports: [CommonModule, ReactiveFormsModule, NgbModule, PasswordStrengthBarComponent, TranslateModule, CompareTextPipe],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 

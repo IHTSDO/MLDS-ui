@@ -6,11 +6,10 @@ import { DateSortPipe } from 'src/app/pipes/date-sort/date-sort.pipe';
 import { RemoveHtmlPipe } from 'src/app/pipes/remove-html/remove-html.pipe';
 
 @Component({
-  selector: 'app-ihtsdo-releases-modal',
-  standalone: true,
-  imports: [TranslateModule,CompareTextPipe,DateSortPipe,DatePipe,CommonModule,RemoveHtmlPipe],
-  templateUrl: './ihtsdo-releases-modal.component.html',
-  styleUrl: './ihtsdo-releases-modal.component.scss'
+    selector: 'app-ihtsdo-releases-modal',
+    imports: [TranslateModule, CompareTextPipe, DateSortPipe, DatePipe, CommonModule, RemoveHtmlPipe],
+    templateUrl: './ihtsdo-releases-modal.component.html',
+    styleUrl: './ihtsdo-releases-modal.component.scss'
 })
 export class IhtsdoReleasesModalComponent {
   @Input() version: any;

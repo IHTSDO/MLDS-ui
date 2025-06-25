@@ -14,11 +14,10 @@ import { FormsModule } from '@angular/forms';
  * Component for displaying usage reports.
  */
 @Component({
-  selector: 'app-usage-reports',
-  standalone: true,
-  imports: [CommonModule, ScrollTrackerDirective, EnumPipe,TranslateModule,FormsModule],
-  templateUrl: './usage-reports.component.html',
-  styleUrl: './usage-reports.component.scss'
+    selector: 'app-usage-reports',
+    imports: [CommonModule, ScrollTrackerDirective, EnumPipe, TranslateModule, FormsModule],
+    templateUrl: './usage-reports.component.html',
+    styleUrl: './usage-reports.component.scss'
 })
 export class UsageReportsComponent implements OnInit {
   routes = ROUTES;

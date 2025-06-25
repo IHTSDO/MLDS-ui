@@ -8,11 +8,10 @@ import { ReleaseFileService } from 'src/app/services/release-file/release-file.s
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-add-release-file-modal',
-  standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbAlert, QuillModule, ModalComponent],
-  templateUrl: './add-release-file-modal.component.html',
-  styleUrl: './add-release-file-modal.component.scss'
+    selector: 'app-add-release-file-modal',
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbAlert, QuillModule, ModalComponent],
+    templateUrl: './add-release-file-modal.component.html',
+    styleUrl: './add-release-file-modal.component.scss'
 })
 export class AddReleaseFileModalComponent implements OnInit {
   isNewObject = true;

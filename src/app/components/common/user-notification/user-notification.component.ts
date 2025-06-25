@@ -7,11 +7,10 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { UserNotificationService } from 'src/app/services/user-notification/user-notification.service';
 
 @Component({
-  selector: 'app-user-notification',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, CompareTextPipe],
-  templateUrl: './user-notification.component.html',
-  styleUrl: './user-notification.component.scss'
+    selector: 'app-user-notification',
+    imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, CompareTextPipe],
+    templateUrl: './user-notification.component.html',
+    styleUrl: './user-notification.component.scss'
 })
 export class UserNotificationComponent implements OnInit {
   unsubscribed = false;

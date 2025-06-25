@@ -15,11 +15,10 @@ import { LoaderComponent } from "../loader/loader.component";
 
 
 @Component({
-  selector: 'app-contact-info',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent, CompareTextPipe, TranslateModule, LoaderComponent],
-  templateUrl: './contact-info.component.html',
-  styleUrl: './contact-info.component.scss'
+    selector: 'app-contact-info',
+    imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent, CompareTextPipe, TranslateModule, LoaderComponent],
+    templateUrl: './contact-info.component.html',
+    styleUrl: './contact-info.component.scss'
 })
 export class ContactInfoComponent implements OnInit {
 

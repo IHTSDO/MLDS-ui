@@ -8,11 +8,10 @@ import { ContactInfoComponent } from '../../common/contact-info/contact-info.com
 
 
 @Component({
-  selector: 'app-edit-affiliate',
-  standalone: true,
-  imports: [CommonModule, ContactInfoComponent],
-  templateUrl: './edit-affiliate.component.html',
-  styleUrl: './edit-affiliate.component.scss'
+    selector: 'app-edit-affiliate',
+    imports: [CommonModule, ContactInfoComponent],
+    templateUrl: './edit-affiliate.component.html',
+    styleUrl: './edit-affiliate.component.scss'
 })
 export class EditAffiliateComponent implements OnInit {
 

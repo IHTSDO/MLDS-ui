@@ -5,11 +5,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-  selector: 'app-create-login-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent],
-  templateUrl: './create-login-modal.component.html',
-  styleUrl: './create-login-modal.component.scss'
+    selector: 'app-create-login-modal',
+    imports: [CommonModule, FormsModule, ModalComponent],
+    templateUrl: './create-login-modal.component.html',
+    styleUrl: './create-login-modal.component.scss'
 })
 export class CreateLoginModalComponent implements OnInit {
 

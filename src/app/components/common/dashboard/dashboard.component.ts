@@ -12,11 +12,10 @@ import { AdminFooterComponent } from "../admin-footer/admin-footer.component";
  * <app-dashboard></app-dashboard>
  */
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [RouterOutlet, StaffTopNavComponent, SideNavComponent, AdminFooterComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    imports: [RouterOutlet, StaffTopNavComponent, SideNavComponent, AdminFooterComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
   /**

@@ -20,11 +20,10 @@ import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe
 import { RemoveHtmlPipe } from 'src/app/pipes/remove-html/remove-html.pipe';
 
 @Component({
-  selector: 'app-view-release',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe, RemoveHtmlPipe],
-  templateUrl: './view-release.component.html',
-  styleUrl: './view-release.component.scss'
+    selector: 'app-view-release',
+    imports: [CommonModule, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe, RemoveHtmlPipe],
+    templateUrl: './view-release.component.html',
+    styleUrl: './view-release.component.scss'
 })
 export class ViewReleaseComponent implements OnInit {
 

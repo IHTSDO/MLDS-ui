@@ -18,11 +18,10 @@ import { TranslateModule } from '@ngx-translate/core';
  * to the appropriate dashboard based on user role.
  */
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, CompareTextPipe, TranslateModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [CommonModule, FormsModule, RouterLink, CompareTextPipe, TranslateModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 

@@ -8,11 +8,10 @@ import { ReleaseFileService } from 'src/app/services/release-file/release-file.s
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-edit-release-file-modal',
-  standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, QuillModule, ModalComponent],
-  templateUrl: './edit-release-file-modal.component.html',
-  styleUrl: './edit-release-file-modal.component.scss'
+    selector: 'app-edit-release-file-modal',
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, QuillModule, ModalComponent],
+    templateUrl: './edit-release-file-modal.component.html',
+    styleUrl: './edit-release-file-modal.component.scss'
 })
 export class EditReleaseFileModalComponent implements OnInit {
   formReleaseFile: FormGroup;

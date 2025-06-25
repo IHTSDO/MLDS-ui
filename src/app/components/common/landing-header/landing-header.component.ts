@@ -14,11 +14,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
  * Displays the member logo in the landing page header
  */
 @Component({
-  selector: 'app-landing-header',
-  standalone: true,
-  imports: [CommonModule, RouterLink, NgbModule, NgbDropdown, NgbDropdownModule, TranslateModule, CompareTextPipe, RouterModule],
-  templateUrl: './landing-header.component.html',
-  styleUrls: ['./landing-header.component.scss']
+    selector: 'app-landing-header',
+    imports: [CommonModule, RouterLink, NgbModule, NgbDropdown, NgbDropdownModule, TranslateModule, CompareTextPipe, RouterModule],
+    templateUrl: './landing-header.component.html',
+    styleUrls: ['./landing-header.component.scss']
 })
 export class LandingHeaderComponent {
   routes = ROUTES;

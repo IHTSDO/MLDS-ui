@@ -25,11 +25,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 @Component({
-  selector: 'app-affiliate-summary',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, ReactiveFormsModule, AffiliateDetailsSummaryComponent, ActivityLogsComponent, AuditsEmbedComponent, OrderByPipe, UsageReportsTableComponent, CompareTextPipe, EnumPipe],
-  templateUrl: './affiliate-summary.component.html',
-  styleUrl: './affiliate-summary.component.scss'
+    selector: 'app-affiliate-summary',
+    imports: [CommonModule, TranslateModule, ReactiveFormsModule, AffiliateDetailsSummaryComponent, ActivityLogsComponent, AuditsEmbedComponent, OrderByPipe, UsageReportsTableComponent, CompareTextPipe, EnumPipe],
+    templateUrl: './affiliate-summary.component.html',
+    styleUrl: './affiliate-summary.component.scss'
 })
 export class AffiliateSummaryComponent implements OnInit {
 

@@ -6,11 +6,10 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-systems-loggers',
-  standalone: true,
-  imports: [CommonModule, FormsModule, CompareTextPipe,TranslateModule],
-  templateUrl: './systems-loggers.component.html',
-  styleUrl: './systems-loggers.component.scss'
+    selector: 'app-systems-loggers',
+    imports: [CommonModule, FormsModule, CompareTextPipe, TranslateModule],
+    templateUrl: './systems-loggers.component.html',
+    styleUrl: './systems-loggers.component.scss'
 })
 export class SystemsLoggersComponent implements OnInit {
   loggers: any[] = [];

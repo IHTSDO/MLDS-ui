@@ -8,11 +8,10 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-remove-country-modal',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,NgbAlert,TranslateModule,CompareTextPipe,ModalComponent],
-  templateUrl: './remove-country-modal.component.html',
-  styleUrl: './remove-country-modal.component.scss'
+    selector: 'app-remove-country-modal',
+    imports: [CommonModule, ReactiveFormsModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './remove-country-modal.component.html',
+    styleUrl: './remove-country-modal.component.scss'
 })
 export class RemoveCountryModalComponent {
   @Input() count: any;  // Country and related data

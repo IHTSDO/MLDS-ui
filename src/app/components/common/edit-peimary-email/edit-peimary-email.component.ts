@@ -11,11 +11,10 @@ import { ROUTES } from 'src/app/routes-config';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-edit-peimary-email',
-  standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
-  templateUrl: './edit-peimary-email.component.html',
-  styleUrl: './edit-peimary-email.component.scss'
+    selector: 'app-edit-peimary-email',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    templateUrl: './edit-peimary-email.component.html',
+    styleUrl: './edit-peimary-email.component.scss'
 })
 export class EditPeimaryEmailComponent {
  

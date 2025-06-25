@@ -5,11 +5,10 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-delete-release-package',
-  standalone: true,
-  imports: [CommonModule,NgbAlert,ModalComponent],
-  templateUrl: './delete-release-package.component.html',
-  styleUrl: './delete-release-package.component.scss'
+    selector: 'app-delete-release-package',
+    imports: [CommonModule, NgbAlert, ModalComponent],
+    templateUrl: './delete-release-package.component.html',
+    styleUrl: './delete-release-package.component.scss'
 })
 export class DeleteReleasePackageComponent {
   @Input() releasePackage: any;

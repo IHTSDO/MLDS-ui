@@ -23,11 +23,10 @@ import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.direct
  * Pending Applications Component
  */
 @Component({
-  selector: 'app-pending-applications',
-  standalone: true,
-  imports: [ScrollTrackerDirective, CommonModule, FormsModule, TranslateModule, EnumPipe, CompareTextPipe],
-  templateUrl: './pending-application.component.html',
-  styleUrls: ['./pending-application.component.scss']
+    selector: 'app-pending-applications',
+    imports: [ScrollTrackerDirective, CommonModule, FormsModule, TranslateModule, EnumPipe, CompareTextPipe],
+    templateUrl: './pending-application.component.html',
+    styleUrls: ['./pending-application.component.scss']
 })
 export class PendingApplicationsComponent implements OnInit {
   /**

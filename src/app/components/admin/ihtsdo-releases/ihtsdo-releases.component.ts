@@ -16,11 +16,10 @@ import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe
 
 
 @Component({
-  selector: 'app-ihtsdo-releases',
-  standalone: true,
-  imports: [CommonModule, FilterOnlinePipe, FilterAlphabetaPipe, FilterOfflinePipe, EnumPipe, CompareTextPipe, TranslateModule, IhtsdoReleasesModalComponent, LinkAddblankPipe],
-  templateUrl: './ihtsdo-releases.component.html',
-  styleUrl: './ihtsdo-releases.component.scss'
+    selector: 'app-ihtsdo-releases',
+    imports: [CommonModule, FilterOnlinePipe, FilterAlphabetaPipe, FilterOfflinePipe, EnumPipe, CompareTextPipe, TranslateModule, IhtsdoReleasesModalComponent, LinkAddblankPipe],
+    templateUrl: './ihtsdo-releases.component.html',
+    styleUrl: './ihtsdo-releases.component.scss'
 })
 export class IhtsdoReleasesComponent implements OnInit {
   utils = this.packageUtilsService;

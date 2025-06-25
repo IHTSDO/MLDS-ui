@@ -12,11 +12,10 @@ import { NgbDate, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
  * ActivityLogsComponent - displays activity logs for a given date range
  */
 @Component({
-  selector: 'app-activity-logs',
-  standalone: true,
-  imports: [CommonModule, FormsModule, AuditsEmbedComponent, CompareTextPipe,TranslateModule,NgbDatepickerModule],
-  templateUrl: './activity-logs.component.html',
-  styleUrl: './activity-logs.component.scss'
+    selector: 'app-activity-logs',
+    imports: [CommonModule, FormsModule, AuditsEmbedComponent, CompareTextPipe, TranslateModule, NgbDatepickerModule],
+    templateUrl: './activity-logs.component.html',
+    styleUrl: './activity-logs.component.scss'
 })
 export class ActivityLogsComponent implements OnInit {
   /**

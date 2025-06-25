@@ -8,11 +8,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
-  selector: 'app-add-institution-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgbAlert, ReactiveFormsModule, NgbDatepicker, NgbDatepickerModule, CompareTextPipe, TranslateModule,  ModalComponent],
-  templateUrl: './add-institution-modal.component.html',
-  styleUrl: './add-institution-modal.component.scss'
+    selector: 'app-add-institution-modal',
+    imports: [CommonModule, FormsModule, NgbAlert, ReactiveFormsModule, NgbDatepicker, NgbDatepickerModule, CompareTextPipe, TranslateModule, ModalComponent],
+    templateUrl: './add-institution-modal.component.html',
+    styleUrl: './add-institution-modal.component.scss'
 })
 export class AddInstitutionModalComponent implements OnInit {
   @Input() country!: any;

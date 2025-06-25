@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 /**
  * Snomed Navbar Component
@@ -12,7 +13,9 @@ import { Location } from '@angular/common';
 @Component({
     selector: 'app-snomed-navbar',
     templateUrl: './snomed-navbar.component.html',
-    styleUrls: ['./snomed-navbar.component.scss']
+    styleUrls: ['./snomed-navbar.component.scss'],
+    standalone: true,
+    imports: [RouterLink]
 })
 export class SnomedNavbarComponent implements OnInit {
     /**

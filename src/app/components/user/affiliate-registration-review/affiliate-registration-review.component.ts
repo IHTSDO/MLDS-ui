@@ -8,11 +8,10 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-affiliate-registration-review',
-  standalone: true,
-  imports: [CommonModule,TranslateModule,CompareTextPipe,ModalComponent],
-  templateUrl: './affiliate-registration-review.component.html',
-  styleUrl: './affiliate-registration-review.component.scss'
+    selector: 'app-affiliate-registration-review',
+    imports: [CommonModule, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './affiliate-registration-review.component.html',
+    styleUrl: './affiliate-registration-review.component.scss'
 })
 export class AffiliateRegistrationReviewComponent implements OnInit {
 

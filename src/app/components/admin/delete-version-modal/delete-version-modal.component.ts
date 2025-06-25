@@ -8,11 +8,10 @@ import { ReleaseVersionsService } from 'src/app/services/release-versions/releas
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-delete-version-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalComponent],
-  templateUrl: './delete-version-modal.component.html',
-  styleUrl: './delete-version-modal.component.scss'
+    selector: 'app-delete-version-modal',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, ModalComponent],
+    templateUrl: './delete-version-modal.component.html',
+    styleUrl: './delete-version-modal.component.scss'
 })
 export class DeleteVersionModalComponent {
   @Input() releasePackage: any;

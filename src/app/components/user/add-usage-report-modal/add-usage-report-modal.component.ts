@@ -10,11 +10,10 @@ import { TranslateModule} from '@ngx-translate/core';
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
-  selector: 'app-add-usage-report-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, CompareTextPipe,TranslateModule,ModalComponent],
-  templateUrl: './add-usage-report-modal.component.html',
-  styleUrl: './add-usage-report-modal.component.scss'
+    selector: 'app-add-usage-report-modal',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, CompareTextPipe, TranslateModule, ModalComponent],
+    templateUrl: './add-usage-report-modal.component.html',
+    styleUrl: './add-usage-report-modal.component.scss'
 })
 export class AddUsageReportModalComponent implements OnInit {
   alerts: Array<{ type: string, msg: string }> = [];

@@ -15,11 +15,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * <app-approve-application-modal [application]="application"></app-approve-application-modal>
  */
 @Component({
-  selector: 'app-approve-application-modal',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './approve-application-modal.component.html',
-  styleUrls: ['./approve-application-modal.component.scss']
+    selector: 'app-approve-application-modal',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './approve-application-modal.component.html',
+    styleUrls: ['./approve-application-modal.component.scss']
 })
 export class ApproveApplicationModalComponent {
   /**

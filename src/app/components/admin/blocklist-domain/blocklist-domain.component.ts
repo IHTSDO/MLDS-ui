@@ -7,11 +7,10 @@ import { BolcklistDomainService } from 'src/app/services/blocklist-domain/bolckl
  * Component for managing blocklisted domains.
  */
 @Component({
-  selector: 'app-blocklist-domain',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './blocklist-domain.component.html',
-  styleUrls: ['./blocklist-domain.component.scss']
+    selector: 'app-blocklist-domain',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './blocklist-domain.component.html',
+    styleUrls: ['./blocklist-domain.component.scss']
 })
 export class BlocklistDomainComponent implements OnInit {
   /**

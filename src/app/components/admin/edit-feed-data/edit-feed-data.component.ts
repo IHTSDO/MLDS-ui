@@ -26,11 +26,10 @@ import { ModalComponent } from '../../common/modal/modal.component';
  * @param member The member object to be edited
  */
 @Component({
-  selector: 'app-edit-feed-data',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, EnumPipe,TranslateModule, ModalComponent],
-  templateUrl: './edit-feed-data.component.html',
-  styleUrl: './edit-feed-data.component.scss'
+    selector: 'app-edit-feed-data',
+    imports: [CommonModule, ReactiveFormsModule, EnumPipe, TranslateModule, ModalComponent],
+    templateUrl: './edit-feed-data.component.html',
+    styleUrl: './edit-feed-data.component.scss'
 })
 export class EditFeedDataComponent implements OnInit {
   /**

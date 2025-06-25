@@ -11,11 +11,10 @@ import { AffiliateDetailsSummaryComponent } from "../../common/affiliate-details
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-review-usage-report-admin',
-  standalone: true,
-  imports: [CommonModule, NgbAlertModule, NgbModule, FormsModule, AffiliateDetailsSummaryComponent,TranslateModule],
-  templateUrl: './review-usage-report-admin.component.html',
-  styleUrl: './review-usage-report-admin.component.scss'
+    selector: 'app-review-usage-report-admin',
+    imports: [CommonModule, NgbAlertModule, NgbModule, FormsModule, AffiliateDetailsSummaryComponent, TranslateModule],
+    templateUrl: './review-usage-report-admin.component.html',
+    styleUrl: './review-usage-report-admin.component.scss'
 })
 export class ReviewUsageReportAdminComponent  implements OnInit {
 

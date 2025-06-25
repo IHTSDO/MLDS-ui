@@ -8,11 +8,10 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
 
 @Component({
-  selector: 'app-user-usage-reports-table',
-  standalone: true,
-  imports: [UsageReportsTableComponent, CommonModule, TranslateModule, CompareTextPipe, LoaderComponent],
-  templateUrl: './user-usage-reports-table.component.html',
-  styleUrl: './user-usage-reports-table.component.scss'
+    selector: 'app-user-usage-reports-table',
+    imports: [UsageReportsTableComponent, CommonModule, TranslateModule, CompareTextPipe, LoaderComponent],
+    templateUrl: './user-usage-reports-table.component.html',
+    styleUrl: './user-usage-reports-table.component.scss'
 })
 export class UserUsageReportsTableComponent implements OnInit {
   showAllColumns: boolean = true;

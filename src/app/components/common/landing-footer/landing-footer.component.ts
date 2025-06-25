@@ -15,11 +15,10 @@ import { CommonModule } from '@angular/common';
  * <app-landing-footer></app-landing-footer>
  */
 @Component({
-  selector: 'app-landing-footer',
-  standalone: true,
-  imports: [TranslateModule, CompareTextPipe,CommonModule],
-  templateUrl: './landing-footer.component.html',
-  styleUrl: './landing-footer.component.scss'
+    selector: 'app-landing-footer',
+    imports: [TranslateModule, CompareTextPipe, CommonModule],
+    templateUrl: './landing-footer.component.html',
+    styleUrl: './landing-footer.component.scss'
 })
 export class LandingFooterComponent {
 

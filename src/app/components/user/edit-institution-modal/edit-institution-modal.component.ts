@@ -8,11 +8,10 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
-  selector: 'app-edit-institution-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAlert, NgbDatepicker, NgbDatepickerModule, TranslateModule, CompareTextPipe, ModalComponent],
-  templateUrl: './edit-institution-modal.component.html',
-  styleUrl: './edit-institution-modal.component.scss'
+    selector: 'app-edit-institution-modal',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAlert, NgbDatepicker, NgbDatepickerModule, TranslateModule, CompareTextPipe, ModalComponent],
+    templateUrl: './edit-institution-modal.component.html',
+    styleUrl: './edit-institution-modal.component.scss'
 })
 export class EditInstitutionModalComponent implements OnInit {
   @Input() country: any;

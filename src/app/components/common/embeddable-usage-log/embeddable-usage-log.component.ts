@@ -21,11 +21,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
-  selector: 'app-embeddable-usage-log',
-  standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,NgbDropdownModule,TranslateModule, CompareTextPipe],
-  templateUrl: './embeddable-usage-log.component.html',
-  styleUrl: './embeddable-usage-log.component.scss'
+    selector: 'app-embeddable-usage-log',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule, TranslateModule, CompareTextPipe],
+    templateUrl: './embeddable-usage-log.component.html',
+    styleUrl: './embeddable-usage-log.component.scss'
 })
 export class EmbeddableUsageLogComponent implements OnInit {
 
