@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
     selector: 'app-delete-release-package',
-    imports: [CommonModule, NgbAlert, ModalComponent],
+    imports: [CommonModule, ModalComponent],
     templateUrl: './delete-release-package.component.html',
     styleUrl: './delete-release-package.component.scss'
 })

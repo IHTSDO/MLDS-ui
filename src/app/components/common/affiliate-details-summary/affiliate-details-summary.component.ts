@@ -3,7 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { EditAffiliateStandingModalComponent } from '../../admin/edit-affiliate-standing-modal/edit-affiliate-standing-modal.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config';
 import { TranslateModule } from '@ngx-translate/core';
 import { EditPeimaryEmailComponent } from '../edit-peimary-email/edit-peimary-email.component';
@@ -11,7 +11,7 @@ import { EditPeimaryEmailComponent } from '../edit-peimary-email/edit-peimary-em
 
 @Component({
     selector: 'app-affiliate-details-summary',
-    imports: [CommonModule, RouterLink, TranslateModule],
+    imports: [CommonModule, TranslateModule],
     templateUrl: './affiliate-details-summary.component.html',
     styleUrl: './affiliate-details-summary.component.scss'
 })

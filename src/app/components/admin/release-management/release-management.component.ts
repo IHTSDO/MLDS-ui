@@ -10,7 +10,6 @@ import { PackagesService } from 'src/app/services/packages-service/packages.serv
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { AddReleaseModalComponent } from '../add-release-modal/add-release-modal.component';
-import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
@@ -18,7 +17,7 @@ import { RemoveHtmlPipe } from 'src/app/pipes/remove-html/remove-html.pipe';
 
 @Component({
     selector: 'app-release-management',
-    imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, CompareTextPipe, TranslateModule, EnumPipe, LinkAddblankPipe, RemoveHtmlPipe],
+    imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, TranslateModule, EnumPipe, LinkAddblankPipe, RemoveHtmlPipe],
     templateUrl: './release-management.component.html',
     styleUrl: './release-management.component.scss'
 })

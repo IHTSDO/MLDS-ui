@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbActiveModal, NgbAlert, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import { QuillModule } from 'ngx-quill';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
@@ -9,7 +9,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
     selector: 'app-add-edit-release-version-modal',
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, NgbModule, QuillModule, ModalComponent],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, QuillModule, ModalComponent],
     templateUrl: './add-edit-release-version-modal.component.html',
     styleUrl: './add-edit-release-version-modal.component.scss'
 })

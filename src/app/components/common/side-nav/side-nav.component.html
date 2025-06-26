@@ -103,7 +103,7 @@
         <span>{{ 'manageBlocklist.title' | translate | compareText: 'Manage Blocklist' }}</span>
       </a>
     </li>
-    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.metrics)" 
+    <li *ngIf="isAdmin" [class.selected]="checkUrl(routes.nationalRegistrationList)" 
         (mouseenter)="hoverItemChange(13)" (mouseleave)="hoverItemChange(null)">
       <a [routerLink]="[routes.nationalRegistrationList]" (click)="selectItem(13)">
         <i class="fa fa-flag"></i>&nbsp;

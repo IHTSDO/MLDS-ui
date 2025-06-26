@@ -8,7 +8,6 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { SessionStateService } from 'src/app/services/session-state/session-state.service';
 import { StandingStateUtilsService } from 'src/app/services/standing-state-utils/standing-state-utils.service';
 import { saveAs } from 'file-saver';
-import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 
@@ -17,7 +16,7 @@ import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.direct
  */
 @Component({
     selector: 'app-affiliate-management',
-    imports: [CommonModule, FormsModule, NgbModule, EnumPipe, TranslateModule, ScrollTrackerDirective],
+    imports: [CommonModule, FormsModule, NgbModule, TranslateModule, ScrollTrackerDirective],
     templateUrl: './affiliate-management.component.html',
     styleUrl: './affiliate-management.component.scss'
 })

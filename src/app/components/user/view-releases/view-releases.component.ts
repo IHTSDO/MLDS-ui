@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import lodash from 'lodash';
 import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
@@ -20,7 +20,7 @@ import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe
 
 @Component({
     selector: 'app-view-releases',
-    imports: [CommonModule, FormsModule, RouterLink, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
+    imports: [CommonModule, FormsModule, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
     templateUrl: './view-releases.component.html',
     styleUrl: './view-releases.component.scss'
 })

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { UsageReportsService } from 'src/app/services/usage-reports/usage-reports.service';
-import { DateSortPipe } from 'src/app/pipes/date-sort/date-sort.pipe';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
@@ -10,7 +9,7 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 
 @Component({
     selector: 'app-usage-reports-table',
-    imports: [CommonModule, DateSortPipe, TranslateModule, CompareTextPipe],
+    imports: [CommonModule, TranslateModule, CompareTextPipe],
     templateUrl: './usage-reports-table.component.html',
     styleUrl: './usage-reports-table.component.scss'
 })

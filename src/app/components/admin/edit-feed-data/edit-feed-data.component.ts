@@ -16,7 +16,6 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, of } from 'rxjs';
 import { MemberService } from 'src/app/services/member/member.service';
-import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalComponent } from '../../common/modal/modal.component';
 
@@ -27,7 +26,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
  */
 @Component({
     selector: 'app-edit-feed-data',
-    imports: [CommonModule, ReactiveFormsModule, EnumPipe, TranslateModule, ModalComponent],
+    imports: [CommonModule, ReactiveFormsModule, TranslateModule, ModalComponent],
     templateUrl: './edit-feed-data.component.html',
     styleUrl: './edit-feed-data.component.scss'
 })

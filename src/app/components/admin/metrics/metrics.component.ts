@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { MetricsService } from 'src/app/services/metrics/metrics.service'
 import { ToFixedPipe } from "../../../pipes/to-fixed/to-fixed.pipe"
-import { NumberRoundPipe } from 'src/app/pipes/number-round/number-round.pipe'
 import { TranslateModule } from '@ngx-translate/core'
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 
@@ -13,7 +12,7 @@ import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
  */
 @Component({
     selector: 'app-metrics',
-    imports: [CommonModule, FormsModule, ToFixedPipe, NumberRoundPipe, TranslateModule, CompareTextPipe],
+    imports: [CommonModule, FormsModule, ToFixedPipe, TranslateModule, CompareTextPipe],
     templateUrl: './metrics.component.html',
     styleUrls: ['./metrics.component.scss']
 })

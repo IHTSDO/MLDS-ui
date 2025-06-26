@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { LandingHeaderComponent } from "../landing-header/landing-header.component";
-import { LandingContentComponent } from "../landing-content/landing-content.component";
 import { LandingFooterComponent } from "../landing-footer/landing-footer.component";
-import { LoginComponent } from "../login/login.component";
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
@@ -13,7 +11,7 @@ import { CommonModule } from '@angular/common';
  */
 @Component({
     selector: 'app-landing-page',
-    imports: [LandingHeaderComponent, LandingContentComponent, LandingFooterComponent, LoginComponent, RouterOutlet, CommonModule],
+    imports: [LandingHeaderComponent, LandingFooterComponent, RouterOutlet, CommonModule],
     templateUrl: './landing-page.component.html',
     styleUrl: './landing-page.component.scss'
 })

@@ -15,7 +15,6 @@ import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { ROUTES } from 'src/app/routes-config';
 import { EnumPipe } from "../../../pipes/enum/enum.pipe";
-import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 /**
  * ApplicationReviewComponent is a standalone Angular component that displays the details of an application and allows the user to approve, reject, or request changes to the application.
@@ -25,7 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
  */
 @Component({
     selector: 'app-application-review',
-    imports: [CommonModule, ReactiveFormsModule, ApplicationSummaryBlockComponent, EnumPipe, CompareTextPipe, TranslateModule, FormsModule],
+    imports: [CommonModule, ReactiveFormsModule, ApplicationSummaryBlockComponent, EnumPipe, TranslateModule, FormsModule],
     templateUrl: './application-review.component.html',
     styleUrl: './application-review.component.scss'
 })

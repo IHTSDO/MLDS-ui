@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -9,7 +9,7 @@ import { ModalComponent } from "../../common/modal/modal.component";
 
 @Component({
     selector: 'app-delete-institution-modal',
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, CompareTextPipe, TranslateModule, ModalComponent],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, CompareTextPipe, TranslateModule, ModalComponent],
     templateUrl: './delete-institution-modal.component.html',
     styleUrl: './delete-institution-modal.component.scss'
 })

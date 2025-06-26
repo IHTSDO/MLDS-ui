@@ -3,12 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { UserNotificationService } from 'src/app/services/user-notification/user-notification.service';
 
 @Component({
     selector: 'app-user-notification',
-    imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, CompareTextPipe],
+    imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
     templateUrl: './user-notification.component.html',
     styleUrl: './user-notification.component.scss'
 })

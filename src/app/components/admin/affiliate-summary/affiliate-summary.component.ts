@@ -7,7 +7,6 @@ import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { AffiliateDetailsSummaryComponent } from "../../common/affiliate-details-summary/affiliate-details-summary.component";
 import { ROUTES } from 'src/app/routes-config';
-import { ActivityLogsComponent } from "../activity-logs/activity-logs.component";
 import { AuditsEmbedComponent } from "../../common/audits-embed/audits-embed.component";
 import { AuditsService } from 'src/app/services/audits/audits.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -22,11 +21,10 @@ import { CreateLoginModalComponent } from '../../common/create-login-modal/creat
 import { ApplicationSummaryModalComponent } from '../../common/application-summary-modal/application-summary-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
-import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 
 @Component({
     selector: 'app-affiliate-summary',
-    imports: [CommonModule, TranslateModule, ReactiveFormsModule, AffiliateDetailsSummaryComponent, ActivityLogsComponent, AuditsEmbedComponent, OrderByPipe, UsageReportsTableComponent, CompareTextPipe, EnumPipe],
+    imports: [CommonModule, TranslateModule, ReactiveFormsModule, AffiliateDetailsSummaryComponent, AuditsEmbedComponent, OrderByPipe, UsageReportsTableComponent, CompareTextPipe],
     templateUrl: './affiliate-summary.component.html',
     styleUrl: './affiliate-summary.component.scss'
 })

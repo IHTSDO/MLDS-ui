@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 
 import { ReleaseFileService } from 'src/app/services/release-file/release-file.service';
@@ -9,7 +9,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
     selector: 'app-add-release-file-modal',
-    imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbAlert, QuillModule, ModalComponent],
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, QuillModule, ModalComponent],
     templateUrl: './add-release-file-modal.component.html',
     styleUrl: './add-release-file-modal.component.scss'
 })

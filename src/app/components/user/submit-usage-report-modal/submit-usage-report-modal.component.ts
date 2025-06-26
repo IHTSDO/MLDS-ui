@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
@@ -12,7 +12,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
     selector: 'app-submit-usage-report-modal',
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, TranslateModule, CompareTextPipe, ModalComponent],
     templateUrl: './submit-usage-report-modal.component.html',
     styleUrl: './submit-usage-report-modal.component.scss'
 })

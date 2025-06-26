@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
 import { ROUTES } from 'src/app/routes-config'
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
-import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { UsageReportStateUtilsService } from 'src/app/services/usage-report-state-utils/usage-report-state-utils.service';
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
@@ -15,7 +14,7 @@ import { FormsModule } from '@angular/forms';
  */
 @Component({
     selector: 'app-usage-reports',
-    imports: [CommonModule, ScrollTrackerDirective, EnumPipe, TranslateModule, FormsModule],
+    imports: [CommonModule, ScrollTrackerDirective, TranslateModule, FormsModule],
     templateUrl: './usage-reports.component.html',
     styleUrl: './usage-reports.component.scss'
 })

@@ -16,14 +16,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { LoaderComponent } from "../../common/loader/loader.component";
-import { OrderByPipe } from "../../../pipes/order-by/order-by.pipe";
 import { Router, RouterModule } from '@angular/router';
 import { MemberPckageService } from 'src/app/services/member-package/member-pckage.service';
 
 
 @Component({
     selector: 'app-user-dashboard',
-    imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, OrderByPipe, RouterModule],
+    imports: [CommonModule, UsageReportsTableComponent, TranslateModule, CompareTextPipe, LoaderComponent, RouterModule],
     templateUrl: './user-dashboard.component.html',
     styleUrl: './user-dashboard.component.scss'
 })

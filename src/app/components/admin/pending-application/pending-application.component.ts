@@ -16,7 +16,6 @@ import { PendingApplicationsService } from 'src/app/services/pending-application
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config'
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
 import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.directive';
 /**
@@ -24,7 +23,7 @@ import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.direct
  */
 @Component({
     selector: 'app-pending-applications',
-    imports: [ScrollTrackerDirective, CommonModule, FormsModule, TranslateModule, EnumPipe, CompareTextPipe],
+    imports: [ScrollTrackerDirective, CommonModule, FormsModule, TranslateModule, CompareTextPipe],
     templateUrl: './pending-application.component.html',
     styleUrls: ['./pending-application.component.scss']
 })

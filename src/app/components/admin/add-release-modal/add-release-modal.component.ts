@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
@@ -11,7 +11,7 @@ import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
     selector: 'app-add-release-modal',
-    imports: [CommonModule, FormsModule, NgbAlert, QuillModule, ReactiveFormsModule, ModalComponent],
+    imports: [CommonModule, FormsModule, QuillModule, ReactiveFormsModule, ModalComponent],
     templateUrl: './add-release-modal.component.html',
     styleUrl: './add-release-modal.component.scss'
 })

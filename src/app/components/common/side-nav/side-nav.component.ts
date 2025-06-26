@@ -5,7 +5,6 @@ import { AuthenticationSharedService } from 'src/app/services/authentication/aut
 import { ROUTES } from 'src/app/routes-config';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from "../../../pipes/compare-text/compare-text.pipe";
-import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { SideBarService } from 'src/app/services/side-bar/side-bar.service';
 
 /**
@@ -16,7 +15,7 @@ import { SideBarService } from 'src/app/services/side-bar/side-bar.service';
  */
 @Component({
     selector: 'app-side-nav',
-    imports: [CommonModule, RouterLink, TranslateModule, CompareTextPipe, EnumPipe],
+    imports: [CommonModule, RouterLink, TranslateModule, CompareTextPipe],
     templateUrl: './side-nav.component.html',
     styleUrls: ['./side-nav.component.scss']
 })

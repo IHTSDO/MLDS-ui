@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import lodash from 'lodash';
-import { FilterOnlinePipe } from 'src/app/pipes/filter-online/filter-online.pipe';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
@@ -16,7 +15,7 @@ import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe
 
 @Component({
     selector: 'app-archive-management',
-    imports: [CommonModule, FilterOnlinePipe, FormsModule, NgbModule, EnumPipe, TranslateModule, LinkAddblankPipe],
+    imports: [CommonModule, FormsModule, NgbModule, EnumPipe, TranslateModule, LinkAddblankPipe],
     templateUrl: './archive-management.component.html',
     styleUrl: './archive-management.component.scss'
 })

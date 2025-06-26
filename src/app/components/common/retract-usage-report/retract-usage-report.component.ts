@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { CommercialUsageService } from 'src/app/services/commercialUsage/commercial-usage.service';
@@ -9,7 +9,7 @@ import { ModalComponent } from '../modal/modal.component';
 
 @Component({
     selector: 'app-retract-usage-report',
-    imports: [CommonModule, NgbAlert, TranslateModule, CompareTextPipe, ModalComponent],
+    imports: [CommonModule, TranslateModule, CompareTextPipe, ModalComponent],
     templateUrl: './retract-usage-report.component.html',
     styleUrl: './retract-usage-report.component.scss'
 })

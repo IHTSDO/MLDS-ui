@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { MemberService } from 'src/app/services/member/member.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
@@ -13,7 +13,7 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
     selector: 'app-extension-application',
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbAlert, TranslateModule, CompareTextPipe],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, CompareTextPipe],
     templateUrl: './extension-application.component.html',
     styleUrl: './extension-application.component.scss'
 })
