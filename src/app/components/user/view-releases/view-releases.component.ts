@@ -19,10 +19,10 @@ import { LoaderComponent } from "../../common/loader/loader.component";
 import { LinkAddblankPipe } from 'src/app/pipes/link-addblank/link-addblink.pipe';
 
 @Component({
-    selector: 'app-view-releases',
-    imports: [CommonModule, FormsModule, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
-    templateUrl: './view-releases.component.html',
-    styleUrl: './view-releases.component.scss'
+  selector: 'app-view-releases',
+  imports: [CommonModule, FormsModule, SortLimitPipe, TranslateModule, CompareTextPipe, LoaderComponent, LinkAddblankPipe],
+  templateUrl: './view-releases.component.html',
+  styleUrl: './view-releases.component.scss'
 })
 export class ViewReleasesComponent implements OnInit {
   releasePackagesByMember: { member: any, packages: any[] }[] = [];
@@ -40,7 +40,8 @@ export class ViewReleasesComponent implements OnInit {
   sessionMember = this.sessionService.getUserDetails()?.member;
   private openAccordions: Set<String> = new Set();
   isLoading: boolean = true; // Add this flag
- 
+  noPackagesAvailable: boolean = false;
+
 
 
   constructor(
@@ -56,14 +57,14 @@ export class ViewReleasesComponent implements OnInit {
     public packageUtilService: PackageUtilsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.loadReleasePackages();
-    if(this.sessionService.isAuthenticated()){
-    this.loadAffiliateState();
-    this.loadUserState();
+    if (this.sessionService.isAuthenticated()) {
+      this.loadAffiliateState();
+      this.loadUserState();
     }
   }
 
@@ -78,33 +79,36 @@ export class ViewReleasesComponent implements OnInit {
         this.updateReleasePackagesByMember(this.releasePackage);
         this.updateAlphaReleasePackagesByMember(this.releasePackage);
         this.updateOfflinePackagesByMember(this.releasePackage);
+      },
+      complete: () => {
+        this.updateNoPackagesAvailable();
       }
     });
   }
 
   private loadAffiliateState(): void {
-    if(this.sessionService.isAuthenticated()){
-    this.affiliateService.myAffiliate().subscribe({
-      next: (data) => {
-        if(data[0]){
-        this.userAffiliateService.setAffiliate(data[0]);
-        this.standingState = data[0].standingState;
-        this.primaryApplication = data[0].application;
-        this.applications = data[0].applications;
-        this.loadStandingState();
-        }
-        else{
+    if (this.sessionService.isAuthenticated()) {
+      this.affiliateService.myAffiliate().subscribe({
+        next: (data) => {
+          if (data[0]) {
+            this.userAffiliateService.setAffiliate(data[0]);
+            this.standingState = data[0].standingState;
+            this.primaryApplication = data[0].application;
+            this.applications = data[0].applications;
+            this.loadStandingState();
+          }
+          else {
+            this.isLoading = false;
+            console.warn('No affiliate data found');
+          }
+        },
+        error: (err) => {
           this.isLoading = false;
-          console.warn('No affiliate data found');
         }
-      },
-      error: (err) =>{
-        this.isLoading = false;
-      }
-    });
-  }else{
-    this.isLoading = false;
-  }
+      });
+    } else {
+      this.isLoading = false;
+    }
   }
 
 
@@ -121,35 +125,35 @@ export class ViewReleasesComponent implements OnInit {
     if (sessionMember != null) {
       const memberRelease = lodash.find(this.releasePackagesByMember, (item) => {
         return sessionMember['key'] != null && sessionMember['key'] !== 'undefined' && sessionMember['key'] !== "IHTSDO" &&
-               item.member.key === sessionMember['key'];
+          item.member.key === sessionMember['key'];
       });
 
       if (memberRelease) {
         lodash.each(this.releasePackagesByMember, (item) => {
-            if (item.member.key === "IHTSDO") {
-                // Ensure item.packages is initialized
-                if (!item.packages) {
-                    item.packages = []; // Initialize as an empty array if undefined
-                }
-    
-                // Push each release package from memberRelease.packages into item.packages
-                lodash.each(memberRelease.packages, (releasePackage) => {
-                    item.packages.push(releasePackage);
-                });
-    
-                // Sort item.packages after pushing the release packages
-                item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+          if (item.member.key === "IHTSDO") {
+            // Ensure item.packages is initialized
+            if (!item.packages) {
+              item.packages = []; // Initialize as an empty array if undefined
             }
+
+            // Push each release package from memberRelease.packages into item.packages
+            lodash.each(memberRelease.packages, (releasePackage) => {
+              item.packages.push(releasePackage);
+            });
+
+            // Sort item.packages after pushing the release packages
+            item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+          }
         });
-    }
-    
+      }
+
     }
     this.isLoading = false;
     this.scrollToFragment();
   }
 
 
-   updateOfflinePackagesByMember(releasePackages: any[]): void {
+  updateOfflinePackagesByMember(releasePackages: any[]): void {
     const filteredPackages = lodash.filter(releasePackages, this.packageUtilsService.isPackageOffline);
     const nonPublishedPackages = lodash.reject(filteredPackages, this.packageUtilsService.isPackagePublished);
     const removeEmptyFiles = lodash.reject(nonPublishedPackages, this.packageUtilService.isPackageEmpty);
@@ -165,31 +169,31 @@ export class ViewReleasesComponent implements OnInit {
     if (sessionMember != null) {
       const offlineMemberRelease = lodash.find(this.offlinePackagesByMember, (item) => {
         return sessionMember['key'] != null && sessionMember['key'] !== 'undefined' && sessionMember['key'] !== "IHTSDO" &&
-               item.member.key === sessionMember['key'];
+          item.member.key === sessionMember['key'];
       });
 
       if (offlineMemberRelease) {
         lodash.each(this.offlinePackagesByMember, (item) => {
-            if (item.member.key === "IHTSDO") {           
-                if (!item.packages) {
-                    item.packages = []; 
-                }
-    
-                lodash.each(offlineMemberRelease.packages, (releasePackage) => {
-                    item.packages.push(releasePackage);
-                });
-    
-                item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+          if (item.member.key === "IHTSDO") {
+            if (!item.packages) {
+              item.packages = [];
             }
+
+            lodash.each(offlineMemberRelease.packages, (releasePackage) => {
+              item.packages.push(releasePackage);
+            });
+
+            item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+          }
         });
-    }
-    
+      }
+
     }
 
   }
 
   updateAlphaReleasePackagesByMember(releasePackages: any[]): void {
-   
+
     const filteredPackages = lodash.reject(releasePackages, this.packageUtilsService.isPackageOffline);
     const nonPublishedPackages = lodash.reject(filteredPackages, this.packageUtilsService.isPackagePublished);
 
@@ -204,41 +208,41 @@ export class ViewReleasesComponent implements OnInit {
     if (sessionMember != null) {
       const alphaMemberRelease = lodash.find(this.alphaReleasePackagesByMember, (item) => {
         return sessionMember['key'] != null && sessionMember['key'] !== 'undefined' && sessionMember['key'] !== "IHTSDO" &&
-               item.member.key === sessionMember['key'];
+          item.member.key === sessionMember['key'];
       });
 
       if (alphaMemberRelease) {
         lodash.each(this.alphaReleasePackagesByMember, (item) => {
-            if (item.member.key === "IHTSDO") {
-                // Ensure item.packages is initialized
-                if (!item.packages) {
-                    item.packages = []; // Initialize as an empty array if undefined
-                }
-    
-                // Push each release package from alphaMemberRelease.packages into item.packages
-                lodash.each(alphaMemberRelease.packages, (releasePackage) => {
-                    item.packages.push(releasePackage);
-                });
-    
-                // Sort item.packages after pushing the release packages
-                item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+          if (item.member.key === "IHTSDO") {
+            // Ensure item.packages is initialized
+            if (!item.packages) {
+              item.packages = []; // Initialize as an empty array if undefined
             }
+
+            // Push each release package from alphaMemberRelease.packages into item.packages
+            lodash.each(alphaMemberRelease.packages, (releasePackage) => {
+              item.packages.push(releasePackage);
+            });
+
+            // Sort item.packages after pushing the release packages
+            item.packages = this.packageUtilsService.releasePackageSort(item.packages);
+          }
         });
-    }
-    
+      }
+
     }
     this.isLoading = false;
     this.scrollToFragment();
   }
 
   private loadStandingState(): void {
-     this.isPendingInvoice = this.standingStateUtils.isPendingInvoice(this.standingState);
-     this.isAccountDeactivated = this.standingStateUtils.isDeactivated(this.standingState);
-     this.isPrimaryApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.primaryApplication);
-     this.isPrimaryApplicationApproved = this.applicationUtilsService.isApplicationApproved(this.primaryApplication);
-     this.isLoading = false;
-    }
-  
+    this.isPendingInvoice = this.standingStateUtils.isPendingInvoice(this.standingState);
+    this.isAccountDeactivated = this.standingStateUtils.isDeactivated(this.standingState);
+    this.isPrimaryApplicationWaitingForApplicant = this.applicationUtilsService.isApplicationWaitingForApplicant(this.primaryApplication);
+    this.isPrimaryApplicationApproved = this.applicationUtilsService.isApplicationApproved(this.primaryApplication);
+    this.isLoading = false;
+  }
+
 
   viewLicense(memberKey: string) {
     this.memberService.getMemberLicense(memberKey).subscribe((licenseData: string) => {
@@ -265,19 +269,19 @@ export class ViewReleasesComponent implements OnInit {
   isApplicationWaitingForApplicant(member: any): boolean {
     return this.applicationUtilsService.isApplicationWaitingForApplicant(this.implementExtension(member));
   }
-  
-  implementExtension(member:any){
+
+  implementExtension(member: any) {
     this.matchingExtensionApplication = this.getLatestMatchingMemberApplication(member);
     return this.matchingExtensionApplication;
   }
 
-  getLatestMatchingMemberApplication(member:any){
+  getLatestMatchingMemberApplication(member: any) {
     const filterApplications = this.applications
       .filter((application: any) => application.member.key === member.member.key);
 
-    return filterApplications.reduce((latest: any, application: any) => 
-      new Date(application.submittedAt) > new Date(latest.submittedAt) ? application : latest, 
-    filterApplications[0]
+    return filterApplications.reduce((latest: any, application: any) =>
+      new Date(application.submittedAt) > new Date(latest.submittedAt) ? application : latest,
+      filterApplications[0]
     );
   }
 
@@ -286,7 +290,7 @@ export class ViewReleasesComponent implements OnInit {
   }
 
   toggleAccordion(index: number, section: 'online' | 'alphaBeta' | 'offline'): void {
-    const key = `${section}-${index}`;  
+    const key = `${section}-${index}`;
     if (this.openAccordions.has(key)) {
       this.openAccordions.delete(key);
     } else {
@@ -309,13 +313,28 @@ export class ViewReleasesComponent implements OnInit {
   }
 
   sortByMemberKey(releasePackagesByMember: any[]): any[] {
-    if (releasePackagesByMember.length > 1) {
+    if (releasePackagesByMember.length >= 1) {
       const sortedArray = releasePackagesByMember
-      .sort((a, b) => a.member.key.localeCompare(b.member.key))
-      .filter(item => item.member.key !== 'IHTSDO');
+        .sort((a, b) => a.member.key.localeCompare(b.member.key))
+        .filter(item => item.member.key !== 'IHTSDO');
       return sortedArray;
     }
     return releasePackagesByMember;
+  }
+
+  hasContainPackages(releasePackagesByMember: any[]): boolean {
+    return this.sortByMemberKey(releasePackagesByMember).some(member => member.packages.length > 0);
+  }
+
+
+  get noPackagesAvailableCheck(): boolean {
+  return this.noPackagesAvailable;
+ }
+
+  updateNoPackagesAvailable(): void {
+   this.noPackagesAvailable = !this.hasContainPackages(this.releasePackagesByMember) &&
+                               !this.hasContainPackages(this.alphaReleasePackagesByMember) &&
+                               !this.hasContainPackages(this.offlinePackagesByMember);
   }
 
   scrollToFragment(): void {
