@@ -21,10 +21,7 @@
       <div class="panel-body">
         <p *ngIf="application?.type !== 'INDIVIDUAL'">
           <b>{{ 'views.contactInfo.organization.type.name' | translate | compareText: 'Organization Type'}}:</b>
-          <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType === 'OTHER'">
-            {{ application?.affiliateDetails?.organizationTypeOther || (application?.affiliateDetails?.organizationType ? ('affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate) : '') }}
-          </span>
-          <span *ngIf="application?.affiliate?.affiliateDetails?.organizationType !== 'OTHER'">
+          <span>
             {{ application?.affiliateDetails?.organizationType ? ('affiliate.organizationType.' + application?.affiliateDetails?.organizationType | translate) : ''}}
           </span>
         </p>

@@ -14,7 +14,15 @@
         <h4><span>{{'register.affiliateRegistration.usageType'|translate|compareText:'Usage Type'}}:</span></h4>
         <ul class="list-group">
           <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.usageType.name'|translate|compareText:'Type'}}:</strong> {{'affiliate.type.'+affiliateform?.type|translate }}</li>
-          <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:</strong> {{'affiliate.subType.'+affiliateform?.subType|translate}} {{affiliateform?.otherText }}</li>
+          <li class="list-group-item-light">
+            <strong>{{'views.contactInfo.admin.subtype.name'|translate|compareText:'Subtype'}}:</strong>
+            <span *ngIf="affiliateform?.type !== 'OTHER'">
+              {{ ('affiliate.subType.' + affiliateform?.subType) | translate }}
+            </span>
+            <span *ngIf="affiliateform?.type === 'OTHER'">
+              {{ affiliateform?.otherText || 'Additional Info Not Provided' }}
+            </span>
+          </li>
           <li class="list-group-item-light"><strong>{{'views.contactInfo.admin.agreementType'|translate|compareText:'Agreement Type'}}:</strong> {{'affiliate.agreementType.'+affiliateform?.agreementType |translate}}</li>
         </ul>
       </div>
