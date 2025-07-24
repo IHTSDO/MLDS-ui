@@ -7,12 +7,12 @@ import { ReleasePackageService } from 'src/app/services/release-package/release-
 import lodash from 'lodash';
 import { Router } from '@angular/router';
 import { ReleaseConfigWarningModalComponent } from '../release-config-warning-modal/release-config-warning-modal.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from '../../common/loader/loader.component';
 
 @Component({
     selector: 'app-release-management-config',
-    imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent],
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent, NgbModule],
     templateUrl: './release-management-config.component.html',
     styleUrl: './release-management-config.component.scss'
 })

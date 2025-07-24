@@ -1,7 +1,7 @@
 <div class="row" style="padding-top: 5rem;">
     <span><a [routerLink]="['/releaseConfig']"><i class="fa fa-angle-double-left"></i> Back to Configuration</a></span>
     <br><br>
-    <h2>Releases - View Permission</h2>
+    <h2>Releases - View Permission  <i class="fa fa-question-circle fa-2x" [ngbPopover]="fullGuide"></i></h2>
 
     <div *ngIf="masterReleasePermissions.length === 0 && releasePermissions.length === 0" class="alert alert-warning">
         No configurations have been set up for any release yet.
@@ -69,3 +69,18 @@
         </table>
     </div>
 </div>
+
+<ng-template #fullGuide>
+  <div style="max-height: 300px; overflow-y: auto; font-size: 0.85rem; max-width: 350px;">
+    <p><strong>Quick Overview of Permissions:</strong></p>
+    <p>
+      Below are the permission types available in this screen for each configured release types / releases:
+    </p>
+
+    <p><strong>ADMIN:</strong> Only Admin users have access.</p>
+    <p><strong>ADMIN, STAFF AND MEMBER:</strong> Access is granted to Admin, Staff and Member roles.</p>
+    <p><strong>ADMIN, STAFF, MEMBER AND AFFILIATES:</strong> Access is granted to Admin, Staff, Member and all Affiliates.</p>
+    <p><strong>ADMIN, STAFF, MEMBER AND SELECTED USERS:</strong> Access is granted to Admin, Staff, Member and specific individual users selected from a list.</p>
+    <p><strong>EVERYONE:</strong> The release is public and accessible to all users.</p>
+  </div>
+</ng-template>

@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MemberService } from 'src/app/services/member/member.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { ViewReleaseAccessUserComponent } from '../view-release-access-user/view-release-access-user.component';
+import { ReleasePermissionRemoveAlertModelComponent } from '../release-permission-remove-alert-model/release-permission-remove-alert-model.component';
 
 @Component({
     selector: 'app-release-view-permission',
-    imports: [CommonModule, RouterLink],
+    imports: [CommonModule, RouterLink, NgbModule],
     templateUrl: './release-view-permission.component.html',
     styleUrl: './release-view-permission.component.scss'
 })
@@ -17,6 +18,7 @@ export class ReleaseViewPermissionComponent {
   releasePermissions: any[] = []; 
   masterReleasePermissions: any[] = []; 
   releasePermissionType: string = 'ADMIN_ONLY'; 
+  message: string = '';
   
 
   constructor(private packagesService: PackagesService, private memberService: MemberService,
@@ -90,28 +92,36 @@ export class ReleaseViewPermissionComponent {
   }
 
 
-  removePermission(releasePermission: any){
-    if(releasePermission.releasePackageId){
-      this.packagesService.releaseAccessRevoke(releasePermission.releasePackageId, releasePermission.permissionType).subscribe({
-        next: (data: any[]) => {
-          this.getReleasePermission();
-        },
-        error: (error) => {
-          console.error('Error', error);
-        }
-    });
+  removePermission(releasePermission: any) {
+
+     if (releasePermission.name) {
+      this.message = `Are you sure you want to remove the permission for the release named: <strong>${releasePermission.name} </strong>?`;
+    } else {
+      this.message = `Are you sure you want to remove the permission for all releases under the type: <strong>${releasePermission.releaseType} </strong>?`;
     }
 
-    else{
-      this.packagesService.releaseAccessRevoke(releasePermission.releaseType, releasePermission.releasePermissionType).subscribe({
-        next: (data: any[]) => {
-          this.getMasterReleasePermission();
-        },
-        error: (error) => {
-          console.error('Error', error);
-        }
+    const modalRef = this.modalService.open(ReleasePermissionRemoveAlertModelComponent, {
+      size: 'lg',
+      backdrop: 'static'
     });
-    }
+
+    modalRef.componentInstance.message = this.message;
+
+    modalRef.result.then((confirmed) => {
+      if (confirmed) {
+        if (releasePermission.releasePackageId) {
+          this.packagesService.releaseAccessRevoke(releasePermission.releasePackageId, releasePermission.permissionType).subscribe({
+            next: () => this.getReleasePermission(),
+            error: (error) => console.error('Error', error)
+          });
+        } else {
+          this.packagesService.releaseAccessRevoke(releasePermission.releaseType, releasePermission.releasePermissionType).subscribe({
+            next: () => this.getMasterReleasePermission(),
+            error: (error) => console.error('Error', error)
+          });
+        }
+      }
+    })
 
   }
 

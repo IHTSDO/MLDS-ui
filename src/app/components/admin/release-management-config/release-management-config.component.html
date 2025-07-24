@@ -1,9 +1,8 @@
 <div class="row">
   <div style="display: flex;flex-direction: row;">
   <h2 style="padding-top: 50px;">
-    Release Management - Configuration screen
+    Release Management - Configuration  <i class="fa fa-question-circle fa-2x" [ngbPopover]="fullGuide"></i>
   </h2>
-
 
   <div *ngIf="isLoading" class="loader-center">
     <app-loader></app-loader>
@@ -120,3 +119,28 @@
     </button>
   </div>
 </div>
+
+
+<ng-template #fullGuide>
+  <div style="max-height: 300px; overflow-y: auto; font-size: 0.85rem; max-width: 350px;">
+    <p><strong>In this screen</strong>, there is a Release permission section check box to select the permission level for who can access the release.</p>
+    <p><strong>Admin:</strong><br>
+      - This is the default selection.<br>
+      - The Admin checkbox is always checked and cannot be unchecked.
+    </p>
+    <p><strong>Admin, Staff, Member:</strong><br>
+      - When these three checkboxes are selected, the release is visible only to these roles.
+    </p>
+    <p><strong>All Affiliates:</strong><br>
+      - Grants access to all affiliate users.<br>
+      - Also checks Admin, Staff, and Member automatically.
+    </p>
+    <p><strong>Selected Users:</strong><br>
+      - Limits access to specific individual users.<br>
+      - Admin, Staff, and Member are auto-selected.<br>
+    </p>
+    <p><strong>Everyone:</strong><br>
+      - Makes the release public to all users.
+    </p>
+  </div>
+</ng-template>

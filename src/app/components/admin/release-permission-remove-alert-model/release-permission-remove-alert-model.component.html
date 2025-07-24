@@ -1,0 +1,13 @@
+<app-modal 
+  [title]="'Remove Permission'" 
+  [cancelText]="'Cancel'"
+  [submitText]="'Remove'"
+  (onCancel)="cancel()"
+  [formGroup]="null"
+  [buttonType]="'delete'" 
+  (onSubmit)="confirm()">
+
+  <div modal-body>
+     <p [innerHTML]="message"></p>
+  </div>
+</app-modal>
