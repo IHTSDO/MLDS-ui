@@ -43,7 +43,13 @@ export class EditPeimaryEmailComponent {
       }
     }
 
-  
+    goToAffiliateSummary() {
+      if (this.affiliateId) {
+        this.router.navigate([this.routes.affiliateManagement, encodeURIComponent(this.affiliateId)]);
+      } else {
+        console.error('Affiliate ID is not available.');
+      }
+    }
     getUserDetails(email: string) {
       this.affiliateService.getUserDetails(email, this.affiliateDetailsId).subscribe(
         (data) => {
@@ -70,8 +76,11 @@ export class EditPeimaryEmailComponent {
       modalRef.result.then(
         (action) => {
           if (action === 'updateAnyway') {
+            this.activeModal.close(); // Close modal & pass updated email
+            this.router.navigate([this.routes.affiliateManagement, encodeURIComponent(this.affiliateId)]);
             console.log('Email updated successfully'); // Success log
           } else if (action === 'cancel') {
+            this.activeModal.close(); 
             this.router.navigate([this.routes.affiliateManagement, encodeURIComponent(this.affiliateId)]);
           }
         },
