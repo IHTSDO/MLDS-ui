@@ -176,23 +176,44 @@ export class ReleaseFileDownloadCountComponent implements OnInit {
   }
 
   private sortData() {
-    this.releaseFileDownloadCounts.sort((a: { [x: string]: any; }, b: { [x: string]: any; }) => {
+    this.releaseFileDownloadCounts.sort((a: any, b: any) => {
+      const compare = (fieldA: any, fieldB: any, isNumeric: boolean = false) => {
+        if (!isNumeric) {
+          fieldA = fieldA?.toLowerCase() || '';
+          fieldB = fieldB?.toLowerCase() || '';
+        }
+        if (fieldA < fieldB) return -1;
+        if (fieldA > fieldB) return 1;
+        return 0;
+      };
+
+      if (this.orderByField === 'count') {
+        let result = compare(b.count, a.count, true);
+
+        if (result !== 0) return result;
+
+        result = compare(a.releasePackageName, b.releasePackageName);
+        if (result !== 0) return result;
+
+        result = compare(a.releaseVersionName, b.releaseVersionName);
+        if (result !== 0) return result;
+
+        return compare(
+          this.transformToPlainText(a.releaseFileName),
+          this.transformToPlainText(b.releaseFileName)
+        );
+      }
+
       let fieldA = a[this.orderByField];
       let fieldB = b[this.orderByField];
-  
-      if (this.orderByField !== 'count') {
-        fieldA = fieldA.toLowerCase();
-        fieldB = fieldB.toLowerCase();
-      }
-  
+
       if (this.orderByField === 'releaseFileName') {
         fieldA = this.transformToPlainText(fieldA);
         fieldB = this.transformToPlainText(fieldB);
       }
-  
-      if (fieldA < fieldB) return this.reverseSort ? 1 : -1;
-      if (fieldA > fieldB) return this.reverseSort ? -1 : 1;
-      return 0;
+
+      const primaryResult = compare(fieldA, fieldB);
+      return this.reverseSort ? -primaryResult : primaryResult;
     });
   }
   
