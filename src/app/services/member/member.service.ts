@@ -235,7 +235,12 @@ export class MemberService {
         catchError(this.handleError)
       );
     }
-
+    updateMemberLanguageAndFooter(m: any): Observable<any> {
+      const memberKey = m.key;
+      return this.http.put<any>(`${this.apiUrl}/members/${memberKey}/language`, m).pipe(
+        catchError(this.handleError)
+      );
+    }
     private handleError(error: HttpErrorResponse) {
       console.error('An error occurred:', error.message);
       return throwError(() => new Error('Something went wrong; please try again later.'));
@@ -272,7 +277,15 @@ export class MemberService {
         );
       }
       
-    
+      updateMemberDetails(memberKey: string, language: string, footerActive: boolean): Observable<string> {
+        return this.http.put<string>(
+          `${this.apiUrl}/members/${encodeURIComponent(memberKey)}/details`,
+          { language, footerActive },
+          { responseType: 'text' as 'json' } // So Angular treats plain text as JSON
+        );
+      }
+      
+      
     
     
   }

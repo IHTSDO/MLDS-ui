@@ -11,6 +11,7 @@ import { ROUTES } from 'src/app/routes-config';
 import { API_ROUTES } from 'src/app/routes-config-api';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { OpenAutoDeactivateConfigComponent } from '../../common/open-auto-deactivate-config/open-auto-deactivate-config.component';
+import { LanguageAndFooterActiveComponent } from '../../common/language-and-footer-active/language-and-footer-active.component';
 
 /**
  * Member Management Component
@@ -245,6 +246,24 @@ openAutoDeactivateConfigModal(member: any): void {
     console.log('Modal dismissed');
   });
 }
+openLanguageAndFooterActiveConfigModal(member: any): void {
+  if (!member) {
+    console.error('Error: Member data is null or undefined');
+    return;
+  }
 
+  const modalRef = this.modalService.open(LanguageAndFooterActiveComponent, {
+    size: 'lg',
+    backdrop: 'static'
+  });
+
+  modalRef.componentInstance.member = member; // Pass member safely
+
+  modalRef.result.then(() => {
+    this.fetchMembers();
+  }).catch(() => {
+    console.log('Modal dismissed');
+  });
+}
 
 }

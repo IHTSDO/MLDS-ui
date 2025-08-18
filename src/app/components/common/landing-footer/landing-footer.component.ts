@@ -45,35 +45,59 @@ export class LandingFooterComponent {
     this.fetchMembers(); // Fetch members when component loads
   }
 
-  fetchMembers(): void {
-    this.isLoading = true;
-    this.memberService.getMembers().subscribe({
-      next: (data) => {
-        // Filter out 'ihtsdo'
-        const filteredMembers = data.filter((member: any) => member.key.toLowerCase() !== 'ihtsdo');
-        this.members = this.sortMembers(filteredMembers);
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Error fetching members:', error);
-      }
-    });
-  }
+  // fetchMembers(): void {
+  //   this.isLoading = true;
+  //   this.memberService.getMembers().subscribe({
+  //     next: (data) => {
+  //       // Filter out 'ihtsdo'
+  //       const filteredMembers = data.filter((member: any) => member.key.toLowerCase() !== 'ihtsdo');
+  //       this.members = this.sortMembers(filteredMembers);
+  //       this.isLoading = false;
+  //     },
+  //     error: (error) => {
+  //       this.isLoading = false;
+  //       console.error('Error fetching members:', error);
+  //     }
+  //   });
+  // }
   
 // Function to sort members by key (alpha-2 code)
+fetchMembers(): void {
+  this.isLoading = true;
+  this.memberService.getMembers().subscribe({
+    next: (data) => {
+      // Filter out 'ihtsdo' and inactive members
+      const filteredMembers = data
+        .filter((member: any) => member.key.toLowerCase() !== 'ihtsdo')
+        .filter((member: any) => member.footerActive); // ✅ Only show active
+
+      this.members = this.sortMembers(filteredMembers);
+      this.isLoading = false;
+    },
+    error: (error) => {
+      this.isLoading = false;
+      console.error('Error fetching members:', error);
+    }
+  });
+}
+
 private sortMembers(members: any[]): any[] {
   return members.sort((a, b) => {
     return a.key.localeCompare(b.key);
   });
 }
 
+  // getMemberLandingPage(member: any): string {
+  //   let fullBaseUrl = `${window.location.protocol}//${window.location.host}/#/landing/${member.key}`;
+  //   if (member.language) {
+  //     fullBaseUrl += `?lang=${member.language}`;
+  //   }
+  //   return fullBaseUrl;
+  // }
   getMemberLandingPage(member: any): string {
-    let fullBaseUrl = `${window.location.protocol}//${window.location.host}/#/landing/${member.key}`;
-    if (member.language) {
-      fullBaseUrl += `?lang=${member.language}`;
-    }
-    return fullBaseUrl;
+    const lang = member.language || 'en'; // ✅ fallback
+    return `${window.location.protocol}//${window.location.host}/#/landing/${member.key}?lang=${lang}`;
   }
+  
     
 }

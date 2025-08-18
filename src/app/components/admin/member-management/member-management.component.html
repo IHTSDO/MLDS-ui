@@ -38,6 +38,19 @@
 							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editStaffNotificationsEmail(member)"><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
                             <li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editFeedData(member)"><i class="fa fa-edit"></i> Edit Feed Data</a></li>
 							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="openAutoDeactivateConfigModal(member)"><i class="fa fa-edit"></i> Auto Deactivation Config</a></li>
+							<li>
+								<a
+								  class="dropdown-item"
+								  *ngIf="canAccess(member)"
+								  [class.disabled]="member.key === 'IHTSDO'"
+								  [attr.aria-disabled]="member.key === 'IHTSDO'"
+								  (click)="member.key !== 'IHTSDO' && openLanguageAndFooterActiveConfigModal(member)"
+								>
+								  <i class="fa fa-edit"></i>
+								  Language and Footer Status Config
+								</a>
+						  </li>
+							  
 						</ul>
 					</div>
     			</td>

@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">Language And Footer Active Config</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  
+  <p class="modal-body">Configure Language key and Footer Status</p>
+  
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Language Key</label>
+      <input type="text" class="form-control" [(ngModel)]="languageKey" />
+    </div>
+  
+    <div class="form-group">
+      <label>Footer Status</label>
+      <select class="form-control" [(ngModel)]="isFooterActive">
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="edit-button" (click)="onSubmit()">Update</button>
+    <button class="btn btn-link" (click)="onCancel()">Cancel</button>
+  </div>
+  

@@ -6,7 +6,6 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { ROUTES } from 'src/app/routes-config';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { HttpResponse } from '@angular/common/http';
 @Component({
     selector: 'app-open-auto-deactivate-config',
     imports: [CommonModule, FormsModule],
