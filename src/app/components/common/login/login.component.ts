@@ -105,6 +105,9 @@ export class LoginComponent {
             } else {
               this.router.navigate([this.routes.pendingApplications]);
             }
+          } 
+          else if (this.authenticationService.isMember()) {
+              this.router.navigate([this.routes.ihtsdoReleases]);
           } else {
             this.userAffiliateService.loadUserAffiliate().subscribe({
               next: () => {
