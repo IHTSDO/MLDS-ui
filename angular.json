@@ -34,7 +34,9 @@
                             "bootstrap/dist/css/bootstrap.min.css",
                             "@fortawesome/fontawesome-free/css/all.css",
                             "node_modules/quill/dist/quill.snow.css",
+                            "./node_modules/intl-tel-input/build/css/intlTelInput.css",
                             "src/styles.scss"
+
                         ],
                         "scripts": [
                             "@popperjs/core/dist/umd/popper.min.js",
@@ -103,5 +105,31 @@
                 }
             }
         }
+    },
+    "schematics": {
+      "@schematics/angular:component": {
+        "type": "component"
+      },
+      "@schematics/angular:directive": {
+        "type": "directive"
+      },
+      "@schematics/angular:service": {
+        "type": "service"
+      },
+      "@schematics/angular:guard": {
+        "typeSeparator": "."
+      },
+      "@schematics/angular:interceptor": {
+        "typeSeparator": "."
+      },
+      "@schematics/angular:module": {
+        "typeSeparator": "."
+      },
+      "@schematics/angular:pipe": {
+        "typeSeparator": "."
+      },
+      "@schematics/angular:resolver": {
+        "typeSeparator": "."
+      }
     }
 }

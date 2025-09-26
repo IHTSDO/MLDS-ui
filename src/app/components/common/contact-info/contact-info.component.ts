@@ -6,7 +6,8 @@ import { AffiliateService } from 'src/app/services/affiliate/affiliate.service';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CountryISO, NgxBsTelInputComponent, PhoneNumberFormat, SearchCountryField } from 'ngx-bs-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import {  CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import { CountryService } from 'src/app/services/country/country.service';
 import { map, Observable, of, startWith } from 'rxjs';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
@@ -16,16 +17,16 @@ import { LoaderComponent } from "../loader/loader.component";
 
 @Component({
     selector: 'app-contact-info',
-    imports: [CommonModule, ReactiveFormsModule, NgbModule, NgxBsTelInputComponent, CompareTextPipe, TranslateModule, LoaderComponent],
+    imports: [CommonModule, ReactiveFormsModule, NgbModule, CompareTextPipe, TranslateModule, LoaderComponent, NgxIntlTelInputModule],
     templateUrl: './contact-info.component.html',
     styleUrl: './contact-info.component.scss'
 })
 export class ContactInfoComponent implements OnInit {
 
-
+	CountryISO = CountryISO;
   PhoneNumberFormat = PhoneNumberFormat;
-  SearchCountryField = SearchCountryField;
-  CountryISO = CountryISO;
+  separateDialCode = false;
+
   affiliateId: any;
   affiliate: any = null;
   approved: boolean = false;
@@ -114,7 +115,6 @@ export class ContactInfoComponent implements OnInit {
         mobileNumberControl?.setValidators([this.mobileNumberValidator()]);
       } else {
         alternateEmailControl?.setValidators([Validators.email,Validators.required]);
-        // mobileNumberControl?.setValidators([Validators.required]);  
         mobileNumberControl?.setValidators([Validators.required, this.mobileNumberValidator()]);
         addressStreetIndividualControl?.clearValidators();  
         addressCityIndividualControl?.clearValidators();
@@ -541,6 +541,23 @@ private patchBillingAddressDetails(): void {
       };
     }
 
+    onCountryChange(event: any): void {
+    const countryCode = event.dialCode;
+    if (this.form.get('landlineNumber')) {
+      this.form.controls['landlineNumber'].setValue("+"+countryCode);
+    } else {
+      console.error('not initialize');
+    }
+  }
+
+  onCountryChangeM(event: any): void {
+    const countryCode = event.dialCode;
+    if (this.form.get('mobileNumber')) {
+      this.form.controls['mobileNumber'].setValue("+"+countryCode);
+    } else {
+      console.error('not initialize');
+    }
+  }
     
  
 
