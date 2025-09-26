@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, DOCUMENT} from '@angular/core';
 import 'jquery';
 import { Title } from '@angular/platform-browser';
 import { EnvService } from './services/environment/env.service';
 import { ToastrService } from 'ngx-toastr';
-import {DOCUMENT} from "@angular/common";
+
 import { RouterOutlet } from '@angular/router';
 
 @Component({
