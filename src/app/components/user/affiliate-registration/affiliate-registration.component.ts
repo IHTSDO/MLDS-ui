@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxBsTelInputComponent } from 'ngx-bs-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import {  CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import { catchError, map, Observable, of, startWith, Subscription } from 'rxjs';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { CountryService } from 'src/app/services/country/country.service';
@@ -18,12 +19,15 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 
 @Component({
     selector: 'app-affiliate-registration',
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgxBsTelInputComponent, NgbModule, EmbeddableUsageLogComponent, TranslateModule, CompareTextPipe],
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, EmbeddableUsageLogComponent, TranslateModule, CompareTextPipe, NgxIntlTelInputModule],
     templateUrl: './affiliate-registration.component.html',
     styleUrl: './affiliate-registration.component.scss'
 })
 export class AffiliateRegistrationComponent implements OnInit {
 
+  CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+  separateDialCode = false;
   applicationData: any;
   approvalState: string | null = null;
   applicationId: string | null = null;
@@ -520,6 +524,24 @@ export class AffiliateRegistrationComponent implements OnInit {
           console.error('Failed to update usage type', error);
         }
   });
+  }
+
+   onCountryChange(event: any): void {
+    const countryCode = event.dialCode;
+    if (this.affiliateApplicationForm.get('contactPhone')) {
+      this.affiliateApplicationForm.controls['contactPhone'].setValue("+"+countryCode);
+    } else {
+      console.error('not initialize');
+    }
+  }
+
+  onCountryChangeM(event: any): void {
+    const countryCode = event.dialCode;
+    if (this.affiliateApplicationForm.get('mobilePhone')) {
+      this.affiliateApplicationForm.controls['mobilePhone'].setValue("+"+countryCode);
+    } else {
+      console.error('not initialize');
+    }
   }
   
 
