@@ -241,11 +241,20 @@
                         <div class="row">
 
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <ngx-bs-tel-input class="form-control phone-input" formControlName="landlineNumber"
-                                        [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"></ngx-bs-tel-input>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <ngx-intl-tel-input
+                                                [cssClass]="'form-control phone-input'"
+                                                [enableAutoCountrySelect]="true"
+                                                [enablePlaceholder]="true"
+                                                [maxLength]="15"
+                                                [phoneValidation]="false"
+                                                name="landlineNumber"
+                                                formControlName="landlineNumber"
+                                                (countryChange)="onCountryChange($event)"
+                                                [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"
+                                            ></ngx-intl-tel-input>
+
                                     <div
                                         *ngIf="form.get('landlineNumber')?.invalid && (form.get('landlineNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('landlineNumber')?.errors?.['required']">
@@ -278,9 +287,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <ngx-bs-tel-input class="form-control phone-input" formControlName="mobileNumber"
-                                        [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"></ngx-bs-tel-input>
+                                    <ngx-intl-tel-input
+                                        [cssClass]="'form-control phone-input'"
+                                        [enableAutoCountrySelect]="true"
+                                        [enablePlaceholder]="true"
+                                        [maxLength]="15"
+                                        [phoneValidation]="false"
+                                        name="mobileNumber"
+                                        formControlName="mobileNumber"
+                                        (countryChange)="onCountryChangeM($event)"
+                                        [attr.disabled]="readOnly ? true : null" [ngClass]="{'readonly-mode': readOnly}"
+                                    ></ngx-intl-tel-input>
+                                   
                                     <div
                                         *ngIf="form.get('mobileNumber')?.invalid && (form.get('mobileNumber')?.touched || formSubmitted)">
                                         <p class="help-block" *ngIf="form.get('mobileNumber')?.errors?.['required']">
