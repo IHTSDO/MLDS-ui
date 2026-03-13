@@ -66,20 +66,11 @@ session: any;
 
     // Use arrow function to preserve `this` context
     const csvRows = data
-      .filter(item => this.shouldIncludeItem(item))
       .map(item => this.formatItem(item))
       .join("\n");
 
     return csvHeader + csvRows;
   }
-
-  private shouldIncludeItem = (item: any): boolean => {
-    if (this.homeMember === undefined) {
-      console.error('homeMember is undefined');
-      return false;
-    }
-    return this.homeMember === "IHTSDO" || item[2] === this.homeMember || item[3] === this.homeMember;
-  };
 
   private formatItem(item: any): string {
     return [
