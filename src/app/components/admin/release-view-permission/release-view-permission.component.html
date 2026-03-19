@@ -7,7 +7,7 @@
         No configurations have been set up for any release yet.
     </div>
 
-    <div *ngIf="masterReleasePermissions.length > 0">
+    <div *ngIf="masterReleasePermissions.length > 0" class="table-container" style="margin-top: 20px;">
         <h4>Master Configuration</h4>
         <table class="table">
             <thead>
@@ -15,54 +15,149 @@
                     <th>S.No</th>
                     <th>Release Type</th>
                     <th>Permission Type</th>
-                    <th>Remove Permission</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let releasePermission of masterReleasePermissions; let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{releasePermission.releaseType}}</td>
-                    <td>{{ getReleasePermissionText(releasePermission.releasePermissionType) }}
+                    <td>
+                        <ng-container *ngIf="editingMasterRowId !== releasePermission.releaseType">
+                            {{ getReleasePermissionText(releasePermission.releasePermissionType) }}
 
-                        <button type="button" class="btn btn-info" *ngIf="releasePermission.releasePermissionType === 'ADMIN_STAFF_SELECTED_USERS'" 
-                        (click)="getMasterUserAccess(releasePermission.releaseType)" class="btn btn-primary btn-sm ml-2">
-                        View Selected Users
-                    </button>
+                            <button type="button" class="btn btn-info btn-sm"
+                                *ngIf="releasePermission.releasePermissionType === 'ADMIN_STAFF_SELECTED_USERS'"
+                                (click)="getMasterUserAccess(releasePermission.releaseType)"
+                                style="margin-left: 10px; font-size: 1.2rem; padding: 2px 8px;">
+                                View Selected Users
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="editingMasterRowId === releasePermission.releaseType">
+                            <div class="d-flex align-items-center gap-2">
+                                <select class="form-select" [(ngModel)]="editMasterPermissionType" style="width: auto;">
+                                    <option value="ADMIN_ONLY">ADMIN</option>
+                                    <option value="ADMIN_AND_STAFF">ADMIN, STAFF AND MEMBER</option>
+                                    <option value="ADMIN_STAFF_AFFILIATES">ADMIN, STAFF, MEMBER AND AFFILIATES</option>
+                                    <option value="ADMIN_STAFF_SELECTED_USERS">ADMIN, STAFF, MEMBER AND SELECTED USERS</option>
+                                    <option value="EVERYONE">EVERYONE</option>
+                                </select>
+
+                                <button type="button" class="btn btn-info btn-sm"
+                                    *ngIf="editMasterPermissionType === 'ADMIN_STAFF_SELECTED_USERS'"
+                                    (click)="openUserSelection()"
+                                    style="font-size: 1.2rem; padding: 2px 8px; white-space: nowrap;">
+                                    <i class="fa fa-users"></i> Add/Edit Users
+                                </button>
+                            </div>
+                        </ng-container>
                     </td>
                     <td>
-                      <i class="fa fa-times-circle" aria-hidden="true" (click)="removePermission(releasePermission)"></i>
+                        <ng-container *ngIf="editingMasterRowId !== releasePermission.releaseType">
+                            <i class="fa fa-pencil" style="color: #40ACD6; cursor: pointer; font-size: 1.5rem; margin-right: 15px;" (click)="startMasterEdit(releasePermission)" title="Edit Permission"></i>
+                            <i class="fa fa-times-circle remove-icon" aria-hidden="true" (click)="removePermission(releasePermission)" title="Remove Permission" style="font-size: 1.5rem;"></i>
+                        </ng-container>
+                        
+                        <ng-container *ngIf="editingMasterRowId === releasePermission.releaseType">
+                            <div class="d-flex align-items-center gap-3">
+                                <i *ngIf="!isSaving" class="fa fa-check text-success" style="cursor: pointer; font-size: 1.5rem;" (click)="saveMasterEdit(releasePermission)" title="Save"></i>
+                                <i *ngIf="!isSaving" class="fa fa-times text-danger" style="cursor: pointer; font-size: 1.5rem;" (click)="cancelMasterEdit()" title="Cancel"></i>
+                                <div *ngIf="isSaving" class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;"></div>
+                            </div>
+                        </ng-container>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div *ngIf="releasePermissions.length > 0">
+    <div *ngIf="releasePermissions.length > 0" class="table-container" style="margin-top: 30px;">
         <h4>Each Release Configuration</h4>
+
+        <div *ngIf="releasePermissions.length > 5" style="margin-bottom: 15px; display: flex; gap: 15px;">
+
+            <div class="input-group" style="max-width: 350px; position: relative;">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search by Package or Version Name..."
+                    [(ngModel)]="searchTermEachRelease" style="padding-right: 30px;">
+                <i *ngIf="searchTermEachRelease" class="fa fa-times" (click)="searchTermEachRelease = ''" 
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6c757d; z-index: 10;" title="Clear Search"></i>
+            </div>
+
+            <div class="input-group" style="max-width: 250px;">
+                <span class="input-group-text"><i class="fa fa-filter"></i></span>
+                <select class="form-select form-control" [(ngModel)]="selectedReleaseTypeFilter">
+                    <option value="">All Release Types</option>
+                    <option *ngFor="let type of availableReleaseTypes" [value]="type">{{ type | uppercase }}</option>
+                </select>
+            </div>
+
+        </div>
+
         <table class="table">
             <thead>
                 <tr>
                     <th>S.No</th>
                     <th>Release Name</th>
                     <th>Permission Type</th>
-                    <th>Remove Permission</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let releasePermission of sortedReleaseNames; let i = index">
                     <td>{{ i + 1 }}</td>
-                    <td>{{releasePermission.name}}</td>
-                    <td>{{ getReleasePermissionText(releasePermission.permissionType) }}
-
-                        <button type="button" class="btn btn-info" *ngIf="releasePermission.permissionType === 'ADMIN_STAFF_SELECTED_USERS'" 
-                            (click)="getUserAccess(releasePermission.releasePackageId)" 
-                            class="btn btn-primary btn-sm ml-2">
-                        View Selected Users
-
-                        </button>
+                    <td>
+                        <div>Package: {{ releasePermission.packageName }}</div>
+                        <div style="margin-top: 4px;">Version: {{ releasePermission.versionName }}
+                            <span class="release-type-chip" *ngIf="releasePermission.releaseType"><strong>{{
+                                    releasePermission.releaseType }}</strong></span>
+                        </div>
                     </td>
                     <td>
-                        <i class="fa fa-times-circle" aria-hidden="true" (click)="removePermission(releasePermission)"></i>
+                        <ng-container *ngIf="editingRowId !== releasePermission.releaseVersionId">
+                            {{ getReleasePermissionText(releasePermission.permissionType) }}
+
+                            <button type="button" class="btn btn-info btn-sm"
+                                *ngIf="releasePermission.permissionType === 'ADMIN_STAFF_SELECTED_USERS'"
+                                (click)="getUserAccess(releasePermission.releaseVersionId)"
+                                style="margin-left: 10px; font-size: 1.2rem; padding: 2px 8px;">
+                                View Selected Users
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="editingRowId === releasePermission.releaseVersionId">
+                            <div class="d-flex align-items-center gap-2">
+                                <select class="form-select" [(ngModel)]="editPermissionType" style="width: auto;">
+                                    <option value="ADMIN_ONLY">ADMIN</option>
+                                    <option value="ADMIN_AND_STAFF">ADMIN, STAFF AND MEMBER</option>
+                                    <option value="ADMIN_STAFF_AFFILIATES">ADMIN, STAFF, MEMBER AND AFFILIATES</option>
+                                    <option value="ADMIN_STAFF_SELECTED_USERS">ADMIN, STAFF, MEMBER AND SELECTED USERS</option>
+                                    <option value="EVERYONE">EVERYONE</option>
+                                </select>
+
+                                <button type="button" class="btn btn-info btn-sm"
+                                    *ngIf="editPermissionType === 'ADMIN_STAFF_SELECTED_USERS'"
+                                    (click)="openUserSelection()"
+                                    style="font-size: 1.2rem; padding: 2px 8px; white-space: nowrap;">
+                                    <i class="fa fa-users"></i> Add/Edit Users
+                                </button>
+                            </div>
+                        </ng-container>
+                    </td>
+                    <td>
+                        <ng-container *ngIf="editingRowId !== releasePermission.releaseVersionId">
+                            <i class="fa fa-pencil" style="color: #40ACD6; cursor: pointer; font-size: 1.5rem; margin-right: 15px;" (click)="startEdit(releasePermission)" title="Edit Permission"></i>
+                            <i class="fa fa-times-circle remove-icon" aria-hidden="true" (click)="removePermission(releasePermission)" title="Remove Permission" style="font-size: 1.5rem;"></i>
+                        </ng-container>
+                        
+                        <ng-container *ngIf="editingRowId === releasePermission.releaseVersionId">
+                            <div class="d-flex align-items-center gap-3">
+                                <i *ngIf="!isSaving" class="fa fa-check text-success" style="cursor: pointer; font-size: 1.5rem;" (click)="saveEdit(releasePermission)" title="Save"></i>
+                                <i *ngIf="!isSaving" class="fa fa-times text-danger" style="cursor: pointer; font-size: 1.5rem;" (click)="cancelEdit()" title="Cancel"></i>
+                                <div *ngIf="isSaving" class="spinner-border text-primary" role="status" style="width: 1.5rem; height: 1.5rem;"></div>
+                            </div>
+                        </ng-container>
                     </td>
                 </tr>
             </tbody>
@@ -71,16 +166,16 @@
 </div>
 
 <ng-template #fullGuide>
-  <div style="max-height: 300px; overflow-y: auto; font-size: 0.85rem; max-width: 350px;">
-    <p><strong>Quick Overview of Permissions:</strong></p>
-    <p>
-      Below are the permission types available in this screen for each configured release types / releases:
-    </p>
+    <div style="max-height: 300px; overflow-y: auto; font-size: 0.85rem; max-width: 350px;">
+        <p><strong>Quick Overview of Permissions:</strong></p>
+        <p>
+            Below are the permission types available in this screen for each configured release types / releases:
+        </p>
 
-    <p><strong>ADMIN:</strong> Only Admin users have access.</p>
-    <p><strong>ADMIN, STAFF AND MEMBER:</strong> Access is granted to Admin, Staff and Member roles.</p>
-    <p><strong>ADMIN, STAFF, MEMBER AND AFFILIATES:</strong> Access is granted to Admin, Staff, Member and all Affiliates.</p>
-    <p><strong>ADMIN, STAFF, MEMBER AND SELECTED USERS:</strong> Access is granted to Admin, Staff, Member and specific individual users selected from a list.</p>
-    <p><strong>EVERYONE:</strong> The release is public and accessible to all users.</p>
-  </div>
+        <p><strong>ADMIN:</strong> Only Admin users have access.</p>
+        <p><strong>ADMIN, STAFF AND MEMBER:</strong> Access is granted to Admin, Staff and Member roles.</p>
+        <p><strong>ADMIN, STAFF, MEMBER AND AFFILIATES:</strong> Access is granted to Admin, Staff, Member and all Affiliates.</p>
+        <p><strong>ADMIN, STAFF, MEMBER AND SELECTED USERS:</strong> Access is granted to Admin, Staff, Member and specific individual users selected from a list.</p>
+        <p><strong>EVERYONE:</strong> The release is public and accessible to all users.</p>
+    </div>
 </ng-template>

@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PackageUtilsService } from 'src/app/services/package-utils/package-utils.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
-import lodash from 'lodash';
 import { Router } from '@angular/router';
 import { ReleaseConfigWarningModalComponent } from '../release-config-warning-modal/release-config-warning-modal.component';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from '../../common/loader/loader.component';
 
 @Component({
-    selector: 'app-release-management-config',
-    imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent, NgbModule],
-    templateUrl: './release-management-config.component.html',
-    styleUrl: './release-management-config.component.scss'
+  selector: 'app-release-management-config',
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent, NgbModule],
+  templateUrl: './release-management-config.component.html',
+  styleUrl: './release-management-config.component.scss'
 })
 
 export class ReleaseManagementConfigComponent implements OnInit {
@@ -22,6 +21,8 @@ export class ReleaseManagementConfigComponent implements OnInit {
   selectedReleaseType: string = '';
   selectedPermission: string = '';
   selectedType: string = '';
+  searchTermRelease: string = '';
+  searchTermUser: string = '';
   isEdit: boolean = false;
   isUpdatedRecently: boolean = false;
   users: { login: string; userId: number; selected: boolean }[] = [];
@@ -38,10 +39,12 @@ export class ReleaseManagementConfigComponent implements OnInit {
   showSuccessMessage: boolean = false;
   isEveryOneChecked: boolean = false;
   isLoading: boolean = false;
+  allReleaseVersions: any[] = [];
 
 
   constructor(private releaseManagementService: ReleasePackageService, private cdr: ChangeDetectorRef, private fb: FormBuilder,
-    private packagesService: PackagesService, private packageUtilsService: PackageUtilsService,  private router: Router, private modalService: NgbModal
+    private packagesService: PackagesService, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal,
+    private eRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -72,40 +75,22 @@ export class ReleaseManagementConfigComponent implements OnInit {
   private loadReleasePackages(): void {
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
-        const memberFiltered = data.filter(p => this.releaseManagementFilter.showAllMembers || this.packageUtilsService.isReleasePackageMatchingMember(p));
-
-        const onlinePackages = this.packageUtilsService.releasePackageSort(
-          lodash.filter(memberFiltered, this.packageUtilsService.isPackagePublished)
+        const memberFiltered = data.filter(p =>
+          this.releaseManagementFilter.showAllMembers ||
+          this.packageUtilsService.isReleasePackageMatchingMember(p)
         );
-        this.onlineReleases = onlinePackages;
 
-        const alphabetaPackages = lodash.chain(memberFiltered)
-          .reject(this.packageUtilsService.isPackageOffline.bind(this))
-          .reject(this.packageUtilsService.isPackagePublished.bind(this))
-          .reject(this.packageUtilsService.isPackageEmpty.bind(this))
-          .sortBy('createdAt')
-          .value();
-        this.alphaBetaReleases = alphabetaPackages;
+        this.allReleaseVersions = this.extractAllVersions(memberFiltered);
 
-        const offlinePackages = lodash.chain(memberFiltered)
-          .reject(this.packageUtilsService.isPackagePublished.bind(this))
-          .reject(this.packageUtilsService.isPackageNotPublished.bind(this))
-          .reject(this.packageUtilsService.isPackageFullyArchived.bind(this))
-          .sortBy('createdAt')
-          .value();
-        this.offlineReleases = offlinePackages;
+        this.onlineReleases = this.allReleaseVersions.filter(v => v.releaseType === 'ONLINE');
+        this.alphaBetaReleases = this.allReleaseVersions.filter(v => v.releaseType === 'ALPHA/BETA');
+        this.offlineReleases = this.allReleaseVersions.filter(v => v.releaseType === 'OFFLINE');
 
-        if(this.isUpdatedRecently){
-        this.updateReleases();
-        this.setSelectedRelease();
-        this.isUpdatedRecently = false;
+        if (this.isUpdatedRecently) {
+          this.updateReleases();
+          this.setSelectedRelease();
+          this.isUpdatedRecently = false;
         }
-
-        return {
-          onlinePackages: onlinePackages,
-          alphabetaPackages: alphabetaPackages,
-          offlinePackages: offlinePackages
-        };
       },
       error: (err) => {
         console.error('Error occurred while fetching release packages:', err.message);
@@ -114,8 +99,8 @@ export class ReleaseManagementConfigComponent implements OnInit {
   }
 
   setSelectedRelease() {
-    const selectedRelease = this.releaseNames.find(r => r.releasePackageId === this.selectedRelease?.releasePackageId);
-  
+    const selectedRelease = this.releaseNames.find(r => r.releaseVersionId === this.selectedRelease?.releaseVersionId);
+
     if (selectedRelease) {
       this.selectedRelease = selectedRelease;
     } else {
@@ -158,10 +143,10 @@ export class ReleaseManagementConfigComponent implements OnInit {
 
   onReleaseSelect() {
     this.updateReleases()
-    if(this.selectedRelease.permissionType != 'NOT_SELECTED'){
+    if (this.selectedRelease.permissionType != 'NOT_SELECTED') {
       this.selectedPermission = this.selectedRelease.permissionType;
     }
-    else{
+    else {
       this.selectedPermission = '';
     }
   }
@@ -172,12 +157,12 @@ export class ReleaseManagementConfigComponent implements OnInit {
     this.updateReleases();
   }
 
-  updateReleases(){
+  updateReleases() {
     switch (this.selectedReleaseType) {
-      case '1': 
+      case '1':
         this.releaseNames = [...this.onlineReleases];
         break;
-      case '2': 
+      case '2':
         this.releaseNames = [...this.alphaBetaReleases];
         break;
       case '3':
@@ -197,48 +182,48 @@ export class ReleaseManagementConfigComponent implements OnInit {
   }
 
   onPermissionSelect() {
-    if(this.selectAllChecked && this.selectedPermission === 'ADMIN_STAFF_SELECTED_USERS'){
+    if (this.selectAllChecked && this.selectedPermission === 'ADMIN_STAFF_SELECTED_USERS') {
       this.selectedType = this.getSelectedTypeString(this.selectedReleaseType);
       this.packagesService.getMasterPermissionedUser(this.selectedType).subscribe({
         next: (data: any[]) => {
-          if(data.length > 0){
-          this.users = this.users.map(user => {
-          if (data.includes(user.login)) {
-            user.selected = true;
-          } else {
-            user.selected = false;
+          if (data.length > 0) {
+            this.users = this.users.map(user => {
+              if (data.includes(user.login)) {
+                user.selected = true;
+              } else {
+                user.selected = false;
+              }
+              return user;
+            });
           }
-          return user;
-        });
-      }
 
         },
         error: (error) => {
           console.error('Error', error);
         }
-    });
+      });
     }
 
 
-    if(!this.selectAllChecked && this.selectedPermission === 'ADMIN_STAFF_SELECTED_USERS' && this.selectedReleses.length == 1){
+    if (!this.selectAllChecked && this.selectedPermission === 'ADMIN_STAFF_SELECTED_USERS' && this.selectedReleses.length == 1) {
       this.selectedType = this.getSelectedTypeString(this.selectedReleaseType);
       this.packagesService.getPermissionedUser(this.selectedReleses[0]).subscribe({
         next: (data: any[]) => {
-           if(data.length > 0){
-           this.users = this.users.map(user => {
-          if (data.includes(user.login)) {
-            user.selected = true;
-          } else {
-            user.selected = false;
+          if (data.length > 0) {
+            this.users = this.users.map(user => {
+              if (data.includes(user.login)) {
+                user.selected = true;
+              } else {
+                user.selected = false;
+              }
+              return user;
+            });
           }
-          return user;
-        });
-      }
         },
         error: (error) => {
           console.error('Error', error);
         }
-    });
+      });
     }
   }
 
@@ -256,33 +241,33 @@ export class ReleaseManagementConfigComponent implements OnInit {
   save() {
     const selectedUsers = this.users.filter(user => user.selected).map(user => String(user.userId));
 
-    if(!this.selectedPermission){
+    if (!this.selectedPermission) {
       this.selectedPermission = 'ADMIN_ONLY';
     }
 
-    if(this.selectedReleses.length > 0 && this.selectedPermission && !this.selectAllChecked){
+    if (this.selectedReleses.length > 0 && this.selectedPermission && !this.selectAllChecked) {
       this.isLoading = true;
       this.packagesService.checkUpdateReleasesPackageType(this.selectedReleses, this.selectedPermission, selectedUsers)
-      .subscribe(response => {
-        if (response) {
+        .subscribe(response => {
+          if (response) {
+            this.isLoading = false;
+            this.openWarningModal('update');
+          } else {
+            this.updateReleasePacakgeType();
+          }
+        }, (err) => {
           this.isLoading = false;
-          this.openWarningModal('update');
-        } else {
-          this.updateReleasePacakgeType();
-        }
-      }, (err) => {
-        this.isLoading = false;
-        console.error('Error checking configuration:', err);
-      });
+          console.error('Error checking configuration:', err);
+        });
     }
 
-    if((this.selectedReleaseType === '4' && this.selectAllChecked) || this.selectAllChecked){
+    if ((this.selectedReleaseType === '4' && this.selectAllChecked) || this.selectAllChecked) {
       this.isLoading = true;
       switch (this.selectedReleaseType) {
-        case '1': 
+        case '1':
           this.selectedType = 'ONLINE';
           break;
-        case '2': 
+        case '2':
           this.selectedType = 'ALPHA/BETA';
           break;
         case '3':
@@ -294,61 +279,61 @@ export class ReleaseManagementConfigComponent implements OnInit {
       }
 
       this.packagesService.checkUpdateReleasesPackageMasterType(this.selectedType, this.selectedPermission, selectedUsers)
-      .subscribe(response => {
-        if (response) {
+        .subscribe(response => {
+          if (response) {
+            this.isLoading = false;
+            this.openWarningModal('master');
+          } else {
+            this.updateReleasePackageMasterType();
+          }
+        }, (err) => {
           this.isLoading = false;
-          this.openWarningModal('master');
-        } else {
-          this.updateReleasePackageMasterType();
-        }
-      }, (err) => {
-        this.isLoading = false;
-        console.error('Error checking configuration:', err);
-      });     
-      
+          console.error('Error checking configuration:', err);
+        });
+
     }
 
   }
 
 
-  updateReleasePacakgeType(){
+  updateReleasePacakgeType() {
     this.isLoading = true;
     this.packagesService.updateReleasesPackageType(this.selectedReleses, this.selectedPermission, this.users.filter(user => user.selected).map(user => String(user.userId))).subscribe({
-        next: (response) => {
-          this.isUpdatedRecently = true;
-          this.loadReleasePackages();
-          this.isLoading = false;
-          this.showSuccessMessage = true;
-          setTimeout(() => {
-            this.showSuccessMessage = false;
-            this.reset();
-          }, 2000);
-        },
-        error: (err) => {
-          console.error('Error updating release package:', err);
-          this.isLoading = false;
-        }
-      });
+      next: (response) => {
+        this.isUpdatedRecently = true;
+        this.loadReleasePackages();
+        this.isLoading = false;
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+          this.reset();
+        }, 2000);
+      },
+      error: (err) => {
+        console.error('Error updating release package:', err);
+        this.isLoading = false;
+      }
+    });
   }
 
-  updateReleasePackageMasterType(){
+  updateReleasePackageMasterType() {
     this.isLoading = true;
     this.packagesService.updateReleasesPackageMasterType(this.selectedType, this.selectedPermission, this.users.filter(user => user.selected).map(user => String(user.userId))).subscribe({
-        next: (response) => {
-          this.isUpdatedRecently = true;
-          this.loadReleasePackages();
-          this.isLoading = false;
-          this.showSuccessMessage = true;
-          setTimeout(() => {
-            this.showSuccessMessage = false;
-            this.reset();
-          }, 2000);
-        },
-        error: (err) => {
-          console.error('Error updating release package:', err);
-          this.isLoading = false;
-        }
-      });  
+      next: (response) => {
+        this.isUpdatedRecently = true;
+        this.loadReleasePackages();
+        this.isLoading = false;
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+          this.reset();
+        }, 2000);
+      },
+      error: (err) => {
+        console.error('Error updating release package:', err);
+        this.isLoading = false;
+      }
+    });
   }
 
   openWarningModal(type: string) {
@@ -377,30 +362,53 @@ export class ReleaseManagementConfigComponent implements OnInit {
     if (anyDeselected) {
       this.selectAllChecked = false;
     }
-
-    this.selectedReleses = this.releaseNames.filter(release => release.selected).map(release => release.releasePackageId);
+    this.selectedReleses = this.releaseNames.filter(release => release.selected).map(release => release.releaseVersionId);
   }
 
   dropdownOpen: boolean = false;
   selectAllChecked: boolean = false;
 
   toggleDropdown() {
-    if(this.selectedReleaseType != ''){
-    this.dropdownOpen = !this.dropdownOpen;
+    if (this.selectedReleaseType != '') {
+      this.dropdownOpen = !this.dropdownOpen;
+      if (this.dropdownOpen) {
+        this.dropdownPermission = false;
+      }
     }
   }
 
   dropdownPermission: boolean = false;
-  toggleDropdownForPermission(){
-    if(this.selectedReleses.length != 0){
-    this.dropdownPermission = !this.dropdownPermission;
+  toggleDropdownForPermission() {
+    if (this.selectedReleses.length != 0) {
+      this.dropdownPermission = !this.dropdownPermission;
+      if (this.dropdownPermission) {
+        this.dropdownOpen = false;
+      }
+    }
+  }
+
+  openUserSelectionModal(content: any) {
+    this.dropdownPermission = false;
+    const modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'md', scrollable: true, backdrop: 'static' });
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    const target = event.target as HTMLElement;
+    
+    const clickedInsideRelease = target.closest('.release-container');
+    const clickedInsideUserDropdown = target.closest('.btn-group');
+    
+    if (!clickedInsideRelease && !clickedInsideUserDropdown) {
+      this.dropdownOpen = false;
+      this.dropdownPermission = false;
     }
   }
 
 
   toggleSelectAll() {
     this.selectAllChecked = this.selectAllChecked;
-    this.releaseNames.forEach(release => release.selected = this.selectAllChecked);
+    this.filteredReleaseNames.forEach(release => release.selected = this.selectAllChecked);
     this.onReleaseChange();
   }
 
@@ -409,7 +417,7 @@ export class ReleaseManagementConfigComponent implements OnInit {
     this.router.navigate(['releaseConfig/viewPermissions']);
   }
 
-   getSelectedTypeString(selectedType: string): string {
+  getSelectedTypeString(selectedType: string): string {
     switch (selectedType) {
       case '1':
         return 'ONLINE';
@@ -425,68 +433,103 @@ export class ReleaseManagementConfigComponent implements OnInit {
   }
 
   get sortedReleaseNames() {
-    return this.releaseNames.sort((a, b) => a.name.localeCompare(b.name));
+    return this.releaseNames.sort((a, b) =>
+    (a.packageName + a.versionName)
+      .localeCompare(b.packageName + b.versionName)
+  );
+  }
+
+  get filteredReleaseNames() {
+    if (!this.searchTermRelease) {
+      return this.sortedReleaseNames;
+    }
+    const term = this.searchTermRelease.toLowerCase();
+    return this.sortedReleaseNames.filter(release => 
+      release.packageName.toLowerCase().includes(term) || 
+      release.versionName.toLowerCase().includes(term)
+    );
+  }
+
+  get filteredUsers() {
+    if (!this.searchTermUser) {
+      return this.users;
+    }
+    const term = this.searchTermUser.toLowerCase();
+    return this.users.filter(user => 
+      user.login.toLowerCase().includes(term)
+    );
+  }
+
+  viewSelectedOnly: boolean = false;
+
+  toggleViewSelected() {
+    this.viewSelectedOnly = !this.viewSelectedOnly;
+    this.searchTermUser = '';
+  }
+
+  get displayedUsers() {
+    let usersList = this.filteredUsers;
+    if (this.viewSelectedOnly) {
+      usersList = usersList.filter(u => u.selected);
+    }
+    return usersList;
   }
 
 
 
+  permissionForm!: FormGroup;
+  permission = 'ADMIN_ONLY';
 
-permissionForm!: FormGroup;
-permission = 'ADMIN_ONLY';
 
+  onCheckboxChange(): void {
+    const form = this.permissionForm;
 
-onCheckboxChange(): void {
-  const form = this.permissionForm;
+    const isEveryone = form.get('isEveryone')?.value;
+    const isAdmin = form.get('isAdmin')?.value;
+    const isStaff = form.get('isStaff')?.value;
+    const isAllAffiliates = form.get('isAllAffiliates')?.value;
+    const isSelectedUsers = form.get('isSelectedUsers')?.value;
+    const isMemberControl = form.get('isMember');
 
-  const isEveryone = form.get('isEveryone')?.value;
-  const isAdmin = form.get('isAdmin')?.value;
-  const isStaff = form.get('isStaff')?.value;
-  const isAllAffiliates = form.get('isAllAffiliates')?.value;
-  const isSelectedUsers = form.get('isSelectedUsers')?.value;
-  const isMemberControl = form.get('isMember');
-
-  // If 'Everyone' is checked, enforce all others
-  if (isEveryone) {
-    form.patchValue({
-      isAdmin: true,
-      isStaff: true,
-      isAllAffiliates: true,
-      isSelectedUsers: true,
-      isMember: true
-    }, { emitEvent: false });
-    this.isEveryOneChecked = true;
-  } else {
-    // Mutually exclusive logic for AllAffiliates and SelectedUsers
-    if (isAllAffiliates && isSelectedUsers) {
-      // Uncheck isSelectedUsers to enforce exclusivity
+    if (isEveryone) {
       form.patchValue({
-        isSelectedUsers: false
+        isAdmin: true,
+        isStaff: true,
+        isAllAffiliates: true,
+        isSelectedUsers: true,
+        isMember: true
       }, { emitEvent: false });
-    }
-
-    // Sync isStaff with AllAffiliates or SelectedUsers
-    const needsStaff = isAllAffiliates || isSelectedUsers;
-
-    if (needsStaff && !isStaff) {
-      form.patchValue({ isStaff: true }, { emitEvent: false });
-    }
-
-    // Sync isMember with isStaff and logic for AllAffiliates or SelectedUsers
-    if (isStaff) {
-      form.patchValue({ isMember: true }, { emitEvent: false });
+      this.isEveryOneChecked = true;
     } else {
-      form.patchValue({ isMember: false }, { emitEvent: false });
+
+      if (isAllAffiliates && isSelectedUsers) {
+
+        form.patchValue({
+          isSelectedUsers: false
+        }, { emitEvent: false });
+      }
+
+      const needsStaff = isAllAffiliates || isSelectedUsers;
+
+      if (needsStaff && !isStaff) {
+        form.patchValue({ isStaff: true }, { emitEvent: false });
+      }
+
+      if (isStaff) {
+        form.patchValue({ isMember: true }, { emitEvent: false });
+      } else {
+        form.patchValue({ isMember: false }, { emitEvent: false });
+      }
+
+
+      if ((isAllAffiliates || isSelectedUsers) && !isMemberControl?.value) {
+        form.patchValue({ isMember: true }, { emitEvent: false });
+      }
     }
 
-    // If AllAffiliates or SelectedUsers is checked, make Member true by default
-    if ((isAllAffiliates || isSelectedUsers) && !isMemberControl?.value) {
-      form.patchValue({ isMember: true }, { emitEvent: false });
-    }
+    this.cdr.detectChanges();
+    this.updatePermission();
   }
-
-  this.cdr.detectChanges();
-  this.updatePermission();
-}
 
 
   updatePermission(): void {
@@ -500,19 +543,19 @@ onCheckboxChange(): void {
       this.permission = 'ADMIN_STAFF_SELECTED_USERS';
     } else if (isAdmin && isMember && isStaff) {
       this.permission = 'ADMIN_AND_STAFF';
-    } else if (isAdmin){
+    } else if (isAdmin) {
       this.permission = 'ADMIN_ONLY';
     }
     this.selectedPermission = this.permission;
-    if(this.selectedPermission == 'ADMIN_STAFF_SELECTED_USERS'){
-    this.onPermissionSelect();
+    if (this.selectedPermission == 'ADMIN_STAFF_SELECTED_USERS') {
+      this.onPermissionSelect();
     }
   }
 
 
   permissionReset(){
     const form = this.permissionForm;
-     form.patchValue({
+    form.patchValue({
       isStaff: false,
       isAllAffiliates: false,
       isSelectedUsers: false,
@@ -520,5 +563,30 @@ onCheckboxChange(): void {
       isMember: false
     }, { emitEvent: false });
   }
+
+ private extractAllVersions(packages: any[]): any[] {
+
+  const versions: any[] = [];
+
+  packages.forEach(pkg => {
+
+    pkg.releaseVersions
+      ?.filter((version: any) => !version.archive) 
+      .forEach((version: any) => {
+
+        versions.push({
+          releaseVersionId: version.releaseVersionId,
+          packageName: pkg.name,
+          versionName: version.name,
+          releaseType: version.releaseType?.toUpperCase(),
+          selected: false
+        });
+
+      });
+
+  });
+
+  return versions;
+}
 
 }

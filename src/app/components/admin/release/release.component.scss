@@ -31,8 +31,6 @@ h3,
   border-radius: 3px;
 }
 
-
-
 .file-edit {
   white-space: nowrap;
   text-align: center;
@@ -91,8 +89,6 @@ h3,
   overflow: hidden;
 }
 
-
-
 .btn.dropdown-toggle {
   position: relative;
   font-size: 12px;
@@ -129,4 +125,57 @@ h3,
   width: auto;
   margin-left: inherit;
   border-radius: 25px;
+}
+
+.permission-toggle-btn {
+  background-color: #40ACD6;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap; 
+  width: auto;          
+}
+
+.permission-toggle-btn:hover {
+  opacity: 0.9;
+}
+
+.version-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.version-name {
+  font-weight: 500;
+}
+
+.permission-container {
+  margin-top: 2px;
+}
+
+.permission-chip {
+  background: #40ACD6;
+  color: white;
+  font-size: 8px;      
+  font-weight: bold;   
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.chip-info {
+  font-size: 8px;
+  cursor: pointer;
 }

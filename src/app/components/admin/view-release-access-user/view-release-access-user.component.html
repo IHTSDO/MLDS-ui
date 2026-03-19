@@ -1,9 +1,11 @@
 <app-modal
-  [title]="'Users with Access'"
+  [title]="editMode ? 'Select Users' : 'Users with Access'"
   (onCancel)="activeModal.dismiss()"
+  (onSubmit)="editMode ? onSave() : null"
   [submitText]="submitText"
 >
 <div modal-body>
+  <ng-container *ngIf="!editMode">
     <div class="scrollable-table">
   <table class="table table-bordered">
     <thead>
@@ -18,12 +20,44 @@
         <td>{{ i + 1 }}</td>
         <td>{{ user }}</td>
         <td>
-          <i class="fa fa-times-circle" aria-hidden="true" (click)="removeUser(user)"></i>
+          <i class="fa fa-times-circle text-danger" style="font-size: 1.2rem; cursor: pointer;" aria-hidden="true" (click)="removeUser(user)"></i>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="editMode">
+    <div class="form-group mb-3 pb-3 border-bottom d-flex justify-content-between align-items-center gap-2">
+      <div style="flex: 1; margin-right: 15px; position: relative;">
+        <i class="fa fa-search text-muted" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+        <input type="text" class="form-control w-100" style="padding-left: 30px; padding-right: 30px;"
+          placeholder="Search users by their mail..." [(ngModel)]="searchTermUser" autocomplete="off">
+        <i *ngIf="searchTermUser" class="fa fa-times" (click)="searchTermUser = ''" 
+          style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6c757d; z-index: 10;" title="Clear Search"></i>
+      </div>
+
+      <button type="button" class="btn btn-info btn-sm" style="white-space: nowrap; padding: 4px 12px; font-size: 0.9rem;"
+        (click)="toggleViewSelected()">
+        <i class="fa fa-eye"></i>
+        {{ viewSelectedOnly ? 'View All Users' : 'View Selected Users' }}
+      </button>
+    </div>
+
+    <div class="user-list-container" style="max-height: 400px; overflow-y: auto;">
+      <div *ngFor="let user of displayedUsers" class="form-check" style="margin-bottom: 8px;">
+        <input class="form-check-input" type="checkbox" [id]="'user-modal-' + user.userId"
+          [(ngModel)]="user.selected">
+        <label class="form-check-label" [for]="'user-modal-' + user.userId" style="margin-left: 5px;">
+          {{ user.login }}
+        </label>
+      </div>
+      <div *ngIf="displayedUsers.length === 0" class="text-muted text-center pt-3">
+        No users found.
+      </div>
+    </div>
+  </ng-container>
 </div>
 
 </app-modal>

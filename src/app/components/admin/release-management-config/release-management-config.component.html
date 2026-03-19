@@ -1,12 +1,12 @@
 <div class="row">
   <div style="display: flex;flex-direction: row;">
   <h2 style="padding-top: 50px;">
-    Release Management - Configuration  <i class="fa fa-question-circle fa-2x" [ngbPopover]="fullGuide"></i>
+    Release Management - Configuration <i class="fa fa-question-circle fa-2x" [ngbPopover]="fullGuide"></i>
   </h2>
 
   <div *ngIf="isLoading" class="loader-center">
     <app-loader></app-loader>
-  </div>
+ </div>
 
   <button type="button" class="review-button " style="padding: 3px;
   margin-top: 125px;
@@ -18,7 +18,7 @@
   <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert" style="margin-top: 20px;">
     Release package updated successfully!
   </div>
-  
+
   <div class="form-container" style="padding-top: 40px;">
     <!-- Release Type Selection -->
     <div>
@@ -29,7 +29,7 @@
       </select>
     </div>
 
-    <div class="release-container" (mouseleave)="dropdownOpen = false">
+    <div class="release-container">
       <span>Releases<span class="text-danger">*</span></span>
 
       <button (click)="toggleDropdown()" class="dropdown-btn">
@@ -42,16 +42,25 @@
           {{ selectAllChecked ? ' Deselect All' : ' Select All' }}
         </label>
         <hr />
-        <div *ngFor="let release of sortedReleaseNames" class="checkbox-item">
+        <div class="px-2 pb-2">
+          <div style="position: relative;">
+            <i class="fa fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #6c757d; pointer-events: none; font-size: 0.875rem;"></i>
+            <input type="text" class="form-control form-control-sm w-100" style="padding-left: 28px; padding-right: 30px;" placeholder="Search releases..."
+              [(ngModel)]="searchTermRelease">
+            <i *ngIf="searchTermRelease" class="fa fa-times" (click)="searchTermRelease = ''" 
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6c757d; z-index: 10; font-size: 0.875rem;" title="Clear Search"></i>
+          </div>
+        </div>
+        <div *ngFor="let release of filteredReleaseNames" class="checkbox-item">
           <label>
             <input type="checkbox" [(ngModel)]="release.selected" (change)="onReleaseChange()" />
-            {{ release.name }}
+            {{ release.packageName }} - {{ release.versionName }}
           </label>
         </div>
       </div>
     </div>
 
-    <div class="release-container" (mouseleave)="dropdownPermission = false">
+    <div class="release-container">
   <span>Release Permission<span class="text-danger">*</span></span>
   <button (click)="toggleDropdownForPermission()" class="dropdown-btn">
     Select a User permission
@@ -83,29 +92,64 @@
       Everyone
     </label>
   </div>
-</div>
+  </div>
 
 
 
 
 
 
-    <!-- User Selection Dropdown -->
-    <div class="btn-group" *ngIf="selectedPermission == 'ADMIN_STAFF_SELECTED_USERS'"
-      style="height: 5rem; padding-top: 20px;">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-        data-bs-auto-close="outside" aria-expanded="false">
-        Select Users
+    <div *ngIf="selectedPermission == 'ADMIN_STAFF_SELECTED_USERS'" style="padding-top: 20px;">
+      <button class="review-button" type="button" (click)="openUserSelectionModal(userModal)"
+        style="padding: 6px 15px; border-radius: 4px;">
+        <i class="fa fa-users"></i> Click here to select users
       </button>
-      <ul class="dropdown-menu">
-        <li *ngFor="let user of users">
-          <label class="dropdown-item">
-            <input type="checkbox" [(ngModel)]="user.selected"> {{ user.login }}
-          </label>
-        </li>
-      </ul>
     </div>
   </div>
+
+  <ng-template #userModal let-modal>
+    <div class="modal-header d-flex justify-content-between align-items-center">
+      <h5 class="modal-title" id="modal-basic-title">Select Users</h5>
+      <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group mb-3 pb-3 border-bottom d-flex justify-content-between align-items-center gap-2">
+        <div style="flex: 1; margin-right: 15px; position: relative;">
+          <i class="fa fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #6c757d; pointer-events: none;"></i>
+          <input type="text" class="form-control w-100" style="padding-left: 30px; padding-right: 30px;"
+            placeholder="Search users by their mail..." [(ngModel)]="searchTermUser" autocomplete="off">
+          <i *ngIf="searchTermUser" class="fa fa-times" (click)="searchTermUser = ''" 
+            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6c757d; z-index: 10;" title="Clear Search"></i>
+        </div>
+
+        <button type="button" class="review-button" style="white-space: nowrap; padding: 4px 12px; font-size: 0.9rem;"
+          (click)="toggleViewSelected()">
+          <i class="fa fa-eye"></i>
+          {{ viewSelectedOnly ? 'View All Users' : 'View Selected Users' }}
+        </button>
+      </div>
+
+      <div class="user-list-container" style="max-height: 400px; overflow-y: auto;">
+
+        <div *ngFor="let user of displayedUsers" class="form-check" style="margin-bottom: 8px;">
+          <input class="form-check-input" type="checkbox" [id]="'user-modal-' + user.userId"
+            [(ngModel)]="user.selected">
+          <label class="form-check-label" [for]="'user-modal-' + user.userId" style="margin-left: 5px;">
+            {{ user.login }}
+          </label>
+        </div>
+
+        <div *ngIf="displayedUsers.length === 0" class="text-muted text-center pt-3">
+          No users found.
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info" (click)="modal.close('Save click')">
+        <i class="fa fa-check"></i> Done
+      </button>
+    </div>
+  </ng-template>
 
   <br><br><br>
 

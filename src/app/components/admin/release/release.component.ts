@@ -47,6 +47,7 @@ export class ReleaseComponent {
   isMasterPermissionPresent: boolean = true;
   viewPermission: string = '';
   releaseType: string = '';
+  versionVisibilityMap: { [key: number]: string } = {};
 
   constructor(private packagesService: PackagesService, private route: ActivatedRoute, private packageUtilsService: PackageUtilsService, private router: Router, private modalService: NgbModal, private releasePackageService: ReleasePackageService,
      private releaseFileService: ReleaseFileService,private sessionService: AuthenticationSharedService) { }
@@ -61,37 +62,45 @@ export class ReleaseComponent {
       this.packageId = params.get('packageId');
       if (this.packageId) {
         this.getReleasePackage(this.packageId);
-        if(this.isAdmin){
-          this.packagesService.getReleaseVisiblity(this.packageId).subscribe({
-            next: (data: any) => {
-              let permissionType = data.permissionType;
-              this.isMasterPermissionPresent = data.masterPermission;
-              this.releaseType = data.releaseType;
-              if(permissionType == "NOT_SELECTED"){
-                this.viewPermission = "NOT CONFIGURED"
-              }
-              if(permissionType == "ADMIN_ONLY"){
-                this.viewPermission = "ADMIN"
-              }
-              if(permissionType == "ADMIN_AND_STAFF"){
-                this.viewPermission = "ADMIN, STAFF, MEMBER"
-              }
-              if(permissionType == "ADMIN_STAFF_AFFILIATES"){
-                this.viewPermission = "ADMIN, STAFF, MEMBER, AFFLIATES"
-              }
-              if(permissionType == "ADMIN_STAFF_SELECTED_USERS"){
-                this.viewPermission = "ADMIN, STAFF, MEMBER, SELECTED AFFILIATES"
-              }
-              if(permissionType == "EVERYONE"){
-                this.viewPermission = permissionType;
-              }
-              
-            },
-            error: (error) => {
-              console.error(error);
-            }
-          })
+if (this.isAdmin) {
+  this.packagesService.getReleaseVisiblity(this.packageId).subscribe({
+    next: (data: any[]) => {
+
+      data.forEach(item => {
+
+        let permissionText = '';
+
+        switch (item.permissionType) {
+          case 'NOT_SELECTED':
+            permissionText = 'NOT CONFIGURED';
+            break;
+          case 'ADMIN_ONLY':
+            permissionText = 'ADMIN';
+            break;
+          case 'ADMIN_AND_STAFF':
+            permissionText = 'ADMIN, STAFF, MEMBER';
+            break;
+          case 'ADMIN_STAFF_AFFILIATES':
+            permissionText = 'ADMIN, STAFF, MEMBER, AFFILIATES';
+            break;
+          case 'ADMIN_STAFF_SELECTED_USERS':
+            permissionText = 'ADMIN, STAFF, MEMBER, SELECTED AFFILIATES';
+            break;
+          case 'EVERYONE':
+            permissionText = 'EVERYONE';
+            break;
         }
+
+        this.versionVisibilityMap[item.releaseVersionId] = permissionText;
+
+      });
+
+    },
+    error: (error) => {
+      console.error(error);
+    }
+  });
+}
       }
     });
   }
@@ -304,34 +313,34 @@ export class ReleaseComponent {
     );
   }
 
+  showPermissions: boolean = false;
+
+togglePermissions() {
+  this.showPermissions = !this.showPermissions;
+}
+
 
   
-  getPermissionedUsers(){
-    if(this.packageId){
-    if(this.isMasterPermissionPresent){
-      this.getMasterUserAccess(this.releaseType)
-    }
-    else{
-      this.getUserAccess(this.packageId)
-    }}
-  }
+getPermissionedUsers(releaseVersionId: string) {
 
+  this.packagesService.getVersionUsers(releaseVersionId).subscribe({
+    next: (data: any[]) => {
 
-   getUserAccess(id: string) {
-      this.packagesService.getPermissionedUser(id).subscribe({
-        next: (data: any[]) => {
-            const modalRef = this.modalService.open(ViewReleaseAccessUserComponent, {
-                  size: 'lg',
-                  backdrop: 'static'
-                });
-            modalRef.componentInstance.users = data;
-            modalRef.componentInstance.id = id;
-        },
-        error: (error) => {
-          console.error('Error', error);
-        }
-    });
+      const modalRef = this.modalService.open(ViewReleaseAccessUserComponent, {
+        size: 'lg',
+        backdrop: 'static'
+      });
+
+      modalRef.componentInstance.users = data;
+      modalRef.componentInstance.id = releaseVersionId;
+
+    },
+    error: (error) => {
+      console.error(error);
     }
+  });
+
+}
   
   
     getMasterUserAccess(id: string) {

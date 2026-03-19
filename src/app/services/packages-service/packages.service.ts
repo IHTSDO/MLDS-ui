@@ -103,16 +103,20 @@ export class PackagesService {
     )
   }
 
-  getReleaseVisiblity(id: string): Observable<string> {
-  return this.http.get<string>(`${this.apiUrl}/viewVisiblity/${id}`).pipe(
-    catchError(this.handleError)
-  );
+  getVersionUsers(versionId: string) {
+    return this.http.get<string[]>(`${this.apiUrl}/releaseVisibility/users/${versionId}`);
+  }
+
+  getReleaseVisiblity(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/viewVisibility/package/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
 
   updateReleasesPackageType(selectedReleses: string[], releasePackageType: string, selectedUsers: string[]): Observable<any> {
     const body = { releases: selectedReleses, releasePackageType: releasePackageType, users: selectedUsers };
-    return this.http.put<any>(`${this.apiUrl}/releasePackages/updatePermissionType`, body).pipe(
+    return this.http.put<any>(`${this.apiUrl}/releaseVersion/updatePermissionType`, body).pipe(
       catchError(this.handleError)
     );
   }
