@@ -67,7 +67,8 @@
             "ru": "Russisch",
             "se": "Zweeds",
             "id": "Indonesisch",
-            "th": "Thais"
+            "th": "Thais",
+            "lv": "Lets"
         },
         "member": {
             "IHTSDO": "SNOMED International",
@@ -120,7 +121,9 @@
             "SA": "Saoedi-Arabië",
             "JO": "Jordanië",
             "FR": "Frankrijk",
-            "HU": "Hongarije"
+            "HU": "Hongarije",
+            "LV": "Letland",
+            "UZ": "Oezbekistan"
         },
         "country": {
             "AC": "Ascension",
@@ -242,7 +245,7 @@
             "KM": "Comoros",
             "KN": "Saint Kitts and Nevis",
             "KP": "Korea, Noord",
-            "KR": "Korea, Zuid",
+            "KR": "Zuid-Korea",
             "KW": "Koeweit",
             "KY": "Cayman Islands",
             "KZ": "Kazakhstan",
@@ -458,7 +461,8 @@
         "form": {
             "tos": "Verklaar u akkoord met onze <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">Bepalingen en Voorwaarden </a>.",
             "button": "Start Registratie",
-            "confirmemail": "E-mail (bevestigen)"
+            "confirmemail": "E-mail (bevestigen)",
+            "tc": ""
         },
         "messages": {
             "validate": {
@@ -1235,7 +1239,9 @@
             "deleteAffiliate": "Verwijder Licentiehouder",
             "deleteAffiliateModal": {
                 "bevestig": "Bent u er zeker van dat u de licentie(affiliate)houder wilt verwijderen?",
-                "uitleg": "Bij het verwijderen van een licentie(affiliate)houder worden ook alle aanvragen en gebruiksrapportage verwijderd. De gebruiker zal niet meer in staat zijn in te loggen."
+                "uitleg": "Bij het verwijderen van een licentie(affiliate)houder worden ook alle aanvragen en gebruiksrapportage verwijderd. De gebruiker zal niet meer in staat zijn in te loggen.",
+                "sure": "",
+                "explanation": ""
             }
         },
         "ihtsdoReleases": {
