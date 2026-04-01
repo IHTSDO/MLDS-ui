@@ -73,7 +73,12 @@
     </div>
 
     <div *ngIf="releasePermissions.length > 0" class="table-container" style="margin-top: 30px;">
-        <h4>Each Release Configuration</h4>
+        <div class="d-flex align-items-center justify-content-between" style="margin-bottom: 10px;">
+            <h4 style="margin: 0;">Each Release Configuration</h4>
+            <button type="button" class="btn btn-danger btn-sm" (click)="confirmRevokeAll()" title="Revoke all individual release configurations">
+                <i class="fa fa-ban" style="margin-right: 5px;"></i> Revoke All
+            </button>
+        </div>
 
         <div *ngIf="releasePermissions.length > 5" style="margin-bottom: 15px; display: flex; gap: 15px;">
 

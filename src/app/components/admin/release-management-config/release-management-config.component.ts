@@ -5,7 +5,6 @@ import { PackageUtilsService } from 'src/app/services/package-utils/package-util
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 import { Router } from '@angular/router';
-import { ReleaseConfigWarningModalComponent } from '../release-config-warning-modal/release-config-warning-modal.component';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from '../../common/loader/loader.component';
 
@@ -238,62 +237,42 @@ export class ReleaseManagementConfigComponent implements OnInit {
     this.permissionReset();
   }
 
-  save() {
-    const selectedUsers = this.users.filter(user => user.selected).map(user => String(user.userId));
+save() {
+  const selectedUsers = this.users
+    .filter(user => user.selected)
+    .map(user => String(user.userId));
 
-    if (!this.selectedPermission) {
-      this.selectedPermission = 'ADMIN_ONLY';
-    }
-
-    if (this.selectedReleses.length > 0 && this.selectedPermission && !this.selectAllChecked) {
-      this.isLoading = true;
-      this.packagesService.checkUpdateReleasesPackageType(this.selectedReleses, this.selectedPermission, selectedUsers)
-        .subscribe(response => {
-          if (response) {
-            this.isLoading = false;
-            this.openWarningModal('update');
-          } else {
-            this.updateReleasePacakgeType();
-          }
-        }, (err) => {
-          this.isLoading = false;
-          console.error('Error checking configuration:', err);
-        });
-    }
-
-    if ((this.selectedReleaseType === '4' && this.selectAllChecked) || this.selectAllChecked) {
-      this.isLoading = true;
-      switch (this.selectedReleaseType) {
-        case '1':
-          this.selectedType = 'ONLINE';
-          break;
-        case '2':
-          this.selectedType = 'ALPHA/BETA';
-          break;
-        case '3':
-          this.selectedType = 'OFFLINE';
-          break;
-        case '4':
-          this.selectedType = 'ALL';
-          break;
-      }
-
-      this.packagesService.checkUpdateReleasesPackageMasterType(this.selectedType, this.selectedPermission, selectedUsers)
-        .subscribe(response => {
-          if (response) {
-            this.isLoading = false;
-            this.openWarningModal('master');
-          } else {
-            this.updateReleasePackageMasterType();
-          }
-        }, (err) => {
-          this.isLoading = false;
-          console.error('Error checking configuration:', err);
-        });
-
-    }
-
+  if (!this.selectedPermission) {
+    this.selectedPermission = 'ADMIN_ONLY';
   }
+
+  if (this.selectedReleses.length > 0 && this.selectedPermission && !this.selectAllChecked) {
+    this.isLoading = true;
+
+    this.updateReleasePacakgeType();
+  }
+
+  else if (this.selectAllChecked) {
+    this.isLoading = true;
+
+    switch (this.selectedReleaseType) {
+      case '1':
+        this.selectedType = 'ONLINE';
+        break;
+      case '2':
+        this.selectedType = 'ALPHA/BETA';
+        break;
+      case '3':
+        this.selectedType = 'OFFLINE';
+        break;
+      case '4':
+        this.selectedType = 'ALL';
+        break;
+    }
+
+    this.updateReleasePackageMasterType();
+  }
+}
 
 
   updateReleasePacakgeType() {
@@ -333,24 +312,6 @@ export class ReleaseManagementConfigComponent implements OnInit {
         console.error('Error updating release package:', err);
         this.isLoading = false;
       }
-    });
-  }
-
-  openWarningModal(type: string) {
-    const modalRef = this.modalService.open(ReleaseConfigWarningModalComponent, { backdrop: 'static' });
-
-    modalRef.result.then((result) => {
-      if (result) {
-        if (type === 'update') {
-          this.updateReleasePacakgeType();
-        } else if (type === 'master') {
-          this.updateReleasePackageMasterType();
-        }
-      } else {
-        console.log('User canceled the action');
-      }
-    }, (reason) => {
-      console.log('Modal dismissed');
     });
   }
 

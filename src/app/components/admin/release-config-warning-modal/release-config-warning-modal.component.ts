@@ -11,7 +11,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ReleaseConfigWarningModalComponent {
 
-
   constructor(
     public activeModal: NgbActiveModal,
   ) { }

@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div class="release-container">
+    <div class="release-container"  [ngStyle]="{'flex': selectedPermission == 'ADMIN_STAFF_SELECTED_USERS' ? '3' : '2'}">
   <span>Release Permission<span class="text-danger">*</span></span>
   <button (click)="toggleDropdownForPermission()" class="dropdown-btn">
     Select a User permission
@@ -99,7 +99,7 @@
 
 
 
-    <div *ngIf="selectedPermission == 'ADMIN_STAFF_SELECTED_USERS'" style="padding-top: 20px;">
+    <div *ngIf="selectedPermission == 'ADMIN_STAFF_SELECTED_USERS'" style="padding-top: 25px;">
       <button class="review-button" type="button" (click)="openUserSelectionModal(userModal)"
         style="padding: 6px 15px; border-radius: 4px;">
         <i class="fa fa-users"></i> Click here to select users

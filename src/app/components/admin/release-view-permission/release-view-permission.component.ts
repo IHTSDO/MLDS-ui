@@ -7,6 +7,7 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { ViewReleaseAccessUserComponent } from '../view-release-access-user/view-release-access-user.component';
 import { ReleasePermissionRemoveAlertModelComponent } from '../release-permission-remove-alert-model/release-permission-remove-alert-model.component';
+import { ReleaseConfigWarningModalComponent } from '../release-config-warning-modal/release-config-warning-modal.component';
 import { ReleasePackageService } from 'src/app/services/release-package/release-package.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class ReleaseViewPermissionComponent {
   editingMasterRowId: string | null = null;
   editMasterPermissionType: string = '';
   isSaving: boolean = false;
+  isRevokingAll: boolean = false;
 
   constructor(private packagesService: PackagesService, private memberService: MemberService,
       private modalService: NgbModal, private releasePackageService: ReleasePackageService
@@ -149,6 +151,33 @@ export class ReleaseViewPermissionComponent {
     })
 
   }
+
+  confirmRevokeAll() {
+    const modalRef = this.modalService.open(ReleaseConfigWarningModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+
+    modalRef.result.then((confirmed) => {
+      if (confirmed) {
+        this.revokeAllEachReleaseConfig();
+      }
+    }).catch(() => {});
+  }
+
+revokeAllEachReleaseConfig() {
+  this.isRevokingAll = true;
+  this.packagesService.revokeAllReleaseVersionAccess().subscribe({
+    next: (res: string) => {
+      this.isRevokingAll = false;
+      this.getReleasePermission();
+    },
+    error: (err: any) => {
+      console.error('Error revoking all release permissions:', err);
+      this.isRevokingAll = false;
+    }
+  });
+}
 
   startEdit(releasePermission: any) {
     this.editingRowId = releasePermission.releaseVersionId;
