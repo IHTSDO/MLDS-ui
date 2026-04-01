@@ -479,7 +479,7 @@
         "form": {
             "button": "Begynd registrering",
             "confirmemail": "E-mail (bekræft)",
-            "tos": "Accepter vores <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">vilkår og betingelser</a>.",
+            "tos": "Accepter vores <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">vilkår og betingelser</a>.",
             "tc": "Du skal acceptere SNOMED Internationals vilkår og betingelser for at fortsætte."
         },
         "messages": {

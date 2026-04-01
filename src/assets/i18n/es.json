@@ -461,7 +461,7 @@
         "subwelcome": "Orientación sobre SNOMED CT ",
         "form": {
             "tc": "Debe aceptar los Términos y condiciones internacionales de SNOMED para continuar.",
-            "tos": "Debe estar de acuerdo con nuestros <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service#MLDSTermsofService-Español\" target=\"_blank\">Términos y Condiciones</a>.",
+            "tos": "Debe estar de acuerdo con nuestros <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service #MLDSTermsofService-Español\" target=\"_blank\">Términos y Condiciones</a>.",
             "button": "Iniciar registro",
             "confirmemail": "Correo electrónico de la Unidad que administra SNOMED CT (confirmar)"
         },
@@ -1080,7 +1080,7 @@
         "landingPage": {
             "appName": "Centro de Servicios de Salud - NRC - Licenciamiento y Distribución de SNOMED-CT ",
             "purpose": "Este servicio es proporcionado por la SNOMED International para que las organizaciones e individuos puedan solicitar y acceder a la Versión Internacional de  SNOMED CT para uso en los Países no miembros.",
-            "furtherDetails": "Por más información, por favor dirigirse a  <a href=\"http://www.snomed.org\" target=\"_blank\">SNOMED International website</a> o  <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/Preguntas+Frecuentes\" target=\"_blank\">Preguntas Frecuentes</a>.",
+            "furtherDetails": "Por más información, por favor dirigirse a  <a href=\"http://www.snomed.org\" target=\"_blank\">SNOMED International website</a> o  <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/preguntas-frecuentes\" target=\"_blank\">Preguntas Frecuentes</a>.",
             "loginHere": "Inicie sesión",
             "member.purpose1": "Esta es una herramienta utilizada por Centro Nacional de Publicaciones de la terminología clínica de SNOMED CT en ",
             "member.purpose2": " (National Release Center) para gestionar las Licencias de Afiliación de SNOMED CT. Incluye nuevas solicitudes, renovaciones y reportes dentro de ",

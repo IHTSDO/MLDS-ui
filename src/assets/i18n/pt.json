@@ -461,7 +461,7 @@
         "subwelcome": "A porta de entrada para ter acesso ao SNOMED CT",
         "form": {
             "tc": "Você deve concordar com os Termos e Condições da SNOMED International para continuar.",
-            "tos": "Concorda com os nossos <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">Termos e Condições</a>.",
+            "tos": "Concorda com os nossos <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">Termos e Condições</a>.",
             "button": "Início do registo",
             "confirmemail": "e-mail (confirmar)"
         },

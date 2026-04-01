@@ -460,7 +460,7 @@
         "subwelcome": "The gateway to access SNOMED CT Orientation",
         "form": {
             "tc": "You must agree to the SNOMED International Terms and Conditions to continue.",
-            "tos": "Agree to our <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">Terms and Conditions</a>.",
+            "tos": "Agree to our <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">Terms and Conditions</a>.",
             "button": "Start Registration",
             "confirmemail": "E-mail (confirm)"
         },

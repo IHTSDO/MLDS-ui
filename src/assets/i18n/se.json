@@ -460,7 +460,7 @@
         "subwelcome": "Här hittar du information om Snomed CT",
         "form": {
             "tc": "Du måste godkänna SNOMED International villkor för att fortsätta.",
-            "tos": "Godkänn våra <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">användarvillkor</a>.",
+            "tos": "Godkänn våra <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">användarvillkor</a>.",
             "button": "Börja registreringen",
             "confirmemail": "E-postadress (bekräfta)"
         },

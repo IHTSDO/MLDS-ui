@@ -460,7 +460,7 @@
         "welcome": "Velkommen til Lisens- og distribusjonsportalen",
         "subwelcome": "Her finner du informasjon om SNOMED CT",
         "form": {
-            "tos": "Godta våre<a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">brukervilkår</a>.",
+            "tos": "Godta våre<a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">brukervilkår</a>.",
             "button": "Start registreringen",
             "confirmemail": "Bekreft e-post adresse",
             "tc": ""

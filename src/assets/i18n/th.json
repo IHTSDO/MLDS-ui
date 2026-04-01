@@ -1178,7 +1178,7 @@
             "tc": "คุณต้องยอมรับข้อกำหนดและเงื่อนไขของ SNOMED International เพื่อดำเนินการต่อ",
             "confirmemail": "อีเมล (ยืนยัน)",
             "button": "เริ่มการลงทะเบียน",
-            "tos": "ยอมรับ <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">ข้อกำหนดและเงื่อนไข</a> ของเรา"
+            "tos": "ยอมรับ <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">ข้อกำหนดและเงื่อนไข</a> ของเรา"
         },
         "subwelcome": "เกตเวย์ในการเข้าถึง SNOMED CT Orientation",
         "welcome": "ยินดีต้อนรับสู่ SNOMED International-MLDS",

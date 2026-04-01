@@ -407,7 +407,7 @@
 		"welcome":"Tere tulemast IHTSDO-MLDS-i",
 		"subwelcome":"SNOMED CT tutvustus",
 		"form":{
-			"tos":"Nõustu <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">tingimustega</a>.",
+			"tos":"Nõustu <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">tingimustega</a>.",
 			"button":"Alusta registreerimist",
 			"confirmemail":"Meiliaadress (korda)"
 		},

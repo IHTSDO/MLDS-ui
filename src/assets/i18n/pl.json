@@ -459,7 +459,7 @@
         "form": {
             "tc": "Aby kontynuować, musisz zaakceptować Międzynarodowe Warunki SNOMED.",
             "button": "Rozpocznij rejestrację",
-            "tos": "Zaakceptuj nasze <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">Warunki korzystania</a>.",
+            "tos": "Zaakceptuj nasze <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">Warunki korzystania</a>.",
             "confirmemail": "E-mail (potwierdź)"
         },
         "welcome": "Witamy w SNOMED International-MLDS",

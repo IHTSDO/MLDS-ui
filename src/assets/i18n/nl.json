@@ -459,7 +459,7 @@
         "welcome": "Welkom bij SNOMED International-MLDS",
         "subwelcome": "De toegangspoort naar SNOMED CT",
         "form": {
-            "tos": "Verklaar u akkoord met onze <a href=\"https://confluence.ihtsdotools.org/display/MLDSDOC/MLDS+Terms+of+Service\" target=\"_blank\">Bepalingen en Voorwaarden </a>.",
+            "tos": "Verklaar u akkoord met onze <a href=\"https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service \" target=\"_blank\">Bepalingen en Voorwaarden </a>.",
             "button": "Start Registratie",
             "confirmemail": "E-mail (bevestigen)",
             "tc": ""
