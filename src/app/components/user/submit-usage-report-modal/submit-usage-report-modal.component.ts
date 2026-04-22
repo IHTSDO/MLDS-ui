@@ -48,7 +48,7 @@ export class SubmitUsageReportModalComponent implements OnInit {
 
     this.commercialUsageService.submitUsageReport(this.commercialUsageReport).subscribe({
       next: (result) => {
-        if (this.sessionService.isAdmin()) {
+        if (this.sessionService.isStaffOrAdmin()) {
           this.router.navigate(['/affiliateManagement', this.commercialUsageReport.affiliate.affiliateId]);
         } else {
           this.userAffiliateService.refreshAffiliate();

@@ -2,7 +2,7 @@
     <app-loader></app-loader>
 </div>
 
-<div *ngIf="!isLoading || isStaffOrAdmin">
+<div [hidden]="isLoading && !isStaffOrAdmin">
 <div class="contact-title">
     <div class="col-sm-12 col-md-12 col-lg-12"  style="padding-left: 0px;">
         <div class="page-header">

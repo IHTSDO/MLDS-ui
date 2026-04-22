@@ -176,7 +176,7 @@ invalidate(): void {
  * Logout from the application
  */
 logout(): void {
-  this.removeFromLocalStorage();
+  this.invalidate();
   this.http.get<void>('/app/logout', { withCredentials: true }).subscribe({
     next: () => {
       this.router.navigate([this.routes.login]).then(() => {

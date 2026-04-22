@@ -148,6 +148,18 @@ export class AffiliateSummaryComponent implements OnInit {
     modalRef.result.then((result) => {
       if (result) {
         this.affiliate.standingState = 'INVOICE_SENT';
+        this.affiliateService.updateAffiliate(this.affiliate)
+          .subscribe({
+            next: (result) => {
+              this.submitting = false;
+              this.affiliate = result;
+              this.router.navigate(['/affiliateManagement', this.affiliate.affiliateId]);
+            },
+            error: (message) => {
+              this.alerts.push({ type: 'danger', msg: 'Network request failure [34]: please try again later.' });
+              this.submitting = false;
+            }
+          });
         this.saveNotes();
       }
     });

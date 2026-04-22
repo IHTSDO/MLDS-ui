@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingPageComponent } from './components/common/landing-page/landing-page.component';
 import { DashboardComponent } from './components/common/dashboard/dashboard.component';
 import { authguardGuard } from './auth/authguard.guard';
+import { adminGuard } from './auth/admin.guard';
 import { LandingContentComponent } from './components/common/landing-content/landing-content.component';
 import { LoginComponent } from './components/common/login/login.component';
 import { MemberManagementComponent } from './components/admin/member-management/member-management.component';
@@ -46,6 +47,10 @@ import { AffiliateRegistrationComponent } from './components/user/affiliate-regi
 import { UserNotificationComponent } from './components/common/user-notification/user-notification.component';
 import { ReleaseManagementConfigComponent } from './components/admin/release-management-config/release-management-config.component';
 import { ReleaseViewPermissionComponent } from './components/admin/release-view-permission/release-view-permission.component';
+import { staffAdminGuard } from './auth/staff-admin.guard';
+import { memberStaffAdminGuard } from './auth/member-staff-admin.guard';
+import { noAuthGuard } from './auth/no-auth.guard';
+import { userGuard } from './auth/user.guard';
 
 
 export const appRoutes: Routes = [
@@ -53,17 +58,17 @@ export const appRoutes: Routes = [
     path: '',
     redirectTo: '/landing',
     pathMatch: 'full'
-  },{
-  path: 'logout',
-  component: LogoutComponent,
-},
- 
+  }, {
+    path: 'logout',
+    component: LogoutComponent,
+  },
+
   {
     path: 'landing',
     component: LandingPageComponent,
     children: [
-      { path: '', component: LandingContentComponent },
-     
+      { path: '', component: LandingContentComponent, canActivate: [noAuthGuard] },
+
     ]
   },
   {
@@ -72,35 +77,33 @@ export const appRoutes: Routes = [
     canActivate: [authguardGuard],
     children: [
       { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: 'memberManagement', component: MemberManagementComponent },
-      { path: 'memberManagement/:memberKey/branding', component: ShowMemberBrandingComponent },
-      { path: 'country', component: CountryComponent },
-      { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent },
-      { path: 'blocklist', component: BlocklistDomainComponent } ,
-      { path: 'usageReportsReview', component: UsageReportsComponent },
-      { path: 'metrics', component: MetricsComponent },
-      { path: 'pendingApplications', component: PendingApplicationsComponent },
-      { path: 'affiliateManagement', component: AffiliateManagementComponent },
-      { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent},
-      { path: 'activityLog', component: ActivityLogsComponent},
-      { path: 'logs', component: SystemsLoggersComponent},
-      { path: 'affiliateManagement/:affiliateId', component: AffiliateSummaryComponent},
-      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent},
-      { path: 'usageReportsReview/:commercialUsageId', component: ReviewUsageReportAdminComponent},
-      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent},
-      { path: 'affiliateManagement/:affiliateId/edit', component: EditAffiliateComponent},
-      { path: 'releaseManagement', component: ReleaseManagementComponent},
-      { path: 'importAffiliates', component: ImportAffiliatesComponent},
-      { path: 'releaseManagement', component: ReleaseManagementComponent},
-      { path: 'releaseManagement/release/:packageId', component: ReleaseComponent},
-      { path: 'releaseConfig', component: ReleaseManagementConfigComponent},
-      { path: 'releaseConfig/viewPermissions', component: ReleaseViewPermissionComponent},
-      { path: 'archiveReleases', component: ArchiveManagementComponent},
-      { path: 'archiveReleases/archivePackage/:packageId', component: ArchiveVersionsComponent},
-      { path: 'ihtsdoReleases', component: IhtsdoReleasesComponent},
-      { path: 'ihtsdoReleases/ihtsdoRelease/:releasePackageId', component: IhtsdoReleaseComponent},
-      { path: 'postAnnouncement', component: PostAnnouncementComponent},
-      { path: 'usageReports/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
+      { path: 'memberManagement', component: MemberManagementComponent, canActivate: [staffAdminGuard] },
+      { path: 'memberManagement/:memberKey/branding', component: ShowMemberBrandingComponent, canActivate: [staffAdminGuard] },
+      { path: 'country', component: CountryComponent, canActivate: [adminGuard] },
+      { path: 'fileDownloadReport', component: ReleaseFileDownloadCountComponent, canActivate: [adminGuard] },
+      { path: 'blocklist', component: BlocklistDomainComponent, canActivate: [adminGuard] },
+      { path: 'usageReportsReview', component: UsageReportsComponent, canActivate: [adminGuard] },
+      { path: 'metrics', component: MetricsComponent, canActivate: [adminGuard] },
+      { path: 'pendingApplications', component: PendingApplicationsComponent, canActivate: [staffAdminGuard] },
+      { path: 'affiliateManagement', component: AffiliateManagementComponent, canActivate: [staffAdminGuard] },
+      { path: 'applicationReview/:applicationId', component: ApplicationReviewComponent, canActivate: [staffAdminGuard] },
+      { path: 'activityLog', component: ActivityLogsComponent, canActivate: [adminGuard] },
+      { path: 'logs', component: SystemsLoggersComponent, canActivate: [adminGuard] },
+      { path: 'affiliateManagement/:affiliateId', component: AffiliateSummaryComponent, canActivate: [staffAdminGuard] },
+      { path: 'reviewUsageReports', component: ReviewUsageReportsComponent, canActivate: [staffAdminGuard] },
+      { path: 'usageReportsReview/:commercialUsageId', component: ReviewUsageReportAdminComponent, canActivate: [staffAdminGuard] },
+      { path: 'affiliateManagement/:affiliateId/edit', component: EditAffiliateComponent, canActivate: [staffAdminGuard] },
+      { path: 'importAffiliates', component: ImportAffiliatesComponent, canActivate: [adminGuard] },
+      { path: 'releaseManagement', component: ReleaseManagementComponent, canActivate: [staffAdminGuard] },
+      { path: 'releaseManagement/release/:packageId', component: ReleaseComponent, canActivate: [staffAdminGuard] },
+      { path: 'releaseConfig', component: ReleaseManagementConfigComponent, canActivate: [adminGuard] },
+      { path: 'releaseConfig/viewPermissions', component: ReleaseViewPermissionComponent, canActivate: [adminGuard] },
+      { path: 'archiveReleases', component: ArchiveManagementComponent, canActivate: [staffAdminGuard] },
+      { path: 'archiveReleases/archivePackage/:packageId', component: ArchiveVersionsComponent, canActivate: [staffAdminGuard] },
+      { path: 'ihtsdoReleases', component: IhtsdoReleasesComponent, canActivate: [memberStaffAdminGuard] },
+      { path: 'ihtsdoReleases/ihtsdoRelease/:releasePackageId', component: IhtsdoReleaseComponent, canActivate: [memberStaffAdminGuard] },
+      { path: 'postAnnouncement', component: PostAnnouncementComponent, canActivate: [staffAdminGuard] },
+      { path: 'usageReports/usageLog/:commercialUsageId', component: FullPageUsageLogComponent, canActivate: [staffAdminGuard] },
     ]
   },
   {
@@ -108,30 +111,29 @@ export const appRoutes: Routes = [
     component: LandingPageComponent,
     children: [
       { path: '', component: LandingContentComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'requestPasswordReset', component: RequestPasswordResetComponent },
-      { path: 'resetPassword', component: ResetPasswordComponent },
-      { path: 'userDashboard', component: UserDashboardComponent },
-      { path: 'activate', component: ActivateComponent },
+      { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
+      { path: 'register', component: RegisterComponent, canActivate: [noAuthGuard] },
+      { path: 'requestPasswordReset', component: RequestPasswordResetComponent, canActivate: [noAuthGuard] },
+      { path: 'resetPassword', component: ResetPasswordComponent, canActivate: [noAuthGuard] },
+      { path: 'userDashboard', component: UserDashboardComponent, canActivate: [userGuard] },
+      { path: 'activate', component: ActivateComponent, canActivate: [noAuthGuard] },
       { path: 'viewReleases', component: ViewReleasesComponent },
       { path: 'viewReleases/viewRelease/:releasePackageId', component: ViewReleaseComponent },
-      { path: 'emailVerification', component: EmailVerificationComponent },
-      { path: 'usageReport', component: UserUsageReportsTableComponent },
-      { path: 'password', component: ChangePasswordComponent },
-      { path: 'contactInfo', component: ContactInfoComponent },
-      { path: 'affiliateRegistration',component: AffiliateRegistrationComponent},
-      { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent },
-      { path: 'usageReport/usageLog/:commercialUsageId', component: FullPageUsageLogComponent },
+      { path: 'emailVerification', component: EmailVerificationComponent, canActivate: [noAuthGuard] },
+      { path: 'usageReport', component: UserUsageReportsTableComponent, canActivate: [userGuard] },
+      { path: 'password', component: ChangePasswordComponent, canActivate: [userGuard] },
+      { path: 'contactInfo', component: ContactInfoComponent, canActivate: [userGuard] },
+      { path: 'affiliateRegistration', component: AffiliateRegistrationComponent, canActivate: [userGuard] },
+      { path: 'extensionApplication/:applicationId', component: ExtensionApplicationComponent, canActivate: [userGuard] },
+      { path: 'usageReport/usageLog/:commercialUsageId', component: FullPageUsageLogComponent, canActivate: [userGuard] },
       { path: 'unsubscribenotification/:affiliateId/:key', component: UserNotificationComponent },
-      
     ]
   },
-{
-  path: 'landing/:memberKey',
-  component: LandingPageComponent,
-  children: [
-    { path: '', component: LandingContentComponent },
-  ]
-}
+  {
+    path: 'landing/:memberKey',
+    component: LandingPageComponent,
+    children: [
+      { path: '', component: LandingContentComponent },
+    ]
+  }
 ];

@@ -87,11 +87,15 @@ export class UsageReportsService {
     modalRef.result
       .then((result) => {
         if (result?.commercialUsageId) {
-          if(this.sessionService.isStaffOrAdmin()){
-          this.router.navigate(['/usageReports/usageLog/', result.commercialUsageId]);
+          if (this.sessionService.isStaffOrAdmin()) {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/usageReports/usageLog', result.commercialUsageId]);
+            });
           }
-          else{
-            this.router.navigate(['/usageReport/usageLog/', result.commercialUsageId]);
+          else {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/usageReport/usageLog', result.commercialUsageId]);
+            });
           }
         }
       })
