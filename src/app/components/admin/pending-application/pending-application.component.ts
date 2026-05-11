@@ -12,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PendingApplicationsService } from 'src/app/services/pending-applications/pending-application.service';
+import { CountryService } from 'src/app/services/country/country.service';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/routes-config'
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -23,7 +25,7 @@ import { ScrollTrackerDirective } from 'src/app/directives/scroll-tracker.direct
  */
 @Component({
     selector: 'app-pending-applications',
-    imports: [ScrollTrackerDirective, CommonModule, FormsModule, TranslateModule, CompareTextPipe],
+    imports: [ScrollTrackerDirective, CommonModule, FormsModule, NgbModule, TranslateModule, CompareTextPipe],
     templateUrl: './pending-application.component.html',
     styleUrls: ['./pending-application.component.scss']
 })
@@ -32,6 +34,16 @@ export class PendingApplicationsComponent implements OnInit {
    * List of pending applications
    */
   applications: any[] = [];
+
+  /**
+   * List of all countries from CountryService
+   */
+  allCountries: any[] = [];
+
+  /**
+   * Selected country filter
+   */
+  countryFilter: string = '';
 
   /**
    * Flag indicating whether the CSV file is being generated
@@ -89,7 +101,13 @@ export class PendingApplicationsComponent implements OnInit {
    * 
    * @param userRegistrationService Pending Applications Service
    */
-  constructor(private userRegistrationService: PendingApplicationsService, private authenticationService: AuthenticationSharedService, private router: Router,private translateService:TranslateService) { }
+  constructor(
+    private userRegistrationService: PendingApplicationsService, 
+    private authenticationService: AuthenticationSharedService, 
+    private router: Router,
+    private translateService:TranslateService,
+    private countryService: CountryService
+  ) { }
 
   /**
    * Initializes the component
@@ -98,6 +116,9 @@ export class PendingApplicationsComponent implements OnInit {
     const userDetails = this.authenticationService.getUserDetails();
     this.isAdmin = this.authenticationService.isAdmin();
     this.homeMember = userDetails?.member?.['key'];
+    this.countryService.getCountries().subscribe((countries) => {
+      this.allCountries = countries;
+    });
     this.loadApplications();
   }
 
@@ -109,6 +130,14 @@ export class PendingApplicationsComponent implements OnInit {
  */
 
 
+  /**
+   * Handles changes to the Show Applications dropdown.
+   */
+  onShowApplicationsChange(): void {
+    this.countryFilter = '';
+    this.loadApplications(true);
+  }
+
   loadApplications(reset = false): void {
 
     this.loadingApplications = true;
@@ -119,7 +148,7 @@ export class PendingApplicationsComponent implements OnInit {
       this.hasMoreData = true;
     }
     this.userRegistrationService
-      .filterPendingApplications(this.query,this.page, this.pageSize, homeMember, this.orderByField, this.reverseSort)
+      .filterPendingApplications(this.query,this.page, this.pageSize, homeMember, this.countryFilter || null, this.orderByField, this.reverseSort)
       .subscribe({next:(response) => {
         if (response.length < this.pageSize) {
           this.hasMoreData = false;
@@ -132,6 +161,11 @@ export class PendingApplicationsComponent implements OnInit {
         this.loadingApplications = false;
       }});
 }
+
+  filterByCountry(isoCode: string): void {
+    this.countryFilter = isoCode;
+    this.loadApplications(true);
+  }
 
 
  /**
@@ -155,9 +189,11 @@ export class PendingApplicationsComponent implements OnInit {
   generateCsv(): void {
     this.generatingCsv = true;
     this.userRegistrationService
-      .filterPendingApplications(this.query, 0, 999999999, this.showAllApplications === '1' ? null : this.homeMember, this.orderByField, this.reverseSort)
+      .filterPendingApplications(this.query, 0, 999999999, this.showAllApplications === '1' ? null : this.homeMember, this.countryFilter || null, this.orderByField, this.reverseSort)
       .subscribe({
         next:(response) => {
+          let dataToExport = response;
+
           const expressions = [
             (application: any) => application.applicationId,
             (application: any) => application.affiliateDetails.firstName + ' ' + application.affiliateDetails.lastName,
@@ -208,7 +244,7 @@ export class PendingApplicationsComponent implements OnInit {
             (application: any) => application?.affiliateDetails?.email || ''
           ];
 
-          const result = response.map((application: any) => {
+          const result = dataToExport.map((application: any) => {
             const isPrimary = application.applicationType === 'PRIMARY';
             return expressions.map((expression) => expression(application, isPrimary));
           });
@@ -284,12 +320,16 @@ goToApplication(application: any): void {
  * @example
  * toggleField('name');
  */
-toggleField(field: string): void {
+toggleField(field: string, isDescendingOrder?: boolean): void {
   if (this.orderByField === field) {
     this.reverseSort = !this.reverseSort;
   } else {
     this.orderByField = field;
     this.reverseSort = false;
+  }
+
+  if (typeof isDescendingOrder !== 'undefined') {
+    this.reverseSort = isDescendingOrder;
   }
   this.loadApplications(true);
 }

@@ -1,42 +1,41 @@
 <div class="row">
   <div class="col-md-12">
     <div class="page-header">
-    <div class="pending-header">
-      <h2 class="d-flex justify-content-between align-items-center">
-        <span >{{'pendingApplications.title' | translate| compareText: 'Pending Applications'}}</span>
-        <button
-            class="csv-button download"
-            type="button"
-            (click)="generateCsv()"
-        >
-        <i class="fa fa-download"></i> Export as CSV
-        <span *ngIf="generatingCsv">
-        <i class="fa fa-spinner fa-spin"></i>
-        </span>
-        </button>
+      <div class="pending-header">
+        <h2 class="d-flex justify-content-between align-items-center">
+          <span>{{'pendingApplications.title' | translate| compareText: 'Pending Applications'}}</span>
+          <button class="csv-button download" type="button" (click)="generateCsv()">
+            <i class="fa fa-download"></i> Export as CSV
+            <span *ngIf="generatingCsv">
+              <i class="fa fa-spinner fa-spin"></i>
+            </span>
+          </button>
         </h2>
-    </div>
-      <div *ngIf="isAdmin">
-        <span>Show: </span>
-        <select [(ngModel)]="showAllApplications" (change)="loadApplications(true)">
-          <option value="0">
-            {{'pendingApplications.show.myApplications' | translate |compareText: 'My Pending Applications'}}
-          </option>
-          <option value="1">{{'pendingApplications.show.allApplications' |translate|compareText:'All Pending Applications'}}</option>
-        </select>
+      </div>
+      <div class="d-flex" style="gap: 15px;">
+        <div *ngIf="isAdmin">
+          <span>Show: </span>
+          <select [(ngModel)]="showAllApplications" (change)="onShowApplicationsChange()">
+            <option value="0">
+              {{'pendingApplications.show.myApplications' | translate |compareText: 'My Pending Applications'}}
+            </option>
+            <option value="1">{{'pendingApplications.show.allApplications' |translate|compareText:'All Pending
+              Applications'}}</option>
+          </select>
+        </div>
+        <div *ngIf="allCountries.length > 0" style="visibility: hidden; width: 0; height: 0;">
+        </div>
       </div>
     </div>
 
     <div>
-      <table class="table table-hover title-colors"aria-label="pending-applications">
+      <table class="table table-hover title-colors" aria-label="pending-applications">
         <thead>
           <tr>
             <th class="col-md-1" style=" color: #40ACD6;">
               <a (click)="toggleField('applicationId')">
                 No.
-                <span *ngIf="orderByField !== 'applicationId'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'applicationId'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'applicationId'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -50,11 +49,9 @@
             <th class="col-md-2" style=" color: #40ACD6;">
               <a (click)="toggleField('affiliateName')">
                 <span>
-                 {{'pendingApplications.table.affiliateName' | translate | compareText: 'Affiliate Name'}}
+                  {{'pendingApplications.table.affiliateName' | translate | compareText: 'Affiliate Name'}}
                 </span>
-                <span *ngIf="orderByField !== 'affiliateName'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'affiliateName'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'affiliateName'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -70,9 +67,7 @@
                 <span>
                   {{'pendingApplications.table.applicationType' |translate | compareText: 'Application Type'}}
                 </span>
-                <span *ngIf="orderByField !== 'applicationType'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'applicationType'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'applicationType'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -88,9 +83,7 @@
                 <span>
                   {{'pendingApplications.table.agreementType' |translate |compareText: 'Agreement Type'}}
                 </span>
-                <span *ngIf="orderByField !== 'agreementType'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'agreementType'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'agreementType'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -104,9 +97,7 @@
             <th class="col-md-1">
               <a (click)="toggleField('useType')">
                 <span>{{'pendingApplications.table.useType' | translate |compareText: 'Use Type'}}</span>
-                <span *ngIf="orderByField !== 'useType'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'useType'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'useType'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -120,11 +111,9 @@
             <th class="col-md-1">
               <a (click)="toggleField('submittedAt')">
                 <span>
-                 {{'pendingApplications.table.dateSubmitted' | translate | compareText:'Date Submitted'}}
+                  {{'pendingApplications.table.dateSubmitted' | translate | compareText:'Date Submitted'}}
                 </span>
-                <span *ngIf="orderByField !== 'submittedAt'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'submittedAt'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'submittedAt'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -138,9 +127,7 @@
             <th class="col-md-1">
               <a (click)="toggleField('approvalState')">
                 <span>{{'global.word.status' | translate | compareText: 'Status'}}</span>
-                <span *ngIf="orderByField !== 'approvalState'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'approvalState'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'approvalState'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -152,27 +139,39 @@
               </a>
             </th>
             <th class="col-md-1">
-              <a (click)="toggleField('country')">
-                <span>{{'pendingApplications.table.homeCountry' | translate |compareText: 'Home Country'}}</span>
-                <span *ngIf="orderByField !== 'country'"
-                  ><i class="fa fa-sort"></i
-                ></span>
-                <span *ngIf="orderByField === 'country'">
-                  <span *ngIf="!reverseSort">
-                    <i class="fa fa-sort-asc"></i>
-                  </span>
-                  <span *ngIf="reverseSort">
-                    <i class="fa fa-sort-desc"></i>
-                  </span>
-                </span>
-              </a>
+              <div class="btn-group" ngbDropdown>
+                <a id="countryDropdown" ngbDropdownToggle>
+                  {{'pendingApplications.table.homeCountry' | translate |compareText: 'Home Country'}}
+                  <ng-container *ngIf="countryFilter">
+                    : {{countryFilter}}
+                  </ng-container>
+                  <ng-container *ngIf="!countryFilter">
+                    <i class="fa fa-sort"></i>
+                  </ng-container>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="countryDropdown"
+                  style="font-size: 14px; max-height: 300px; overflow-y: auto;">
+                  <button class="dropdown-item" (click)="countryFilter = ''; toggleField('country', false)">
+                    <i class="fa fa-sort-alpha-asc"></i> Sort A to Z
+                  </button>
+                  <button class="dropdown-item" (click)="countryFilter = ''; toggleField('country', true)">
+                    <i class="fa fa-sort-alpha-desc"></i> Sort Z to A
+                  </button>
+                  <div class="dropdown-divider"></div>
+                  <button class="dropdown-item" (click)="filterByCountry('')">All Countries</button>
+                  <ng-container *ngFor="let country of allCountries">
+                    <button class="dropdown-item" (click)="filterByCountry(country.isoCode2)"
+                      [ngClass]="{'selected': countryFilter === country.isoCode2}">
+                      {{country.commonName}}
+                    </button>
+                  </ng-container>
+                </div>
+              </div>
             </th>
             <th class="col-md-1">
               <a (click)="toggleField('member')">
                 <span>{{'pendingApplications.table.member' | translate| compareText:'Member'}}</span>
-                <span *ngIf="orderByField !== 'member'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'member'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'member'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -186,9 +185,7 @@
             <th class="col-md-1">
               <a (click)="toggleField('email')">
                 <span>{{'pendingApplications.table.email' | translate|compareText: 'Email'}}</span>
-                <span *ngIf="orderByField !== 'email'"
-                  ><i class="fa fa-sort"></i
-                ></span>
+                <span *ngIf="orderByField !== 'email'"><i class="fa fa-sort"></i></span>
                 <span *ngIf="orderByField === 'email'">
                   <span *ngIf="!reverseSort">
                     <i class="fa fa-sort-asc"></i>
@@ -202,40 +199,28 @@
             <th class="col-md-1"></th>
           </tr>
         </thead>
-        <tbody >
-          <tbody appScrollTracker (scrollingFinished)="loadApplications()">
-          <tr class="language-option"
-            *ngFor="let application of applications"
-            (click)="goToApplication(application)"
-          >
+        <tbody>
+        <tbody appScrollTracker (scrollingFinished)="loadApplications()">
+          <tr class="language-option" *ngFor="let application of applications" (click)="goToApplication(application)">
             <td class="col-md-1">{{ application.applicationId }}</td>
             <td class="col-md-2">
               {{ application.affiliateDetails.firstName + ' ' + application.affiliateDetails.lastName }}
             </td>
-            <td class="col-md-1">{{'application.applicationType.'+application.applicationType  | translate}}</td>
-            <td
-              *ngIf="application.applicationType === 'PRIMARY'"
-              class="col-md-1"
-            >
-            {{application.affiliateDetails.agreementType ? ('affiliate.agreementType.'+application.affiliateDetails.agreementType | translate) : ''}}
+            <td class="col-md-1">{{'application.applicationType.'+application.applicationType | translate}}</td>
+            <td *ngIf="application.applicationType === 'PRIMARY'" class="col-md-1">
+              {{application.affiliateDetails.agreementType ?
+              ('affiliate.agreementType.'+application.affiliateDetails.agreementType | translate) : ''}}
             </td>
-            <td
-              *ngIf="application.applicationType === 'EXTENSION'"
-              class="col-md-1"
-            >
-            {{ application.affiliate.affiliateDetails.agreementType ? ('affiliate.agreementType.'+ application.affiliate.affiliateDetails.agreementType| translate) : ''}}
+            <td *ngIf="application.applicationType === 'EXTENSION'" class="col-md-1">
+              {{ application.affiliate.affiliateDetails.agreementType ? ('affiliate.agreementType.'+
+              application.affiliate.affiliateDetails.agreementType| translate) : ''}}
             </td>
-            <td
-              *ngIf="application.applicationType === 'PRIMARY'"
-              class="col-md-1"
-            >
-            {{application.type ? ('affiliate.type.'+application.type |translate) : ''}} - {{application.subType ? ('affiliate.subType.'+application.subType | translate) : ''}}
+            <td *ngIf="application.applicationType === 'PRIMARY'" class="col-md-1">
+              {{application.type ? ('affiliate.type.'+application.type |translate) : ''}} - {{application.subType ?
+              ('affiliate.subType.'+application.subType | translate) : ''}}
             </td>
-            <td
-              *ngIf="application.applicationType === 'EXTENSION'"
-              class="col-md-1"
-            >
-            {{ application.affiliate.type ? ('affiliate.type.'+application.affiliate.type | translate) : ''}}
+            <td *ngIf="application.applicationType === 'EXTENSION'" class="col-md-1">
+              {{ application.affiliate.type ? ('affiliate.type.'+application.affiliate.type | translate) : ''}}
             </td>
             <td class="col-md-1">
               {{ application.submittedAt | date: 'yyyy-MM-dd' }}
@@ -247,16 +232,12 @@
             <td class="col-md-1">{{ 'global.member.'+application.member.key| translate}}</td>
             <td class="col-md-1">
               <a href="mailto:{{ application.affiliateDetails.email }}">{{ application.affiliateDetails.email }}</a>
-            </td>            
+            </td>
             <td class="col-md-1">
-              <button
-              type="button"
-              class="review-button"
-              (click)="goToApplication(application)"
-            >
-              <i class="fa fa-pencil"></i> {{'pendingApplications.table.review' | translate | compareText:'Review'}}
-            </button>
-            
+              <button type="button" class="review-button" (click)="goToApplication(application)">
+                <i class="fa fa-pencil"></i> {{'pendingApplications.table.review' | translate | compareText:'Review'}}
+              </button>
+
             </td>
           </tr>
           <tr *ngIf="applications.length === 0 && !loadingApplications">
