@@ -48,6 +48,7 @@ export class PendingApplicationsService {
     page: number,
     pageSize: number,
     member: string | null,
+    countryCode: string | null,
     orderBy: string | null,
     reverseSort: boolean
   ): Observable<any> {
@@ -56,6 +57,10 @@ export class PendingApplicationsService {
     )}&$pageSize=${encodeURIComponent(pageSize)}`;
     if (member) {
       const filter = `homeMember eq '${member}'`;
+      url += `&$filter=${encodeURIComponent(filter)}`;
+    }
+    if (countryCode) {
+      const filter = `country eq '${countryCode}'`;
       url += `&$filter=${encodeURIComponent(filter)}`;
     }
     if (orderBy) {
