@@ -29,6 +29,7 @@ export class ArchiveManagementComponent implements OnInit {
   archivePackages: any[] = [];
   member:any;
   isLoading:boolean=true;
+  membersList: any[] = [];
   constructor(
     private router: Router,
     private packageUtilsService: PackageUtilsService,
@@ -38,7 +39,7 @@ export class ArchiveManagementComponent implements OnInit {
     private memberService: MemberService,
   ) {
     this.isAdmin = this.sessionService.isAdmin();
-    this.releaseManagementFilter = this.sessionStateService.sessionState.releaseManagementFilter;
+    this.releaseManagementFilter = this.packagesService.archiveFilterState;
   }
 
   ngOnInit(): void {
@@ -46,7 +47,12 @@ export class ArchiveManagementComponent implements OnInit {
     this.member=this.sessionService.getUserDetails()?.member?.['key'];
   }
   onShowAllMembersChange(): void {
+    this.saveFilterState();
     this.extractPackages();
+  }
+
+  private saveFilterState(): void {
+    this.packagesService.archiveFilterState = this.releaseManagementFilter;
   }
   hasNoArchivePackages(): boolean {
     // Check if all members have no archive packages
@@ -62,6 +68,13 @@ export class ArchiveManagementComponent implements OnInit {
         if (!this.packages) {
           return;
         }
+
+        // Build member list
+        const allGrouped = lodash.groupBy(this.packages, 'member.key');
+        const availableMembers = lodash.map(Object.keys(allGrouped), key => this.memberService.getMemberByKey(key));
+        this.membersList = lodash.sortBy(availableMembers, (member) => 
+          member?.key === 'IHTSDO' ? '!IHTSDO' : member?.key
+        );
   
         // Apply member filtering
         const memberFiltered = this.filterPackagesByMember(this.packages);
@@ -73,9 +86,15 @@ export class ArchiveManagementComponent implements OnInit {
   
   // Helper function to filter packages by member
   filterPackagesByMember(packages: any[]): any[] {
-    return this.releaseManagementFilter.showAllMembers
-      ? packages
-      : packages.filter(p => this.packageUtilsService.isReleasePackageMatchingMember(p));
+    return packages.filter(p => {
+      if (!this.releaseManagementFilter.showAllMembers) {
+        return this.packageUtilsService.isReleasePackageMatchingMember(p);
+      } else if (this.releaseManagementFilter.showAllMembers === '1') {
+        return true;
+      } else {
+        return p.member?.key === this.releaseManagementFilter.showAllMembers;
+      }
+    });
   }
   
   

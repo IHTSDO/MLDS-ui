@@ -8,7 +8,12 @@
           <option value="" [selected]="true">
             {{ (member | enum:'global.member.') | async }}
           </option>
-          <option [value]="1">All Members</option>
+          <option value="1">All Members</option>
+          <ng-container *ngFor="let m of membersList">
+            <option *ngIf="m.key !== member" [value]="m.key">
+              {{ m.key | enum:'global.member.' | async }}
+            </option>
+          </ng-container>
         </select>&nbsp;&nbsp;
         <i class="fa fa-question-circle fa-2x" [ngbPopover]="popoverContent" placement="top"
           triggers="mouseenter:mouseleave"></i>

@@ -10,10 +10,13 @@
         <select [(ngModel)]="releaseManagementFilter.showAllMembers" (ngModelChange)="onShowAllMembersChange()">
           <option value="" selected>
             {{ session.member.key | enum:'global.member.' | async }}
-            
           </option>
-          
           <option value="1">All Members</option>
+          <ng-container *ngFor="let member of membersList">
+            <option *ngIf="member.key !== session.member.key" [value]="member.key">
+              {{ member.key | enum:'global.member.' | async }}
+            </option>
+          </ng-container>
         </select>&nbsp;&nbsp;
         
         <i class="fa fa-question-circle fa-2x"  [ngbPopover]="popoverContent" placement="top"
@@ -34,7 +37,7 @@
 
 
 
-<div *ngFor="let memberEntry of packagesByMember">
+<div *ngFor="let memberEntry of packagesByMember" [id]="'member-section-' + memberEntry.member.key">
   <div class="row">
     <div class="col-lg-12">
       <!-- online package -->

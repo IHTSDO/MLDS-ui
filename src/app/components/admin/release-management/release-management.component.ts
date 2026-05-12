@@ -26,11 +26,10 @@ export class ReleaseManagementComponent {
   public packagesByMember: any[] = [];
   public isAdmin: boolean = false;
   public alerts: any[] = [];
-  public releaseManagementFilter = {
-    showAllMembers: ''
-  };
+  public releaseManagementFilter = this.packagesService.releaseFilterState;
 session: any;
   isLoading: boolean = true;
+  membersList: any[] = [];
 
 
 
@@ -51,7 +50,12 @@ session: any;
   }
 
   onShowAllMembersChange(): void {
+    this.saveFilterState();
     this.loadReleasePackages();
+  }
+
+  private saveFilterState(): void {
+    this.packagesService.releaseFilterState = this.releaseManagementFilter;
   }
 
   private loadReleasePackages(): void {
@@ -59,7 +63,21 @@ session: any;
     this.packagesService.loadPackages().subscribe({
       next: (data) => {
 
-        const memberFiltered = data.filter(p => this.releaseManagementFilter.showAllMembers || this.packageUtilsService.isReleasePackageMatchingMember(p));
+        const allGrouped = lodash.groupBy(data, 'member.key');
+        const availableMembers = lodash.map(Object.keys(allGrouped), key => this.memberService.getMemberByKey(key));
+        this.membersList = lodash.sortBy(availableMembers, (member) => 
+          member?.key === 'IHTSDO' ? '!IHTSDO' : member?.key
+        );
+
+        let memberFiltered = data.filter(p => {
+          if (!this.releaseManagementFilter.showAllMembers) {
+            return this.packageUtilsService.isReleasePackageMatchingMember(p);
+          } else if (this.releaseManagementFilter.showAllMembers === '1') {
+            return true;
+          } else {
+            return p.member?.key === this.releaseManagementFilter.showAllMembers;
+          }
+        });
 
         const groupedByMember = lodash.groupBy(memberFiltered, 'member.key');
 
@@ -96,6 +114,7 @@ session: any;
         this.packagesByMember = lodash.sortBy(this.packagesByMember, (memberEntry) =>
           memberEntry.member.key === 'IHTSDO' ? '!IHTSDO' : memberEntry.member.key
         );
+
 
 
         this.fixReleasePackagesWithoutPriority(memberFiltered);
