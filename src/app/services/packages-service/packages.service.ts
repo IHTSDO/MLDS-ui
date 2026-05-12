@@ -11,6 +11,15 @@ export class PackagesService {
 
   private apiUrl = API_ROUTES.apiUrl;
 
+  public releaseFilterState = {
+    showAllMembers: '',
+    selectedMember: ''
+  };
+
+  public archiveFilterState = {
+    showAllMembers: ''
+  };
+
   constructor(private http: HttpClient,private memberService: MemberService) { }
 
   loadPackages(): Observable<any[]> {
