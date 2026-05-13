@@ -117,6 +117,9 @@
                   <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
                     <i class="fa fa-pencil"></i> Edit
                   </button>
+                  <button class="dropdown-item" (click)="cloneReleaseVersion(releaseVersion)">
+                    <i class="fa fa-clone"></i> Clone
+                  </button>
                   <button class="dropdown-item" (click)="takeOfflineModal(releaseVersion)">
                     <i class="fa-solid fa-circle-xmark"></i> Take Offline
                   </button>
@@ -210,6 +213,9 @@
                 <div ngbDropdownMenu>
                   <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
                     <i class="fa fa-pencil"></i> Edit
+                  </button>
+                  <button class="dropdown-item" (click)="cloneReleaseVersion(releaseVersion)">
+                    <i class="fa fa-clone"></i> Clone
                   </button>
                   <button class="dropdown-item" (click)="takeOnlineModal(releaseVersion)">
                     <i class="fa-regular fa-circle-check"></i> Publish Online
@@ -307,6 +313,9 @@
                 <div ngbDropdownMenu>
                   <button class="dropdown-item" (click)="editReleaseVersion(releaseVersion)">
                     <i class="fa fa-pencil"></i> Edit
+                  </button>
+                   <button class="dropdown-item" (click)="cloneReleaseVersion(releaseVersion)">
+                    <i class="fa fa-clone"></i> Clone
                   </button>
                   <button class="dropdown-item" (click)="takeAlphaBetaModal(releaseVersion)">
                     <i class="fa-regular fa-circle-check"></i> Publish Alpha/Beta
