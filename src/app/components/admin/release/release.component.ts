@@ -267,6 +267,16 @@ if (this.isAdmin) {
     this.openReleaseVersionModal(selectedReleaseVersion);
   }
 
+  cloneReleaseVersion(selectedReleaseVersion: any): void {
+    const clonedVersion = {
+      ...selectedReleaseVersion,
+      releaseVersionId: null,
+      releaseFiles: [],
+      releaseType: 'offline'
+    };
+    this.openReleaseVersionModal(clonedVersion);
+  }
+
   deleteVersionModal(selectedReleaseVersion: any): void {
     this.releasePackageService.determineDependencyPresence(selectedReleaseVersion.releaseVersionId)
       .subscribe({
