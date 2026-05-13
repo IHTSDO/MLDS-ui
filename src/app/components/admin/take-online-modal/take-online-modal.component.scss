@@ -23,3 +23,16 @@ label {
     font-weight: bold;
 }
 
+.notification-disabled {
+    opacity: 0.5;
+    filter: blur(0.3px);
+    pointer-events: none;
+}
+
+.notification-warning {
+    margin-left: 1.25rem;
+    margin-top: 6px;
+    font-size: 0.85em;
+    color: #dc3545;
+    font-weight: 500;
+}
