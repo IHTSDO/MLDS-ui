@@ -35,6 +35,11 @@
   </div>
 </div>
 
+<div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+
+<div *ngIf="!isLoading">
+
+
 
 
 <div *ngFor="let memberEntry of packagesByMember" [id]="'member-section-' + memberEntry.member.key">
@@ -104,7 +109,10 @@
         </div>
       </div>
       
-      <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+
+      
+
+
 
       <div class="alert alert-warning" *ngIf="!isLoading && memberEntry.onlinePackages.length === 0">
         <i class="fa fa-exclamation-circle"></i> There are currently no public releases available
@@ -133,7 +141,7 @@
         </div>
       </div>
 
-      <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+
 
       <div class="alert alert-warning" *ngIf="!isLoading && memberEntry.alphabetaPackages.length === 0">
         <i class="fa fa-exclamation-circle"></i> There are currently no Alpha/Beta releases available
@@ -161,7 +169,7 @@
         </div>
       </div>
 
-      <div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+
       
       <div class="alert alert-warning" *ngIf="!isLoading && memberEntry.offlinePackages.length == 0"><i
           class="fa fa-exclamation-circle"></i> There are currently no offline releases available</div>
@@ -170,4 +178,5 @@
 
 
 
+</div>
 </div>
