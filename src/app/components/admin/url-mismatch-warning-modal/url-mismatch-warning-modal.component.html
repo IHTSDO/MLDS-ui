@@ -1,0 +1,10 @@
+<app-modal
+  [title]="'URL Mismatch'"
+  [submitText]="'Save Anyway'"
+  [cancelText]="'Cancel'"
+  (onSubmit)="confirm()"
+  (onCancel)="cancel()">
+  <div modal-body>
+    <p [innerHTML]="message"></p>
+  </div>
+</app-modal>

@@ -101,8 +101,6 @@ session: any;
             .sortBy('createdAt')
             .value();
           
-          this.isLoading = false;
-
           return {
             member: this.memberService.getMemberByKey(memberKey),
             onlinePackages: onlinePackages,
@@ -110,6 +108,8 @@ session: any;
             offlinePackages: offlinePackages
           };
         });
+
+        this.isLoading = false;
 
         this.packagesByMember = lodash.sortBy(this.packagesByMember, (memberEntry) =>
           memberEntry.member.key === 'IHTSDO' ? '!IHTSDO' : memberEntry.member.key
@@ -122,6 +122,7 @@ session: any;
       },
       error: (err) => {
         console.error('Error occurred while fetching release packages:', err.message);
+        this.isLoading = false;
       }
     });
   }

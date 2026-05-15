@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import { QuillModule } from 'ngx-quill';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
+import { UrlMismatchWarningModalComponent } from '../url-mismatch-warning-modal/url-mismatch-warning-modal.component';
 import { ModalComponent } from '../../common/modal/modal.component';
 
 @Component({
@@ -28,7 +29,8 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
-    private releaseVersionsService: ReleaseVersionsService
+    private releaseVersionsService: ReleaseVersionsService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -77,9 +79,28 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
         return moment(jsDate).format('YYYY-MM-DD');
     }
     return null;
-}
+  }
 
-
+  hasUrlMismatches(htmlContent: string): boolean {
+    if (!htmlContent) return false;
+    
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const links = tempDiv.querySelectorAll('a');
+    
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i];
+      const href = link.getAttribute('href');
+      const text = link.textContent?.trim() || '';
+      
+      if (href && (text.startsWith('http://') || text.startsWith('https://'))) {
+        if (href.trim() !== text) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   saveReleaseVersion(): void {
     this.submitAttempted = true;
@@ -88,6 +109,20 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
       return;
     }
 
+    const descriptionHtml = this.releaseVersionForm.value.description;
+    if (this.hasUrlMismatches(descriptionHtml)) {
+      const modalRef = this.modalService.open(UrlMismatchWarningModalComponent, { backdrop: 'static' });
+      modalRef.result.then((confirmed) => {
+        if (confirmed) {
+          this.executeSave();
+        }
+      }).catch(() => {});
+    } else {
+      this.executeSave();
+    }
+  }
+
+  private executeSave(): void {
     this.submitting = true;
     this.alerts = [];
 
