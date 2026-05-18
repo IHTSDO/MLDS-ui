@@ -51,7 +51,7 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
       versionDependentURI: [this.releaseVersion?.versionDependentURI || ''],
       versionDependentDerivativeURI: [this.releaseVersion?.versionDependentDerivativeURI || ''],
       releaseType: [this.releaseVersion?.releaseType || '', Validators.required],
-      publishedAt: [this.releaseVersion?.publishedAt ? this.convertToNgbDate(new Date(this.releaseVersion.publishedAt)) : null],
+      publishedAt: [this.releaseVersion?.publishedAt ? this.convertToNgbDate(new Date(this.releaseVersion.publishedAt)) : null, Validators.required],
     });
   }
 
