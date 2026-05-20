@@ -1,47 +1,66 @@
 <div class="row">
-    <div class="col-md-12">
-      
-      <div class="page-header">
-        <h2>{{'views.postAnnouncement.title' | translate| compareText: 'Post Announcement'}}</h2>
-      </div>
+  <div class="col-md-12">
+ 
+    <div class="page-header">
+      <h2>{{'views.postAnnouncement.title' | translate| compareText: 'Post Announcement'}}</h2>
     </div>
-  
-  
+  </div>
+ 
+ 
   <div class="content-row">
     <form [formGroup]="announcementForm" (ngSubmit)="postAnnouncement()">
-  
+ 
       <div class="col-md-12">
         <h3>{{'views.postAnnouncement.messageContent' | translate | compareText: 'Message Content'}}</h3>
-  
+ 
         <div class="form-group">
           <label><b>{{'views.postAnnouncement.emailSubject' | translate | compareText: 'Email Subject'}}<span class="text-danger"> * </span></b></label>
           <input class="form-control"
-            formControlName="subject"
-            required 
-            [disabled]="completed">
+                 formControlName="subject"
+                 required
+                 [disabled]="completed">
           <span *ngIf="announcementForm.get('subject')?.invalid && announcementForm.get('subject')?.touched" class="help-block">{{'form.requiredField' | translate }}</span>
         </div>
-  
-        <div class="form-group">  
+ 
+        <div class="form-group">
           <label for="body"><b>{{'views.postAnnouncement.emailBody' | translate | compareText:'Email Body'}}<span class="text-danger"> * </span></b></label><br>
           <quill-editor id="body" formControlName="body"  [style]="{'height': '200px','width':'100%'}"  bounds="self"></quill-editor><br>
           <div class="message">
           <span class="help-block">{{'views.postAnnouncement.salutationMessage' | translate |compareText: 'Remember to add a salutation and valediction to the email body.'}}</span>
           <span *ngIf="announcementForm.get('body')?.invalid && announcementForm.get('body')?.touched" class="help-block"> {{'form.requiredField' | translate }}</span>
-        </div>
+          </div>
         </div>
       </div>
-  
+ 
+      <!-- AUDIENCE -->
+ 
       <div class="col-md-12">
+ 
         <h3>{{'views.postAnnouncement.audience' |translate| compareText: 'Audience'}}</h3>
-        
+ 
         <div class="form-group">
-          <label><b>{{'views.postAnnouncement.affiliates' | translate |compareText: 'Affiliates'}}</b></label>
+ 
+          <label>
+            <b>{{'views.postAnnouncement.affiliates' | translate |compareText: 'Affiliates'}}</b>
+          </label>
+ 
           <div *ngIf="isAdmin">
+ 
             <select formControlName="includeAllAffiliates">
-              <option value="0" selected><span><b>My Affiliates</b></span> (<b>{{memberKey | enum:'global.member.'|async}}</b>)</option>
-              <option value="1"><b> {{'views.postAnnouncement.allAffiliates' |translate | compareText:  'All Affiliates'}} </b></option>
+ 
+              <option value="0" selected>
+                <span><b>My Affiliates</b></span>
+                (<b>{{memberKey | enum:'global.member.'|async}}</b>)
+              </option>
+ 
+              <option value="1">
+                <b>
+                  {{'views.postAnnouncement.allAffiliates' |translate | compareText: 'All Affiliates'}}
+                </b>
+              </option>
+ 
             </select>
+ 
           </div>
           <div *ngIf="!isAdmin">
             <div><span><b>{{'views.postAnnouncement.myAffiliates' |translate |compareText: 'My Affiliates'}}</b></span> <b>({{memberKey | enum:'global.member.'|async}})</b></div>
@@ -55,72 +74,409 @@
               {{ 'affiliate.standingState.DEACTIVATION_PENDING' | translate | compareText: 'Deactivation Pending' }}.
             </span>
           </div>
-          
+ 
         </div>
-
+ 
+        <!-- ADDITIONAL EMAILS -->
+ 
         <div class="form-group">
-          <label><b>{{'views.postAnnouncement.additionalEmails' | translate | compareText: 'Additional Email Addresses'}}</b></label>
-          
-          <!-- Binding input to FormControl using formControlName -->
+ 
+          <label>
+            <b>
+              {{'views.postAnnouncement.additionalEmails' | translate | compareText: 'Additional Email Addresses'}}
+            </b>
+          </label>
+ 
           <input
-            class="form-control "
+            class="form-control"
             formControlName="emailListString"
             [disabled]="completed"
           />
+ 
           <div class="message">
-          <span class="help-block">
-           {{'views.postAnnouncement.additionalEmailsHelp' |translate |compareText: 'Send the announcement to additional email addressses.'}}
-          </span>
+ 
+            <span class="help-block">
+              {{'views.postAnnouncement.additionalEmailsHelp' |translate |compareText: 'Send the announcement to additional email addressses.'}}
+            </span>
+ 
+          </div>
+ 
         </div>
-        </div>
-        
+ 
       </div>
- <br> 
+ 
+      <br>
+ 
+      <!-- BUTTONS -->
+ 
       <div class="col-md-12">
+ 
         <div class="button-group">
-          <button class="upload-button" 
-          
-          (click)="announcementForm.markAllAsTouched()"
-          *ngIf="!completed">
-      <i class="fa fa-paper-plane" aria-hidden="true"></i>
-      {{'views.postAnnouncement.post' | translate |compareText: 'Post Announcement'}}
-      <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-  </button> 
-          <!-- Disabled Post Announcement Button -->
-          <button class="upload-button" 
-                  [disabled]="true" 
-                  *ngIf="completed">
+ 
+          <!-- POST ANNOUNCEMENT -->
+ 
+          <button class="upload-button"
+                  (click)="announcementForm.markAllAsTouched()"
+                  *ngIf="!completed" [disabled]="
+        !announcementForm.get('subject')?.value?.trim()
+        ||
+        !announcementForm.get('body')?.value?.trim()
+        ">
+ 
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
+ 
             {{'views.postAnnouncement.post' | translate |compareText: 'Post Announcement'}}
-            <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
+ 
+            <span *ngIf="submitting">
+              <i class="fa fa-spinner fa-spin"></i>
+            </span>
+ 
           </button>
-      
-          <!-- New Announcement Button -->
-          <button class="upload-button" 
-                  *ngIf="completed" 
-                  (click)="newAnnouncement()">
+ 
+          <!-- TEST EMAIL BUTTON -->
+          <button class="upload-button"
+          type="button"
+          (click)="openTestEmailModal(); $event.preventDefault(); $event.stopPropagation()"
+          style="margin-left:10px;"
+          *ngIf="!completed"
+  
+          [disabled]="
+          !announcementForm.get('subject')?.value?.trim()
+          ||
+          !announcementForm.get('body')?.value?.trim()
+          ">
+  
+      <i class="fa fa-envelope"
+         aria-hidden="true"></i>
+  
+      Test Email
+  
+  </button>
+ 
+          <!-- DISABLED BUTTON -->
+ 
+          <button class="upload-button"
+                  [disabled]="true"
+                  *ngIf="completed">
+ 
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
+ 
+            {{'views.postAnnouncement.post' | translate |compareText: 'Post Announcement'}}
+ 
+          </button>
+ 
+          <!-- NEW ANNOUNCEMENT -->
+ 
+          <button class="upload-button"
+                  *ngIf="completed"
+                  (click)="newAnnouncement()">
+ 
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+ 
             {{'views.postAnnouncement.newAnnouncement' | translate |compareText: 'New Announcement'}}
+ 
           </button>
+ 
         </div>
+ 
       </div>
-      
-      
-      
-      
-      
+ 
+    <!-- TEST EMAIL POPUP -->
+ 
+<ng-template #testEmailModal let-modal>
+ 
+<div class="custom-modal" style="box-shadow: none; max-height: none;">
+ 
+<!-- HEADER -->
+ 
+<div class="modal-header">
+ 
+ 
+ 
+  <h4 class="modal-title">
+ 
+      Test Email Recipients
+ 
+  </h4>
+ 
+    <button type="button"
+          class="close"
+          (click)="closeTestEmailModal()">
+ 
+      &times;
+ 
+  </button>
+ 
+</div>
+ 
+<!-- BODY -->
+ 
+<div class="modal-body">
+ 
+<!-- ALLOWED DOMAINS -->
+ 
+<div class="form-group">
+ 
+<label>
+ 
+<b>Domains Allowed</b>
+ 
+</label>
+ 
+<div class="row" style="margin-top: 10px;">
+ 
+<div class="col-md-8">
+ 
+<input
+type="text"
+class="form-control"
+placeholder="Enter domain name"
+[(ngModel)]="domainInput"
+[ngModelOptions]="{standalone:true}"
+/>
+ 
+</div>
+ 
+<div class="col-md-4">
+ 
+<!-- ADD -->
+ 
+<button
+*ngIf="!editingDomainId"
+type="button"
+class="popup-green-btn"
+(click)="addDomain()">
+ 
+<i class="fa fa-plus"></i>
+ 
+Add Domain
+ 
+</button>
+ 
+<!-- UPDATE -->
+ 
+<button
+*ngIf="editingDomainId"
+type="button"
+class="popup-green-btn"
+(click)="updateDomain()">
+ 
+<i class="fa fa-save"></i>
+ 
+Update
+ 
+</button>
+ 
+</div>
+ 
+</div>
+ 
+<br>
+ 
+<!-- DOMAIN LIST -->
+ 
+<div
+class="form-control"
+*ngFor="let domain of allowedDomainsList"
+style="
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;">
+ 
+<span>
+ 
+{{domain.domainName}}
+ 
+</span>
+ 
+<div>
+ 
+<button
+type="button"
+class="popup-green-btn popup-small-btn"
+style="margin-right:5px;"
+(click)="editDomain(domain)">
+ 
+<i class="fa fa-pencil"></i>
+ 
+</button>
+ 
+<button
+type="button"
+class="popup-red-btn popup-small-btn"
+(click)="deleteDomain(domain.id)">
+ 
+<i class="fa fa-trash"></i>
+ 
+</button>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
+<hr>
+ 
+<!-- EMAIL INPUT -->
+ 
+<div class="form-group">
+ 
+<label>
+ 
+<b>Test Email Address</b>
+ 
+</label>
+ 
+<div class="row" style="margin-top: 10px;">
+ 
+<div class="col-md-9">
+ 
+<input
+type="email"
+class="form-control"
+placeholder="Enter test email address"
+[formControl]="testEmailControl"
+/>
+ 
+<div
+*ngIf="testEmailError"
+class="text-danger"
+style="margin-top:5px;font-size:13px;">
+ 
+{{testEmailError}}
+ 
+</div>
+ 
+</div>
+ 
+<div class="col-md-3">
+ 
+<button
+type="button"
+class="popup-green-btn"
+(click)="addTestEmail()"
+[disabled]="!!testEmailError || !testEmailControl.value">
+ 
+<i class="fa fa-plus"></i>
+ 
+Add
+ 
+</button>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
+<!-- EMAIL LIST -->
+ 
+<div
+class="form-group"
+*ngIf="testEmails.length>0">
+ 
+<label>
+ 
+<b>
+ 
+Added Test Email Addresses
+({{testEmails.length}} / {{maxTestEmailCount}})
+ 
+</b>
+ 
+</label>
+ 
+<div
+class="form-control"
+*ngFor="let email of testEmails; let i=index"
+style="
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;">
+ 
+<span>
+ 
+{{email}}
+ 
+</span>
+ 
+<button
+type="button"
+class="close"
+(click)="removeTestEmail(i)">
+ 
+&times;
+ 
+</button>
+ 
+</div>
+ 
+</div>
+ 
+</div>
+ 
+<!-- FOOTER -->
+ 
+<div class="modal-footer">
+ 
+<button
+type="button"
+class="popup-green-btn"
+(click)="sendTestEmail()"
+[disabled]="testEmails.length===0">
+ 
+<i class="fa fa-envelope"></i>
+ 
+Send Test Email
+ 
+</button>
+ 
+<button
+type="button"
+class="popup-red-btn"
+(click)="closeTestEmailModal()">
+ 
+<i class="fa fa-times"></i>
+ 
+Cancel
+ 
+</button>
+ 
+</div><!-- FOOTER -->
+ 
+ 
+ 
+</div>
+ 
+</ng-template>
+ 
+      <!-- ALERTS -->
+ 
       <div class="col-md-12">
-        <div class="alert space" 
-          *ngFor="let alert of alerts" 
-          [ngClass]="'alert-' + alert.type">
+ 
+        <div class="alert space"
+             *ngFor="let alert of alerts"
+             [ngClass]="'alert-' + alert.type">
+ 
           {{alert.msg}}
-          <button type="button" class="close" (click)="closeAlert(alert)">
+ 
+          <button type="button"
+                  class="close"
+                  (click)="closeAlert(alert)">
+ 
             &times;
+ 
           </button>
+ 
         </div>
+ 
       </div>
-  
+ 
     </form>
-    </div>
+ 
   </div>
-  
+ 
+</div>
