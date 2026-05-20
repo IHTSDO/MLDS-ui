@@ -19,4 +19,48 @@ export class PostAnnouncementService {
       })
     });
   }
+  sendTestEmail(payload: any) {
+    return this.http.post(
+        '/api/announcements/test',
+        payload
+    );
+  }
+  getTestEmailDomains() {
+
+    return this.http.get(
+      '/api/test-email-domains'
+    );
+  }
+  
+  createTestEmailDomain(payload: any) {
+  
+    return this.http.post(
+      '/api/test-email-domains',
+      payload
+    );
+  }
+  
+  updateTestEmailDomain(
+    id: number,
+    payload: any
+  ) {
+  
+    return this.http.put(
+      `/api/test-email-domains/${id}`,
+      payload
+    );
+  }
+  
+  deleteTestEmailDomain(id: number) {
+  
+    return this.http.delete(
+      `/api/test-email-domains/${id}`
+    );
+  }
+  getMaxTestEmailCount() {
+
+    return this.http.get<number>(
+      '/api/test-email/max-count'
+    );
+  }
 }
