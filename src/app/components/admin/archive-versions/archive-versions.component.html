@@ -38,7 +38,7 @@
       <thead>
         <tr>
           <th>Version</th>
-          <th>Description</th>
+          <th class="description-col">Description</th>
           <th>Download Files</th>
           <th>Date Published</th>
           <th *ngIf="isEditableReleasePackage && isAdmin">
@@ -49,12 +49,12 @@
       <tbody>
         <tr *ngFor="let releaseVersion of versions['archive']">
           <td class="col-sm-2">{{ releaseVersion.name }}</td>
-          <td class="col-sm-5" [innerHTML]="releaseVersion.description | linkAddblank"></td>
+          <td class="col-sm-5 description-col" [innerHTML]="releaseVersion.description | linkAddblank"></td>
           <td class="col-sm-3">
             <div *ngFor="let releaseFile of releaseVersion.releaseFiles" class="file-info">
                 <i class="fa fa-file"></i>
                 <div class="file-label">
-                <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl" style="white-space: nowrap;">{{releaseFile.label | removeHtml}}</a>
+                <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl" [title]="releaseFile.label | removeHtml">{{releaseFile.label | removeHtml}}</a>
                 </div>
                 <button class="btn btn-success btn-xs file-edit"
                   *ngIf="isEditableReleasePackage && isAdmin" (click)="editReleaseFile(releaseVersion,releaseFile)">

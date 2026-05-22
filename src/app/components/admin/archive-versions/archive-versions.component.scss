@@ -63,6 +63,13 @@ h1, .h1, h2, .h2, h3, .h3 {
 .file-label {
   flex-grow: 1;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+
+  @media (min-width: 1680px) {
+    max-width: 350px;
+  }
 }
 
   
@@ -106,6 +113,28 @@ h1, .h1, h2, .h2, h3, .h3 {
 .review-button{
   font-size: 14px;
   line-height: 1.2;
+}
+
+.description-col {
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  white-space: normal !important;
+  max-width: 800px;
+  min-width: 550px;
+
+  * {
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+  }
+}
+
+.table {
+  font-size: 13px;
+  
+  th, td {
+    vertical-align: middle;
+  }
 }
 
   
