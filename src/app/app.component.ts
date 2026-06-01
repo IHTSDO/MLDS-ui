@@ -1,8 +1,9 @@
-import {Component, Inject, OnInit, DOCUMENT} from '@angular/core';
+import { Component, Inject, OnInit, DOCUMENT } from '@angular/core';
 import 'jquery';
 import { Title } from '@angular/platform-browser';
 import { EnvService } from './services/environment/env.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 import { RouterOutlet } from '@angular/router';
 
@@ -19,7 +20,9 @@ export class AppComponent implements OnInit {
     constructor(private envService: EnvService,
                 private toastr: ToastrService,
                 private titleService: Title,
+                private translate: TranslateService,
                 @Inject(DOCUMENT) private document: Document) {
+        this.translate.setDefaultLang('en');
     }
 
     ngOnInit() {

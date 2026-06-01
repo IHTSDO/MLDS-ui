@@ -17,8 +17,50 @@ import { appRoutes } from './app.routes';
 import { ModalService } from './services/modal/modal.service';
 import { EnvServiceProvider } from './providers/env.service.provider';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export function cleanEmptyTranslations(obj: any): any {
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+  if (Array.isArray(obj)) {
+    return obj.map(cleanEmptyTranslations);
+  }
+  const result: any = {};
+  for (const key of Object.keys(obj)) {
+    const value = obj[key];
+    if (value === "") {
+      continue;
+    }
+    if (typeof value === 'object' && value !== null) {
+      const cleaned = cleanEmptyTranslations(value);
+      if (Object.keys(cleaned).length > 0) {
+        result[key] = cleaned;
+      }
+    } else {
+      result[key] = value;
+    }
+  }
+  return result;
+}
+
+export class SafeTranslateHttpLoader implements TranslateLoader {
+  private httpLoader: TranslateHttpLoader;
+
+  constructor(http: HttpClient, prefix?: string, suffix?: string) {
+    this.httpLoader = new TranslateHttpLoader(http, prefix, suffix);
+  }
+
+  getTranslation(lang: string): Observable<any> {
+    return this.httpLoader.getTranslation(lang).pipe(
+      map(translations => cleanEmptyTranslations(translations))
+    );
+  }
+}
+
+export function HttpLoaderFactory(http: HttpClient): SafeTranslateHttpLoader {
+  return new SafeTranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 Quill.register('modules/magicUrl', MagicUrl);
