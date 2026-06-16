@@ -1,48 +1,29 @@
-import { inject } from "@angular/core";
-import { CanActivateFn, Router } from "@angular/router";
-import { AuthenticationSharedService } from "../services/authentication/authentication-shared.service";
+import { inject } from '@angular/core';
+import { CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthenticationSharedService } from '../services/authentication/authentication-shared.service';
 
 /**
- * AuthGuard that checks if the user is logged in before allowing access to a route.
- *
- * If the user is not logged in, it redirects them to the root route ('/').
- *
- * @example
- * ```typescript
- * import { NgModule } from '@angular/core';
- * import { RouterModule, Routes } from '@angular/router';
- * import { AuthGuard } from './auth.guard';
- *
- * const routes: Routes = [
- *   {
- *     path: 'protected',
- *     component: ProtectedComponent,
- *     canActivate: [AuthGuard]
- *   }
- * ];
- *
- * @NgModule({
- *   imports: [RouterModule.forRoot(routes)],
- *   exports: [RouterModule]
- * })
- * export class AppRoutingModule {}
- * ```
- *
- * @param {import('@angular/router').ActivatedRouteSnapshot} route
- * @param {import('@angular/router').RouterStateSnapshot} state
- * @returns {boolean} true if the user is logged in, false otherwise
+ * Protects routes that require authentication.
+ * Saves the intended route path to localStorage so the user is redirected
+ * back after a successful login (including IMS login).
  */
-export const authguardGuard: CanActivateFn = (route, state) => {
+export const authguardGuard: CanActivateFn = (route, state: RouterStateSnapshot) => {
   const authService = inject(AuthenticationSharedService);
   const router = inject(Router);
 
   if (authService.isLoggedIn()) {
+    if (!authService.isImsSessionValid()) {
+      authService.invalidate();
+      router.navigate(['/login']);
+      return false;
+    }
     return true;
   }
 
-  const fullUrl = window.location.href; // 🧠 Use full URL to preserve hash-based paths
-  localStorage.setItem('redirectAfterLogin', fullUrl); // ✅ Save before redirect
+  // Store the Angular route path (e.g. "/pendingApplications") — NOT the full href.
+  // This works correctly with both normal login and IMS redirect login.
+  sessionStorage.setItem('redirectAfterLogin', state.url);
 
-  router.navigate(['/login']); // or router.navigate([ROUTES.login]);
+  router.navigate(['/login']);
   return false;
 };

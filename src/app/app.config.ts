@@ -11,11 +11,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import MagicUrl from 'quill-magic-url';
 import Quill from 'quill';
 import { provideRouter, withEnabledBlockingInitialNavigation, withHashLocation, withInMemoryScrolling } from '@angular/router';
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { appRoutes } from './app.routes';
 import { ModalService } from './services/modal/modal.service';
 import { EnvServiceProvider } from './providers/env.service.provider';
+import { AuthBootstrapService } from './services/auth-bootstrap/auth-bootstrap.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -100,6 +101,16 @@ export const appConfig: ApplicationConfig = {
     ModalService,
     EnvServiceProvider,
     CookieService,
+     {
+    provide: APP_INITIALIZER,
+    useFactory: (
+      authBootstrapService:
+        AuthBootstrapService
+    ) => () =>
+      authBootstrapService.initialize(),
+    deps: [AuthBootstrapService],
+    multi: true
+  },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,

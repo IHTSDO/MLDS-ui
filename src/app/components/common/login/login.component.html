@@ -1,34 +1,83 @@
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 login">
-      <h1>{{ 'login.title' | translate | compareText:'Login'}}</h1>
-      <div class="alert alert-danger" *ngIf="authenticationError"> <div [innerHtml]="authenticationErrorMessageKey | translate"></div>
-      </div>
-      <form class="form" role="form" (ngSubmit)="login()">
-        <div class="form-group">
-          <label for="username">{{ 'login.form.username' | translate | compareText:'E-mail or Username'}}</label>
-          <input type="text" class="form-control" id="username" placeholder="{{'global.form.email.placeholder' | translate}}" [(ngModel)]="username" name="username">
-        </div>
-        <div class="form-group">
-          <label for="password">{{ 'login.form.password' | translate | compareText:'Password' }}</label>
-          <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}" [(ngModel)]="password" name="password">
-        </div>
-        <div class="checkbox">
-          <div class="form-group">
-            <label for="rememberMe" style="font-weight: 100">
-              <input type="checkbox" class="checkbox inline_class" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe"> {{ 'login.form.rememberme' | translate | compareText:'Remember Me' }}
-            </label>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-lg btn-primary">
-          {{ 'login.form.button' | translate | compareText:'Login' }}
-          <span *ngIf="submitting"><i class="fa fa-spinner fa-spin"></i></span>
-        </button>
-      </form>
-      <hr>
-      <div>
-        <p [innerHTML]="'global.messages.info.register' | translate"></p>
-        <p><a routerLink="/requestPasswordReset">{{ 'login.form.forgot' | translate | compareText:'Forgot your password?' }}</a></p>
-      </div>
+  <div class="col-md-3"></div>
+
+  <div class="col-md-6 login">
+
+    <h1>{{ 'login.title' | translate | compareText:'Login' }}</h1>
+
+    <div class="alert alert-danger" *ngIf="authenticationError">
+      <div [innerHtml]="authenticationErrorMessageKey | translate"></div>
+      <br>
+      Did you forget your password?
+      <a routerLink="/requestPasswordReset">Click here to reset it</a>.
     </div>
-    <div class="col-md-3"></div>
+
+    <form class="form" role="form" (ngSubmit)="login()">
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">
+          {{ 'login.form.username' | translate | compareText:'E-mail or Username' }}
+        </label>
+
+        <input type="text" class="form-control" id="username"
+          placeholder="{{ 'global.form.email.placeholder' | translate }}" [(ngModel)]="username" name="username"
+          autocomplete="username" (blur)="onUsernameBlur()" (ngModelChange)="onUsernameChange()">
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">
+          {{ 'login.form.password' | translate | compareText:'Password' }}
+        </label>
+
+        <input type="password" class="form-control" id="password"
+          placeholder="{{ 'login.form.password.placeholder' | translate }}" [(ngModel)]="password" name="password"
+          autocomplete="current-password" [disabled]="!isEmailUser">
+      </div>
+
+      <!-- Remember Me -->
+      <div class="checkbox" *ngIf="isEmailUser">
+        <div class="form-group">
+          <label for="rememberMe" style="font-weight: 100">
+            <input type="checkbox" class="checkbox inline_class" id="rememberMe" [(ngModel)]="rememberMe"
+              name="rememberMe">
+
+            {{ 'login.form.rememberme' | translate | compareText:'Remember Me' }}
+          </label>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn btn-lg btn-primary" [disabled]="!username.trim()">
+
+        {{
+        !usernameValidated
+        ? 'Login'
+        : (isImsUser ? 'Login to IMS' : 'Login')
+        }}
+
+        <span *ngIf="submitting">
+          <i class="fa fa-spinner fa-spin"></i>
+        </span>
+
+      </button>
+
+    </form>
+
+    <hr>
+
+    <div>
+      <p [innerHTML]="'global.messages.info.register' | translate"></p>
+
+      <p>
+        <a routerLink="/requestPasswordReset">
+          {{ 'login.form.forgot' | translate | compareText:'Forgot your password?' }}
+        </a>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="col-md-3"></div>
+</div>
