@@ -1,143 +1,139 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
-import { ROUTES } from 'src/app/routes-config'
+import { ROUTES } from 'src/app/routes-config';
 import { ApplicationUtilsService } from 'src/app/services/application-utils/application-utils.service';
 import { UserAffiliateService } from 'src/app/services/user-affiliate/user-affiliate.service';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { ImsConfigService } from 'src/app/services/ims-config/ims-config.service';
+import { AuthBootstrapService } from 'src/app/services/auth-bootstrap/auth-bootstrap.service';
 
-/**
- * LoginComponent - Handles user login functionality
- *
- * This component is responsible for handling user login functionality, including
- * validating user credentials, authenticating with the backend, and redirecting
- * to the appropriate dashboard based on user role.
- */
 @Component({
-    selector: 'app-login',
-    imports: [CommonModule, FormsModule, RouterLink, CompareTextPipe, TranslateModule],
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss'
+  selector: 'app-login',
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    CompareTextPipe,
+    TranslateModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  /**
-   * Username input field value
-   */
   username: string = '';
-
-  /**
-   * Password input field value
-   */
   password: string = '';
-
-  /**
-   * Remember me checkbox value
-   */
   rememberMe: boolean = true;
 
-  /**
-   * Indicates whether the login form is currently submitting
-   */
   submitting: boolean = false;
-
-  /**
-   * Indicates whether an authentication error occurred
-   */
   authenticationError: boolean = false;
-
-  /**
-   * Error message key for authentication error
-   */
   authenticationErrorMessageKey: string = '';
 
-  /**
-   * Routes configuration
-   */
+  usernameValidated: boolean = false;
+
   routes = ROUTES;
 
-  /**
-   * Constructor
-   *
-   * @param authenticationService - Authentication shared service
-   * @param router - Router instance
-   */
   constructor(
     private authenticationService: AuthenticationSharedService,
+    private authBootstrapService: AuthBootstrapService,
     private router: Router,
     private applicationUtilsService: ApplicationUtilsService,
-    private userAffiliateService: UserAffiliateService
+    private userAffiliateService: UserAffiliateService,
+    private imsConfigService: ImsConfigService
   ) {}
 
-  /**
-   * Login function
-   *
-   * Submits the login form and authenticates with the backend. If successful,
-   * redirects to the appropriate dashboard based on user role.
-   *
-   * Example:
-   * ```
-   * this.login();
-   * ```
-   */
-  login() {
+  ngOnInit(): void {}
+
+  onUsernameBlur(): void {
+    const username = this.username?.trim();
+    this.usernameValidated = !!username;
+  }
+
+  onUsernameChange(): void {
+
+    if (!this.username?.trim()) {
+      this.usernameValidated = false;
+      this.password = '';
+    }
+  }
+
+  get isImsUser(): boolean {
+
+    if (!this.usernameValidated) {
+      return false;
+    }
+
+    const username = this.username?.trim();
+
+    return !!username && !username.includes('@');
+  }
+
+  get isEmailUser(): boolean {
+
+    if (!this.usernameValidated) {
+      return false;
+    }
+
+    return !!this.username?.includes('@');
+  }
+
+  login(): void {
+
+    this.authenticationError = false;
+    this.authenticationErrorMessageKey = '';
+
+    const username = this.username?.trim();
+
+    if (!username) {
+      return;
+    }
+
+    if (this.isImsUser) {
+
+      const callbackUrl = `${window.location.origin}/`;
+      const imsEndpoint = this.imsConfigService.getImsEndpoint();
+
+      const redirectUrl =
+        `${imsEndpoint}/#/login?serviceReferer=${encodeURIComponent(callbackUrl)}&login=${encodeURIComponent(username)}`;
+
+      window.location.href = redirectUrl;
+      return;
+    }
+
     this.submitting = true;
-  
-    this.authenticationService.login(this.username, this.password, this.rememberMe)
+
+    this.authenticationService
+      .login(
+        this.username,
+        this.password,
+        this.rememberMe
+      )
       .pipe(
         finalize(() => {
           this.submitting = false;
         })
       )
       .subscribe({
-        next: (data) => {
-          const redirectUrl = localStorage.getItem('redirectAfterLogin');
-  
-          if (this.authenticationService.isStaffOrAdmin()) {
-            if (redirectUrl) {
-              localStorage.removeItem('redirectAfterLogin');
-              window.location.href = redirectUrl; // ✅ Full URL redirect
-              return;
-            } else {
-              this.router.navigate([this.routes.pendingApplications]);
-            }
-          } 
-          else if (this.authenticationService.isMember()) {
-              this.router.navigate([this.routes.ihtsdoReleases]);
-          } else {
-            this.userAffiliateService.loadUserAffiliate().subscribe({
-              next: () => {
-                const isWaitingForApplicant =
-                  this.applicationUtilsService.isApplicationWaitingForApplicant(
-                    this.userAffiliateService.affiliate.application
-                  );
-  
-                if (redirectUrl) {
-                  localStorage.removeItem('redirectAfterLogin');
-                  window.location.href = redirectUrl; // ✅ Full URL redirect
-                  return;
-                } else if (isWaitingForApplicant) {
-                  this.router.navigate(['/affiliateRegistration']);
-                } else {
-                  this.router.navigate([this.routes.userDashboard]);
-                }
-              },
-              error: () => {
-                console.error('Failed to load affiliate data');
-                this.router.navigate([this.routes.userDashboard]);
-              }
-            });
-          }
+
+        next: () => {
+          this.authBootstrapService.navigateByRole();
         },
+
         error: (error) => {
           this.authenticationError = true;
-          this.authenticationErrorMessageKey = this.authenticationService.extractErrorCode(error.message);
+
+          this.authenticationErrorMessageKey =
+            this.authenticationService.extractErrorCode(
+              error.message
+            );
         }
+
       });
   }
-   
 }

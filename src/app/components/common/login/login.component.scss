@@ -15,6 +15,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
 }
+
 hr {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -22,6 +23,7 @@ hr {
     border-top: 1px solid #eeeeee;
     opacity: 1;
 }
+
 .btn-lg, .btn-group-lg > .btn {
     padding: 10px 66px;
     font-size: 18px;
@@ -36,11 +38,28 @@ hr {
     border: 1px solid;
 }
 
+.btn-primary:hover, .btn-primary:focus {
+    color: #ffffff;
+    background-color: #00a7e1;
+}
+
+/* IMS redirect button variant */
+.btn-ims {
+    color: #ffffff;
+    background-color: #005a8e;
+    border-color: #005a8e;
+}
+
+.btn-ims:hover, .btn-ims:focus {
+    background-color: #003f63;
+    border-color: #003f63;
+}
+
 .form-group {
     margin-bottom: 15px;
 }
 
-.row{
+.row {
     padding-bottom: 20px;
 }
 
@@ -48,11 +67,29 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     color: #40ACD6;
     text-decoration: none;
 }
-.btn-primary:hover, .btn-primary:focus {
-    color: #ffffff;
-    background-color: #00a7e1;
+
+h1 {
+    margin-bottom: 20px;
 }
 
-h1{
-    margin-bottom: 20px;
+/* IMS redirect notice */
+.ims-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background-color: #e8f4fb;
+    border: 1px solid #b3d9ef;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    color: #1a5276;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.ims-notice .ims-icon {
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
 }
