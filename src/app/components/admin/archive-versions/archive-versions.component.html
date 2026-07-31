@@ -41,7 +41,7 @@
           <th class="description-col">Description</th>
           <th>Download Files</th>
           <th>Date Published</th>
-          <th *ngIf="isEditableReleasePackage && isAdmin">
+          <th *ngIf="isEditableReleasePackage && isStaffOrAdmin">
             <i class="fa fa-cog"></i>
           </th>
         </tr>
@@ -57,14 +57,14 @@
                 <a [href]="releaseFile.clientDownloadUrl" target="_blank" *ngIf="releaseFile.clientDownloadUrl" [title]="releaseFile.label | removeHtml">{{releaseFile.label | removeHtml}}</a>
                 </div>
                 <button class="btn btn-success btn-xs file-edit"
-                  *ngIf="isEditableReleasePackage && isAdmin" (click)="editReleaseFile(releaseVersion,releaseFile)">
+                  *ngIf="isEditableReleasePackage && isStaffOrAdmin" (click)="editReleaseFile(releaseVersion,releaseFile)">
                   <i class="fa fa-edit"></i> Edit
                 </button>
             </div>
           </td>
           <td class="col-sm-2" style="white-space: nowrap;">{{ releaseVersion.publishedAt | date: 'yyyy-MM-dd' }}</td>
           <td>
-            <div ngbDropdown *ngIf="isEditableReleasePackage && isAdmin ">
+            <div ngbDropdown *ngIf="isEditableReleasePackage && isStaffOrAdmin ">
               <button class="dropdown-toggle" ngbDropdownToggle>
               </button>
               <div ngbDropdownMenu>

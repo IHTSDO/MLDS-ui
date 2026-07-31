@@ -751,7 +751,11 @@
             "RELEASE_VERSION_CREATED": "Release Version Created",
             "RELEASE_VERSION_DELETED": "Release Version Deleted",
             "USAGE_CREATED": "Usage Created",
-            "USAGE_APPROVAL_STATE_CHANGED": "Usage Approval State Changed"
+            "USAGE_APPROVAL_STATE_CHANGED": "Usage Approval State Changed",
+            "RELEASE_VERSION_TAKEN_ALPHA/BETA": "Release Version Taken Alpha/Beta",
+            "LOGOUT_SUCCESS": "Logout Success",
+            "RELEASE_VERSION_ARCHIVED": "Release Version Archived",
+            "RELEASE_VERSION_UNARCHIVED": "Release Version Unarchived"
         }
     },
     "errors": {
