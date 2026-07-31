@@ -43,6 +43,7 @@ export class ReleaseComponent {
     archive: []
   };
   isAdmin : boolean | undefined;
+  isStaffOrAdmin : boolean | undefined;
   isLoading: boolean = true;
   isMasterPermissionPresent: boolean = true;
   viewPermission: string = '';
@@ -54,6 +55,7 @@ export class ReleaseComponent {
 
   ngOnInit(): void {
     this.isAdmin=this.sessionService.isAdmin();
+    this.isStaffOrAdmin=this.sessionService.isStaffOrAdmin();
     this.loadReleasePackageId();
   }
 

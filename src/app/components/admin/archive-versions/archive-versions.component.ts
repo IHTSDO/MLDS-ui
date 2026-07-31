@@ -29,6 +29,7 @@ export class ArchiveVersionsComponent implements OnInit {
   isRemovableReleasePackage: boolean = false;
   versions: { [key: string]: any[] } = { archive: [] };
   isAdmin: boolean | undefined;
+  isStaffOrAdmin: boolean | undefined;
   isLoading: boolean = true;
 
   constructor(
@@ -44,6 +45,7 @@ export class ArchiveVersionsComponent implements OnInit {
   ngOnInit(): void {
     this.loadReleasePackageId();
     this.isAdmin = this.sessionService.isAdmin();
+    this.isStaffOrAdmin = this.sessionService.isStaffOrAdmin();
   }
 
   loadReleasePackageId(): void {
