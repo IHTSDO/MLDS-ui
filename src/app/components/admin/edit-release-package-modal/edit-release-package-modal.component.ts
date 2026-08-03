@@ -12,6 +12,8 @@ import { EnumPipe } from "../../../pipes/enum/enum.pipe";
 import { ModalComponent } from '../../common/modal/modal.component';
 
 
+import { SCT_PACKAGE_URI_RE } from '../add-release-modal/add-release-modal.component';
+
 @Component({
     selector: 'app-edit-release-package-modal',
     imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule, TranslateModule, EnumPipe, ModalComponent],
@@ -39,7 +41,7 @@ export class EditReleasePackageModalComponent {
       name: ['', Validators.required],
       description: [''],
       member: [null],
-      releasePackageURI: [''],
+      releasePackageURI: ['', [Validators.pattern(SCT_PACKAGE_URI_RE)]],
       copyrights: [''],
       priority: ['']
     });
@@ -69,6 +71,13 @@ export class EditReleasePackageModalComponent {
         console.error('Error fetching members:', error);
       }
     });
+  }
+
+  isControlInvalid(controlName: string, errorType?: string): boolean {
+    const control = this.formPackage?.get(controlName);
+    if (!control) return false;
+    const isInvalid = errorType ? !!control.errors?.[errorType] : control.invalid;
+    return isInvalid && (this.submitAttempted || control.touched || control.dirty);
   }
 
   closeAlert(index: number): void {

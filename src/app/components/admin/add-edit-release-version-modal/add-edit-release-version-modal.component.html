@@ -10,13 +10,13 @@
   <div class="form-group">
     <label for="name">Name<span class="text-danger">*</span></label>
     <input  #nameInput class="form-control" placeholder="Enter Version Name" formControlName="name">
-    <div *ngIf="releaseVersionForm.get('name')?.invalid && submitAttempted" class="help-block">Required Field</div>
+    <div *ngIf="isControlInvalid('name')" class="help-block">Required Field</div>
   </div>
 
   <div class="form-group">
     <label for="desc">Description<span class="text-danger">*</span></label>
     <quill-editor id="description" formControlName="description" [style]="{'height': '200px','width':'780px'}" bounds="self"></quill-editor>
-    <div *ngIf="releaseVersionForm.get('description')?.invalid && submitAttempted" class="help-block">Required Field
+    <div *ngIf="isControlInvalid('description')" class="help-block">Required Field
     </div>
   </div>
 
@@ -29,7 +29,7 @@
       <option value="SCT_RF2_FULL">SNOMED CT RF2 Full</option>
       <option value="OTHER">Other Package</option>
     </select>
-    <div *ngIf="releaseVersionForm.get('packageType')?.invalid && submitAttempted" class="help-block">Required Field
+    <div *ngIf="isControlInvalid('packageType')" class="help-block">Required Field
     </div>
   </div>
 
@@ -39,20 +39,24 @@
   </div>
 
   <div class="form-group">
-    <label for="releaseVersionURI">Release Version URI</label>
-    <input class="form-control" placeholder="Enter Release Version URI" formControlName="versionURI">
+    <label for="releaseVersionURI">Release Version URI<span class="text-danger">*</span></label>
+    <input class="form-control" [placeholder]="versionUriPlaceholder()" formControlName="versionURI">
+    <div *ngIf="isControlInvalid('versionURI', 'required')" class="help-block">Required Field</div>
+    <div *ngIf="isControlInvalid('versionURI', 'pattern')" class="help-block">{{versionUriError()}}</div>
   </div>
 
   <div class="form-group">
     <label for="releaseVersionDependentURI">Release Version Dependent URI</label>
-    <input class="form-control" placeholder="Enter Release Version Dependent URI"
+    <input class="form-control" placeholder="http://snomed.info/sct/<moduleId>/version/<YYYYMMDD>"
       formControlName="versionDependentURI">
+    <div *ngIf="isControlInvalid('versionDependentURI', 'pattern')" class="help-block">Must be a SNOMED CT version URI, e.g. http://snomed.info/sct/32506021000036107/version/20260601 (scheme must be http, not https)</div>
   </div>
 
   <div class="form-group">
     <label for="releaseVersionDDURI">Release Version Dependent Derivative URI</label>
-    <input class="form-control" placeholder="Enter Release Version Dependent Derivative URI"
+    <input class="form-control" placeholder="http://snomed.info/sct/<moduleId>/version/<YYYYMMDD>"
       formControlName="versionDependentDerivativeURI">
+    <div *ngIf="isControlInvalid('versionDependentDerivativeURI', 'pattern')" class="help-block">Must be a SNOMED CT version URI, e.g. http://snomed.info/sct/32506021000036107/version/20260601 (scheme must be http, not https)</div>
   </div>
 
   <div class="form-group">
@@ -63,7 +67,7 @@
       <option value="offline">Offline</option>
       <option value="alpha/beta">Alpha/Beta</option>
     </select>
-    <div *ngIf="releaseVersionForm.get('releaseType')?.invalid && submitAttempted" class="help-block">Required Field
+    <div *ngIf="isControlInvalid('releaseType')" class="help-block">Required Field
     </div>
   </div>
 
