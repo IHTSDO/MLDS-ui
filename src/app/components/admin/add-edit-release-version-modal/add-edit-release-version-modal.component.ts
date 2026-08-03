@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NgbActiveModal, NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import { QuillModule } from 'ngx-quill';
 import { ReleaseVersionsService } from 'src/app/services/release-versions/release-versions.service';
 import { UrlMismatchWarningModalComponent } from '../url-mismatch-warning-modal/url-mismatch-warning-modal.component';
 import { ModalComponent } from '../../common/modal/modal.component';
+
+export const SCT_VERSION_URI_RE = /^http:\/\/snomed\.info\/x?sct\/[0-9]{6,18}\/version\/(19|20)[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
 
 @Component({
     selector: 'app-add-edit-release-version-modal',
@@ -41,17 +43,65 @@ export class AddEditReleaseVersionModalComponent implements OnInit {
     }, 0);
   }
 
+  isOtherPackage(): boolean {
+    return this.releaseVersionForm?.get('packageType')?.value === 'OTHER';
+  }
+
+  isControlInvalid(controlName: string, errorType?: string): boolean {
+    const control = this.releaseVersionForm?.get(controlName);
+    if (!control) return false;
+    const isInvalid = errorType ? !!control.errors?.[errorType] : control.invalid;
+    return isInvalid && (this.submitAttempted || control.touched || control.dirty);
+  }
+
+  versionUriPlaceholder(): string {
+    return this.isOtherPackage()
+      ? 'Enter release version'
+      : 'http://snomed.info/sct/<moduleId>/version/<YYYYMMDD>';
+  }
+
+  versionUriError(): string {
+    return this.isOtherPackage()
+      ? ''
+      : 'Must be a valid SNOMED CT version URI, e.g. http://snomed.info/sct/32506021000036107/version/20260601 (scheme must be http, not https)';
+  }
+
+  private versionUriValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+      if (this.isOtherPackage()) {
+        return null;
+      }
+      return SCT_VERSION_URI_RE.test(control.value) ? null : { pattern: true };
+    };
+  }
+
   private initializeForm(): void {
     this.releaseVersionForm = this.fb.group({
       name: [this.releaseVersion?.name || '', Validators.required],
       description: [this.releaseVersion?.description || '', Validators.required],
       packageType: [this.releaseVersion?.packageType || '', Validators.required],
       summary: [this.releaseVersion?.summary || ''],
-      versionURI: [this.releaseVersion?.versionURI || ''],
-      versionDependentURI: [this.releaseVersion?.versionDependentURI || ''],
-      versionDependentDerivativeURI: [this.releaseVersion?.versionDependentDerivativeURI || ''],
+      versionURI: [
+        this.releaseVersion?.versionURI || '',
+        [Validators.required, this.versionUriValidator()]
+      ],
+      versionDependentURI: [
+        this.releaseVersion?.versionDependentURI || '',
+        [Validators.pattern(SCT_VERSION_URI_RE)]
+      ],
+      versionDependentDerivativeURI: [
+        this.releaseVersion?.versionDependentDerivativeURI || '',
+        [Validators.pattern(SCT_VERSION_URI_RE)]
+      ],
       releaseType: [this.releaseVersion?.releaseType || '', Validators.required],
       publishedAt: [this.releaseVersion?.publishedAt ? this.convertToNgbDate(new Date(this.releaseVersion.publishedAt)) : null, Validators.required],
+    });
+
+    this.releaseVersionForm.get('packageType')?.valueChanges.subscribe(() => {
+      this.releaseVersionForm.get('versionURI')?.updateValueAndValidity();
     });
   }
 

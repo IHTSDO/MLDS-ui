@@ -23,7 +23,7 @@
       formControlName="name"
       required
     />
-    <div *ngIf="formPackage.get('name')?.invalid && submitAttempted" class="help-block">
+    <div *ngIf="isControlInvalid('name')" class="help-block">
       Required Field
     </div>
   </div>
@@ -42,7 +42,10 @@
 
   <div class="form-group">
     <label for="releasePackageURI">Release Package URI</label>
-    <input type="text" id="releasePackageURI" class="form-control" placeholder="Enter Release Package URI" formControlName="releasePackageURI" />
+    <input type="text" id="releasePackageURI" class="form-control" placeholder="http://snomed.info/sct/<moduleId>" formControlName="releasePackageURI" />
+    <div *ngIf="isControlInvalid('releasePackageURI', 'pattern')" class="help-block">
+      Must be a SNOMED CT release package URI, e.g. http://snomed.info/sct/32506021000036107 (scheme must be http, not https)
+    </div>
   </div>
 
   <div class="form-group">

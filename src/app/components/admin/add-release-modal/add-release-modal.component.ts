@@ -9,6 +9,8 @@ import { MemberService } from 'src/app/services/member/member.service';
 import { PackagesService } from 'src/app/services/packages-service/packages.service';
 import { ModalComponent } from '../../common/modal/modal.component';
 
+export const SCT_PACKAGE_URI_RE = /^http:\/\/snomed\.info\/x?sct\/[0-9]{6,18}$/;
+
 @Component({
     selector: 'app-add-release-modal',
     imports: [CommonModule, FormsModule, QuillModule, ReactiveFormsModule, ModalComponent],
@@ -44,12 +46,19 @@ export class AddReleaseModalComponent implements OnInit {
       name: ['', Validators.required],
       description: [''],
       member: [this.members.find((m: any) => m.key === currentMember?.['key']) || null, Validators.required],
-      releasePackageURI: [''],
+      releasePackageURI: ['', [Validators.pattern(SCT_PACKAGE_URI_RE)]],
       copyrights: ['']
     });
     setTimeout(() => {
       this.nameInput.nativeElement.focus();
     }, 0);
+  }
+
+  isControlInvalid(controlName: string, errorType?: string): boolean {
+    const control = this.formPackage?.get(controlName);
+    if (!control) return false;
+    const isInvalid = errorType ? !!control.errors?.[errorType] : control.invalid;
+    return isInvalid && (this.submitAttempted || control.touched || control.dirty);
   }
 
   public ok(): void {
