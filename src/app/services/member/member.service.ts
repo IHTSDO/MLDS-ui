@@ -40,6 +40,9 @@ export class MemberService {
   // }
 
   getMembers(): Observable<any[]> {
+    if (this.members && this.members.length > 0) {
+      return of(this.members);
+    }
     return this.http.get<any[]>(`${this.apiUrl}/members`).pipe(
       map(members => {
         this.members = members;
@@ -63,12 +66,24 @@ export class MemberService {
   }
 
   /**
-   * Sets the current member key.
+   * Sets the current member key and updates the member logo.
    *
-   * @param memberKey The new member key.
+   * @param memberKey The new member key, or null/IHTSDO for default.
    */
-  setMemberKey(memberKey: string): void {
+  setMemberKey(memberKey: string | null): void {
     this.memberKeySubject.next(memberKey);
+    if (memberKey && memberKey.toUpperCase() !== 'IHTSDO') {
+      this.getMemberLogo(memberKey).subscribe({
+        next: (logoUrl: string) => {
+          this.setMemberLogo(logoUrl);
+        },
+        error: () => {
+          this.setMemberLogo(null);
+        }
+      });
+    } else {
+      this.setMemberLogo(null);
+    }
   }
 
   /**
@@ -76,8 +91,16 @@ export class MemberService {
    *
    * @param logoUrl The new member logo URL.
    */
-  setMemberLogo(logoUrl: string): void {
+  setMemberLogo(logoUrl: string | null): void {
     this.memberLogoSubject.next(logoUrl);
+  }
+
+  /**
+   * Resets the member key and logo state back to default (null).
+   */
+  reset(): void {
+    this.memberKeySubject.next(null);
+    this.memberLogoSubject.next(null);
   }
 
   /**

@@ -31,29 +31,11 @@ export class LandingPageComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const memberKey = params['memberKey'];
-      if (memberKey) {
-        this.setMemberKey(memberKey);
+      if (memberKey !== undefined) {
+        this.memberService.setMemberKey(memberKey);
       }
     });
     this.getLandingPageStyle();
-  }
-
-  /**
-   * Sets the member key and fetches the member logo from the member service.
-   * @param memberKey - The member key to set.
-   * @example
-   * this.setMemberKey('member-123');
-   */
-  setMemberKey(memberKey: string): void {
-    this.memberService.setMemberKey(memberKey);
-    this.memberService.getMemberLogo(memberKey).subscribe({
-      next: (logoUrl: string) => {
-        this.memberService.setMemberLogo(logoUrl);
-      },
-      error: (error) => {
-        console.error('Error fetching member logo:', error);
-      }
-    });
   }
 
   getLandingPageStyle() {

@@ -6,6 +6,7 @@ import { API_ROUTES } from 'src/app/routes-config-api';
 import { User } from 'src/model/user.model';
 import { ROUTES } from 'src/app/routes-config';
 import { ImsConfigService } from '../ims-config/ims-config.service';
+import { MemberService } from '../member/member.service';
 
 /**
  * Shared service for authentication state and operations.
@@ -26,7 +27,8 @@ export class AuthenticationSharedService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private imsConfigService: ImsConfigService
+    private imsConfigService: ImsConfigService,
+    private memberService: MemberService
   ) {
     this.loadFromLocalStorage();
     this.setupFocusListener();
@@ -147,6 +149,7 @@ export class AuthenticationSharedService {
     this.userRoles = [];
     this.userDetails = null;
     this.removeFromLocalStorage();
+    this.memberService.reset();
   }
 
   logout(): void {
@@ -180,15 +183,22 @@ export class AuthenticationSharedService {
         `?client_id=IMS` +
         `&post_logout_redirect_uri=${encodeURIComponent(callbackUrl)}`;
 
-      const width = 600;
-      const height = 500;
-      const left = (window.screen.width - width) / 2;
-      const top = (window.screen.height - height) / 2;
+      const width = 800;
+      const height = 550;
+
+      const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : (window.screenX ?? 0);
+      const dualScreenTop = window.screenTop !== undefined ? window.screenTop : (window.screenY ?? 0);
+
+      const currentWindowWidth = window.innerWidth || document.documentElement.clientWidth || screen.width;
+      const currentWindowHeight = window.innerHeight || document.documentElement.clientHeight || screen.height;
+
+      const left = Math.max(0, Math.floor(dualScreenLeft + (currentWindowWidth - width) / 2));
+      const top = Math.max(0, Math.floor(dualScreenTop + (currentWindowHeight - height) / 2));
 
       const popup = window.open(
         redirectUrl,
         'logoutPopup',
-        `width=${width},height=${height},left=${left},top=${top}`
+        `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
       );
 
       

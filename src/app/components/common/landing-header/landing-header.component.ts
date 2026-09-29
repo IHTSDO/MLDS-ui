@@ -44,18 +44,17 @@ export class LandingHeaderComponent {
   isUser: boolean = false;
   memberDetails: any = null;
   memberKey: string | null = null;
-  memberName:any;
-  sessionMember: any = null;
+  memberName: any;
+
   constructor(
     private memberService: MemberService,
     private router: Router,
-    private sessionService: AuthenticationSharedService ,// Inject SessionService
+    private sessionService: AuthenticationSharedService,
     private translateService: TranslateService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-
     const storedLang = localStorage.getItem('selectedLang');
     this.translateService.use(storedLang ?? 'en');
 
@@ -63,89 +62,60 @@ export class LandingHeaderComponent {
       this.memberLogo = logoUrl;
     });
 
-     if (this.sessionMember?.isAuthenticated) {
-      this.updateFromMember(this.sessionMember);
-    } else {
-      this.route.params.subscribe(params => {
-        this.memberKey = params['memberKey'];
-        if (this.memberKey) {
-          this.updateFromMemberByKey(this.memberKey);
-        }
-      });
+    this.memberService.memberKey$.subscribe(memberKey => {
+      this.memberKey = memberKey;
+      this.setMemberName(memberKey);
+    });
+
+    this.translateService.onLangChange.subscribe(() => {
+      if (this.memberKey) {
+        this.setMemberName(this.memberKey);
+      }
+    });
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.updateUserDetails();
     });
 
-
     this.updateUserDetails();
   }
-}
 
-  private updateFromMember(sessionMember: any): void {
-
-    if (sessionMember) {
-      this.memberService.getMemberLogo(sessionMember.key).subscribe({
-        next: (logoUrl: string) => {
-          this.memberLogo = logoUrl; // Set memberLogo here once you get the logo URL
-          this.memberService.setMemberLogo(logoUrl);
-        },
-        error: (error) => {
-          console.error('Error fetching member logo:', error);
-          this.memberLogo = ''; // Fallback in case of error
-        }
+  private setMemberName(memberKey: string | null): void {
+    if (memberKey && memberKey.toUpperCase() !== 'IHTSDO') {
+      const translationKey = `global.member.${memberKey}`;
+      this.memberService.getMembers().subscribe(members => {
+        const member = members.find(m => m.key?.toUpperCase() === memberKey.toUpperCase());
+        this.translateService.get(translationKey).subscribe((translatedName: string) => {
+          const validTranslation = (translatedName && translatedName !== translationKey) ? translatedName : '';
+          this.memberName = member?.name || validTranslation || '';
+        });
       });
     } else {
-      this.memberLogo = ''; // Set empty string if no logo is available
-    }
-    this.setMemberDetails(sessionMember);
-  
-  }
-
-  private updateFromMemberByKey(memberKey: string): void {
-    
-    this.memberService.getMembers().subscribe(members => {
-      // Filter the member using the memberKey
-      const filteredMember = members.find(member => member.key === this.memberKey);
-
-    const member = filteredMember;
-    this.setMemberDetails(member);
-  });
-  }
-  private setMemberDetails(member: any): void {
-    if (member) {
-      const memberKey = member.key;
-    const translationKey = `global.member.${memberKey}`;
-    
-
-    // Fetch the translated member name
-    this.translateService.get(translationKey).subscribe((translatedName: string) => {
-      this.memberName = member.name || translatedName || '';
-    });
-    } else {
       this.memberName = '';
-      this.memberLogo = '';
     }
   }
-  
 
   // Method to update user authentication and details
   updateUserDetails(): void {
-    
     this.isAuthenticated = this.sessionService.isAuthenticated();
     this.isUser = this.sessionService.isUser();
 
     if (this.isAuthenticated) {
       const userDetails = this.sessionService.getUserDetails();
-      
       if (userDetails) {
-        this.updateFromMember(userDetails.member);
-    
         this.firstName = userDetails.firstName;
         this.lastName = userDetails.lastName;
         this.userName = `${this.firstName} ${this.lastName}`;
+        if (userDetails.member?.['key']) {
+          this.memberService.setMemberKey(userDetails.member['key']);
+        }
       }
+    } else {
+      this.firstName = null;
+      this.lastName = null;
+      this.userName = null;
     }
   }
   changeLanguage(lang: any) {
