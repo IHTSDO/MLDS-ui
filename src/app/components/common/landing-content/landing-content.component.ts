@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -22,86 +22,58 @@ import { MemberService } from 'src/app/services/member/member.service';
     templateUrl: './landing-content.component.html',
     styleUrl: './landing-content.component.scss'
 })
-export class LandingContentComponent implements OnInit{
- /**
+export class LandingContentComponent implements OnInit, OnDestroy {
+  /**
    * Member key retrieved from route parameters or default value
    */
- memberKey: string | null = null;
+  memberKey: string | null = null;
 
- /**
-  * Default member key to use if none is provided
-  */
- defaultMemberKey = 'IHTSDO';
+  /**
+   * Default member key to use if none is provided
+   */
+  defaultMemberKey = 'IHTSDO';
   landingText: string = '';
-  private langISO: string | null = null;
   private subscriptions = new Subscription();
- /**
-  * Subscription to language change events
-  */
- 
 
- /**
-  * Constructor
-  * 
-  * @param route ActivatedRoute instance
-  * @param memberService MemberService instance
-  * @param sanitizer DomSanitizer instance
-  * @param translateService TranslateService instance
-  */
- constructor(
-   private route: ActivatedRoute,
-   private memberService: MemberService,
-   private countryService: CountryService,
-   private translateService: TranslateService
- ) {
+  constructor(
+    private route: ActivatedRoute,
+    private memberService: MemberService,
+    private countryService: CountryService,
+    private translateService: TranslateService
+  ) {}
 
-}
-
- /**
-  * Initializes the component
-  */
- ngOnInit(): void {
-   /**
-    * Subscribes to route parameters changes
-    */
-   this.setLandingText();
-   this.route.params.subscribe(params => {
-     /**
-      * Retrieves the member key from route parameters or uses the default value
-      */
-     this.memberKey = params['memberKey'] || this.defaultMemberKey;
-   });
-   this.subscriptions.add(
-    this.route.params.subscribe(params => {
-      this.memberKey = params['memberKey'];
-      this.langISO = this.route.snapshot.queryParamMap.get('lang');
-      if (this.langISO) {
-        this.translateService.use(this.langISO);
-      }
-      this.loadMemberData();
-    })
-  );
-
-  this.subscriptions.add(
-    this.translateService.onLangChange.subscribe(() => {
-      this.setLandingText();
-    })
-  );
-
-  this.loadMemberData();
-
- }
- private loadMemberData(): void {
-  // Load member data
-  this.subscriptions.add(
-    this.memberService.getMembers().subscribe(members => {
-      const member = this.memberService.membersByKey[this.memberKey ?? ''];
-      if (member) {
+  /**
+   * Initializes the component
+   */
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.memberService.memberKey$.subscribe(key => {
+        this.memberKey = key || this.defaultMemberKey;
         this.setLandingText();
-      }
-    })
-  );
-}
+      })
+    );
+
+    this.subscriptions.add(
+      this.route.queryParamMap.subscribe(params => {
+        const langISO = params.get('lang');
+        if (langISO) {
+          this.translateService.use(langISO);
+        }
+      })
+    );
+
+    this.subscriptions.add(
+      this.translateService.onLangChange.subscribe(() => {
+        this.setLandingText();
+      })
+    );
+
+    this.setLandingText();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
 private setLandingText(): void {
   if (this.memberKey) {
