@@ -61,6 +61,7 @@ export class AuthenticationSharedService {
       map((accountData: User) => {
         this.userRoles = accountData.roles;
         this.userDetails = accountData;
+        localStorage.removeItem('loginType');
         this.saveToLocalStorage();
         return accountData;
       })
@@ -161,22 +162,12 @@ export class AuthenticationSharedService {
 
     if (isIms && hasImsCookie ) {
       const imsEndpoint = this.imsConfigService.getImsEndpoint();
+      const keycloakEndpoint = this.imsConfigService.getKeycloakEndpoint();
 
       const callbackUrl =
         `${imsEndpoint}/#/login?serviceReferer=${encodeURIComponent(
           window.location.origin + '/#/login'
         )}`;
-
-      const imsUrl = new URL(imsEndpoint);
-
-      let keycloakHost = imsUrl.hostname;
-      if (keycloakHost.includes('-ims.')) {
-        keycloakHost = keycloakHost.replace('-ims.', '-snoauth.');
-      } else if (keycloakHost.startsWith('ims.')) {
-        keycloakHost = keycloakHost.replace('ims.', '-snoauth.');
-      }
-
-      const keycloakEndpoint = `${imsUrl.protocol}//${keycloakHost}`;
 
       const redirectUrl =
         `${keycloakEndpoint}/realms/snomed/protocol/openid-connect/logout` +
@@ -283,18 +274,8 @@ export class AuthenticationSharedService {
         sessionStorage.setItem('loggedOut', 'true');
 
         const imsEndpoint = this.imsConfigService.getImsEndpoint();
+        const keycloakEndpoint = this.imsConfigService.getKeycloakEndpoint();
         const callbackUrl = `${window.location.origin}/`;
-
-        const imsUrl = new URL(imsEndpoint);
-
-        let keycloakHost = imsUrl.hostname;
-        if (keycloakHost.includes('-ims.')) {
-          keycloakHost = keycloakHost.replace('-ims.', '-snoauth.');
-        } else if (keycloakHost.startsWith('ims.')) {
-          keycloakHost = keycloakHost.replace('ims.', '-snoauth.');
-        }
-
-        const keycloakEndpoint = `${imsUrl.protocol}//${keycloakHost}`;
 
         let redirectUrl =
           `${keycloakEndpoint}/realms/snomed/protocol/openid-connect/logout`;
@@ -433,9 +414,8 @@ export class AuthenticationSharedService {
     const cookieName = this.imsConfigService.getImsCookieName();
     let token = cookieName ? this.getCookie(cookieName) : null;
     if (!token) {
-      token = this.getCookie('dev-ims-ihtsdo') || this.getCookie('test-ims-ihtsdo') || this.getCookie('ims-ihtsdo');
+      token = this.getCookie('dev-ims-ihtsdo') || this.getCookie('uat-ims-ihtsdo') || this.getCookie('ims-ihtsdo');
     }
     return !!token;
   }
-
 }

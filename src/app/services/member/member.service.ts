@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
@@ -39,8 +39,8 @@ export class MemberService {
   //   return this.http.get<any[]>(`${this.apiUrl}/members`);
   // }
 
-  getMembers(): Observable<any[]> {
-    if (this.members && this.members.length > 0) {
+  getMembers(refresh: boolean = false): Observable<any[]> {
+    if (!refresh && this.members && this.members.length > 0) {
       return of(this.members);
     }
     return this.http.get<any[]>(`${this.apiUrl}/members`).pipe(
@@ -189,7 +189,11 @@ export class MemberService {
    */
   updateMemberNotifications(memberKey: string, staffNotificationEmail: string): Observable<any> {
     const member = { staffNotificationEmail };
-    return this.http.put<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/notifications`, member);
+    return this.http.put<any>(`${this.apiUrl}/members/${encodeURIComponent(memberKey)}/notifications`, member).pipe(
+      tap(() => {
+        this.members = [];
+      })
+    );
   }
 
   /**

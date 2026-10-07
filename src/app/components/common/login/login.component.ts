@@ -98,9 +98,18 @@ export class LoginComponent implements OnInit {
 
       const callbackUrl = `${window.location.origin}/`;
       const imsEndpoint = this.imsConfigService.getImsEndpoint();
+      const keycloakEndpoint = this.imsConfigService.getKeycloakEndpoint();
+      const imsCallbackUrl = `${imsEndpoint}/api/auth/callback`;
+      const returnTo = `/#/home?serviceReferer=${encodeURIComponent(callbackUrl)}`;
 
       const redirectUrl =
-        `${imsEndpoint}/#/login?serviceReferer=${encodeURIComponent(callbackUrl)}&login=${encodeURIComponent(username)}`;
+        `${keycloakEndpoint}/realms/snomed/protocol/openid-connect/auth` +
+        `?client_id=IMS` +
+        `&response_type=code` +
+        `&scope=openid%20profile%20email` +
+        `&redirect_uri=${encodeURIComponent(imsCallbackUrl)}` +
+        `&state=${encodeURIComponent(returnTo)}` +
+        `&login_hint=${encodeURIComponent(username)}`;
 
       window.location.href = redirectUrl;
       return;
