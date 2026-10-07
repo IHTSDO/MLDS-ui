@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { API_ROUTES } from 'src/app/routes-config-api';
 
 /**
@@ -26,6 +26,9 @@ export class CountryService {
    * this.countryService.getCountries().subscribe(countries => console.log(countries));
    */
   getCountries(): Observable<any[]> {
+    if (this.countries && this.countries.length > 0) {
+      return of(this.countries);
+    }
     return this.http.get<any[]>(`${this.apiUrl}/countries`).pipe(
       map((countries) => {
         const tempCountriesUsingMLDS: string[] = [];

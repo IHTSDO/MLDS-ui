@@ -67,38 +67,47 @@ export class LandingContentComponent implements OnInit, OnDestroy {
         this.setLandingText();
       })
     );
-
-    this.setLandingText();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-private setLandingText(): void {
-  if (this.memberKey) {
-    // Load country data
+  private setLandingText(): void {
+    const isDefaultMember = !this.memberKey || this.memberKey.toUpperCase() === 'IHTSDO';
+
+    if (isDefaultMember) {
+      const instantText = this.translateService.instant('views.landingPage.purpose');
+      if (instantText && instantText !== 'views.landingPage.purpose') {
+        this.landingText = instantText;
+      }
+      this.subscriptions.add(
+        this.translateService.get('views.landingPage.purpose').subscribe(text => {
+          this.landingText = text;
+        })
+      );
+      return;
+    }
+
+    const fallbackText = this.translateService.instant('views.landingPage.purpose');
+    if (fallbackText && fallbackText !== 'views.landingPage.purpose') {
+      this.landingText = fallbackText;
+    }
+
     this.subscriptions.add(
-      this.countryService.getCountries().subscribe(countries => {
+      this.countryService.getCountries().subscribe(() => {
         const country = this.countryService.countriesByIsoCode2[this.memberKey ?? ''];
         if (country) {
-          this.landingText = `
-            ${this.translateService.instant('views.landingPage.member.purpose1')}
-            ${this.translateService.instant('global.country.' + this.memberKey)}
-            ${this.translateService.instant('views.landingPage.member.purpose2')}
-            ${this.translateService.instant('global.country.' + this.memberKey)}
-            ${this.translateService.instant('views.landingPage.member.purpose3')}
-            
-            
-          `;
+          const p1 = this.translateService.instant('views.landingPage.member.purpose1');
+          const cName = this.translateService.instant('global.country.' + this.memberKey);
+          const p2 = this.translateService.instant('views.landingPage.member.purpose2');
+          const p3 = this.translateService.instant('views.landingPage.member.purpose3');
+          this.landingText = `${p1} ${cName} ${p2} ${cName} ${p3}`;
         } else {
           this.landingText = this.translateService.instant('views.landingPage.purpose');
         }
       })
     );
-  } else {
-    this.landingText = this.translateService.instant('views.landingPage.purpose');
   }
-}
 
 }
