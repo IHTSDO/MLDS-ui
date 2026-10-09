@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { AsyncValidatorFn, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -16,6 +16,7 @@ import { CommercialUsageService } from 'src/app/services/commercialUsage/commerc
 import { AffiliateRegistrationReviewComponent } from '../affiliate-registration-review/affiliate-registration-review.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
+import { phoneRequiredValidator } from 'src/app/validators/phone-number.validator';
 
 @Component({
     selector: 'app-affiliate-registration',
@@ -24,6 +25,8 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
     styleUrl: './affiliate-registration.component.scss'
 })
 export class AffiliateRegistrationComponent implements OnInit {
+
+  @ViewChild(EmbeddableUsageLogComponent) usageLogComponent!: EmbeddableUsageLogComponent;
 
   CountryISO = CountryISO;
   PhoneNumberFormat = PhoneNumberFormat;
@@ -80,6 +83,9 @@ export class AffiliateRegistrationComponent implements OnInit {
   private handleApplicationData(data: any): void {
     this.applicationData = data;
     this.commercialUsageReport = data.commercialUsage;
+    if (this.commercialUsageReport && !this.commercialUsageReport.type) {
+      this.commercialUsageReport.type = data.type || data.affiliateDetails?.type || '';
+    }
     this.approvalState = data.approvalState;
     this.applicationId = data.applicationId;
     this.memberKey = data.member.key;
@@ -141,11 +147,11 @@ export class AffiliateRegistrationComponent implements OnInit {
       subType: ['', Validators.required],
       otherText: ['', Validators.maxLength(255)],
       agreementType: ['', Validators.required],
-      alternateEmail: ['', [Validators.required, Validators.email, Validators.maxLength(100)], [this.uniqueEmailValidator('alternateEmail')]],
-      thirdEmail: ['', [Validators.required, Validators.email, Validators.maxLength(100)], [this.uniqueEmailValidator('thirdEmail')]],
-      contactPhone: ['', [Validators.required, Validators.maxLength(25)]],
+      alternateEmail: ['', [Validators.required, Validators.email, Validators.maxLength(100), this.uniqueEmailValidator('alternateEmail')]],
+      thirdEmail: ['', [Validators.email, Validators.maxLength(100), this.uniqueEmailValidator('thirdEmail')]],
+      contactPhone: ['', [phoneRequiredValidator(), Validators.maxLength(25)]],
       contactExtension: ['', Validators.maxLength(255)],
-      mobilePhone: ['', [Validators.required, Validators.maxLength(25)]],
+      mobilePhone: ['', [phoneRequiredValidator(), Validators.maxLength(25)]],
       address: ['', [Validators.required, Validators.maxLength(255)]],
       city: ['', [Validators.required, Validators.maxLength(255)]],
       postalCode: ['', [Validators.required, Validators.maxLength(25)]],
@@ -156,16 +162,27 @@ export class AffiliateRegistrationComponent implements OnInit {
       billingCountry: ['', Validators.required],
       organizationName: ['', [Validators.required, Validators.maxLength(255)]],
       organizationType: ['', Validators.required],
-      organizationTypeOther: ['', [Validators.required]],
+      organizationTypeOther: ['', [Validators.maxLength(255)]],
       otherTextArea: [''],
       snoMedTC: [false, Validators.requiredTrue]
     })
   }
 
   private setupTypeChangeSubscription(): void {
-    this.typeSubscription = this.affiliateApplicationForm.get('type')?.valueChanges.subscribe(newValue => {
+    const typeSub = this.affiliateApplicationForm.get('type')?.valueChanges.subscribe(newValue => {
+      if (this.commercialUsageReport && newValue) {
+        this.commercialUsageReport = {
+          ...this.commercialUsageReport,
+          type: newValue
+        };
+      }
       this.onTypeChange(newValue);
-    }) ?? new Subscription();
+    });
+    const orgTypeSub = this.affiliateApplicationForm.get('organizationType')?.valueChanges.subscribe(() => {
+      this.updateValidations();
+    });
+    if (typeSub) this.typeSubscription.add(typeSub);
+    if (orgTypeSub) this.typeSubscription.add(orgTypeSub);
   }
 
   private onTypeChange(newValue: string): void {
@@ -184,21 +201,31 @@ export class AffiliateRegistrationComponent implements OnInit {
 
   updateValidations() {
     const affiliateType = this.affiliateApplicationForm.get('type')?.value;
+    const orgType = this.affiliateApplicationForm.get('organizationType')?.value;
     const subTypeControl = this.affiliateApplicationForm?.get('subType');
     const otherTextControl = this.affiliateApplicationForm?.get('otherText');
+    const alternateEmailControl = this.affiliateApplicationForm?.get('alternateEmail');
     const thirdEmailControl = this.affiliateApplicationForm?.get('thirdEmail');
+    const contactPhoneControl = this.affiliateApplicationForm?.get('contactPhone');
     const mobilePhoneControl = this.affiliateApplicationForm?.get('mobilePhone');
     const organizationNameControl = this.affiliateApplicationForm?.get('organizationName');
     const organizationTypeControl = this.affiliateApplicationForm?.get('organizationType');
     const organizationTypeOtherControl = this.affiliateApplicationForm?.get('organizationTypeOther');
 
+    contactPhoneControl?.setValidators([phoneRequiredValidator(), Validators.maxLength(25)]);
+
+    alternateEmailControl?.setValidators([Validators.required, Validators.email, Validators.maxLength(100), this.uniqueEmailValidator('alternateEmail')]);
+    alternateEmailControl?.clearAsyncValidators();
+
+    thirdEmailControl?.setValidators([Validators.email, Validators.maxLength(100), this.uniqueEmailValidator('thirdEmail')]);
+    thirdEmailControl?.clearAsyncValidators();
+
     if (affiliateType == 'INDIVIDUAL') {
-      thirdEmailControl?.setValidators([Validators.email, Validators.maxLength(100)]);
       mobilePhoneControl?.setValidators([Validators.maxLength(25)]);
       organizationNameControl?.setValidators([Validators.maxLength(255)]);
       organizationTypeControl?.clearValidators();
       otherTextControl?.clearValidators();
-      organizationTypeOtherControl?.setValidators([Validators.maxLength(255)]);
+      organizationTypeOtherControl?.clearValidators();
     }
     else {
       if (affiliateType === 'OTHER') {
@@ -209,16 +236,21 @@ export class AffiliateRegistrationComponent implements OnInit {
         otherTextControl?.clearValidators();
         subTypeControl?.setValidators([Validators.required]);
       }
-      thirdEmailControl?.setValidators([Validators.required, Validators.email, Validators.maxLength(100)]);
-      mobilePhoneControl?.setValidators([Validators.required, Validators.maxLength(25)]);
+      mobilePhoneControl?.setValidators([phoneRequiredValidator(), Validators.maxLength(25)]);
       organizationNameControl?.setValidators([Validators.required, Validators.maxLength(255)]);
       organizationTypeControl?.setValidators([Validators.required]);
-      organizationTypeOtherControl?.setValidators([Validators.maxLength(255)]);
+      if (orgType === 'OTHER') {
+        organizationTypeOtherControl?.setValidators([Validators.required, Validators.maxLength(255)]);
+      } else {
+        organizationTypeOtherControl?.clearValidators();
+      }
     }
 
     subTypeControl?.updateValueAndValidity();
     otherTextControl?.updateValueAndValidity();
+    contactPhoneControl?.updateValueAndValidity();
     mobilePhoneControl?.updateValueAndValidity();
+    alternateEmailControl?.updateValueAndValidity();
     thirdEmailControl?.updateValueAndValidity();
     organizationNameControl?.updateValueAndValidity();
     organizationTypeControl?.updateValueAndValidity();
@@ -246,9 +278,9 @@ export class AffiliateRegistrationComponent implements OnInit {
   private getAffiliateDetails(): any {
     const affiliateDetails = this.applicationData?.affiliateDetails || {};
     return {
-      type: affiliateDetails.type || '',
-      subType: affiliateDetails.subType || '',
-      otherText: affiliateDetails.otherText || '',
+      type: this.applicationData?.type || this.applicationData?.commercialUsage?.type || affiliateDetails.type || '',
+      subType: this.applicationData?.subType || affiliateDetails.subType || '',
+      otherText: this.applicationData?.otherText || affiliateDetails.otherText || '',
       agreementType: affiliateDetails.agreementType || '',
       alternateEmail: affiliateDetails.alternateEmail || '',
       thirdEmail: affiliateDetails.thirdEmail || '',
@@ -332,6 +364,10 @@ export class AffiliateRegistrationComponent implements OnInit {
     this.applicationData.affiliateDetails.organizationName = this.affiliateApplicationForm.get('organizationName')?.value;
     this.applicationData.affiliateDetails.organizationType = this.affiliateApplicationForm.get('organizationType')?.value;
     this.applicationData.affiliateDetails.organizationTypeOther = this.affiliateApplicationForm.get('organizationTypeOther')?.value;
+    if (!this.applicationData.other) {
+      this.applicationData.other = {};
+    }
+    this.applicationData.other.textArea = this.affiliateApplicationForm.get('otherTextArea')?.value;
     this.applicationData.commercialUsage.type = this.affiliateApplicationForm.get('type')?.value;
     this.copyAddress();
     this.userRegistrationService.saveApplication(this.applicationData, this.applicationId)
@@ -367,15 +403,34 @@ export class AffiliateRegistrationComponent implements OnInit {
 
   submit() {
     this.submitAttempted = true;
+    this.affiliateApplicationForm.markAllAsTouched();
+    if (this.usageLogComponent?.usageForm) {
+      this.usageLogComponent.usageForm.markAllAsTouched();
+      this.usageLogComponent.autoSubmit();
+      if (this.usageLogComponent.usageForm.value) {
+        this.updateUsageContext(this.usageLogComponent.usageForm.value);
+      }
+    }
     this.saveApplication();
-    if (!this.affiliateApplicationForm.valid) {
+
+    const isUsageValid = !this.usageLogComponent?.usageForm || this.usageLogComponent.usageForm.valid;
+    if (!this.affiliateApplicationForm.valid || !isUsageValid) {
+      console.warn('Form submission prevented due to validation errors:');
+      console.warn('affiliateApplicationForm valid:', this.affiliateApplicationForm.valid, 'status:', this.affiliateApplicationForm.status);
+      console.warn('isUsageValid:', isUsageValid);
+      Object.keys(this.affiliateApplicationForm.controls).forEach(key => {
+        const ctrl = this.affiliateApplicationForm.get(key);
+        if (ctrl && !ctrl.valid) {
+          console.warn(`Invalid control "${key}":`, 'status:', ctrl.status, 'errors:', ctrl.errors, 'value:', ctrl.value);
+        }
+      });
       return;
     }
 
     const modalRef = this.modalService.open(AffiliateRegistrationReviewComponent, {
       size: 'lg'
     });
-    modalRef.componentInstance.affiliateform = this.affiliateApplicationForm.value;
+    modalRef.componentInstance.affiliateform = this.affiliateApplicationForm.getRawValue();
     modalRef.componentInstance.affiliate = this.applicationData;
     modalRef.componentInstance.billingHide = this.billingHide;
 
@@ -405,30 +460,55 @@ export class AffiliateRegistrationComponent implements OnInit {
   formatCountry = (country: any) => country.commonName;
 
 
-  uniqueEmailValidator(currentField: string): AsyncValidatorFn {
-    return (control: any): Observable<{ [key: string]: any } | null> => {
-      if (!control.value) {
-        return of(null);
+  uniqueEmailValidator(currentField: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const val = control.value;
+      if (!val || (typeof val === 'string' && !val.trim())) {
+        return null;
       }
-      const currentValue = control.value;
-      const email = this.applicationData.affiliateDetails.email;
-      const alternateEmail = this.affiliateApplicationForm.get('alternateEmail')?.value;
-      const thirdEmail = this.affiliateApplicationForm.get('thirdEmail')?.value;
+      const currentValue = val.toString().trim().toLowerCase();
+      const email = this.applicationData?.affiliateDetails?.email?.trim().toLowerCase();
+      const alternateEmail = this.affiliateApplicationForm?.get('alternateEmail')?.value?.toString().trim().toLowerCase();
+      const thirdEmail = this.affiliateApplicationForm?.get('thirdEmail')?.value?.toString().trim().toLowerCase();
       let existingEmails: string[] = [];
       if (currentField === 'email') {
-        existingEmails = [alternateEmail, thirdEmail];
+        existingEmails = [alternateEmail, thirdEmail].filter(e => !!e);
       } else if (currentField === 'alternateEmail') {
-        existingEmails = [email, thirdEmail];
+        existingEmails = [email, thirdEmail].filter(e => !!e);
       } else if (currentField === 'thirdEmail') {
-        existingEmails = [email, alternateEmail];
+        existingEmails = [email, alternateEmail].filter(e => !!e);
       }
       const isUnique = !existingEmails.includes(currentValue);
-      return of(isUnique ? null : { notUnique: true });
+      return isUnique ? null : { notUnique: true };
     };
   }
 
   private extractPhoneNumber(phoneNumber: any): string {
-    return phoneNumber && typeof phoneNumber === 'object' ? phoneNumber.internationalNumber : phoneNumber;
+    if (!phoneNumber) {
+      return '';
+    }
+    if (typeof phoneNumber === 'object') {
+      const nationalDigits = (phoneNumber.nationalNumber || '').toString().replace(/\D/g, '');
+      if (nationalDigits.length > 0) {
+        return phoneNumber.internationalNumber || phoneNumber.number || '';
+      }
+      const num = (phoneNumber.internationalNumber || phoneNumber.number || '').toString();
+      const digitsOnly = num.replace(/\D/g, '');
+      const dialCodeDigits = (phoneNumber.dialCode || '').toString().replace(/\D/g, '');
+      if (!digitsOnly || (dialCodeDigits && digitsOnly === dialCodeDigits) || (num.trim().startsWith('+') && digitsOnly.length <= 4)) {
+        return '';
+      }
+      return num;
+    }
+    if (typeof phoneNumber === 'string') {
+      const trimmed = phoneNumber.trim();
+      const digitsOnly = trimmed.replace(/\D/g, '');
+      if (!digitsOnly || (trimmed.startsWith('+') && digitsOnly.length <= 4)) {
+        return '';
+      }
+      return trimmed;
+    }
+    return phoneNumber;
   }
 
   ngOnDestroy(): void {
@@ -493,8 +573,15 @@ export class AffiliateRegistrationComponent implements OnInit {
   }
 
   private updateReportAndSubmit(result: any): void {
+    const latestContext = this.applicationData.commercialUsage?.context;
     this.applicationData.commercialUsage = result;
     this.applicationData.commercialUsage.type = this.affiliateApplicationForm.get('type')?.value;
+    if (latestContext) {
+      this.applicationData.commercialUsage.context = {
+        ...(result.context || {}),
+        ...latestContext
+      };
+    }
     const finalFormData = this.applicationData;
     this.userRegistrationService.submitApplication(finalFormData, finalFormData.applicationId).subscribe({
       next: () => this.handleSuccess(),
@@ -511,37 +598,26 @@ export class AffiliateRegistrationComponent implements OnInit {
   }
   onAffiliateTypeUpdated(event: any) {
     const newType = event.target.value;
-    const updatedCommercialUsageReport = { ...this.commercialUsageReport };
-    updatedCommercialUsageReport.type = newType;
+    const updatedCommercialUsageReport = { ...this.commercialUsageReport, type: newType };
     this.commercialUsageReport = updatedCommercialUsageReport;
   
-    this.commercialUsageService.updateUsageReportType(this.commercialUsageReport)
-      .subscribe({next:
-        (response: any) => {
-          
-        },
-        error:(error: any) => {
-          console.error('Failed to update usage type', error);
-        }
-  });
+    if (this.commercialUsageReport?.commercialUsageId && newType) {
+      this.commercialUsageService.updateUsageReportType(this.commercialUsageReport)
+        .subscribe({next:
+          (response: any) => {
+            
+          },
+          error:(error: any) => {
+            console.error('Failed to update usage type', error);
+          }
+      });
+    }
   }
 
-   onCountryChange(event: any): void {
-    const countryCode = event.dialCode;
-    if (this.affiliateApplicationForm.get('contactPhone')) {
-      this.affiliateApplicationForm.controls['contactPhone'].setValue("+"+countryCode);
-    } else {
-      console.error('not initialize');
-    }
+  onCountryChange(event: any): void {
   }
 
   onCountryChangeM(event: any): void {
-    const countryCode = event.dialCode;
-    if (this.affiliateApplicationForm.get('mobilePhone')) {
-      this.affiliateApplicationForm.controls['mobilePhone'].setValue("+"+countryCode);
-    } else {
-      console.error('not initialize');
-    }
   }
   
 

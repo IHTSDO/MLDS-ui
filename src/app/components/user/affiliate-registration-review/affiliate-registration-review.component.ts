@@ -27,6 +27,9 @@ export class AffiliateRegistrationReviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.affiliate?.commercialUsage?.context) {
+      this.context = { ...this.affiliate.commercialUsage.context };
+    }
     this.loadUsageReport(this.affiliate?.commercialUsage?.commercialUsageId);
   }
 
@@ -40,7 +43,10 @@ export class AffiliateRegistrationReviewComponent implements OnInit {
 
   private processData(data: any): void {
 
-    this.context = data.context;
+    this.context = {
+      ...(data?.context || {}),
+      ...(this.affiliate?.commercialUsage?.context || {})
+    };
 
     this.commercialUsageInstitutionsByCountry = groupBy(data.entries, (entry: any) => entry.country.isoCode2);
 
