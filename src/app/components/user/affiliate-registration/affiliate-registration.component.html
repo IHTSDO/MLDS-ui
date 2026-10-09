@@ -183,19 +183,15 @@
                                                 (blur)="autoSubmit()" />
                                             <div
                                                 *ngIf="affiliateApplicationForm?.get('thirdEmail')?.touched || submitAttempted">
-                                                <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('required')"
-                                                    class="help-block">
-                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
-                                                </p>
-                                                <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('email')"
+                                                <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('email')"
                                                     class="help-block"
                                                     >
                                                     {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Invalid Email Address.'}}
                                                 </p>
-                                                <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('notUnique')"
+                                                <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('notUnique')"
                                                     class="help-block"
                                                     >
-                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses needs to be unique.'}}
+                                                    {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses need to be unique.'}}
                                                 </p>
                                             </div>
                                         </div>
@@ -824,22 +820,18 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="thirdEmail"
-                                                >{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:<span class="text-danger">*</span></label>
+                                                >{{'views.contactInfo.contact.thirdEmail'|translate|compareText:'Third Email'}}:</label>
                                             <input class="form-control" type="email"
                                                 placeholder="{{ 'views.contactInfo.contact.email.placeholder' |translate}}"
                                                 formControlName="thirdEmail" (blur)="autoSubmit()" />
 
                                             <div
                                                 *ngIf="(affiliateApplicationForm?.get('thirdEmail')?.touched || submitAttempted) && affiliateApplicationForm?.get('thirdEmail')?.errors">
-                                                <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('required')"
-                                                    class="help-block">
-                                                    {{'form.requiredField'|translate|compareText:'Required field.'}}
-                                                </p>
-                                                <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('email')"
+                                                <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('email')"
                                                     class="help-block">
                                                     {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Invalid Email Address.'}}
                                                 </p>
-                                                <p *ngIf="!affiliateApplicationForm?.get('thirdEmail')?.hasError('required') && affiliateApplicationForm?.get('thirdEmail')?.hasError('notUnique')"
+                                                <p *ngIf="affiliateApplicationForm?.get('thirdEmail')?.hasError('notUnique')"
                                                     class="help-block">
                                                     {{'views.contactInfo.contact.email.invalid'|translate|compareText:'Email Addresses need to be unique.'}}
                                                 </p>
@@ -865,7 +857,7 @@
                 </div>
                 <div *ngIf="affiliateApplicationForm?.get('type')?.value" >
                     <app-embeddable-usage-log [commercialUsageReport]="commercialUsageReport"
-                        [usageLogCanSubmit]="false"></app-embeddable-usage-log>
+                        [usageLogCanSubmit]="false" [submitAttempted]="submitAttempted"></app-embeddable-usage-log>
                 </div>
 
                 <div class="panel panel-default">
@@ -894,7 +886,7 @@
                         </div>
                         <div class="panel-footer">
                             <button type="button" class="btn btn-success" (click)="submit()">{{'register.form.button'|translate|compareText:'Start Registration'}}</button>
-                            <div class="has-error" *ngIf="submitAttempted && !affiliateApplicationForm.valid">
+                            <div class="has-error" *ngIf="submitAttempted && (!affiliateApplicationForm.valid || (usageLogComponent?.usageForm && !usageLogComponent.usageForm.valid))">
                                 <p class="help-block">{{'form.pleaseFix'|translate|compareText:'Please fix the errors listed above.'}}</p>
                             </div>
                         </div>

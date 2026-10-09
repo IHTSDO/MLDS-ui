@@ -23,13 +23,13 @@
 				<form [formGroup]="usageForm">
                     <div class="form-group" style="margin-bottom: 15px">
                       <label class="name" for="name">{{ 'views.usageLog.licenseType' | translate | compareText: 'License Type' }}: </label>&nbsp;
-                      <span>{{ 'affiliate.type.' + commercialUsageReport?.type | translate}}</span>
+                      <span>{{ commercialUsageReport?.type ? ('affiliate.type.' + commercialUsageReport.type | translate) : '' }}</span>
                     </div>
                   
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" for="currentUsage">{{ 'views.usageLog.currentUsage' | translate | compareText: 'Current Usage' }}:<span class="text-danger">*</span></label>
                       <textarea class="form-control" rows="3" formControlName="currentUsage" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
-                      <div *ngIf="usageForm?.get('currentUsage')?.invalid && usageForm?.get('currentUsage')?.touched">
+                      <div *ngIf="usageForm?.get('currentUsage')?.invalid && (usageForm?.get('currentUsage')?.touched || submitAttempted)">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="form-group"style="margin-bottom: 15px">
                         <label class="name" for="plannedUsage">{{ 'views.usageLog.plannedUsage' | translate | compareText: 'Planned Usage' }}:<span class="text-danger">*</span></label>
                       <textarea class="form-control" rows="3" formControlName="plannedUsage" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
-                      <div *ngIf="usageForm?.get('plannedUsage')?.invalid && usageForm?.get('plannedUsage')?.touched">
+                      <div *ngIf="usageForm?.get('plannedUsage')?.invalid && (usageForm?.get('plannedUsage')?.touched || submitAttempted)">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
@@ -45,7 +45,7 @@
                     <div class="form-group"style="margin-bottom: 15px">
                       <label class="name" for="purpose">{{ 'views.usageLog.purpose' | translate | compareText: 'Purpose' }}:<span class="text-danger">*</span></label>
                       <textarea class="form-control" rows="3" formControlName="purpose" [attr.disabled]="readOnly ? true : null" style="resize: both;" (blur)="autoSubmit()"></textarea>
-                      <div *ngIf="usageForm?.get('purpose')?.invalid && usageForm?.get('purpose')?.touched">
+                      <div *ngIf="usageForm?.get('purpose')?.invalid && (usageForm?.get('purpose')?.touched || submitAttempted)">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>
@@ -55,7 +55,7 @@
                       <select formControlName="implementationStatus" class="form-select" [attr.disabled]="readOnly ? true : null" (blur)="autoSubmit()">
                         <option *ngFor="let status of implementationStatusOptions" [value]="status">{{ 'affiliate.implementationStatus.' + status | translate }}</option>
                       </select>
-                      <div *ngIf="usageForm?.get('implementationStatus')?.invalid && usageForm?.get('implementationStatus')?.touched">
+                      <div *ngIf="usageForm?.get('implementationStatus')?.invalid && (usageForm?.get('implementationStatus')?.touched || submitAttempted)">
                         <p class="text-danger">{{ 'form.requiredField' | translate | compareText: 'Required field.' }}</p>
                       </div>
                     </div>

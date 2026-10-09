@@ -681,7 +681,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:<span *ngIf="!isStaffOrAdmin" class="text-danger">*</span></b></label>
+                                    <label for="thirdEmail"><b>{{ 'views.contactInfo.contact.thirdEmail' | translate | compareText: 'Third Email' }}:</b></label>
                                     <input class="form-control" type="email" placeholder="{{'views.contactInfo.contact.email.placeholder'| translate}}" formControlName="thirdEmail"
                                         [attr.disabled]="readOnly ? true : null" />
                                     <div

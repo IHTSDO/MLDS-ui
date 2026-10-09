@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input,  OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, of } from 'rxjs';
@@ -26,7 +26,7 @@ import { CompareTextPipe } from 'src/app/pipes/compare-text/compare-text.pipe';
     templateUrl: './embeddable-usage-log.component.html',
     styleUrl: './embeddable-usage-log.component.scss'
 })
-export class EmbeddableUsageLogComponent implements OnInit {
+export class EmbeddableUsageLogComponent implements OnInit, OnChanges {
 
   usageForm!: FormGroup;
   collapsePanel: any = {};
@@ -56,6 +56,7 @@ institution: any;
 q: string = '';
 @Input() commercialUsageReport: any = {};
 @Input() usageLogCanSubmit: boolean = true;
+@Input() submitAttempted: boolean = false;
   constructor(
     private modalService: NgbModal,
     private fb: FormBuilder,
@@ -76,6 +77,19 @@ q: string = '';
     this.initForm();
     
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['commercialUsageReport'] && changes['commercialUsageReport'].currentValue) {
+      const updatedReport = changes['commercialUsageReport'].currentValue;
+      if (updatedReport.type && (!this.commercialUsageReport || this.commercialUsageReport.type !== updatedReport.type)) {
+        this.commercialUsageReport = {
+          ...this.commercialUsageReport,
+          ...updatedReport
+        };
+        this.commercialType = this.commercialUsageReport.type === 'COMMERCIAL';
+      }
+    }
+  }
  
 
   initForm(): void {
@@ -84,7 +98,7 @@ q: string = '';
       plannedUsage: [{ value: this.commercialUsageReport.context?.plannedUsage || '', disabled: this.readOnly }, Validators.required],
       purpose: [{ value: this.commercialUsageReport.context?.purpose || '', disabled: this.readOnly }, Validators.required],
       implementationStatus: [{ value: this.commercialUsageReport.context?.implementationStatus || '', disabled: this.readOnly }, Validators.required],
-      otherActivities:  [{ value: this.commercialUsageReport.context?.otherActivities || '', disabled: this.readOnly }, Validators.required],
+      otherActivities: [{ value: this.commercialUsageReport.context?.otherActivities || '', disabled: this.readOnly }],
     });
   }
   setupNotifications() {
@@ -132,6 +146,9 @@ q: string = '';
     if (this.commercialUsageReport) {
       this.commercialUsageService.getUsageReport(this.commercialUsageReport?.commercialUsageId).subscribe({
         next: (usageReport: any) => {
+          if (!usageReport.type && this.commercialUsageReport?.type) {
+            usageReport.type = this.commercialUsageReport.type;
+          }
           this.commercialUsageReport = usageReport;
           this.updateFromUsageReport(usageReport);
         },
