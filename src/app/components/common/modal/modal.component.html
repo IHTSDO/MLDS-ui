@@ -22,7 +22,7 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-link" (click)="cancel()" [disabled]="isSubmitting">{{ cancelText }}</button>
+  <button *ngIf="cancelText" class="btn btn-link" (click)="cancel()" [disabled]="isSubmitting">{{ cancelText }}</button>
   <button
   [ngClass]="buttonType === 'delete' ? 'btn btn-danger' : 'btn btn-success'" *ngIf="submitText != ''"
   (click)="submit()" [disabled]="isSubmitting || (formGroup && formGroup.invalid)|| buttonDisabled">
