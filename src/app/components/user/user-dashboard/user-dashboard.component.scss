@@ -152,6 +152,16 @@ strong {
     border-top-left-radius: 10px;
 }
 
+.action-btn {
+    min-width: 65px;
+    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
 .text-danger {
     color: #f26c4f !important;
 }
