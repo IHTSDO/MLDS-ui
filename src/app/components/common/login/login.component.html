@@ -21,7 +21,7 @@
         </label>
 
         <input type="text" class="form-control" id="username"
-          placeholder="{{ 'global.form.email.placeholder' | translate }}" [(ngModel)]="username" name="username"
+          placeholder="{{ 'login.form.username.placeholder' | translate | compareText:'Your e-mail address (Affiliate) or IMS username (NRC Staff / Admin)' }}" [(ngModel)]="username" name="username"
           autocomplete="username" (blur)="onUsernameBlur()" (ngModelChange)="onUsernameChange()">
       </div>
 

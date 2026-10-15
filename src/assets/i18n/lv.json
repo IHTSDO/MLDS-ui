@@ -1071,6 +1071,7 @@
         "title": "",
         "form": {
             "username": "",
+            "username.placeholder": "Jūsu e-pasta adrese (Affiliate) vai IMS lietotājvārds (NRC Staff / Admin)",
             "password": "",
             "password.placeholder": "",
             "rememberme": "",

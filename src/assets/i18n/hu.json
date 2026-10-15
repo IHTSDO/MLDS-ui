@@ -526,6 +526,7 @@
             "button": "",
             "forgot": "",
             "username": "",
+            "username.placeholder": "Az Ön e-mail címe (Affiliate) vagy IMS felhasználónév (NRC Staff / Admin)",
             "password": ""
         },
         "title": "",

@@ -550,7 +550,8 @@
             "rememberme": "Husk mig",
             "button": "Log ind",
             "forgot": "Har du glemt din adgangskode?",
-            "username": "E-mail eller brugernavn"
+            "username": "E-mail eller brugernavn",
+            "username.placeholder": "Din e-mail adresse (Affiliate) eller IMS brugernavn (NRC Staff / Admin)"
         },
         "messages": {
             "error": {

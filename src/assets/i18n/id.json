@@ -1244,7 +1244,8 @@
             "rememberme": "Ingat Saya",
             "password.placeholder": "Kata Sandi Anda",
             "password": "Kata Sandi",
-            "username": "E-mail Atau Nama Pengguna"
+            "username": "E-mail Atau Nama Pengguna",
+            "username.placeholder": "Alamat E-mail Anda (Afiliasi) atau nama pengguna IMS (NRC Staff / Admin)"
         },
         "title": "Masuk"
     },

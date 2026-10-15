@@ -526,6 +526,7 @@
         "title": "Login",
         "form": {
             "username": "E-mail of gebruikersnaam",
+            "username.placeholder": "Uw e-mailadres (Affiliate) of IMS-gebruikersnaam (NRC Staff / Admin)",
             "password": "Wachtwoord",
             "password.placeholder": "Uw wachtwoord",
             "rememberme": "Dit wachtwoord onthouden",
