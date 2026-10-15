@@ -523,6 +523,7 @@
         "title": "Logga in",
         "form": {
             "username": "E-postadress",
+            "username.placeholder": "Din e-postadress (Affiliate) eller IMS-användarnamn (NRC Staff / Admin)",
             "password": "Lösenord",
             "password.placeholder": "Ditt lösenord",
             "rememberme": "Kom ihåg mig",

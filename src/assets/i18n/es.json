@@ -527,6 +527,7 @@
         "title": "Inicie sesión",
         "form": {
             "username": "Correo electrónico de la Unidad que administra SNOMED CT",
+            "username.placeholder": "Su correo electrónico (Afiliado) o nombre de usuario de IMS (NRC Staff / Admin)",
             "password": "Contraseña",
             "password.placeholder": "Su contraseña",
             "rememberme": "Recordarme",

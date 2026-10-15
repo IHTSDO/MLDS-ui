@@ -526,6 +526,7 @@
         "title": "Login",
         "form": {
             "username": "E-Mail oder Benutzername",
+            "username.placeholder": "Ihre E-Mail-Adresse (Affiliate) oder IMS-Benutzername (NRC Staff / Admin)",
             "password": "Passwort",
             "password.placeholder": "Ihr Passwort",
             "rememberme": "Passwort merken",

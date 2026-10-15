@@ -526,6 +526,7 @@
         "title": "Přihlášení",
         "form": {
             "username": "E-mail nebo uživatelské jméno",
+            "username.placeholder": "Vaše e-mailová adresa (Affiliate) nebo IMS uživatelské jméno (NRC Staff / Admin)",
             "password": "Heslo",
             "password.placeholder": "Vaše heslo",
             "rememberme": "Pamatuj si mě",

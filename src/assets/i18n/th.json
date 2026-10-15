@@ -1140,7 +1140,8 @@
             "rememberme": "จดจำการเข้าสู่ระบบ",
             "password.placeholder": "รหัสผ่านของคุณ",
             "password": "รหัสผ่าน",
-            "username": "อีเมลหรือชื่อผู้ใช้งาน"
+            "username": "อีเมลหรือชื่อผู้ใช้งาน",
+            "username.placeholder": "อีเมลของคุณ (Affiliate) หรือชื่อผู้ใช้ IMS (NRC Staff / Admin)"
         },
         "title": "เข้าสู่ระบบ"
     },
