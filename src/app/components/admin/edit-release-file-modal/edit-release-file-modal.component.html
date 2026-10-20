@@ -19,12 +19,12 @@
 
     <div class="form-group">
       <label for="downloadUrl">Download URL<span class="text-danger">*</span></label>
-      <input id="downloadUrl" type="url" class="form-control" formControlName="downloadUrl"
+      <input id="downloadUrl" type="text" class="form-control" formControlName="downloadUrl"
              placeholder="Enter File Download URL" />
       <div *ngIf="submitAttempted && formReleaseFile.get('downloadUrl')?.errors?.['required']" class="help-block">
         Required Field
       </div>
-      <div *ngIf="formReleaseFile.get('downloadUrl')?.errors?.['pattern']" class="help-block">
+      <div *ngIf="(submitAttempted || formReleaseFile.get('downloadUrl')?.dirty) && formReleaseFile.get('downloadUrl')?.errors?.['pattern']" class="help-block">
         Invalid URL
       </div>
     </div>

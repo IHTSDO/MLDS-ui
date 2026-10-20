@@ -30,7 +30,7 @@ export class AddReleaseFileModalComponent implements OnInit {
   ) {
     this.formReleaseFile = this.fb.group({
       label: ['', Validators.required],
-      downloadUrl: ['', [Validators.required, Validators.pattern(/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i)]],
+      downloadUrl: ['', [Validators.required, Validators.pattern(/^(https?|ftp|s3):\/\/\S+$/i)]],
       md5Hash: [''],
       fileSize: ['', [Validators.pattern(/^\d+$/)]],
       primaryFile: [false]
