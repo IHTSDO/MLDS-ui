@@ -17,7 +17,19 @@ export class EditReleaseFileModalComponent implements OnInit {
   formReleaseFile: FormGroup;
   @Input() releasePackage: any;
   @Input() releaseVersion: any;
-  @Input() releaseFile: any;
+
+  private _releaseFile: any;
+
+  @Input()
+  set releaseFile(val: any) {
+    this._releaseFile = val;
+    this.patchFormData();
+  }
+
+  get releaseFile(): any {
+    return this._releaseFile;
+  }
+
   submitAttempted = false;
   submitting = false;
   alerts: { type: string, msg: string }[] = [];
@@ -29,7 +41,7 @@ export class EditReleaseFileModalComponent implements OnInit {
   ) {
     this.formReleaseFile = this.fb.group({
       label: ['', Validators.required],
-      downloadUrl: ['', [Validators.required, Validators.pattern(/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i)]],
+      downloadUrl: ['', [Validators.required, Validators.pattern(/^(https?|ftp|s3):\/\/\S+$/i)]],
       md5Hash: [''],
       fileSize: ['', [Validators.pattern(/^\d+$/)]],
       primaryFile: [false],
@@ -38,13 +50,21 @@ export class EditReleaseFileModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.patchFormData();
+  }
+
+  private patchFormData(): void {
+    if (!this.formReleaseFile || !this._releaseFile) {
+      return;
+    }
+    console.log('Patching releaseFile in Edit Modal:', this._releaseFile);
     this.formReleaseFile.patchValue({
-      label: this.releaseFile?.label || '',
-      downloadUrl: this.releaseFile?.downloadUrl || '',
-      md5Hash: this.releaseFile?.md5Hash || '',
-      fileSize: this.releaseFile?.fileSize || '',
-      primaryFile: this.releaseFile?.primaryFile || false,
-      releaseFileId: this.releaseFile?.releaseFileId || ''
+      label: this._releaseFile?.label || '',
+      downloadUrl: this._releaseFile?.downloadUrl || '',
+      md5Hash: this._releaseFile?.md5Hash || '',
+      fileSize: this._releaseFile?.fileSize || '',
+      primaryFile: this._releaseFile?.primaryFile || false,
+      releaseFileId: this._releaseFile?.releaseFileId || ''
     });
   }
 
