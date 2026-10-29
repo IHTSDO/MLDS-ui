@@ -5,19 +5,19 @@
                 <ul class="nav nav-justified">
                     <li><a id="copyright" rel="noopener" href="http://www.snomed.org" target="_blank">Copyright © {{ currentYear }} SNOMED International</a></li>
                     <li>
-                        <a rel="noopener" href="https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide" target="_blank"> <span >{{'global.menu.help' | translate | compareText: 'Help'}}</span></a>
+                        <a rel="noopener" href="https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide" target="_blank"> <span>{{'global.menu.help' | translate | compareText: 'Help'}}</span></a>
                     </li>
                     <li>
-                        <a rel="noopener" href="https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service " target="_blank" >{{'views.footer.tos' | translate | compareText:'Terms of Service'}}</a>
+                        <a rel="noopener" href="https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-terms-of-service " target="_blank">{{'views.footer.tos' | translate | compareText:'Terms of Service'}}</a>
                     </li>
                     <li>
-                        <a rel="noopener" href="https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-privacy-policies " target="_blank" >{{ 'global.menu.privacyPolicy'| translate | compareText:'Privacy Policy'}}</a>
+                        <a rel="noopener" href="https://docs.snomed.org/snomed-ct-user-guides/mlds-user-guide/mlds-privacy-policies " target="_blank">{{ 'global.menu.privacyPolicy'| translate | compareText:'Privacy Policy'}}</a>
                     </li>
                     <li>
-                        <a rel="noopener" href="http://www.snomed.org/contact-us/" target="_blank" >{{ 'views.footer.contact'| translate | compareText:'Contact us'}}</a>
+                        <a rel="noopener" href="http://www.snomed.org/contact-us/" target="_blank">{{ 'views.footer.contact'| translate | compareText:'Contact us'}}</a>
                     </li>
                     <li>
-                        <a rel="noopener" href="https://www.snomed.org/snomed-in-action" target="_blank" >{{'views.footer.register'| translate | compareText:'Register your deployment'}}</a>
+                        <a rel="noopener" href="https://www.snomed.org/snomed-in-action" target="_blank">{{'views.footer.register'| translate | compareText:'Register your deployment'}}</a>
                     </li>
                 </ul>
             </div>
@@ -30,22 +30,36 @@
             </div>
         </div>
         <hr>
-            <div class="col-md-12">
-                    <ul class="nav nav-justified">
-                    <li>
-                      <a [routerLink]="['/landing', 'IHTSDO']" [queryParams]="{ lang: 'en' }">
+        <div class="col-md-12">
+            <ul class="nav nav-justified">
+                <!-- IHTSDO always first -->
+                <li>
+                    <a [routerLink]="['/landing', 'IHTSDO']" [queryParams]="{ lang: 'en' }">
                         <img class="img-responsive" src="assets/small_logo.png" style="display:inline-block;line-height:20px;height:20px;">
-                      </a>
-                    </li>
-                  
-                    <li *ngFor="let member of members">
-                      <a [routerLink]="['/landing', member.key]" [queryParams]="{ lang: member.language || 'en' }">
-                        <span [ngClass]="'famfamfam-flag-' + member.key.toLowerCase()"></span>&nbsp;
-                      </a>
-                    </li>
-                  </ul>
-                  
-            </div>
+                    </a>
+                </li>
+
+                <li *ngFor="let flag of flags">
+                    <!-- Active member that doesn't use MLDS: external link to alternate registration URL -->
+                    <a *ngIf="flag.externalUrl; else internalLink"
+                       [href]="flag.externalUrl"
+                       target="_blank"
+                       rel="noopener"
+                       [attr.title]="flag.title">
+                        <span [ngClass]="'famfamfam-flag-' + flag.key.toLowerCase()"></span>&nbsp;
+                    </a>
+
+                    <!-- Active MLDS member: internal landing page (existing behaviour) -->
+                    <ng-template #internalLink>
+                        <a [routerLink]="['/landing', flag.key]"
+                           [queryParams]="{ lang: flag.language }"
+                           [attr.title]="flag.title">
+                            <span [ngClass]="'famfamfam-flag-' + flag.key.toLowerCase()"></span>&nbsp;
+                        </a>
+                    </ng-template>
+                </li>
+            </ul>
+        </div>
         <hr>
     </div>
 </footer>
