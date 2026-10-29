@@ -42,3 +42,57 @@ th {
   align-items: center;
   }
   
+.status-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.toggle-track {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #adb5bd;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.status-toggle.active .toggle-track {
+  background-color: #198754;
+}
+
+.status-toggle.active .toggle-thumb {
+  transform: translateX(16px);
+}
+
+.status-toggle.inactive .toggle-track {
+  background-color: #adb5bd;
+}
+
+.status-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.status-label {
+  min-width: 48px;
+  text-align: left;
+}

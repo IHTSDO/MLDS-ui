@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirm Member Status Change</h4>
+
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="cancel()">
+  </button>
+</div>
+
+<p class="modal-body">
+  Please review the member status change before confirming.
+</p>
+
+<div class="modal-body">
+  <div class="form-group">
+    <label>Member</label>
+    <p><strong>{{ memberKey }}</strong></p>
+  </div>
+
+  <div class="form-group">
+    <label>Current Status</label>
+    <p>
+      <strong>{{ memberActive ? 'Inactive' : 'Active' }}</strong>
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label>New Status</label>
+    <p>
+      <strong>{{ memberActive ? 'Active' : 'Inactive' }}</strong>
+    </p>
+  </div>
+
+  <p>
+    Are you sure you want to
+    <strong>{{ memberActive ? 'Activate' : 'Inactivate' }}</strong>
+    this member?
+  </p>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="edit-button"
+    (click)="confirm()">
+    Confirm {{ memberActive ? 'Activate' : 'Inactivate' }}
+  </button>
+
+  <button
+    type="button"
+    class="btn btn-link"
+    (click)="cancel()">
+    Cancel
+  </button>
+</div>

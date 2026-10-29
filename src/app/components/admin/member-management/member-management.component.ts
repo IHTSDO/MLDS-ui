@@ -12,6 +12,7 @@ import { API_ROUTES } from 'src/app/routes-config-api';
 import { AuthenticationSharedService } from 'src/app/services/authentication/authentication-shared.service';
 import { OpenAutoDeactivateConfigComponent } from '../../common/open-auto-deactivate-config/open-auto-deactivate-config.component';
 import { LanguageAndFooterActiveComponent } from '../../common/language-and-footer-active/language-and-footer-active.component';
+import { MemberStatusConfirmationModalComponent } from '../../common/member-status-confirmation-modal/member-status-confirmation-modal.component';
 
 /**
  * Member Management Component
@@ -32,7 +33,7 @@ export class MemberManagementComponent {
    * Array of member objects
    */
   members: any[] = [];
-
+  memberActiveUpdating: { [key: string]: boolean } = {};
   /**
    * API URL
    */
@@ -263,6 +264,58 @@ openLanguageAndFooterActiveConfigModal(member: any): void {
     this.fetchMembers();
   }).catch(() => {
     console.log('Modal dismissed');
+  });
+}
+
+
+toggleMemberActive(member: any): void {
+  if (
+    !member ||
+    !this.canAccess(member) ||
+    this.memberActiveUpdating[member.key]
+  ) {
+    return;
+  }
+
+  const updatedStatus = member.memberActive !== true;
+
+  const modalRef = this.modalService.open(
+    MemberStatusConfirmationModalComponent,
+    {
+      centered: true,
+      backdrop: 'static'
+    }
+  );
+
+  modalRef.componentInstance.memberKey = member.key;
+  modalRef.componentInstance.memberActive = updatedStatus;
+
+  modalRef.result.then((confirmed: boolean) => {
+    if (!confirmed) {
+      return;
+    }
+
+    this.memberActiveUpdating[member.key] = true;
+
+    this.memberService
+      .updateMemberActive(member.key, updatedStatus)
+      .subscribe({
+        next: () => {
+          member.memberActive = updatedStatus;
+          this.memberActiveUpdating[member.key] = false;
+          this.fetchMembers();
+        },
+        error: (error) => {
+          this.memberActiveUpdating[member.key] = false;
+
+          console.error(
+            'Error updating member active status:',
+            error
+          );
+        }
+      });
+  }).catch(() => {
+    // User cancelled the confirmation dialog.
   });
 }
 

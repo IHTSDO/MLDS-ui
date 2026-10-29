@@ -1,64 +1,162 @@
+
 <div class="row">
-<div class="page-header">
+  <div class="page-header">
     <h2>Member Management</h2>
 
-    <table class="table">
-    	<thead>
-    		<tr>
-    			<th>Member</th>
-    			<th>Name</th>
-    			<th>Public Landing Page</th>
-    			<th>Staff Notifications</th>
-    			<th>License</th>
-    			<th>Version</th>
-    			<th>Last Uploaded</th>
-    			<th></th>
-    		</tr>
-    	</thead>
-    	<tbody>
-    		<tr *ngFor="let member of members">
-			  <ng-container *ngIf="canAccess(member)">
-    			<td>{{member.key}}</td>
-    			<td>{{member.name}}</td>
-    			<td>{{getMemberLandingPage(member)}}</td>
-    			<td>{{member.staffNotificationEmail}}</td>
-    			<td>{{member.licenseName}}</td>
-    			<td>{{member.licenseVersion}}</td>
-    			<td>{{member.license.lastUpdated | date: 'yyyy-MM-dd'}}</td>
-    			<td>
-					<div class="btn-group" dropdown>
-						<button type="button" class="review-button " data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-pencil"></i> Edit</button>
-						<ul class="dropdown-menu dropdown-menu-right language-option">
-		    				<li><a class="dropdown-item" (click)="viewBranding(member)"><i class="fa fa-image"></i> View Branding</a></li>
-		    				<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="openEditMemberModal(member)"><i class="fa fa-edit"></i> Edit Branding</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" (click)="viewLicense(member.key)"><i class="fa fa-gavel"></i> View License</a></li>
-    						<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editLicense(member)"><i class="fa fa-edit"></i> Edit License</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editStaffNotificationsEmail(member)"><i class="fa fa-edit"></i> Edit Staff Notifications</a></li>
-                            <li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="editFeedData(member)"><i class="fa fa-edit"></i> Edit Feed Data</a></li>
-							<li><a class="dropdown-item" *ngIf="canAccess(member)" (click)="openAutoDeactivateConfigModal(member)"><i class="fa fa-edit"></i> Auto Deactivation Config</a></li>
-							<li>
-								<a
-								  class="dropdown-item"
-								  *ngIf="canAccess(member)"
-								  [class.disabled]="member.key === 'IHTSDO'"
-								  [attr.aria-disabled]="member.key === 'IHTSDO'"
-								  (click)="member.key !== 'IHTSDO' && openLanguageAndFooterActiveConfigModal(member)"
-								>
-								  <i class="fa fa-edit"></i>
-								  Language and Footer Status Config
-								</a>
-						  </li>
-							  
-						</ul>
-					</div>
-    			</td>
-			  </ng-container>
-    	    </tr>
-    	</tbody>
-    </table>
-	<div *ngIf="isLoading" class="text-center"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>
+    <div class="table-responsive">
+      <table class="table member-management-table">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Name</th>
+            <th>Public Landing Page</th>
+            <th class="member-active-column">Member Active</th>
+            <th>Staff Notifications</th>
+            <th>License</th>
+            <th>Version</th>
+            <th>Last Uploaded</th>
+            <th></th>
+          </tr>
+        </thead>
 
-</div>
+        <tbody>
+          <tr *ngFor="let member of members">
+            <ng-container *ngIf="canAccess(member)">
+              <td>{{ member.key }}</td>
+              <td>{{ member.name }}</td>
+              <td>{{ getMemberLandingPage(member) }}</td>
+
+              <td class="member-active-column">
+                <button
+                  type="button"
+                  class="status-toggle"
+                  [class.active]="member.memberActive === true"
+                  [class.inactive]="member.memberActive !== true"
+                  [disabled]="
+                    !canAccess(member) ||
+                    memberActiveUpdating[member.key]
+                  "
+                  [attr.aria-pressed]="member.memberActive === true"
+                  (click)="toggleMemberActive(member)"
+                >
+                  <span class="toggle-track">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="status-label">
+                    {{ member.memberActive === true ? 'Active' : 'Inactive' }}
+                  </span>
+                </button>
+              </td>
+
+              <td>{{ member.staffNotificationEmail }}</td>
+              <td>{{ member.licenseName }}</td>
+              <td>{{ member.licenseVersion }}</td>
+              <td>
+                {{ member.license?.lastUpdated | date: 'yyyy-MM-dd' }}
+              </td>
+
+              <td>
+                <div class="btn-group" dropdown>
+                  <button
+                    type="button"
+                    class="review-button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fa fa-pencil"></i> Edit
+                  </button>
+
+                  <ul class="dropdown-menu dropdown-menu-right language-option">
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        (click)="viewBranding(member)"
+                      >
+                        <i class="fa fa-image"></i> View Branding
+                      </a>
+                    </li>
+
+                    <li *ngIf="canAccess(member)">
+                      <a
+                        class="dropdown-item"
+                        (click)="openEditMemberModal(member)"
+                      >
+                        <i class="fa fa-edit"></i> Edit Branding
+                      </a>
+                    </li>
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        (click)="viewLicense(member.key)"
+                      >
+                        <i class="fa fa-gavel"></i> View License
+                      </a>
+                    </li>
+
+                    <li *ngIf="canAccess(member)">
+                      <a
+                        class="dropdown-item"
+                        (click)="editLicense(member)"
+                      >
+                        <i class="fa fa-edit"></i> Edit License
+                      </a>
+                    </li>
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li *ngIf="canAccess(member)">
+                      <a
+                        class="dropdown-item"
+                        (click)="editStaffNotificationsEmail(member)"
+                      >
+                        <i class="fa fa-edit"></i> Edit Staff Notifications
+                      </a>
+                    </li>
+
+                    <li *ngIf="canAccess(member)">
+                      <a
+                        class="dropdown-item"
+                        (click)="editFeedData(member)"
+                      >
+                        <i class="fa fa-edit"></i> Edit Feed Data
+                      </a>
+                    </li>
+
+                    <li *ngIf="canAccess(member)">
+                      <a
+                        class="dropdown-item"
+                        (click)="openAutoDeactivateConfigModal(member)"
+                      >
+                        <i class="fa fa-edit"></i> Auto Deactivation Config
+                      </a>
+                    </li>
+
+                    <li *ngIf="canAccess(member)">
+                      <a
+                        class="dropdown-item"
+                        [class.disabled]="member.key === 'IHTSDO'"
+                        [attr.aria-disabled]="member.key === 'IHTSDO'"
+                        (click)="member.key !== 'IHTSDO' &&
+                          openLanguageAndFooterActiveConfigModal(member)"
+                      >
+                        <i class="fa fa-edit"></i>
+                        Language and Footer Status Config
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center">
+      <i class="fa fa-spinner fa-spin"></i> Loading data...
+    </div>
+  </div>
 </div>

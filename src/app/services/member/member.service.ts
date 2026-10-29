@@ -312,7 +312,18 @@ export class MemberService {
         );
       }
       
-      
+     updateMemberActive(
+  memberKey: string,
+  memberActive: boolean
+): Observable<any> {
+  const url = `${this.apiUrl}/members/${encodeURIComponent(memberKey)}/active`;
+
+  return this.http.put(url, null, {
+    params: {
+      memberActive: String(memberActive)
+    }
+  });
+} 
     
     
   }
